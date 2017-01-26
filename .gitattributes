@@ -1,0 +1,55 @@
+* text=auto eol=lf
+
+# Source code
+*.pxd text
+*.py text
+*.py3 text
+*.pyw text
+*.pyx text
+
+# Binary files
+*.db binary
+*.p binary
+*.pkl binary
+*.pyc binary
+*.pyd binary
+*.pyo binary
+
+# Note: .db, .p, and .pkl files are associated
+# with the python modules ``pickle``, ``dbm.*``,
+# ``shelve``, ``marshal``, ``anydbm``, & ``bsddb``
+# (among others).
+
+# Documents
+*.doc diff=astextplain
+*.DOC diff=astextplain
+*.docx diff=astextplain
+*.DOCX diff=astextplain
+*.dot diff=astextplain
+*.DOT diff=astextplain
+*.pdf diff=astextplain
+*.PDF diff=astextplain
+*.rtf diff=astextplain
+*.RTF diff=astextplain
+*.md text
+*.adoc text
+*.textile text
+*.mustache text
+*.csv text
+*.tab text
+*.tsv text
+*.sql text
+
+# Graphics
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.tif binary
+*.tiff binary
+*.ico binary
+# SVG treated as an asset (binary) by default. If you want to treat it as text,
+# comment-out the following line and uncomment the line after.
+*.svg binary
+#*.svg text
+*.eps binary
