@@ -30,14 +30,24 @@ runserver`.
 ## Documentation
 
 Documentation for Project Moore is split up into two parts. All documentation
-regarding Project Moore's code base is located within the code. Like the rest of
-the UTN infrastructure, a global overview of the application is documented on
-[docs.utn.se](https://docs.utn.se/)
+regarding Project Moore's code base is located within the code. Like the rest
+of the UTN infrastructure, a global overview of the application is documented
+on [docs.utn.se](https://docs.utn.se/)
 
 
 ## Testing
 
-Testing instructions for Project Moore will be updated soon...
+All code in this repository is tested in two ways: we use [Django test
+suites](https://docs.djangoproject.com/en/1.10/topics/testing/) and we run the
+[flake8](http://flake8.pycqa.org/en/latest/) style enforcer. Together they can
+promote clean and good code.
+
+These tests are run automatically using [Travis CI](https://travis-ci.org/).
+If, however, you want to run these tests locally you can run the following
+commands in the project root directory:
+
+- `./website/manage.py test` - to test with our Django test suites
+- `flake8 website` - to run the flake8 style enforcer
 
 ## License
 
