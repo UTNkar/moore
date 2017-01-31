@@ -1,0 +1,4 @@
+# Project requirements
+-r requirements.txt
+
+# Development requirements

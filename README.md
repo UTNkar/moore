@@ -19,9 +19,10 @@ development environment:
 1. Install Python 3, at least version 3.5 or up.
 2. Clone the repository.
 3. Run `source ./source_me.sh` to create a virtual environment.
-4. Use `cd website` to enter the website directory.
-5. Run `./migrate.py migrate` to initialize the database.
-6. Run `./migrate.py creatsuperuser` to create an admin user.
+4. Run `pip install -r dev-requirements.txt`
+5. Use `cd website` to enter the website directory.
+6. Run `./migrate.py migrate` to initialize the database.
+7. Run `./migrate.py creatsuperuser` to create an admin user.
 
 During development, you can run a test web server using `./migrate.py
 runserver`.
