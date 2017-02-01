@@ -1,5 +1,7 @@
 # Project Moore
 
+[![Build Status](https://travis-ci.org/UTNkar/moore.svg?branch=master)](https://travis-ci.org/UTNkar/moore)
+
 Project Moore is a replacement for many of the [UTN](https://utn.se/) web
 applications. Built using [Django](https://www.djangoproject.com/), Project
 Moore intends to replace obfuscated custom applications. This is why this
