@@ -51,4 +51,4 @@ commands in the project root directory:
 
 ## License
 
-[AGPL-v2.0](LICENSE.md)
+[AGPL-v2.0](LICENSE)
