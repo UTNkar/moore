@@ -170,12 +170,11 @@ system administrator](mailto:admin@utn.se). He will help you get started.
     * :memo: `:memo:` when writing docs
     * :bug: `:bug:` when fixing a bug
     * :fire: `:fire:` when removing code or files
-    * :green_heart: `:green_heart:` when fixing the CI build
+    * :green_heart: `:green_heart:` when fixing for CI builds
     * :white_check_mark: `:white_check_mark:` when adding tests
     * :lock: `:lock:` when dealing with security
     * :arrow_up: `:arrow_up:` when upgrading dependencies
     * :arrow_down: `:arrow_down:` when downgrading dependencies
-    * :shirt: `:shirt:` when removing linter warnings
 
 ### Python Styleguide
 
