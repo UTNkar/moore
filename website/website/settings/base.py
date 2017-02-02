@@ -115,6 +115,8 @@ LANGUAGES = [
     ('sv', _('Swedish'))
 ]
 
+LOCALE_PATHS = ['locale']
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
