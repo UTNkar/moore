@@ -36,7 +36,6 @@ regarding Project Moore's code base is located within the code. Like the rest
 of the UTN infrastructure, a global overview of the application is documented
 on [docs.utn.se](https://docs.utn.se/)
 
-
 ## Testing
 
 All code in this repository is tested in two ways: we use [Django test
@@ -50,6 +49,23 @@ commands in the project root directory:
 
 - `./website/manage.py test` - to test with our Django test suites
 - `flake8 website` - to run the flake8 style enforcer
+
+## Translating
+
+Project Moore intends to be multilingual. The web application is available in
+both Swedish and English. Whenever any translatable text is added or changed it
+should be translated using translation files.
+
+*Within Project Moore we use American English.*
+
+To create translations for an app:
+
+1. `cd website/<appname>`
+1. `../manage.py makemessages`
+2. This will create or update the files under `website/<appname>/locale/`.
+3. Use poedit (or your favourite tool -- please do not use a plain text editor
+since those cannot handle all the subtleties) to fix the translations.
+4. `../manage.py compilemessages`
 
 ## License
 
