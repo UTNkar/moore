@@ -168,6 +168,7 @@ system administrator](mailto:admin@utn.se). He will help you get started.
     * :art: `:art:` when improving templates
     * :racehorse: `:racehorse:` when improving performance
     * :memo: `:memo:` when writing docs
+    * :speech_balloon: `:speech_balloon:` when writing translations
     * :bug: `:bug:` when fixing a bug
     * :fire: `:fire:` when removing code or files
     * :green_heart: `:green_heart:` when fixing for CI builds
