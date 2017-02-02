@@ -100,7 +100,7 @@ PASSWORD_HASHERS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Europe/Stockholm'
 
@@ -109,6 +109,11 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('sv', _('Swedish'))
+]
 
 
 # Static files (CSS, JavaScript, Images)
