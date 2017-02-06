@@ -1,3 +1,24 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 
-# Create your tests here.
+from members.models import Member
+
+
+class MemberTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(username='test')
+        self.member = Member.objects.create(user=self.user)
+        self.assertEqual(1, Member.objects.count())
+
+    def test_delete_cascade(self):
+        self.user.delete()
+        self.assertEqual(
+            0, Member.objects.count(),
+            'Deleting a user deletes the member information.'
+        )
+
+    def test_user_link(self):
+        self.assertEqual(
+            self.user, self.member.user,
+            'Members are linked to a user object.'
+        )
