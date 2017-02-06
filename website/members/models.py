@@ -38,6 +38,9 @@ class StudyProgram(models.Model):
         null=False,
     )
 
+    def __str__(self) -> str:
+        return '%s in %s' % (self.get_degree_display(), self.name)
+
 
 class Member(models.Model):
     """This class describes a member"""
