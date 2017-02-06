@@ -106,3 +106,7 @@ class Member(models.Model):
         null=True,
         blank=True,
     )
+
+    def person_number(self) -> str:
+        return '%s-%s' % (self.birthday.strftime('%Y%m%d'),
+                          self.person_number_ext)

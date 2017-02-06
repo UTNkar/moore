@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
+from datetime import datetime
 
 from members.models import Member
 
@@ -21,4 +22,12 @@ class MemberTest(TestCase):
         self.assertEqual(
             self.user, self.member.user,
             'Members are linked to a user object.'
+        )
+
+    def test_print_person_number(self):
+        self.member.birthday = datetime.strptime('09/07/1999', '%d/%m/%Y')
+        self.member.person_number_ext = '1234'
+        self.assertEqual(
+            '19990709-1234', self.member.person_number(),
+            'Person numbers are printed as \'(year)(month)(day)-(ext)\'.'
         )
