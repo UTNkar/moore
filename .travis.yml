@@ -5,4 +5,4 @@ python:
 install: "pip install -r dev-requirements.txt"
 script:
   - flake8 website
-  - ./website/manage.py test
+  - ./website/manage.py test website
