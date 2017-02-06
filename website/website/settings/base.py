@@ -26,6 +26,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # Project Moore
     'members.apps.MembersConfig',
+    # External Plug-ins
+    'modeltranslation',
     # Django basics
     'django.contrib.admin',
     'django.contrib.auth',
@@ -33,8 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # External Plug-ins
-    'modeltranslation',
 ]
 
 MIDDLEWARE = [
