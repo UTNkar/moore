@@ -25,7 +25,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # Project Moore
-    'members.apps.MembersConfig',
+    'members',
     # External Plug-ins
     'modeltranslation',
     # Django basics
