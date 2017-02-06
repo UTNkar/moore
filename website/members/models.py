@@ -61,7 +61,7 @@ class Member(models.Model):
         help_text=_('Enter the last four digits of your Swedish person '
                     'number, given by the Swedish tax authority'),
         validators=[validators.RegexValidator(
-            regex=r'^\d{10}$',
+            regex=r'^\d{4}$',
             message=_('The person number extension consists of four numbers'),
         )],
         null=True,
