@@ -1,0 +1,158 @@
+{% load i18n static compress %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+
+    {% block css_head %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    {% compress css %}
+    <link href="{% static 'fonts/font-awesome/css/font-awesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'libraries/owl-carousel/owl.carousel.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'scss/material.scss' %}" rel="stylesheet" type="text/x-scss" id="css-primary">
+    {% endcompress %}
+    {% endblock %}
+
+    <title>{% block title %}{% trans "Uppsala Union of Engineering and Science Students" %}{% endblock %}</title>
+</head>
+
+<body class="">
+<div class="page-wrapper">
+	<div class="header-wrapper">
+	<div class="header">
+		<div class="header-inner">
+            <div class="header-colored">
+					<div class="container">
+						{% block colored_menu %}
+                        {% endblock %}
+					</div><!-- /.container -->
+				</div><!-- /.header-colored -->
+
+			<div class="header-white">
+				<div class="container">
+					<a href="{% url 'index' %}">
+						{% block logo %}<img src="{% static 'img/logo.png' %}" alt="" class="header-white-logo">{% endblock %}
+					</a>
+
+					<div class="nav-primary-wrapper collapse navbar-toggleable-sm">
+                    {% block navigation_left %}
+						{# TODO: Insert MAIN MENU #}
+                    {% endblock %}
+					</div><!-- /.nav-primary-wrapper -->
+
+					<ul class="nav nav-pills secondary">
+                        {% block navigation_right %}
+						<li class="nav-item"><form action="{% url 'set_language' %}" id="set_language_form" method="post">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}" />
+                            {% if LANGUAGE_CODE == 'sv' %}
+                                <input type="hidden" name="language" value="en" />
+                                <button class="btn" type="submit"><i class="fa fa-globe"></i> English</button>
+                            {% else %}
+                                <input type="hidden" name="language" value="sv" />
+                                <button class="btn" type="submit"><i class="fa fa-globe"></i> Svenska</button>
+                            {% endif %}
+                        </form></li>
+                        {% if not user.is_authenticated %}
+                            <li class="nav-item">
+                                <a href="{# TODO: Login Path #}" class="nav-link circle">
+                                    <i class="md-icon">person</i>
+                                </a>
+                            </li>
+                        {% else %}
+						<li class="nav-item user-avatar-wrapper">
+							<a href="#" class="nav-link circle user-avatar-image"
+                               {# TODO: Avatar?? style="background-image: url('assets/img/tmp/profile-1.jpg')"#}><i class="md-icon">person</i></a>
+							<span class="user-avatar-status"></span>
+
+							<ul class="header-more-menu">
+                                {# TODO: Add actual working links #}
+								<li><a href="#">Profile</a></li>
+								<li><a href="#">Password</a></li>
+								<li><a href="#">Logout</a></li>
+							</ul>
+						</li>
+                        {% endif %}
+                        {% endblock %}
+					</ul>
+
+					<button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target=".nav-primary-wrapper">
+                        <i class="md-icon">menu</i>
+                    </button>
+				</div><!-- /.container -->
+			</div><!-- /.header-white -->
+		</div><!-- /.header-inner -->
+	</div><!-- /.header -->
+</div><!-- /.header-wrapper -->
+
+    <div class="main-wrapper">
+	    <div class="main">
+	        <div class="main-inner">
+	            <div class="content">
+                    {% block body %}{% endblock body %}
+	            </div><!-- /.content -->
+	        </div><!-- /.main-inner -->
+	    </div><!-- /.main -->
+    </div><!-- /.main-wrapper -->
+
+    <div class="footer-wrapper">
+	<div class="footer">
+
+		<div class="footer-top">
+			<div class="container">
+				<div class="footer-top-left">
+					<strong class="hidden-xs-down">{% trans "Follow us on social media:" %}</strong>
+                    <a href="{% block facebook %}https://www.facebook.com/utnkar/{% endblock %}"><i class="fa fa-facebook-square"></i></a>
+                    <a href="{% block twitter %}https://twitter.com/UTNkar{% endblock %}"><i class="fa fa-twitter-square"></i></a>
+                    <a href="{% block instagram %}https://www.instagram.com/utnkar/{% endblock %}"><i class="fa fa-instagram"></i></a>
+				</div><!-- /.footer-top-left -->
+
+				<div class="footer-top-right">
+					<a class="footer-top-action">
+                        {# TODO: FIX ME #}
+						<i class="md-icon">vertical_align_top</i>
+					</a><!-- /.footer-top-action -->
+
+					<ul class="nav nav-pills">
+                        {% block footer_menu %}
+                        {# TODO: ACTUAL BOTTOM MENU #}
+                        {% endblock %}
+					</ul>
+				</div><!-- /.footer-top-right -->
+			</div><!-- /.container -->
+		</div><!-- /.footer-top -->
+
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="footer-bottom-left">
+					{% trans "Developed on" %}
+                    {# TODO: FIX UNDERLINE #}
+                    <a href="https://github.com/UTNkar/moore"><i class="fa fa-github" style="font-size: 20px; padding-left: 5px;" ></i></a>
+				</div><!-- /.footer-bottom-left -->
+
+				<div class="footer-bottom-right">
+                    {# TODO: What about it? #}
+{#					Copyright &copy; - All Rights Reserved#}
+				</div><!-- /.footer-bottom-right -->
+			</div><!-- /.container -->
+		</div><!-- /.footer-bottom -->
+	</div><!-- /.footer -->
+</div><!-- /.footer-wrapper -->
+</div><!-- /.page-wrapper -->
+
+{% compress js %}
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/tether.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'libraries/owl-carousel/owl.carousel.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/materialist.js' %}"></script>
+{% endcompress %}
+</body>
+</html>

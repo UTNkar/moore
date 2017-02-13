@@ -1,0 +1,86 @@
+.cta {
+	background-color: #fff;
+	background-image: url('../img/tmp/hero-2.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 100px 0;
+	text-align: center;
+
+	h2 {
+		color: $color-black;
+		font-size: 36px;
+		font-weight: 400;
+		margin: 0 0 30px 0;
+	}
+
+	p {
+		color: $color-gray;
+		font-size: 18px;
+		margin: 0 0 50px 0;
+		padding: 0 100px;
+
+		@include media-breakpoint-down(sm) {
+			padding-left: 0;
+			padding-right: 0; 
+		}		
+	}
+
+	.btn {
+		padding: 20px 40px;
+	}
+}
+
+
+.call-to-action-small {
+	background-color: #fff;
+	border-radius: 3px;
+	box-shadow: 0 1px 2px rgba(#000, .08);
+	margin: 30px 0;
+	text-align: center;
+	padding: 30px 20px 20px 20px;
+
+	h1 {
+		border: 0;
+		font-size: 1.6em;
+		line-height: 1.6;
+		margin: 0;
+		padding: 0;
+	}
+
+	h2 {
+		border: 0;
+		color: $color-gray;
+		font-size: 1.2em;
+		line-height: 1.6;
+		margin: 15px 0 40px 0;
+		padding: 0;
+	}
+
+	.btn {
+		margin: 0 10px;
+		padding: 12px 28px;
+
+		.fa {
+			font-size: 17px;
+			margin: 0 10px 0 -5px;
+		}
+	}
+}
+
+.call-to-action-small-buttons {
+	background-color: rgba(#000, .05);
+	border-radius: 0 0 3px 3px;
+	margin: 0 -20px -20px -20px;
+	padding: 20px 20px 20px 20px;
+
+	@include media-breakpoint-down(sm) { 
+		.btn {
+			margin: 0 0 20px 0;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}

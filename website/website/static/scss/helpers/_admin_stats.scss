@@ -1,0 +1,92 @@
+.admin-stats {
+	box-shadow: 0 1px 2px rgba(#000, .2);
+	background-color: #fff;	
+	margin: 0 0 30px 0;
+	padding: 30px;
+}
+
+.admin-stat {
+	@extend .clearfix;
+	@include media-breakpoint-down(lg) {
+		margin-bottom: 30px;
+	}	
+}
+
+.admin-stat-icon {
+	background-color: $color-secondary;
+	border-radius: 3px;
+	float: left;
+	height: 64px;
+	margin: 0 20px 0 0;
+	position: relative;
+	width: 64px;
+
+	.lime & {
+		background-color: #00897B;
+
+		&:after {
+			border-color: #00897B;
+		}
+	}
+
+	.blue & {
+		background-color: #039BE5;
+
+		&:after {
+			border-color: #039BE5;
+		}
+	}
+
+	.purple & {
+		background-color: #5E35B1;
+
+		&:after {
+			border-color: #5E35B1;
+		}
+	}
+	
+	.brown & {
+		background-color: #6D4C41;
+
+		&:after {
+			border-color: #6D4C41;
+		}
+	}
+
+	.md-icon {
+		color: #fff;
+		font-size: 30px;
+		height: 30px;
+		left: 50%;
+		position: absolute;
+		top: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		width: 30px;
+	}
+
+	&:after {
+		border: 1px solid $color-secondary;
+		border-radius: 3px;
+		content: '';
+		display: block;
+		height: 24px;
+		position: absolute;
+		transform: translateX(-8px) translateY(-8px);
+		width: 24px;
+	}
+}
+
+.admin-stat-content {	
+	h2 {
+		color: $color-gray;
+		font-size: 14px;
+		margin: 0 0 3px 0;
+		padding: 10px 0 0 0;
+	}
+
+	h3 {
+		color: $color-black;
+		font-size: 28px;
+		margin: 0;
+	}
+}

@@ -1,0 +1,263 @@
+.map-filter-wrapper {
+	@extend .container;  
+
+	left: 0;
+	pointer-events: none;
+	position: absolute;
+	right: 0; 
+	top: 60px; 
+	z-index: 9999;		
+
+	&.map-filter-horizontal {
+		bottom: 40px;
+		top: auto;
+
+		.form-group {
+			margin-bottom: 0;
+
+			@include media-breakpoint-down(sm) {
+				margin: 0 0 10px 0;
+			}			
+		}
+	}
+
+	@include media-breakpoint-down(sm) {
+		bottom: auto !important;
+		margin: 40px 0;
+		max-width: inherit;
+		position: relative; 
+	}
+}
+
+.map-filter {
+	@extend .col-sm-3, .col-sm-offset-9; 
+
+	.map-filter-horizontal & {
+		@extend .col-sm-12;
+
+		margin: 0; 
+	}
+
+	pointer-events: all;
+}
+
+.map-leaflet-wrapper, .map-google-wrapper {
+	position: relative;
+}
+
+#map-leaflet, #map-google {
+	height: 560px;
+
+	.map-pull-top & {
+		margin-top: -180px;
+	}
+
+	&.full {
+		height: 100%;
+
+	}
+}  
+
+.map-marker {
+	height: 36px;
+	width: 36px;
+}
+
+.leaflet-div-icon, .map-marker {
+	background-color: $color-secondary;
+	border: 4px solid $color-secondary;	
+	border-radius: 50%;
+	cursor: pointer;
+	position: relative;
+	transition: all .15s linear;
+	z-index: 10;
+
+	.fa {
+		color: rgba(#000, .55);
+		font-size: 14px;
+		left: 50%;
+		position: absolute;
+		top: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		z-index: 13;
+	}
+
+	&:hover {
+		top: -2px;
+	}
+}
+
+.map-popup-content-wrapper {
+	box-shadow: 0 5px 10px rgba(#000, .3);
+	display: none;
+	left: -100px;
+	top: -210px !important;
+	position: absolute;
+	z-index: 9999;
+
+	&:after {
+		border: 7px solid transparent;
+		border-top-color: #fff;
+		bottom: -14px;
+		content: '';
+		display: block;
+		height: 0;
+		left: 50%;
+		position: absolute;
+		transform: translateX(-50%);
+		width: 0;
+	}
+}
+
+.map-popup-content-wrapper, .leaflet-popup-content-wrapper {
+	border-radius: 0;
+	margin: 0;
+	padding: 0;
+	width: 240px;
+}
+
+.map-popup-content, .leaflet-popup-content {
+	background-color: #fff;
+	height: 196px;
+	margin: 0;
+	padding: 0;
+
+	a {
+		&:hover {
+			text-decoration: none;
+		}
+	}	
+}
+
+.map-popup-content-wrapper {
+	.close {
+		color: #fff;
+		display: block;
+		font-size: 11px;
+		opacity: 1;
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		text-shadow: none;
+		z-index: 99999;
+	}
+}
+
+.listing-window-image {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;	
+	display: block;
+	height: 160px;
+	position: relative;
+
+	&:after {
+		background-color: rgba(#000, .3); 
+		bottom: 0;
+		content: '';
+		display: block;
+		left: 0;
+		opacity: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transition: opacity .15s linear;		
+		visibility: hidden;
+		z-index: 100;
+	}
+
+	&:before {
+		-webkit-font-smoothing: antialiased;
+		background-color: $color-primary;
+		border-radius: 50%;
+		color: #fff; 
+		content: '\f002';
+		display: block;
+		font-family: 'FontAwesome';
+		height: 32px;
+		left: 50%;
+		line-height: 30px;
+		opacity: 0;
+		position: absolute;
+		text-align: center;
+		top: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		transition: opacity .15s linear;
+		visibility: hidden;
+		width: 32px;
+		z-index: 101;
+	}
+
+	.map-popup-content-wrapper:hover &, .leaflet-popup-content-wrapper:hover & {
+		&:before, &:after {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}
+
+.listing-window-content { 
+	h2, h3 {
+		display: block;
+		color: $color-black;
+	}
+
+	h2 {
+		display: block;
+		font-size: 1.1em;
+		font-weight: 700;
+		line-height: 1.5;
+		margin: 8px 15px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	h3 {
+		background-color: $color-primary;
+		border-radius: 3px;
+		color: #fff;	
+		display: inline-block;
+		font-size: 1em;		
+		font-weight: 700;
+		left: 15px;
+		margin: 0;
+		padding: 4px 8px;
+		position: absolute;
+		top: 15px;
+	}
+}
+
+.marker-cluster-small {
+	background-color: rgba($color-primary, 0.6);
+	color: #fff;
+	font-weight: 700;
+}
+
+.marker-cluster-small div {
+	background-color: rgba($color-primary, 0.6);
+	color: #fff;
+	font-weight: 700;	
+}
+
+.marker-cluster-medium {
+	background-color: rgba($color-primary, 0.6);
+	color: #fff;
+	font-weight: 700;	
+}
+
+.marker-cluster-medium div {
+	background-color: rgba($color-primary, 0.6);
+	color: #fff;
+	font-weight: 700;	
+}
+
+.marker-cluster-large {
+	background-color: rgba($color-primary, 0.6);
+	color: #fff;
+	font-weight: 700;	
+}
+
+.marker-cluster-large div {
+	background-color: rgba($color-primary, 0.6);
+}

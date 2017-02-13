@@ -1,0 +1,54 @@
+.image-wrapper {
+    background-color: #fff;
+    position: relative;
+}
+
+.image-holder {
+    background-image: url('../img/tmp/map.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center;
+    bottom: 0;  
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.image-description-wrapper {
+    padding-bottom: 80px;
+    padding-top: 80px;  
+
+    h2 {
+        color: $color-black;
+        font-size: 30px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 0 0 20px 0;                    
+        text-align: center;
+
+        strong {
+            color: $color-primary;
+            font-weight: 700;
+        }
+    }
+}
+
+.image-description-box {
+    margin: 50px 0 0 0;
+
+    .md-icon {
+        color: $color-gray;
+        font-size: 28px;
+        height: 28px;
+        margin: 0 15px 0 0;
+        vertical-align: -8px;
+        width: 28px;
+    }
+
+    h3 {
+        color: $color-black;
+        font-size: 18px;
+        font-weight: 400;
+        margin: 0 0 20px 0;
+    }
+}
