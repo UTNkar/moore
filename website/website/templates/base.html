@@ -23,7 +23,8 @@
     <title>{% block title %}{% trans "Uppsala Union of Engineering and Science Students" %}{% endblock %}</title>
 </head>
 
-<body class="">
+<body class="{% block body_class %}{% endblock %}">
+{% block page %}
 <div class="page-wrapper">
 	<div class="header-wrapper">
 	<div class="header">
@@ -38,7 +39,7 @@
 			<div class="header-white">
 				<div class="container">
 					<a href="{% url 'index' %}">
-						{% block logo %}<img src="{% static 'img/logo.png' %}" alt="" class="header-white-logo">{% endblock %}
+						{% block logo %}<img src="{% static 'img/logo.png' %}" alt="{% trans 'The UTN Logo' %}" class="header-white-logo">{% endblock %}
 					</a>
 
 					<div class="nav-primary-wrapper collapse navbar-toggleable-sm">
@@ -62,7 +63,7 @@
                         </form></li>
                         {% if not user.is_authenticated %}
                             <li class="nav-item">
-                                <a href="{# TODO: Login Path #}" class="nav-link circle">
+                                <a href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}" class="nav-link circle">
                                     <i class="md-icon">person</i>
                                 </a>
                             </li>
@@ -73,10 +74,9 @@
 							<span class="user-avatar-status"></span>
 
 							<ul class="header-more-menu">
-                                {# TODO: Add actual working links #}
-								<li><a href="#">Profile</a></li>
-								<li><a href="#">Password</a></li>
-								<li><a href="#">Logout</a></li>
+								<li><a href="{# TODO: PROFILE SETTINGS #}">Profile</a></li>
+								<li><a href="{% url 'password_change' %}">{% trans "password"|capfirst %}</a></li>
+								<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>{% trans "Log Out" %}</a></li>
 							</ul>
 						</li>
                         {% endif %}
@@ -96,7 +96,7 @@
 	    <div class="main">
 	        <div class="main-inner">
 	            <div class="content">
-                    {% block body %}{% endblock body %}
+                    {% block main %}{% endblock main %}
 	            </div><!-- /.content -->
 	        </div><!-- /.main-inner -->
 	    </div><!-- /.main -->
@@ -146,6 +146,7 @@
 	</div><!-- /.footer -->
 </div><!-- /.footer-wrapper -->
 </div><!-- /.page-wrapper -->
+{% endblock %}
 
 {% compress js %}
 <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
