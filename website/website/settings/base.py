@@ -24,6 +24,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     'home',
+    'members',
     'search',
 
     'wagtail.wagtailforms',
@@ -123,6 +124,20 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Authentication settings
+
+AUTH_USER_MODEL = 'members.Member'
+
+# Password hashers
+# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+]
 
 # Wagtail settings
 
@@ -132,3 +147,8 @@ WAGTAIL_SITE_NAME = "Uppsala teknolog- och naturvetarkår"
 # backend - e.g. in notification emails. Don't include '/admin' or a
 # trailing slash
 BASE_URL = 'http://utn.se'
+
+WAGTAIL_USER_EDIT_FORM = 'members.forms.CustomUserEditForm'
+WAGTAIL_USER_CREATION_FORM = 'members.forms.CustomUserCreationForm'
+WAGTAIL_USER_CUSTOM_FIELDS = ['birthday', 'person_number_ext', 'phone_number',
+                              'registration_year', 'study']
