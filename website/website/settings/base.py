@@ -23,6 +23,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    'website',  # include for templatetags
     'home',
     'members',
     'search',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
 
     'modelcluster',
     'taggit',
+    'compressor',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -112,6 +114,8 @@ LOCALE_PATHS = ['locale']
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # Compressor
+    'compressor.finders.CompressorFinder',
 ]
 
 STATICFILES_DIRS = [
@@ -123,6 +127,16 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Compressor
+# https://django-compressor.readthedocs.io/en/latest/settings/
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
+                        'compressor.filters.cssmin.rCSSMinFilter']
 
 # Authentication settings
 

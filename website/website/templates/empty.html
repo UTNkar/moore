@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% load static i18n %}
+{% load static i18n site_tags %}
+{% get_site_root as site_root %}
 
 {% block body_class %}layout-empty{% endblock %}
 
 {% block page %}
 {% block return_link %}
-<a href="{% url 'index' %}" class="return-back">
+<a href="{% pageurl site_root %}" class="return-back">
 	<i class="fa fa-long-arrow-left"></i> {% trans 'Return Home' %}</a>
 </a>
 {% endblock %}
