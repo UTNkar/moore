@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 from __future__ import absolute_import, unicode_literals
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
