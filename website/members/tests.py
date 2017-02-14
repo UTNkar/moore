@@ -18,7 +18,7 @@ class MemberTest(TestCase):
         )
 
     def test_study_deletion(self):
-        study = StudyProgram.objects.create(name='subject')
+        study = StudyProgram.objects.create(name_en='subject')
         self.member.study = study
         self.member.save()
         study.delete()
