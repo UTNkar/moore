@@ -1,0 +1,5 @@
+# Project requirements
+-r requirements.txt
+
+# Development requirements
+flake8
