@@ -1,0 +1,20 @@
+.page-wrapper {
+	display: table;	  
+	height: 100%;
+	overflow: hidden;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.header-wrapper, .main-wrapper, .footer-wrapper {
+	display: table-row;
+	height: 1px;
+}
+
+.main-wrapper {
+	height: 100%;
+}
+
+.sidebar {
+	padding: 60px 0;
+}

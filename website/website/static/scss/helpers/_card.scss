@@ -1,0 +1,249 @@
+.cards-wrapper {
+	margin: 0 0 70px 0;
+}
+
+.card {
+	background-color: #fff;
+	border: 0;
+	border-radius: 3px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+	margin: 0 0 30px 0;
+	transition: all .15s ease;
+
+	&:hover {
+		box-shadow: 0 2px 16px rgba(0, 0, 0, .2);
+	}
+}
+
+.card-image {
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;	
+	border-radius: 3px 3px 0 0;
+	height: 220px;
+	position: relative;
+
+	&.small {
+		height: 160px;
+	}
+
+	&.no-line {
+		&:after {
+			display: none;
+		}
+	}
+	
+	a {
+		background-image: linear-gradient(to top, rgba(#000, .4), transparent);
+		bottom: 0;
+		display: block;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	&:after {
+		background-color: $color-primary;
+		bottom: 0;
+		content: '';
+		height: 4px;
+		left: 0;
+		position: absolute;
+		right: 0;
+		z-index: 10;
+	}
+}
+
+.card-image-rating {
+	bottom: 8px;
+	color: $color-yellow; 
+	left: 16px;
+	position: absolute;
+}
+
+.card-image-count {
+	border-radius: 50%;
+	bottom: 8px;
+	color: #fff;
+	display: block;
+	left: 16px;
+	position: absolute;
+
+
+	strong {
+		 font-size: 14px;
+	}
+
+	span {
+		color: rgba(#fff, .7);
+		font-size: 14px;
+	}
+}
+
+.card-image-icon {
+	background-color: #fff;
+	border-radius: 50%;
+	box-shadow: 0 1px 2px rgba(#000, .2);
+	color: $color-gray; 
+	height: 32px;
+	line-height: 44px; 
+	position: absolute;	
+	right: 16px;
+	text-align: center;
+	top: 8px;
+	width: 32px;
+}
+
+.card-content {
+	padding: 16px;
+
+	h2 {		
+		@extend .clearfix;
+		display: block;
+		font-size: 16px;
+		font-weight: 700;
+		line-height: 1.7;
+		margin: 0;
+		overflow: hidden;
+		padding: 0;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+
+		a {
+			color: $color-black;
+			display: block;
+			float: left;
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
+
+		.btn {
+			color: $color-gray;
+			float: right;
+			font-size: 13px;
+			margin: 7px 0 0 0;
+		}
+	}
+
+	h3 {		
+		font-size: 13px;
+		font-weight: 400;
+		line-height: 1.7;
+		margin: 0;
+		padding: 0;
+
+		a {
+			color: $color-gray;
+
+			&:hover {
+				text-decoration: none;
+			}			
+		}
+	}
+}
+
+.card-actions {
+	border-top: 1px solid $color-gray-light;
+	padding: 16px;
+
+	a {
+		vertical-align: top;
+	}
+}
+
+.card-action-icon {
+	color: $color-gray;
+	margin: 0 16px 0 0;
+
+	&:hover {
+		color: $color-black;
+		text-decoration: none;
+
+		span {
+			color: $color-black;
+		}
+	}
+
+	.md-icon {
+		vertical-align: middle;
+	}
+
+	span {
+		color: $color-gray;
+		font-size: 12px;
+		margin: 0 0 0 10px;
+		font-weight: 700;
+		vertical-align: middle;
+	}	
+}
+
+.card-action-btn {
+	float: right;
+	margin: 4px 0 0 0;
+}
+
+.cards-small-wrapper {
+
+}
+
+.card-small {
+	@extend .clearfix;
+	margin: 0 0 16px 0;
+
+	&:last-child {
+		margin-bottom: 0;
+	}	
+}
+
+.card-small-image {
+	border-radius: 3px;
+	float: left;
+	height: 56px;
+	margin: 0 20px 0 0;
+	overflow: hidden;
+	position: relative;
+	width: 64px;
+
+
+	a {		
+		background-position: center center;
+		background-repeat: no-repeat;		
+		background-size: cover;
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+
+.card-small-content {
+	h3 {
+		display: block;
+		font-size: 16px;
+		font-weight: 400;
+		margin: 0 0 6px 0;		 		
+		overflow: hidden;
+		padding: 7px 0 0 0;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+
+		a {
+			color: $color-black;
+		}
+	}
+
+	h4 {
+		font-size: 13px;
+		font-weight: 400;
+		margin: 0;
+		padding: 0;
+
+		a {
+			color: $color-gray;
+		}
+	}	
+}

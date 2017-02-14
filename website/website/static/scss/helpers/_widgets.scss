@@ -1,0 +1,88 @@
+.widget {
+	background-color: #fff;
+	border-radius: 3px;
+	box-shadow: 0 1px 2px rgba(#000, .1);
+	margin: 0 0 30px 0;
+	padding: 25px;
+
+	&.simple {
+		box-shadow: none;
+		padding: 0;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	.nav-link {
+		color: $color-gray;
+		padding: 6px 0;
+
+		&:hover {
+			color: $color-primary;
+		}
+	}
+
+	.contact {
+	    list-style: none;
+	    margin: 0;
+	    padding: 0;
+
+	    li {
+	    	border-bottom: 1px solid rgba(#000, .04);
+			padding: 10px 0;
+
+	    	&:last-child {
+	    		border-bottom: 0;	    		
+	    	}
+
+	    	.md-icon {
+	    		color: $color-gray;
+	    		font-size: 22px;	    		
+	    		float: left;	
+	    		height: 22px;
+	    		margin: 0 15px 0 0;    		
+	    	}
+	    }
+	}
+
+	.overview {
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			strong {
+				color: $color-gray;
+				display: block;
+				font-size: 12px;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+
+			span {
+				color: $color-black;
+				display: block;
+				font-size: 18px;
+				font-weight: 500;
+				margin: 2px 0 0 0;
+			}
+
+			li {
+				margin: 0 0 15px 0;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+
+				a {
+					color: $color-black;
+				}
+			}
+		}
+	}
+}
+
+.widgettitle {
+	font-size: 20px;
+}

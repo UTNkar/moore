@@ -1,0 +1,50 @@
+{% extends "empty.html" %}
+{% load i18n %}
+
+{% comment %}This page is automatically used by django.contrib.auth.views{% endcomment %}
+
+{% block title %}{% trans 'Login' %} — {{ block.super }}{% endblock %}
+
+{% block heading %}{% trans 'Log into your UTN account' %}{% endblock %}
+
+{% block form %}
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+    {% trans 'Your username and password didn\'t match. Please try again.' %}
+</div>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <div class="alert alert-warning" role="alert">
+        {% trans 'Your account doesn\'t have access to this page. To proceed, please login with an account that has access.' %}
+    </div>
+    {# TODO: DO WE NEED THIS? #}
+{#                {% else %}#}
+{#                <p>Please login to see this page.</p>#}
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{% firstof next %}" />
+
+    <div class="form-group{% if form.errors %} has-danger{% endif %}">
+        <label>{% trans 'username' %}</label>
+        <input name="{{ form.username.name }}" type="text" class="form-control">
+    </div><!-- /.form-group -->
+
+    <div class="form-group{% if form.errors %} has-danger{% endif %}">
+        <label>{% trans 'password' %}</label>
+        <input name="{{ form.password.name }}" type="password" class="form-control">
+    </div><!-- /.form-group -->
+
+    <div class="form-group-btn">
+        <button type="submit" class="btn btn-primary pull-right">{% trans 'Sign In' %}</button>
+    </div><!-- /.form-group-btn -->
+
+    <div class="form-group-bottom-link">
+        <a href="{% url 'password_reset' %}">{% trans 'I forgot my password' %} <i class="fa fa-long-arrow-right"></i></a>
+    </div><!-- /.form-group-bottom-link -->
+</form>
+{% endblock %}

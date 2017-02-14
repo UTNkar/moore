@@ -1,0 +1,71 @@
+html {
+	height: 100%;
+}
+
+body {  
+	background-color: $color-background; 
+	color: $color-text;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	height: 100%;
+	overflow-x: hidden;
+	width: 100%;
+}
+
+a, button {
+	color: $color-primary;
+	transition: color .15s linear;
+
+	&:hover {
+		color: darken($color-primary, 5%);
+		text-decoration: none;
+	}
+}
+
+button {
+	background-color: inherit;
+}
+
+hr {
+	margin: 25px 0;
+}
+
+p {
+	line-height: 26px;
+}
+
+ol {
+	margin: 0 0 0 20px;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: $color-black;
+	font-weight: 400;
+	margin: 0 0 30px 0;
+}
+
+blockquote {
+	background-color: #fff;
+	font-style: italic;
+	font-size: 1.5em;	
+	padding: 20px 30px; 
+
+	p {
+		color: $color-black;
+		line-height: 1.7;		
+	}
+
+	cite {
+		color: $color-gray;
+		float: right;
+		font-size: .7em;
+		font-weight: 400;
+		margin: 30px 0 0 0;
+	}
+}
+
+
+.layout-empty {
+	background-color: lighten($color-secondary, 7%);
+}

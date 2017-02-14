@@ -1,0 +1,111 @@
+.filter {
+	background-color: #fff;	
+	border-radius: 3px;
+	box-shadow: 0 1px 2px rgba(#000, .1);	
+	margin: 0 0 30px 0;
+	padding: 25px;
+
+	h2 {
+		font-size: 1em;
+		margin: 0 0 10px 0;
+		padding: 10px 0 10px 0;
+	}
+
+	.btn {
+		padding: 10px 20px;
+	}
+
+	&.filter-gray {
+		h2 {
+			border-color: $color-gray-medium;
+		}
+	}
+
+	&.filter-primary, &.filter-secondary {
+		h2 {
+			color: #fff; 
+		}
+
+		select {
+			background-image: url('../img/caret-light.svg') !important;  
+		}
+
+		.form-control {
+			box-shadow: 0px 1px 0px 0px rgba(#fff, .5);
+			color: #fff;
+		}
+
+		.radio-wrapper, .checkbox-wrapper {
+			&:after {
+				color: #fff;
+			}
+		}
+	}
+
+	&.filter-gray {
+		background-color: $color-gray-medium;
+	}
+
+	&.filter-primary {
+		background-color: $color-primary;
+
+		label {
+			color: rgba(#fff, .9);
+		}
+
+		.form-control {
+			border: 0;
+			border-radius: 0;			
+		}
+
+		.btn {
+			@extend .btn-secondary;
+		}
+	}
+
+	&.filter-secondary {
+		background-color: $color-secondary;
+
+		label {
+			color: rgba(#fff, .9);
+		}
+
+		.form-control {
+			border: 0;
+			border-radius: 0;
+		}
+	}	
+}
+
+.filter-options {
+	background-color: rgba(#000, .015);
+	border-radius: 0 0 3px 3px;
+	border-top: 1px solid rgba(#000, .05);	
+	margin: 15px -25px -25px -25px;
+	padding: 25px 15px 10px 15px;
+
+	strong {
+		display: inline-block;
+		font-size: .9em;
+		margin: 2px 30px 0 0;
+		text-transform: uppercase;
+		vertical-align: top;
+	}
+
+	.filter-primary &, .filter-secondary & {
+		background-color: rgba(#fff, .05);
+		border-top-color: rgba(#fff, .1); 
+
+		strong {
+			color: rgba(#fff, .9);
+		}
+	}
+}
+
+.filter-sort {
+	float: left;
+}
+
+.filter-order {			
+	float: right;
+}

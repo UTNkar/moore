@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Error - {{ block.super }}{% endblock %}
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="warning">
+            <h1>{% block error_code %}{% trans 'Error' %}{% endblock %}</h1>
+            <p>{% block error_message %}{% trans 'An error has occurred' %}{% endblock %}</p>
+
+            <hr>
+
+            <a href="{% url 'index' %}" class="btn btn-secondary btn-large"><i class="fa fa-long-arrow-left"></i> {% trans 'Return Home' %}</a>
+        </div><!-- /.warning -->
+    </div><!-- /.row -->
+</div><!-- /.container -->
+{% endblock %}

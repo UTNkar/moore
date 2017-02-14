@@ -1,0 +1,144 @@
+.customizer {
+	left: -190px; 
+	position: fixed;
+	top: 200px;
+	transition: all .15s linear;
+	z-index: 99999;
+
+	&.open {
+		left: 0;
+	}
+}
+
+.customizer-title {
+	display: inline-block;
+	cursor: pointer;
+	position: absolute;
+	right: -76px;
+	top: 43px;
+
+	span {
+		background-color: $color-secondary;;
+		color: #fff;
+		display: block;
+		padding: 6px 10px; 
+		text-align: center;
+		transform: rotate(-90deg);
+		width: 120px;
+
+		.fa {
+			margin: 0 5px 0 0;
+		}
+	}
+}
+
+.customizer-content {
+	@extend .clearfix;
+
+	background-color: #fff;
+	box-shadow: 0 1px 2px rgba(#000, .08);
+	padding: 20px;
+	position: relative;
+	width: 190px;
+	z-index: 99999;
+
+	h2 {
+		font-size: 16px;
+		margin: 0;
+		padding: 0 0 20px 0; 
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		li {
+			float: left;
+			margin: 0 7px 5px 0;
+
+			&:nth-child(5n) {
+				margin-right: 0;
+			}
+		}
+
+		a {			
+			background-color: $color-primary;
+			display: block;
+			height: 24px;			
+			width: 24px;
+		}
+	}
+}
+
+.background-red {
+	background-color: $color-customizer-red !important;
+}
+
+.background-pink {
+	background-color: $color-customizer-pink !important;
+} 
+
+.background-purple {
+	background-color: $color-customizer-purple !important; 
+}
+
+.background-deep-purple {
+	background-color: $color-customizer-deep-purple !important; 
+}
+
+.background-indigo {
+	background-color: $color-customizer-indigo !important; 
+}
+
+.background-blue {
+	background-color: $color-customizer-blue !important; 
+}
+
+.background-light-blue {
+	background-color: $color-customizer-light-blue !important; 
+}
+
+.background-teal {
+	background-color: $color-customizer-teal !important; 
+}
+
+.background-cyan {
+	background-color: $color-customizer-cyan !important; 
+}
+
+.background-green {
+	background-color: $color-customizer-green !important; 
+}
+
+.background-light-green {
+	background-color: $color-customizer-light-green !important; 
+}
+
+.background-lime {
+	background-color: $color-customizer-lime !important; 
+}
+
+.background-yellow {
+	background-color: $color-customizer-yellow !important; 
+}
+
+.background-amber { 
+	background-color: $color-customizer-amber !important; 
+}
+
+.background-orange {
+	background-color: $color-customizer-orange !important; 
+}
+
+.background-deep-orange {
+	background-color: $color-customizer-deep-orange !important; 
+}
+
+.background-brown {
+	background-color: $color-customizer-brown !important; 
+}
+
+.background-blue-grey {
+	background-color: $color-customizer-blue-grey !important; 
+}
