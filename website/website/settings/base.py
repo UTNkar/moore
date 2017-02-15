@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 from __future__ import absolute_import, unicode_literals
+
+from django.conf.global_settings import LOGIN_URL
 from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -156,6 +158,7 @@ PASSWORD_HASHERS = [
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "Uppsala teknolog- och naturvetarkår"
+WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
 
 # Base URL to use when referring to full URLs within the Wagtail admin
 # backend - e.g. in notification emails. Don't include '/admin' or a

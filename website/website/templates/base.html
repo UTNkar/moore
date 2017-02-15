@@ -68,7 +68,7 @@
                         </form></li>
                         {% if not user.is_authenticated %}
                             <li class="nav-item">
-                                <a href="{# url 'login' #}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}" class="nav-link circle">
+                                <a href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}" class="nav-link circle">
                                     <i class="md-icon">person</i>
                                 </a>
                             </li>
@@ -80,8 +80,8 @@
 
 							<ul class="header-more-menu">
 								<li><a href="{# TODO: PROFILE SETTINGS #}">Profile</a></li>
-								<li><a href="{# TODO: url 'password_change' #}">{% trans "password"|capfirst %}</a></li>
-								<li><a href="{# TODO: url 'logout' #}"><i class="fa fa-sign-out"></i>{% trans "Log Out" %}</a></li>
+								<li><a href="{% url 'password_change' %}">{% trans "password"|capfirst %}</a></li>
+								<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>{% trans "Log Out" %}</a></li>
 							</ul>
 						</li>
                         {% endif %}

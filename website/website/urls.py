@@ -17,6 +17,7 @@ urlpatterns = [
 
     url(r'^search/$', search_views.search, name='search'),
 
+    url('^accounts/', include('django.contrib.auth.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
     # For anything not caught by a more specific rule above, hand over to
