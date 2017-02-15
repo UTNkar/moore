@@ -8,6 +8,8 @@ from utils.translation import TranslatedField
 
 class StudyProgram(models.Model):
     """This class describes a university study program"""
+    class Meta:
+        verbose_name_plural = _('Study Programs')
 
     DEGREE_CHOICES = (
         ('bachelor', _('Bachelor\'s Degree')),
