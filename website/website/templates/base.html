@@ -1,6 +1,7 @@
-{% load i18n static compress wagtailcore_tags wagtailuserbar site_tags %}
+{% load i18n static compress wagtailcore_tags wagtailuserbar wagtailsettings_tags site_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_site_root as site_root %}
+{% get_settings %}
 <!DOCTYPE html>
 <html>
 
@@ -123,9 +124,15 @@
 			<div class="container">
 				<div class="footer-top-left">
 					<strong class="hidden-xs-down">{% trans "Follow us on social media:" %}</strong>
-                    <a href="{% block facebook %}https://www.facebook.com/utnkar/{% endblock %}"><i class="fa fa-facebook-square"></i></a>
-                    <a href="{% block twitter %}https://twitter.com/UTNkar{% endblock %}"><i class="fa fa-twitter-square"></i></a>
-                    <a href="{% block instagram %}https://www.instagram.com/utnkar/{% endblock %}"><i class="fa fa-instagram"></i></a>
+                    {% if settings.website.SocialMediaSettings.facebook %}
+                        <a href="{{ settings.website.SocialMediaSettings.facebook }}"><i class="fa fa-facebook-square"></i></a>
+                    {% endif %}
+                    {% if settings.website.SocialMediaSettings.twitter %}
+                        <a href="https://twitter.com/{{ settings.website.SocialMediaSettings.twitter }}"><i class="fa fa-twitter-square"></i></a>
+                    {% endif %}
+                    {% if settings.website.SocialMediaSettings.instagram %}
+                        <a href="https://www.instagram.com/{{ settings.website.SocialMediaSettings.instagram }}/"><i class="fa fa-instagram"></i></a>
+                    {% endif %}
 				</div><!-- /.footer-top-left -->
 
 				<div class="footer-top-right">
