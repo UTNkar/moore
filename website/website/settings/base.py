@@ -144,6 +144,28 @@ COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
 
 AUTH_USER_MODEL = 'members.Member'
 
+# Password validation
+# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation'
+                '.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation'
+                '.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation'
+                '.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation'
+                '.NumericPasswordValidator',
+    },
+]
+
 # Password hashers
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
