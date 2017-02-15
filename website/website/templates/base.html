@@ -23,10 +23,10 @@
         {# Override this in templates to add extra stylesheets #}
     {% endblock %}
 
-    <title>{% block title %}{% trans "Uppsala Union of Engineering and Science Students" %}{% endblock %}</title>
+    <title>{% block title %}{% trans 'Uppsala Union of Engineering and Science Students' %}{% endblock %}</title>
 </head>
 
-<body class="{% block body_class %}{% endblock %}">
+<body class="moore {% block body_class %}{% endblock %}">
 {% wagtailuserbar %}
 {% block page %}
 <div class="page-wrapper">
