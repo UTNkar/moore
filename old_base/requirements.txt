@@ -1,9 +1,0 @@
-# Django core
-Django[argon2]>=1.10,<1.11
-
-# Internationalization
-django-modeltranslation==0.12
-
-# Templates
-django-compressor==2.1.1
-django-libsass==0.7
