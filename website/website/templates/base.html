@@ -89,9 +89,9 @@
 							<span class="user-avatar-status"></span>
 
 							<ul class="header-more-menu">
-								<li><a href="{# TODO: PROFILE SETTINGS #}">Profile</a></li>
-								<li><a href="{% url 'password_change' %}">{% trans "password"|capfirst %}</a></li>
-								<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>{% trans "Log Out" %}</a></li>
+								<li><a href="{# TODO: PROFILE SETTINGS #}">{% trans 'account'|capfirst %}</a></li>
+								<li><a href="{% url 'password_change' %}">{% trans 'password'|capfirst %}</a></li>
+								<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>{% trans "Log out" %}</a></li>
 							</ul>
 						</li>
                         {% endif %}
