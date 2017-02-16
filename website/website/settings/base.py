@@ -11,42 +11,64 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
-import os
+from __future__ import absolute_import, unicode_literals
 
+from django.conf.global_settings import LOGIN_URL
 from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import os
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Application definition
 
 INSTALLED_APPS = [
-    # External Plug-ins
-    'modeltranslation',
-    # Django basics
+    'website',  # include for templatetags
+    'home',
+    'members',
+    'search',
+
+    'wagtail.wagtailforms',
+    'wagtail.wagtailredirects',
+    'wagtail.wagtailembeds',
+    'wagtail.wagtailsites',
+    'wagtail.wagtailusers',
+    'wagtail.wagtailsnippets',
+    'wagtail.wagtaildocs',
+    'wagtail.wagtailimages',
+    'wagtail.wagtailsearch',
+    'wagtail.wagtailadmin',
+    'wagtail.wagtailcore',
+    'wagtail.contrib.settings',
+    'wagtail.contrib.modeladmin',
+
+    'modelcluster',
+    'taggit',
+    'compressor',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # External Plug-ins
-    'compressor',
-    # Project Moore
-    'members',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+
+    'wagtail.wagtailcore.middleware.SiteMiddleware',
+    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'website.urls'
@@ -54,7 +76,9 @@ ROOT_URLCONF = 'website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(PROJECT_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +92,60 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'website.wsgi.application'
+
+# Internationalization
+# https://docs.djangoproject.com/en/1.10/topics/i18n/
+
+LANGUAGE_CODE = 'en'
+
+TIME_ZONE = 'Europe/Stockholm'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('sv', _('Swedish'))
+]
+
+LOCALE_PATHS = ['locale']
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.10/howto/static-files/
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # Compressor
+    'compressor.finders.CompressorFinder',
+]
+
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_DIR, 'static'),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# Compressor
+# https://django-compressor.readthedocs.io/en/latest/settings/
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
+                        'compressor.filters.cssmin.rCSSMinFilter']
+
+# Authentication settings
+
+AUTH_USER_MODEL = 'members.Member'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -102,45 +180,17 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.BCryptPasswordHasher',
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.10/topics/i18n/
+# Wagtail settings
 
-LANGUAGE_CODE = 'en'
+WAGTAIL_SITE_NAME = "Uppsala teknolog- och naturvetarkår"
+WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
 
-TIME_ZONE = 'Europe/Stockholm'
+# Base URL to use when referring to full URLs within the Wagtail admin
+# backend - e.g. in notification emails. Don't include '/admin' or a
+# trailing slash
+BASE_URL = 'http://utn.se'
 
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-LANGUAGES = [
-    ('en', _('English')),
-    ('sv', _('Swedish'))
-]
-
-LOCALE_PATHS = ['locale']
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # Compressor
-    'compressor.finders.CompressorFinder',
-]
-
-# Compressor
-# https://django-compressor.readthedocs.io/en/latest/settings/
-
-COMPRESS_PRECOMPILERS = (
-    ('text/x-scss', 'django_libsass.SassCompiler'),
-)
-
-COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
-                        'compressor.filters.cssmin.rCSSMinFilter']
+WAGTAIL_USER_EDIT_FORM = 'members.forms.CustomUserEditForm'
+WAGTAIL_USER_CREATION_FORM = 'members.forms.CustomUserCreationForm'
+WAGTAIL_USER_CUSTOM_FIELDS = ['birthday', 'person_number_ext', 'phone_number',
+                              'registration_year', 'study']

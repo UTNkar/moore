@@ -1,5 +1,7 @@
-{% load i18n static compress %}
+{% load i18n static compress wagtailcore_tags wagtailuserbar wagtailsettings_tags site_tags %}
 {% get_current_language as LANGUAGE_CODE %}
+{% get_site_root as site_root %}
+{% get_settings %}
 <!DOCTYPE html>
 <html>
 
@@ -7,9 +9,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
 
-    {% block css_head %}
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
@@ -18,12 +19,25 @@
     <link href="{% static 'libraries/owl-carousel/owl.carousel.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'scss/material.scss' %}" rel="stylesheet" type="text/x-scss" id="css-primary">
     {% endcompress %}
+
+    {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
     {% endblock %}
 
-    <title>{% block title %}{% trans "Uppsala Union of Engineering and Science Students" %}{% endblock %}</title>
+    <title>
+    {% block title %}
+        {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+    {% endblock %}
+    {% block title_suffix %}
+        {% with self.get_site.site_name as site_name %}
+            {% if site_name %}- {{ site_name }}{% endif %}
+        {% endwith %}
+    {% endblock %}
+    </title>
 </head>
 
-<body class="{% block body_class %}{% endblock %}">
+<body class="moore {% block body_class %}{% endblock %}">
+{% wagtailuserbar %}
 {% block page %}
 <div class="page-wrapper">
 	<div class="header-wrapper">
@@ -38,8 +52,8 @@
 
 			<div class="header-white">
 				<div class="container">
-					<a href="{% url 'index' %}">
-						{% block logo %}<img src="{% static 'img/logo.png' %}" alt="{% trans 'The UTN Logo' %}" class="header-white-logo">{% endblock %}
+					<a href="{% pageurl site_root %}">
+						{% block logo %}<img src="{% static 'images/logo.png' %}" alt="{% trans 'The UTN Logo' %}" class="header-white-logo">{% endblock %}
 					</a>
 
 					<div class="nav-primary-wrapper collapse navbar-toggleable-sm">
@@ -50,6 +64,7 @@
 
 					<ul class="nav nav-pills secondary">
                         {% block navigation_right %}
+                        {# TODO: IS THIS WORKING?? #}
 						<li class="nav-item"><form action="{% url 'set_language' %}" id="set_language_form" method="post">
                             {% csrf_token %}
                             <input name="next" type="hidden" value="{{ redirect_to }}" />
@@ -74,9 +89,9 @@
 							<span class="user-avatar-status"></span>
 
 							<ul class="header-more-menu">
-								<li><a href="{# TODO: PROFILE SETTINGS #}">Profile</a></li>
-								<li><a href="{% url 'password_change' %}">{% trans "password"|capfirst %}</a></li>
-								<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>{% trans "Log Out" %}</a></li>
+								<li><a href="{# TODO: PROFILE SETTINGS #}">{% trans 'account'|capfirst %}</a></li>
+								<li><a href="{% url 'password_change' %}">{% trans 'password'|capfirst %}</a></li>
+								<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>{% trans "Log out" %}</a></li>
 							</ul>
 						</li>
                         {% endif %}
@@ -109,9 +124,15 @@
 			<div class="container">
 				<div class="footer-top-left">
 					<strong class="hidden-xs-down">{% trans "Follow us on social media:" %}</strong>
-                    <a href="{% block facebook %}https://www.facebook.com/utnkar/{% endblock %}"><i class="fa fa-facebook-square"></i></a>
-                    <a href="{% block twitter %}https://twitter.com/UTNkar{% endblock %}"><i class="fa fa-twitter-square"></i></a>
-                    <a href="{% block instagram %}https://www.instagram.com/utnkar/{% endblock %}"><i class="fa fa-instagram"></i></a>
+                    {% if settings.website.SocialMediaSettings.facebook %}
+                        <a href="{{ settings.website.SocialMediaSettings.facebook }}"><i class="fa fa-facebook-square"></i></a>
+                    {% endif %}
+                    {% if settings.website.SocialMediaSettings.twitter %}
+                        <a href="https://twitter.com/{{ settings.website.SocialMediaSettings.twitter }}"><i class="fa fa-twitter-square"></i></a>
+                    {% endif %}
+                    {% if settings.website.SocialMediaSettings.instagram %}
+                        <a href="https://www.instagram.com/{{ settings.website.SocialMediaSettings.instagram }}/"><i class="fa fa-instagram"></i></a>
+                    {% endif %}
 				</div><!-- /.footer-top-left -->
 
 				<div class="footer-top-right">
@@ -155,5 +176,9 @@
 <script type="text/javascript" src="{% static 'libraries/owl-carousel/owl.carousel.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/materialist.js' %}"></script>
 {% endcompress %}
+
+{% block extra_js %}
+    {# Override this in templates to add extra javascript #}
+{% endblock %}
 </body>
 </html>

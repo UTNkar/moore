@@ -1,12 +1,15 @@
-from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 from django.core import validators
 from django.db import models
-
 from django.utils.translation import ugettext_lazy as _
+
+from utils.translation import TranslatedField
 
 
 class StudyProgram(models.Model):
     """This class describes a university study program"""
+    class Meta:
+        verbose_name_plural = _('Study Programs')
 
     DEGREE_CHOICES = (
         ('bachelor', _('Bachelor\'s Degree')),
@@ -14,21 +17,41 @@ class StudyProgram(models.Model):
         ('engineer', _('Engineer\'s Degree')),
     )
 
-    name = models.CharField(
+    name_en = models.CharField(
         max_length=255,
-        verbose_name=_('Study program name'),
+        verbose_name=_('English program name'),
         help_text=_('Enter the name of the study program'),
         null=False,
         blank=False,
     )
 
-    abbreviation = models.CharField(
+    name_sv = models.CharField(
+        max_length=255,
+        verbose_name=_('Swedish program name'),
+        help_text=_('Enter the name of the study program'),
+        null=False,
+        blank=False,
+    )
+
+    name = TranslatedField('name_en', 'name_sv')
+
+    abbreviation_en = models.CharField(
         max_length=130,
-        verbose_name=_('Study program abbreviation'),
+        verbose_name=_('English program abbreviation'),
         help_text=_('Enter the abbreviation for the study program'),
         null=True,
         blank=True,
     )
+
+    abbreviation_sv = models.CharField(
+        max_length=130,
+        verbose_name=_('Swedish program abbreviation'),
+        help_text=_('Enter the abbreviation for the study program'),
+        null=True,
+        blank=True,
+    )
+
+    abbreviation = TranslatedField('name_en', 'name_sv')
 
     degree = models.CharField(
         max_length=20,
@@ -42,14 +65,8 @@ class StudyProgram(models.Model):
         return '%s in %s' % (self.get_degree_display(), self.name)
 
 
-class Member(models.Model):
+class Member(AbstractUser):
     """This class describes a member"""
-
-    # Connection to the login user
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
 
     # ---- Personal information ------
 
@@ -67,6 +84,7 @@ class Member(models.Model):
             regex=r'^\d{4}$',
             message=_('The person number extension consists of four numbers'),
         )],
+        unique_for_date="birthday",
         null=True,
         blank=True,
     )

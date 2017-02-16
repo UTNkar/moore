@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 from datetime import datetime
 
@@ -7,22 +6,8 @@ from members.models import Member, StudyProgram
 
 class MemberTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create(username='test')
-        self.member = Member.objects.create(user=self.user)
+        self.member = Member.objects.create(username='test')
         self.assertEqual(1, Member.objects.count())
-
-    def test_delete_cascade(self):
-        self.user.delete()
-        self.assertEqual(
-            0, Member.objects.count(),
-            'Deleting a user deletes the member information.'
-        )
-
-    def test_user_link(self):
-        self.assertEqual(
-            self.user, self.member.user,
-            'Members are linked to a user object.'
-        )
 
     def test_print_person_number(self):
         self.member.birthday = datetime.strptime('09/07/1999', '%d/%m/%Y')
@@ -33,7 +18,7 @@ class MemberTest(TestCase):
         )
 
     def test_study_deletion(self):
-        study = StudyProgram.objects.create(name='subject')
+        study = StudyProgram.objects.create(name_en='subject')
         self.member.study = study
         self.member.save()
         study.delete()

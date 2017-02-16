@@ -1,11 +1,14 @@
 {% extends "base.html" %}
-{% load static i18n %}
+{% load static i18n wagtailcore_tags site_tags %}
+{% get_site_root as site_root %}
+
+{% block title %}{% trans 'Uppsala Union of Engineering and Science Students' %}{% endblock %}
 
 {% block body_class %}layout-empty{% endblock %}
 
 {% block page %}
 {% block return_link %}
-<a href="{% url 'index' %}" class="return-back">
+<a href="{% pageurl site_root %}" class="return-back">
 	<i class="fa fa-long-arrow-left"></i> {% trans 'Return Home' %}</a>
 </a>
 {% endblock %}
@@ -13,7 +16,7 @@
 <div class="container login-form">
 	<div class="row">
 		<div class="col-lg-5 col-lg-offset-4">
-            <img class="center-block" src="{% static 'img/logo_white.png' %}" alt="{% trans 'The UTN Logo' %}" width="300px" style="padding-bottom: 25px;">
+            <img class="center-block" src="{% static 'images/logo_white.png' %}" alt="{% trans 'The UTN Logo' %}" width="300px" style="padding-bottom: 25px;">
 			<h2>{% block heading %}Log into your UTN account{% endblock %}</h2>
 
             {% block form %}

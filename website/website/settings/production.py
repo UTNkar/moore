@@ -10,8 +10,7 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
-
-from __future__ import absolute_import
+from __future__ import absolute_import, unicode_literals
 
 from .base import *
 
