@@ -1,13 +1,74 @@
+from django import forms
 from django.conf import settings
 from django.core import validators
 from django.db import models
+from django.http import Http404
 from django.utils.translation import ugettext_lazy as _
-from modelcluster.fields import ParentalKey
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.models import ClusterableModel
 from utils.translation import TranslatedField
+from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel,\
     InlinePanel, FieldRowPanel
-from wagtail.wagtailcore.models import Orderable
+from wagtail.wagtailcore.models import Orderable, Page
+
+
+class RequirementPage(RoutablePageMixin, Page):
+
+    # ---- General Page information ------
+    title_sv = models.CharField(max_length=255)
+    translated_title = TranslatedField('title', 'title_sv')
+
+    # ------ Team selection ------
+    included_teams = ParentalManyToManyField(
+        'Team',
+        verbose_name=_('Included teams'),
+        help_text=_('Select teams to include on the page'),
+        related_name='include_on_page',
+        blank=True,
+    )
+    excluded_teams = ParentalManyToManyField(
+        'Team',
+        verbose_name=_('Excluded teams'),
+        help_text=_('Select teams to exclude from the page'),
+        related_name='exclude_on_page',
+        blank=True,
+    )
+
+    # ------ Routing ------
+    @route(r'^$')
+    def open_positions(self, request):
+        """View function for the currently open positions"""
+        pass
+
+    @route(r'^sent_applications/$')
+    def sent_applications(self, request):
+        """View function for the sent applications by user"""
+        pass
+
+    @route(r'^action/$')
+    def action_list(self, request):
+        """
+        View function for the applications that require (future) attention
+        from the user
+        """
+        pass
+
+    @route(r'^position/(\d+)/$', name='position')
+    def position(self, request, position=None):
+        """
+        View function for a specific position.
+        """
+        pass
+
+    # ------ Administrator settings ------
+    content_panels = Page.content_panels + [
+        FieldPanel('title_sv'),
+        FieldPanel('included_teams', widget=forms.CheckboxSelectMultiple),
+        FieldPanel('excluded_teams', widget=forms.CheckboxSelectMultiple),
+    ]
+    # Don't allow any sub pages
+    subpage_types = []
 
 
 class Team(models.Model):
@@ -71,7 +132,7 @@ class Team(models.Model):
     def __str__(self) -> str:
         return '{}'.format(self.name)
 
-    # ---- Wagtail Information ------
+    # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldRowPanel([
             FieldPanel('name_en'),
@@ -145,7 +206,7 @@ class Function(models.Model):
     def __str__(self) -> str:
         return _('{} in {}').format(self.name, self.team)
 
-    # ---- Wagtail Information ------
+    # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldPanel('team'),
         FieldRowPanel([
@@ -201,7 +262,7 @@ class Position(models.Model):
     def __str__(self) -> str:
         return "{} {}".format(self.function.name, self.term_from.year)
 
-    # ---- Wagtail Information ------
+    # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldRowPanel([
             FieldPanel('function'),
@@ -255,7 +316,7 @@ class Application(ClusterableModel):
         blank=True,
     )
 
-    # ---- Wagtail Information ------
+    # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldRowPanel([
             FieldPanel('applicant'),
@@ -319,7 +380,7 @@ class Reference(Orderable):
         blank=True,
     )
 
-    # ---- Wagtail Information ------
+    # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldRowPanel([
             FieldPanel('name'),
