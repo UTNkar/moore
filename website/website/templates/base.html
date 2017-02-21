@@ -26,7 +26,7 @@
 
     <title>
     {% block title %}
-        {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+        {% if self.seo_title %}{{ self.seo_title }}{% else %}{% firstof self.translated_title self.title %}{% endif %}
     {% endblock %}
     {% block title_suffix %}
         {% with self.get_site.site_name as site_name %}
@@ -58,7 +58,7 @@
 
 					<div class="nav-primary-wrapper collapse navbar-toggleable-sm">
                     {% block navigation_left %}
-						{# TODO: Insert MAIN MENU #}
+						{% main_menu parent=site_root calling_page=self %}
                     {% endblock %}
 					</div><!-- /.nav-primary-wrapper -->
 
@@ -67,7 +67,7 @@
                         {# TODO: IS THIS WORKING?? #}
 						<li class="nav-item"><form action="{% url 'set_language' %}" id="set_language_form" method="post">
                             {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ redirect_to }}" />
+                            <input name="next" type="hidden" value="{{ request.path }}" />
                             {% if LANGUAGE_CODE == 'sv' %}
                                 <input type="hidden" name="language" value="en" />
                                 <button class="btn" type="submit"><i class="fa fa-globe"></i> English</button>
@@ -111,6 +111,21 @@
 	    <div class="main">
 	        <div class="main-inner">
 	            <div class="content">
+                    {% block page_title %}
+                    <div class="content-title">
+                        <div class="container">
+                            <h1>{% firstof page.translated_title page.title %}</h1>
+                            <ul class="breadcrumb">
+                            {% for page in self.get_ancestors %}
+                            {% if page.is_root == False %}
+                                <li><a href="{% pageurl page %}">{% firstof page.translated_title page.title %}</a> <i class="md-icon">keyboard_arrow_right</i></li>
+                            {% endif %}
+                            {% endfor %}
+                                <li class="active">{% firstof page.translated_title page.title%}</li>
+                            </ul><!-- /.breadcrumb -->
+                        </div><!-- /.container -->
+                    </div><!-- /.content-title -->
+                    {% endblock %}
                     {% block main %}{% endblock main %}
 	            </div><!-- /.content -->
 	        </div><!-- /.main-inner -->
@@ -153,7 +168,7 @@
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="footer-bottom-left">
-					{% trans "Developed on" %}
+					{% trans "Developed using" %}
                     {# TODO: FIX UNDERLINE #}
                     <a href="https://github.com/UTNkar/moore"><i class="fa fa-github" style="font-size: 20px; padding-left: 5px;" ></i></a>
 				</div><!-- /.footer-bottom-left -->
