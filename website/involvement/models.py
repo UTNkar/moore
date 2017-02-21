@@ -2,7 +2,7 @@ from django import forms
 from django.conf import settings
 from django.core import validators
 from django.db import models
-from django.http import Http404
+from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.models import ClusterableModel
@@ -13,7 +13,7 @@ from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel,\
 from wagtail.wagtailcore.models import Orderable, Page
 
 
-class RequirementPage(RoutablePageMixin, Page):
+class RecruitmentPage(RoutablePageMixin, Page):
 
     # ---- General Page information ------
     title_sv = models.CharField(max_length=255)
@@ -39,12 +39,14 @@ class RequirementPage(RoutablePageMixin, Page):
     @route(r'^$')
     def open_positions(self, request):
         """View function for the currently open positions"""
-        pass
+        return render(request, 'involvement/open_positions.html',
+                      self.get_context(request))
 
     @route(r'^sent_applications/$')
     def sent_applications(self, request):
         """View function for the sent applications by user"""
-        pass
+        return render(request, 'involvement/sent_applications.html',
+                      self.get_context(request))
 
     @route(r'^action/$')
     def action_list(self, request):
@@ -52,14 +54,16 @@ class RequirementPage(RoutablePageMixin, Page):
         View function for the applications that require (future) attention
         from the user
         """
-        pass
+        return render(request, 'involvement/action_list.html',
+                      self.get_context(request))
 
     @route(r'^position/(\d+)/$', name='position')
     def position(self, request, position=None):
         """
         View function for a specific position.
         """
-        pass
+        return render(request, 'involvement/position.html',
+                      self.get_context(request))
 
     # ------ Administrator settings ------
     content_panels = Page.content_panels + [
