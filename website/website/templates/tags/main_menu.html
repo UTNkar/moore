@@ -1,0 +1,17 @@
+{% load site_tags wagtailcore_tags i18n %}
+{% get_site_root as site_root %}
+
+<ul class="nav nav-pills ">
+    <li class="nav-item">
+        <a href="{% pageurl site_root %}" class="nav-link ">{% trans 'Home' %}</a>
+    </li>
+    {% for menuitem in menuitems %}
+    <li class="nav-item{% if menuitem.show_dropdown %}has-submenu{% endif %}{% if menuitem.active %} active{% endif %}">
+        <a href="{% pageurl menuitem %}" class="nav-link ">{% firstof menuitem.translated_title menuitem.title %}</a>
+
+        {% if menuitem.show_dropdown %}
+            {% main_menu_children parent=menuitem %}
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul><!-- /.nav -->
