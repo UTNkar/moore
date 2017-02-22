@@ -1,20 +1,22 @@
+from datetime import date
+
 from django import forms
 from django.conf import settings
 from django.core import validators
 from django.db import models
-from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.models import ClusterableModel
 from utils.translation import TranslatedField
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
-from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel,\
+from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel, \
     InlinePanel, FieldRowPanel
 from wagtail.wagtailcore.models import Orderable, Page
 
+from involvement import views
+
 
 class RecruitmentPage(RoutablePageMixin, Page):
-
     # ---- General Page information ------
     title_sv = models.CharField(max_length=255)
     translated_title = TranslatedField('title', 'title_sv')
@@ -38,32 +40,28 @@ class RecruitmentPage(RoutablePageMixin, Page):
     # ------ Routing ------
     @route(r'^$')
     def open_positions(self, request):
-        """View function for the currently open positions"""
-        return render(request, 'involvement/open_positions.html',
-                      self.get_context(request))
+        """View redirect for the currently open positions"""
+        return views.open_positions(request, self.get_context(request))
 
     @route(r'^sent_applications/$')
     def sent_applications(self, request):
-        """View function for the sent applications by user"""
-        return render(request, 'involvement/sent_applications.html',
-                      self.get_context(request))
+        """View redirect for the sent applications by user"""
+        return views.sent_applications(request, self.get_context(request))
 
     @route(r'^action/$')
     def action_list(self, request):
         """
-        View function for the applications that require (future) attention
+        View redirect for the applications that require (future) attention
         from the user
         """
-        return render(request, 'involvement/action_list.html',
-                      self.get_context(request))
+        return views.action_list(request, self.get_context(request))
 
     @route(r'^position/(\d+)/$', name='position')
     def position(self, request, position=None):
         """
-        View function for a specific position.
+        View redirect for a specific position.
         """
-        return render(request, 'involvement/position.html',
-                      self.get_context(request))
+        return views.position(request, self.get_context(request), position)
 
     # ------ Administrator settings ------
     content_panels = Page.content_panels + [
@@ -77,6 +75,7 @@ class RecruitmentPage(RoutablePageMixin, Page):
 
 class Team(models.Model):
     """This class represents a working group within UTN"""
+
     class Meta:
         verbose_name_plural = _('Teams')
 
@@ -157,6 +156,7 @@ class Function(models.Model):
     This class represents a function held by a member within UTN or its
     committees
     """
+
     class Meta:
         verbose_name_plural = _('Functions')
 
@@ -225,6 +225,7 @@ class Function(models.Model):
 
 class Position(models.Model):
     """Appointment represents the holding of a function."""
+
     class Meta:
         verbose_name_plural = _('Positions')
 
@@ -234,6 +235,12 @@ class Position(models.Model):
         on_delete=models.PROTECT,
         blank=False,
     )
+
+    commencement = models.DateField(
+        verbose_name=_('Commencement of recruitment'),
+        default=date.today,
+    )
+    deadline = models.DateField(verbose_name=_('Recruitment deadline'))
 
     # ---- Appointment Information ------
     appointments = models.IntegerField(
@@ -275,6 +282,10 @@ class Position(models.Model):
         FieldRowPanel([
             FieldPanel('term_from'),
             FieldPanel('term_to'),
+        ]),
+        FieldRowPanel([
+            FieldPanel('commencement'),
+            FieldPanel('deadline'),
         ]),
         FieldPanel('comment_en'),
         FieldPanel('comment_sv'),
