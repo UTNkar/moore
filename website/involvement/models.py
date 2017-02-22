@@ -13,8 +13,6 @@ from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel, \
     InlinePanel, FieldRowPanel
 from wagtail.wagtailcore.models import Orderable, Page
 
-from involvement import views
-
 
 class RecruitmentPage(RoutablePageMixin, Page):
     # ---- General Page information ------
@@ -41,11 +39,13 @@ class RecruitmentPage(RoutablePageMixin, Page):
     @route(r'^$')
     def open_positions(self, request):
         """View redirect for the currently open positions"""
+        from involvement import views
         return views.open_positions(request, self.get_context(request))
 
     @route(r'^sent_applications/$')
     def sent_applications(self, request):
         """View redirect for the sent applications by user"""
+        from involvement import views
         return views.sent_applications(request, self.get_context(request))
 
     @route(r'^action/$')
@@ -54,6 +54,7 @@ class RecruitmentPage(RoutablePageMixin, Page):
         View redirect for the applications that require (future) attention
         from the user
         """
+        from involvement import views
         return views.action_list(request, self.get_context(request))
 
     @route(r'^position/(\d+)/$', name='position')
@@ -61,6 +62,7 @@ class RecruitmentPage(RoutablePageMixin, Page):
         """
         View redirect for a specific position.
         """
+        from involvement import views
         return views.position(request, self.get_context(request), position)
 
     # ------ Administrator settings ------
@@ -268,7 +270,7 @@ class Position(models.Model):
         blank=True,
     )
 
-    comment = TranslatedField('comments_en', 'comments_sv')
+    comment = TranslatedField('comment_en', 'comment_sv')
 
     def __str__(self) -> str:
         return "{} {}".format(self.function.name, self.term_from.year)
