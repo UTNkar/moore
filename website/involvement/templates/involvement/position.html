@@ -1,5 +1,7 @@
 {% extends "involvement/base.html" %}
-{% load i18n %}
+{% load i18n static wagtailimages_tags %}
+
+{# TODO: move style to SCSS! #}
 
 {% block involvement_content %}
 <div class="container push-top-bottom">
@@ -8,7 +10,8 @@
             <div class="widget">
             {% if position.function.team %}
                 {% with team=position.function.team %}
-                <h2>{{ team }}</h2>
+                {% image team.logo fill-40x40 as logo %}
+                <div style="border-radius: 50%; float: left; background-image: url('{{ logo.url }}'); width: 40px; height: 40px;margin: 0px 10px 0 0;"></div><h2>{{ team }}</h2>
                 <div class="overview">
                     <ul>
                         <li>
@@ -23,7 +26,7 @@
                 </div>
                 {% endwith %}
             {% else %}
-                <h2>{% trans 'unaffiliated'|capfirst %}</h2>
+                <div style="border-radius: 50%; float: left; background-image: url('{% static 'images/bocken.png' %}'); width: 40px; height: 40px;margin: 0px 10px 0 0; background-size: contain;"></div><h2>{% trans 'unaffiliated'|capfirst %}</h2>
                 <div class="overview">
                     <ul>
                         <li>
