@@ -3,11 +3,12 @@
 
 {% block content %}
 <div class="container push-top-bottom">
-    <div class="faq">
+    <div class="faq positions">
         {% for pos in positions %}
             <div class="faq-item">
                 <div class="faq-item-question">
                     <h2>{{ pos }}{% if pos.function.team %} &mdash; {{ pos.function.team }}{% endif %}</h2>
+                    <p style="margin-top: -15px;"><b>Deadline: {{ pos.deadline }}</b></p>
                 </div><!-- /.faq-item-question -->
 
                 <div class="faq-item-answer">
