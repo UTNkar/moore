@@ -4,20 +4,18 @@
 {% block extra_css %}
 <style>
 {% for team in teams %}
-    {% if team.logo %}{% image team.logo fill-40x40 as logo %}{% endif %}
+{% if team.logo %}{% image team.logo fill-40x40 as logo %}{% endif %}
 .team-{{ team.id }}.faq-item:before {
     content: '';
     background: #FFFFFF {% if team.logo %}url("{{ logo.url }}");{% else %}url("{% static 'images/bocken.png' %}");{% endif %}
     background-size: 40px 40px;
 }
 {% endfor %}
-
 .no-team.faq-item:before {
     content: '';
     background: #FFFFFF url("{% static 'images/bocken.png' %}");
     background-size: 40px 40px;
 }
-
 </style>
 {% endblock %}
 
@@ -26,7 +24,7 @@
     <div class="row">
     <div class="faq col-md-8 col-lg-9">
         {# This works because of stable sort #}
-        {% for pos in positions|dictsort:'function.team.name'|dictsort:'deadline' %}
+        {% for pos in positions|dictsort:'deadline' %}
             <div class="{% if pos.function.team %}team-{{ pos.function.team.id }}{% else %}no-team{% endif %} faq-item">
                 <div class="faq-item-question">
                     <h2>{{ pos }}{% if pos.function.team %} &mdash; {{ pos.function.team }}{% endif %}</h2>
@@ -34,8 +32,8 @@
                 </div><!-- /.faq-item-question -->
 
                 <div class="faq-item-answer">
-                    {% if pos.function.description %}<p>{{ pos.function.description }}</p>{% endif %}
-                    {% if pos.comment %}<p>{{ pos.comment }}</p>{% endif %}
+                    {% if pos.function.description %}<p>{{ pos.function.description|truncatechars:300 }}</p>{% endif %}
+                    {% if pos.comment %}<p>{{ pos.comment|truncatechars:300 }}</p>{% endif %}
                 </div><!-- /.faq-item-answer -->
 
                 <div class="faq-item-meta">
@@ -56,17 +54,17 @@
     <div class="col-md-4 col-lg-3">
 			<div class="sidebar">
 				<div class="widget">
-                <h2 class="widgettitle">{% trans 'Overview' %}</h2>
+                <h2 class="widgettitle">{% trans 'overview'|capfirst %}</h2>
 
                 <div class="reviews">
-                {% for pos in positions|dictsort:'function.team.name'|dictsort:'deadline' %}
+                {% for pos in positions|dictsort:'deadline' %}
                     {% if pos.function.team.logo %}{% image pos.function.team.logo fill-20x20 as logo %}{% endif %}
                     <div class="review" style="margin: 0 0 5px 0; padding: 0 0 5px 0;">
                         <a href="{% routablepageurl page 'position' pos.id  %}" class="review-user" style="background-image: {% if pos.function.team.logo %}url('{{ logo.url }}');{% else %}url('{% static 'images/bocken.png' %}');{% endif %}width: 20px; height: 20px;margin: 10px 10px 0 0;"></a>
 
                         <div class="review-content">
-                            <h3><a href="{% routablepageurl page 'position' pos.id  %}">{{ pos }}</a></h3>
-                            {% if pos.function.team %}<div><i class="md-icon" style="height: 14px; font-size: 20px;">group</i>{{ pos.function.team }}</div>{% endif %}<!-- /.review-rating -->
+                            <h3><a href="{% routablepageurl page 'position' pos.id  %}">{{ pos|truncatechars:25 }}</a></h3>
+                            {% if pos.function.team %}<div><i class="md-icon" style="height: 14px; font-size: 20px;">group</i>{{ pos.function.team|truncatechars:20 }}</div>{% else %}<div><i class="md-icon" style="height: 14px; font-size: 20px;">person</i>{% trans 'unaffiliated'|capfirst %}</div>{% endif %}<!-- /.review-rating -->
                         </div><!-- /.review-content -->
                     </div><!-- /.review -->
                 {% endfor %}
