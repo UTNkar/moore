@@ -7,6 +7,7 @@ from involvement.models import Position, Team
 
 def open_positions(request, context):
     """View redirect for the currently open positions"""
+    # TODO: Limit accorting to inclusion/exclusion rules
     context['positions'] = Position.objects.filter(
         commencement__lte=datetime.date.today()
     ).filter(

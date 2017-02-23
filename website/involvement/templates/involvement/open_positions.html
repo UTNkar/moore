@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "involvement/base.html" %}
 {% load i18n static wagtailroutablepage_tags wagtailimages_tags %}
 
 {% block extra_css %}
@@ -21,7 +21,7 @@
 </style>
 {% endblock %}
 
-{% block content %}
+{% block involvement_content %}
 <div class="container push-top-bottom">
     <div class="faq">
         {% for pos in positions %}
@@ -44,7 +44,7 @@
                         </span><!-- /.rate -->
                     </div>
                     <div>
-                        <a class="btn" href="{% routablepageurl page "position" pos.id  %}">{% trans 'apply' %}</a>
+                        <a class="btn" href="{% routablepageurl page 'position' pos.id  %}">{% trans 'apply' %}</a>
                     </div>
                 </div><!-- /.faq-item-meta -->
             </div><!-- /.faq-item -->
