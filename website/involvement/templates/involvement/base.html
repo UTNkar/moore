@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n wagtailroutablepage_tags %}
+
+{% block content %}
+    <div class="header-colored">
+        <div class="container">
+            <div class="header-colored-label hidden-md-down">
+                Go to
+            </div><!-- /.header-bottom-label -->
+
+            {# TODO: Mark when on the page?? #}
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="{% routablepageurl page 'open_positions' %}" class="nav-link">{% trans 'Open Positions' %}</a></li>
+                <li class="nav-item"><a href="{% routablepageurl page 'sent_applications' %}" class="nav-link">{% trans 'My Applications' %}</a></li>
+                <li class="nav-item"><a href="{% routablepageurl page 'action_list' %}" class="nav-link">{% trans 'Action List' %}</a></li>
+            </ul><!-- /.nav -->
+        </div><!-- /.container -->
+    </div><!-- /.header-bottom -->
+    {% block involvement_content %}{% endblock %}
+{% endblock %}
