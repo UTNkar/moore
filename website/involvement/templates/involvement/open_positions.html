@@ -1,11 +1,31 @@
 {% extends "base.html" %}
-{% load i18n wagtailroutablepage_tags %}
+{% load i18n static wagtailroutablepage_tags wagtailimages_tags %}
+
+{% block extra_css %}
+<style>
+{% for team in teams %}
+    {% if team.logo %}{% image team.logo fill-40x40 as logo %}{% endif %}
+.team-{{ team.id }}.faq-item:before {
+    content: '';
+    background: #FFFFFF {% if team.logo %}url("{{ logo.url }}");{% else %}url("{% static 'images/bocken.png' %}");{% endif %}
+    background-size: 40px 40px;
+}
+{% endfor %}
+
+.no-team.faq-item:before {
+    content: '';
+    background: #FFFFFF url("{% static 'images/bocken.png' %}");
+    background-size: 40px 40px;
+}
+
+</style>
+{% endblock %}
 
 {% block content %}
 <div class="container push-top-bottom">
-    <div class="faq positions">
+    <div class="faq">
         {% for pos in positions %}
-            <div class="faq-item">
+            <div class="{% if pos.function.team %}team-{{ pos.function.team.id }}{% else %}no-team{% endif %} faq-item">
                 <div class="faq-item-question">
                     <h2>{{ pos }}{% if pos.function.team %} &mdash; {{ pos.function.team }}{% endif %}</h2>
                     <p style="margin-top: -15px;"><b>Deadline: {{ pos.deadline }}</b></p>
