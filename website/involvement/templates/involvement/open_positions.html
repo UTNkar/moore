@@ -23,7 +23,8 @@
 
 {% block involvement_content %}
 <div class="container push-top-bottom">
-    <div class="faq">
+    <div class="row">
+    <div class="faq col-md-8 col-lg-9">
         {# This works because of stable sort #}
         {% for pos in positions|dictsort:'function.team.name'|dictsort:'deadline' %}
             <div class="{% if pos.function.team %}team-{{ pos.function.team.id }}{% else %}no-team{% endif %} faq-item">
@@ -39,7 +40,7 @@
 
                 <div class="faq-item-meta">
                     <div style="text-align: left; float: left">
-                        {% trans 'Term of office' %}:
+                        <b>{% trans 'Term of office' %}:</b>
                         <span class="rate">
                             {{ pos.term_from }}<span class="separator">-</span>{{ pos.term_to }}
                         </span><!-- /.rate -->
@@ -50,8 +51,32 @@
                 </div><!-- /.faq-item-meta -->
             </div><!-- /.faq-item -->
         {% endfor %}
-
     </div><!-- /.faq -->
+
+    <div class="col-md-4 col-lg-3">
+			<div class="sidebar">
+				<div class="widget">
+                <h2 class="widgettitle">{% trans 'Overview' %}</h2>
+
+                <div class="reviews">
+                {% for pos in positions|dictsort:'function.team.name'|dictsort:'deadline' %}
+                    {% if pos.function.team.logo %}{% image pos.function.team.logo fill-20x20 as logo %}{% endif %}
+                    <div class="review" style="margin: 0 0 5px 0; padding: 0 0 5px 0;">
+                        <a href="{% routablepageurl page 'position' pos.id  %}" class="review-user" style="background-image: {% if pos.function.team.logo %}url('{{ logo.url }}');{% else %}url('{% static 'images/bocken.png' %}');{% endif %}width: 20px; height: 20px;margin: 10px 10px 0 0;"></a>
+
+                        <div class="review-content">
+                            <h3><a href="{% routablepageurl page 'position' pos.id  %}">{{ pos }}</a></h3>
+                            {% if pos.function.team %}<div><i class="md-icon" style="height: 14px; font-size: 20px;">group</i>{{ pos.function.team }}</div>{% endif %}<!-- /.review-rating -->
+                        </div><!-- /.review-content -->
+                    </div><!-- /.review -->
+                {% endfor %}
+                </div><!-- /.reviews -->
+
+                </div><!-- /.widget -->
+			</div><!-- /.sidebar -->
+		</div>
+    </div>
+
 
 </div><!-- /.container -->
 {% endblock %}
