@@ -1,5 +1,7 @@
 import datetime
 
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 from django.shortcuts import render
 
 from involvement.models import Position, Team
@@ -34,4 +36,11 @@ def position(request, context, position=None):
     """
     View function for specific positions.
     """
+    if position is None:
+        raise Http404
+    try:
+        context['position'] = Position.objects.get(id=position)
+    except ObjectDoesNotExist:
+        raise Http404
+
     return render(request, 'involvement/position.html', context)
