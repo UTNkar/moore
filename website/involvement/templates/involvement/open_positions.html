@@ -24,7 +24,8 @@
 {% block involvement_content %}
 <div class="container push-top-bottom">
     <div class="faq">
-        {% for pos in positions %}
+        {# This works because of stable sort #}
+        {% for pos in positions|dictsort:'function.team.name'|dictsort:'deadline' %}
             <div class="{% if pos.function.team %}team-{{ pos.function.team.id }}{% else %}no-team{% endif %} faq-item">
                 <div class="faq-item-question">
                     <h2>{{ pos }}{% if pos.function.team %} &mdash; {{ pos.function.team }}{% endif %}</h2>
