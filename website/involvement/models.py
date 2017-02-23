@@ -12,6 +12,7 @@ from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel, \
     InlinePanel, FieldRowPanel
 from wagtail.wagtailcore.models import Orderable, Page
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
 class RecruitmentPage(RoutablePageMixin, Page):
@@ -98,6 +99,14 @@ class Team(models.Model):
 
     name = TranslatedField('name_en', 'name_sv')
 
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     description_en = models.TextField(
         verbose_name=_('English team description'),
         help_text=_('Enter a description of the team'),
@@ -143,6 +152,7 @@ class Team(models.Model):
             FieldPanel('name_en'),
             FieldPanel('name_sv'),
         ]),
+        ImageChooserPanel('logo'),
         FieldRowPanel([
             FieldPanel('leader_en'),
             FieldPanel('leader_sv'),

@@ -2,7 +2,7 @@ import datetime
 
 from django.shortcuts import render
 
-from involvement.models import Position
+from involvement.models import Position, Team
 
 
 def open_positions(request, context):
@@ -12,6 +12,7 @@ def open_positions(request, context):
     ).filter(
         deadline__gte=datetime.date.today()
     )
+    context['teams'] = Team.objects.all()
     return render(request, 'involvement/open_positions.html', context)
 
 
