@@ -27,7 +27,7 @@
 
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
-    <input type="hidden" name="next" value="{% firstof next %}" />
+    <input type="hidden" name="next" value="{{ next }}" />
 
     <div class="form-group{% if form.errors %} has-danger{% endif %}">
         <label>{% trans 'username' %}</label>
