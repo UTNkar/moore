@@ -1,4 +1,4 @@
-{% load i18n static compress wagtailcore_tags wagtailuserbar wagtailsettings_tags site_tags %}
+{% load i18n static compress wagtailcore_tags wagtailuserbar wagtailsettings_tags gravatar site_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_site_root as site_root %}
 {% get_settings %}
@@ -78,13 +78,16 @@
                         {% if not user.is_authenticated %}
                             <li class="nav-item">
                                 <a href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}" class="nav-link circle">
-                                    <i class="md-icon">person</i>
+                                    <i class="md-icon">input</i>
                                 </a>
                             </li>
                         {% else %}
 						<li class="nav-item user-avatar-wrapper">
-							<a href="#" class="nav-link circle user-avatar-image"
-                               {# TODO: Avatar?? style="background-image: url('assets/img/tmp/profile-1.jpg')"#}><i class="md-icon">person</i></a>
+							<a href="#" class="nav-link circle user-avatar-image">
+                                <i class="md-icon">person</i>
+                                {# TODO: Solve grey backlash #}
+                                <div class="nav-link circle user-avatar-image" style="background: transparent url('{% gravatar_url user.email %}'); background-size: 32px; bottom: 44px"></div>
+                            </a>
 							<span class="user-avatar-status"></span>
 
 							<ul class="header-more-menu">
