@@ -30,13 +30,13 @@
     <input type="hidden" name="next" value="{{ next }}" />
 
     <div class="form-group{% if form.errors %} has-danger{% endif %}">
-        <label>{% trans 'username' %}</label>
-        <input name="{{ form.username.name }}" type="text" class="form-control">
+        <label for="username">{% trans 'username' %}</label>
+        <input id="username" name="{{ form.username.name }}" type="text" class="form-control">
     </div><!-- /.form-group -->
 
     <div class="form-group{% if form.errors %} has-danger{% endif %}">
-        <label>{% trans 'password' %}</label>
-        <input name="{{ form.password.name }}" type="password" class="form-control">
+        <label for="password">{% trans 'password' %}</label>
+        <input id="password" name="{{ form.password.name }}" type="password" class="form-control">
     </div><!-- /.form-group -->
 
     <div class="form-group-btn">
