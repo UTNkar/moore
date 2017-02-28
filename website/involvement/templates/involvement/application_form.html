@@ -1,0 +1,127 @@
+{% load i18n wagtailroutablepage_tags %}
+
+<div class="box">
+    <h2>{% trans 'Apply now!' %}</h2>
+    <form method="post" action="{% routablepageurl page 'position' position.id  %}">
+        {% csrf_token %}
+        <fieldset>
+            <legend>{% trans 'member information'|title %}</legend>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="first-name">{% trans 'first name' %}</label>
+                        <input id="first-name" class="form-control" type="text" placeholder="{{ request.user.first_name }}" readonly>
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="last-name">{% trans 'last name' %}</label>
+                        <input id="last-name" class="form-control" type="text" placeholder="{{ request.user.last_name }}" readonly>
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="person-number">{% trans 'person number' %}</label>
+                        <input id="person-number" class="form-control" type="text" placeholder="{{ request.user.person_number }}" readonly>
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="phone">{% trans 'phone number' %}</label>
+                        <input id="phone" class="form-control" type="text" placeholder="{{ request.user.phone_number }}" readonly>
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="email">{% trans 'e-mail' %}</label>
+                        <input id="email" class="form-control" type="text" placeholder="{{ request.user.email }}" readonly>
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="study">{% trans 'study program' %}</label>
+                        <input id="study" class="form-control" type="text" placeholder="{{ request.user.study }}" readonly>
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+            </div>
+            <div class="row">
+                <i>{% trans 'These values can be changed in your profile' %}</i>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>{{ form.cover_letter.label|title }}</legend>
+
+            <div class="form-group">
+                <label for="{{ form.cover_letter.auto_id }}">{{ form.cover_letter.help_text }}</label>
+                {{ form.cover_letter }}
+            </div><!-- /.form-group -->
+        </fieldset>
+
+        <fieldset>
+            <legend>{{ form.qualifications.label|title }}</legend>
+
+            <div class="form-group">
+                <label for="{{ form.qualifications.auto_id }}">{{ form.qualifications.help_text }}</label>
+                {{ form.qualifications }}
+            </div><!-- /.form-group -->
+        </fieldset>
+
+        {{ reference_forms.management_form }}
+        <fieldset>
+            <legend>{% trans 'references'|title %}</legend>
+
+            <div class="row">
+                {% for form in reference_forms %}
+                <div class="col-sm-12">
+                    <b>{% trans 'reference'|capfirst %} #{{ forloop.counter }}</b>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                    </div><!-- /.form-group -->
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        {{ form.position.label_tag }}
+                        {{ form.position }}
+                    </div><!-- /.form-group -->
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {{ form.phone_number.label_tag }}
+                        {{ form.phone_number }}
+                    </div><!-- /.form-group -->
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                    </div><!-- /.form-group -->
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {{ form.comment.label_tag }}
+                        {{ form.comment }}
+                    </div><!-- /.form-group -->
+                </div>
+                {% endfor %}
+            </div>
+        </fieldset>
+
+        <div class="text-right">
+            {% if draft %}
+            <button name="{{ form.draft.name }}" type="submit" class="btn btn-large" value="True">{% trans 'save as draft' %}</button>
+            {% endif %}
+            <button name="{{ form.draft.name }}" type="submit" class="btn btn-large btn-primary" value="False">{% if draft %}{% trans 'apply' %}{% else %}{% trans 'update' %}{% endif %}</button>
+        </div><!-- /.center -->
+    </form>
+</div>
+	

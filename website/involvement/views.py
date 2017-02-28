@@ -2,9 +2,12 @@ import datetime
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from involvement.models import Position, Team
+from involvement.models import Position, Team, Application
+
+from involvement.forms import ApplicationForm, ReferenceFormSet
 
 
 def open_positions(request, context):
@@ -42,5 +45,35 @@ def position(request, context, position=None):
         context['position'] = Position.objects.get(id=position)
     except ObjectDoesNotExist:
         raise Http404
+
+    # Load application form if user is logged in
+    if request.user.is_authenticated:
+        # Did the user already have an application?
+        try:
+            appl = Application.objects.get(applicant=request.user,
+                                           position=context['position'])
+            context['draft'] = appl.draft
+        except ObjectDoesNotExist:
+            appl = Application()
+            context['draft'] = True
+        # Did the user already fill in the form?
+        if request.method == 'POST':
+            context['form'] = ApplicationForm(request.POST, instance=appl)
+            context['reference_forms'] = ReferenceFormSet(request.POST,
+                                                          request.FILES,
+                                                          instance=appl)
+            # Was all data correct?
+            if context['form'].is_valid() \
+                    and context['reference_forms'].is_valid():
+                appl = context['form'].save(commit=False)
+                appl.applicant = request.user
+                appl.position = context['position']
+                appl.save()
+                context['reference_forms'].save()
+                if not appl.draft:
+                    return HttpResponseRedirect('/')
+        else:
+            context['form'] = ApplicationForm(instance=appl)
+            context['reference_forms'] = ReferenceFormSet(instance=appl)
 
     return render(request, 'involvement/position.html', context)

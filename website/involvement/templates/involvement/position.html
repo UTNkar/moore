@@ -5,54 +5,66 @@
 
 {% block involvement_content %}
 <div class="container push-top-bottom">
-    <div class="col-md-5 col-md-push-7">
-        <div class="sidebar">
-            <div class="widget">
-            {% if position.function.team %}
-                {% with team=position.function.team %}
-                {% image team.logo fill-40x40 as logo %}
-                <div style="border-radius: 50%; float: left; background-image: url('{{ logo.url }}'); width: 40px; height: 40px;margin: 0px 10px 0 0;"></div><h2>{{ team }}</h2>
-                <div class="overview">
-                    <ul>
-                        <li>
-                            <strong>{% trans 'about' %}</strong>
-                            <span>{{ team.description }}</span>
-                        </li>
-                        <li>
-                            <strong>{% trans 'contact' %}</strong>
-                            <a href="mailto:{{ team.email }}"><span>{{ team.leader }} &lt;{{ team.email }}&gt;</span></a>
-                        </li>
-                    </ul>
+    <div class="row">
+        <div class="col-md-5 col-md-push-7">
+            <div class="sidebar">
+                <div class="widget">
+                {% if position.function.team %}
+                    {% with team=position.function.team %}
+                    {% image team.logo fill-40x40 as logo %}
+                    <div style="border-radius: 50%; float: left; background-image: url('{{ logo.url }}'); width: 40px; height: 40px;margin: 0px 10px 0 0;"></div><h2>{{ team }}</h2>
+                    <div class="overview">
+                        <ul>
+                            <li>
+                                <strong>{% trans 'about' %}</strong>
+                                <span>{{ team.description }}</span>
+                            </li>
+                            <li>
+                                <strong>{% trans 'contact' %}</strong>
+                                <a href="mailto:{{ team.email }}"><span>{{ team.leader }} &lt;{{ team.email }}&gt;</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    {% endwith %}
+                {% else %}
+                    <div style="border-radius: 50%; float: left; background-image: url('{% static 'images/bocken.png' %}'); width: 40px; height: 40px;margin: 0px 10px 0 0; background-size: contain;"></div><h2>{% trans 'unaffiliated'|capfirst %}</h2>
+                    <div class="overview">
+                        <ul>
+                            <li>
+                                <strong>{% trans 'about' %}</strong>
+                                <span>{% trans 'This position is not affiliated with any team or committee. You answer directly to the management team and the board.' %}</span>
+                            </li>
+                            <li>
+                                <strong>{% trans 'contact' %}</strong>
+                                <a href="mailto:ordf@utn.se"><span>{% trans 'chairman'|capfirst %} &lt;ordf@utn.se&gt;</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
                 </div>
-                {% endwith %}
-            {% else %}
-                <div style="border-radius: 50%; float: left; background-image: url('{% static 'images/bocken.png' %}'); width: 40px; height: 40px;margin: 0px 10px 0 0; background-size: contain;"></div><h2>{% trans 'unaffiliated'|capfirst %}</h2>
-                <div class="overview">
-                    <ul>
-                        <li>
-                            <strong>{% trans 'about' %}</strong>
-                            <span>{% trans 'This position is not affiliated with any team or committee. You answer directly to the management team and the board.' %}</span>
-                        </li>
-                        <li>
-                            <strong>{% trans 'contact' %}</strong>
-                            <a href="mailto:ordf@utn.se"><span>{% trans 'chairman'|capfirst %} &lt;ordf@utn.se&gt;</span></a>
-                        </li>
-                    </ul>
-                </div>
-            {% endif %}
+            </div>
+        </div>
+        <div class="col-md-7 col-md-pull-5">
+            <div class="listing-detail">
+                <h1>{{ position }}</h1>
+                <h2>{% trans 'function description'|title %}</h2>
+                <p>{% if position.function.description %}{{ position.function.description }}{% else %}{% trans 'No function description is available at this time. For more information about this position, please get in contact with us.' %}{% endif %}</p>
+                {% if position.comment %}
+                <h2>{% trans 'comments for this year'|title %}</h2>
+                <p>{{ position.comment }}</p>
+                {% endif %}
             </div>
         </div>
     </div>
-    <div class="col-md-7 col-md-pull-5">
-        <div class="listing-detail">
-            <h1>{{ position }}</h1>
-            <h2>{% trans 'function description'|title %}</h2>
-            <p>{% if position.function.description %}{{ position.function.description }}{% else %}{% trans 'No function description is available at this time. For more information about this position, please get in contact with us.' %}{% endif %}</p>
-            {% if position.comment %}
-            <h2>{% trans 'comments for this year'|title %}</h2>
-            <p>{{ position.comment }}</p>
-            {% endif %}
+    <div class="row">
+    {% if form %}
+        {% include 'involvement/application_form.html' %}
+    {% else %}
+        <div class="box center">
+            <h5>{% trans 'Please login to apply to this position' %}</h5>
+            <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary btn-large">{% trans 'login' %}</a>
         </div>
+    {% endif %}
     </div>
 </div>
 {% endblock %}
