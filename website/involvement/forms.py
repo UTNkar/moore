@@ -26,4 +26,5 @@ ReferenceFormSet = inlineformset_factory(
         'phone_number': TextInput(attrs={'class': 'form-control'}),
         'comment': TextInput(attrs={'class': 'form-control'}),
     },
+    extra=0,
 )

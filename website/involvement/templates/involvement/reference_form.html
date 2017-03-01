@@ -1,0 +1,50 @@
+{% load i18n %}
+<div id="reference-{{ number }}" class="item">
+    <div class="col-sm-12">
+        <b>{% trans 'reference'|capfirst %}</b>
+    </div>
+    <div class="col-sm-11">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div><!-- /.form-group -->
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                {{ form.position.label_tag }}
+                {{ form.position }}
+            </div><!-- /.form-group -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                {{ form.phone_number.label_tag }}
+                {{ form.phone_number }}
+            </div><!-- /.form-group -->
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div><!-- /.form-group -->
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                {{ form.comment.label_tag }}
+                {{ form.comment }}
+            </div><!-- /.form-group -->
+        </div>
+    </div>
+    </div>
+    <div class="col-sm-1 center delete-button">
+        <div style="display: none;">
+        {{ form.DELETE }}</div>
+        <a class="btn delete" href="#" style="margin-top: 60px;"><i class="fa fa-trash"></i></a>
+    </div>
+    {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+    {% endfor %}
+</div>

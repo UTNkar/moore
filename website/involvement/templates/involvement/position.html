@@ -3,6 +3,10 @@
 
 {# TODO: move style to SCSS! #}
 
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'js/dynamic_formset.js' %}"></script>
+{% endblock %}
+
 {% block involvement_content %}
 <div class="container push-top-bottom">
     <div class="row">
