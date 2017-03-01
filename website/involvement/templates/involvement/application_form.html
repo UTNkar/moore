@@ -77,42 +77,13 @@
         <fieldset>
             <legend>{% trans 'references'|title %}</legend>
 
-            <div class="row">
+            <div id="formset-container" class="row">
                 {% for form in reference_forms %}
-                <div class="col-sm-12">
-                    <b>{% trans 'reference'|capfirst %} #{{ forloop.counter }}</b>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        {{ form.name.label_tag }}
-                        {{ form.name }}
-                    </div><!-- /.form-group -->
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        {{ form.position.label_tag }}
-                        {{ form.position }}
-                    </div><!-- /.form-group -->
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        {{ form.phone_number.label_tag }}
-                        {{ form.phone_number }}
-                    </div><!-- /.form-group -->
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        {{ form.email.label_tag }}
-                        {{ form.email }}
-                    </div><!-- /.form-group -->
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        {{ form.comment.label_tag }}
-                        {{ form.comment }}
-                    </div><!-- /.form-group -->
-                </div>
+                    {% include 'involvement/reference_form.html' with number=forloop.counter0 %}
                 {% endfor %}
+            </div>
+            <div class="col-sm-12">
+                <a href="#" id="add"><b><i class="fa fa-plus"></i> {% trans 'Add a reference' %}</b></a>
             </div>
         </fieldset>
 
@@ -124,4 +95,9 @@
         </div><!-- /.center -->
     </form>
 </div>
+
+
+<script type="text/html" id="formset-template">
+{% include 'involvement/reference_form.html' with form=reference_forms.empty_form number='__prefix__' %}
+</script>
 	
