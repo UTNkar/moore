@@ -1,5 +1,5 @@
 {% extends "involvement/base.html" %}
-{% load i18n static wagtailroutablepage_tags wagtailimages_tags %}
+{% load i18n static wagtailroutablepage_tags wagtailimages_tags involvement_filters %}
 
 {% block extra_css %}
 <style>
@@ -28,7 +28,7 @@
             <div class="{% if pos.function.team %}team-{{ pos.function.team.id }}{% else %}no-team{% endif %} faq-item">
                 <div class="faq-item-question">
                     <h2>{{ pos }}{% if pos.function.team %} &mdash; {{ pos.function.team }}{% endif %}</h2>
-                    <p style="margin-top: -15px;"><b>Deadline: {{ pos.deadline }}</b></p>
+                    <p style="margin-top: -15px; color: {{ pos.deadline|date_color }};"><b>Deadline: {{ pos.deadline }}</b></p>
                 </div><!-- /.faq-item-question -->
 
                 <div class="faq-item-answer">
