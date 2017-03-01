@@ -19,13 +19,18 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="form-group">
+                {# TODO: ERROR Messages #}
+                {% if form.phone_number.errors %}<div style="color: red;">{% endif %}
                 {{ form.phone_number.label_tag }}
+                {% if form.phone_number.errors %}</div>{% endif %}
                 {{ form.phone_number }}
             </div><!-- /.form-group -->
         </div>
         <div class="col-sm-4">
             <div class="form-group">
+                {% if form.email.errors %}<div style="color: red;">{% endif %}
                 {{ form.email.label_tag }}
+                {% if form.email.errors %}</div>{% endif %}
                 {{ form.email }}
             </div><!-- /.form-group -->
         </div>

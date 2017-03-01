@@ -71,8 +71,9 @@ def position(request, context, position=None):
                 appl.save()
                 context['reference_forms'].save()
                 if not appl.draft:
-                    # TODO: render the right page
                     return HttpResponseRedirect('/')
+            else:
+                return render(request, 'involvement/position.html', context)
 
         context['form'] = ApplicationForm(instance=appl)
         context['reference_forms'] = ReferenceFormSet(instance=appl)
