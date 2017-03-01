@@ -1,8 +1,6 @@
 {% load i18n %}
 <div id="reference-{{ number }}" class="item">
-    <div class="col-sm-12">
-        <b>{% trans 'reference'|capfirst %}</b>
-    </div>
+    {% if number != 0 %}<div class="col-sm-12"><hr style="border-top-color: #616161;" /></div>{% endif %}
     <div class="col-sm-11">
     <div class="row">
         <div class="col-sm-6">
@@ -47,4 +45,5 @@
     {% for hidden in form.hidden_fields %}
         {{ hidden }}
     {% endfor %}
+{#    <div class="col-sm-12"><hr style="border-top-color: #616161;" /></div>#}
 </div>
