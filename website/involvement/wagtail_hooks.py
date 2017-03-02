@@ -36,7 +36,7 @@ class ApplicationAdmin(ModelAdmin):
     model = Application
     menu_icon = 'mail'
     menu_order = 400
-    list_display = ('position', 'applicant', 'draft')
+    list_display = ('position', 'applicant', 'status')
 
 
 class InvolvementAdminGroup(ModelAdminGroup):

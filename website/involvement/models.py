@@ -325,12 +325,12 @@ class Application(ClusterableModel):
         unique_together = ('position', 'applicant')
 
     STATUS_CHOICES = (
-        ('draft', _('draft')),
-        ('submitted', _('submitted')),
-        ('approved', _('approved')),
-        ('disapproved', _('disapproved')),
-        ('appointed', _('appointed')),
-        ('turned_down', _('turned down')),
+        ('draft', _('Draft')),
+        ('submitted', _('Submitted')),
+        ('approved', _('Approved')),
+        ('disapproved', _('Disapproved')),
+        ('appointed', _('Appointed')),
+        ('turned_down', _('Turned down')),
     )
 
     status = models.CharField(
