@@ -2,14 +2,12 @@ from datetime import date
 
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 
-from involvement.models import Position, Team, Application
-
 from involvement.forms import ApplicationForm, ReferenceFormSet
+from involvement.models import Position, Team, Application
 
 
 def open_positions(request, context):
@@ -75,12 +73,7 @@ def position(request, context, page, position=None):
     """
     View function for specific positions.
     """
-    if position is None:
-        raise Http404
-    try:
-        context['position'] = Position.objects.get(id=position)
-    except ObjectDoesNotExist:
-        raise Http404
+    context['position'] = get_object_or_404(Position, id=position)
 
     # Load application form if user is logged in
     if request.user.is_authenticated:
