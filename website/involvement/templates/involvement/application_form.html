@@ -1,7 +1,10 @@
 {% load i18n wagtailroutablepage_tags %}
 
 <div class="box">
-    <h2>{% trans 'Apply now!' %}</h2>
+    <h2>{% trans 'apply now!'|title %}</h2>
+    {% if form.errors %}
+        ERROR: {{ form.errors }}
+    {% endif %}
     <form method="post" action="{% routablepageurl page 'position' position.id  %}">
         {% csrf_token %}
         <fieldset>
@@ -88,10 +91,10 @@
         </fieldset>
 
         <div class="text-right">
-            {% if draft %}
-            <button name="{{ form.draft.name }}" type="submit" class="btn btn-large" value="True">{% trans 'save as draft' %}</button>
+            {% if status == 'draft' %}
+            <button name="{{ form.status.name }}" type="submit" class="btn btn-large" value="draft">{% trans 'save as draft' %}</button>
             {% endif %}
-            <button name="{{ form.draft.name }}" type="submit" class="btn btn-large btn-primary" value="False">{% if draft %}{% trans 'apply' %}{% else %}{% trans 'update' %}{% endif %}</button>
+            <button name="{{ form.status.name }}" type="submit" class="btn btn-large btn-primary" value="submitted">{% if draft %}{% trans 'apply' %}{% else %}{% trans 'update' %}{% endif %}</button>
         </div><!-- /.center -->
     </form>
 </div>

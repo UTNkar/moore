@@ -53,11 +53,11 @@ def my_applications(request, context):
 
     context['drafts'] = applications.filter(
         position__deadline__gte=date.today(),
-        draft=True,
+        status='draft',
     )
     context['submitted'] = applications.filter(
         position__deadline__gte=date.today(),
-        draft=False,
+        status='submitted',
     )
 
     return render(request, 'involvement/my_applications.html', context)
@@ -88,10 +88,10 @@ def position(request, context, page, position=None):
         try:
             appl = Application.objects.get(applicant=request.user,
                                            position=context['position'])
-            context['draft'] = appl.draft
+            context['status'] = appl.status
         except ObjectDoesNotExist:
             appl = Application()
-            context['draft'] = True
+            context['status'] = 'draft'
         # Did the user already fill in the form?
         if request.method == 'POST':
             context['form'] = ApplicationForm(request.POST, instance=appl)
@@ -102,11 +102,14 @@ def position(request, context, page, position=None):
             if context['form'].is_valid() \
                     and context['reference_forms'].is_valid():
                 appl = context['form'].save(commit=False)
+                # Don't save as daft unless it was one!
+                if context['status'] != 'draft':
+                    appl.status = 'submitted'
                 appl.applicant = request.user
                 appl.position = context['position']
                 appl.save()
                 context['reference_forms'].save()
-                if not appl.draft:
+                if not appl.status == 'draft':
                     return HttpResponseRedirect(
                         page.url + page.reverse_subpage('my_applications')
                     )

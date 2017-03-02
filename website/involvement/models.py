@@ -324,10 +324,21 @@ class Application(ClusterableModel):
         verbose_name_plural = _('Applications')
         unique_together = ('position', 'applicant')
 
-    draft = models.BooleanField(
-        verbose_name=_('Draft'),
-        help_text=_('Save application as a draft'),
-        default=False,
+    STATUS_CHOICES = (
+        ('draft', _('draft')),
+        ('submitted', _('submitted')),
+        ('approved', _('approved')),
+        ('disapproved', _('disapproved')),
+        ('appointed', _('appointed')),
+        ('turned_down', _('turned down')),
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        verbose_name=_('Status'),
+        blank=False,
+        null=False,
     )
 
     # ---- Application Information ------
@@ -352,7 +363,7 @@ class Application(ClusterableModel):
         FieldPanel('cover_letter'),
         FieldPanel('qualifications'),
         InlinePanel('references'),
-        FieldPanel('draft'),
+        FieldPanel('status'),
     ])]
 
 
