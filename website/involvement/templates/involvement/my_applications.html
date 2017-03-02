@@ -1,1 +1,51 @@
 {% extends "involvement/base.html" %}
+{% load i18n %}
+
+{% block involvement_content %}
+    <div class="container push-top-bottom">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        {% if message %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+        {% if drafts %}
+        <div class="page-header"><h2>{% trans 'drafted applications'|title %}</h2></div>
+        {% for a in drafts %}
+            {% include 'involvement/application_summary.html' with application=a edit=True color='primary' %}
+        {% endfor %}
+        {% endif %}
+
+        {% if submitted %}
+        <div class="page-header"><h2>{% trans 'submitted applications'|title %}</h2></div>
+        {% for a in submitted %}
+            {% include 'involvement/application_summary.html' with application=a edit=True %}
+        {% endfor %}
+        {% endif %}
+
+        {% if waiting %}
+        <div class="page-header"><h2>{% trans 'waiting applications'|title %}</h2></div>
+        {% for a in waiting %}
+            {% include 'involvement/application_summary.html' with application=a %}
+        {% endfor %}
+        {% endif %}
+
+        {% if not drafts and not submitted and not waiting and not old %}
+            <div class="page-header"><h2>{% trans 'submitted applications'|title %}</h2></div>
+            <div class="filter">
+            <b>{% trans 'You currently do not have any submitted applications.' %}</b>
+            </div>
+        {% endif %}
+
+        {% if old %}
+        <div class="page-header"><h2>{% trans 'submitted applications'|title %}</h2></div>
+        {% for a in old %}
+            {% include 'involvement/application_summary.html' with application=a color='secondary' %}
+        {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

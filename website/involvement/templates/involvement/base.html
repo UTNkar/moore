@@ -2,6 +2,7 @@
 {% load i18n wagtailroutablepage_tags %}
 
 {% block content %}
+    {% if user.is_authenticated %}
     <div class="header-colored">
         <div class="container">
             <div class="header-colored-label hidden-md-down">
@@ -16,5 +17,6 @@
             </ul><!-- /.nav -->
         </div><!-- /.container -->
     </div><!-- /.header-bottom -->
+    {% endif %}
     {% block involvement_content %}{% endblock %}
 {% endblock %}
