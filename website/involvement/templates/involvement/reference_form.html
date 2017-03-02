@@ -5,13 +5,17 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
+                {% if form.name.errors %}<div style="color: red;">{% endif %}
                 {{ form.name.label_tag }}
+                {% if form.name.errors %}</div>{% endif %}
                 {{ form.name }}
             </div><!-- /.form-group -->
         </div>
         <div class="col-sm-6">
             <div class="form-group">
+                {% if form.position.errors %}<div style="color: red;">{% endif %}
                 {{ form.position.label_tag }}
+                {% if form.position.errors %}</div>{% endif %}
                 {{ form.position }}
             </div><!-- /.form-group -->
         </div>
