@@ -1,11 +1,22 @@
 {% load i18n wagtailroutablepage_tags %}
 
 <div class="box">
-    <h2>{% trans 'apply now!'|title %}</h2>
-    {% if form.errors %}
-        ERROR: {{ form.errors }}
+    <h2 id="apply">{% trans 'apply now!'|title %}</h2>
+    {% if form.errors or reference_forms.errors %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% if reference_forms.errors %}
+                <li>{% trans 'An error has been found in the refences.' %}</li>
+            {% endif %}
+            </ul>
+        </div>
     {% endif %}
-    <form method="post" action="{% routablepageurl page 'position' position.id  %}">
+    <form method="post" action="{% routablepageurl page 'position' position.id  %}#apply">
         {% csrf_token %}
         <fieldset>
             <legend>{% trans 'member information'|title %}</legend>
