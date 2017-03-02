@@ -9,7 +9,9 @@ register = template.Library()
 def date_color(value):
     delta = value - date.today()
 
-    if delta.days < 1:
+    if delta.days < 0:
+        return 'inherit'
+    elif delta.days < 1:
         return "#E53935"
     elif delta.days <= 3:
         return "#FBC02D"
