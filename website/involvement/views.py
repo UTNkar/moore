@@ -26,6 +26,7 @@ def open_positions(request, context):
 def my_applications(request, context):
     """View redirect for the applications by user"""
     if request.method == 'POST':
+        # TODO: Use form?
         try:
             action = request.POST.get('action')
             appl_id = request.POST.get('application')
@@ -56,6 +57,14 @@ def my_applications(request, context):
     context['submitted'] = applications.filter(
         position__deadline__gte=date.today(),
         status='submitted',
+    )
+    context['waiting'] = applications.filter(
+        position__deadline__lt=date.today(),
+        status__in=['submitted', 'approved'],
+    )
+    context['old'] = applications.filter(
+        position__deadline__lt=date.today(),
+        status__in=['disapproved', 'appointed', 'turned_down'],
     )
 
     return render(request, 'involvement/my_applications.html', context)
