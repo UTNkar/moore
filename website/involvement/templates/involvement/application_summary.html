@@ -1,0 +1,25 @@
+{% load i18n wagtailroutablepage_tags involvement_filters %}
+{% with position=application.position %}
+<div class="filter{% if color == 'primary' %} filter-primary{% elif color == 'secondary' %} filter-secondary{% endif %}">
+    <div class="row" style="padding-left: 20px;">
+        <h4>{{ position }}</h4>
+        <p style="margin-top: -15px; color: {{ position.deadline|date_color }};"><b>Deadline: {{ position.deadline }}</b></p>
+    </div>
+    <div class="row filter-options">
+        {% if edit %}
+            <div class="col-sm-9"><a class="btn btn-large btn-primary" href="{% routablepageurl page 'position' position.id  %}">{% trans 'edit' %}</a></div>
+            <div class="col-sm-3" style="text-align: right;">
+                <form method="post" action="{% routablepageurl page 'my_applications'  %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="application" id="application" value="{{ application.id }}" />
+                    <button name="action" type="submit" class="btn btn-large btn-danger" value="delete">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </form>
+            </div>
+        {% else %}
+
+        {% endif %}
+    </div>
+</div>
+{% endwith %}

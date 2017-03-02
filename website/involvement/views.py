@@ -1,9 +1,11 @@
-import datetime
+from datetime import date
 
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.utils.translation import ugettext_lazy as _
 
 from involvement.models import Position, Team, Application
 
@@ -14,16 +16,50 @@ def open_positions(request, context):
     """View redirect for the currently open positions"""
     # TODO: Limit accorting to inclusion/exclusion rules
     context['positions'] = Position.objects.filter(
-        commencement__lte=datetime.date.today()
+        commencement__lte=date.today()
     ).filter(
-        deadline__gte=datetime.date.today()
+        deadline__gte=date.today()
     )
     context['teams'] = Team.objects.all()
     return render(request, 'involvement/open_positions.html', context)
 
 
+@login_required
 def my_applications(request, context):
     """View redirect for the applications by user"""
+    if request.method == 'POST':
+        try:
+            action = request.POST.get('action')
+            appl_id = request.POST.get('application')
+            appl = Application.objects.get(id=appl_id)
+            if appl.applicant != request.user:
+                context['error'] = _('You cannot delete an application that '
+                                     'is not yours!')
+            elif appl.position.deadline < date.today():
+                context['error'] = _('You cannot delete an application after '
+                                     'its deadline has passed!')
+            else:
+                if action == 'delete':
+                    appl.delete()
+                    context['message'] = _('Your application has been removed!')
+                else:
+                    context['error'] = _('No action has been supplied!')
+        except ObjectDoesNotExist:
+            context['error'] = _('This application does not exist!')
+
+    applications = Application.objects.filter(applicant=request.user).order_by(
+        'position__deadline'
+    )
+
+    context['drafts'] = applications.filter(
+        position__deadline__gte=date.today(),
+        draft=True,
+    )
+    context['submitted'] = applications.filter(
+        position__deadline__gte=date.today(),
+        draft=False,
+    )
+
     return render(request, 'involvement/my_applications.html', context)
 
 
@@ -77,6 +113,7 @@ def position(request, context, page, position=None):
             else:
                 return render(request, 'involvement/position.html', context)
 
+        # Render fresh: empty or after saving draft.
         context['form'] = ApplicationForm(instance=appl)
         context['reference_forms'] = ReferenceFormSet(instance=appl)
 
