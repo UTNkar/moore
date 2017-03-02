@@ -7,7 +7,7 @@
     </div>
     <div class="row filter-options">
         {% if edit %}
-            <div class="col-sm-9"><a class="btn btn-large btn-primary" href="{% routablepageurl page 'position' position.id  %}">{% trans 'edit' %}</a></div>
+            <div class="col-sm-9"><a class="btn btn-large btn-primary" href="{% routablepageurl page 'position' position.id  %}"><i class="fa {{ application.status|status_icon }}"></i> {% trans 'edit' %}</a></div>
             <div class="col-sm-3" style="text-align: right;">
                 <form method="post" action="{% routablepageurl page 'my_applications'  %}">
                     {% csrf_token %}
@@ -18,7 +18,12 @@
                 </form>
             </div>
         {% else %}
-
+            <div class="col-sm-9">
+                <h4><i class="fa {{ application.status|status_icon }}"></i> {{ application.status|capfirst }}</h4>
+            </div>
+            <div class="col-sm-3" style="text-align: right;">
+                <a class="btn btn-large btn-primary" href="{% routablepageurl page 'position' position.id  %}">{% trans 'view application' %}</a>
+            </div>
         {% endif %}
     </div>
 </div>

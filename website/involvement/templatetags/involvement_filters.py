@@ -15,3 +15,21 @@ def date_color(value):
         return "#FBC02D"
     else:
         return "inherit"
+
+
+@register.filter
+def status_icon(value):
+    if value == 'draft':
+        return 'fa-pencil'
+    elif value == 'submitted':
+        return 'fa-envelope-open'
+    elif value == 'approved':
+        return 'fa-thumbs-up'
+    elif value == 'disapproved':
+        return 'fa-thumbs-down'
+    elif value == 'appointed':
+        return 'fa-check'
+    elif value == 'turned_down':
+        return 'fa-close'
+    else:
+        return 'fa-exclamation-triangle'
