@@ -43,11 +43,11 @@ class RecruitmentPage(RoutablePageMixin, Page):
         from involvement import views
         return views.open_positions(request, self.get_context(request))
 
-    @route(r'^sent_applications/$')
-    def sent_applications(self, request):
-        """View redirect for the sent applications by user"""
+    @route(r'^my_applications/$')
+    def my_applications(self, request):
+        """View redirect for the applications by user"""
         from involvement import views
-        return views.sent_applications(request, self.get_context(request))
+        return views.my_applications(request, self.get_context(request))
 
     @route(r'^action/$')
     def action_list(self, request):
@@ -64,7 +64,7 @@ class RecruitmentPage(RoutablePageMixin, Page):
         View redirect for a specific position.
         """
         from involvement import views
-        return views.position(request, self.get_context(request), position)
+        return views.position(request, self.get_context(request), self, position)
 
     # ------ Administrator settings ------
     content_panels = Page.content_panels + [
