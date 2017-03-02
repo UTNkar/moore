@@ -22,9 +22,9 @@ def open_positions(request, context):
     return render(request, 'involvement/open_positions.html', context)
 
 
-def sent_applications(request, context):
-    """View redirect for the sent applications by user"""
-    return render(request, 'involvement/sent_applications.html', context)
+def my_applications(request, context):
+    """View redirect for the applications by user"""
+    return render(request, 'involvement/my_applications.html', context)
 
 
 def action_list(request, context):
@@ -35,7 +35,7 @@ def action_list(request, context):
     return render(request, 'involvement/action_list.html', context)
 
 
-def position(request, context, position=None):
+def position(request, context, page, position=None):
     """
     View function for specific positions.
     """
@@ -71,7 +71,9 @@ def position(request, context, position=None):
                 appl.save()
                 context['reference_forms'].save()
                 if not appl.draft:
-                    return HttpResponseRedirect('/')
+                    return HttpResponseRedirect(
+                        page.url + page.reverse_subpage('my_applications')
+                    )
             else:
                 return render(request, 'involvement/position.html', context)
 
