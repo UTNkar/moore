@@ -2,6 +2,7 @@ from datetime import date
 
 from django import forms
 from django.conf import settings
+from django.contrib.auth.models import Group
 from django.core import validators
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -24,14 +25,14 @@ class RecruitmentPage(RoutablePageMixin, Page):
     included_teams = ParentalManyToManyField(
         'Team',
         verbose_name=_('Included teams'),
-        help_text=_('Select teams to include on the page'),
+        help_text=_('Choose teams to include on the page'),
         related_name='include_on_page',
         blank=True,
     )
     excluded_teams = ParentalManyToManyField(
         'Team',
         verbose_name=_('Excluded teams'),
-        help_text=_('Select teams to exclude from the page'),
+        help_text=_('Choose teams to exclude from the page'),
         related_name='exclude_on_page',
         blank=True,
     )
@@ -81,6 +82,11 @@ class Team(models.Model):
 
     class Meta:
         verbose_name_plural = _('Teams')
+
+    group = models.OneToOneField(
+        Group,
+        on_delete=models.PROTECT,
+    )
 
     # ---- General Information ------
     name_en = models.CharField(
@@ -152,6 +158,7 @@ class Team(models.Model):
             FieldPanel('name_en'),
             FieldPanel('name_sv'),
         ]),
+        FieldPanel('group'),
         ImageChooserPanel('logo'),
         FieldRowPanel([
             FieldPanel('leader_en'),
@@ -178,6 +185,12 @@ class Function(models.Model):
         on_delete=models.PROTECT,
         null=True,
         blank=True,
+    )
+
+    official = models.BooleanField(
+        verbose_name=_('Official'),
+        help_text=_('Function has official access in the website'),
+        default=False,
     )
 
     # Display position in selection?
