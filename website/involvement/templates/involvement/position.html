@@ -61,14 +61,20 @@
         </div>
     </div>
     <div class="row">
-    {% if form %}
+    <div class="box">
+    {% if position.is_past_due and status == 'draft' %}
+        <div class="alert alert-info" role="alert">
+        {% trans 'The deadline for this application has passed.' %} {% trans 'You can no longer apply for this position.' %}
+        </div>
+    {% elif form %}
         {% include 'involvement/application_form.html' %}
     {% else %}
-        <div class="box center">
+        <div class="center">
             <h5>{% trans 'Please login to apply to this position' %}</h5>
             <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary btn-large">{% trans 'login' %}</a>
         </div>
     {% endif %}
+    </div>
     </div>
 </div>
 {% endblock %}

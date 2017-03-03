@@ -95,12 +95,11 @@ def position(request, context, page, position=None):
             appl = Application()
             context['status'] = 'draft'
         # Did the user already fill in the form?
-        if request.method == 'POST':
+        if request.method == 'POST' and not context['position'].is_past_due():
             context['form'] = ApplicationForm(request.POST, instance=appl)
             context['reference_forms'] = ReferenceFormSet(request.POST,
                                                           request.FILES,
                                                           instance=appl)
-            # Was all data correct?
             if context['form'].is_valid() \
                     and context['reference_forms'].is_valid():
                 appl = context['form'].save(commit=False)

@@ -285,6 +285,10 @@ class Position(models.Model):
     def __str__(self) -> str:
         return "{} {}".format(self.function.name, self.term_from.year)
 
+    @property
+    def is_past_due(self):
+        return date.today() > self.deadline
+
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldRowPanel([
