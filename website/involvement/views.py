@@ -2,6 +2,7 @@ from datetime import date
 
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
@@ -59,11 +60,10 @@ def my_applications(request, context):
         status='submitted',
     )
     context['waiting'] = applications.filter(
-        position__deadline__lt=date.today(),
-        status__in=['submitted', 'approved'],
+        Q(position__deadline__lt=date.today(), status='submitted')
+        | Q(status='approved')
     )
     context['old'] = applications.filter(
-        position__deadline__lt=date.today(),
         status__in=['disapproved', 'appointed', 'turned_down'],
     )
 
