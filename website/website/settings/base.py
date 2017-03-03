@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     'compressor',
+    'rules.apps.AutodiscoverRulesConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -148,6 +149,11 @@ COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
 # Authentication settings
 
 AUTH_USER_MODEL = 'members.Member'
+
+AUTHENTICATION_BACKENDS = (
+    'rules.permissions.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
