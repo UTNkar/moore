@@ -71,14 +71,6 @@ def my_applications(request, context):
     return render(request, 'involvement/my_applications.html', context)
 
 
-def action_list(request, context):
-    """
-    View redirect for the applications that require (future) attention
-    from the user
-    """
-    return render(request, 'involvement/action_list.html', context)
-
-
 def position(request, context, page, position=None):
     """
     View function for specific positions.
