@@ -50,22 +50,14 @@ class RecruitmentPage(RoutablePageMixin, Page):
         from involvement import views
         return views.my_applications(request, self.get_context(request))
 
-    @route(r'^action/$')
-    def action_list(self, request):
-        """
-        View redirect for the applications that require (future) attention
-        from the user
-        """
-        from involvement import views
-        return views.action_list(request, self.get_context(request))
-
     @route(r'^position/(\d+)/$', name='position')
     def position(self, request, position=None):
         """
         View redirect for a specific position.
         """
         from involvement import views
-        return views.position(request, self.get_context(request), self, position)
+        return views.position(request, self.get_context(request), self,
+                              position)
 
     # ------ Administrator settings ------
     content_panels = Page.content_panels + [
@@ -82,6 +74,10 @@ class Team(models.Model):
 
     class Meta:
         verbose_name_plural = _('Teams')
+        default_permissions = ()
+        permissions = (
+            ('admin', _('Can administrate the recruitment process')),
+        )
 
     group = models.OneToOneField(
         Group,
@@ -178,6 +174,7 @@ class Function(models.Model):
 
     class Meta:
         verbose_name_plural = _('Functions')
+        default_permissions = ()
 
     team = models.ForeignKey(
         Team,
@@ -244,7 +241,10 @@ class Function(models.Model):
         ]),
         FieldPanel('description_en'),
         FieldPanel('description_sv'),
-        FieldPanel('archived'),
+        FieldRowPanel([
+            FieldPanel('archived'),
+            FieldPanel('official'),
+        ]),
     ])]
 
 
@@ -253,6 +253,7 @@ class Position(models.Model):
 
     class Meta:
         verbose_name_plural = _('Positions')
+        default_permissions = ()
 
     function = models.ForeignKey(
         Function,
@@ -340,6 +341,7 @@ class Application(ClusterableModel):
     class Meta:
         verbose_name_plural = _('Applications')
         unique_together = ('position', 'applicant')
+        default_permissions = ()
 
     STATUS_CHOICES = (
         ('draft', _('Draft')),
