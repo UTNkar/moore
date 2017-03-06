@@ -41,7 +41,8 @@ def my_applications(request, context):
             else:
                 if action == 'delete':
                     appl.delete()
-                    context['message'] = _('Your application has been removed!')
+                    context['message'] = _('Your application has been '
+                                           'removed!')
                 else:
                     context['error'] = _('No action has been supplied!')
         except ObjectDoesNotExist:
