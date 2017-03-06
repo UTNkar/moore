@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-06 13:41+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: models.py:10
+msgid "Social media accounts"
+msgstr ""
+
+#: models.py:12
+msgid "Your Facebook page URL"
+msgstr ""
+
+#: models.py:17
+msgid "Your Instagram username, without the @"
+msgstr ""
+
+#: models.py:22
+msgid "Your Twitter username, without the @"
+msgstr ""
+
+#: settings/base.py:113
+msgid "English"
+msgstr ""
+
+#: settings/base.py:114
+msgid "Swedish"
+msgstr ""
+
+#: templates/400.html:5
+msgid "Bad request"
+msgstr ""
+
+#: templates/403.html:5
+msgid "Permission denied"
+msgstr ""
+
+#: templates/404.html:5
+msgid "Page not found"
+msgstr ""
+
+#: templates/500.html:5
+msgid "Internal server error"
+msgstr ""
+
+#: templates/base.html:56 templates/empty.html:19
+msgid "The UTN Logo"
+msgstr ""
+
+#: templates/base.html:94
+msgid "account"
+msgstr ""
+
+#: templates/base.html:95 templates/registration/login.html:39
+msgid "password"
+msgstr ""
+
+#: templates/base.html:96
+msgid "Log out"
+msgstr ""
+
+#: templates/base.html:143
+msgid "Follow us on social media:"
+msgstr ""
+
+#: templates/base.html:174
+msgid "Developed using"
+msgstr ""
+
+#: templates/empty.html:5
+msgid "Uppsala Union of Engineering and Science Students"
+msgstr ""
+
+#: templates/empty.html:12 templates/error.html:16
+msgid "Return Home"
+msgstr ""
+
+#: templates/error.html:11
+msgid "Error"
+msgstr ""
+
+#: templates/error.html:12
+msgid "An error has occurred"
+msgstr ""
+
+#: templates/registration/logged_out.html:4
+msgid "Logged out"
+msgstr ""
+
+#: templates/registration/logged_out.html:6
+msgid "You have succesfully been logged out."
+msgstr ""
+
+#: templates/registration/login.html:7
+msgid "Login"
+msgstr ""
+
+#: templates/registration/login.html:9
+msgid "Log into your UTN account"
+msgstr ""
+
+#: templates/registration/login.html:14
+msgid "Your username and password didn\\"
+msgstr ""
+
+#: templates/registration/login.html:21
+msgid "Your account doesn\\"
+msgstr ""
+
+#: templates/registration/login.html:34
+msgid "username"
+msgstr ""
+
+#: templates/registration/login.html:44
+msgid "Sign In"
+msgstr ""
+
+#: templates/registration/login.html:48
+msgid "I forgot my password"
+msgstr ""
+
+#: templates/registration/password_change_done.html:7
+msgid "Password changed"
+msgstr ""
+
+#: templates/registration/password_change_done.html:9
+#: templates/registration/password_change_form.html:11
+msgid "Change your password"
+msgstr ""
+
+#: templates/registration/password_change_done.html:12
+msgid ""
+"Your password has succesfully been changed. You can now log in with your new "
+"password."
+msgstr ""
+
+#: templates/registration/password_change_form.html:9
+msgid "Change Password"
+msgstr ""
+
+#: templates/registration/password_change_form.html:14
+msgid "Please enter your old password, for security\\"
+msgstr ""
+
+#: templates/registration/password_change_form.html:28
+msgid "Old password"
+msgstr ""
+
+#: templates/registration/password_change_form.html:33
+msgid "New password"
+msgstr ""
+
+#: templates/registration/password_change_form.html:41
+msgid "New password confirmation"
+msgstr ""
+
+#: templates/registration/password_change_form.html:49
+msgid "Change my password"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:7
+#: templates/registration/password_reset_done.html:9
+msgid "Password reset sent"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:12
+msgid "We\\"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:14
+msgid "If you don\\"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:7
+msgid "Reset password"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:10
+msgid "Reset your password"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:12
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:26
+msgid "E-mail address"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:31
+msgid "Reset my password"
+msgstr ""
+
+#: templates/tags/main_menu.html:6
+msgid "Home"
+msgstr ""
+
+#: templates/wagtailadmin/home.html:4
+msgid "Welcome UTN website administrators!"
+msgstr ""
