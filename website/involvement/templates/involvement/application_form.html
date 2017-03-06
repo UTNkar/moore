@@ -18,7 +18,7 @@
 {% if position.is_past_due %}
 <div class="alert alert-info" role="alert">
     {% trans 'The deadline for this application has passed.' %} {% trans 'You can no longer change your application.' %}
-    </div>
+</div>
 {% endif %}
 <form method="post" action="{% routablepageurl page 'position' position.id  %}#apply">
     {% csrf_token %}

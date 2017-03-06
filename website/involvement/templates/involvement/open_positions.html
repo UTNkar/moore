@@ -23,7 +23,7 @@
 <div class="container push-top-bottom">
     <div class="row">
     <div class="faq col-md-8 col-lg-9">
-        {# This works because of stable sort #}
+        <h1>{% trans 'open positions'|title %}</h1>
         {% for pos in positions|dictsort:'deadline' %}
             <div class="{% if pos.function.team %}team-{{ pos.function.team.id }}{% else %}no-team{% endif %} faq-item">
                 <div class="faq-item-question">
@@ -48,6 +48,10 @@
                     </div>
                 </div><!-- /.faq-item-meta -->
             </div><!-- /.faq-item -->
+        {% empty %}
+            <div class="alert alert-info" role="alert">
+                {% trans 'There are currently no open positions. Check back later!' %}
+            </div>
         {% endfor %}
     </div><!-- /.faq -->
 
@@ -67,6 +71,8 @@
                             {% if pos.function.team %}<div><i class="md-icon" style="height: 14px; font-size: 20px;">group</i>{{ pos.function.team|truncatechars:20 }}</div>{% else %}<div><i class="md-icon" style="height: 14px; font-size: 20px;">person</i>{% trans 'unaffiliated'|capfirst %}</div>{% endif %}<!-- /.review-rating -->
                         </div><!-- /.review-content -->
                     </div><!-- /.review -->
+                {% empty %}
+                    {% trans 'There are currently no open positions. Check back later!' %}
                 {% endfor %}
                 </div><!-- /.reviews -->
 
