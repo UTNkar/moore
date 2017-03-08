@@ -4,6 +4,7 @@ import rules
 
 from involvement.models import Application
 
+
 # General Predicates
 @rules.predicate
 def is_admin(user):
