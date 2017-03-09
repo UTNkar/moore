@@ -1,0 +1,32 @@
+.organisation-menu {
+  h4 {
+    color: $color-background;
+    margin: 0;
+  }
+  .switch {
+    text-align: center;
+    width: 12%;
+    float: left;
+  }
+  .sections {
+    display: none;
+  }
+  .logo {
+    display: block;
+    margin: 0 3px;
+  }
+  .left-side {
+    width: 44%;
+    float: left;
+    .logo {
+      float: right;
+    }
+  }
+  .right-side {
+    width: 44%;
+    float: right;
+    .logo {
+      float: left;
+    }
+  }
+}
