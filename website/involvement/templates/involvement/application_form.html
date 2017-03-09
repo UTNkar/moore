@@ -20,7 +20,7 @@
     {% trans 'The deadline for this application has passed.' %} {% trans 'You can no longer change your application.' %}
 </div>
 {% endif %}
-<form method="post" action="{% routablepageurl page 'position' position.id  %}#apply">
+<form id="application-form" method="post" action="{% routablepageurl page 'position' position.id  %}#apply">
     {% csrf_token %}
     <fieldset>
         <legend>{% trans 'member information'|title %}</legend>
@@ -108,9 +108,9 @@
     {% if not position.is_past_due %}
     <div class="text-right">
         {% if status == 'draft' %}
-        <button name="{{ form.status.name }}" type="submit" class="btn btn-large" value="draft">{% trans 'save as draft' %}</button>
+        <button name="{{ form.status.name }}" type="submit" class="save btn btn-large disabled" value="draft">{% trans 'save as draft' %}</button>
         {% endif %}
-        <button name="{{ form.status.name }}" type="submit" class="btn btn-large btn-primary" value="submitted">{% if status == 'draft' %}{% trans 'apply' %}{% else %}{% trans 'update' %}{% endif %}</button>
+        <button name="{{ form.status.name }}" type="submit" class="save btn btn-large btn-primary disabled" value="submitted">{% if status == 'draft' %}{% trans 'apply' %}{% else %}{% trans 'update' %}{% endif %}</button>
     </div><!-- /.center -->
     {% endif %}
 </form>
