@@ -1,0 +1,35 @@
+{% load i18n %}
+<div class="header-colored organisation-menu">
+    <div class="">
+        <div class="committees row">
+            {% widthratio committees|length 2 1 as com_center %}
+            <div class="left-side">
+            {% for committee in committees %}
+                {% if forloop.counter0|slugify == com_center %}
+                    </div>
+                    <div class="switch">
+                        <a id="section-switch" href="#"><h4>{% trans 'sections'|title %}</h4></a>
+                    </div>
+                    <div class="right-side">
+                {% endif %}
+                {% include 'tags/organisation_logo.html' with logo=committee %}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="sections row">
+            {% widthratio sections|length 2 1 as sec_center %}
+            <div class="left-side col-md-7">
+            {% for section in sections %}
+                {% if forloop.counter0|slugify == sec_center %}
+                    </div>
+                    <div class="switch">
+                        <a id="committee-switch" href="#"><h4>{% trans 'committees'|title %}</h4></a>
+                    </div>
+                    <div class="right-side">
+                {% endif %}
+                {% include 'tags/organisation_logo.html' with logo=section %}
+            {% endfor %}
+            </div>
+        </div>
+    </div><!-- /.container -->
+</div><!-- /.header-colored -->

@@ -1,5 +1,7 @@
 from django import template
 
+from website.models import Logo
+
 register = template.Library()
 
 
@@ -48,4 +50,17 @@ def main_menu_children(context, parent):
         'menuitems_children': menuitems_children,
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
+    }
+
+
+@register.inclusion_tag('tags/organisation_menu.html', takes_context=True)
+def organisation_menu(context, color=''):
+    logos = Logo.objects.all()
+    committees = logos.filter(category='committee')
+    sections = logos.filter(category='section')
+    return {
+        'site': context['request'].site,
+        'committees': committees,
+        'sections': sections,
+        'color': color,
     }

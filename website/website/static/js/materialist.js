@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	'use strict';
-
+	// TODO: Split up!
 	/**
 	 * Hero unit animation
 	 */
@@ -146,5 +146,16 @@ $(document).ready(function() {
 				$(this).closest('.radio-wrapper').removeClass('checked');
 			}
 		});
-	});	
+	});
+
+	$('#section-switch').click(function(ev) {
+	    ev.preventDefault();
+	    $('.committees').hide();
+	    $('.sections').show();
+    });
+	$('#committee-switch').click(function(ev) {
+	    ev.preventDefault();
+	    $('.sections').hide();
+	    $('.committees').show();
+    });
 });
