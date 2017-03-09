@@ -110,7 +110,7 @@
         {% if status == 'draft' %}
         <button name="{{ form.status.name }}" type="submit" class="btn btn-large" value="draft">{% trans 'save as draft' %}</button>
         {% endif %}
-        <button name="{{ form.status.name }}" type="submit" class="btn btn-large btn-primary" value="submitted">{% if draft %}{% trans 'apply' %}{% else %}{% trans 'update' %}{% endif %}</button>
+        <button name="{{ form.status.name }}" type="submit" class="btn btn-large btn-primary" value="submitted">{% if status == 'draft' %}{% trans 'apply' %}{% else %}{% trans 'update' %}{% endif %}</button>
     </div><!-- /.center -->
     {% endif %}
 </form>
