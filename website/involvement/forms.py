@@ -18,7 +18,9 @@ class ApplicationForm(ModelForm):
 
     def clean_status(self):
         status = self.cleaned_data['status']
-        if status not in ['draft', 'submitted']:
+        if status not in ['draft', 'submitted']\
+                or (self.initial['status'] == 'submitted'
+                    and status == 'draft'):
             raise ValidationError(_('The submitted status was invalid.'))
         return status
 

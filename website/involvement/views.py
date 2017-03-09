@@ -88,7 +88,7 @@ def position(request, context, page, position=None):
             appl = Application()
             context['status'] = 'draft'
         # Did the user already fill in the form?
-        if request.method == 'POST' and not context['position'].is_past_due():
+        if request.method == 'POST' and not context['position'].is_past_due:
             context['form'] = ApplicationForm(request.POST, instance=appl)
             context['reference_forms'] = ReferenceFormSet(request.POST,
                                                           request.FILES,
@@ -96,9 +96,6 @@ def position(request, context, page, position=None):
             if context['form'].is_valid() \
                     and context['reference_forms'].is_valid():
                 appl = context['form'].save(commit=False)
-                # Don't save as daft unless it was one!
-                if context['status'] != 'draft':
-                    appl.status = 'submitted'
                 appl.applicant = request.user
                 appl.position = context['position']
                 appl.save()
