@@ -1,5 +1,5 @@
-from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register, \
-    ThumbnailMixin
+from wagtail.contrib.modeladmin.options import ModelAdmin,\
+    modeladmin_register, ThumbnailMixin
 
 from website.models import Logo
 
