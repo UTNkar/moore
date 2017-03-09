@@ -7,13 +7,13 @@
 {% if team.logo %}{% image team.logo fill-40x40 as logo %}{% endif %}
 .team-{{ team.id }}.faq-item:before {
     content: '';
-    background: #FFFFFF {% if team.logo %}url("{{ logo.url }}");{% else %}url("{% static 'images/bocken.png' %}");{% endif %}
+    background: #FFFFFF {% if team.logo %}url("{{ logo.url }}");{% else %}url("{% static 'images/bocken.svg' %}");{% endif %}
     background-size: 40px 40px;
 }
 {% endfor %}
 .no-team.faq-item:before {
     content: '';
-    background: #FFFFFF url("{% static 'images/bocken.png' %}");
+    background: #FFFFFF url("{% static 'images/bocken.svg' %}");
     background-size: 40px 40px;
 }
 </style>
@@ -64,7 +64,7 @@
                 {% for pos in positions|dictsort:'deadline' %}
                     {% if pos.function.team.logo %}{% image pos.function.team.logo fill-20x20 as logo %}{% endif %}
                     <div class="review" style="margin: 0 0 5px 0; padding: 0 0 5px 0;">
-                        <a href="{% routablepageurl page 'position' pos.id  %}" class="review-user" style="background-image: {% if pos.function.team.logo %}url('{{ logo.url }}');{% else %}url('{% static 'images/bocken.png' %}');{% endif %}width: 20px; height: 20px;margin: 10px 10px 0 0;"></a>
+                        <a href="{% routablepageurl page 'position' pos.id  %}" class="review-user" style="background-image: {% if pos.function.team.logo %}url('{{ logo.url }}');{% else %}url('{% static 'images/bocken.svg' %}');{% endif %}width: 20px; height: 20px;margin: 10px 10px 0 0;"></a>
 
                         <div class="review-content">
                             <h3><a href="{% routablepageurl page 'position' pos.id  %}">{{ pos|truncatechars:25 }}</a></h3>
