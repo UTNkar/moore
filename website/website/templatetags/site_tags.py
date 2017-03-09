@@ -55,11 +55,10 @@ def main_menu_children(context, parent):
 
 @register.inclusion_tag('tags/organisation_menu.html', takes_context=True)
 def organisation_menu(context, color=''):
-    logos = Logo.objects.all()
+    logos = Logo.objects.exclude(belongs_to=context['request'].site).all()
     committees = logos.filter(category='committee')
     sections = logos.filter(category='section')
     return {
-        'site': context['request'].site,
         'committees': committees,
         'sections': sections,
         'color': color,
