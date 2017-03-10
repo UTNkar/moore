@@ -30,7 +30,7 @@
     {% endblock %}
     {% block title_suffix %}
         {% with self.get_site.site_name as site_name %}
-            {% if site_name %}- {{ site_name }}{% endif %}
+            {% if site_name %}- {{ site_name }}{% else %}- {% trans 'Uppsala Union of Engineering and Science Students' %}{% endif %}
         {% endwith %}
     {% endblock %}
     </title>
@@ -87,7 +87,7 @@
 							<span class="user-avatar-status"></span>
 
 							<ul class="header-more-menu">
-								<li><a href="{# TODO: PROFILE SETTINGS #}">{% trans 'account'|capfirst %}</a></li>
+								<li><a href="{% url 'profile' %}">{% trans 'account'|capfirst %}</a></li>
 								<li><a href="{% url 'password_change' %}">{% trans 'password'|capfirst %}</a></li>
 								<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>{% trans "Log out" %}</a></li>
 							</ul>
@@ -119,7 +119,7 @@
                                 <li><a href="{% pageurl page %}">{% firstof page.translated_title page.title %}</a> <i class="md-icon">keyboard_arrow_right</i></li>
                             {% endif %}
                             {% endfor %}
-                                <li class="active">{% firstof page.translated_title page.title%}</li>
+                                <li class="active">{% firstof page.translated_title page.title %}</li>
                             </ul><!-- /.breadcrumb -->
                         </div><!-- /.container -->
                     </div><!-- /.content-title -->

@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Account Settings' %}{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'libraries/dirrty/jquery.dirrty.js' %}"></script>
+<script type="text/javascript">
+$('#account-settings').dirrty().on('dirty', function(){
+    $('.btn').removeClass('disabled');
+}).on('clean', function(){
+    $('.btn').addClass('disabled');
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container push-top-bottom">
+<div class="box">
+    {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% if saved %}
+        <div class="alert alert-success" role="alert">
+            {% trans 'Your account settings have been saved.' %}
+        </div>
+    {% endif %}
+    <form method="post" action="{% url 'profile' %}" id="account-settings">
+        {% csrf_token %}
+
+        <fieldset>
+            <legend>{% trans 'contact information'|title %}</legend>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {% if form.first_name.errors %}<div style="color: red;">{% endif %}
+                        {{ form.first_name.label_tag }}
+                        {% if form.first_name.errors %}</div>{% endif %}
+                        {{ form.first_name }}
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {% if form.last_name.errors %}<div style="color: red;">{% endif %}
+                        {{ form.last_name.label_tag }}
+                        {% if form.last_name.errors %}</div>{% endif %}
+                        {{ form.last_name }}
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {% if form.person_number.errors %}<div style="color: red;">{% endif %}
+                        {{ form.person_number.label_tag }}
+                        {% if form.person_number.errors %}</div>{% endif %}
+                        {{ form.person_number }}
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        {% if form.phone_number.errors %}<div style="color: red;">{% endif %}
+                        {{ form.phone_number.label_tag }}
+                        {% if form.phone_number.errors %}</div>{% endif %}
+                        {{ form.phone_number }}
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="email">{% trans 'e-mail' %}</label>
+                        <input id="email" class="form-control" type="text" placeholder="{{ request.user.email }}" readonly>
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>{% trans 'study information'|title %}</legend>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        {% if form.study.errors %}<div style="color: red;">{% endif %}
+                        {{ form.study.label_tag }}
+                        {% if form.study.errors %}</div>{% endif %}
+                        {{ form.study }}
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {% if form.registration_year.errors %}<div style="color: red;">{% endif %}
+                        {{ form.registration_year.label_tag }}
+                        {% if form.registration_year.errors %}</div>{% endif %}
+                        {{ form.registration_year }}
+                    </div><!-- /.form-group -->
+                </div><!-- /.col-* -->
+            </div>
+        </fieldset>
+
+        <div class="center">
+            <button class="btn btn-large disabled">{% trans 'save' %}</button>
+        </div>
+    </form>
+</div>
+</div>
+{% endblock %}
