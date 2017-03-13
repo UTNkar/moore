@@ -10,14 +10,14 @@
 {% block form %}
 {% if form.errors %}
 <div class="alert alert-danger" role="alert">
-    {% trans 'Your username and password didn\'t match. Please try again.' %}
+    {% blocktrans %}Your username and password didn't match. Please try again.{% endblocktrans %}
 </div>
 {% endif %}
 
 {% if next %}
     {% if user.is_authenticated %}
     <div class="alert alert-warning" role="alert">
-        {% trans 'Your account doesn\'t have access to this page. To proceed, please login with an account that has access.' %}
+        {% blocktrans %}Your account doesn't have access to this page. To proceed, please login with an account that has access.{% endblocktrans %}
     </div>
     {# TODO: DO WE NEED THIS? #}
 {#                {% else %}#}
