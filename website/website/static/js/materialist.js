@@ -177,4 +177,6 @@ $(document).ready(function() {
 		$("#toasty-darth").addClass("show-darth");
 		setTimeout(function(){ $("#toasty-darth").removeClass("show-darth"); }, 5000);
 	});
+
+	$.getScript('/static/libraries/misc/party.js');
 });
