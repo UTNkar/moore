@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+<title>Look at him go!</title>
+<style>
+    #head {
+        position: absolute;
+        top: 15px;
+        left: 135px;
+        z-index: 20;
+        margin-left: 20px;
+    }
+
+    img.flip {
+        -moz-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        -ms-transform: scaleX(-1);
+    }
+
+    #chest {
+        text-align: center;
+        font-family: sans-serif;
+        position: absolute;
+        top: 105px;
+        width: 100px;
+        height: 150px;
+        left: 150px;
+        z-index: 10;
+        visibility: hidden;
+    }
+    .leg {
+        position: absolute;
+        float: left;
+        height: 120px;
+        width: 26px;
+        -moz-transform-origin: 13px 0;
+        -webkit-transform-origin: 13px 0;
+        -ms-transform-origin: 13px 0;
+
+        -webkit-transition: all 300ms;
+        -moz-transition: all 300ms;
+    }
+    #left_leg {
+        left: 160px;
+        top: 235px;
+    }
+    #right_leg {
+        left: 210px;
+        top: 235px;
+    }
+    .foot {
+        top: 345px;
+        position: absolute;
+        background-color: black;
+        float: left;
+        height: 10px;
+        width: 36px;
+        -webkit-transition: all 300ms;
+        -moz-transition: all 300ms;
+        visibility: hidden;
+    }
+    #left_foot {
+        left: 150px;
+        -webkit-transform-origin: 23px -110px;
+        -moz-transform-origin: 23px -110px;
+    }
+    #right_foot {
+        left: 210px;
+        -webkit-transform-origin: 13px -110px;
+        -moz-transform-origin: 13px -110px;
+    }
+    .hand {
+        top:122px;
+        position: absolute;
+        background-color: #facccc;
+        height: 30px;
+        width: 30px;
+        -webkit-transition: all 300ms;
+        -moz-transition: all 300ms;
+        visibility: hidden;
+    }
+    .arm {
+        position: absolute;
+        top: 125px;
+        height: 26px;
+        width: 130px;
+        -webkit-transition: all 300ms;
+        -moz-transition: all 300ms;
+    }
+    #left_arm{
+        left:50px;
+        -moz-transform-origin: 100px 13px;
+        -webkit-transform-origin: 100px 13px;
+    }
+    #right_arm{
+        left:220px;
+        -moz-transform-origin: 30px 13px;
+        -webkit-transform-origin: 30px 13px;
+    }
+    #left_hand{
+        left:30px;
+        -moz-transform-origin: 120px 13px;
+        -webkit-transform-origin: 120px 13px;
+    }
+
+    #right_hand{
+        left:340px;
+        -moz-transform-origin: -90px 13px;
+        -webkit-transform-origin: -90px 13px;
+    }
+
+</style>
+<script>
+    var timeout = 300;
+    var head = new Image();
+    head.id = "head";
+    head.src = "./front.png";
+    var left_arm, right_arm, left_hand, right_hand, chest, left_leg, right_leg, left_foot, right_foot;
+
+    function randomColor() {
+        return Math.round((Math.random() * 255))
+    }
+
+    function randomRGB() {
+        return "rgb(" + randomColor() + "," + randomColor() + "," + randomColor() + ")"
+    }
+
+    function transform(element, transformation) {
+        element.style.WebkitTransform = transformation;
+        element.style.MozTransform = transformation;
+        element.style.msTransform = transformation;
+    }
+
+    function randomRotate(from, to) {
+        return "rotate(" + (Math.round(Math.random()*from-to)) + "deg)"
+    }
+
+    function moveLeftArm() {
+        var left_arm_rotate = randomRotate(160,80);
+        transform(left_arm, left_arm_rotate);
+        transform(left_hand, left_arm_rotate);
+    }
+
+    function moveRightArm() {
+        var right_arm_rotate = randomRotate(160,80);
+        transform(right_arm, right_arm_rotate);
+        transform(right_hand, right_arm_rotate);
+    }
+
+    function moveLeftLeg() {
+        var left_leg_rotate = randomRotate(60,0);
+        transform(left_leg, left_leg_rotate);
+        transform(left_foot, left_leg_rotate);
+    }
+
+    function moveRightLeg() {
+        var right_leg_rotate = randomRotate(-60,0);
+        transform(right_leg, right_leg_rotate);
+        transform(right_foot, right_leg_rotate);
+    }
+
+    function moveHead(){
+        var front = "./front.png";
+        var right = "./right.png";
+
+        head.src = right;
+
+        setTimeout(function(){
+            head.style.marginLeft = "15px";
+            head.src = front;
+        },timeout);
+
+        setTimeout(function(){
+            head.style.marginLeft = "15px";
+            head.className = "flip";
+            head.src = front;
+        },timeout*2);
+
+        setTimeout(function(){
+            head.style.marginLeft = "15px";
+            head.src = right;
+        },timeout*3);
+
+        setTimeout(function(){
+            head.style.marginLeft = "35px";
+            head.src = front;
+        },timeout*4);
+
+        setTimeout(function(){
+            head.style.marginLeft = "15px";
+            head.className = "";
+            head.src = front;
+        },timeout*5);
+    }
+
+    function party() {
+        document.body.appendChild(head);
+        left_arm = document.getElementById("left_arm");
+        chest = document.getElementById("chest");
+        right_arm = document.getElementById("right_arm");
+        right_leg = document.getElementById("right_leg");
+        left_leg = document.getElementById("left_leg");
+        left_foot = document.getElementById("left_foot");
+        right_foot = document.getElementById("right_foot");
+        left_hand = document.getElementById("left_hand");
+        right_hand = document.getElementById("right_hand");
+
+        [chest, left_foot, right_foot, left_hand, right_hand].forEach(function (element){
+            element.style.visibility = "visible" });
+
+        var pants_color = randomRGB();
+        right_leg.style.backgroundColor = pants_color;
+        left_leg.style.backgroundColor = pants_color;
+
+        var shirt_color = randomRGB();
+        right_arm.style.backgroundColor = shirt_color;
+        left_arm.style.backgroundColor = shirt_color;
+        chest.style.backgroundColor = shirt_color;
+
+        chest.style.color = randomRGB();
+
+        setInterval(moveLeftArm, 300);
+        setInterval(moveRightArm, 300);
+        setInterval(moveLeftLeg, 300);
+        setInterval(moveRightLeg, 300);
+        moveHead();
+        setInterval(moveHead, timeout*6)
+    }
+</script>
+</head>
+<body onload="party()">
+<div id="chest"><br><br><h1>D</h1><br></div>
+<div id="left_arm" class="arm"></div>
+<div id="left_hand" class="hand"></div>
+<div id="right_arm" class="arm"></div>
+<div id="right_hand" class="hand"></div>
+<div id="left_leg" class="leg"></div>
+<div id="right_leg" class="leg"></div>
+<div id="left_foot" class="foot"></div>
+<div id="right_foot" class="foot"></div>
+</body>
+</html>
