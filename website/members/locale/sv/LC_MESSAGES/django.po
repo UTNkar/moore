@@ -1,0 +1,257 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-13 15:33+0100\n"
+"PO-Revision-Date: 2017-03-13 15:41+0100\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.12\n"
+
+#: apps.py:7
+msgid "UTN Member Management"
+msgstr ""
+
+#: forms.py:15
+msgid "Person number using the YYYYMMDD-XXXX format."
+msgstr ""
+
+#: forms.py:18
+msgid "Use the format YYYYMMDD-XXXX for your person number."
+msgstr ""
+
+#: forms.py:62 forms.py:86 models.py:74
+msgid "Birthday"
+msgstr ""
+
+#: forms.py:65 forms.py:89 models.py:80
+msgid "Person number extension"
+msgstr ""
+
+#: forms.py:69 forms.py:93 models.py:96
+msgid "Phone number"
+msgstr ""
+
+#: forms.py:73 forms.py:97 models.py:110
+msgid "Registration year"
+msgstr ""
+
+#: forms.py:78 forms.py:102
+msgid "Study Program"
+msgstr ""
+
+#: models.py:12
+msgid "Study Programs"
+msgstr ""
+
+#: models.py:15
+msgid "Bachelor's Degree"
+msgstr ""
+
+#: models.py:16
+msgid "Master's Degree"
+msgstr ""
+
+#: models.py:17
+msgid "Engineer's Degree"
+msgstr ""
+
+#: models.py:22
+msgid "English program name"
+msgstr ""
+
+#: models.py:23 models.py:31
+msgid "Enter the name of the study program"
+msgstr ""
+
+#: models.py:30
+msgid "Swedish program name"
+msgstr ""
+
+#: models.py:40
+msgid "English program abbreviation"
+msgstr ""
+
+#: models.py:41 models.py:49
+msgid "Enter the abbreviation for the study program"
+msgstr ""
+
+#: models.py:48
+msgid "Swedish program abbreviation"
+msgstr ""
+
+#: models.py:59
+msgid "Degree type"
+msgstr ""
+
+#: models.py:81
+msgid ""
+"Enter the last four digits of your Swedish person number, given by the "
+"Swedish tax authority"
+msgstr ""
+
+#: models.py:85
+msgid "The person number extension consists of four numbers"
+msgstr ""
+
+#: models.py:97
+msgid "Enter a phone number so UTN may reach you"
+msgstr ""
+
+#: models.py:100
+msgid "Please enter a valid phone number"
+msgstr ""
+
+#: models.py:111
+msgid "Enter the year you started studying at the TakNat faculty"
+msgstr ""
+
+#: models.py:115
+msgid "Please enter a valid year"
+msgstr ""
+
+#: templates/members/profile.html:4 views.py:10
+msgid "Account Settings"
+msgstr ""
+
+#: templates/members/profile.html:33
+msgid "Your account settings have been saved."
+msgstr ""
+
+#: templates/members/profile.html:40
+msgid "contact information"
+msgstr ""
+
+#: templates/members/profile.html:83
+msgid "e-mail"
+msgstr ""
+
+#: templates/members/profile.html:91
+msgid "study information"
+msgstr ""
+
+#: templates/members/profile.html:114
+msgid "save"
+msgstr ""
+
+#: templates/registration/logged_out.html:4
+msgid "Logged out"
+msgstr "Utloggad"
+
+#: templates/registration/logged_out.html:6
+msgid "You have succesfully been logged out."
+msgstr "Du har blivit utloggad."
+
+#: templates/registration/login.html:7
+msgid "Login"
+msgstr "Logga in"
+
+#: templates/registration/login.html:9
+msgid "Log into your UTN account"
+msgstr "Logga in på ditt UTN-konto"
+
+#: templates/registration/login.html:14
+msgid "Your username and password didn\\"
+msgstr ""
+
+#: templates/registration/login.html:21
+msgid "Your account doesn\\"
+msgstr ""
+
+#: templates/registration/login.html:34
+msgid "username"
+msgstr "användarnamn"
+
+#: templates/registration/login.html:39
+msgid "password"
+msgstr "lösenord"
+
+#: templates/registration/login.html:44
+msgid "Sign In"
+msgstr "Logga in"
+
+#: templates/registration/login.html:48
+msgid "I forgot my password"
+msgstr "Jag har glömt mitt lösenord"
+
+#: templates/registration/password_change_done.html:7
+msgid "Password changed"
+msgstr "Lösenordet har ändrats"
+
+#: templates/registration/password_change_done.html:9
+#: templates/registration/password_change_form.html:11
+msgid "Change your password"
+msgstr "Ändra ditt lösenord"
+
+#: templates/registration/password_change_done.html:12
+msgid ""
+"Your password has succesfully been changed. You can now log in with your new "
+"password."
+msgstr ""
+"Ditt lösenord har blivit ändrat. Nu kan du logga in med ditt nya lösenord."
+
+#: templates/registration/password_change_form.html:9
+msgid "Change Password"
+msgstr "Ändra lösenord"
+
+#: templates/registration/password_change_form.html:14
+msgid "Please enter your old password, for security\\"
+msgstr ""
+
+#: templates/registration/password_change_form.html:28
+msgid "Old password"
+msgstr "Nuvarande lösenord"
+
+#: templates/registration/password_change_form.html:33
+msgid "New password"
+msgstr "Nytt lösenord"
+
+#: templates/registration/password_change_form.html:41
+msgid "New password confirmation"
+msgstr "Bekräftelse av nytt lösenord"
+
+#: templates/registration/password_change_form.html:49
+msgid "Change my password"
+msgstr "Ändra mitt lösenord"
+
+#: templates/registration/password_reset_done.html:7
+#: templates/registration/password_reset_done.html:9
+msgid "Password reset sent"
+msgstr "En återställning av ditt lösenord har skickats."
+
+#: templates/registration/password_reset_done.html:12
+msgid "We\\"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:14
+msgid "If you don\\"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:7
+msgid "Reset password"
+msgstr "Återställ lösenord"
+
+#: templates/registration/password_reset_form.html:10
+msgid "Reset your password"
+msgstr "Återställ ditt lösenord"
+
+#: templates/registration/password_reset_form.html:12
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+"Har du glömt ditt lösenord? Skriv in din emailadress nedan så får du "
+"instruktioner om hur du återställer ditt lösenord skickade till dig."
+
+#: templates/registration/password_reset_form.html:26
+msgid "E-mail address"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:31
+msgid "Reset my password"
+msgstr "Återställ mitt lösenord"
