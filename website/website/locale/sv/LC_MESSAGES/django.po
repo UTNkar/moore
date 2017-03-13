@@ -2,32 +2,68 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-06 13:41+0100\n"
+"POT-Creation-Date: 2017-03-13 15:40+0100\n"
 "PO-Revision-Date: 2017-03-10 17:38+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 1.8.12\n"
 
-#: models.py:10
+#: models.py:13
 msgid "Social media accounts"
 msgstr "Konton på sociala medier"
 
-#: models.py:12
+#: models.py:16
 msgid "Your Facebook page URL"
 msgstr "ULR:en till din facebook"
 
-#: models.py:17
+#: models.py:21
 msgid "Your Instagram username, without the @"
 msgstr "Ditt användarnamn på Instagram, utan @"
 
-#: models.py:22
+#: models.py:26
 msgid "Your Twitter username, without the @"
 msgstr "Ditt användarnamn på Twitter, utan @"
+
+#: models.py:33
+msgid "logos"
+msgstr ""
+
+#: models.py:36
+msgid "Committee"
+msgstr ""
+
+#: models.py:37
+msgid "Section"
+msgstr ""
+
+#: models.py:43
+msgid "category"
+msgstr ""
+
+#: models.py:49
+msgid "links to"
+msgstr ""
+
+#: models.py:56
+msgid "logo"
+msgstr ""
+
+#: models.py:65
+msgid "white logo"
+msgstr ""
+
+#: models.py:74
+msgid "black logo"
+msgstr ""
+
+#: models.py:83
+msgid "belongs to"
+msgstr ""
 
 #: settings/base.py:113
 msgid "English"
@@ -53,33 +89,33 @@ msgstr "Sidan kunde inte hittas"
 msgid "Internal server error"
 msgstr "Internal server error"
 
-#: templates/base.html:56 templates/empty.html:19
+#: templates/base.html:33 templates/empty.html:5
+msgid "Uppsala Union of Engineering and Science Students"
+msgstr "Uppsala teknolog- och naturvetarkår"
+
+#: templates/base.html:52 templates/empty.html:19
 msgid "The UTN Logo"
 msgstr "UTN-loggan"
 
-#: templates/base.html:94
+#: templates/base.html:90
 msgid "account"
 msgstr "konto"
 
-#: templates/base.html:95 templates/registration/login.html:39
+#: templates/base.html:91
 msgid "password"
 msgstr "lösenord"
 
-#: templates/base.html:96
+#: templates/base.html:92
 msgid "Log out"
 msgstr "Logga ut"
 
-#: templates/base.html:143
+#: templates/base.html:139
 msgid "Follow us on social media:"
 msgstr "Följ oss på sociala medier:"
 
-#: templates/base.html:174
+#: templates/base.html:170
 msgid "Developed using"
 msgstr "Sidan är under utveckling"
-
-#: templates/empty.html:5
-msgid "Uppsala Union of Engineering and Science Students"
-msgstr "Uppsala teknolog- och naturvetarkår"
 
 #: templates/empty.html:12 templates/error.html:16
 msgid "Return Home"
@@ -93,122 +129,17 @@ msgstr "Fel"
 msgid "An error has occurred"
 msgstr "Ett fel har inträffat"
 
-#: templates/registration/logged_out.html:4
-msgid "Logged out"
-msgstr "Utloggad"
-
-#: templates/registration/logged_out.html:6
-msgid "You have succesfully been logged out."
-msgstr "Du har blivit utloggad."
-
-#: templates/registration/login.html:7
-msgid "Login"
-msgstr "Logga in"
-
-#: templates/registration/login.html:9
-msgid "Log into your UTN account"
-msgstr "Logga in på ditt UTN-konto"
-
-#: templates/registration/login.html:14
-msgid "Your username and password didn\\"
-msgstr ""
-
-#: templates/registration/login.html:21
-msgid "Your account doesn\\"
-msgstr ""
-
-#: templates/registration/login.html:34
-msgid "username"
-msgstr "användarnamn"
-
-#: templates/registration/login.html:44
-msgid "Sign In"
-msgstr "Logga in"
-
-#: templates/registration/login.html:48
-msgid "I forgot my password"
-msgstr "Jag har glömt mitt lösenord"
-
-#: templates/registration/password_change_done.html:7
-msgid "Password changed"
-msgstr "Lösenordet har ändrats"
-
-#: templates/registration/password_change_done.html:9
-#: templates/registration/password_change_form.html:11
-msgid "Change your password"
-msgstr "Ändra ditt lösenord"
-
-#: templates/registration/password_change_done.html:12
-msgid ""
-"Your password has succesfully been changed. You can now log in with your new "
-"password."
-msgstr ""
-"Ditt lösenord har blivit ändrat. Nu kan du logga in med ditt nya lösenord."
-
-#: templates/registration/password_change_form.html:9
-msgid "Change Password"
-msgstr "Ändra lösenord"
-
-#: templates/registration/password_change_form.html:14
-msgid "Please enter your old password, for security\\"
-msgstr ""
-
-#: templates/registration/password_change_form.html:28
-msgid "Old password"
-msgstr "Nuvarande lösenord"
-
-#: templates/registration/password_change_form.html:33
-msgid "New password"
-msgstr "Nytt lösenord"
-
-#: templates/registration/password_change_form.html:41
-msgid "New password confirmation"
-msgstr "Bekräftelse av nytt lösenord"
-
-#: templates/registration/password_change_form.html:49
-msgid "Change my password"
-msgstr "Ändra mitt lösenord"
-
-#: templates/registration/password_reset_done.html:7
-#: templates/registration/password_reset_done.html:9
-msgid "Password reset sent"
-msgstr "En återställning av ditt lösenord har skickats. "
-
-#: templates/registration/password_reset_done.html:12
-msgid "We\\"
-msgstr ""
-
-#: templates/registration/password_reset_done.html:14
-msgid "If you don\\"
-msgstr ""
-
-#: templates/registration/password_reset_form.html:7
-msgid "Reset password"
-msgstr "Återställ lösenord"
-
-#: templates/registration/password_reset_form.html:10
-msgid "Reset your password"
-msgstr "Återställ ditt lösenord"
-
-#: templates/registration/password_reset_form.html:12
-msgid ""
-"Forgotten your password? Enter your email address below, and we'll email "
-"instructions for setting a new one."
-msgstr ""
-"Har du glömt ditt lösenord? Skriv in din emailadress nedan så får du "
-"instruktioner om hur du återställer ditt lösenord skickade till dig. "
-
-#: templates/registration/password_reset_form.html:26
-msgid "E-mail address"
-msgstr "emailadress"
-
-#: templates/registration/password_reset_form.html:31
-msgid "Reset my password"
-msgstr "Återställ mitt lösenord"
-
 #: templates/tags/main_menu.html:6
 msgid "Home"
 msgstr "Startsida"
+
+#: templates/tags/organisation_menu.html:11
+msgid "sections"
+msgstr ""
+
+#: templates/tags/organisation_menu.html:26
+msgid "committees"
+msgstr ""
 
 #: templates/wagtailadmin/home.html:4
 msgid "Welcome UTN website administrators!"
