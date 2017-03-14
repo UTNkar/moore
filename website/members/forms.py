@@ -43,7 +43,7 @@ class MemberForm(ModelForm):
                 'person_number': instance.person_number()
             })
 
-        super(ModelForm, self).__init__(*args, **kwargs)
+        super(MemberForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
         person_number = self.cleaned_data['person_number']
@@ -52,7 +52,7 @@ class MemberForm(ModelForm):
         )
         self.instance.person_number_ext = person_number[-4:]
 
-        return super(ModelForm, self).save(commit=commit)
+        return super(MemberForm, self).save(commit=commit)
 
 
 class CustomUserEditForm(UserEditForm):

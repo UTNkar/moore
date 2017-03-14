@@ -1,11 +1,10 @@
 from datetime import date
 
-from involvement.models import Team, Role, Position, Application
+from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 
-from django.utils.translation import ugettext_lazy as _
-
+from involvement.models import Team, Role, Position, Application
 from involvement.rules import is_admin
 from utils.permissions import RulesPermissionHelper
 
@@ -21,7 +20,7 @@ class TeamAdmin(ModelAdmin):
 
     def get_queryset(self, request):
         if is_admin(request.user):
-            return super().get_queryset(request)
+            return super(TeamAdmin, self).get_queryset(request)
         else:
             # TODO : Is this efficient?
             applications = Application.objects.filter(
@@ -53,7 +52,7 @@ class RoleAdmin(ModelAdmin):
 
     def get_queryset(self, request):
         if is_admin(request.user):
-            return super().get_queryset(request)
+            return super(RoleAdmin, self).get_queryset(request)
         else:
             # TODO : Is this efficient?
             applications = Application.objects.filter(
@@ -80,12 +79,11 @@ class PositionAdmin(ModelAdmin):
     menu_order = 300
     list_display = ('role', 'appointments', 'term_from', 'term_to')
     search_fields = ('comments_en', 'comments_sv')
-    list_filter = ('term_from', 'term_to')
     permission_helper_class = RulesPermissionHelper
 
     def get_queryset(self, request):
         if is_admin(request.user):
-            return super().get_queryset(request)
+            return super(PositionAdmin, self).get_queryset(request)
         else:
             # TODO : Is this efficient?
             applications = Application.objects.filter(
