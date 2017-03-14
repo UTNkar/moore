@@ -2,22 +2,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-06 13:41+0100\n"
+"POT-Creation-Date: 2017-03-14 13:36+0100\n"
 "PO-Revision-Date: 2017-03-10 17:32+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 1.8.12\n"
 
 #: apps.py:7 wagtail_hooks.py:118
 msgid "Involvement"
 msgstr "Engagemang"
 
-#: forms.py:22
+#: forms.py:24
 msgid "The submitted status was invalid."
 msgstr "Den angivna statusen var ej giltig. "
 
@@ -85,187 +85,203 @@ msgstr "Svensk benämning av gruppledarens post"
 msgid "Contact e-mail address"
 msgstr "Emailadress för kontakt"
 
-#: models.py:176
-msgid "Functions"
-msgstr "Roller"
+#: models.py:175
+msgid "Roles"
+msgstr ""
 
-#: models.py:188
+#: models.py:187
 msgid "Official"
 msgstr "Ämbete"
 
-#: models.py:189
-msgid "Function has official access in the website"
-msgstr "Rollen har särskilda befogenheter på hemsidan"
+#: models.py:188
+msgid "This is an official role"
+msgstr ""
 
-#: models.py:195
+#: models.py:194
 msgid "Archived"
 msgstr "Arkiverade"
 
-#: models.py:196
-msgid "Hide the position from menus"
+#: models.py:195
+#, fuzzy
+#| msgid "Hide the position from menus"
+msgid "Hide the role from menus"
 msgstr "Dölj posten från menyn"
 
-#: models.py:204
-msgid "English function name"
-msgstr "Rollens benämning (engelska) "
+#: models.py:203
+#, fuzzy
+#| msgid "English team name"
+msgid "English role name"
+msgstr "gruppens namn (engelska) "
 
-#: models.py:205 models.py:212
-msgid "Enter the name of the function"
-msgstr "Ange rollens benämning"
+#: models.py:204 models.py:211
+#, fuzzy
+#| msgid "Enter the name of the team"
+msgid "Enter the name of the role"
+msgstr "Ange gruppens namn"
 
-#: models.py:211
-msgid "Swedish function name"
-msgstr "Rollens benämning (svenska)"
+#: models.py:210
+#, fuzzy
+#| msgid "Swedish team name"
+msgid "Swedish role name"
+msgstr "gruppens namn (svenska)"
 
-#: models.py:219
-msgid "English function description"
-msgstr "Postens roll (engelska)"
+#: models.py:218
+#, fuzzy
+#| msgid "English team description"
+msgid "English role description"
+msgstr "Beskrivning av gruppen (engelska) "
 
-#: models.py:220 models.py:226
-msgid "Enter a description of the function"
-msgstr "Ange en beskrivning av rollen"
+#: models.py:219 models.py:225
+#, fuzzy
+#| msgid "Enter a description of the team"
+msgid "Enter a description of the role"
+msgstr "Ange en beskrivning av gruppen"
 
-#: models.py:225
-msgid "Swedish function description"
-msgstr "Beskrivning av postens roll (svenska)"
+#: models.py:224
+#, fuzzy
+#| msgid "Swedish team description"
+msgid "Swedish role description"
+msgstr "Beskrivning av gruppen (svenska) "
 
-#: models.py:233
+#: models.py:232
 msgid "{} in {}"
 msgstr ""
 
-#: models.py:255
+#: models.py:254
 msgid "Positions"
 msgstr "Poster"
 
-#: models.py:266
-msgid "Commencement of recruitment"
+#: models.py:265
+#, fuzzy
+#| msgid "Commencement of recruitment"
+msgid "Start of recruitment"
 msgstr "Sök öppnar"
 
-#: models.py:269
+#: models.py:268
 msgid "Recruitment deadline"
 msgstr "Sista ansökningssdag"
 
-#: models.py:273
+#: models.py:272
 msgid "Number of appointments"
 msgstr "Antal tillsättningar"
 
-#: models.py:274
+#: models.py:273
 msgid "Enter the number of concurrent appointments to the position"
 msgstr "Ange antalet samtidiga tillsättningar av posten"
 
-#: models.py:279
+#: models.py:278
 msgid "Date of appointment"
 msgstr "Datum för tillsättning"
 
-#: models.py:281
+#: models.py:280
 msgid "End date of appointment"
 msgstr "Datum för mandatperiodens slut"
 
-#: models.py:284
+#: models.py:283
 msgid "English extra comments"
 msgstr "Övriga kommenterar (engelska) "
 
-#: models.py:285 models.py:292
+#: models.py:284 models.py:291
 msgid "Enter extra comments specific to the position this year."
 msgstr ""
-"Ange eventuell extra information om posten som gäller specifikt för "
-"detta år. "
+"Ange eventuell extra information om posten som gäller specifikt för detta "
+"år. "
 
-#: models.py:291
+#: models.py:290
 msgid "Swedish extra comments"
 msgstr "Övriga kommentarer (svenska) "
 
-#: models.py:342
+#: models.py:341
 msgid "Applications"
 msgstr "Ansökningar"
 
-#: models.py:347
+#: models.py:346
 msgid "Draft"
 msgstr "Utkast"
 
-#: models.py:348
+#: models.py:347
 msgid "Submitted"
 msgstr "Inskickade"
 
-#: models.py:349
+#: models.py:348
 msgid "Approved"
 msgstr "Beviljad"
 
-#: models.py:350
+#: models.py:349
 msgid "Disapproved"
 msgstr "Avslagen"
 
-#: models.py:351
+#: models.py:350
 msgid "Appointed"
 msgstr "Tillsatt"
 
-#: models.py:352
+#: models.py:351
 msgid "Turned down"
 msgstr "Avslagen"
 
-#: models.py:358
+#: models.py:357
 msgid "Status"
 msgstr "Status"
 
-#: models.py:365
+#: models.py:364
 msgid "Cover Letter"
 msgstr "Ansökningsbrev"
 
-#: models.py:366
+#: models.py:365
 msgid "Present yourself and state why you are what we are looking for"
 msgstr ""
-"Skriv en presentation av dig själv och en beskrivning av varför du är "
-"den vi letar efter"
+"Skriv en presentation av dig själv och en beskrivning av varför du är den vi "
+"letar efter"
 
-#: models.py:371
+#: models.py:370
 msgid "Qualifications"
 msgstr "Meriter"
 
-#: models.py:372
+#: models.py:371
 msgid "Give a summary of relevant qualifications"
 msgstr "Ge en sammanfattning av relevanta meriter"
 
-#: models.py:401
+#: models.py:400
 msgid "Name"
 msgstr "Namn"
 
-#: models.py:402
+#: models.py:401
 msgid "Enter the name of your reference"
 msgstr "Ange namnet på din referens"
 
-#: models.py:408
+#: models.py:407
 msgid "Position"
 msgstr "Position"
 
-#: models.py:409
+#: models.py:408
 msgid "Enter the position in which your reference relates to you"
 msgstr "Ange din relation till din referens"
 
-#: models.py:415
+#: models.py:414
 msgid "E-mail address"
 msgstr "Emailadress"
 
-#: models.py:416
+#: models.py:415
 msgid "Enter an e-mail address on which your reference in reachable"
 msgstr "Ange en emailadress som din referens kan nås på"
 
-#: models.py:423
+#: models.py:422
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: models.py:424
+#: models.py:423
 msgid "Enter a valid phone number"
 msgstr "Ange ett giltigt telefonnummer"
 
-#: models.py:427
+#: models.py:426
 msgid "Enter a phone number on which your reference is reachable"
 msgstr "Ange ett telefonnummer som din referens kan nås på "
 
-#: models.py:435
+#: models.py:434
 msgid "Comment"
 msgstr "Kommentar"
 
-#: models.py:436
+#: models.py:435
 msgid "Enter any additional comments regarding your reference"
 msgstr "Är det något mer du vill tillägga om din referens? "
 
@@ -278,7 +294,7 @@ msgid "An error has been found in the refences."
 msgstr "Ett fel har påträffats bland referenserna"
 
 #: templates/involvement/application_form.html:20
-#: templates/involvement/position.html:67
+#: templates/involvement/position.html:80
 msgid "The deadline for this application has passed."
 msgstr "Sista ansökningsdatum för den här posten har passerats. "
 
@@ -339,6 +355,11 @@ msgstr "ansök"
 msgid "update"
 msgstr "uppdatera"
 
+#: templates/involvement/application_summary.html:6
+#: templates/involvement/open_positions.html:31
+msgid "deadline"
+msgstr ""
+
 #: templates/involvement/application_summary.html:10
 msgid "edit"
 msgstr "redigera"
@@ -382,65 +403,71 @@ msgstr "Mandatperiod"
 #: templates/involvement/open_positions.html:75
 msgid "There are currently no open positions. Check back later!"
 msgstr ""
-"Det finns förnärvarande inga sökbara poster. Välkommen att komma "
-"tillbaka och kolla läget snart igen! "
+"Det finns förnärvarande inga sökbara poster. Välkommen att komma tillbaka "
+"och kolla läget snart igen! "
 
 #: templates/involvement/open_positions.html:61
 msgid "overview"
 msgstr "översikt"
 
 #: templates/involvement/open_positions.html:71
-#: templates/involvement/position.html:34
+#: templates/involvement/position.html:47
 msgid "unaffiliated"
 msgstr "ej ansluten"
 
-#: templates/involvement/position.html:23
-#: templates/involvement/position.html:38
+#: templates/involvement/position.html:36
+#: templates/involvement/position.html:51
 msgid "about"
 msgstr "om"
 
-#: templates/involvement/position.html:27
-#: templates/involvement/position.html:42
+#: templates/involvement/position.html:40
+#: templates/involvement/position.html:55
 msgid "contact"
 msgstr "kontakt"
 
-#: templates/involvement/position.html:39
+#: templates/involvement/position.html:52
 msgid ""
 "This position is not affiliated with any team or committee. You answer "
 "directly to the management team and the board."
 msgstr ""
-"Den här posten är inte del av någon grupp eller kommittée. Som "
-"innehavare svarar du direkt till ledningsgruppen och styrelsen. "
+"Den här posten är inte del av någon grupp eller kommittée. Som innehavare "
+"svarar du direkt till ledningsgruppen och styrelsen. "
 
-#: templates/involvement/position.html:43
+#: templates/involvement/position.html:56
 msgid "chairman"
 msgstr "ordförande"
 
-#: templates/involvement/position.html:54
-msgid "function description"
+#: templates/involvement/position.html:67
+#, fuzzy
+#| msgid "function description"
+msgid "Role description"
 msgstr "beskrivning av roll"
 
-#: templates/involvement/position.html:55
+#: templates/involvement/position.html:68
+#, fuzzy
+#| msgid ""
+#| "No function description is available at this time. For more information "
+#| "about this position, please get in contact with us."
 msgid ""
-"No function description is available at this time. For more information "
-"about this position, please get in contact with us."
+"No role description is available at this time. For more information about "
+"this position, please get in contact with us."
 msgstr ""
-"Det finns för närvarande ingen information om den här rollen. Var "
-"vänlig kontakta oss för mer information om den här positionen. "
+"Det finns för närvarande ingen information om den här rollen. Var vänlig "
+"kontakta oss för mer information om den här positionen. "
 
-#: templates/involvement/position.html:57
+#: templates/involvement/position.html:70
 msgid "comments for this year"
 msgstr "kommenterar för detta år"
 
-#: templates/involvement/position.html:67
+#: templates/involvement/position.html:80
 msgid "You can no longer apply for this position."
 msgstr "Den här posten är inte öppen för anmälan."
 
-#: templates/involvement/position.html:73
+#: templates/involvement/position.html:86
 msgid "Please login to apply to this position"
 msgstr "Var vänlig logga in för att ansöka om den här posten"
 
-#: templates/involvement/position.html:74
+#: templates/involvement/position.html:87
 msgid "login"
 msgstr "logga in"
 
