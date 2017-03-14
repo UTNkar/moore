@@ -8,6 +8,7 @@ from utils.translation import TranslatedField
 
 class StudyProgram(models.Model):
     """This class describes a university study program"""
+
     class Meta:
         verbose_name_plural = _('Study Programs')
 
@@ -126,5 +127,8 @@ class Member(AbstractUser):
     )
 
     def person_number(self) -> str:
-        return '%s-%s' % (self.birthday.strftime('%Y%m%d'),
-                          self.person_number_ext)
+        if self.birthday is None or self.person_number_ext is None:
+            return ''
+        else:
+            return '%s-%s' % (self.birthday.strftime('%Y%m%d'),
+                              self.person_number_ext)
