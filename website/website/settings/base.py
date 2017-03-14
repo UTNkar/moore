@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'compressor',
     'rules.apps.AutodiscoverRulesConfig',
 
-    'django.contrib.admin',
+    'django.contrib.admin',  # Used for wagtail admin filters
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
