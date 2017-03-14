@@ -22,6 +22,12 @@ class MemberTest(TestCase):
             'Person numbers are printed as \'(year)(month)(day)-(ext)\'.'
         )
 
+    def test_empty_person_number(self):
+        self.assertEqual(
+            '', self.member.person_number(),
+            'A empty string is returned if no person number data is available'
+        )
+
     def test_study_deletion(self):
         study = StudyProgram.objects.create(name_en='subject')
         self.member.study = study
