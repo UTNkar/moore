@@ -1,5 +1,7 @@
 from datetime import date
 
+from django.contrib import admin
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
@@ -48,6 +50,9 @@ class RoleAdmin(ModelAdmin):
     list_display = ('team', 'name_en', 'name_sv', 'archived')
     search_fields = ('name_en', 'name_sv', 'description_en',
                      'description_sv')
+    # TODO: Default to archived==False, might be in
+    # https://code.djangoproject.com/ticket/8851#no1
+    list_filter = ('team', 'archived')
     permission_helper_class = RulesPermissionHelper
 
     def get_queryset(self, request):
@@ -73,12 +78,53 @@ class RoleAdmin(ModelAdmin):
             return qs
 
 
+class PositionYearFilter(admin.SimpleListFilter):
+    title = _('year')
+
+    parameter_name = 'year'
+    parameter = 'year'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('this', _('This Year')),
+            ('last', _('Last Year')),
+            ('before', _('Before')),
+        )
+
+    def queryset(self, request, queryset):
+        now = timezone.now()
+        # When time zone support is enabled, convert "now" to the user's time
+        # zone so Django's definition of "Today" matches what the user expects.
+        if timezone.is_aware(now):
+            now = timezone.localtime(now)
+
+        this_year = now.replace(
+            month=1, day=1, hour=0, minute=0, second=0, microsecond=0
+        )
+        next_year = date(year=this_year.year + 1, month=1, day=1)
+        last_year = date(year=this_year.year - 1, month=1, day=1)
+
+        if self.value() == 'this':
+            return queryset.filter(
+                term_from__gte=this_year,
+                term_from__lt=next_year
+            )
+        elif self.value() == 'last':
+            return queryset.filter(
+                term_from__gte=last_year,
+                term_from__lt=this_year
+            )
+        elif self.value() == 'before':
+            return queryset.filter(term_from__lt=last_year)
+
+
 class PositionAdmin(ModelAdmin):
     model = Position
     menu_icon = 'search'
     menu_order = 300
     list_display = ('role', 'appointments', 'term_from', 'term_to')
     search_fields = ('comments_en', 'comments_sv')
+    list_filter = ('role__team', PositionYearFilter)
     permission_helper_class = RulesPermissionHelper
 
     def get_queryset(self, request):
@@ -109,6 +155,7 @@ class ApplicationAdmin(ModelAdmin):
     menu_icon = 'mail'
     menu_order = 400
     list_display = ('position', 'applicant', 'status')
+    list_filter = ('position__role__team', 'status')
     permission_helper_class = RulesPermissionHelper
 
 
