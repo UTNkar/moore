@@ -18,8 +18,8 @@ def is_official(user):
         status='appointed',
         position__term_from__lte=date.today(),
         position__term_to__gte=date.today(),
-        position__function__official=True,
-        position__function__team_id__isnull=False,
+        position__role__official=True,
+        position__role__team_id__isnull=False,
     ).exists()
 
 
@@ -31,26 +31,26 @@ def is_team_official(user, team):
         status='appointed',
         position__term_from__lte=date.today(),
         position__term_to__gte=date.today(),
-        position__function__official=True,
-        position__function__team=team,
+        position__role__official=True,
+        position__role__team=team,
     ).exists()
 
 
-# Function Predicates
+# role Predicates
 @rules.predicate
-def is_function_official(user, function):
-    return is_team_official(user, function.team)
+def is_role_official(user, role):
+    return is_team_official(user, role.team)
 
 
 # Position Predicates
 @rules.predicate
 def is_position_official(user, position):
-    return is_team_official(user, position.function.team)
+    return is_team_official(user, position.role.team)
 
 
 @rules.predicate
-def before_commencement(user, position):
-    return date.today() < position.commencement
+def before_recruitment_start(user, position):
+    return date.today() < position.recruitment_start
 
 
 # Application Predicates
@@ -72,16 +72,16 @@ rules.add_perm('involvement.add_team', is_admin)
 rules.add_perm('involvement.change_team', is_admin | is_team_official)
 rules.add_perm('involvement.delete_team', is_admin)
 
-rules.add_perm('involvement.list_function', is_admin | is_official)
-rules.add_perm('involvement.add_function', is_admin | is_official)
-rules.add_perm('involvement.change_function', is_admin | is_function_official)
-rules.add_perm('involvement.delete_function', is_admin)
+rules.add_perm('involvement.list_role', is_admin | is_official)
+rules.add_perm('involvement.add_role', is_admin | is_official)
+rules.add_perm('involvement.change_role', is_admin | is_role_official)
+rules.add_perm('involvement.delete_role', is_admin)
 
 rules.add_perm('involvement.list_position', is_admin | is_official)
 rules.add_perm('involvement.add_position', is_admin | is_official)
 rules.add_perm('involvement.change_position', is_admin | is_position_official)
 rules.add_perm('involvement.delete_position', is_admin
-               | (is_position_official & before_commencement))
+               | (is_position_official & before_recruitment_start))
 
 rules.add_perm('involvement.list_application', is_admin)
 rules.add_perm('involvement.add_application', is_admin | is_official)

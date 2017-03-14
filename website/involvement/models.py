@@ -166,19 +166,18 @@ class Team(models.Model):
     ])]
 
 
-class Function(models.Model):
+class Role(models.Model):
     """
-    This class represents a function held by a member within UTN or its
-    committees
+    This class represents a role within a team or UTN
     """
 
     class Meta:
-        verbose_name_plural = _('Functions')
+        verbose_name_plural = _('Roles')
         default_permissions = ()
 
     team = models.ForeignKey(
         Team,
-        related_name='functions',
+        related_name='roles',
         on_delete=models.PROTECT,
         null=True,
         blank=True,
@@ -186,14 +185,14 @@ class Function(models.Model):
 
     official = models.BooleanField(
         verbose_name=_('Official'),
-        help_text=_('Function has official access in the website'),
+        help_text=_('This is an official role'),
         default=False,
     )
 
     # Display position in selection?
     archived = models.BooleanField(
         verbose_name=_('Archived'),
-        help_text=_('Hide the position from menus'),
+        help_text=_('Hide the role from menus'),
         default=False,
     )
 
@@ -201,29 +200,29 @@ class Function(models.Model):
 
     name_en = models.CharField(
         max_length=255,
-        verbose_name=_('English function name'),
-        help_text=_('Enter the name of the function'),
+        verbose_name=_('English role name'),
+        help_text=_('Enter the name of the role'),
         blank=False,
     )
 
     name_sv = models.CharField(
         max_length=255,
-        verbose_name=_('Swedish function name'),
-        help_text=_('Enter the name of the function'),
+        verbose_name=_('Swedish role name'),
+        help_text=_('Enter the name of the role'),
         blank=False,
     )
 
     name = TranslatedField('name_en', 'name_sv')
 
     description_en = models.TextField(
-        verbose_name=_('English function description'),
-        help_text=_('Enter a description of the function'),
+        verbose_name=_('English role description'),
+        help_text=_('Enter a description of the role'),
         blank=True,
     )
 
     description_sv = models.TextField(
-        verbose_name=_('Swedish function description'),
-        help_text=_('Enter a description of the function'),
+        verbose_name=_('Swedish role description'),
+        help_text=_('Enter a description of the role'),
         blank=True,
     )
 
@@ -249,24 +248,24 @@ class Function(models.Model):
 
 
 class Position(models.Model):
-    """Appointment represents the holding of a function."""
+    """Position represents the execution of a role within UTN"""
 
     class Meta:
         verbose_name_plural = _('Positions')
         default_permissions = ()
 
-    function = models.ForeignKey(
-        Function,
+    role = models.ForeignKey(
+        Role,
         related_name='positions',
         on_delete=models.PROTECT,
         blank=False,
     )
 
-    commencement = models.DateField(
-        verbose_name=_('Commencement of recruitment'),
+    recruitment_start = models.DateField(
+        verbose_name=_('Start of recruitment'),
         default=date.today,
     )
-    deadline = models.DateField(verbose_name=_('Recruitment deadline'))
+    recruitment_end = models.DateField(verbose_name=_('Recruitment deadline'))
 
     # ---- Appointment Information ------
     appointments = models.IntegerField(
@@ -297,16 +296,16 @@ class Position(models.Model):
     comment = TranslatedField('comment_en', 'comment_sv')
 
     def __str__(self) -> str:
-        return "{} {}".format(self.function.name, self.term_from.year)
+        return "{} {}".format(self.role.name, self.term_from.year)
 
     @property
     def is_past_due(self):
-        return date.today() > self.deadline
+        return date.today() > self.recruitment_end
 
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldRowPanel([
-            FieldPanel('function'),
+            FieldPanel('role'),
             FieldPanel('appointments'),
         ]),
         FieldRowPanel([
@@ -314,8 +313,8 @@ class Position(models.Model):
             FieldPanel('term_to'),
         ]),
         FieldRowPanel([
-            FieldPanel('commencement'),
-            FieldPanel('deadline'),
+            FieldPanel('recruitment_start'),
+            FieldPanel('recruitment_end'),
         ]),
         FieldPanel('comment_en'),
         FieldPanel('comment_sv'),

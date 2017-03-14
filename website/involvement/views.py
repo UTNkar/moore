@@ -15,9 +15,9 @@ def open_positions(request, context):
     """View redirect for the currently open positions"""
     # TODO: Limit accorting to inclusion/exclusion rules
     context['positions'] = Position.objects.filter(
-        commencement__lte=date.today()
+        recruitment_start__lte=date.today()
     ).filter(
-        deadline__gte=date.today()
+        recruitment_end__gte=date.today()
     )
     context['teams'] = Team.objects.all()
     return render(request, 'involvement/open_positions.html', context)
@@ -35,7 +35,7 @@ def my_applications(request, context):
             if appl.applicant != request.user:
                 context['error'] = _('You cannot delete an application that '
                                      'is not yours!')
-            elif appl.position.deadline < date.today():
+            elif appl.position.recruitment_end < date.today():
                 context['error'] = _('You cannot delete an application after '
                                      'its deadline has passed!')
             else:
@@ -49,19 +49,19 @@ def my_applications(request, context):
             context['error'] = _('This application does not exist!')
 
     applications = Application.objects.filter(applicant=request.user).order_by(
-        'position__deadline'
+        'position__recruitment_end'
     )
 
     context['drafts'] = applications.filter(
-        position__deadline__gte=date.today(),
+        position__recruitment_end__gte=date.today(),
         status='draft',
     )
     context['submitted'] = applications.filter(
-        position__deadline__gte=date.today(),
+        position__recruitment_end__gte=date.today(),
         status='submitted',
     )
     context['waiting'] = applications.filter(
-        Q(position__deadline__lt=date.today(), status='submitted')
+        Q(position__recruitment_end__lt=date.today(), status='submitted')
         | Q(status='approved')
     )
     context['old'] = applications.filter(

@@ -5,7 +5,7 @@ from wagtail.tests.utils import WagtailPageTests
 from wagtail.wagtailcore.models import Page
 
 from home.models import HomePage
-from involvement.models import RecruitmentPage, Position, Function, Team
+from involvement.models import RecruitmentPage, Position, Role, Team
 
 
 class RecruitmentPageTests(WagtailPageTests):
@@ -59,14 +59,14 @@ class RecruitmentPageTests(WagtailPageTests):
         When there are open positions, these positions should be visible and
         a link should be available to their specific page.
         """
-        function = Function.objects.create(
-            name_en='Test Function',
-            name_sv='Test Funktion',
+        role = Role.objects.create(
+            name_en='Test Role',
+            name_sv='Test Roll',
         )
         position = Position.objects.create(
-            function=function,
-            commencement=date.today() - timedelta(days=1),
-            deadline=date.today(),
+            role=role,
+            recruitment_start=date.today() - timedelta(days=1),
+            recruitment_end=date.today(),
             term_from=date.today() + timedelta(days=1),
             term_to=date.today() + timedelta(days=365),
         )
@@ -91,14 +91,14 @@ class RecruitmentPageTests(WagtailPageTests):
                                  msg='Response context contains the position')
 
     def test_position_view_general(self):
-        function = Function.objects.create(
-            name_en='Test Function',
-            name_sv='Test Funktion',
+        role = Role.objects.create(
+            name_en='Test Role',
+            name_sv='Test Roll',
         )
         position = Position.objects.create(
-            function=function,
-            commencement=date.today() - timedelta(days=1),
-            deadline=date.today(),
+            role=role,
+            recruitment_start=date.today() - timedelta(days=1),
+            recruitment_end=date.today(),
             term_from=date.today() + timedelta(days=1),
             term_to=date.today() + timedelta(days=365),
         )
@@ -116,15 +116,15 @@ class RecruitmentPageTests(WagtailPageTests):
                          msg='Response context contains the position')
 
     def test_position_view_unaffiliated(self):
-        function = Function.objects.create(
+        role = Role.objects.create(
             team=None,
-            name_en='Test Function',
-            name_sv='Test Funktion',
+            name_en='Test Role',
+            name_sv='Test Roll',
         )
         position = Position.objects.create(
-            function=function,
-            commencement=date.today() - timedelta(days=1),
-            deadline=date.today(),
+            role=role,
+            recruitment_start=date.today() - timedelta(days=1),
+            recruitment_end=date.today(),
             term_from=date.today() + timedelta(days=1),
             term_to=date.today() + timedelta(days=365),
         )
@@ -143,15 +143,15 @@ class RecruitmentPageTests(WagtailPageTests):
             email='test@localhost',
             group=Group.objects.first()
         )
-        function = Function.objects.create(
+        role = Role.objects.create(
             team=team,
             name_en='Test Function',
             name_sv='Test Funktion',
         )
         position = Position.objects.create(
-            function=function,
-            commencement=date.today() - timedelta(days=1),
-            deadline=date.today(),
+            role=role,
+            recruitment_start=date.today() - timedelta(days=1),
+            recruitment_end=date.today(),
             term_from=date.today() + timedelta(days=1),
             term_to=date.today() + timedelta(days=365),
         )

@@ -1,6 +1,6 @@
 from datetime import date
 
-from involvement.models import Team, Function, Position, Application
+from involvement.models import Team, Role, Position, Application
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 
@@ -29,12 +29,12 @@ class TeamAdmin(ModelAdmin):
                 status='appointed',
                 position__term_from__lte=date.today(),
                 position__term_to__gte=date.today(),
-                position__function__official=True,
-                position__function__team_id__isnull=False,
-            ).select_related('position__function__team')
+                position__role__official=True,
+                position__role__team_id__isnull=False,
+            ).select_related('position__role__team')
             teams = []
             for i in applications:
-                teams.append(i.position.function.team.id)
+                teams.append(i.position.role.team.id)
             qs = Team.objects.filter(id__in=teams)
             ordering = self.get_ordering(request)
             if ordering:
@@ -42,8 +42,8 @@ class TeamAdmin(ModelAdmin):
             return qs
 
 
-class FunctionAdmin(ModelAdmin):
-    model = Function
+class RoleAdmin(ModelAdmin):
+    model = Role
     menu_icon = 'user'
     menu_order = 200
     list_display = ('team', 'name_en', 'name_sv', 'archived')
@@ -61,13 +61,13 @@ class FunctionAdmin(ModelAdmin):
                 status='appointed',
                 position__term_from__lte=date.today(),
                 position__term_to__gte=date.today(),
-                position__function__official=True,
-                position__function__team_id__isnull=False,
-            ).select_related('position__function__team')
+                position__role__official=True,
+                position__role__team_id__isnull=False,
+            ).select_related('position__role__team')
             teams = []
             for i in applications:
-                teams.append(i.position.function.team)
-            qs = Function.objects.filter(team__in=teams)
+                teams.append(i.position.role.team)
+            qs = Role.objects.filter(team__in=teams)
             ordering = self.get_ordering(request)
             if ordering:
                 qs = qs.order_by(*ordering)
@@ -78,7 +78,7 @@ class PositionAdmin(ModelAdmin):
     model = Position
     menu_icon = 'search'
     menu_order = 300
-    list_display = ('function', 'appointments', 'term_from', 'term_to')
+    list_display = ('role', 'appointments', 'term_from', 'term_to')
     search_fields = ('comments_en', 'comments_sv')
     list_filter = ('term_from', 'term_to')
     permission_helper_class = RulesPermissionHelper
@@ -93,13 +93,13 @@ class PositionAdmin(ModelAdmin):
                 status='appointed',
                 position__term_from__lte=date.today(),
                 position__term_to__gte=date.today(),
-                position__function__official=True,
-                position__function__team_id__isnull=False,
-            ).select_related('position__function__team')
+                position__role__official=True,
+                position__role__team_id__isnull=False,
+            ).select_related('position__role__team')
             teams = []
             for i in applications:
-                teams.append(i.position.function.team)
-            qs = Position.objects.filter(function__team__in=teams)
+                teams.append(i.position.role.team)
+            qs = Position.objects.filter(role__team__in=teams)
             ordering = self.get_ordering(request)
             if ordering:
                 qs = qs.order_by(*ordering)
@@ -118,7 +118,7 @@ class InvolvementAdminGroup(ModelAdminGroup):
     menu_label = _('Involvement')
     menu_icon = 'group'
     menu_order = 500
-    items = (TeamAdmin, FunctionAdmin, PositionAdmin, ApplicationAdmin)
+    items = (TeamAdmin, RoleAdmin, PositionAdmin, ApplicationAdmin)
 
 
 modeladmin_register(InvolvementAdminGroup)

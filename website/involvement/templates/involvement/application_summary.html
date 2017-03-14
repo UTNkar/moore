@@ -3,7 +3,7 @@
 <div class="filter{% if color == 'primary' %} filter-primary{% elif color == 'secondary' %} filter-secondary{% endif %}">
     <div class="row" style="padding-left: 20px;">
         <h4>{{ position }}</h4>
-        <p style="margin-top: -15px; color: {{ position.deadline|date_color }};"><b>Deadline: {{ position.deadline }}</b></p>
+        <p style="margin-top: -15px; color: {{ position.recruitment_end|date_color }};"><b>{% trans 'deadline'|capfirst %}: {{ position.recruitment_end }}</b></p>
     </div>
     <div class="row filter-options">
         {% if edit %}
