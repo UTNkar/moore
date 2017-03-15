@@ -3,6 +3,7 @@ from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
+from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
@@ -112,3 +113,21 @@ def position(request, context, page, position=None):
         context['reference_forms'] = ReferenceFormSet(instance=appl)
 
     return render(request, 'involvement/position.html', context)
+
+
+def admin_appoint(request, position=None):
+    """
+    Admin view to appoint members to the position
+    """
+    position = get_object_or_404(Position, id=position)
+
+    raise Http404
+
+
+def admin_elect(request, position=None):
+    """
+    Admin view to approve members for a position
+    """
+    position = get_object_or_404(Position, id=position)
+
+    raise Http404

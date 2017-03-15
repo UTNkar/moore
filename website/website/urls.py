@@ -10,6 +10,7 @@ from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
 urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
+    url(r'', include('involvement.urls')),
     url(r'^documents/', include(wagtaildocs_urls)),
 
     url(r'^search/$', search_views.search, name='search'),

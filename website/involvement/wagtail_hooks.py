@@ -1,8 +1,11 @@
 from datetime import date
 
 from django.contrib import admin
+from django.contrib.admin.utils import quote
+from django.contrib.auth import get_permission_codename
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from wagtail.contrib.modeladmin.helpers import ButtonHelper, AdminURLHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 
@@ -118,6 +121,78 @@ class PositionYearFilter(admin.SimpleListFilter):
             return queryset.filter(term_from__lt=last_year)
 
 
+class PositionPermissionHelper(RulesPermissionHelper):
+    def user_can_elect_obj(self, user, obj):
+        opts = self.opts
+        codename = get_permission_codename('elect', opts)
+        return user.has_perm('%s.%s' % (opts.app_label, codename), obj)
+
+    def user_can_appoint_obj(self, user, obj):
+        opts = self.opts
+        codename = get_permission_codename('appoint', opts)
+        return user.has_perm('%s.%s' % (opts.app_label, codename), obj)
+
+
+class PositionButtonHelper(ButtonHelper):
+    def elect_button(self, pk, classnames_add=None, classnames_exclude=None):
+        if classnames_add is None:
+            classnames_add = []
+        if classnames_exclude is None:
+            classnames_exclude = []
+        classnames = self.edit_button_classnames + classnames_add
+        cn = self.finalise_classname(classnames, classnames_exclude)
+        return {
+            'url': self.url_helper.get_action_url('elect', quote(pk)),
+            'label': _('Elect'),
+            'classname': cn,
+            'title': _('Elect applicants for %s') % self.verbose_name,
+        }
+
+    def appoint_button(self, pk, classnames_add=None, classnames_exclude=None):
+        if classnames_add is None:
+            classnames_add = []
+        if classnames_exclude is None:
+            classnames_exclude = []
+        classnames = self.edit_button_classnames + classnames_add
+        cn = self.finalise_classname(classnames, classnames_exclude)
+        return {
+            'url': self.url_helper.get_action_url('appoint', quote(pk)),
+            'label': _('Appoint'),
+            'classname': cn,
+            'title': _('Appoint member to %s') % self.verbose_name,
+        }
+
+    def get_buttons_for_obj(self, obj, exclude=None, classnames_add=None,
+                            classnames_exclude=None):
+        btns = []
+        if exclude is None:
+            exclude = []
+        if classnames_add is None:
+            classnames_add = []
+        if classnames_exclude is None:
+            classnames_exclude = []
+        ph = self.permission_helper
+        usr = self.request.user
+        pk = quote(getattr(obj, self.opts.pk.attname))
+        if 'elect' not in exclude and ph.user_can_elect_obj(usr, obj):
+            btns.append(
+                self.elect_button(
+                    pk, classnames_add, classnames_exclude
+                )
+            )
+        if 'appoint' not in exclude and ph.user_can_appoint_obj(usr, obj):
+            btns.append(
+                self.appoint_button(
+                    pk, classnames_add, classnames_exclude
+                )
+            )
+        btns += super(PositionButtonHelper, self).get_buttons_for_obj(
+            obj, exclude=exclude, classnames_add=classnames_add,
+            classnames_exclude=classnames_exclude
+        )
+        return btns
+
+
 class PositionAdmin(ModelAdmin):
     model = Position
     menu_icon = 'search'
@@ -125,7 +200,8 @@ class PositionAdmin(ModelAdmin):
     list_display = ('role', 'appointments', 'term_from', 'term_to')
     search_fields = ('comments_en', 'comments_sv')
     list_filter = ('role__team', PositionYearFilter)
-    permission_helper_class = RulesPermissionHelper
+    permission_helper_class = PositionPermissionHelper
+    button_helper_class = PositionButtonHelper
 
     def get_queryset(self, request):
         if is_admin(request.user):
