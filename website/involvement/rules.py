@@ -80,6 +80,9 @@ rules.add_perm('involvement.delete_role', is_admin)
 rules.add_perm('involvement.list_position', is_admin | is_official)
 rules.add_perm('involvement.add_position', is_admin | is_official)
 rules.add_perm('involvement.change_position', is_admin | is_position_official)
+rules.add_perm('involvement.elect_position', is_admin)  # TODO: Implement
+rules.add_perm('involvement.appoint_position', is_admin
+               | is_position_official)  # TODO: Add position status/date
 rules.add_perm('involvement.delete_position', is_admin
                | (is_position_official & before_recruitment_start))
 

@@ -50,7 +50,7 @@ class RecruitmentPage(RoutablePageMixin, Page):
         from involvement import views
         return views.my_applications(request, self.get_context(request))
 
-    @route(r'^position/(\d+)/$', name='position')
+    @route(r'^position/(\d+)/$')
     def position(self, request, position=None):
         """
         View redirect for a specific position.
