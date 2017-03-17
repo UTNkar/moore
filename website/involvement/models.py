@@ -56,8 +56,8 @@ class RecruitmentPage(RoutablePageMixin, Page):
         View redirect for a specific position.
         """
         from involvement import views
-        return views.position(request, self.get_context(request), self,
-                              position)
+        return views.view_position(request, self.get_context(request), self,
+                                   position)
 
     # ------ Administrator settings ------
     content_panels = Page.content_panels + [
@@ -435,6 +435,17 @@ class Reference(Orderable):
         help_text=_('Enter any additional comments regarding your reference'),
         blank=True,
     )
+
+    def __str__(self) -> str:
+        ref = '%s - %s' % (self.name, self.position)
+        if self.phone_number and self.email:
+            ref += '\nContact: %s or %s' % (self.phone_number, self.email)
+        elif self.phone_number or self.email:
+            ref += '\nContact: %s' % self.phone_number + self.email
+        if self.comment:
+            ref += '\nComment: %s' % self.comment
+
+        return ref
 
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
