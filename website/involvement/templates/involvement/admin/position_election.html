@@ -1,0 +1,140 @@
+{% extends "modeladmin/create.html" %}
+{% load i18n %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+.field-content {
+    font-size: 1.1em;
+}
+.field-content span {
+    float: left;
+    padding-top: 1.2em;
+}
+</style>
+{% endblock %}
+
+{% block form_action %}{% url 'involvement_position_modeladmin_elect' position.id %}{% endblock %}
+
+{% block form %}
+{% if formset.total_error_count != 0 %}
+<div class="help-block help-warning">
+    <div class="alert alert-danger" role="alert">
+        <ul>
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+        {% for form in formset %}
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+{{ formset.management_form }}
+<ul class="objects">
+{% for form in formset %}
+    <li class="object">
+        <h2>{{ form.instance.applicant }}</h2>
+        <fieldset>
+            <ul class="fields">
+                    <ul class="field-row label-above">
+                        <li class="field-col col6">
+                            <label>{% trans 'name'|capfirst %}:</label>
+                            <div class="field-content">
+                                <span>{{ form.instance.applicant.first_name }} {{ form.instance.applicant.last_name }}</span>
+                            </div>
+                        </li>
+                        <li class="field-col col6">
+                            <label>{% trans 'person number'|capfirst %}:</label>
+                            <div class="field-content">
+                                <span>{{ form.instance.applicant.person_number }}</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="field-row label-above">
+                        <li class="field-col col6">
+                            <label>{% trans 'phone number'|capfirst %}:</label>
+                            <div class="field-content">
+                                <span>{{ form.instance.applicant.phone_number }}</span>
+                            </div>
+                        </li>
+                        <li class="field-col col6">
+                            <label>{% trans 'e-mail address'|capfirst %}:</label>
+                            <div class="field-content">
+                                <span>{{ form.instance.applicant.email }}</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    {% if form.instance.cover_letter %}
+                    <li class="field">
+                        <label>{% trans 'cover letter'|capfirst %}:</label>
+                        <div class="field-content">
+                            {{ form.instance.cover_letter|linebreaks }}
+                        </div>
+                    </li>
+                    {% endif %}
+
+                    <ul class="field-row label-above">
+                        <li class="field-col col6">
+                            {% if form.instance.qualifications %}
+                            <label>{% trans 'qualifications'|capfirst %}:</label>
+                            <div class="field-content">
+                                {{ form.instance.qualifications }}
+                            </div>
+                            {% endif %}
+                        </li>
+                        <li class="field-col col6">
+                            {% if form.instance.references.all %}
+                            <label>{% trans 'references'|capfirst %}:</label>
+                            <div class="field-content">
+                                <ul>
+                                    {% for ref in form.instance.references.all %}
+                                        <li style="list-style-type: circle;">{{ ref|linebreaks }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+                        </li>
+                    </ul>
+
+                    <li class="field typed_choice_field" style="margin-top: 10px;">
+                        <div class="field typed_choice_field select">
+                        {% if form.status.errors %}<div style="color: red;">{% endif %}
+                            {{ form.status.label_tag }}
+                        {% if form.status.errors %}</div>{% endif %}
+                        <div class="field-content">
+                            <div class="input">
+                            {{ form.status }}
+                            <span></span>
+                            </div>
+                        </div>
+                        </div>
+                    </li>
+
+                </li>
+            </ul>
+        </fieldset>
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
+
+{% block form_actions %}
+    <div class="dropdown dropup dropdown-button match-width">
+        <button type="submit" class="button action-save button-longrunning" tabindex="3" data-clicked-text="{% trans 'Saving...' %}" {% if page.locked %}disabled {% endif %}>
+            <span class="icon icon-spinner"></span><em>{% trans 'Save' %}</em>
+        </button>
+    </div>
+{% endblock %}

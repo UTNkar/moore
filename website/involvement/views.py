@@ -3,12 +3,14 @@ from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
+from django.forms import inlineformset_factory, modelformset_factory
 from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
+from rules.contrib.views import permission_required
 
-from involvement.forms import ApplicationForm, ReferenceFormSet
+from involvement.forms import ApplicationForm, ReferenceFormSet, ApprovalForm
 from involvement.models import Position, Team, Application
 
 
@@ -72,7 +74,7 @@ def my_applications(request, context):
     return render(request, 'involvement/my_applications.html', context)
 
 
-def position(request, context, page, position=None):
+def view_position(request, context, page, position=None):
     """
     View function for specific positions.
     """
@@ -115,19 +117,53 @@ def position(request, context, page, position=None):
     return render(request, 'involvement/position.html', context)
 
 
-def admin_appoint(request, position=None):
+def get_position_by_pk(request, position_id):
+    return get_object_or_404(Position, pk=position_id)
+
+
+@permission_required('involvement.appoint_position', fn=get_position_by_pk)
+def admin_appoint(request, pos_id=None):
     """
     Admin view to appoint members to the position
     """
-    position = get_object_or_404(Position, id=position)
-
     raise Http404
 
 
-def admin_elect(request, position=None):
+@permission_required('involvement.elect_position', fn=get_position_by_pk)
+def admin_approve_applicants(request, key):
     """
     Admin view to approve members for a position
     """
-    position = get_object_or_404(Position, id=position)
+    position = get_object_or_404(Position, pk=key)
+    applications = position.applications.filter(
+        status__in=['submitted', 'approved', 'disapproved']
+    )
 
-    raise Http404
+    formset_class = modelformset_factory(
+        Application,
+        form=ApprovalForm,
+        can_delete=False,
+        extra=0,
+    )
+    if request.method == 'POST':
+        formset = formset_class(request.POST, request.FILES,
+                                queryset=applications)
+        if formset.is_valid():
+            formset.save()
+    else:
+        formset = formset_class(queryset=applications)
+
+    view = {
+        'get_meta_title': 'Approve applicants',
+        'get_page_title': 'Approve applicants for',
+        'get_page_subtitle': position.__str__(),
+        'header_icon': 'tick',
+    }
+    context = {
+        'view': view,
+        'request': request,
+        'position': position,
+        'formset': formset,
+    }
+    return render(request, 'involvement/admin/position_election.html',
+                  context)

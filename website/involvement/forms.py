@@ -1,5 +1,6 @@
-from django.forms import inlineformset_factory, Textarea, TextInput,\
-    ModelForm, ValidationError
+from django.forms import inlineformset_factory, Textarea, TextInput, \
+    ModelForm, ValidationError, RadioSelect, \
+    ChoiceField
 from django.utils.translation import ugettext_lazy as _
 
 from involvement.models import Application, Reference
@@ -18,7 +19,7 @@ class ApplicationForm(ModelForm):
 
     def clean_status(self):
         status = self.cleaned_data['status']
-        if status not in ['draft', 'submitted']\
+        if status not in ['draft', 'submitted'] \
                 or (self.initial['status'] == 'submitted'
                     and status == 'draft'):
             raise ValidationError(_('The submitted status was invalid.'))
@@ -38,3 +39,28 @@ ReferenceFormSet = inlineformset_factory(
     },
     extra=0,
 )
+
+
+class ApprovalForm(ModelForm):
+    status = ChoiceField(
+        choices=(
+            ('submitted', '---------'),
+            ('approved', _('Approved')),
+            ('disapproved', _('Disapproved')),
+        ),
+    )
+
+    class Meta:
+        model = Application
+        fields = []
+
+    def clean_status(self):
+        status = self.cleaned_data['status']
+        if status not in ['submitted', 'approved', 'disapproved']:
+            raise ValidationError(_('The submitted status was invalid.'))
+        return status
+
+    def save(self, commit=True):
+        self.instance.status = self.cleaned_data['status']
+
+        super(ApprovalForm, self).save(commit)
