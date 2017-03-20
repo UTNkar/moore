@@ -21,11 +21,6 @@
 <div class="help-block help-warning">
     <div class="alert alert-danger" role="alert">
         <ul>
-        {% for field, errors in form.errors.items %}
-            {% for error in errors %}
-                <li>{{ error }}</li>
-            {% endfor %}
-        {% endfor %}
         {% for form in formset %}
             {% for field, errors in form.errors.items %}
                 {% for error in errors %}
@@ -40,86 +35,25 @@
 {{ formset.management_form }}
 <ul class="objects">
 {% for form in formset %}
+    {# TODO: Make collapsable #}
     <li class="object">
         <h2>{{ form.instance.applicant }}</h2>
         <fieldset>
             <ul class="fields">
-                    <ul class="field-row label-above">
-                        <li class="field-col col6">
-                            <label>{% trans 'name'|capfirst %}:</label>
-                            <div class="field-content">
-                                <span>{{ form.instance.applicant.first_name }} {{ form.instance.applicant.last_name }}</span>
-                            </div>
-                        </li>
-                        <li class="field-col col6">
-                            <label>{% trans 'person number'|capfirst %}:</label>
-                            <div class="field-content">
-                                <span>{{ form.instance.applicant.person_number }}</span>
-                            </div>
-                        </li>
-                    </ul>
+                {% include 'involvement/admin/application_overview_fields.html' with application=form.instance %}
 
-                    <ul class="field-row label-above">
-                        <li class="field-col col6">
-                            <label>{% trans 'phone number'|capfirst %}:</label>
-                            <div class="field-content">
-                                <span>{{ form.instance.applicant.phone_number }}</span>
-                            </div>
-                        </li>
-                        <li class="field-col col6">
-                            <label>{% trans 'e-mail address'|capfirst %}:</label>
-                            <div class="field-content">
-                                <span>{{ form.instance.applicant.email }}</span>
-                            </div>
-                        </li>
-                    </ul>
-
-                    {% if form.instance.cover_letter %}
-                    <li class="field">
-                        <label>{% trans 'cover letter'|capfirst %}:</label>
-                        <div class="field-content">
-                            {{ form.instance.cover_letter|linebreaks }}
+                <li class="field typed_choice_field" style="margin-top: 10px;">
+                    <div class="field typed_choice_field select">
+                    {% if form.status.errors %}<div style="color: red;">{% endif %}
+                        {{ form.status.label_tag }}
+                    {% if form.status.errors %}</div>{% endif %}
+                    <div class="field-content">
+                        <div class="input">
+                        {{ form.status }}
+                        <span></span>
                         </div>
-                    </li>
-                    {% endif %}
-
-                    <ul class="field-row label-above">
-                        <li class="field-col col6">
-                            {% if form.instance.qualifications %}
-                            <label>{% trans 'qualifications'|capfirst %}:</label>
-                            <div class="field-content">
-                                {{ form.instance.qualifications }}
-                            </div>
-                            {% endif %}
-                        </li>
-                        <li class="field-col col6">
-                            {% if form.instance.references.all %}
-                            <label>{% trans 'references'|capfirst %}:</label>
-                            <div class="field-content">
-                                <ul>
-                                    {% for ref in form.instance.references.all %}
-                                        <li style="list-style-type: circle;">{{ ref|linebreaks }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            {% endif %}
-                        </li>
-                    </ul>
-
-                    <li class="field typed_choice_field" style="margin-top: 10px;">
-                        <div class="field typed_choice_field select">
-                        {% if form.status.errors %}<div style="color: red;">{% endif %}
-                            {{ form.status.label_tag }}
-                        {% if form.status.errors %}</div>{% endif %}
-                        <div class="field-content">
-                            <div class="input">
-                            {{ form.status }}
-                            <span></span>
-                            </div>
-                        </div>
-                        </div>
-                    </li>
-
+                    </div>
+                    </div>
                 </li>
             </ul>
         </fieldset>

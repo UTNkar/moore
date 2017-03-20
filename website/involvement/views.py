@@ -10,7 +10,8 @@ from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from rules.contrib.views import permission_required
 
-from involvement.forms import ApplicationForm, ReferenceFormSet, ApprovalForm
+from involvement.forms import ApplicationForm, ReferenceFormSet, ApprovalForm, \
+    AppointmentForm
 from involvement.models import Position, Team, Application
 
 
@@ -126,7 +127,29 @@ def admin_appoint(request, pos_id=None):
     """
     Admin view to appoint members to the position
     """
-    raise Http404
+    position = get_object_or_404(Position, pk=pos_id)
+
+    if request.method == 'POST':
+        form = AppointmentForm(position, request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # TODO: Redirect
+    else:
+        form = AppointmentForm(position)
+
+    view = {
+        'get_meta_title': 'Appoint applicants',
+        'get_page_title': 'Appoint applicants for',
+        'get_page_subtitle': position.__str__(),
+        'header_icon': 'pick',
+    }
+    context = {
+        'view': view,
+        'request': request,
+        'position': position,
+        'form': form,
+    }
+    return render(request, 'involvement/admin/position_appointment.html', context)
 
 
 @permission_required('involvement.elect_position', fn=get_position_by_pk)
@@ -150,6 +173,7 @@ def admin_approve_applicants(request, key):
                                 queryset=applications)
         if formset.is_valid():
             formset.save()
+            # TODO: redirect
     else:
         formset = formset_class(queryset=applications)
 
@@ -165,5 +189,4 @@ def admin_approve_applicants(request, key):
         'position': position,
         'formset': formset,
     }
-    return render(request, 'involvement/admin/position_election.html',
-                  context)
+    return render(request, 'involvement/admin/position_election.html', context)
