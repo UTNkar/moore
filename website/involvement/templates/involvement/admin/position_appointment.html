@@ -1,0 +1,89 @@
+{% extends "modeladmin/create.html" %}
+{% load i18n %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+.field-content {
+    font-size: 1.1em;
+}
+.field-content span {
+    float: left;
+    padding-top: 1.2em;
+}
+</style>
+{% endblock %}
+
+{% block form_action %}{% url 'involvement_position_modeladmin_appoint' position.id %}{% endblock %}
+
+{% block form %}
+{% if form.errors %}
+<div class="help-block help-warning">
+    <div class="alert alert-danger" role="alert">
+        <ul>
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+<ul class="objects">
+{% for val, string, application in form.appoint.field.choices %}
+    {# TODO: Make collapsable #}
+    <li class="object">
+        <h2>{{ application.applicant }}</h2>
+        <fieldset>
+            <ul class="fields">
+                {% include 'involvement/admin/application_overview_fields.html' %}
+
+                <li class="field" style="margin-top: 10px;">
+                    <div class="field boolean_field checkbox_input">
+                        <label for="id_appoint_{{ forloop.counter0 }}">{{ form.appoint.label }}:</label>
+                    <div class="field-content">
+                        <div class="input">
+                            <input id="id_appoint_{{ forloop.counter0 }}" name="{{ form.appoint.name }}" value="{{ val }}" {% if application in form.initial.appoint %}checked="checked"{% endif %} type="checkbox">
+                        </div>
+                    </div>
+                    </div>
+                </li>
+            </ul>
+        </fieldset>
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+    </li>
+{% endfor %}
+    <li class="object">
+        <h2>{% trans 'overturn' %}</h2>
+        <fieldset>
+            <ul class="fields">
+                <li class="char_field">
+                    <div class="field char_field text_input">
+                        {{ form.overturn.label_tag }}
+                        <div class="field-content">
+                            <div class="input">
+                                {{ form.overturn }}
+                            </div>
+                            <p class="help">{{ form.overturn.help_text }}</p>
+                        </div>
+                    </div>
+                    </li>
+            </ul>
+        </fieldset>
+    </li>
+</ul>
+
+</ul>
+
+{% endblock %}
+
+{% block form_actions %}
+    <div class="dropdown dropup dropdown-button match-width">
+        <button type="submit" class="button action-save button-longrunning" tabindex="3" data-clicked-text="{% trans 'Saving...' %}" {% if page.locked %}disabled {% endif %}>
+            <span class="icon icon-spinner"></span><em>{% trans 'Save' %}</em>
+        </button>
+    </div>
+{% endblock %}

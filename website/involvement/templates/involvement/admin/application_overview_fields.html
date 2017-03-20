@@ -1,0 +1,63 @@
+{% load i18n %}
+
+<ul class="field-row label-above">
+    <li class="field-col col6">
+        <label>{% trans 'name'|capfirst %}:</label>
+        <div class="field-content">
+            <span>{{ application.applicant.first_name }} {{ application.applicant.last_name }}</span>
+        </div>
+    </li>
+    <li class="field-col col6">
+        <label>{% trans 'person number'|capfirst %}:</label>
+        <div class="field-content">
+            <span>{{ application.applicant.person_number }}</span>
+        </div>
+    </li>
+</ul>
+
+<ul class="field-row label-above">
+    <li class="field-col col6">
+        <label>{% trans 'phone number'|capfirst %}:</label>
+        <div class="field-content">
+            <span>{{ application.applicant.phone_number }}</span>
+        </div>
+    </li>
+    <li class="field-col col6">
+        <label>{% trans 'e-mail address'|capfirst %}:</label>
+        <div class="field-content">
+            <span>{{ application.applicant.email }}</span>
+        </div>
+    </li>
+</ul>
+
+{% if application.cover_letter %}
+<li class="field">
+    <label>{% trans 'cover letter'|capfirst %}:</label>
+    <div class="field-content">
+        {{ application.cover_letter|linebreaks }}
+    </div>
+</li>
+{% endif %}
+
+<ul class="field-row label-above">
+    <li class="field-col col6">
+        {% if application.qualifications %}
+        <label>{% trans 'qualifications'|capfirst %}:</label>
+        <div class="field-content">
+            {{ application.qualifications }}
+        </div>
+        {% endif %}
+    </li>
+    <li class="field-col col6">
+        {% if application.references.all %}
+        <label>{% trans 'references'|capfirst %}:</label>
+        <div class="field-content">
+            <ul>
+                {% for ref in application.references.all %}
+                    <li style="list-style-type: circle;">{{ ref|linebreaks }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </li>
+</ul>
