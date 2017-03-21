@@ -261,6 +261,14 @@ class Position(models.Model):
         blank=False,
     )
 
+    approval_committee = models.ForeignKey(
+        Group,
+        verbose_name=_('Approval committee'),
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True
+    )
+
     recruitment_start = models.DateField(
         verbose_name=_('Start of recruitment'),
         default=date.today,
@@ -302,6 +310,20 @@ class Position(models.Model):
     def is_past_due(self):
         return date.today() > self.recruitment_end
 
+    def current_action(self) -> str:
+        if self.is_past_due:
+            applications = self.applications.exclude(status='draft')
+            if applications.all().filter(status='submitted').exists()\
+                    and self.approval_committee is not None:
+                return 'approve'
+            elif applications.all().filter(status='appointed')\
+                    .count() >= self.appointments:
+                return 'done'
+            else:
+                return 'appoint'
+        else:
+            return'recruit'
+
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldRowPanel([
@@ -312,6 +334,7 @@ class Position(models.Model):
             FieldPanel('term_from'),
             FieldPanel('term_to'),
         ]),
+        FieldPanel('approval_committee'),
         FieldRowPanel([
             FieldPanel('recruitment_start'),
             FieldPanel('recruitment_end'),
