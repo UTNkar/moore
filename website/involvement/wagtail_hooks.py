@@ -16,6 +16,7 @@ from utils.permissions import RulesPermissionHelper
 
 class TeamAdmin(ModelAdmin):
     model = Team
+    menu_label = _('Teams')
     menu_icon = 'group'
     menu_order = 100
     list_display = ('name_en', 'name_sv', 'email')
@@ -48,6 +49,7 @@ class TeamAdmin(ModelAdmin):
 
 class RoleAdmin(ModelAdmin):
     model = Role
+    menu_label = _('Roles')
     menu_icon = 'user'
     menu_order = 200
     list_display = ('team', 'name_en', 'name_sv', 'archived')
@@ -195,6 +197,7 @@ class PositionButtonHelper(ButtonHelper):
 
 class PositionAdmin(ModelAdmin):
     model = Position
+    menu_label = _('Positions')
     menu_icon = 'search'
     menu_order = 300
     list_display = ('role', 'appointments', 'term_from', 'term_to')
@@ -228,6 +231,7 @@ class PositionAdmin(ModelAdmin):
 
 class ApplicationAdmin(ModelAdmin):
     model = Application
+    menu_label = _('Applications')
     menu_icon = 'mail'
     menu_order = 400
     list_display = ('position', 'applicant', 'status')
