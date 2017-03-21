@@ -1,12 +1,13 @@
 from datetime import date
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
-from django.forms import inlineformset_factory, modelformset_factory
-from django.http import Http404
+from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from rules.contrib.views import permission_required
 
@@ -133,7 +134,14 @@ def admin_appoint(request, pos_id=None):
         form = AppointmentForm(position, request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            # TODO: Redirect
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                _('Your decisions have successfully been saved.'),
+            )
+            return HttpResponseRedirect(
+                reverse('involvement_position_modeladmin_index')
+            )
     else:
         form = AppointmentForm(position)
 
@@ -152,7 +160,7 @@ def admin_appoint(request, pos_id=None):
     return render(request, 'involvement/admin/position_appointment.html', context)
 
 
-@permission_required('involvement.elect_position', fn=get_position_by_pk)
+@permission_required('involvement.approve_position', fn=get_position_by_pk)
 def admin_approve_applicants(request, key):
     """
     Admin view to approve members for a position
@@ -173,7 +181,14 @@ def admin_approve_applicants(request, key):
                                 queryset=applications)
         if formset.is_valid():
             formset.save()
-            # TODO: redirect
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                _('Your decisions have successfully been saved.'),
+            )
+            return HttpResponseRedirect(
+                reverse('involvement_position_modeladmin_index')
+            )
     else:
         formset = formset_class(queryset=applications)
 

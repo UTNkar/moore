@@ -68,7 +68,6 @@ def is_approval_committee_member(user, position):
 
 @rules.predicate
 def appoint_state(user, position):
-    print(position.current_action())
     return position.current_action() == 'appoint'
 
 
