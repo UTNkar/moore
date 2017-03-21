@@ -189,4 +189,4 @@ def admin_approve_applicants(request, key):
         'position': position,
         'formset': formset,
     }
-    return render(request, 'involvement/admin/position_election.html', context)
+    return render(request, 'involvement/admin/position_approval.html', context)

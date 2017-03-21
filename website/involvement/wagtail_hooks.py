@@ -122,9 +122,9 @@ class PositionYearFilter(admin.SimpleListFilter):
 
 
 class PositionPermissionHelper(RulesPermissionHelper):
-    def user_can_elect_obj(self, user, obj):
+    def user_can_approve_obj(self, user, obj):
         opts = self.opts
-        codename = get_permission_codename('elect', opts)
+        codename = get_permission_codename('approve', opts)
         return user.has_perm('%s.%s' % (opts.app_label, codename), obj)
 
     def user_can_appoint_obj(self, user, obj):
@@ -134,7 +134,7 @@ class PositionPermissionHelper(RulesPermissionHelper):
 
 
 class PositionButtonHelper(ButtonHelper):
-    def elect_button(self, pk, classnames_add=None, classnames_exclude=None):
+    def approve_button(self, pk, classnames_add=None, classnames_exclude=None):
         if classnames_add is None:
             classnames_add = []
         if classnames_exclude is None:
@@ -142,10 +142,10 @@ class PositionButtonHelper(ButtonHelper):
         classnames = self.edit_button_classnames + classnames_add
         cn = self.finalise_classname(classnames, classnames_exclude)
         return {
-            'url': self.url_helper.get_action_url('elect', quote(pk)),
-            'label': _('Elect'),
+            'url': self.url_helper.get_action_url('approve', quote(pk)),
+            'label': _('Approve'),
             'classname': cn,
-            'title': _('Elect applicants for %s') % self.verbose_name,
+            'title': _('Approve applicants for %s') % self.verbose_name,
         }
 
     def appoint_button(self, pk, classnames_add=None, classnames_exclude=None):
@@ -174,9 +174,9 @@ class PositionButtonHelper(ButtonHelper):
         ph = self.permission_helper
         usr = self.request.user
         pk = quote(getattr(obj, self.opts.pk.attname))
-        if 'elect' not in exclude and ph.user_can_elect_obj(usr, obj):
+        if 'approve' not in exclude and ph.user_can_approve_obj(usr, obj):
             btns.append(
-                self.elect_button(
+                self.approve_button(
                     pk, classnames_add, classnames_exclude
                 )
             )

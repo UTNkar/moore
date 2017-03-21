@@ -14,7 +14,7 @@
 </style>
 {% endblock %}
 
-{% block form_action %}{% url 'involvement_position_modeladmin_elect' position.id %}{% endblock %}
+{% block form_action %}{% url 'involvement_position_modeladmin_approve' position.id %}{% endblock %}
 
 {% block form %}
 {% if formset.total_error_count != 0 %}
