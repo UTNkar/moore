@@ -11,7 +11,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from rules.contrib.views import permission_required
 
-from involvement.forms import ApplicationForm, ReferenceFormSet, ApprovalForm, \
+from involvement.forms import ApplicationForm, ReferenceFormSet, ApprovalForm,\
     AppointmentForm
 from involvement.models import Position, Team, Application
 
@@ -157,7 +157,8 @@ def admin_appoint(request, pos_id=None):
         'position': position,
         'form': form,
     }
-    return render(request, 'involvement/admin/position_appointment.html', context)
+    return render(request, 'involvement/admin/position_appointment.html',
+                  context)
 
 
 @permission_required('involvement.approve_position', fn=get_position_by_pk)

@@ -5,7 +5,7 @@ from django.contrib.admin.utils import quote
 from django.contrib.auth import get_permission_codename
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from wagtail.contrib.modeladmin.helpers import ButtonHelper, AdminURLHelper
+from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 
