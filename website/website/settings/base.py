@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'taggit',
     'compressor',
     'rules.apps.AutodiscoverRulesConfig',
+    'simple_email_confirmation',
 
     'django.contrib.admin',  # Used for wagtail admin filters
     'django.contrib.auth',
