@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'wagtail.contrib.settings',
     'wagtail.contrib.modeladmin',
     "wagtail.contrib.wagtailroutablepage",
-    "wagtail.contrib.wagtailstyleguide",
 
     'modelcluster',
     'taggit',
