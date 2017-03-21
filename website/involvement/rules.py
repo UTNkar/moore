@@ -99,7 +99,7 @@ rules.add_perm('involvement.delete_role', is_admin)
 rules.add_perm('involvement.list_position', is_admin | is_official)
 rules.add_perm('involvement.add_position', is_admin | is_official)
 rules.add_perm('involvement.change_position', is_admin | is_position_official)
-rules.add_perm('involvement.elect_position', is_admin
+rules.add_perm('involvement.approve_position', is_admin
                | (is_approval_committee_member & approve_state))
 rules.add_perm('involvement.appoint_position', is_admin
                | (is_position_official & appoint_state))
