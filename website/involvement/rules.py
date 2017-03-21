@@ -53,6 +53,25 @@ def before_recruitment_start(user, position):
     return date.today() < position.recruitment_start
 
 
+@rules.predicate
+def approve_state(user, position):
+    return position.current_action() == 'approve'
+
+
+@rules.predicate
+def is_approval_committee_member(user, position):
+    if position.approval_committee is None:
+        return False
+    else:
+        return position.approval_committee in user.groups.all()
+
+
+@rules.predicate
+def appoint_state(user, position):
+    print(position.current_action())
+    return position.current_action() == 'appoint'
+
+
 # Application Predicates
 @rules.predicate
 def is_applicant(user, application):
@@ -80,9 +99,10 @@ rules.add_perm('involvement.delete_role', is_admin)
 rules.add_perm('involvement.list_position', is_admin | is_official)
 rules.add_perm('involvement.add_position', is_admin | is_official)
 rules.add_perm('involvement.change_position', is_admin | is_position_official)
-rules.add_perm('involvement.elect_position', is_admin)  # TODO: Implement
+rules.add_perm('involvement.elect_position', is_admin
+               | (is_approval_committee_member & approve_state))
 rules.add_perm('involvement.appoint_position', is_admin
-               | is_position_official)  # TODO: Add position status/date
+               | (is_position_official & appoint_state))
 rules.add_perm('involvement.delete_position', is_admin
                | (is_position_official & before_recruitment_start))
 
