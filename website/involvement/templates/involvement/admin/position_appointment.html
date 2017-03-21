@@ -17,17 +17,20 @@
 {% block form_action %}{% url 'involvement_position_modeladmin_appoint' position.id %}{% endblock %}
 
 {% block form %}
-{% if form.errors %}
+{% if position.current_action != 'appoint' %}
 <div class="help-block help-warning">
-    <div class="alert alert-danger" role="alert">
-        <ul>
-        {% for field, errors in form.errors.items %}
-            {% for error in errors %}
-                <li>{{ error }}</li>
-            {% endfor %}
+        <p>{% trans 'This position is currently not in the appointment stage. Use this form carefully!' %}</p>
+</div>
+{% endif %}
+{% if form.errors %}
+<div class="help-block help-critical">
+    <ul>
+    {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+            <li>{{ error }}</li>
         {% endfor %}
-        </ul>
-    </div>
+    {% endfor %}
+    </ul>
 </div>
 {% endif %}
 <ul class="objects">
