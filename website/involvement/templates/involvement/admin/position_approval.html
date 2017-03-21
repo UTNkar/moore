@@ -17,19 +17,22 @@
 {% block form_action %}{% url 'involvement_position_modeladmin_approve' position.id %}{% endblock %}
 
 {% block form %}
-{% if formset.total_error_count != 0 %}
+{% if position.current_action != 'approve' %}
 <div class="help-block help-warning">
-    <div class="alert alert-danger" role="alert">
-        <ul>
-        {% for form in formset %}
-            {% for field, errors in form.errors.items %}
-                {% for error in errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
+        <p>{% trans 'This position is currently not in the approval stage. Use this form carefully!' %}</p>
+</div>
+{% endif %}
+{% if formset.total_error_count != 0 %}
+<div class="help-block help-critical">
+    <ul>
+    {% for form in formset %}
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <li>{{ error }}</li>
             {% endfor %}
         {% endfor %}
-        </ul>
-    </div>
+    {% endfor %}
+    </ul>
 </div>
 {% endif %}
 {{ formset.management_form }}
