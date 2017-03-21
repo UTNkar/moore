@@ -5,5 +5,6 @@ wagtail>=1.9,<1.10
 django-compressor==2.1.1
 django-libsass==0.7
 
-# Permissions
+# User management
 rules==1.2.0
+django-simple-email-confirmation==0.21
