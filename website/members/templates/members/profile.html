@@ -76,10 +76,10 @@ $('#account-settings').dirrty().on('dirty', function(){
 
                 <div class="col-sm-6">
                     <div class="form-group">
-                        {% if form.new_email.errors %}<div style="color: red;">{% endif %}
-                        {{ form.new_email.label_tag }}
-                        {% if form.new_email.errors %}</div>{% endif %}
-                        {{ form.new_email }}
+                        {% if form.email.errors %}<div style="color: red;">{% endif %}
+                        {{ form.email.label_tag }}
+                        {% if form.email.errors %}</div>{% endif %}
+                        {{ form.email }}
                     </div><!-- /.form-group -->
                 </div><!-- /.col-* -->
             </div>

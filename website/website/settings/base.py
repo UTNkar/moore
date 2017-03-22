@@ -189,15 +189,14 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.BCryptPasswordHasher',
 ]
 
+# Email address used to send errors.
+# https://docs.djangoproject.com/en/1.10/ref/settings/#server-email
+SERVER_EMAIL = 'moore@utn.se'
+
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "Uppsala teknolog- och naturvetarkår"
 WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
-
-# Base URL to use when referring to full URLs within the Wagtail admin
-# backend - e.g. in notification emails. Don't include '/admin' or a
-# trailing slash
-BASE_URL = 'http://utn.se'
 
 WAGTAIL_USER_EDIT_FORM = 'members.forms.CustomUserEditForm'
 WAGTAIL_USER_CREATION_FORM = 'members.forms.CustomUserCreationForm'

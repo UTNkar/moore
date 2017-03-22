@@ -1,6 +1,8 @@
 from django.conf.urls import url, include
+from django.views.generic import CreateView
 
 from members import views
+from members.forms import RegistrationForm
 
 urlpatterns = [
     url(r'^profile/$', views.profile, name='profile'),
@@ -9,6 +11,11 @@ urlpatterns = [
         views.email_change_confirm,
         name='email_change_confirm'
     ),
+    url('^register/', CreateView.as_view(
+        template_name='members/register.html',
+        form_class=RegistrationForm,
+        success_url='/accounts/login/'
+    ), name='register'),
 
     # Views given by django auth library
     url(r'', include('django.contrib.auth.urls')),

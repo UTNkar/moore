@@ -27,11 +27,17 @@ DATABASES = {
     }
 }
 
+# Base URL to use when referring to full URLs within the Wagtail admin
+# backend - e.g. in notification emails. Don't include '/admin' or a
+# trailing slash
+BASE_URL = 'http://127.0.0.1:8000'
+
 # E-mail
 # https://docs.djangoproject.com/en/1.10/ref/settings/#email-backend
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+DEFAULT_FROM_EMAIL = 'info@localhost'
 
 try:
     from .local import *

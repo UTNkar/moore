@@ -2,7 +2,7 @@
 {% blocktrans %}You're receiving this email because you registered a new e-mail address for your UTN-account.{% endblocktrans %}
 
 {% trans "Please go to the following page to confirm your e-mail address:" %}
-{% block reset_link %}
-{{ protocol }}://{{ domain }}{% url 'email_change_confirm' token=token %}
+{% block confirmation_link %}
+{{ domain }}{% url 'email_change_confirm' token=token %}
 {% endblock %}
 {% endautoescape %}
