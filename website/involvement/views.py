@@ -11,7 +11,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from rules.contrib.views import permission_required
 
-from involvement.forms import ApplicationForm, ReferenceFormSet, ApprovalForm,\
+from involvement.forms import ApplicationForm, ReferenceFormSet, ApprovalForm, \
     AppointmentForm
 from involvement.models import Position, Team, Application
 
@@ -38,20 +38,27 @@ def my_applications(request, context):
             appl_id = request.POST.get('application')
             appl = Application.objects.get(id=appl_id)
             if appl.applicant != request.user:
-                context['error'] = _('You cannot delete an application that '
-                                     'is not yours!')
+                messages.add_message(request, messages.ERROR,
+                                     _('You cannot delete an application that '
+                                       'is not yours!'))
             elif appl.position.recruitment_end < date.today():
-                context['error'] = _('You cannot delete an application after '
-                                     'its deadline has passed!')
+                messages.add_message(request, messages.ERROR,
+                                     _('You cannot delete an application '
+                                       'after its deadline has passed!'))
             else:
                 if action == 'delete':
                     appl.delete()
-                    context['message'] = _('Your application has been '
-                                           'removed!')
+                    messages.add_message(
+                        request,
+                        messages.SUCCESS,
+                        _('Your application has been removed!')
+                    )
                 else:
-                    context['error'] = _('No action has been supplied!')
+                    messages.add_message(request, messages.ERROR,
+                                         _('No action has been supplied!'))
         except ObjectDoesNotExist:
-            context['error'] = _('This application does not exist!')
+            messages.add_message(request, messages.ERROR,
+                                 _('This application does not exist!'))
 
     applications = Application.objects.filter(applicant=request.user).order_by(
         'position__recruitment_end'

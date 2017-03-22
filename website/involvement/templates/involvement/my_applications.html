@@ -3,16 +3,7 @@
 
 {% block involvement_content %}
     <div class="container push-top-bottom">
-        {% if error %}
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
-            </div>
-        {% endif %}
-        {% if message %}
-            <div class="alert alert-success" role="alert">
-                {{ message }}
-            </div>
-        {% endif %}
+        {% include 'partial/messages.html' %}
         {% if drafts %}
         <div class="page-header"><h2>{% trans 'drafted applications'|title %}</h2></div>
         {% for a in drafts %}
