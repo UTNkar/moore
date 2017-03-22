@@ -16,7 +16,7 @@ def profile(request):
     if request.POST:
         form = MemberForm(request.POST, instance=request.user)
         if form.is_valid():
-            form.save(request)
+            form.save()
             messages.add_message(request, messages.SUCCESS,
                                  _('Your account settings have been saved.'))
     else:
