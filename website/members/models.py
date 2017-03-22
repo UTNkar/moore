@@ -133,3 +133,10 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         else:
             return '%s-%s' % (self.birthday.strftime('%Y%m%d'),
                               self.person_number_ext)
+
+    def remove_old_email(self):
+        for email in self.get_unconfirmed_emails() or []:
+            self.remove_email(email)
+        for email in self.get_confirmed_emails():
+            if email != self.email:
+                self.remove_email(email)

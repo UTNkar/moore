@@ -28,11 +28,7 @@ $('#account-settings').dirrty().on('dirty', function(){
             </ul>
         </div>
     {% endif %}
-    {% if saved %}
-        <div class="alert alert-success" role="alert">
-            {% trans 'Your account settings have been saved.' %}
-        </div>
-    {% endif %}
+    {% include 'partial/messages.html' %}
     <form method="post" action="{% url 'profile' %}" id="account-settings">
         {% csrf_token %}
 
@@ -80,8 +76,10 @@ $('#account-settings').dirrty().on('dirty', function(){
 
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="email">{% trans 'e-mail' %}</label>
-                        <input id="email" class="form-control" type="text" placeholder="{{ request.user.email }}" readonly>
+                        {% if form.new_email.errors %}<div style="color: red;">{% endif %}
+                        {{ form.new_email.label_tag }}
+                        {% if form.new_email.errors %}</div>{% endif %}
+                        {{ form.new_email }}
                     </div><!-- /.form-group -->
                 </div><!-- /.col-* -->
             </div>
