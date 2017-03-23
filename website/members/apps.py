@@ -7,4 +7,4 @@ class MembersConfig(AppConfig):
     verbose_name = _('UTN Member Management')
 
     def ready(self):
-        import members.signals #noqa
+        import members.signals  # noqa
