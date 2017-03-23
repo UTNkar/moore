@@ -11,8 +11,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from rules.contrib.views import permission_required
 
-from involvement.forms import ApplicationForm, ReferenceFormSet, ApprovalForm, \
-    AppointmentForm
+from involvement import forms
 from involvement.models import Position, Team, Application
 
 
@@ -101,10 +100,11 @@ def view_position(request, context, page, position=None):
             context['status'] = 'draft'
         # Did the user already fill in the form?
         if request.method == 'POST' and not context['position'].is_past_due:
-            context['form'] = ApplicationForm(request.POST, instance=appl)
-            context['reference_forms'] = ReferenceFormSet(request.POST,
-                                                          request.FILES,
-                                                          instance=appl)
+            context['form'] = forms.ApplicationForm(request.POST,
+                                                    instance=appl)
+            context['reference_forms'] = forms.ReferenceFormSet(request.POST,
+                                                                request.FILES,
+                                                                instance=appl)
             if context['form'].is_valid() \
                     and context['reference_forms'].is_valid():
                 appl = context['form'].save(commit=False)
@@ -120,8 +120,8 @@ def view_position(request, context, page, position=None):
                 return render(request, 'involvement/position.html', context)
 
         # Render fresh: empty or after saving draft.
-        context['form'] = ApplicationForm(instance=appl)
-        context['reference_forms'] = ReferenceFormSet(instance=appl)
+        context['form'] = forms.ApplicationForm(instance=appl)
+        context['reference_forms'] = forms.ReferenceFormSet(instance=appl)
 
     return render(request, 'involvement/position.html', context)
 
@@ -138,7 +138,7 @@ def admin_appoint(request, pos_id=None):
     position = get_object_or_404(Position, pk=pos_id)
 
     if request.method == 'POST':
-        form = AppointmentForm(position, request.POST, request.FILES)
+        form = forms.AppointmentForm(position, request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.add_message(
@@ -150,7 +150,7 @@ def admin_appoint(request, pos_id=None):
                 reverse('involvement_position_modeladmin_index')
             )
     else:
-        form = AppointmentForm(position)
+        form = forms.AppointmentForm(position)
 
     view = {
         'get_meta_title': 'Appoint applicants',
@@ -180,7 +180,7 @@ def admin_approve_applicants(request, key):
 
     formset_class = modelformset_factory(
         Application,
-        form=ApprovalForm,
+        form=forms.ApprovalForm,
         can_delete=False,
         extra=0,
     )
