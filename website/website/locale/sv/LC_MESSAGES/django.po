@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-13 15:40+0100\n"
-"PO-Revision-Date: 2017-03-10 17:38+0100\n"
+"POT-Creation-Date: 2017-03-23 13:31+0100\n"
+"PO-Revision-Date: 2017-03-23 14:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -31,45 +31,45 @@ msgstr "Ditt användarnamn på Twitter, utan @"
 
 #: models.py:33
 msgid "logos"
-msgstr ""
+msgstr "logotyper"
 
 #: models.py:36
 msgid "Committee"
-msgstr ""
+msgstr "Kommittée"
 
 #: models.py:37
 msgid "Section"
-msgstr ""
+msgstr "Sektion"
 
 #: models.py:43
 msgid "category"
-msgstr ""
+msgstr "kategori"
 
 #: models.py:49
 msgid "links to"
-msgstr ""
+msgstr "länkar till"
 
 #: models.py:56
 msgid "logo"
-msgstr ""
+msgstr "logotyp"
 
 #: models.py:65
 msgid "white logo"
-msgstr ""
+msgstr "Vit logotyp"
 
 #: models.py:74
 msgid "black logo"
-msgstr ""
+msgstr "svart logotyp"
 
 #: models.py:83
 msgid "belongs to"
-msgstr ""
+msgstr "Tillhör"
 
-#: settings/base.py:113
+#: settings/base.py:114
 msgid "English"
 msgstr "engelska"
 
-#: settings/base.py:114
+#: settings/base.py:115
 msgid "Swedish"
 msgstr "svenska"
 
@@ -89,11 +89,11 @@ msgstr "Sidan kunde inte hittas"
 msgid "Internal server error"
 msgstr "Internal server error"
 
-#: templates/base.html:33 templates/empty.html:5
+#: templates/base.html:33
 msgid "Uppsala Union of Engineering and Science Students"
 msgstr "Uppsala teknolog- och naturvetarkår"
 
-#: templates/base.html:52 templates/empty.html:19
+#: templates/base.html:52 templates/empty.html:17
 msgid "The UTN Logo"
 msgstr "UTN-loggan"
 
@@ -117,7 +117,7 @@ msgstr "Följ oss på sociala medier:"
 msgid "Developed using"
 msgstr "Sidan är under utveckling"
 
-#: templates/empty.html:12 templates/error.html:16
+#: templates/empty.html:10 templates/error.html:16
 msgid "Return Home"
 msgstr "Gå tillbaka till startsidan"
 
@@ -135,11 +135,11 @@ msgstr "Startsida"
 
 #: templates/tags/organisation_menu.html:11
 msgid "sections"
-msgstr ""
+msgstr "sektioner"
 
 #: templates/tags/organisation_menu.html:26
 msgid "committees"
-msgstr ""
+msgstr "Kommittéer"
 
 #: templates/wagtailadmin/home.html:4
 msgid "Welcome UTN website administrators!"
