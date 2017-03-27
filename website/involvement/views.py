@@ -113,6 +113,11 @@ def view_position(request, context, page, position=None):
                 appl.save()
                 context['reference_forms'].save()
                 if not appl.status == 'draft':
+                    messages.add_message(
+                        request,
+                        messages.SUCCESS,
+                        _('Your application has been submitted!'),
+                    )
                     return HttpResponseRedirect(
                         page.url + page.reverse_subpage('my_applications')
                     )
