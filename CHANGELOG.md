@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - Creating and editing positions is now sensitive to access rights.
-
+### Fixed
+- Editing and creation rights in recruitment for officials
 
 ## [0.1.0] - 2017-03-27
 ### Added

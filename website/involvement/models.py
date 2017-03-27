@@ -166,7 +166,7 @@ class Team(models.Model):
     ])]
 
 
-def official_for(user, pk=True):
+def official_for(user, pk=False):
     # TODO : Is this efficient?
     applications = Application.objects.filter(
         applicant=user,
