@@ -8,9 +8,9 @@
 <script type="text/javascript" src="{% static 'libraries/dirrty/jquery.dirrty.js' %}"></script>
 <script type="text/javascript">
 $('#application-form').dirrty().on('dirty', function(){
-    $('.btn').removeClass('disabled');
+    $('#submit').removeClass('disabled');
 }).on('clean', function(){
-    $('.btn').addClass('disabled');
+    $('#submit').addClass('disabled');
 });
 </script>
 {% endblock %}

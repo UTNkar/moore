@@ -108,9 +108,11 @@
     {% if not position.is_past_due %}
     <div class="text-right">
         {% if status == 'draft' %}
-        <button name="{{ form.status.name }}" type="submit" class="save btn btn-large disabled" value="draft">{% trans 'save as draft' %}</button>
+        <button id="submit" name="{{ form.status.name }}" type="submit" class="save btn btn-large disabled" value="draft">{% trans 'save as draft' %}</button>
+        <button name="{{ form.status.name }}" type="submit" class="save btn btn-large btn-primary" value="submitted">{% trans 'apply' %}</button>
+        {% else %}
+        <button name="{{ form.status.name }}" type="submit" class="save btn btn-large btn-primary disabled" value="submitted" id="submit">{% trans 'update' %}</button>
         {% endif %}
-        <button name="{{ form.status.name }}" type="submit" class="save btn btn-large btn-primary disabled" value="submitted">{% if status == 'draft' %}{% trans 'apply' %}{% else %}{% trans 'update' %}{% endif %}</button>
     </div><!-- /.center -->
     {% endif %}
 </form>
