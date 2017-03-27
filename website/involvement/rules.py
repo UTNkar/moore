@@ -2,7 +2,7 @@ from datetime import date
 
 import rules
 
-from involvement.models import Application
+from involvement.models import official_for
 
 
 # General Predicates
@@ -13,30 +13,16 @@ def is_admin(user):
 
 @rules.predicate
 def is_official(user):
-    return Application.objects.filter(
-        applicant=user,
-        status='appointed',
-        position__term_from__lte=date.today(),
-        position__term_to__gte=date.today(),
-        position__role__official=True,
-        position__role__team_id__isnull=False,
-    ).exists()
+    return len(official_for(user)) > 0
 
 
 # Team Permissions
 @rules.predicate
 def is_team_official(user, team):
-    return Application.objects.filter(
-        applicant=user,
-        status='appointed',
-        position__term_from__lte=date.today(),
-        position__term_to__gte=date.today(),
-        position__role__official=True,
-        position__role__team=team,
-    ).exists()
+    return team in official_for(user)
 
 
-# role Predicates
+# Role Predicates
 @rules.predicate
 def is_role_official(user, role):
     return is_team_official(user, role.team)

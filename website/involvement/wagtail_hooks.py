@@ -8,8 +8,9 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
+from wagtail.contrib.modeladmin.views import CreateView, EditView
 
-from involvement.models import Team, Role, Position, Application
+from involvement.models import Team, Role, Position, Application, official_for
 from involvement.rules import is_admin
 from utils.permissions import RulesPermissionHelper
 
@@ -28,18 +29,7 @@ class TeamAdmin(ModelAdmin):
         if is_admin(request.user):
             return super(TeamAdmin, self).get_queryset(request)
         else:
-            # TODO : Is this efficient?
-            applications = Application.objects.filter(
-                applicant=request.user,
-                status='appointed',
-                position__term_from__lte=date.today(),
-                position__term_to__gte=date.today(),
-                position__role__official=True,
-                position__role__team_id__isnull=False,
-            ).select_related('position__role__team')
-            teams = []
-            for i in applications:
-                teams.append(i.position.role.team.id)
+            teams = official_for(request.user)
             qs = Team.objects.filter(id__in=teams)
             ordering = self.get_ordering(request)
             if ordering:
@@ -64,18 +54,7 @@ class RoleAdmin(ModelAdmin):
         if is_admin(request.user):
             return super(RoleAdmin, self).get_queryset(request)
         else:
-            # TODO : Is this efficient?
-            applications = Application.objects.filter(
-                applicant=request.user,
-                status='appointed',
-                position__term_from__lte=date.today(),
-                position__term_to__gte=date.today(),
-                position__role__official=True,
-                position__role__team_id__isnull=False,
-            ).select_related('position__role__team')
-            teams = []
-            for i in applications:
-                teams.append(i.position.role.team)
+            teams = official_for(request.user)
             qs = Role.objects.filter(team__in=teams)
             ordering = self.get_ordering(request)
             if ordering:
@@ -195,6 +174,40 @@ class PositionButtonHelper(ButtonHelper):
         return btns
 
 
+class PositionCreateView(CreateView):
+    def get_form(self, form_class=None):
+        form = super(PositionCreateView, self).get_form(form_class=form_class)
+        queryset = form.fields['role'].queryset
+        queryset = queryset.filter(
+            archived=False
+        )
+        if not is_admin(self.request.user):
+            teams = official_for(self.request.user)
+            queryset = queryset.filter(
+                team__in=teams
+            )
+        form.fields['role'].queryset = queryset
+        return form
+
+
+class PositionEditView(EditView):
+    def get_form(self, form_class=None):
+        form = super(PositionEditView, self).get_form(form_class=form_class)
+        queryset = form.fields['role'].queryset
+        init = Role.objects.get(pk=form.initial['role'])
+        if not init.archived:
+            queryset = queryset.filter(
+                archived=False
+            )
+        if not is_admin(self.request.user):
+            teams = official_for(self.request.user)
+            queryset = queryset.filter(
+                team__in=teams
+            )
+        form.fields['role'].queryset = queryset
+        return form
+
+
 class PositionAdmin(ModelAdmin):
     model = Position
     menu_label = _('Positions')
@@ -205,23 +218,14 @@ class PositionAdmin(ModelAdmin):
     list_filter = ('role__team', PositionYearFilter)
     permission_helper_class = PositionPermissionHelper
     button_helper_class = PositionButtonHelper
+    create_view_class = PositionCreateView
+    edit_view_class = PositionEditView
 
     def get_queryset(self, request):
         if is_admin(request.user):
             return super(PositionAdmin, self).get_queryset(request)
         else:
-            # TODO : Is this efficient?
-            applications = Application.objects.filter(
-                applicant=request.user,
-                status='appointed',
-                position__term_from__lte=date.today(),
-                position__term_to__gte=date.today(),
-                position__role__official=True,
-                position__role__team_id__isnull=False,
-            ).select_related('position__role__team')
-            teams = []
-            for i in applications:
-                teams.append(i.position.role.team)
+            teams = official_for(request.user)
             qs = Position.objects.filter(role__team__in=teams)
             ordering = self.get_ordering(request)
             if ordering:
