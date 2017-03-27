@@ -29,7 +29,7 @@ class TeamAdmin(ModelAdmin):
         if is_admin(request.user):
             return super(TeamAdmin, self).get_queryset(request)
         else:
-            teams = official_for(request.user)
+            teams = official_for(request.user, pk=True)
             qs = Team.objects.filter(id__in=teams)
             ordering = self.get_ordering(request)
             if ordering:
