@@ -166,6 +166,26 @@ class Team(models.Model):
     ])]
 
 
+def official_for(user, pk=True):
+    # TODO : Is this efficient?
+    applications = Application.objects.filter(
+        applicant=user,
+        status='appointed',
+        position__term_from__lte=date.today(),
+        position__term_to__gte=date.today(),
+        position__role__official=True,
+        position__role__team_id__isnull=False,
+    ).select_related('position__role__team')
+    teams = []
+    for i in applications:
+        if pk:
+            teams.append(i.position.role.team.pk)
+        else:
+            teams.append(i.position.role.team)
+
+    return teams
+
+
 class Role(models.Model):
     """
     This class represents a role within a team or UTN
@@ -313,16 +333,16 @@ class Position(models.Model):
     def current_action(self) -> str:
         if self.is_past_due:
             applications = self.applications.exclude(status='draft')
-            if applications.all().filter(status='submitted').exists()\
+            if applications.all().filter(status='submitted').exists() \
                     and self.approval_committee is not None:
                 return 'approve'
-            elif applications.all().filter(status='appointed')\
+            elif applications.all().filter(status='appointed') \
                     .count() >= self.appointments:
                 return 'done'
             else:
                 return 'appoint'
         else:
-            return'recruit'
+            return 'recruit'
 
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
