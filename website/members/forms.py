@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 from django import forms
 from django.contrib.auth import forms as auth
@@ -51,9 +51,9 @@ class MemberForm(forms.ModelForm):
 
     def save(self, commit=True):
         person_number = self.cleaned_data['person_number']
-        self.instance.birthday = '%s-%s-%s' % (
-            person_number[:4], person_number[4:6], person_number[6:8]
-        )
+        self.instance.birthday = datetime.strptime(
+            person_number[:8], "%Y%m%d"
+        ).date()
         self.instance.person_number_ext = person_number[-4:]
 
         email = self.cleaned_data['email']
