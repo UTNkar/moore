@@ -61,6 +61,10 @@ LOGGING_CONFIG = None
 #
 # SESSION_COOKIE_SECURE = True
 
+# Membership API
+MEMBERSHIP_API_USER = 'moore'
+MEMBERSHIP_API_PASSWORD = os.environ.get('MEMBERSHIP_API_PASSWORD')
+
 try:
     from .local import *
 except ImportError:

@@ -39,6 +39,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 DEFAULT_FROM_EMAIL = 'info@localhost'
 
+# Membership API
+MEMBERSHIP_API_USER = 'test'
+MEMBERSHIP_API_PASSWORD = 'test'
+
 try:
     from .local import *
 except ImportError:
