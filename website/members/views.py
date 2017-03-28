@@ -22,6 +22,12 @@ def profile(request):
     else:
         form = MemberForm(instance=request.user)
 
+    if len(request.user.get_unconfirmed_emails()) > 0:
+        messages.add_message(
+            request, messages.WARNING,
+            _('Your newly set e-mail address has not yet been confirmed')
+        )
+
     return render(request, 'members/profile.html', {
         'page': page,
         'form': form,
