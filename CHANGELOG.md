@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Notification on unconfirmed e-mail addresses
 ### Changed
 - Creating and editing positions is now sensitive to access rights.
 ### Fixed
