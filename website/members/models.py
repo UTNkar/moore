@@ -1,8 +1,11 @@
+import requests
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core import validators
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from requests.auth import HTTPDigestAuth
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 
 from utils.translation import TranslatedField
@@ -156,6 +159,31 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         else:
             return '%s-%s' % (self.birthday.strftime('%Y%m%d'),
                               self.person_number_ext)
+
+    def update_status(self):
+        r = requests.get(
+            'https://register.utn.se/api.php',
+            auth=HTTPDigestAuth(settings.MEMBERSHIP_API_USER,
+                                settings.MEMBERSHIP_API_PASSWORD),
+            params={
+                'action': 'check',
+                'person_number': self.person_number().replace('-', '')
+            },
+        )
+        try:
+            data = r.json().get('status')
+        except ValueError:
+            return
+
+        if data == 'member':
+            self.status = 'member'
+        elif data == 'nonmember':
+            if self.status in ['unknown', 'nonmember']:
+                self.status = 'nonmember'
+            else:
+                self.status = 'alumnus'
+
+        self.status_changed = timezone.now()
 
     def remove_old_email(self):
         for email in self.get_unconfirmed_emails() or []:
