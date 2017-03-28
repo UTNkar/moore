@@ -79,6 +79,7 @@ class RegistrationForm(MemberForm, auth.UserCreationForm):
             'registration_year': forms.Select(
                 attrs={'class': 'form-control'},
                 choices=[('', '---------')] + [
+                    # TODO: __str__()??
                     (y, y)
                     for y in
                     range(date.today().year, date.today().year - 50, -1)
@@ -102,23 +103,29 @@ class CustomUserEditForm(wagtail.UserEditForm):
     """
     Custom form to edit users from within the wagtail admin interface.
     """
+    # TODO: Person number
     birthday = forms.DateField(required=True, label=_('Birthday'))
     person_number_ext = forms.CharField(
         required=True,
-        label=_('Person number extension')
+        label=_('Person number extension'),
     )
     phone_number = forms.CharField(
         required=False,
-        label=_('Phone number')
+        label=_('Phone number'),
     )
     registration_year = forms.CharField(
         required=False,
-        label=_('Registration year')
+        label=_('Registration year'),
     )
     study = forms.ModelChoiceField(
         required=False,
         queryset=StudyProgram.objects,
-        label=_("Study Program")
+        label=_("Study Program"),
+    )
+    status = forms.ChoiceField(
+        required=False,
+        choices=Member.MEMBERSHIP_CHOICES,
+        label=_("Membership status"),
     )
 
 
@@ -126,21 +133,27 @@ class CustomUserCreationForm(wagtail.UserCreationForm):
     """
     Custom form to create user from within the Wagtail admin user interface.
     """
+    # TODO: Person number
     birthday = forms.DateField(required=True, label=_('Birthday'))
     person_number_ext = forms.CharField(
         required=True,
-        label=_('Person number extension')
+        label=_('Person number extension'),
     )
     phone_number = forms.CharField(
         required=False,
-        label=_('Phone number')
+        label=_('Phone number'),
     )
     registration_year = forms.CharField(
         required=False,
-        label=_('Registration year')
+        label=_('Registration year'),
     )
     study = forms.ModelChoiceField(
         required=False,
         queryset=StudyProgram.objects,
-        label=_("Study Program")
+        label=_("Study Program"),
+    )
+    status = forms.ChoiceField(
+        required=False,
+        choices=Member.MEMBERSHIP_CHOICES,
+        label=_("Membership status"),
     )

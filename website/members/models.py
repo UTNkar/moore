@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.core import validators
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 
@@ -89,6 +90,28 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         unique_for_date="birthday",
         null=True,
         blank=True,
+    )
+
+    # ---- Membership information ------
+
+    MEMBERSHIP_CHOICES = (
+        ('unknown', _('Unknown')),
+        ('nonmember', _('Nonmember')),
+        ('member', _('Member')),
+        ('alumnus', _('Alumnus')),
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=MEMBERSHIP_CHOICES,
+        verbose_name=_('Membership status'),
+        blank=False,
+        null=False,
+        default='unknown'
+    )
+    status_changed = models.DateTimeField(
+        default=timezone.now,
+        null=False,
     )
 
     # ---- Contact information ------
