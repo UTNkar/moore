@@ -1,5 +1,5 @@
 {% load wagtailimages_tags %}
-<div class="logo">
+<div class="logo"><a href="{{ logo.link }}">
     {% if color == 'white' and logo.logo_white %}
         {% image logo.logo_white height-30 %}
     {% elif color == 'black' and logo.logo_black %}
@@ -7,4 +7,4 @@
     {% else %}
         {% image logo.logo height-30 %}
     {% endif %}
-</div>
+</a></div>
