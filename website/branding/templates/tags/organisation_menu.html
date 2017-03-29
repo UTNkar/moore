@@ -13,12 +13,18 @@
                     <div class="right-side">
                 {% endif %}
                 {% include 'tags/organisation_logo.html' with logo=committee %}
+            {% empty %}
+                </div>
+                <div class="switch">
+                    <a id="section-switch" href="#"><h4>{% trans 'sections'|title %}</h4></a>
+                </div>
+                <div class="right-side">
             {% endfor %}
             </div>
         </div>
         <div class="sections row">
             {% widthratio sections|length 2 1 as sec_center %}
-            <div class="left-side col-md-7">
+            <div class="left-side">
             {% for section in sections %}
                 {% if forloop.counter0|slugify == sec_center %}
                     </div>
@@ -28,6 +34,12 @@
                     <div class="right-side">
                 {% endif %}
                 {% include 'tags/organisation_logo.html' with logo=section %}
+            {% empty %}
+                </div>
+                <div class="switch">
+                    <a id="committee-switch" href="#"><h4>{% trans 'committees'|title %}</h4></a>
+                </div>
+                <div class="right-side">
             {% endfor %}
             </div>
         </div>
