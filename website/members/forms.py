@@ -42,12 +42,11 @@ class MemberForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         instance = kwargs.get('instance', None)
 
+        initial = kwargs.pop('initial', {})
         if instance is not None:
-            kwargs.update(initial={
-                'person_number': instance.person_number(),
-            })
+            initial['person_number'] = instance.person_number()
 
-        super(MemberForm, self).__init__(*args, **kwargs)
+        super(MemberForm, self).__init__(initial=initial, *args, **kwargs)
 
     def save(self, commit=True):
         person_number = self.cleaned_data['person_number']
@@ -83,7 +82,7 @@ class RegistrationForm(MemberForm, auth.UserCreationForm):
                     (y, y)
                     for y in
                     range(date.today().year, date.today().year - 50, -1)
-                    ]
+                ]
             ),
             'study': forms.Select(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
@@ -128,6 +127,9 @@ class CustomUserEditForm(wagtail.UserEditForm):
         label=_("Membership status"),
     )
 
+    def __init__(self, *args, **kwargs):
+        super(CustomUserEditForm, self).__init__(*args, **kwargs)
+
 
 class CustomUserCreationForm(wagtail.UserCreationForm):
     """
@@ -157,3 +159,6 @@ class CustomUserCreationForm(wagtail.UserCreationForm):
         choices=Member.MEMBERSHIP_CHOICES,
         label=_("Membership status"),
     )
+
+    def __init__(self, *args, **kwargs):
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)

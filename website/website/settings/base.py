@@ -202,4 +202,4 @@ WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
 WAGTAIL_USER_EDIT_FORM = 'members.forms.CustomUserEditForm'
 WAGTAIL_USER_CREATION_FORM = 'members.forms.CustomUserCreationForm'
 WAGTAIL_USER_CUSTOM_FIELDS = ['birthday', 'person_number_ext', 'phone_number',
-                              'registration_year', 'study']
+                              'registration_year', 'study', 'status']
