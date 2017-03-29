@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'compressor',
     'rules.apps.AutodiscoverRulesConfig',
     'simple_email_confirmation',
+    'kronos',
 
     'django.contrib.admin',  # Used for wagtail admin filters
     'django.contrib.auth',

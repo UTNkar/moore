@@ -160,20 +160,21 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             return '%s-%s' % (self.birthday.strftime('%Y%m%d'),
                               self.person_number_ext)
 
-    def update_status(self):
-        r = requests.get(
-            'https://register.utn.se/api.php',
-            auth=HTTPDigestAuth(settings.MEMBERSHIP_API_USER,
-                                settings.MEMBERSHIP_API_PASSWORD),
-            params={
-                'action': 'check',
-                'person_number': self.person_number().replace('-', '')
-            },
-        )
-        try:
-            data = r.json().get('status')
-        except ValueError:
-            return
+    def update_status(self, data=None):
+        if data is None:
+            r = requests.get(
+                'https://register.utn.se/api.php',
+                auth=HTTPDigestAuth(settings.MEMBERSHIP_API_USER,
+                                    settings.MEMBERSHIP_API_PASSWORD),
+                params={
+                    'action': 'check',
+                    'person_number': self.person_number().replace('-', '')
+                },
+            )
+            try:
+                data = r.json().get('status')
+            except ValueError:
+                return
 
         if data == 'member':
             self.status = 'member'
