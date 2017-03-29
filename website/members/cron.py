@@ -6,7 +6,7 @@ from requests.auth import HTTPDigestAuth
 from members.models import Member
 
 
-@kronos.register('0 0 * * *')
+@kronos.register('0 3 * * 1')  # At 03:00 on Monday.
 def update_membership_status():
     r = requests.get(
         'https://register.utn.se/api.php',
