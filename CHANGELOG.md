@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Notification on unconfirmed e-mail addresses
+- Membership status for all members. It checks against the UTN registry.
+- Cron Tasks
 ### Changed
 - Creating and editing positions is now sensitive to access rights.
 ### Fixed
