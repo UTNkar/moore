@@ -11,9 +11,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Cron Tasks
 ### Changed
 - Creating and editing positions is now sensitive to access rights.
+- The logo model is now situated in the branding app
 ### Fixed
 - Editing and creation rights in recruitment for officials
 - Allow submitting an application without changing a draft
+- Logos in the organisational menu now link to their given link
+- The organisational menu is displayed correctly when no logos are available.
 
 ## [0.1.0] - 2017-03-27
 ### Added
