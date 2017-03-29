@@ -1,9 +1,12 @@
+import datetime
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from members.forms import MemberForm
@@ -28,9 +31,16 @@ def profile(request):
             _('Your newly set e-mail address has not yet been confirmed')
         )
 
+    can_update_status = (
+        request.user.status != 'member'
+        and (timezone.now() - request.user.status_changed
+             > datetime.timedelta(1))
+    )
+
     return render(request, 'members/profile.html', {
         'page': page,
         'form': form,
+        'can_update_status': can_update_status,
     })
 
 

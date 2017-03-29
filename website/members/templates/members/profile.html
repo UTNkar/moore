@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n static %}
+{% load i18n static membertags %}
 
 {% block title %}{% trans 'Account Settings' %}{% endblock %}
 
@@ -7,9 +7,9 @@
 <script type="text/javascript" src="{% static 'libraries/dirrty/jquery.dirrty.js' %}"></script>
 <script type="text/javascript">
 $('#account-settings').dirrty().on('dirty', function(){
-    $('.btn').removeClass('disabled');
+    $('#submit').removeClass('disabled');
 }).on('clean', function(){
-    $('.btn').addClass('disabled');
+    $('#submit').addClass('disabled');
 });
 </script>
 {% endblock %}
@@ -86,6 +86,15 @@ $('#account-settings').dirrty().on('dirty', function(){
         </fieldset>
 
         <fieldset>
+            <legend>{% trans 'membership status'|title %}</legend>
+            <h6>{% trans 'current status'|capfirst %}: {% status_badge form.instance %}</h6>
+            <p></p>
+            {% if can_update_status %}
+            <p>{% trans 'Is this incorrect?' %} <button class="btn btn-primary btn-sm">{% trans 'recheck status'|capfirst %}</button></p>
+            {% endif %}
+        </fieldset>
+
+        <fieldset>
             <legend>{% trans 'study information'|title %}</legend>
             <div class="row">
                 <div class="col-sm-8">
@@ -109,7 +118,7 @@ $('#account-settings').dirrty().on('dirty', function(){
         </fieldset>
 
         <div class="center">
-            <button class="btn btn-large disabled">{% trans 'save' %}</button>
+            <button id="submit" class="btn btn-large disabled">{% trans 'save' %}</button>
         </div>
     </form>
 </div>
