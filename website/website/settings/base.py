@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'involvement',
     'members',
     'search',
+    'branding',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
