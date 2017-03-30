@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-23 13:31+0100\n"
+"POT-Creation-Date: 2017-03-30 16:50+0200\n"
 "PO-Revision-Date: 2017-03-23 14:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,134 +13,119 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.12\n"
 
-#: models.py:13
-msgid "Social media accounts"
-msgstr "Konton på sociala medier"
-
-#: models.py:16
-msgid "Your Facebook page URL"
-msgstr "ULR:en till din facebook"
-
-#: models.py:21
-msgid "Your Instagram username, without the @"
-msgstr "Ditt användarnamn på Instagram, utan @"
-
-#: models.py:26
-msgid "Your Twitter username, without the @"
-msgstr "Ditt användarnamn på Twitter, utan @"
-
-#: models.py:33
-msgid "logos"
-msgstr "logotyper"
-
-#: models.py:36
-msgid "Committee"
-msgstr "Kommittée"
-
-#: models.py:37
-msgid "Section"
-msgstr "Sektion"
-
-#: models.py:43
-msgid "category"
-msgstr "kategori"
-
-#: models.py:49
-msgid "links to"
-msgstr "länkar till"
-
-#: models.py:56
-msgid "logo"
-msgstr "logotyp"
-
-#: models.py:65
-msgid "white logo"
-msgstr "Vit logotyp"
-
-#: models.py:74
-msgid "black logo"
-msgstr "svart logotyp"
-
-#: models.py:83
-msgid "belongs to"
-msgstr "Tillhör"
-
-#: settings/base.py:114
+#: website/settings/base.py:116
 msgid "English"
 msgstr "engelska"
 
-#: settings/base.py:115
+#: website/settings/base.py:117
 msgid "Swedish"
 msgstr "svenska"
 
-#: templates/400.html:5
+#: website/templates/400.html:5
 msgid "Bad request"
 msgstr "Bad request"
 
-#: templates/403.html:5
+#: website/templates/403.html:5
 msgid "Permission denied"
 msgstr "Du har inte åtkomst till den här sidan"
 
-#: templates/404.html:5
+#: website/templates/404.html:5
 msgid "Page not found"
 msgstr "Sidan kunde inte hittas"
 
-#: templates/500.html:5
+#: website/templates/500.html:5
 msgid "Internal server error"
 msgstr "Internal server error"
 
-#: templates/base.html:33
+#: website/templates/base.html:33
 msgid "Uppsala Union of Engineering and Science Students"
 msgstr "Uppsala teknolog- och naturvetarkår"
 
-#: templates/base.html:52 templates/empty.html:17
+#: website/templates/base.html:52 website/templates/empty.html:17
 msgid "The UTN Logo"
 msgstr "UTN-loggan"
 
-#: templates/base.html:90
+#: website/templates/base.html:90
 msgid "account"
 msgstr "konto"
 
-#: templates/base.html:91
+#: website/templates/base.html:91
 msgid "password"
 msgstr "lösenord"
 
-#: templates/base.html:92
+#: website/templates/base.html:92
 msgid "Log out"
 msgstr "Logga ut"
 
-#: templates/base.html:139
+#: website/templates/base.html:139
 msgid "Follow us on social media:"
 msgstr "Följ oss på sociala medier:"
 
-#: templates/base.html:170
+#: website/templates/base.html:170
 msgid "Developed using"
 msgstr "Sidan är under utveckling"
 
-#: templates/empty.html:10 templates/error.html:16
+#: website/templates/empty.html:10 website/templates/error.html:16
 msgid "Return Home"
 msgstr "Gå tillbaka till startsidan"
 
-#: templates/error.html:11
+#: website/templates/error.html:11
 msgid "Error"
 msgstr "Fel"
 
-#: templates/error.html:12
+#: website/templates/error.html:12
 msgid "An error has occurred"
 msgstr "Ett fel har inträffat"
 
-#: templates/tags/main_menu.html:6
+#: website/templates/tags/main_menu.html:6
 msgid "Home"
 msgstr "Startsida"
 
-#: templates/tags/organisation_menu.html:11
-msgid "sections"
-msgstr "sektioner"
-
-#: templates/tags/organisation_menu.html:26
-msgid "committees"
-msgstr "Kommittéer"
-
-#: templates/wagtailadmin/home.html:4
+#: website/templates/wagtailadmin/home.html:4
 msgid "Welcome UTN website administrators!"
 msgstr "Var hälsade, administratörer av UTN:s hemsida!"
+
+#~ msgid "Social media accounts"
+#~ msgstr "Konton på sociala medier"
+
+#~ msgid "Your Facebook page URL"
+#~ msgstr "ULR:en till din facebook"
+
+#~ msgid "Your Instagram username, without the @"
+#~ msgstr "Ditt användarnamn på Instagram, utan @"
+
+#~ msgid "Your Twitter username, without the @"
+#~ msgstr "Ditt användarnamn på Twitter, utan @"
+
+#~ msgid "logos"
+#~ msgstr "logotyper"
+
+#~ msgid "Committee"
+#~ msgstr "Kommittée"
+
+#~ msgid "Section"
+#~ msgstr "Sektion"
+
+#~ msgid "category"
+#~ msgstr "kategori"
+
+#~ msgid "links to"
+#~ msgstr "länkar till"
+
+#~ msgid "logo"
+#~ msgstr "logotyp"
+
+#~ msgid "white logo"
+#~ msgstr "Vit logotyp"
+
+#~ msgid "black logo"
+#~ msgstr "svart logotyp"
+
+#~ msgid "belongs to"
+#~ msgstr "Tillhör"
+
+#~ msgid "sections"
+#~ msgstr "sektioner"
+
+#~ msgid "committees"
+#~ msgstr "Kommittéer"
