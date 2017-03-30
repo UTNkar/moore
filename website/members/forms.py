@@ -68,18 +68,18 @@ class MemberForm(forms.ModelForm):
 class RegistrationForm(MemberForm, auth.UserCreationForm):
     class Meta:
         model = Member
-        fields = ['username', 'email', 'first_name', 'last_name',
-                  'registration_year', 'study']
+        fields = ['username', 'email', 'first_name', 'last_name', 'study',
+                  'registration_year', 'phone_number']
         field_classes = {'username': auth.UsernameField}
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
             'registration_year': forms.Select(
                 attrs={'class': 'form-control'},
                 choices=[('', '---------')] + [
-                    # TODO: __str__()??
-                    (y, y)
+                    (y.__str__(), y.__str__())
                     for y in
                     range(date.today().year, date.today().year - 50, -1)
                 ]
