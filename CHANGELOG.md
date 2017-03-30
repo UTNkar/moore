@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Allow submitting an application without changing a draft
 - Logos in the organisational menu now link to their given link
 - The organisational menu is displayed correctly when no logos are available.
+- The access rights for members of teams designated as an approval committee
 
 ## [0.1.0] - 2017-03-27
 ### Added

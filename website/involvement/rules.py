@@ -2,7 +2,7 @@ from datetime import date
 
 import rules
 
-from involvement.models import official_for
+from involvement.models import official_of, member_of, Position
 
 
 # General Predicates
@@ -13,13 +13,20 @@ def is_admin(user):
 
 @rules.predicate
 def is_official(user):
-    return len(official_for(user)) > 0
+    return len(official_of(user)) > 0
+
+
+@rules.predicate
+def is_approval_committee(user):
+    return Position.objects.filter(
+        approval_committee__in=member_of(user)
+    ).exists()
 
 
 # Team Permissions
 @rules.predicate
 def is_team_official(user, team):
-    return team in official_for(user)
+    return team in official_of(user)
 
 
 # Role Predicates
@@ -45,11 +52,11 @@ def approve_state(user, position):
 
 
 @rules.predicate
-def is_approval_committee_member(user, position):
+def is_approval_committee_for(user, position):
     if position.approval_committee is None:
         return False
     else:
-        return position.approval_committee in user.groups.all()
+        return position.approval_committee in member_of(user)
 
 
 @rules.predicate
@@ -81,11 +88,12 @@ rules.add_perm('involvement.add_role', is_admin | is_official)
 rules.add_perm('involvement.change_role', is_admin | is_role_official)
 rules.add_perm('involvement.delete_role', is_admin)
 
-rules.add_perm('involvement.list_position', is_admin | is_official)
+rules.add_perm('involvement.list_position', is_admin | is_official
+               | is_approval_committee)
 rules.add_perm('involvement.add_position', is_admin | is_official)
 rules.add_perm('involvement.change_position', is_admin | is_position_official)
 rules.add_perm('involvement.approve_position', is_admin
-               | (is_approval_committee_member & approve_state))
+               | (is_approval_committee_for & approve_state))
 rules.add_perm('involvement.appoint_position', is_admin
                | (is_position_official & appoint_state))
 rules.add_perm('involvement.delete_position', is_admin
