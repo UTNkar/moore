@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.1.1] - 2017-03-30
 ### Added
 - Notification on unconfirmed e-mail addresses
 - Membership status for all members. It checks against the UTN registry.
@@ -30,5 +32,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/UTNkar/moore/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/UTNkar/moore/compare/8210c5175bcca87d9f012e49d090c8bec687c672...v0.1.0
