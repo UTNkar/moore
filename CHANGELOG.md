@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Creating and editing positions is now sensitive to access rights.
 - The logo model is now situated in the branding app.
 - Phone number has been added to the registration form.
+- Combine birthday and person number extension within the admin forms.
 ### Fixed
 - Editing and creation rights in recruitment for officials
 - Allow submitting an application without changing a draft

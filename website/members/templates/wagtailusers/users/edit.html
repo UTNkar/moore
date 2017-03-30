@@ -1,8 +1,9 @@
 {% extends "wagtailusers/users/edit.html" %}
 
 {% block extra_fields %}
-    {% include "wagtailadmin/shared/field_as_li.html" with field=form.birthday %}
-    {% include "wagtailadmin/shared/field_as_li.html" with field=form.person_number_ext %}
+    {% include "wagtailadmin/shared/field_as_li.html" with field=form.person_number %}
+{#    {% include "wagtailadmin/shared/field_as_li.html" with field=form.birthday %}#}
+{#    {% include "wagtailadmin/shared/field_as_li.html" with field=form.person_number_ext %}#}
     {% include "wagtailadmin/shared/field_as_li.html" with field=form.status %}
     {% include "wagtailadmin/shared/field_as_li.html" with field=form.phone_number %}
     {% include "wagtailadmin/shared/field_as_li.html" with field=form.registration_year %}
