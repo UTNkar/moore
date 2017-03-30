@@ -73,7 +73,6 @@ possible. For example, start by explaining how opened the page, e.g. which
 program/browser you used.
 * **Describe the behavior you observed after following the steps** and point out
 what exactly is the problem with that behavior.
-* **Explain which behavior you expected to see instead and why.**
 * **Include screenshots and animated GIFs** which show you following the
 described steps and clearly demonstrate the problem if possible. You can use
 [this tool](http://www.cockos.com/licecap/) to record GIFs on macOS and
@@ -237,31 +236,34 @@ Please open an issue if you have suggestions for new labels, and if you notice
 some labels are missing on some repositories, then please open an issue on that
 repository.
 
-#### Type of Issue and Issue State
+#### Type of Issue (Yellow)
 
 | Label name | Description |
 | --- | --- |
 | `enhancement` | Feature requests. |
 | `bug` | Confirmed bugs or reports that are very likely to be bugs. |
-| `question` | Questions more than bug reports or feature requests (e.g. how do I do X). |
-| `feedback` | General feedback more than bug reports or feature requests. |
+
+#### Issue State (Green/Red)
+
+| Label name | Description |
+| --- | --- |
 | `help-wanted` | The UTN system administrator would appreciate help others in resolving these issues. |
 | `more-information-needed` | More information needs to be collected about these problems or feature requests (e.g. steps to reproduce). |
-| `needs-reproduction` | Likely bugs, but haven't been reliably reproduced. |
 | `duplicate` | Issues which are duplicates of other issues, i.e. they have been reported before. |
 | `wontfix` | The UTN system administrator has decided not to fix these issues for now, either because they're working as intended or for some other reason. |
 | `invalid` | Issues which aren't valid (e.g. user errors). |
 
-#### Topic Categories
+#### Topic Categories (Blue)
 
 | Label name | Description |
 | --- | --- |
 | `documentation` | Related to any type of documentation. |
-| `performance` | Related to performance. |
+| `feature` | Related to functionality. |
+| `interface` | Related to visual design. |
 | `security` | Related to security. |
-| `ui` | Related to visual design. |
+| `translation` | Related to translations or internationalisation. |
 
-#### Pull Request Labels
+#### Pull Request Labels (Purple)
 
 | Label name | Description
 | --- | --- |
