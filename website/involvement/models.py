@@ -4,6 +4,7 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core import validators
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
@@ -166,7 +167,7 @@ class Team(models.Model):
     ])]
 
 
-def official_for(user, pk=False):
+def official_of(user, pk=False):
     # TODO : Is this efficient?
     applications = Application.objects.filter(
         applicant=user,
@@ -183,6 +184,18 @@ def official_for(user, pk=False):
         else:
             teams.append(i.position.role.team)
 
+    return teams
+
+
+def member_of(user, pk=False):
+    groups = user.groups.all()
+    teams = []
+    for group in groups:
+        if hasattr(group, 'team'):
+            if pk:
+                teams.append(group.team.pk)
+            else:
+                teams.append(group.team)
     return teams
 
 

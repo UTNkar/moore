@@ -3,6 +3,7 @@ from datetime import date
 from django.contrib import admin
 from django.contrib.admin.utils import quote
 from django.contrib.auth import get_permission_codename
+from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
@@ -10,7 +11,8 @@ from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 from wagtail.contrib.modeladmin.views import CreateView, EditView
 
-from involvement.models import Team, Role, Position, Application, official_for
+from involvement.models import Team, Role, Position, Application, official_of, \
+    member_of
 from involvement.rules import is_admin
 from utils.permissions import RulesPermissionHelper
 
@@ -29,7 +31,7 @@ class TeamAdmin(ModelAdmin):
         if is_admin(request.user):
             return super(TeamAdmin, self).get_queryset(request)
         else:
-            teams = official_for(request.user, pk=True)
+            teams = official_of(request.user, pk=True)
             qs = Team.objects.filter(id__in=teams)
             ordering = self.get_ordering(request)
             if ordering:
@@ -54,7 +56,7 @@ class RoleAdmin(ModelAdmin):
         if is_admin(request.user):
             return super(RoleAdmin, self).get_queryset(request)
         else:
-            teams = official_for(request.user)
+            teams = official_of(request.user)
             qs = Role.objects.filter(team__in=teams)
             ordering = self.get_ordering(request)
             if ordering:
@@ -182,7 +184,7 @@ class PositionCreateView(CreateView):
             archived=False
         )
         if not is_admin(self.request.user):
-            teams = official_for(self.request.user)
+            teams = official_of(self.request.user)
             queryset = queryset.filter(
                 team__in=teams
             )
@@ -200,7 +202,7 @@ class PositionEditView(EditView):
                 archived=False
             )
         if not is_admin(self.request.user):
-            teams = official_for(self.request.user)
+            teams = official_of(self.request.user)
             queryset = queryset.filter(
                 team__in=teams
             )
@@ -225,8 +227,12 @@ class PositionAdmin(ModelAdmin):
         if is_admin(request.user):
             return super(PositionAdmin, self).get_queryset(request)
         else:
-            teams = official_for(request.user)
-            qs = Position.objects.filter(role__team__in=teams)
+            official_teams = official_of(request.user)
+            teams = member_of(request.user)
+            qs = Position.objects.filter(
+                Q(role__team__in=official_teams)
+                | Q(approval_committee__in=teams)
+            )
             ordering = self.get_ordering(request)
             if ordering:
                 qs = qs.order_by(*ordering)
