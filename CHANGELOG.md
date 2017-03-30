@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Fixed
+- Confirmation e-mails not being sent.
 
 ## [0.1.1] - 2017-03-30
 ### Added
