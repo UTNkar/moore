@@ -282,7 +282,7 @@ class Position(models.Model):
     )
 
     approval_committee = models.ForeignKey(
-        Group,
+        Team,
         verbose_name=_('Approval committee'),
         on_delete=models.SET_NULL,
         blank=True,
