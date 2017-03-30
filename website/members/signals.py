@@ -12,6 +12,7 @@ from members.models import Member
 
 @receiver(unconfirmed_email_created, dispatch_uid='send_email_confirmation')
 def send_confirmation_email(sender, email, user=None, **kwargs):
+    user = user or sender
     if user is not None:
         context = {
             'email': email,
