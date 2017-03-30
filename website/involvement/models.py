@@ -4,17 +4,17 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core import validators
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.models import ClusterableModel
-from utils.translation import TranslatedField
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel, \
     InlinePanel, FieldRowPanel
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+
+from utils.translation import TranslatedField
 
 
 class RecruitmentPage(RoutablePageMixin, Page):

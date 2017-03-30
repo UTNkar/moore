@@ -11,8 +11,8 @@ from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 from wagtail.contrib.modeladmin.views import CreateView, EditView
 
-from involvement.models import Team, Role, Position, Application, official_of, \
-    member_of
+from involvement.models import Team, Role, Position, Application, \
+    official_of, member_of
 from involvement.rules import is_admin
 from utils.permissions import RulesPermissionHelper
 
