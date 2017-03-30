@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-30 16:50+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps.py:7 wagtail_hooks.py:18
+msgid "Branding"
+msgstr ""
+
+#: models.py:13
+msgid "Social media accounts"
+msgstr ""
+
+#: models.py:16
+msgid "Your Facebook page URL"
+msgstr ""
+
+#: models.py:21
+msgid "Your Instagram username, without the @"
+msgstr ""
+
+#: models.py:26
+msgid "Your Twitter username, without the @"
+msgstr ""
+
+#: models.py:33
+msgid "logos"
+msgstr ""
+
+#: models.py:36
+msgid "Committee"
+msgstr ""
+
+#: models.py:37
+msgid "Section"
+msgstr ""
+
+#: models.py:43
+msgid "category"
+msgstr ""
+
+#: models.py:49
+msgid "links to"
+msgstr ""
+
+#: models.py:56
+msgid "logo"
+msgstr ""
+
+#: models.py:65
+msgid "white logo"
+msgstr ""
+
+#: models.py:74
+msgid "black logo"
+msgstr ""
+
+#: models.py:83
+msgid "belongs to"
+msgstr ""
+
+#: templates/tags/organisation_menu.html:11
+#: templates/tags/organisation_menu.html:19
+msgid "sections"
+msgstr ""
+
+#: templates/tags/organisation_menu.html:32
+#: templates/tags/organisation_menu.html:40
+msgid "committees"
+msgstr ""
