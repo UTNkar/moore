@@ -74,6 +74,7 @@ class AppointmentForm(forms.Form):
     )
     overturn = forms.CharField(
         required=False,
+        label=_('Overturn'),
         help_text=_('Enter a comma separated list of users you want to '
                     'appoint to the position, even though did not apply for '
                     'the position.')
