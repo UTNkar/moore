@@ -1,3 +1,4 @@
+from django.core import mail
 from django.test import TestCase
 from datetime import datetime
 
@@ -10,6 +11,7 @@ class MemberTest(TestCase):
     """
     Unit tests for the Member Model
     """
+
     def setUp(self):
         self.member = Member.objects.create(username='moore')
         self.assertEqual(1, Member.objects.count())
@@ -44,6 +46,7 @@ class ProfileTest(TestCase):
     """
     Tests for the profile page and subsequent form.
     """
+
     def setUp(self):
         # Create test objects
         self.study = StudyProgram.objects.create(
@@ -138,3 +141,31 @@ class ProfileTest(TestCase):
         member = Member.objects.get(username='moore')
         self.assertEqual(member.study, new_study)
         self.assertEqual(member.registration_year, data['registration_year'])
+
+
+class EmailConfirmationTest(TestCase):
+    """Tests for the sending of confirmations of new e-mail addresses"""
+    def setUp(self):
+        # Create test objects
+        self.member = Member.objects.create(
+            username='moore',
+            email='g.moore@localhost',
+        )
+        self.member.save()
+
+    def test_confirm_on_creation(self):
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [self.member.email])
+        self.assertIn(
+            self.member.get_confirmation_key(), mail.outbox[0].body
+        )
+
+    def test_confirm_on_change(self):
+        new_email = 'gordon@localhost'
+        token = self.member.add_email_if_not_exists(new_email)
+
+        self.assertEqual(len(mail.outbox), 2)
+        self.assertEqual(mail.outbox[1].to, [new_email])
+        self.assertIn(
+            token, mail.outbox[1].body
+        )
