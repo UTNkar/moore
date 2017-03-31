@@ -74,6 +74,7 @@ class Team(models.Model):
     """This class represents a working group within UTN"""
 
     class Meta:
+        verbose_name = _('Team')
         verbose_name_plural = _('Teams')
         default_permissions = ()
         permissions = (
@@ -205,6 +206,7 @@ class Role(models.Model):
     """
 
     class Meta:
+        verbose_name = _('Role')
         verbose_name_plural = _('Roles')
         default_permissions = ()
 
@@ -284,6 +286,7 @@ class Position(models.Model):
     """Position represents the execution of a role within UTN"""
 
     class Meta:
+        verbose_name = _('Position')
         verbose_name_plural = _('Positions')
         default_permissions = ()
 
@@ -394,6 +397,7 @@ class Application(ClusterableModel):
     )
 
     class Meta:
+        verbose_name = _('Application')
         verbose_name_plural = _('Applications')
         unique_together = ('position', 'applicant')
         default_permissions = ()
