@@ -56,10 +56,11 @@ ADMINS = [('UTN System Administrator', 'admin@utn.se')]
 
 LOGGING_CONFIG = None
 
-# TODO: HTTPS security
-# CSRF_COOKIE_SECURE = True
-#
-# SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_DOMAIN = '.utn.se'
+
+SESSION_COOKIE_SECURE = True
 
 # Membership API
 MEMBERSHIP_API_USER = 'moore'

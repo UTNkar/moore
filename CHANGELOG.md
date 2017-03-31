@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Fixed
 - Confirmation e-mails not being sent.
+- Updated translations
+- Production: cross-domain cookies
 
 ## [0.1.1] - 2017-03-30
 ### Added
