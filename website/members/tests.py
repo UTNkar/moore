@@ -178,7 +178,6 @@ class EmailConfirmationTest(TestCase):
             username='moore',
             email='g.moore@localhost',
         )
-        self.member.save()
 
     def test_send_on_creation(self):
         self.assertEqual(len(mail.outbox), 1)
@@ -196,3 +195,31 @@ class EmailConfirmationTest(TestCase):
         self.assertIn(
             token, mail.outbox[1].body
         )
+
+    def test_confirm(self):
+        self.member.set_password('Intel1968')
+        self.member.save()
+        self.client.login(username='moore', password='Intel1968')
+
+        response = self.client.get(reverse('email_change_confirm', kwargs={
+            'token': self.member.get_confirmation_key()
+        }), follow=True)
+
+        self.assertContains(
+            response, 'Your e-mail address has been confirmed.',
+        )
+        self.assertIn(self.member.email, self.member.get_confirmed_emails())
+
+    def test_invalid_confirm(self):
+        self.member.set_password('Intel1968')
+        self.member.save()
+        self.client.login(username='moore', password='Intel1968')
+
+        response = self.client.get(reverse('email_change_confirm', kwargs={
+            'token': 'trololololol'
+        }), follow=True)
+
+        self.assertContains(
+            response, 'The provided confirmation token was invalid.',
+        )
+        self.assertNotIn(self.member.email, self.member.get_confirmed_emails())
