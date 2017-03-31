@@ -15,7 +15,8 @@ class StudyProgram(models.Model):
     """This class describes a university study program"""
 
     class Meta:
-        verbose_name_plural = _('Study Programs')
+        verbose_name = _('study program')
+        verbose_name_plural = _('study programs')
 
     DEGREE_CHOICES = (
         ('bachelor', _('Bachelor\'s Degree')),

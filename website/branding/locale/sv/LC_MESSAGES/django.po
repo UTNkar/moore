@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-31 11:12+0200\n"
+"POT-Creation-Date: 2017-03-31 11:25+0200\n"
 "PO-Revision-Date: 2017-03-31 11:21+0200\n"
+"Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
+"Language-Team: \n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
-"Language-Team: \n"
 "X-Generator: Poedit 1.8.12\n"
 
 #: branding/apps.py:7 branding/wagtail_hooks.py:18
@@ -23,7 +23,9 @@ msgid "Branding"
 msgstr "Branding"
 
 #: branding/models.py:13
-msgid "Social media accounts"
+#, fuzzy
+#| msgid "Social media accounts"
+msgid "social media accounts"
 msgstr "Konton på sociala medier"
 
 #: branding/models.py:16
@@ -38,39 +40,39 @@ msgstr "Ditt användarnamn på Instagram, utan @"
 msgid "Your Twitter username, without the @"
 msgstr "Ditt användarnamn på Twitter, utan @"
 
-#: branding/models.py:33
-msgid "logos"
-msgstr "logotyper"
-
-#: branding/models.py:36
-msgid "Committee"
-msgstr "Kommittée"
-
-#: branding/models.py:37
-msgid "Section"
-msgstr "Sektion"
-
-#: branding/models.py:43
-msgid "category"
-msgstr "kategori"
-
-#: branding/models.py:49
-msgid "links to"
-msgstr "länkar till"
-
-#: branding/models.py:56
+#: branding/models.py:33 branding/models.py:57
 msgid "logo"
 msgstr "logotyp"
 
-#: branding/models.py:65
+#: branding/models.py:34
+msgid "logos"
+msgstr "logotyper"
+
+#: branding/models.py:37
+msgid "Committee"
+msgstr "Kommittée"
+
+#: branding/models.py:38
+msgid "Section"
+msgstr "Sektion"
+
+#: branding/models.py:44
+msgid "category"
+msgstr "kategori"
+
+#: branding/models.py:50
+msgid "links to"
+msgstr "länkar till"
+
+#: branding/models.py:66
 msgid "white logo"
 msgstr "vit logotyp"
 
-#: branding/models.py:74
+#: branding/models.py:75
 msgid "black logo"
 msgstr "svart logotyp"
 
-#: branding/models.py:83
+#: branding/models.py:84
 msgid "belongs to"
 msgstr "tillhör"
 

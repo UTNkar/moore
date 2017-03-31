@@ -10,7 +10,7 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 @register_setting(icon='openquote')
 class SocialMediaSettings(BaseSetting):
     class Meta:
-        verbose_name = _('Social media accounts')
+        verbose_name = _('social media accounts')
 
     facebook = models.URLField(
         help_text=_('Your Facebook page URL'),
@@ -30,6 +30,7 @@ class SocialMediaSettings(BaseSetting):
 
 class Logo(models.Model):
     class Meta:
+        verbose_name = _('logo')
         verbose_name_plural = _('logos')
 
     CATEGORY_CHOICES = (
