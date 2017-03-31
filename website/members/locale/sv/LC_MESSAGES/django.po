@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-31 11:12+0200\n"
+"POT-Creation-Date: 2017-03-31 11:25+0200\n"
 "PO-Revision-Date: 2017-03-31 11:22+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -25,11 +25,11 @@ msgstr "Personnummer på formen ÅÅÅÅMDD-NNNN."
 msgid "Use the format YYYYMMDD-XXXX for your person number."
 msgstr "Använd formen ÅÅÅÅMMDD-NNNN för ditt personnummer."
 
-#: members/forms.py:121 members/forms.py:178 members/models.py:124
+#: members/forms.py:121 members/forms.py:178 members/models.py:125
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: members/forms.py:125 members/forms.py:182 members/models.py:138
+#: members/forms.py:125 members/forms.py:182 members/models.py:139
 msgid "Registration year"
 msgstr "Inskrivningsår"
 
@@ -37,63 +37,71 @@ msgstr "Inskrivningsår"
 msgid "Study Program"
 msgstr "Program"
 
-#: members/forms.py:134 members/forms.py:192 members/models.py:110
+#: members/forms.py:134 members/forms.py:192 members/models.py:111
 msgid "Membership status"
 msgstr ""
 
 #: members/models.py:18
-msgid "Study Programs"
+#, fuzzy
+#| msgid "Study Program"
+msgid "study program"
 msgstr "Program"
 
-#: members/models.py:21
+#: members/models.py:19
+#, fuzzy
+#| msgid "Study Programs"
+msgid "study programs"
+msgstr "Program"
+
+#: members/models.py:22
 msgid "Bachelor's Degree"
 msgstr "Kandidatexamen"
 
-#: members/models.py:22
+#: members/models.py:23
 msgid "Master's Degree"
 msgstr "Masterexamen"
 
-#: members/models.py:23
+#: members/models.py:24
 msgid "Engineer's Degree"
 msgstr "Civilingenjörsexamen"
 
-#: members/models.py:28
+#: members/models.py:29
 msgid "English program name"
 msgstr "Engelsk benämning av program"
 
-#: members/models.py:29 members/models.py:37
+#: members/models.py:30 members/models.py:38
 msgid "Enter the name of the study program"
 msgstr "Ange namnet på programmet"
 
-#: members/models.py:36
+#: members/models.py:37
 msgid "Swedish program name"
 msgstr "Svensk benämning av program"
 
-#: members/models.py:46
+#: members/models.py:47
 msgid "English program abbreviation"
 msgstr "Engelsk förkortning av program"
 
-#: members/models.py:47 members/models.py:55
+#: members/models.py:48 members/models.py:56
 msgid "Enter the abbreviation for the study program"
 msgstr "Ange den engelska förkortningen på programmet"
 
-#: members/models.py:54
+#: members/models.py:55
 msgid "Swedish program abbreviation"
 msgstr "Svensk förkortning av program"
 
-#: members/models.py:65
+#: members/models.py:66
 msgid "Degree type"
 msgstr "Examensnivå"
 
-#: members/models.py:80
+#: members/models.py:81
 msgid "Birthday"
 msgstr "Födelsedag"
 
-#: members/models.py:86
+#: members/models.py:87
 msgid "Person number extension"
 msgstr "De fyra sista siffrorna"
 
-#: members/models.py:87
+#: members/models.py:88
 msgid ""
 "Enter the last four digits of your Swedish person number, given by the "
 "Swedish tax authority"
@@ -101,39 +109,39 @@ msgstr ""
 "Ange de fyra sista siffrorna i ditt svenska personnummer, som du fått från "
 "Skatteverket"
 
-#: members/models.py:91
+#: members/models.py:92
 msgid "The person number extension consists of four numbers"
 msgstr "Här avses de fyra sista siffrorna i ditt personnummer"
 
-#: members/models.py:101
+#: members/models.py:102
 msgid "Unknown"
 msgstr ""
 
-#: members/models.py:102
+#: members/models.py:103
 msgid "Nonmember"
 msgstr ""
 
-#: members/models.py:103
+#: members/models.py:104
 msgid "Member"
 msgstr ""
 
-#: members/models.py:104
+#: members/models.py:105
 msgid "Alumnus"
 msgstr ""
 
-#: members/models.py:125
+#: members/models.py:126
 msgid "Enter a phone number so UTN may reach you"
 msgstr "Ange ett telefonnummer som UTN kan nå dig på"
 
-#: members/models.py:128
+#: members/models.py:129
 msgid "Please enter a valid phone number"
 msgstr "Var vänlig ange ett giltigt telefonnummer"
 
-#: members/models.py:139
+#: members/models.py:140
 msgid "Enter the year you started studying at the TakNat faculty"
 msgstr "Ange året då du började studera på TekNat-fakulteten"
 
-#: members/models.py:143
+#: members/models.py:144
 msgid "Please enter a valid year"
 msgstr "Vänligen ange ett giltigt år"
 
