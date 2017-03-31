@@ -3,83 +3,83 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-30 16:50+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2017-03-31 11:12+0200\n"
+"PO-Revision-Date: 2017-03-31 11:21+0200\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.12\n"
 
-#: apps.py:7 wagtail_hooks.py:18
+#: branding/apps.py:7 branding/wagtail_hooks.py:18
 msgid "Branding"
-msgstr ""
+msgstr "Branding"
 
-#: models.py:13
+#: branding/models.py:13
 msgid "Social media accounts"
 msgstr "Konton på sociala medier"
 
-#: models.py:16
+#: branding/models.py:16
 msgid "Your Facebook page URL"
 msgstr "ULR:en till din facebook"
 
-#: models.py:21
+#: branding/models.py:21
 msgid "Your Instagram username, without the @"
 msgstr "Ditt användarnamn på Instagram, utan @"
 
-#: models.py:26
+#: branding/models.py:26
 msgid "Your Twitter username, without the @"
 msgstr "Ditt användarnamn på Twitter, utan @"
 
-#: models.py:33
+#: branding/models.py:33
 msgid "logos"
 msgstr "logotyper"
 
-#: models.py:36
+#: branding/models.py:36
 msgid "Committee"
 msgstr "Kommittée"
 
-#: models.py:37
+#: branding/models.py:37
 msgid "Section"
 msgstr "Sektion"
 
-#: models.py:43
+#: branding/models.py:43
 msgid "category"
 msgstr "kategori"
 
-#: models.py:49
+#: branding/models.py:49
 msgid "links to"
 msgstr "länkar till"
 
-#: models.py:56
+#: branding/models.py:56
 msgid "logo"
 msgstr "logotyp"
 
-#: models.py:65
+#: branding/models.py:65
 msgid "white logo"
 msgstr "vit logotyp"
 
-#: models.py:74
+#: branding/models.py:74
 msgid "black logo"
 msgstr "svart logotyp"
 
-#: models.py:83
+#: branding/models.py:83
 msgid "belongs to"
 msgstr "tillhör"
 
-#: templates/tags/organisation_menu.html:11
-#: templates/tags/organisation_menu.html:19
+#: branding/templates/tags/organisation_menu.html:11
+#: branding/templates/tags/organisation_menu.html:19
 msgid "sections"
 msgstr "sektioner"
 
-#: templates/tags/organisation_menu.html:32
-#: templates/tags/organisation_menu.html:40
+#: branding/templates/tags/organisation_menu.html:32
+#: branding/templates/tags/organisation_menu.html:40
 msgid "committees"
 msgstr "kommittéer"
