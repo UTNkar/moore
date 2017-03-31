@@ -24,62 +24,62 @@ msgstr ""
 
 #: models.py:13
 msgid "Social media accounts"
-msgstr ""
+msgstr "Konton på sociala medier"
 
 #: models.py:16
 msgid "Your Facebook page URL"
-msgstr ""
+msgstr "ULR:en till din facebook"
 
 #: models.py:21
 msgid "Your Instagram username, without the @"
-msgstr ""
+msgstr "Ditt användarnamn på Instagram, utan @"
 
 #: models.py:26
 msgid "Your Twitter username, without the @"
-msgstr ""
+msgstr "Ditt användarnamn på Twitter, utan @"
 
 #: models.py:33
 msgid "logos"
-msgstr ""
+msgstr "logotyper"
 
 #: models.py:36
 msgid "Committee"
-msgstr ""
+msgstr "Kommittée"
 
 #: models.py:37
 msgid "Section"
-msgstr ""
+msgstr "Sektion"
 
 #: models.py:43
 msgid "category"
-msgstr ""
+msgstr "kategori"
 
 #: models.py:49
 msgid "links to"
-msgstr ""
+msgstr "länkar till"
 
 #: models.py:56
 msgid "logo"
-msgstr ""
+msgstr "logotyp"
 
 #: models.py:65
 msgid "white logo"
-msgstr ""
+msgstr "vit logotyp"
 
 #: models.py:74
 msgid "black logo"
-msgstr ""
+msgstr "svart logotyp"
 
 #: models.py:83
 msgid "belongs to"
-msgstr ""
+msgstr "tillhör"
 
 #: templates/tags/organisation_menu.html:11
 #: templates/tags/organisation_menu.html:19
 msgid "sections"
-msgstr ""
+msgstr "sektioner"
 
 #: templates/tags/organisation_menu.html:32
 #: templates/tags/organisation_menu.html:40
 msgid "committees"
-msgstr ""
+msgstr "kommittéer"
