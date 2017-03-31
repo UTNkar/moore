@@ -142,9 +142,36 @@ class ProfileTest(TestCase):
         self.assertEqual(member.study, new_study)
         self.assertEqual(member.registration_year, data['registration_year'])
 
+    def test_change_email(self):
+        new_email = 'f.gordon@localhost'
+        data = {
+            'email': 'f.gordon@localhost',
+            'person_number': self.member.person_number(),
+        }
+        response = self.client.post(reverse('profile'), data)
+
+        # No errors occurred in the change
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['form'].errors, {})
+
+        # An unconfirmed e-mail address has been added
+        self.assertContains(
+            response,
+            'Your newly set e-mail address has not yet been confirmed',
+        )
+        member = Member.objects.get(username='moore')
+        self.assertIn(new_email, member.get_unconfirmed_emails())
+
+        self.assertEqual(len(mail.outbox), 2)
+        self.assertEqual(mail.outbox[1].to, [new_email])
+        self.assertIn(
+            self.member.get_confirmation_key(new_email), mail.outbox[1].body
+        )
+
 
 class EmailConfirmationTest(TestCase):
     """Tests for the sending of confirmations of new e-mail addresses"""
+
     def setUp(self):
         # Create test objects
         self.member = Member.objects.create(
@@ -153,14 +180,14 @@ class EmailConfirmationTest(TestCase):
         )
         self.member.save()
 
-    def test_confirm_on_creation(self):
+    def test_send_on_creation(self):
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [self.member.email])
         self.assertIn(
             self.member.get_confirmation_key(), mail.outbox[0].body
         )
 
-    def test_confirm_on_change(self):
+    def test_send_on_change(self):
         new_email = 'gordon@localhost'
         token = self.member.add_email_if_not_exists(new_email)
 
