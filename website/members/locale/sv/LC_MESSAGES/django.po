@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-30 16:50+0200\n"
-"PO-Revision-Date: 2017-03-23 14:44+0100\n"
+"POT-Creation-Date: 2017-03-31 11:12+0200\n"
+"PO-Revision-Date: 2017-03-31 11:22+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -110,10 +110,8 @@ msgid "Unknown"
 msgstr ""
 
 #: members/models.py:102
-#, fuzzy
-#| msgid "Phone number"
 msgid "Nonmember"
-msgstr "Telefonnummer"
+msgstr ""
 
 #: members/models.py:103
 msgid "Member"

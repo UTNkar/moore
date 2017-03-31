@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-30 16:50+0200\n"
-"PO-Revision-Date: 2017-03-23 14:44+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2017-03-31 11:12+0200\n"
+"PO-Revision-Date: 2017-03-31 11:15+0200\n"
+"Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
@@ -21,17 +21,15 @@ msgstr "Engagemang"
 msgid "The submitted status was invalid."
 msgstr "Den angivna statusen var ej giltig."
 
-#: involvement/forms.py:48 involvement/models.py:404
+#: involvement/forms.py:48 involvement/models.py:408
 msgid "Approved"
 msgstr "Beviljad"
 
-#: involvement/forms.py:49 involvement/models.py:405
+#: involvement/forms.py:49 involvement/models.py:409
 msgid "Disapproved"
 msgstr "Avslagen"
 
 #: involvement/forms.py:77
-#, fuzzy
-#| msgid "overturn"
 msgid "Overturn"
 msgstr "Upphäv"
 
@@ -81,230 +79,242 @@ msgstr "Exkluderade grupper"
 msgid "Choose teams to exclude from the page"
 msgstr "Välj grupper att exkludera från sidan"
 
-#: involvement/models.py:77 involvement/wagtail_hooks.py:22
+#: involvement/models.py:77
+msgid "Team"
+msgstr "Grupp"
+
+#: involvement/models.py:78 involvement/wagtail_hooks.py:22
 msgid "Teams"
 msgstr "Grupper"
 
-#: involvement/models.py:80
+#: involvement/models.py:81
 msgid "Can administrate the recruitment process"
 msgstr "Får administrera rekryterings processen"
 
-#: involvement/models.py:91
+#: involvement/models.py:92
 msgid "English team name"
-msgstr "gruppens namn (engelska)"
+msgstr "Gruppens namn (engelska)"
 
-#: involvement/models.py:92 involvement/models.py:99
+#: involvement/models.py:93 involvement/models.py:100
 msgid "Enter the name of the team"
 msgstr "Ange gruppens namn"
 
-#: involvement/models.py:98
+#: involvement/models.py:99
 msgid "Swedish team name"
-msgstr "gruppens namn (svenska)"
+msgstr "Gruppens namn (svenska)"
 
-#: involvement/models.py:114
+#: involvement/models.py:115
 msgid "English team description"
 msgstr "Beskrivning av gruppen (engelska) "
 
-#: involvement/models.py:115 involvement/models.py:121
+#: involvement/models.py:116 involvement/models.py:122
 msgid "Enter a description of the team"
 msgstr "Ange en beskrivning av gruppen"
 
-#: involvement/models.py:120
+#: involvement/models.py:121
 msgid "Swedish team description"
 msgstr "Beskrivning av gruppen (svenska) "
 
-#: involvement/models.py:130
+#: involvement/models.py:131
 msgid "English team leader position name"
 msgstr "Engelsk benämning av gruppledarens post"
 
-#: involvement/models.py:131 involvement/models.py:138
+#: involvement/models.py:132 involvement/models.py:139
 msgid "Enter the name of position of the team leader"
 msgstr "Ange gruppledarens postnamn"
 
-#: involvement/models.py:137
+#: involvement/models.py:138
 msgid "Swedish team leader position name"
 msgstr "Svensk benämning av gruppledarens post"
 
-#: involvement/models.py:145
+#: involvement/models.py:146
 msgid "Contact e-mail address"
 msgstr "Emailadress för kontakt"
 
-#: involvement/models.py:208 involvement/wagtail_hooks.py:44
-msgid "Roles"
-msgstr "Poster"
+#: involvement/models.py:209
+msgid "Role"
+msgstr "Roll"
 
-#: involvement/models.py:220
+#: involvement/models.py:210 involvement/wagtail_hooks.py:44
+msgid "Roles"
+msgstr "Roller"
+
+#: involvement/models.py:222
 msgid "Official"
 msgstr "Ämbetsman"
 
-#: involvement/models.py:221
+#: involvement/models.py:223
 msgid "This is an official role"
-msgstr "Detta är en ämbetsmanna post"
+msgstr "Detta är en ämbetsmanna roll"
 
-#: involvement/models.py:227
+#: involvement/models.py:229
 msgid "Archived"
 msgstr "Arkiverade"
 
-#: involvement/models.py:228
+#: involvement/models.py:230
 msgid "Hide the role from menus"
-msgstr "Dölj posten från menyer"
+msgstr "Dölj rollen från menyer"
 
-#: involvement/models.py:236
+#: involvement/models.py:238
 msgid "English role name"
 msgstr "Gruppens roll namn (engelska) "
 
-#: involvement/models.py:237 involvement/models.py:244
+#: involvement/models.py:239 involvement/models.py:246
 msgid "Enter the name of the role"
 msgstr "Ange rollens namn"
 
-#: involvement/models.py:243
+#: involvement/models.py:245
 msgid "Swedish role name"
 msgstr "Rollens namn (svenska)"
 
-#: involvement/models.py:251
+#: involvement/models.py:253
 msgid "English role description"
 msgstr "Beskrivning av rollen (engelska) "
 
-#: involvement/models.py:252 involvement/models.py:258
+#: involvement/models.py:254 involvement/models.py:260
 msgid "Enter a description of the role"
 msgstr "Ange en beskrivning av rollen"
 
-#: involvement/models.py:257
+#: involvement/models.py:259
 msgid "Swedish role description"
 msgstr "Beskrivning av rollen (svenska)"
 
-#: involvement/models.py:265
+#: involvement/models.py:267
 msgid "{} in {}"
 msgstr "{} in {}"
 
-#: involvement/models.py:287 involvement/wagtail_hooks.py:215
+#: involvement/models.py:289 involvement/models.py:467
+msgid "Position"
+msgstr "Post"
+
+#: involvement/models.py:290 involvement/wagtail_hooks.py:215
 msgid "Positions"
 msgstr "Poster"
 
-#: involvement/models.py:299
+#: involvement/models.py:302
 msgid "Approval committee"
 msgstr "Valberedningen"
 
-#: involvement/models.py:306
+#: involvement/models.py:309
 msgid "Start of recruitment"
 msgstr "Sökstart"
 
-#: involvement/models.py:309
+#: involvement/models.py:312
 msgid "Recruitment deadline"
 msgstr "Sista ansökningssdag"
 
-#: involvement/models.py:313
+#: involvement/models.py:316
 msgid "Number of appointments"
 msgstr "Antal tillsättningar"
 
-#: involvement/models.py:314
+#: involvement/models.py:317
 msgid "Enter the number of concurrent appointments to the position"
 msgstr "Ange antalet samtidiga tillsättningar av posten"
 
-#: involvement/models.py:319
+#: involvement/models.py:322
 msgid "Date of appointment"
 msgstr "Datum för tillsättning"
 
-#: involvement/models.py:321
+#: involvement/models.py:324
 msgid "End date of appointment"
 msgstr "Mandatperiodens slutdatum"
 
-#: involvement/models.py:324
+#: involvement/models.py:327
 msgid "English extra comments"
 msgstr "Övriga kommenterar (engelska)"
 
-#: involvement/models.py:325 involvement/models.py:332
+#: involvement/models.py:328 involvement/models.py:335
 msgid "Enter extra comments specific to the position this year."
 msgstr ""
 "Ange eventuell extra information om posten som gäller specifikt för detta år."
 
-#: involvement/models.py:331
+#: involvement/models.py:334
 msgid "Swedish extra comments"
 msgstr "Övriga kommentarer (svenska)"
 
-#: involvement/models.py:397 involvement/wagtail_hooks.py:244
+#: involvement/models.py:400
+msgid "Application"
+msgstr "Ansökning"
+
+#: involvement/models.py:401 involvement/wagtail_hooks.py:244
 msgid "Applications"
 msgstr "Ansökningar"
 
-#: involvement/models.py:402
+#: involvement/models.py:406
 msgid "Draft"
 msgstr "Utkast"
 
-#: involvement/models.py:403
+#: involvement/models.py:407
 msgid "Submitted"
 msgstr "Inskickade"
 
-#: involvement/models.py:406
+#: involvement/models.py:410
 msgid "Appointed"
 msgstr "Tillsatt"
 
-#: involvement/models.py:407
+#: involvement/models.py:411
 msgid "Turned down"
 msgstr "Avslagen"
 
-#: involvement/models.py:413
+#: involvement/models.py:417
 msgid "Status"
 msgstr "Status"
 
-#: involvement/models.py:420
+#: involvement/models.py:424
 msgid "Cover Letter"
 msgstr "Ansökningsbrev"
 
-#: involvement/models.py:421
+#: involvement/models.py:425
 msgid "Present yourself and state why you are what we are looking for"
 msgstr ""
 "Skriv en presentation av dig själv och en beskrivning av varför du är den vi "
 "letar efter"
 
-#: involvement/models.py:426
+#: involvement/models.py:430
 msgid "Qualifications"
 msgstr "Meriter"
 
-#: involvement/models.py:427
+#: involvement/models.py:431
 msgid "Give a summary of relevant qualifications"
 msgstr "Ge en sammanfattning av relevanta meriter"
 
-#: involvement/models.py:456
+#: involvement/models.py:460
 msgid "Name"
 msgstr "Namn"
 
-#: involvement/models.py:457
+#: involvement/models.py:461
 msgid "Enter the name of your reference"
 msgstr "Ange namnet på din referens"
 
-#: involvement/models.py:463
-msgid "Position"
-msgstr "Position"
-
-#: involvement/models.py:464
+#: involvement/models.py:468
 msgid "Enter the position in which your reference relates to you"
 msgstr "Ange din relation till din referens"
 
-#: involvement/models.py:470
+#: involvement/models.py:474
 msgid "E-mail address"
 msgstr "Emailadress"
 
-#: involvement/models.py:471
+#: involvement/models.py:475
 msgid "Enter an e-mail address on which your reference in reachable"
 msgstr "Ange en emailadress som din referens kan nås på"
 
-#: involvement/models.py:478
+#: involvement/models.py:482
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: involvement/models.py:479
+#: involvement/models.py:483
 msgid "Enter a valid phone number"
 msgstr "Ange ett giltigt telefonnummer"
 
-#: involvement/models.py:482
+#: involvement/models.py:486
 msgid "Enter a phone number on which your reference is reachable"
 msgstr "Ange ett telefonnummer som din referens kan nås på "
 
-#: involvement/models.py:490
+#: involvement/models.py:494
 msgid "Comment"
 msgstr "Kommentar"
 
-#: involvement/models.py:491
+#: involvement/models.py:495
 msgid "Enter any additional comments regarding your reference"
 msgstr "Är det något mer du vill tillägga om din referens? "
 
@@ -349,12 +359,12 @@ msgstr ""
 
 #: involvement/templates/involvement/admin/position_appointment.html:63
 msgid "overturn"
-msgstr "Upphäv"
+msgstr "opphäv"
 
 #: involvement/templates/involvement/admin/position_appointment.html:88
 #: involvement/templates/involvement/admin/position_approval.html:73
 msgid "Saving..."
-msgstr "Sparar…."
+msgstr "Sparar..."
 
 #: involvement/templates/involvement/admin/position_appointment.html:89
 #: involvement/templates/involvement/admin/position_approval.html:74
