@@ -169,6 +169,8 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
 
     def update_status(self, data=None):
         if data is None:
+            if self.person_number() == '':
+                return
             try:
                 r = requests.get(
                     'https://register.utn.se/api.php',
