@@ -34,5 +34,6 @@ def send_confirmation_email(sender, email, user=None, **kwargs):
 
 @receiver(pre_save, sender=Member, dispatch_uid='member_check_membership')
 def check_membership(sender, instance, **kwargs):
-    if timezone.now() - instance.status_changed > datetime.timedelta(1):
+    if timezone.now() - instance.status_changed > datetime.timedelta(1)\
+            or instance.status == 'unknown':
         instance.update_status()
