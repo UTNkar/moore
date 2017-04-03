@@ -154,6 +154,12 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         blank=True,
     )
 
+    def __str__(self) -> str:
+        if self.first_name and self.last_name:
+            return '%s %s' % (self.first_name, self.last_name)
+        else:
+            return self.username
+
     def person_number(self) -> str:
         if self.birthday is None or self.person_number_ext is None:
             return ''
