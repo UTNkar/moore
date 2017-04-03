@@ -23,7 +23,9 @@ def update_membership_status():
 
     for member in Member.objects.all():
         if member.person_number().replace('-', '') in data:
-            member.update(data='member')
+            member.update_status(data='member')
         else:
             member.update_status(data='nonmember')
-        member.save()
+        Member.objects.filter(pk=member.pk).update(
+            status=member.status, status_changed=member.status_changed
+        )
