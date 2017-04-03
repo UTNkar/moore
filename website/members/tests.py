@@ -1,9 +1,10 @@
 from django.core import mail
 from django.test import TestCase
-from datetime import datetime
+import datetime
 
 from django.urls import reverse
 
+from members import cron
 from members.models import Member, StudyProgram
 
 
@@ -17,7 +18,7 @@ class MemberTest(TestCase):
         self.assertEqual(1, Member.objects.count())
 
     def test_print_person_number(self):
-        self.member.birthday = datetime.strptime('03/01/1929', '%d/%m/%Y')
+        self.member.birthday = datetime.date(1929, 1, 3)
         self.member.person_number_ext = '1234'
         self.assertEqual(
             '19290103-1234', self.member.person_number(),
@@ -59,7 +60,7 @@ class ProfileTest(TestCase):
             first_name='Gordon',
             last_name='Moore',
             email='g.moore@localhost',
-            birthday=datetime.strptime('03/01/1929', '%d/%m/%Y'),
+            birthday=datetime.date(1929, 1, 3),
             person_number_ext='1234',
             phone_number='+461234567890',
             registration_year='1946',
@@ -117,6 +118,10 @@ class ProfileTest(TestCase):
         member = Member.objects.get(username='moore')
         self.assertEqual(member.first_name, data['first_name'])
         self.assertEqual(member.last_name, data['last_name'])
+        self.assertEqual(
+            member.birthday, datetime.date(1934, 1, 7)
+        )
+        self.assertEqual(member.person_number_ext, '9876')
         self.assertEqual(member.person_number(), data['person_number'])
         self.assertEqual(member.phone_number, data['phone_number'])
 
@@ -223,3 +228,64 @@ class EmailConfirmationTest(TestCase):
             response, 'The provided confirmation token was invalid.',
         )
         self.assertNotIn(self.member.email, self.member.get_confirmed_emails())
+
+
+class MembershipAPITest(TestCase):
+    def setUp(self):
+        self.moore = Member.objects.create(
+            username='moore',
+            birthday=datetime.date(1929, 1, 3),
+            person_number_ext='1234',
+        )
+        self.flash = Member.objects.create(
+            username='flash',
+            birthday=datetime.date(1934, 1, 7),
+            person_number_ext='9876',
+        )
+
+    def test_signal(self):
+        self.assertEqual(self.moore.status, 'member')
+        self.assertEqual(self.flash.status, 'nonmember')
+
+    def test_method(self):
+        self.moore.status = 'unknown'
+        self.moore.update_status('member')
+        self.assertEqual(self.moore.status, 'member')
+
+        self.moore.status = 'unknown'
+        self.moore.update_status('nonmember')
+        self.assertEqual(self.moore.status, 'nonmember')
+
+        self.moore.status = 'member'
+        self.moore.update_status('member')
+        self.assertEqual(self.moore.status, 'member')
+
+        self.moore.status = 'member'
+        self.moore.update_status('nonmember')
+        self.assertEqual(self.moore.status, 'alumnus')
+
+        self.moore.status = 'alumnus'
+        self.moore.update_status('member')
+        self.assertEqual(self.moore.status, 'member')
+
+        self.moore.status = 'alumnus'
+        self.moore.update_status('nonmember')
+        self.assertEqual(self.moore.status, 'alumnus')
+
+        self.moore.status = 'nonmember'
+        self.moore.update_status('member')
+        self.assertEqual(self.moore.status, 'member')
+
+        self.moore.status = 'nonmember'
+        self.moore.update_status('nonmember')
+        self.assertEqual(self.moore.status, 'nonmember')
+
+    def test_cron(self):
+        Member.objects.filter(pk=self.moore.pk).update(status='unknown')
+        Member.objects.filter(pk=self.flash.pk).update(status='unknown')
+
+        cron.update_membership_status()
+        self.moore.refresh_from_db()
+        self.assertEqual(self.moore.status, 'member')
+        self.flash.refresh_from_db()
+        self.assertEqual(self.flash.status, 'nonmember')
