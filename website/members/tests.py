@@ -1,3 +1,6 @@
+import os
+import unittest
+
 from django.core import mail
 from django.test import TestCase
 import datetime
@@ -243,6 +246,8 @@ class MembershipAPITest(TestCase):
             person_number_ext='9876',
         )
 
+    @unittest.skipIf(os.environ.get('TRAVIS', 'false') == 'true',
+                     'Skipping this test on Travis CI.')
     def test_signal(self):
         self.assertEqual(self.moore.status, 'member')
         self.assertEqual(self.flash.status, 'nonmember')
@@ -280,6 +285,8 @@ class MembershipAPITest(TestCase):
         self.moore.update_status('nonmember')
         self.assertEqual(self.moore.status, 'nonmember')
 
+    @unittest.skipIf(os.environ.get('TRAVIS', 'false') == 'true',
+                     'Skipping this test on Travis CI.')
     def test_cron(self):
         Member.objects.filter(pk=self.moore.pk).update(status='unknown')
         Member.objects.filter(pk=self.flash.pk).update(status='unknown')
