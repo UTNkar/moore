@@ -2,9 +2,13 @@ language: python
 python:
   - "3.5"
   - "3.6"
-install: "pip install -r dev-requirements.txt"
+install:
+- pip install -r dev-requirements.txt
+- pip install coveralls
 script:
   - flake8 website
-  - ./website/manage.py test website
+  - coverage run --source='.' ./website/manage.py test website
+after_success:
+  coveralls
 notifications:
   slack: utnkar:yoXuou43TNbtRLmeIyga5mmO
