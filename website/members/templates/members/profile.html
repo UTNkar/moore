@@ -11,6 +11,32 @@ $('#account-settings').dirrty().on('dirty', function(){
 }).on('clean', function(){
     $('#submit').addClass('disabled');
 });
+
+function limit_studies(){
+    var val = $('#{{ form.section.auto_id }}').val();
+    $('#{{ form.study.auto_id }}').html('');
+    switch (val) {
+        {% for s in sections %}
+            case '{{ s.pk }}':
+            {% for study in s.studies.all %}
+                $('#{{ form.study.auto_id }}').append('<option value="{{ study.pk }}">{{ study }}</option>');
+            {% empty %}
+                $('#{{ form.study.auto_id }}').append('<option value="">---------</option>');
+            {% endfor %}
+            break;
+        {% endfor %}
+        default:
+            $('#{{ form.study.auto_id }}').append('<option value="">---------</option>');
+        {% for study in studies %}
+            $('#{{ form.study.auto_id }}').append('<option value="{{ study.pk }}">{{ study }}</option>');
+        {% endfor %}
+
+        break;
+    }
+}
+
+$('#{{ form.section.auto_id }}').change(limit_studies);
+$(document).ready(limit_studies);
 </script>
 {% endblock %}
 
@@ -96,6 +122,12 @@ $('#account-settings').dirrty().on('dirty', function(){
 
         <fieldset>
             <legend>{% trans 'study information'|title %}</legend>
+                <div class="form-group">
+                    {% if form.section.errors %}<div style="color: red;">{% endif %}
+                    {{ form.section.label_tag }}
+                    {% if form.section.errors %}</div>{% endif %}
+                    {{ form.section }}
+                </div>
             <div class="row">
                 <div class="col-sm-8">
                     <div class="form-group">
