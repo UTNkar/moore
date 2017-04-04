@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.1.2] - 2017-04-01
 ### Added
 - Section model, linked to study programs and users
 - FontAwesome support within wagtail icons
@@ -43,6 +45,7 @@ asked to extend their profile in the registration e-mail.
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/UTNkar/moore/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/UTNkar/moore/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/UTNkar/moore/compare/8210c5175bcca87d9f012e49d090c8bec687c672...v0.1.0
