@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import datetime
 
 from django import forms
 from django.contrib.auth import forms as auth

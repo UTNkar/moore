@@ -29,4 +29,5 @@ class EducationAdminGroup(ModelAdminGroup):
     menu_order = 450
     items = (StudyProgramAdmin, SectionAdmin)
 
+
 modeladmin_register(EducationAdminGroup)

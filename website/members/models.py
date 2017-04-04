@@ -7,12 +7,10 @@ from django.db.models import ManyToManyField
 from django.forms import CheckboxSelectMultiple
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from modelcluster.models import ClusterableModel
 from requests.auth import HTTPDigestAuth
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 from wagtail.wagtailadmin.edit_handlers import TabbedInterface, ObjectList, \
     FieldPanel
-from wagtail.wagtailcore.models import Orderable
 
 from utils.translation import TranslatedField
 
@@ -72,12 +70,12 @@ class StudyProgram(models.Model):
 
     def __str__(self) -> str:
         if self.degree:
-            return _('%(degree_type)s in %(study_program)') % {
+            return _('%(degree_type)s in %(study_program)s') % {
                 'degree_type': self.degree,
                 'study_program': self.name,
             }
         else:
-            return self.name
+            return self.name.__str__()
 
     # ------ Administrator settings ------
     edit_handler = TabbedInterface([
@@ -137,7 +135,7 @@ class Section(models.Model):
         if self.abbreviation:
             return '%s - %s' % (self.abbreviation, self.name)
         else:
-            return self.name
+            return self.name.__str__()
 
     # ------ Administrator settings ------
     edit_handler = TabbedInterface([
