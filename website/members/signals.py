@@ -19,6 +19,7 @@ def send_confirmation_email(sender, email, user=None, **kwargs):
             'domain': settings.BASE_URL,
             'site_name': settings.WAGTAIL_SITE_NAME,
             'token': user.get_confirmation_key(email),
+            'new_user': user.get_confirmed_emails() == []
         }
 
         subject = loader.render_to_string(

@@ -227,6 +227,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
 
     study = models.ForeignKey(
         StudyProgram,
+        verbose_name=_('Study program'),
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
