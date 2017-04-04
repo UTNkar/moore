@@ -6,7 +6,7 @@ from django.core import validators
 from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailusers import forms as wagtail
 
-from members.models import StudyProgram, Member
+from members.models import StudyProgram, Member, Section
 
 
 class MemberForm(forms.ModelForm):
@@ -27,7 +27,7 @@ class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = ['first_name', 'last_name', 'phone_number',
-                  'registration_year', 'study', 'email']
+                  'registration_year', 'study', 'section', 'email']
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -36,17 +36,19 @@ class MemberForm(forms.ModelForm):
                 attrs={'class': 'form-control'}
             ),
             'study': forms.Select(attrs={'class': 'form-control'}),
+            'section': forms.Select(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
 
     def __init__(self, *args, **kwargs):
         instance = kwargs.get('instance', None)
-
         initial = kwargs.pop('initial', {})
         if instance is not None:
             initial['person_number'] = instance.person_number()
 
         super(MemberForm, self).__init__(initial=initial, *args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
 
     def save(self, commit=True):
         person_number = self.cleaned_data['person_number']
@@ -90,6 +92,8 @@ class RegistrationForm(MemberForm, auth.UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
         self.fields['password1'].widget = forms.PasswordInput(
             attrs={'class': 'form-control'}
         )
@@ -128,6 +132,11 @@ class CustomUserEditForm(wagtail.UserEditForm):
         required=False,
         queryset=StudyProgram.objects,
         label=_("Study Program"),
+    )
+    section = forms.ModelChoiceField(
+        required=False,
+        queryset=Section.objects,
+        label=_("Section"),
     )
     status = forms.ChoiceField(
         choices=Member.MEMBERSHIP_CHOICES,
@@ -185,6 +194,11 @@ class CustomUserCreationForm(wagtail.UserCreationForm):
         required=False,
         queryset=StudyProgram.objects,
         label=_("Study Program"),
+    )
+    section = forms.ModelChoiceField(
+        required=False,
+        queryset=Section.objects,
+        label=_("Section"),
     )
     status = forms.ChoiceField(
         required=False,

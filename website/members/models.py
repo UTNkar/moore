@@ -25,16 +25,16 @@ class StudyProgram(models.Model):
         verbose_name_plural = _('study programs')
 
     DEGREE_CHOICES = (
-        ('bachelor', _('Bachelor\'s Degree')),
-        ('master', _('Master\'s Degree')),
-        ('engineer', _('Engineer\'s Degree')),
+        ('bsc', _('Bachelor of Science')),
+        ('msc', _('Master of Science')),
+        ('be', _('Bachelor of Engineering')),
+        ('msceng', _('Master of Science in Engineering')),
     )
 
     name_en = models.CharField(
         max_length=255,
         verbose_name=_('English program name'),
         help_text=_('Enter the name of the study program'),
-        null=False,
         blank=False,
     )
 
@@ -42,7 +42,6 @@ class StudyProgram(models.Model):
         max_length=255,
         verbose_name=_('Swedish program name'),
         help_text=_('Enter the name of the study program'),
-        null=False,
         blank=False,
     )
 
@@ -52,7 +51,6 @@ class StudyProgram(models.Model):
         max_length=130,
         verbose_name=_('English program abbreviation'),
         help_text=_('Enter the abbreviation for the study program'),
-        null=True,
         blank=True,
     )
 
@@ -60,7 +58,6 @@ class StudyProgram(models.Model):
         max_length=130,
         verbose_name=_('Swedish program abbreviation'),
         help_text=_('Enter the abbreviation for the study program'),
-        null=True,
         blank=True,
     )
 
@@ -70,12 +67,17 @@ class StudyProgram(models.Model):
         max_length=20,
         choices=DEGREE_CHOICES,
         verbose_name=_('Degree type'),
-        blank=False,
-        null=False,
+        blank=True,
     )
 
     def __str__(self) -> str:
-        return '%s in %s' % (self.get_degree_display(), self.name)
+        if self.degree:
+            return _('%(degree_type)s in %(study_program)') % {
+                'degree_type': self.degree,
+                'study_program': self.name,
+            }
+        else:
+            return self.name
 
     # ------ Administrator settings ------
     edit_handler = TabbedInterface([
@@ -87,6 +89,7 @@ class StudyProgram(models.Model):
             FieldPanel('abbreviation_sv'),
         ], heading=_('General'),
         ),
+        # TODO: http://stackoverflow.com/questions/43188124/
         # ObjectList([
         #     FieldPanel('sections', widget=CheckboxSelectMultiple),
         # ], heading=_('Sections'),
@@ -105,7 +108,6 @@ class Section(models.Model):
         max_length=255,
         verbose_name=_('English section name'),
         help_text=_('Enter the name of the section'),
-        null=False,
         blank=False,
     )
 
@@ -113,7 +115,6 @@ class Section(models.Model):
         max_length=255,
         verbose_name=_('Swedish section name'),
         help_text=_('Enter the name of the section'),
-        null=False,
         blank=False,
     )
 
@@ -123,7 +124,6 @@ class Section(models.Model):
         max_length=130,
         verbose_name=_('Section abbreviation'),
         help_text=_('Enter the abbreviation for the section'),
-        null=True,
         blank=True,
     )
 
@@ -132,6 +132,12 @@ class Section(models.Model):
         related_name='sections',
         blank=True,
     )
+
+    def __str__(self) -> str:
+        if self.abbreviation:
+            return '%s - %s' % (self.abbreviation, self.name)
+        else:
+            return self.name
 
     # ------ Administrator settings ------
     edit_handler = TabbedInterface([
@@ -168,7 +174,6 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             message=_('The person number extension consists of four numbers'),
         )],
         unique_for_date="birthday",
-        null=True,
         blank=True,
     )
 
@@ -186,7 +191,6 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         choices=MEMBERSHIP_CHOICES,
         verbose_name=_('Membership status'),
         blank=False,
-        null=False,
         default='unknown'
     )
     status_changed = models.DateTimeField(
@@ -204,7 +208,6 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             regex=r'^\+?\d+$',
             message=_('Please enter a valid phone number'),
         )],
-        null=True,
         blank=True,
     )
 
@@ -219,12 +222,19 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             regex=r'^\d{4}$',
             message=_('Please enter a valid year')
         )],
-        null=True,
         blank=True,
     )
 
     study = models.ForeignKey(
         StudyProgram,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+
+    section = models.ForeignKey(
+        Section,
+        verbose_name=_('Member of section'),
         on_delete=models.SET_NULL,
         null=True,
         blank=True,

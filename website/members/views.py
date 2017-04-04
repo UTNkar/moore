@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from members.forms import MemberForm
+from members.models import Section, StudyProgram
 
 
 @login_required
@@ -40,6 +41,8 @@ def profile(request):
     return render(request, 'members/profile.html', {
         'page': page,
         'form': form,
+        'studies': StudyProgram.objects.all(),
+        'sections': Section.objects.all(),
         'can_update_status': can_update_status,
     })
 
