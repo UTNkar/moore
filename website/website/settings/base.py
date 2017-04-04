@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'rules.apps.AutodiscoverRulesConfig',
     'simple_email_confirmation',
     'kronos',
+    'wagtailfontawesome',
 
     'django.contrib.admin',  # Used for wagtail admin filters
     'django.contrib.auth',
