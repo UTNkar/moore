@@ -7,7 +7,7 @@ from branding.models import Logo
 
 class LogoAdmin(ThumbnailMixin, ModelAdmin):
     model = Logo
-    menu_icon = 'picture'
+    menu_icon = 'fa-rebel'
     menu_order = 100
     list_display = ('admin_thumb', 'category', 'link')
     thumb_image_field_name = 'logo'
@@ -16,7 +16,7 @@ class LogoAdmin(ThumbnailMixin, ModelAdmin):
 
 class BrandingAdminGroup(ModelAdminGroup):
     menu_label = _('Branding')
-    menu_icon = 'picture'
+    menu_icon = 'fa-paint-brush'
     menu_order = 600
     items = (LogoAdmin,)
 

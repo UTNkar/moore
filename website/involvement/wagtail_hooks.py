@@ -20,7 +20,7 @@ from utils.permissions import RulesPermissionHelper
 class TeamAdmin(ModelAdmin):
     model = Team
     menu_label = _('Teams')
-    menu_icon = 'group'
+    menu_icon = 'fa-sitemap'
     menu_order = 100
     list_display = ('name_en', 'name_sv', 'email')
     search_fields = ('name_en', 'name_sv', 'description_en', 'description_sv',
@@ -42,7 +42,7 @@ class TeamAdmin(ModelAdmin):
 class RoleAdmin(ModelAdmin):
     model = Role
     menu_label = _('Roles')
-    menu_icon = 'user'
+    menu_icon = 'fa-suitcase'
     menu_order = 200
     list_display = ('team', 'name_en', 'name_sv', 'archived')
     search_fields = ('name_en', 'name_sv', 'description_en',
@@ -213,7 +213,7 @@ class PositionEditView(EditView):
 class PositionAdmin(ModelAdmin):
     model = Position
     menu_label = _('Positions')
-    menu_icon = 'search'
+    menu_icon = 'fa-address-card'
     menu_order = 300
     list_display = ('role', 'appointments', 'term_from', 'term_to')
     search_fields = ('comments_en', 'comments_sv')
@@ -251,7 +251,7 @@ class ApplicationAdmin(ModelAdmin):
 
 class InvolvementAdminGroup(ModelAdminGroup):
     menu_label = _('Involvement')
-    menu_icon = 'group'
+    menu_icon = 'fa-address-book'
     menu_order = 500
     items = (TeamAdmin, RoleAdmin, PositionAdmin, ApplicationAdmin)
 
