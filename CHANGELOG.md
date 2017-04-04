@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Section model, linked to study programs and users
 - FontAwesome support within wagtail icons
+### Changed
+- Study has been removed from the registration page. Members will instead be
+asked to extend their profile in the registration e-mail.
 ### Fixed
 - Confirmation e-mails not being sent.
 - Updated translations
