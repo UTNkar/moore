@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-31 11:25+0200\n"
-"PO-Revision-Date: 2017-03-31 11:15+0200\n"
+"POT-Creation-Date: 2017-04-04 14:37+0200\n"
+"PO-Revision-Date: 2017-04-04 15:02+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -52,7 +52,7 @@ msgid ""
 "User %(user)s already applied for this position and can not be appointed "
 "through the overturn field."
 msgstr ""
-"Användaren %(user)s har redan sökt den här posten och kan inte bli tillsatt "
+"Användaren %(user)s har redan sökt den här posten och kan inte bli tillsatt"
 
 #: involvement/forms.py:126
 #, python-format
@@ -570,10 +570,8 @@ msgid "This application does not exist!"
 msgstr "Den här ansökan finns inte! "
 
 #: involvement/views.py:119
-#, fuzzy
-#| msgid "Your application has been removed!"
 msgid "Your application has been submitted!"
-msgstr "Din ansökan har tagits bort! "
+msgstr "Din ansökan har skickats!"
 
 #: involvement/views.py:152 involvement/views.py:200
 msgid "Your decisions have successfully been saved."
