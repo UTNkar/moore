@@ -3,10 +3,16 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core import validators
 from django.db import models
+from django.db.models import ManyToManyField
+from django.forms import CheckboxSelectMultiple
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from modelcluster.models import ClusterableModel
 from requests.auth import HTTPDigestAuth
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
+from wagtail.wagtailadmin.edit_handlers import TabbedInterface, ObjectList, \
+    FieldPanel
+from wagtail.wagtailcore.models import Orderable
 
 from utils.translation import TranslatedField
 
@@ -58,7 +64,7 @@ class StudyProgram(models.Model):
         blank=True,
     )
 
-    abbreviation = TranslatedField('name_en', 'name_sv')
+    abbreviation = TranslatedField('abbreviation_en', 'abbreviation_sv')
 
     degree = models.CharField(
         max_length=20,
@@ -70,6 +76,76 @@ class StudyProgram(models.Model):
 
     def __str__(self) -> str:
         return '%s in %s' % (self.get_degree_display(), self.name)
+
+    # ------ Administrator settings ------
+    edit_handler = TabbedInterface([
+        ObjectList([
+            FieldPanel('name_en'),
+            FieldPanel('name_sv'),
+            FieldPanel('degree'),
+            FieldPanel('abbreviation_en'),
+            FieldPanel('abbreviation_sv'),
+        ], heading=_('General'),
+        ),
+        # ObjectList([
+        #     FieldPanel('sections', widget=CheckboxSelectMultiple),
+        # ], heading=_('Sections'),
+        # ),
+    ])
+
+
+class Section(models.Model):
+    """This class represent a study section"""
+
+    class Meta:
+        verbose_name = _('section')
+        verbose_name_plural = _('sections')
+
+    name_en = models.CharField(
+        max_length=255,
+        verbose_name=_('English section name'),
+        help_text=_('Enter the name of the section'),
+        null=False,
+        blank=False,
+    )
+
+    name_sv = models.CharField(
+        max_length=255,
+        verbose_name=_('Swedish section name'),
+        help_text=_('Enter the name of the section'),
+        null=False,
+        blank=False,
+    )
+
+    name = TranslatedField('name_en', 'name_sv')
+
+    abbreviation = models.CharField(
+        max_length=130,
+        verbose_name=_('Section abbreviation'),
+        help_text=_('Enter the abbreviation for the section'),
+        null=True,
+        blank=True,
+    )
+
+    studies = ManyToManyField(
+        StudyProgram,
+        related_name='sections',
+        blank=True,
+    )
+
+    # ------ Administrator settings ------
+    edit_handler = TabbedInterface([
+        ObjectList([
+                FieldPanel('name_en'),
+                FieldPanel('name_sv'),
+                FieldPanel('abbreviation'),
+            ], heading=_('General'),
+        ),
+        ObjectList([
+                FieldPanel('studies', widget=CheckboxSelectMultiple),
+            ], heading=_('Studies'),
+        ),
+    ])
 
 
 class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
