@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Section model, linked to study programs and users
+- FontAwesome support within wagtail icons
 ### Fixed
 - Confirmation e-mails not being sent.
 - Updated translations
