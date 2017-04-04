@@ -56,7 +56,7 @@ class ProfileTest(TestCase):
         self.study = StudyProgram.objects.create(
             name_en='Chemistry',
             name_sv='Kemi',
-            degree='bachelor',
+            degree='bsc',
         )
         self.member = Member.objects.create(
             username='moore',
@@ -132,12 +132,15 @@ class ProfileTest(TestCase):
         new_study = StudyProgram.objects.create(
             name_en='Superhero',
             name_sv='Superhjälte',
-            degree='master',
+            degree='msc',
         )
         data = {
             'study': new_study.id.__str__(),
             'registration_year': '1980',
+            # required fields
             'person_number': self.member.person_number(),
+            'first_name': self.member.first_name,
+            'last_name': self.member.last_name,
         }
         response = self.client.post(reverse('profile'), data)
 
@@ -154,7 +157,10 @@ class ProfileTest(TestCase):
         new_email = 'f.gordon@localhost'
         data = {
             'email': 'f.gordon@localhost',
+            # required fields
             'person_number': self.member.person_number(),
+            'first_name': self.member.first_name,
+            'last_name': self.member.last_name,
         }
         response = self.client.post(reverse('profile'), data)
 
