@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-31 11:25+0200\n"
+"POT-Creation-Date: 2017-04-04 14:37+0200\n"
 "PO-Revision-Date: 2017-03-23 14:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,11 +13,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.12\n"
 
-#: website/settings/base.py:116
+#: website/settings/base.py:117
 msgid "English"
 msgstr "engelska"
 
-#: website/settings/base.py:117
+#: website/settings/base.py:118
 msgid "Swedish"
 msgstr "svenska"
 

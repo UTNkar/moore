@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class StudyProgramAdmin(ModelAdmin):
     model = StudyProgram
+    menu_label = _('Study Program')
     menu_icon = 'fa-graduation-cap'
     menu_order = 510
     add_to_settings_menu = False
@@ -16,6 +17,7 @@ class StudyProgramAdmin(ModelAdmin):
 
 class SectionAdmin(ModelAdmin):
     model = Section
+    menu_label = _('Sections')
     menu_icon = 'fa-eye'
     menu_order = 520
     add_to_settings_menu = False
