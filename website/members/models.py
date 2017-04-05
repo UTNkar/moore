@@ -71,7 +71,7 @@ class StudyProgram(models.Model):
     def __str__(self) -> str:
         if self.degree:
             return _('%(degree_type)s in %(study_program)s') % {
-                'degree_type': self.degree,
+                'degree_type': self.get_degree_display(),
                 'study_program': self.name,
             }
         else:
