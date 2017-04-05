@@ -11,6 +11,7 @@ from members.models import StudyProgram, Member, Section
 
 class MemberForm(forms.ModelForm):
     person_number = forms.CharField(
+        label=_('Person number'),
         max_length=13,
         min_length=12,
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
@@ -98,6 +99,7 @@ class CustomUserEditForm(wagtail.UserEditForm):
     Custom form to edit users from within the wagtail admin interface.
     """
     person_number = forms.CharField(
+        label=_('Person number'),
         max_length=13,
         min_length=12,
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
@@ -160,6 +162,7 @@ class CustomUserCreationForm(wagtail.UserCreationForm):
     Custom form to create user from within the Wagtail admin user interface.
     """
     person_number = forms.CharField(
+        label=_('Person number'),
         max_length=13,
         min_length=12,
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
@@ -184,7 +187,7 @@ class CustomUserCreationForm(wagtail.UserCreationForm):
     study = forms.ModelChoiceField(
         required=False,
         queryset=StudyProgram.objects,
-        label=_("Study Program"),
+        label=_("Study program"),
     )
     section = forms.ModelChoiceField(
         required=False,
