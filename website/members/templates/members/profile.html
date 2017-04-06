@@ -30,9 +30,9 @@ function limit_studies(){
         {% for study in studies %}
             $('#{{ form.study.auto_id }}').append('<option value="{{ study.pk }}">{{ study }}</option>');
         {% endfor %}
-
         break;
     }
+    $('#{{ form.study.auto_id }} option[value="{{ form.study.value }}"]').attr("selected", "selected");
 }
 
 $('#{{ form.section.auto_id }}').change(limit_studies);

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Use display value for degree for StudyProgram string method.
 - Translate person number label where applicable
 - Empty height of the organisational menu now matches the filled height.
+- Initial selection of study is maintained when on section selection.
 
 ## [0.1.2] - 2017-04-01
 ### Added
