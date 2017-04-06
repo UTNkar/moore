@@ -340,7 +340,11 @@ class Position(models.Model):
     comment = TranslatedField('comment_en', 'comment_sv')
 
     def __str__(self) -> str:
-        return "{} {}".format(self.role.name, self.term_from.year)
+        if self.term_from.year != self.term_to.year:
+            return "%s %s-%s"\
+                   % (self.role.name, self.term_from.year, self.term_to.year)
+        else:
+            return "%s %s" % (self.role.name, self.term_from.year)
 
     @property
     def is_past_due(self):
