@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Translate person number label where applicable
 - Empty height of the organisational menu now matches the filled height.
 - Initial selection of study is maintained when on section selection.
+- Naming of position with double years if the span is over two years.
 
 ## [0.1.2] - 2017-04-01
 ### Added
