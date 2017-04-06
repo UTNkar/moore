@@ -264,7 +264,10 @@ class Role(models.Model):
     description = TranslatedField('description_en', 'description_sv')
 
     def __str__(self) -> str:
-        return _('{} in {}').format(self.name, self.team)
+        return _('%(role)s in %(team)s') % {
+                'role': self.name,
+                'team': self.team,
+            }
 
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
