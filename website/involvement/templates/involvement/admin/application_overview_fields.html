@@ -1,16 +1,22 @@
 {% load i18n %}
 
 <ul class="field-row label-above">
-    <li class="field-col col6">
+    <li class="field-col col4">
         <label>{% trans 'name'|capfirst %}:</label>
         <div class="field-content">
             <span>{{ application.applicant.first_name }} {{ application.applicant.last_name }}</span>
         </div>
     </li>
-    <li class="field-col col6">
+    <li class="field-col col4">
         <label>{% trans 'person number'|capfirst %}:</label>
         <div class="field-content">
             <span>{{ application.applicant.person_number }}</span>
+        </div>
+    </li>
+    <li class="field-col col4">
+        <label>{% trans 'membership status'|capfirst %}:</label>
+        <div class="field-content">
+            <span>{{ application.applicant.status }}</span>
         </div>
     </li>
 </ul>
