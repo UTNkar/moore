@@ -5,12 +5,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.1.3] - 2017-04-06
 ### Fixed
 - Use display value for degree for StudyProgram string method.
 - Translate person number label where applicable
 - Empty height of the organisational menu now matches the filled height.
 - Initial selection of study is maintained when on section selection.
 - Naming of position with double years if the span is over two years.
+- Membership status is now shown when approving and appointing members.
+- The role to string method is now correctly translated.
 
 ## [0.1.2] - 2017-04-01
 ### Added
@@ -52,6 +56,7 @@ asked to extend their profile in the registration e-mail.
 
 
 [Unreleased]: https://github.com/UTNkar/moore/compare/v0.1.2...HEAD
+[0.1.3]: https://github.com/UTNkar/moore/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/UTNkar/moore/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/UTNkar/moore/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/UTNkar/moore/compare/8210c5175bcca87d9f012e49d090c8bec687c672...v0.1.0
