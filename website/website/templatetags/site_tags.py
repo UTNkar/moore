@@ -22,7 +22,7 @@ def main_menu(context, parent, calling_page=None):
     menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
-        if menuitem.recruitmentpage:
+        if hasattr(menuitem, 'recruitmentpage'):
             menuitem.translated_title = menuitem.recruitmentpage\
                 .translated_title
         # We don't directly check if calling_page is None since the template
