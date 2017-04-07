@@ -1,0 +1,11 @@
+{% load i18n %}
+<strong>{% trans "Follow us on social media:" %}</strong>
+{% if settings.branding.SocialMediaSettings.facebook %}
+    <a href="{{ settings.branding.SocialMediaSettings.facebook }}"><i class="fa fa-facebook-square"></i></a>
+{% endif %}
+{% if settings.branding.SocialMediaSettings.twitter %}
+    <a href="https://twitter.com/{{ settings.branding.SocialMediaSettings.twitter }}"><i class="fa fa-twitter-square"></i></a>
+{% endif %}
+{% if settings.branding.SocialMediaSettings.instagram %}
+    <a href="https://www.instagram.com/{{ settings.branding.SocialMediaSettings.instagram }}/"><i class="fa fa-instagram"></i></a>
+{% endif %}
