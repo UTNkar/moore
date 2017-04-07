@@ -45,22 +45,6 @@ class StudyProgram(models.Model):
 
     name = TranslatedField('name_en', 'name_sv')
 
-    abbreviation_en = models.CharField(
-        max_length=130,
-        verbose_name=_('English program abbreviation'),
-        help_text=_('Enter the abbreviation for the study program'),
-        blank=True,
-    )
-
-    abbreviation_sv = models.CharField(
-        max_length=130,
-        verbose_name=_('Swedish program abbreviation'),
-        help_text=_('Enter the abbreviation for the study program'),
-        blank=True,
-    )
-
-    abbreviation = TranslatedField('abbreviation_en', 'abbreviation_sv')
-
     degree = models.CharField(
         max_length=20,
         choices=DEGREE_CHOICES,
@@ -83,8 +67,6 @@ class StudyProgram(models.Model):
             FieldPanel('name_en'),
             FieldPanel('name_sv'),
             FieldPanel('degree'),
-            FieldPanel('abbreviation_en'),
-            FieldPanel('abbreviation_sv'),
         ], heading=_('General'),
         ),
         # TODO: http://stackoverflow.com/questions/43188124/
