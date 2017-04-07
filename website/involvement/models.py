@@ -2,6 +2,7 @@ from datetime import date
 
 from django import forms
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.core import validators
 from django.db import models
@@ -166,6 +167,22 @@ class Team(models.Model):
 
     def __str__(self) -> str:
         return '{}'.format(self.name)
+
+    def get_members(self):
+        return get_user_model().objects.filter(
+            application__position__role__team=self,
+            application__position__term_from__lte=date.today(),
+            application__position__term_to__gte=date.today(),
+            application__status='appointed',
+        )
+
+    def get_manual_members(self):
+        members = self.get_members().values('pk')
+        return get_user_model().objects.filter(
+            groups=self.group
+        ).exclude(
+            pk__in=members
+        )
 
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([

@@ -26,6 +26,7 @@ class TeamAdmin(ModelAdmin):
     search_fields = ('name_en', 'name_sv', 'description_en', 'description_sv',
                      'leader_en', 'leader_sv', 'email')
     permission_helper_class = RulesPermissionHelper
+    inspect_view_enabled = True
 
     def get_queryset(self, request):
         if is_admin(request.user):
