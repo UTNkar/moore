@@ -136,16 +136,7 @@
 		<div class="footer-top">
 			<div class="container">
 				<div class="footer-top-left">
-					<strong class="hidden-xs-down">{% trans "Follow us on social media:" %}</strong>
-                    {% if settings.website.SocialMediaSettings.facebook %}
-                        <a href="{{ settings.website.SocialMediaSettings.facebook }}"><i class="fa fa-facebook-square"></i></a>
-                    {% endif %}
-                    {% if settings.website.SocialMediaSettings.twitter %}
-                        <a href="https://twitter.com/{{ settings.website.SocialMediaSettings.twitter }}"><i class="fa fa-twitter-square"></i></a>
-                    {% endif %}
-                    {% if settings.website.SocialMediaSettings.instagram %}
-                        <a href="https://www.instagram.com/{{ settings.website.SocialMediaSettings.instagram }}/"><i class="fa fa-instagram"></i></a>
-                    {% endif %}
+					{% include 'branding/social_media.html' %}
 				</div><!-- /.footer-top-left -->
 
 				<div class="footer-top-right">

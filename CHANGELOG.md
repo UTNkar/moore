@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Fixed
-- Update 'Account settings' translation for Swedish
+- Update 'Account settings' translation for Swedish.
+- Social Media Icons where not being displayed.
 
 ## [0.1.3] - 2017-04-06
 ### Fixed

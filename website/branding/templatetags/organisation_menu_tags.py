@@ -5,7 +5,8 @@ from branding.models import Logo
 register = template.Library()
 
 
-@register.inclusion_tag('tags/organisation_menu.html', takes_context=True)
+@register.inclusion_tag('branding/tags/organisation_menu.html',
+                        takes_context=True)
 def organisation_menu(context, color=''):
     logos = Logo.objects.exclude(belongs_to=context['request'].site).all()
     committees = logos.filter(category='committee')
