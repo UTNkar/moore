@@ -223,6 +223,7 @@ def official_of(user, pk=False):
 
 
 def member_of(user, pk=False):
+    # TODO: Optimize.
     groups = user.groups.all()
     teams = []
     for group in groups:
@@ -471,6 +472,11 @@ class Application(ClusterableModel):
         verbose_name=_('Qualifications'),
         help_text=_('Give a summary of relevant qualifications'),
         blank=True,
+    )
+
+    # Access overhead
+    removed = models.BooleanField(
+        default=False,
     )
 
     # ------ Administrator settings ------
