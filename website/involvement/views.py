@@ -17,8 +17,7 @@ from involvement.models import Position, Team, Application
 
 def open_positions(request, context):
     """View redirect for the currently open positions"""
-    # TODO: Limit accorting to inclusion/exclusion rules
-    context['positions'] = Position.objects.filter(
+    context['positions'] = context['positions'].filter(
         recruitment_start__lte=date.today()
     ).filter(
         recruitment_end__gte=date.today()
@@ -64,18 +63,24 @@ def my_applications(request, context):
     )
 
     context['drafts'] = applications.filter(
+        position__in=context['positions'],
         position__recruitment_end__gte=date.today(),
         status='draft',
     )
     context['submitted'] = applications.filter(
+        position__in=context['positions'],
         position__recruitment_end__gte=date.today(),
         status='submitted',
     )
     context['waiting'] = applications.filter(
-        Q(position__recruitment_end__lt=date.today(), status='submitted')
-        | Q(status='approved')
+        Q(position__in=context['positions'],
+          position__recruitment_end__lt=date.today(),
+          status='submitted')
+        | Q(position__in=context['positions'],
+            status='approved')
     )
     context['old'] = applications.filter(
+        position__in=context['positions'],
         status__in=['disapproved', 'appointed', 'turned_down'],
     )
 
@@ -86,7 +91,7 @@ def view_position(request, context, page, position=None):
     """
     View function for specific positions.
     """
-    context['position'] = get_object_or_404(Position, id=position)
+    context['position'] = get_object_or_404(context['positions'], id=position)
 
     # Load application form if user is logged in
     if request.user.is_authenticated:

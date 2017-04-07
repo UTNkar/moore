@@ -26,7 +26,8 @@ class RecruitmentPage(RoutablePageMixin, Page):
     included_teams = ParentalManyToManyField(
         'Team',
         verbose_name=_('Included teams'),
-        help_text=_('Choose teams to include on the page'),
+        help_text=_('Choose teams to include on the page. This overrules'
+                    'excluded teams'),
         related_name='include_on_page',
         blank=True,
     )
@@ -37,6 +38,22 @@ class RecruitmentPage(RoutablePageMixin, Page):
         related_name='exclude_on_page',
         blank=True,
     )
+
+    # ------ Methods ------
+    def get_context(self, request, *args, **kwargs):
+        context = super(RecruitmentPage, self).get_context(
+            request, *args, **kwargs
+        )
+        context['positions'] = Position.objects.all()
+        if self.included_teams.all():
+            context['positions'] = context['positions'].filter(
+                role__team__in=self.included_teams.all()
+            )
+        elif self.excluded_teams.all():
+            context['positions'] = context['positions'].exclude(
+                role__team__in=self.excluded_teams.all()
+            )
+        return context
 
     # ------ Routing ------
     @route(r'^$')
