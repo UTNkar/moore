@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Inclusion and Exclusion of teams within a recruitment page.
 ### Changed
-- Term of office is now visible in 'my applications' 
+- Term of office is now visible in 'my applications'.
+### Removed
+- Study program abbreviations.
 ### Fixed
 - Update 'Account settings' translation for Swedish.
 - Social Media Icons where not being displayed.

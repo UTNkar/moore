@@ -11,8 +11,7 @@ class StudyProgramAdmin(ModelAdmin):
     menu_order = 510
     add_to_settings_menu = False
     list_display = ('degree', 'name_en', 'name_sv')
-    search_fields = ('name_en', 'name_sv', 'abbreviation_en',
-                     'abbreviation_sv')
+    search_fields = ('name_en', 'name_sv')
 
 
 class SectionAdmin(ModelAdmin):
