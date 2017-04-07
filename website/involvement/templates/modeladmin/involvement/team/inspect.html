@@ -1,0 +1,29 @@
+{% extends 'modeladmin/inspect.html' %}
+{% load i18n %}
+
+{% block fields_output %}
+    <dl>
+        <dt>{% trans 'name' %}</dt>
+        <dd>{{ instance.name }}</dd>
+
+        <dt>{% trans 'members' %}</dt>
+        <dd>
+            <ul>
+                {% for m in instance.get_members %}
+                    {{ m }}
+                {% empty %}
+                    {% trans 'This team currently does not contain any members.' %}
+                {% endfor %}
+            </ul>
+        </dd>
+
+        {% if instance.get_manual_members %}
+        <dt>{% trans 'manually added members' %}</dt>
+        <ul>
+            {% for m in instance.get_manual_members %}
+                {{ m }}
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </dl>
+{% endblock %}
