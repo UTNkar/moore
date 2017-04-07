@@ -3,7 +3,12 @@
 <div class="filter{% if color == 'primary' %} filter-primary{% elif color == 'secondary' %} filter-secondary{% endif %}">
     <div class="row" style="padding-left: 20px;">
         <h4>{{ position }}</h4>
+        {% if application.status != 'turned_down' and application.status != 'appointed' and application.status != 'disapproved' %}
         <p style="margin-top: -15px; color: {{ position.recruitment_end|date_color }};"><b>{% trans 'deadline'|capfirst %}: {{ position.recruitment_end }}</b></p>
+        {% endif %}
+        {% if application.status != 'turned_down' and application.status != 'disapproved' %}
+            <p><b>{% trans 'term of office'|capfirst %}: {{ position.term_from }} - {{ position.term_to }}</b></p>
+        {% endif %}
     </div>
     <div class="row filter-options">
         {% if edit %}

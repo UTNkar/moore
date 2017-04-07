@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Term of office is now visible in 'my applications' 
 ### Fixed
 - Update 'Account settings' translation for Swedish.
 - Social Media Icons where not being displayed.
