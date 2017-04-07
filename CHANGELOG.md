@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Inclusion and Exclusion of teams within a recruitment page.
 - Inspection view for Teams to show the current members of a Team.
+- A cron task to automate setting of access Group associated with Team.
 ### Changed
 - Term of office is now visible in 'my applications'.
 - Change the login button to be more visible.
