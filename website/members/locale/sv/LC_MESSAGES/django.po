@@ -232,7 +232,7 @@ msgstr "[UTN] Bekräfta din emailadress"
 
 #: templates/members/profile.html:4 views.py:18
 msgid "Account Settings"
-msgstr "Kontoanställningar"
+msgstr "Kontoinställningar"
 
 #: templates/members/profile.html:62
 msgid "contact information"
