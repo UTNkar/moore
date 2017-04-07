@@ -73,8 +73,8 @@
                         </form></li>
                         {% if not user.is_authenticated %}
                             <li class="nav-item">
-                                <a href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}" class="nav-link circle">
-                                    <i class="md-icon">input</i>
+                                <a class="btn btn-secondary" href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i> {% trans 'Log in' %}
                                 </a>
                             </li>
                         {% else %}

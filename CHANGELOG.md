@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Inclusion and Exclusion of teams within a recruitment page.
 ### Changed
 - Term of office is now visible in 'my applications'.
+- Change the login button to be more visible.
 ### Removed
 - Study program abbreviations.
 ### Fixed
