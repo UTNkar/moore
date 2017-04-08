@@ -1,7 +1,0 @@
-{% load wagtailcore_tags %}
-
-<ul class="submenu">
-    {% for child in menuitems_children %}
-        <li><a href="{% pageurl child %}">{% firstof child.translated_title child.title %}</a></li>
-    {% endfor %}
-</ul>
