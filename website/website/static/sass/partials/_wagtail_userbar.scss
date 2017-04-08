@@ -1,0 +1,17 @@
+@import "base";
+.moore {
+  .wagtail-icon-wagtail:before {
+    // Set icon to a pencil
+    content: "d"
+  }
+
+  // Change the color used by the userbar
+  .wagtail-userbar-trigger {
+    box-shadow: 0 0 1px 0 $primary-color, 0 1px 10px 0 rgba($primary-color, 0.7);
+  }
+
+  .wagtail-userbar.touch.is-active .wagtail-userbar-trigger,
+  .wagtail-userbar.no-touch .wagtail-userbar-trigger:hover {
+    box-shadow: 0 0 1px 0 $primary-color, 0 3px 15px 0 rgba($primary-color, 0.95);
+  }
+}
