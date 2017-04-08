@@ -1,0 +1,48 @@
+.structure-header {
+  @extend nav;
+  @extend .hide-on-med-and-down;
+
+  height: 40px;
+  padding: 5px 0;
+
+  .switch {
+    width: 14%;
+    float: left;
+    height: 40px;
+    line-height: 1;
+    &>a{
+      @extend .btn;
+      height: 30px;
+      padding: 0 0.5rem;
+      line-height: 30px;
+      &>i{
+        margin-right: 5px;
+      }
+    }
+  }
+  .sections {
+    display: none;
+  }
+  .logo {
+    display: block;
+    margin: 0 3px;
+  }
+  .left-side {
+    width: 43%;
+    height: 40px;
+    line-height: 1;
+    float: left;
+    .logo {
+      float: right;
+    }
+  }
+  .right-side {
+    width: 43%;
+    height: 40px;
+    line-height: 1;
+    float: right;
+    .logo {
+      float: left;
+    }
+  }
+}
