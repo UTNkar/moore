@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'members',
     'search',
     'branding',
+    'materialize',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',

@@ -1,0 +1,47 @@
+{% load i18n static compress wagtailuserbar %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+    <title>
+    {% block title %}
+        {% if self.seo_title %}{{ self.seo_title }}{% else %}{% firstof self.translated_title self.title %}{% endif %}
+    {% endblock %}
+    {% block title_suffix %}
+        {% with self.get_site.site_name as site_name %}
+            {% if site_name %}- {{ site_name }}{% else %}- {% trans 'Uppsala Union of Engineering and Science Students' %}{% endif %}
+        {% endwith %}
+    {% endblock %}
+    </title>
+
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% compress css %}
+        <link href="{% static 'sass/noyce.scss' %}" rel="stylesheet" type="text/x-scss" id="css-primary">
+    {% endcompress %}
+
+    {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+</head>
+
+<body class="moore {% block body_class %}{% endblock %}">
+    {% wagtailuserbar %}
+
+    {% block page %}{% endblock %}
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    {% compress js %}
+        <script type="text/javascript" src="{% static 'materialize/js/materialize.js' %}"></script>
+    {% endcompress %}
+
+    {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+    {% endblock %}
+</body>
+
+</html>
