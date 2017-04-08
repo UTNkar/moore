@@ -1,0 +1,8 @@
+// Main stylesheet of the Noyce Theme.
+// SASS structure according to: http://thesassway.com/beginner/how-to-structure-a-sass-project
+
+// Modules and Variables
+@import "partials/base";
+
+// The Materialize Framework
+@import "materialize/sass/materialize";

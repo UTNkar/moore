@@ -1,0 +1,21 @@
+{% extends 'skeleton.html' %}
+
+{% block page %}
+    <div class="header">
+    {% block header %}
+
+    {% endblock %}
+    </div>
+
+    <div class="main">
+    {% block main %}
+        {% block content %}{% endblock %}
+    {% endblock %}
+    </div>
+
+    <footer>
+    {% block footer %}
+
+    {% endblock %}
+    </footer>
+{% endblock %}
