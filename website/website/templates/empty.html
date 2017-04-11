@@ -1,0 +1,27 @@
+{% extends 'skeleton.html' %}
+{% load static i18n %}
+
+{% block body_class %}layout-empty{% endblock %}
+
+{% block page %}
+
+    {% block return_link %}
+    <a href="/" class="return-back">
+        <i class="material-icons">subdirectory_arrow_left</i> {% trans 'Return Home' %}
+    </a>
+    {% endblock %}
+
+    <main>
+        <div id="content" class="row">
+            <div class="col l6 offset-l3 m8 offset-m2 s12">
+                <img id="logo" class="center-block" src="{% static 'images/logo_white.svg' %}" alt="{% trans 'The UTN Logo' %}">
+                <h2 class="center-align">{% block heading %}{% endblock %}</h2>
+
+                <div class="form">
+                    {% block form %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

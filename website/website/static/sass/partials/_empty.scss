@@ -1,0 +1,76 @@
+@import "base";
+
+.layout-empty {
+  background-color: $black-color;
+  color: $background-color;
+
+  a {
+    color: rgba($background-color, 0.7);
+    &:hover {
+      color: ($background-color);
+    }
+    i {
+      font-size: 0.9rem;
+    }
+  }
+
+  main {
+    margin-top: $empty-top-distance;
+
+    #logo {
+      width: 300px;
+      margin-bottom: 25px;
+    }
+    .form {
+      margin-top: 25px;
+    }
+  }
+
+  input:not([type]),
+  input[type=text],
+  input[type=password],
+  input[type=email],
+  input[type=url],
+  input[type=time],
+  input[type=date],
+  input[type=datetime],
+  input[type=datetime-local],
+  input[type=tel],
+  input[type=number],
+  input[type=search] {
+    color: $background-color;
+
+    &:focus:not([readonly]) {
+      border-bottom: 1px solid $background-color;
+      box-shadow: 0 1px 0 0 $background-color;
+    }
+
+    &:focus:not([readonly])+label {
+      color: $background-color;
+    }
+  }
+
+  label {
+    color: $background-color;
+  }
+
+  .return-back {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+  }
+
+  .extra-links {
+    border-top: 1px solid rgba($background-color, 0.15);
+    clear: both;
+    margin: 20px 0 0 0;
+    padding: 5px 0 0 0;
+    a {
+      line-height: 32px;
+    }
+  }
+
+  .prefix.active {
+    color: $background-color;
+  }
+}

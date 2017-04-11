@@ -1,3 +1,4 @@
+@import "base";
 .btn {
   text-transform: uppercase;
   font-weight: bold;
@@ -6,7 +7,7 @@
     float: left;
     margin-right: 5px;
     &.right{
-      margin-right: 0px;
+      margin-right: 0;
     }
   }
   &:hover {
@@ -23,11 +24,20 @@ nav .btn {
   }
 }
 
+.btn-primary {
+  color: $background-color;
+  background-color: $primary-color;
+
+  &:hover {
+    background-color: darken($primary-color, 5%);
+  }
+}
+
 .btn-inverse {
   color: $primary-color;
   background-color: $background-color;
 
-  &:hover{
-    background-color: inherit;
+  &:hover {
+    background-color: $background-color;
   }
 }
