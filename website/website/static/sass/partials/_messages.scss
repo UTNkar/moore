@@ -1,0 +1,21 @@
+@import "grid";
+
+.message {
+  display: none;
+}
+
+.marvin {
+  position: absolute;
+  bottom: 0;
+  width: 60px;
+  height: 60px;
+}
+
+.message-impl {
+  white-space: pre-wrap;
+  word-break: keep-all;
+  margin-left: 60px;
+  .marvin {
+    margin-left: -70px;
+  }
+}

@@ -70,4 +70,4 @@ since those cannot handle all the subtleties) to fix the translations.
 
 ## License
 
-[AGPL-v2.0](LICENSE)
+[AGPL-v2.0](LICENSE), unless a different, usually external, license is provided within a folder or file.
