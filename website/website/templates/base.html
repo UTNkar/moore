@@ -2,17 +2,20 @@
 {% load branding_tags %}
 
 {% block page %}
-    <div class="header">
+    <header>
     {% block header %}
         {% structure_header 'white' %}
+        {% block navigation %}
+            {% include 'partials/navigation.html' %}
+        {% endblock %}
     {% endblock %}
-    </div>
+    </header>
 
-    <div class="main">
+    <main>
     {% block main %}
         {% block content %}{% endblock %}
     {% endblock %}
-    </div>
+    </main>
 
     <footer>
     {% block footer %}

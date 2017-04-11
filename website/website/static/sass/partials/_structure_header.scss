@@ -5,6 +5,7 @@
 
   height: 40px;
   padding: 5px 0;
+  box-shadow: none;
 
   .switch {
     width: 14%;
@@ -12,13 +13,8 @@
     height: 40px;
     line-height: 1;
     &>a{
-      @extend .btn;
       height: 30px;
-      padding: 0 0.5rem;
       line-height: 30px;
-      &>i{
-        margin-right: 5px;
-      }
     }
   }
   .sections {

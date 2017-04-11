@@ -1,0 +1,15 @@
+{% load site_tags wagtailcore_tags i18n %}
+{% get_site_root as site_root %}
+
+<li><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
+{% for menuitem in menuitems %}
+<li {% if menuitem.active %}class="active"{% endif %}>
+    <a {% if menuitem.show_dropdown %}class="dropdown-button" data-activates="{{ menuitem.slug }}"{% endif %} href="{% pageurl menuitem %}">{% firstof menuitem.translated_title menuitem.title %}</a>
+    {% if menuitem.show_dropdown %}
+        <ul class="dropdown-content" id="{{ menuitem.slug }}">
+            <li><a href="{% pageurl menuitem %}">{% firstof menuitem.translated_title menuitem.title %}</a></li>
+            {% menu_children parent=menuitem %}
+        </ul>
+    {% endif %}
+</li>
+{% endfor %}
