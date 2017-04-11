@@ -1,0 +1,48 @@
+@import "base";
+$navigation-height: 80px;
+$line-height: 32px;
+
+$logo-height: $line-height;
+$logo-width: 125px;
+
+.navigation {
+  @extend .nav-wrapper;
+
+  background-color: $background-color;
+  height: $navigation-height;
+  line-height: $line-height;
+  padding: ($navigation-height - $line-height)/2 0;
+
+  .brand-logo {
+    height: $logo-height;
+    width: $logo-width;
+  }
+
+  .button-collapse i {
+    color: $secondary-color;
+    height: $line-height;
+    line-height: $line-height;
+  }
+
+  .main-menu {
+    margin-left: $logo-width + 50px;
+    li {
+      a {
+        color: rgba($black-color, .8);
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      &.active, &:hover{
+        background: none;
+        a {
+          color: $black-color;
+          background: inherit;
+        }
+      }
+    }
+
+    .submenu {
+      display: none;
+    }
+  }
+}

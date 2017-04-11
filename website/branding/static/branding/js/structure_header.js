@@ -1,11 +1,15 @@
 // Committee/Section header
 $('#section-switch').click(function(ev) {
     ev.preventDefault();
-    $('.committees').hide();
-    $('.sections').show();
+    setTimeout(function () {
+        $('.committees').hide();
+        $('.sections').show();
+    }, 100);
 });
 $('#committee-switch').click(function(ev) {
     ev.preventDefault();
-    $('.sections').hide();
-    $('.committees').show();
+    setTimeout(function () {
+        $('.sections').hide();
+        $('.committees').show();
+    }, 100);
 });

@@ -1,0 +1,33 @@
+.btn {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  &>i {
+    float: left;
+    margin-right: 5px;
+    &.right{
+      margin-right: 0px;
+    }
+  }
+  &:hover {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .14), 0 4px 7px rgba(0, 0, 0, .18), 0 8px 19px rgba(0, 0, 0, .16);
+  }
+}
+
+nav .btn {
+  padding: 0 0.5rem;
+  &>i{
+    height: initial;
+    line-height: inherit;
+    margin-right: 5px;
+  }
+}
+
+.btn-inverse {
+  color: $primary-color;
+  background-color: $background-color;
+
+  &:hover{
+    background-color: inherit;
+  }
+}

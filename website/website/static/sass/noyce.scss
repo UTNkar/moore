@@ -8,5 +8,9 @@
 @import "materialize/sass/materialize";
 
 // Partials
+@import "partials/buttons";
+@import "partials/grid";
+@import "partials/navigation";
 @import "partials/structure_header";
 @import "partials/wagtail_userbar";
+@import "partials/waves";

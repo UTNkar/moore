@@ -1,0 +1,56 @@
+{% load static i18n wagtailcore_tags site_tags %}
+{% get_site_root as site_root %}
+<nav class="navigation">
+    <div class="container">
+
+        <a class="brand-logo" href="{% pageurl site_root %}">
+            {% block logo %}<img src="{% static 'images/logo.svg' %}" alt="{% trans 'The UTN Logo' %}">{% endblock %}
+        </a>
+
+        <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="mobile" class="side-nav">
+            {% menu_items parent=site_root calling_page=self sidenav=True %}
+        </ul>
+
+        <ul class="main-menu hide-on-med-and-down">
+            {% menu_items parent=site_root calling_page=self %}
+        </ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li><form action="{% url 'set_language' %}" id="set_language_form" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.path }}" />
+                {% if LANGUAGE_CODE == 'sv' %}
+                    <input type="hidden" name="language" value="en" />
+                    <button class="btn btn-inverse" type="submit"><i class="material-icons">language</i>English</button>
+                {% else %}
+                    <input type="hidden" name="language" value="sv" />
+                    <button class="btn btn-inverse" type="submit"><i class="material-icons">language</i>Svenska</button>
+                {% endif %}
+            </form></li>
+            {% if not user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="btn" href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}">
+                    <i class="material-icons">account_circle</i>{% trans 'Log in' %}
+                    </a>
+                </li>
+            {% else %}
+{#                <li class="nav-item user-avatar-wrapper">#}
+{#                    <a href="#" class="nav-link circle user-avatar-image">#}
+{#                        <i class="md-icon">person</i>#}
+                        {# TODO: Solve grey backlash #}
+{#                        <div class="nav-link circle user-avatar-image" style="background: transparent url('{% gravatar_url user.email %}'); background-size: 32px; bottom: 44px"></div>#}
+{#                    </a>#}
+{#                    <span class="user-avatar-status"></span>#}
+{##}
+{#                    <ul class="header-more-menu">#}
+{#                        <li><a href="{% url 'profile' %}">{% trans 'account'|capfirst %}</a></li>#}
+{#                        <li><a href="{% url 'password_change' %}">{% trans 'password'|capfirst %}</a></li>#}
+{#                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>{% trans "Log out" %}</a></li>#}
+{#                    </ul>#}
+{#                </li>#}
+            {% endif %}
+        </ul>
+
+    </div>
+</nav>

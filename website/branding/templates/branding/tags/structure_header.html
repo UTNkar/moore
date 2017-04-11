@@ -7,7 +7,7 @@
             {% if forloop.counter0|slugify == com_center %}
                 </div>
                 <div class="switch">
-                    <a id="section-switch" href="#"><i class="material-icons left">compare_arrows</i>{% trans 'sections'|title %}</a>
+                    <a id="section-switch" class="btn" href="#"><i class="material-icons">compare_arrows</i>{% trans 'sections'|title %}</a>
                 </div>
                 <div class="right-side">
             {% endif %}
@@ -15,7 +15,7 @@
         {% empty %}
             </div>
             <div class="switch">
-                <a id="section-switch" href="#"><i class="material-icons left">compare_arrows</i>{% trans 'sections'|title %}</a>
+                <a id="section-switch" class="btn" href="#"><i class="material-icons">compare_arrows</i>{% trans 'sections'|title %}</a>
             </div>
             <div class="right-side">
         {% endfor %}
@@ -28,7 +28,7 @@
             {% if forloop.counter0|slugify == sec_center %}
                 </div>
                 <div class="switch">
-                    <a id="committee-switch" href="#"><i class="material-icons left">compare_arrows</i>{% trans 'committees'|title %}</a>
+                    <a id="committee-switch" class="btn" href="#"><i class="material-icons">compare_arrows</i>{% trans 'committees'|title %}</a>
                 </div>
                 <div class="right-side">
             {% endif %}
@@ -36,7 +36,7 @@
         {% empty %}
             </div>
             <div class="switch">
-                <a id="committee-switch" href="#"><i class="material-icons left">compare_arrows</i>{% trans 'committees'|title %}</a>
+                <a id="committee-switch" class="btn" href="#"><i class="material-icons">compare_arrows</i>{% trans 'committees'|title %}</a>
             </div>
             <div class="right-side">
         {% endfor %}
