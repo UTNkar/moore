@@ -1,0 +1,8 @@
+@import "base";
+
+.input-field {
+  .errors {
+    color: $input-error-color;
+    margin-top: -10px;
+  }
+}

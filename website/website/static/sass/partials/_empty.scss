@@ -6,7 +6,7 @@
 
   a {
     color: rgba($background-color, 0.7);
-    &:hover {
+    &:hover, &.btn {
       color: ($background-color);
     }
     i {

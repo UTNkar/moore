@@ -21,7 +21,9 @@ def render_field(template, field, prefix=None):
 @register.simple_tag
 def materialize_field(field, prefix=None):
     widget = get_widget(field)
-    if widget == 'PasswordInput':
+    if widget == 'EmailInput':
+        return render_field('materialize/form/email_input.html', field, prefix)
+    elif widget == 'PasswordInput':
         return render_field(
             'materialize/form/password_input.html', field, prefix
         )
