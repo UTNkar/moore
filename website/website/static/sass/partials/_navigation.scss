@@ -1,9 +1,11 @@
 @import "base";
 $navigation-height: 80px;
 $line-height: 32px;
+$navigation-padding: ($navigation-height - $line-height)/2;
 
 $logo-height: $line-height;
 $logo-width: 125px;
+
 
 .navigation {
   @extend .nav-wrapper;
@@ -11,7 +13,35 @@ $logo-width: 125px;
   background-color: $background-color;
   height: $navigation-height;
   line-height: $line-height;
-  padding: ($navigation-height - $line-height)/2 0;
+  padding: $navigation-padding 0;
+
+  .avatar {
+    height: $line-height;
+
+    &.active, &:hover {
+      background: none;
+      a {
+        color: $black-color;
+        background: inherit;
+      }
+    }
+
+    img {
+      margin-top: - ($navigation-padding - (($navigation-height - ($line-height*2))/2));
+      height: $line-height*2;
+      width: $line-height*2;
+    }
+    .more-icon {
+      color: $black-color;
+      float: right;
+      font-size: 32px;
+      line-height: 32px;
+    }
+    .dropdown-content {
+      margin-top: 32px;
+      width: 200px !important;
+    }
+  }
 
   .brand-logo {
     height: $logo-height;
@@ -32,17 +62,13 @@ $logo-width: 125px;
         font-weight: bold;
         text-transform: uppercase;
       }
-      &.active, &:hover{
+      &.active, &:hover {
         background: none;
         a {
           color: $black-color;
           background: inherit;
         }
       }
-    }
-
-    .submenu {
-      display: none;
     }
   }
 }
