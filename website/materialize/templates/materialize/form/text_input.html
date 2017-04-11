@@ -1,6 +1,6 @@
 <div class="input-field">
     {% if prefix %}<i class="material-icons prefix">{{ prefix }}</i>{% endif %}
     <input id="{{ field.auto_id }}" name="{{ field.name }}" type="text" class="validate{% if field.errors %} invalid{% endif %}">
-    <label for="{{ field.auto_id }}" data-error="{% if field.errors %}{{ field.errors }}{% else %}{{ field.help_text }}{% endif %}">{{ field.label }}</label>
-{{ field.errors }}
+    <label for="{{ field.auto_id }}" data-error="{{ field.help_text }}">{{ field.label }}</label>
+    {% if field.errors %}{% include 'materialize/form/field_errors.html' %}{% endif %}
 </div>
