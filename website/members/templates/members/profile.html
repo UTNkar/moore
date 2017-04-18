@@ -1,48 +1,51 @@
 {% extends 'base.html' %}
-{% load i18n static membertags %}
+{% load i18n static membertags materialize %}
 
 {% block title %}{% trans 'Account Settings' %}{% endblock %}
 
 {% block extra_js %}
-<script type="text/javascript" src="{% static 'libraries/dirrty/jquery.dirrty.js' %}"></script>
-<script type="text/javascript">
-$('#account-settings').dirrty().on('dirty', function(){
-    $('#submit').removeClass('disabled');
-}).on('clean', function(){
-    $('#submit').addClass('disabled');
-});
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'libraries/dirrty/jquery.dirrty.js' %}"></script>
+    <script type="text/javascript">
+    $('#account-settings').dirrty().on('dirty', function(){
+        $('#submit').removeClass('disabled');
+    }).on('clean', function(){
+        $('#submit').addClass('disabled');
+    });
 
-function limit_studies(){
-    var val = $('#{{ form.section.auto_id }}').val();
-    $('#{{ form.study.auto_id }}').html('');
-    switch (val) {
-        {% for s in sections %}
-            case '{{ s.pk }}':
-            {% for study in s.studies.all %}
-                $('#{{ form.study.auto_id }}').append('<option value="{{ study.pk }}">{{ study }}</option>');
-            {% empty %}
+    function limit_studies(){
+    {# TODO: Fix for materialize #}
+        var val = $('#{{ form.section.auto_id }}').val();
+        $('#{{ form.study.auto_id }}').html('');
+        switch (val) {
+            {% for s in sections %}
+                case '{{ s.pk }}':
+                {% for study in s.studies.all %}
+                    $('#{{ form.study.auto_id }}').append('<option value="{{ study.pk }}">{{ study }}</option>');
+                {% empty %}
+                    $('#{{ form.study.auto_id }}').append('<option value="">---------</option>');
+                {% endfor %}
+                break;
+            {% endfor %}
+            default:
                 $('#{{ form.study.auto_id }}').append('<option value="">---------</option>');
+            {% for study in studies %}
+                $('#{{ form.study.auto_id }}').append('<option value="{{ study.pk }}">{{ study }}</option>');
             {% endfor %}
             break;
-        {% endfor %}
-        default:
-            $('#{{ form.study.auto_id }}').append('<option value="">---------</option>');
-        {% for study in studies %}
-            $('#{{ form.study.auto_id }}').append('<option value="{{ study.pk }}">{{ study }}</option>');
-        {% endfor %}
-        break;
+        }
+        $('#{{ form.study.auto_id }} option[value="{{ form.study.value }}"]').attr("selected", "selected");
     }
-    $('#{{ form.study.auto_id }} option[value="{{ form.study.value }}"]').attr("selected", "selected");
-}
 
-$('#{{ form.section.auto_id }}').change(limit_studies);
-$(document).ready(limit_studies);
-</script>
+    $('#{{ form.section.auto_id }}').change(limit_studies);
+    $(document).ready(limit_studies);
+    </script>
 {% endblock %}
 
 {% block content %}
-<div class="container push-top-bottom">
-<div class="box">
+<div class="container">
+<div class="card">
+<div class="card-content">
     {% if form.errors %}
         <div class="alert alert-danger" role="alert">
             <ul>
@@ -54,60 +57,33 @@ $(document).ready(limit_studies);
             </ul>
         </div>
     {% endif %}
-    {% include 'partial/messages.html' %}
     <form method="post" action="{% url 'profile' %}" id="account-settings">
         {% csrf_token %}
 
         <fieldset>
             <legend>{% trans 'contact information'|title %}</legend>
             <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        {% if form.first_name.errors %}<div style="color: red;">{% endif %}
-                        {{ form.first_name.label_tag }}
-                        {% if form.first_name.errors %}</div>{% endif %}
-                        {{ form.first_name }}
-                    </div><!-- /.form-group -->
-                </div><!-- /.col-* -->
+                <div class="col s4">
+                    {% materialize_field form.first_name 'face' %}
+                </div>
 
+                <div class="col s4">
+                    {% materialize_field form.last_name %}
+                </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        {% if form.last_name.errors %}<div style="color: red;">{% endif %}
-                        {{ form.last_name.label_tag }}
-                        {% if form.last_name.errors %}</div>{% endif %}
-                        {{ form.last_name }}
-                    </div><!-- /.form-group -->
-                </div><!-- /.col-* -->
-
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        {% if form.person_number.errors %}<div style="color: red;">{% endif %}
-                        {{ form.person_number.label_tag }}
-                        {% if form.person_number.errors %}</div>{% endif %}
-                        {{ form.person_number }}
-                    </div><!-- /.form-group -->
-                </div><!-- /.col-* -->
+                <div class="col s4">
+                    {% materialize_field form.person_number 'fiber_pin' %}
+                </div>
             </div>
 
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        {% if form.phone_number.errors %}<div style="color: red;">{% endif %}
-                        {{ form.phone_number.label_tag }}
-                        {% if form.phone_number.errors %}</div>{% endif %}
-                        {{ form.phone_number }}
-                    </div><!-- /.form-group -->
-                </div><!-- /.col-* -->
+                <div class="col s6">
+                    {% materialize_field form.phone_number 'phone' %}
+                </div>
 
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        {% if form.email.errors %}<div style="color: red;">{% endif %}
-                        {{ form.email.label_tag }}
-                        {% if form.email.errors %}</div>{% endif %}
-                        {{ form.email }}
-                    </div><!-- /.form-group -->
-                </div><!-- /.col-* -->
+                <div class="col s6">
+                    {% materialize_field form.email 'email' %}
+                </div>
             </div>
         </fieldset>
 
@@ -116,43 +92,29 @@ $(document).ready(limit_studies);
             <h6>{% trans 'current status'|capfirst %}: {% status_badge form.instance %}</h6>
             <p></p>
             {% if can_update_status %}
-            <p>{% trans 'Is this incorrect?' %} <button class="btn btn-primary btn-sm">{% trans 'recheck status'|capfirst %}</button></p>
+            <p><button class="btn btn-primary"><i class="material-icons">refresh</i>{% trans 'recheck status'|capfirst %}</button></p>
             {% endif %}
         </fieldset>
 
         <fieldset>
             <legend>{% trans 'study information'|title %}</legend>
-                <div class="form-group">
-                    {% if form.section.errors %}<div style="color: red;">{% endif %}
-                    {{ form.section.label_tag }}
-                    {% if form.section.errors %}</div>{% endif %}
-                    {{ form.section }}
-                </div>
+                {% materialize_field form.section 'group' %}
             <div class="row">
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        {% if form.study.errors %}<div style="color: red;">{% endif %}
-                        {{ form.study.label_tag }}
-                        {% if form.study.errors %}</div>{% endif %}
-                        {{ form.study }}
-                    </div><!-- /.form-group -->
-                </div><!-- /.col-* -->
+                <div class="col s8">
+                    {% materialize_field form.study 'book' %}
+                </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        {% if form.registration_year.errors %}<div style="color: red;">{% endif %}
-                        {{ form.registration_year.label_tag }}
-                        {% if form.registration_year.errors %}</div>{% endif %}
-                        {{ form.registration_year }}
-                    </div><!-- /.form-group -->
-                </div><!-- /.col-* -->
+                <div class="col s4">
+                    {% materialize_field form.registration_year %}
+                </div>
             </div>
         </fieldset>
 
         <div class="center">
-            <button id="submit" class="btn btn-large disabled">{% trans 'save' %}</button>
+            <button id="submit" class="btn btn-inverse disabled"><i class="material-icons">save</i>{% trans 'save' %}</button>
         </div>
     </form>
+</div>
 </div>
 </div>
 {% endblock %}

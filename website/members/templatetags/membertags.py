@@ -7,15 +7,15 @@ register = template.Library()
 @register.simple_tag
 def status_badge(member):
     if member.status == 'member':
-        cl = 'badge-success'
+        cl = 'green'
     elif member.status == 'alumnus':
-        cl = 'badge-primary'
+        cl = 'blue'
     elif member.status == 'nonmember':
-        cl = 'badge-danger'
+        cl = 'red'
     else:
-        cl = 'badge-default'
+        cl = ''
 
     return format_html(
-        '<span class="badge {}">{}</span>',
+        '<div class="chip {}">{}</span>',
         cl, member.get_status_display()
     )

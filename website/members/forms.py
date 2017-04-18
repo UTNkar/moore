@@ -29,17 +29,6 @@ class MemberForm(forms.ModelForm):
         model = Member
         fields = ['first_name', 'last_name', 'phone_number',
                   'registration_year', 'study', 'section', 'email']
-        widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'registration_year': forms.TextInput(
-                attrs={'class': 'form-control'}
-            ),
-            'study': forms.Select(attrs={'class': 'form-control'}),
-            'section': forms.Select(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-        }
 
     def __init__(self, *args, **kwargs):
         instance = kwargs.get('instance', None)
