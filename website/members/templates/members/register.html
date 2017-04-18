@@ -1,74 +1,52 @@
 {% extends "empty.html" %}
-{% load i18n %}
+{% load i18n materialize %}
 
 {% block title %}{% trans 'Register' %}{% endblock %}
 
 {% block heading %}{% trans 'Create a UTN account' %}{% endblock %}
 
 {% block form %}
-{% for error in form.errors.items %}
-    {% for message in error.1 %}
-        <div class="alert alert-danger" role="alert">
-            {{ message }}
-        </div>
-    {% endfor %}
+{% for error in form.non_field_errors %}
+    <div class="message error">{{ error }}</div>
 {% endfor %}
 
 <form method="post">
     {% csrf_token %}
 
-    <div class="form-group">
-        {{ form.person_number.label_tag }}
-        {{ form.person_number }}
-    </div>
-
     <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                {{ form.first_name.label_tag }}
-                {{ form.first_name }}
-            </div>
+        <div class="col s12">
+            {% materialize_field form.person_number 'fiber_pin' %}
         </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                {{ form.last_name.label_tag }}
-                {{ form.last_name }}
-            </div>
+
+        <div class="col m6 s12">
+            {% materialize_field form.first_name 'face' %}
         </div>
-    </div>
-
-    <div class="form-group">
-        {{ form.phone_number.label_tag }}
-        {{ form.phone_number }}
-    </div>
-
-    <div class="form-group">
-        {{ form.username.label_tag }}
-        {{ form.username }}
-    </div>
-
-    <div class="form-group">
-        {{ form.email.label_tag }}
-        {{ form.email }}
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                {{ form.password1.label_tag }}
-                {{ form.password1 }}
-            </div>
+        <div class="col m6 s12">
+            {% materialize_field form.last_name %}
         </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                {{ form.password2.label_tag }}
-                {{ form.password2 }}
-            </div>
+
+        <div class="col s12">
+            {% materialize_field form.phone_number 'phone' %}
+        </div>
+
+        <div class="col s12">
+            {% materialize_field form.username 'account_circle' %}
+        </div>
+
+        <div class="col s12">
+            {% materialize_field form.email 'email' %}
+        </div>
+
+        <div class="col m6 s12">
+            {% materialize_field form.password1 'lock' %}
+        </div>
+        <div class="col m6 s12">
+            {% materialize_field form.password2 %}
         </div>
     </div>
 
-    <div class="form-group-btn">
-        <button type="submit" class="btn btn-primary pull-right">{% trans 'register' %}</button>
+    <div class="center">
+        <button type="submit" class="btn btn-primary right"><i class="material-icons">create</i>{% trans 'register' %}</button>
     </div>
 </form>
 {#    {{ form }}#}
