@@ -46,17 +46,9 @@
 <div class="container">
 <div class="card">
 <div class="card-content">
-    {% if form.errors %}
-        <div class="alert alert-danger" role="alert">
-            <ul>
-            {% for field, errors in form.errors.items %}
-                {% for error in errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-            {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
+    {% for error in form.non_field_errors %}
+        <div class="message error">{{ error }}</div>
+    {% endfor %}
     <form method="post" action="{% url 'profile' %}" id="account-settings">
         {% csrf_token %}
 
