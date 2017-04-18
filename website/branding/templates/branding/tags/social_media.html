@@ -1,0 +1,35 @@
+{% load i18n static %}
+<strong>{% trans "Follow us on social media:" %}</strong>
+
+{% if settings.facebook %}
+    <a href="{{ settings.facebook }}">
+        <img src="{% if dark %}
+        {% static 'branding/images/social/facebook-black.png' %}
+        {% else %}
+        {% static 'branding/images/social/facebook-white.png' %}
+        {% endif %}"
+        alt="{% trans 'facebook icon'|capfirst %}">
+    </a>
+{% endif %}
+
+{% if settings.twitter %}
+    <a href="https://twitter.com/{{ settings.branding.SocialMediaSettings.twitter }}">
+        <img src="{% if dark %}
+        {% static 'branding/images/social/twitter-black.png' %}
+        {% else %}
+        {% static 'branding/images/social/twitter-white.png' %}
+        {% endif %}"
+        alt="{% trans 'twitter icon'|capfirst %}">
+    </a>
+{% endif %}
+
+{% if settings.instagram %}
+    <a href="https://www.instagram.com/{{ settings.instagram }}/">
+        <img src="{% if dark %}
+        {% static 'branding/images/social/instagram-black.png' %}
+        {% else %}
+        {% static 'branding/images/social/instagram-white.png' %}
+        {% endif %}"
+        alt="{% trans 'instagram icon'|capfirst %}">
+    </a>
+{% endif %}

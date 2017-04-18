@@ -1,6 +1,6 @@
 from django import template
 
-from branding.models import Logo
+from branding.models import Logo, SocialMediaSettings
 
 register = template.Library()
 
@@ -15,4 +15,13 @@ def structure_header(context, logo_color=''):
         'committees': committees,
         'sections': sections,
         'color': logo_color,
+    }
+
+
+@register.inclusion_tag('branding/tags/social_media.html', takes_context=True)
+def social_media(context, dark=False):
+    request = context['request']
+    return {
+        'settings': SocialMediaSettings.for_site(request.site),
+        'dark': dark,
     }

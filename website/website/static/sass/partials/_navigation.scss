@@ -3,8 +3,9 @@ $navigation-height: 80px;
 $line-height: 32px;
 $navigation-padding: ($navigation-height - $line-height)/2;
 
-$logo-height: $line-height;
-$logo-width: 125px;
+$logo-height: 55px;
+$logo-width: 214px;
+$logo-margin: ($line-height - $logo-height)/2;
 
 
 .navigation {
@@ -27,9 +28,9 @@ $logo-width: 125px;
     }
 
     img {
-      margin-top: - ($navigation-padding - (($navigation-height - ($line-height*2))/2));
-      height: $line-height*2;
-      width: $line-height*2;
+      margin-top: $logo-margin;
+      height: $logo-height;
+      width: $logo-height;
     }
     .more-icon {
       color: $black-color;
@@ -46,6 +47,7 @@ $logo-width: 125px;
   .brand-logo {
     height: $logo-height;
     width: $logo-width;
+    margin-top: $logo-margin;
   }
 
   .button-collapse i {

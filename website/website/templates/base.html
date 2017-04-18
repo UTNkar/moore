@@ -19,7 +19,11 @@
 
     <footer>
     {% block footer %}
-
+        {% include 'partials/footer.html' %}
     {% endblock %}
     </footer>
+{% endblock %}
+
+{% block extra_js %}
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 {% endblock %}
