@@ -1,5 +1,18 @@
 @import "base";
 
+fieldset {
+  background-color: rgba(0,0,0,0.03);
+  border-radius: 3px;
+  border: 0;
+  padding: 25px;
+  margin-bottom: 25px;
+
+  legend {
+    color: $secondary-color;
+    font-size: 20px;
+  }
+}
+
 .input-field {
   .errors {
     color: $input-error-color;

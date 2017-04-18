@@ -27,6 +27,8 @@ def materialize_field(field, prefix=None):
         return render_field(
             'materialize/form/password_input.html', field, prefix
         )
+    elif widget == 'Select':
+        return render_field('materialize/form/select.html', field, prefix)
     elif widget == 'TextInput':
         return render_field('materialize/form/text_input.html', field, prefix)
     else:
