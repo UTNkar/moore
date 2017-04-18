@@ -3,6 +3,24 @@
 
 <li><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
 {% for menuitem in menuitems %}
+{% if sidenav and menuitem.show_dropdown %}
+
+    <li {% if menuitem.active %}class="active"{% endif %} class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header">{% firstof menuitem.translated_title menuitem.title %}<i class="material-icons">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{% pageurl menuitem %}">{% firstof menuitem.translated_title menuitem.title %}</a></li>
+                        {% menu_children parent=menuitem %}
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+
+{% else %}
+
 <li {% if menuitem.active %}class="active"{% endif %}>
     <a {% if menuitem.show_dropdown %}class="dropdown-button" data-activates="{{ menuitem.slug }}"{% endif %} href="{% pageurl menuitem %}">{% firstof menuitem.translated_title menuitem.title %}</a>
     {% if menuitem.show_dropdown %}
@@ -12,4 +30,6 @@
         </ul>
     {% endif %}
 </li>
+
+{% endif %}
 {% endfor %}

@@ -9,7 +9,31 @@
 
         <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="mobile" class="side-nav">
+            <li>
+                <div class="userView">
+                    <div class="background">
+                        <img src="{% static 'images/uthgard_cut.jpg' %}">
+                    </div>
+                    {% if not user.is_authenticated %}
+                        <div class="center">
+                            <a class="btn center" href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}">
+                                <i class="material-icons">account_circle</i>{% trans 'Log in' %}
+                            </a>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'profile' %}"><img class="circle" src="{% gravatar_url user.email %}"></a>
+                        <a href="{% url 'profile' %}"><span class="white-text name">{{ user }}</span></a>
+                        <a href="{% url 'profile' %}"><span class="white-text email">{{ user.email }}</span></a>
+                    {% endif %}
+                </div>
+            </li>
             {% menu_items parent=site_root calling_page=self sidenav=True %}
+            {% if user.is_authenticated %}
+                <li><div class="divider"></div></li>
+                <li><a href="{% url 'profile' %}"><i class="material-icons">face</i>{% trans 'account' %}</a></li>
+                <li><a href="{% url 'password_change' %}"><i class="material-icons">lock</i>{% trans 'password' %}</a></li>
+                <li><a href="{% url 'logout' %}"><i class="material-icons">cancel</i>{% trans 'Log out' %}</a></li>
+            {% endif %}
         </ul>
 
         <ul class="main-menu hide-on-med-and-down">
@@ -46,20 +70,6 @@
                         <li><a href="{% url 'logout' %}"><i class="material-icons">cancel</i>{% trans 'Log out' %}</a></li>
                     </ul>
                 </li>
-{#                <li class="nav-item user-avatar-wrapper">#}
-{#                    <a href="#" class="nav-link circle user-avatar-image">#}
-{#                        <i class="md-icon">person</i>#}
-{#                         TODO: Solve grey backlash#}
-{#                        <div class="nav-link circle user-avatar-image" style="background: transparent url('{% gravatar_url user.email %}'); background-size: 32px; bottom: 44px"></div>#}
-{#                    </a>#}
-{#                    <span class="user-avatar-status"></span>#}
-{##}
-{#                    <ul class="header-more-menu">#}
-{#                        <li><a href="{% url 'profile' %}">{% trans 'account'|capfirst %}</a></li>#}
-{#                        <li><a href="{% url 'password_change' %}">{% trans 'password'|capfirst %}</a></li>#}
-{#                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>{% trans "Log out" %}</a></li>#}
-{#                    </ul>#}
-{#                </li>#}
             {% endif %}
         </ul>
 
