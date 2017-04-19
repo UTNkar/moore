@@ -65,7 +65,7 @@ $('#application-form').dirrty().on('dirty', function(){
             <div class="listing-detail">
                 <h1>{{ position }}</h1>
                 <h6 style="margin-top: -30px; color: {{ position.recruitment_end|date_color }};">{% trans 'deadline'|capfirst %}: {{ position.recruitment_end }}</h6>
-                <h2 style="margin-top: 0px; margin-bottom: 15px;">{% trans 'Role description'|title %}</h2>
+                <h2 style="margin-top: 0px; margin-bottom: 15px;">{% trans 'role description'|title %}</h2>
                 <p>{% if position.role.description %}{{ position.role.description|linebreaks }}{% else %}{% trans 'No role description is available at this time. For more information about this position, please get in contact with us.' %}{% endif %}</p>
                 {% if position.comment %}
                 <h2 style="margin-top: 25px; margin-bottom: 15px">{% trans 'comments for this year'|title %}</h2>

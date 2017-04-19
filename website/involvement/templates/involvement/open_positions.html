@@ -1,86 +1,43 @@
 {% extends "involvement/base.html" %}
 {% load i18n static wagtailroutablepage_tags wagtailimages_tags involvement_filters %}
 
-{% block extra_css %}
-<style>
-{% for team in teams %}
-{% if team.logo %}{% image team.logo fill-40x40 as logo %}{% endif %}
-.team-{{ team.id }}.faq-item:before {
-    content: '';
-    background: #FFFFFF {% if team.logo %}url("{{ logo.url }}");{% else %}url("{% static 'images/bocken.svg' %}");{% endif %}
-    background-size: 40px 40px;
-}
-{% endfor %}
-.no-team.faq-item:before {
-    content: '';
-    background: #FFFFFF url("{% static 'images/bocken.svg' %}");
-    background-size: 40px 40px;
-}
-</style>
-{% endblock %}
-
 {% block involvement_content %}
-<div class="container push-top-bottom">
-    <div class="row">
-    <div class="faq col-md-8 col-lg-9">
-        <h1>{% trans 'open positions'|title %}</h1>
+<div class="positions container">
+    <h1>{% trans 'open positions'|title %}</h1>
+    {% if positions %}
+        <ul class="collapsible popout" data-collapsible="expandable">
         {% for pos in positions|dictsort:'recruitment_end' %}
-            <div class="{% if pos.role.team %}team-{{ pos.role.team.id }}{% else %}no-team{% endif %} faq-item">
-                <div class="faq-item-question">
-                    <h2>{{ pos }}{% if pos.role.team %} &mdash; {{ pos.role.team }}{% endif %}</h2>
-                    <p style="margin-top: -15px; color: {{ pos.recruitment_end|date_color }};"><b>{% trans 'deadline'|capfirst %}: {{ pos.recruitment_end }}</b></p>
-                </div><!-- /.faq-item-question -->
-
-                <div class="faq-item-answer">
-                    {% if pos.role.description %}<p>{{ pos.role.description|truncatechars:300 }}</p>{% endif %}
-                    {% if pos.comment %}<p>{{ pos.comment|truncatechars:300 }}</p>{% endif %}
-                </div><!-- /.faq-item-answer -->
-
-                <div class="faq-item-meta">
-                    <div style="text-align: left; float: left">
-                        <b>{% trans 'Term of office' %}:</b>
-                        <span class="rate">
-                            {{ pos.term_from }}<span class="separator">-</span>{{ pos.term_to }}
-                        </span><!-- /.rate -->
+            <li>
+                <div class="collapsible-header">
+                    {% if pos.role.team.logo %}{% image pos.role.team.logo fill-45x45 as logo %}{% endif %}
+                    <img class="circle" src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/bocken.svg' %}{% endif %}">
+                    <div class="header-text">
+                        <h3>{{ pos }}</h3>
+                        <div class="team">
+                            {% if pos.role.team %}
+                                <i class="material-icons">group</i>{{ pos.role.team|truncatechars:20 }}
+                            {% else %}
+                                <i class="material-icons">person</i>{% trans 'unaffiliated'|capfirst %}
+                            {% endif %}
+                        </div>
                     </div>
-                    <div>
-                        <a class="btn" href="{% routablepageurl page 'position' pos.id  %}">{% trans 'apply' %}</a>
+                    <div class="apply right">
+                        <div class="hide-on-med-and-up"></div>
+                        <a class="btn" href="{% routablepageurl page 'position' pos.id  %}">{% trans 'apply' %}</a><br>
+                        <div class="hide-on-small-only"><b style="color: {{ pos.recruitment_end|date_color }};">{% trans 'deadline'|capfirst %}: {{ pos.recruitment_end }}</b></div>
                     </div>
-                </div><!-- /.faq-item-meta -->
-            </div><!-- /.faq-item -->
-        {% empty %}
-            <div class="alert alert-info" role="alert">
-                {% trans 'There are currently no open positions. Check back later!' %}
-            </div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="hide-on-med-and-up"><b style="color: {{ pos.recruitment_end|date_color }};">{% trans 'deadline'|capfirst %}: {{ pos.recruitment_end }}</b></div>
+                    <b>{% trans 'Term of office' %}: </b><span>{{ pos.term_from }} &mdash; {{ pos.term_to }}</span><br>
+                    {% if pos.role.description %}<b>{% trans 'role description'|title %}:</b><p>{{ pos.role.description|truncatechars:600 }} {% if pos.role.description|length > 600 %}<a href="{% routablepageurl page 'position' pos.id %}">{% trans 'Read more' %}</a>{% endif %}</p>{% endif %}
+                    {% if pos.comment %}<b>{% trans 'comments for this year'|title %}:</b><p>{{ pos.comment|truncatechars:600 }} {% if pos.role.description|length > 600 %}<a href="{% routablepageurl page 'position' pos.id  %}">{% trans 'Read more' %}</a>{% endif %}</p>{% endif %}
+                </div>
+            </li>
         {% endfor %}
-    </div><!-- /.faq -->
-
-    <div class="col-md-4 col-lg-3">
-			<div class="sidebar">
-				<div class="widget">
-                <h2 class="widgettitle">{% trans 'overview'|capfirst %}</h2>
-
-                <div class="reviews">
-                {% for pos in positions|dictsort:'recruitment_end' %}
-                    {% if pos.role.team.logo %}{% image pos.role.team.logo fill-20x20 as logo %}{% endif %}
-                    <div class="review" style="margin: 0 0 5px 0; padding: 0 0 5px 0;">
-                        <a href="{% routablepageurl page 'position' pos.id  %}" class="review-user" style="background-image: {% if pos.function.team.logo %}url('{{ logo.url }}');{% else %}url('{% static 'images/bocken.svg' %}');{% endif %}width: 20px; height: 20px;margin: 10px 10px 0 0;"></a>
-
-                        <div class="review-content">
-                            <h3><a href="{% routablepageurl page 'position' pos.id  %}">{{ pos|truncatechars:25 }}</a></h3>
-                            {% if pos.role.team %}<div><i class="md-icon" style="height: 14px; font-size: 20px;">group</i>{{ pos.role.team|truncatechars:20 }}</div>{% else %}<div><i class="md-icon" style="height: 14px; font-size: 20px;">person</i>{% trans 'unaffiliated'|capfirst %}</div>{% endif %}<!-- /.review-rating -->
-                        </div><!-- /.review-content -->
-                    </div><!-- /.review -->
-                {% empty %}
-                    {% trans 'There are currently no open positions. Check back later!' %}
-                {% endfor %}
-                </div><!-- /.reviews -->
-
-                </div><!-- /.widget -->
-			</div><!-- /.sidebar -->
-		</div>
-    </div>
-
-
-</div><!-- /.container -->
+        </ul>
+    {% else %}
+        <div class="card-panel primary-color white-text">{% trans 'There are currently no open positions. Check back later!' %}</div>
+    {% endif %}
+</div>
 {% endblock %}
