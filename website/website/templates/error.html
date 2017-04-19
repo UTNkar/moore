@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n wagtailcore_tags site_tags %}
+{% get_site_root as site_root %}
+
+{% block title %}Error{% endblock %}
+
+{% block content %}
+    <div class="error-page">
+        <h1>{% block error_code %}{% trans 'Error' %}{% endblock %}</h1>
+        <p>{% block error_message %}{% trans 'An error has occurred' %}{% endblock %}</p>
+
+        <div class="container">
+            <div class="divider"></div>
+        </div>
+
+        <a href="/" class="btn btn-secondary btn-large"><i class="material-icons">home</i> {% trans 'Return Home' %}</a>
+    </div>
+{% endblock %}

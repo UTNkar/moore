@@ -1,0 +1,7 @@
+{% extends "error.html" %}
+{% load i18n %}
+
+{% block title_suffix %}{% trans 'Uppsala Union of Engineering and Science Students' %}{% endblock %}
+
+{% block error_code %}500{% endblock %}
+{% block error_message %}{% trans 'Internal server error' %}{% endblock %}
