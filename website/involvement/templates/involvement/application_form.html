@@ -1,23 +1,16 @@
 {% load i18n wagtailroutablepage_tags materialize membertags %}
 
 <h2 id="apply">{% trans 'apply now!'|title %}</h2>
+
 {% for error in form.non_field_errors %}
     <div class="message error">{{ error }}</div>
 {% endfor %}
-{#{% if form.errors or reference_forms.errors %}#}
-{#    <div class="alert alert-danger" role="alert">#}
-{#        <ul>#}
-{#        {% for field, errors in form.errors.items %}#}
-{#            {% for error in errors %}#}
-{#                <li>{{ error }}</li>#}
-{#            {% endfor %}#}
-{#        {% endfor %}#}
-{#        {% if reference_forms.errors %}#}
-{#            <li>{% trans 'An error has been found in the refences.' %}</li>#}
-{#        {% endif %}#}
-{#        </ul>#}
-{#    </div>#}
-{#{% endif %}#}
+{% for form in reference_forms %}
+    {% for error in form.non_field_errors %}
+        <div class="message error">{{ error }}</div>
+    {% endfor %}
+{% endfor %}
+
 {% if position.is_past_due %}
 <div class="alert alert-info" role="alert">
     {% trans 'The deadline for this application has passed.' %} {% trans 'You can no longer change your application.' %}
@@ -32,20 +25,20 @@
             {% status_badge request.user %}
         </legend>
         <div class="row">
-            <div class="col m4 s6">
+            <div class="col l4 m6">
                 <div class="input-field">
                     <i class="material-icons prefix">face</i>
                     <input id="first-name" type="text" placeholder="{{ request.user.first_name }}" readonly>
                     <label for="first-name">{% trans 'first name' %}</label>
                 </div>
             </div>
-            <div class="col m4 s6">
+            <div class="col l4 m6">
                 <div class="input-field">
                     <input id="last-name" type="text" placeholder="{{ request.user.last_name }}" readonly>
                     <label for="last-name">{% trans 'last name' %}</label>
                 </div>
             </div>
-            <div class="col m4 s6">
+            <div class="col l4 m6">
                 <div class="input-field">
                     <i class="material-icons prefix">fiber_pin</i>
                     <input id="person-number" type="text" placeholder="{{ request.user.person_number }}" readonly>
@@ -53,29 +46,29 @@
                 </div>
             </div>
 
-            <div class="col m4 s6">
+            <div class="col l4 m6">
                 <div class="input-field">
                     <i class="material-icons prefix">phone</i>
                     <input id="phone" type="text" placeholder="{{ request.user.phone_number }}" readonly>
                     <label for="phone">{% trans 'phone number' %}</label>
                 </div>
             </div>
-            <div class="col m4 s6">
+            <div class="col l4 m6">
                 <div class="input-field">
                     <i class="material-icons prefix">email</i>
                     <input id="email" type="text" placeholder="{{ request.user.email }}" readonly>
                     <label for="email">{% trans 'e-mail' %}</label>
                 </div>
             </div>
-            <div class="col m4 s6">
+            <div class="col l4 m6">
                 <div class="input-field">
-                    <i class="material-icons prefix">book</i>
+                    <i class="material-icons prefix">school</i>
                     <input id="study" type="text" placeholder="{{ request.user.study }}" readonly>
                     <label for="study">{% trans 'study program' %}</label>
                 </div>
             </div>
 
-            <div class="edit-button col s12"><a class="btn-floating btn-large btn-primary right" href="{% url 'profile' %}"><i class="material-icons">edit</i></a></div>
+            <div class="fab-button col s12"><a class="btn-floating btn-large btn-primary right" href="{% url 'profile' %}"><i class="material-icons">edit</i></a></div>
         </div>
     </fieldset>
 
@@ -108,18 +101,19 @@
                 {% include 'involvement/reference_form.html' with number=forloop.counter0 %}
             {% endfor %}
         </div>
-        <div class="col-sm-12">
-            <a href="#" id="add"><b><i class="fa fa-plus"></i> {% trans 'Add a reference' %}</b></a>
+
+        <div class="col s12 fab-button">
+            <a id="add" class="btn-floating btn-large btn-primary right" href="{% url 'profile' %}"><i class="material-icons">add</i></a>
         </div>
     </fieldset>
 
     {% if not position.is_past_due %}
-    <div class="right">
+    <div class="col s12">
         {% if status == 'draft' %}
-        <button id="submit" name="{{ form.status.name }}" type="submit" class="save btn disabled" value="draft">{% trans 'save as draft' %}</button>
-        <button name="{{ form.status.name }}" type="submit" class="save btn btn-primary" value="submitted">{% trans 'apply' %}</button>
+            <button id="submit" name="{{ form.status.name }}" type="submit" class="save btn btn-inverse disabled" value="draft">{% trans 'save as draft' %}</button>
+            <button name="{{ form.status.name }}" type="submit" class="save btn btn-primary" value="submitted">{% trans 'apply' %}</button>
         {% else %}
-        <button name="{{ form.status.name }}" type="submit" class="save btn btn-primary disabled" value="submitted" id="submit">{% trans 'update' %}</button>
+            <button name="{{ form.status.name }}" type="submit" class="save btn btn-primary disabled" value="submitted" id="submit">{% trans 'update' %}</button>
         {% endif %}
     </div><!-- /.center -->
     {% endif %}
@@ -127,6 +121,6 @@
 
 
 <script type="text/html" id="formset-template">
-{% include 'involvement/reference_form.html' with form=reference_forms.empty_form number='__prefix__' %}
+    {% include 'involvement/reference_form.html' with form=reference_forms.empty_form number='__prefix__' %}
 </script>
 	

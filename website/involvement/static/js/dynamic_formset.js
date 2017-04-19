@@ -2,7 +2,7 @@ $(document).ready(function() {
     function deleteItem(btn, ev) {
        ev.preventDefault();
 
-       $(btn).parents('.item').hide();
+       $(btn).parents('.deletable').hide();
 
        var delbox = $(btn).parents('.delete-button').find('input[type=checkbox]');
 

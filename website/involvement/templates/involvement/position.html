@@ -2,7 +2,6 @@
 {% load i18n static wagtailimages_tags involvement_filters %}
 
 {% block extra_js %}
-<script type="text/javascript" src="{% static 'js/dynamic_formset.js' %}"></script>
 <script type="text/javascript" src="{% static 'libraries/dirrty/jquery.dirrty.js' %}"></script>
 <script type="text/javascript">
 $('#application-form').dirrty().on('dirty', function(){
@@ -11,6 +10,7 @@ $('#application-form').dirrty().on('dirty', function(){
     $('#submit').addClass('disabled');
 });
 </script>
+<script type="text/javascript" src="{% static 'js/dynamic_formset.js' %}"></script>
 {% endblock %}
 
 {% block involvement_content %}
