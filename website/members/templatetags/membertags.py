@@ -16,6 +16,6 @@ def status_badge(member):
         cl = ''
 
     return format_html(
-        '<div class="chip {}">{}</span>',
+        '<div class="chip {}">{}</div>',
         cl, member.get_status_display()
     )

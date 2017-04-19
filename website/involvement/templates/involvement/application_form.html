@@ -1,20 +1,23 @@
-{% load i18n wagtailroutablepage_tags %}
+{% load i18n wagtailroutablepage_tags materialize membertags %}
 
 <h2 id="apply">{% trans 'apply now!'|title %}</h2>
-{% if form.errors or reference_forms.errors %}
-    <div class="alert alert-danger" role="alert">
-        <ul>
-        {% for field, errors in form.errors.items %}
-            {% for error in errors %}
-                <li>{{ error }}</li>
-            {% endfor %}
-        {% endfor %}
-        {% if reference_forms.errors %}
-            <li>{% trans 'An error has been found in the refences.' %}</li>
-        {% endif %}
-        </ul>
-    </div>
-{% endif %}
+{% for error in form.non_field_errors %}
+    <div class="message error">{{ error }}</div>
+{% endfor %}
+{#{% if form.errors or reference_forms.errors %}#}
+{#    <div class="alert alert-danger" role="alert">#}
+{#        <ul>#}
+{#        {% for field, errors in form.errors.items %}#}
+{#            {% for error in errors %}#}
+{#                <li>{{ error }}</li>#}
+{#            {% endfor %}#}
+{#        {% endfor %}#}
+{#        {% if reference_forms.errors %}#}
+{#            <li>{% trans 'An error has been found in the refences.' %}</li>#}
+{#        {% endif %}#}
+{#        </ul>#}
+{#    </div>#}
+{#{% endif %}#}
 {% if position.is_past_due %}
 <div class="alert alert-info" role="alert">
     {% trans 'The deadline for this application has passed.' %} {% trans 'You can no longer change your application.' %}
@@ -23,77 +26,82 @@
 <form id="application-form" method="post" action="{% routablepageurl page 'position' position.id  %}#apply">
     {% csrf_token %}
     <fieldset>
-        <legend>{% trans 'member information'|title %}</legend>
-
+        <legend>
+            <i class="material-icons">person</i>
+            {% trans 'member information'|title %}
+            {% status_badge request.user %}
+        </legend>
         <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group">
+            <div class="col m4 s6">
+                <div class="input-field">
+                    <i class="material-icons prefix">face</i>
+                    <input id="first-name" type="text" placeholder="{{ request.user.first_name }}" readonly>
                     <label for="first-name">{% trans 'first name' %}</label>
-                    <input id="first-name" class="form-control" type="text" placeholder="{{ request.user.first_name }}" readonly>
-                </div><!-- /.form-group -->
-            </div><!-- /.col-* -->
-
-            <div class="col-sm-4">
-                <div class="form-group">
+                </div>
+            </div>
+            <div class="col m4 s6">
+                <div class="input-field">
+                    <input id="last-name" type="text" placeholder="{{ request.user.last_name }}" readonly>
                     <label for="last-name">{% trans 'last name' %}</label>
-                    <input id="last-name" class="form-control" type="text" placeholder="{{ request.user.last_name }}" readonly>
-                </div><!-- /.form-group -->
-            </div><!-- /.col-* -->
-
-            <div class="col-sm-4">
-                <div class="form-group">
+                </div>
+            </div>
+            <div class="col m4 s6">
+                <div class="input-field">
+                    <i class="material-icons prefix">fiber_pin</i>
+                    <input id="person-number" type="text" placeholder="{{ request.user.person_number }}" readonly>
                     <label for="person-number">{% trans 'person number' %}</label>
-                    <input id="person-number" class="form-control" type="text" placeholder="{{ request.user.person_number }}" readonly>
-                </div><!-- /.form-group -->
-            </div><!-- /.col-* -->
+                </div>
+            </div>
 
-            <div class="col-sm-4">
-                <div class="form-group">
+            <div class="col m4 s6">
+                <div class="input-field">
+                    <i class="material-icons prefix">phone</i>
+                    <input id="phone" type="text" placeholder="{{ request.user.phone_number }}" readonly>
                     <label for="phone">{% trans 'phone number' %}</label>
-                    <input id="phone" class="form-control" type="text" placeholder="{{ request.user.phone_number }}" readonly>
-                </div><!-- /.form-group -->
-            </div><!-- /.col-* -->
-
-            <div class="col-sm-4">
-                <div class="form-group">
+                </div>
+            </div>
+            <div class="col m4 s6">
+                <div class="input-field">
+                    <i class="material-icons prefix">email</i>
+                    <input id="email" type="text" placeholder="{{ request.user.email }}" readonly>
                     <label for="email">{% trans 'e-mail' %}</label>
-                    <input id="email" class="form-control" type="text" placeholder="{{ request.user.email }}" readonly>
-                </div><!-- /.form-group -->
-            </div><!-- /.col-* -->
-
-            <div class="col-sm-4">
-                <div class="form-group">
+                </div>
+            </div>
+            <div class="col m4 s6">
+                <div class="input-field">
+                    <i class="material-icons prefix">book</i>
+                    <input id="study" type="text" placeholder="{{ request.user.study }}" readonly>
                     <label for="study">{% trans 'study program' %}</label>
-                    <input id="study" class="form-control" type="text" placeholder="{{ request.user.study }}" readonly>
-                </div><!-- /.form-group -->
-            </div><!-- /.col-* -->
-        </div>
-        <div class="row">
-            <i>{% trans 'These values can be changed in your profile' %}</i>
+                </div>
+            </div>
+
+            <div class="edit-button col s12"><a class="btn-floating btn-large btn-primary right" href="{% url 'profile' %}"><i class="material-icons">edit</i></a></div>
         </div>
     </fieldset>
 
     <fieldset>
-        <legend>{{ form.cover_letter.label|title }}</legend>
+        <legend><i class="material-icons">assignment_ind</i> {{ form.cover_letter.label|title }}</legend>
 
-        <div class="form-group">
+        <div class="input-field">
+            <textarea id="{{ form.cover_letter.auto_id }}" name="{{ form.cover_letter.name }}" type="text" class="materialize-textarea validate{% if form.cover_letter.errors %} invalid{% endif %}">{{ form.cover_letter.initial }}</textarea>
             <label for="{{ form.cover_letter.auto_id }}">{{ form.cover_letter.help_text }}</label>
-            {{ form.cover_letter }}
-        </div><!-- /.form-group -->
+            {% if form.cover_letter.errors %}{% include 'materialize/form/field_errors.html' %}{% endif %}
+        </div>
     </fieldset>
 
     <fieldset>
-        <legend>{{ form.qualifications.label|title }}</legend>
+        <legend><i class="material-icons">assignment</i> {{ form.qualifications.label|title }}</legend>
 
-        <div class="form-group">
+        <div class="input-field">
+            <textarea id="{{ form.qualifications.auto_id }}" name="{{ form.qualifications.name }}" type="text" class="materialize-textarea validate{% if form.qualifications.errors %} invalid{% endif %}">{{ form.qualifications.initial }}</textarea>
             <label for="{{ form.qualifications.auto_id }}">{{ form.qualifications.help_text }}</label>
-            {{ form.qualifications }}
-        </div><!-- /.form-group -->
+            {% if form.qualifications.errors %}{% include 'materialize/form/field_errors.html' %}{% endif %}
+        </div>
     </fieldset>
 
     {{ reference_forms.management_form }}
     <fieldset>
-        <legend>{% trans 'references'|title %}</legend>
+        <legend><i class="material-icons">recent_actors</i> {% trans 'references'|title %}</legend>
 
         <div id="formset-container" class="row">
             {% for form in reference_forms %}
@@ -106,12 +114,12 @@
     </fieldset>
 
     {% if not position.is_past_due %}
-    <div class="text-right">
+    <div class="right">
         {% if status == 'draft' %}
-        <button id="submit" name="{{ form.status.name }}" type="submit" class="save btn btn-large disabled" value="draft">{% trans 'save as draft' %}</button>
-        <button name="{{ form.status.name }}" type="submit" class="save btn btn-large btn-primary" value="submitted">{% trans 'apply' %}</button>
+        <button id="submit" name="{{ form.status.name }}" type="submit" class="save btn disabled" value="draft">{% trans 'save as draft' %}</button>
+        <button name="{{ form.status.name }}" type="submit" class="save btn btn-primary" value="submitted">{% trans 'apply' %}</button>
         {% else %}
-        <button name="{{ form.status.name }}" type="submit" class="save btn btn-large btn-primary disabled" value="submitted" id="submit">{% trans 'update' %}</button>
+        <button name="{{ form.status.name }}" type="submit" class="save btn btn-primary disabled" value="submitted" id="submit">{% trans 'update' %}</button>
         {% endif %}
     </div><!-- /.center -->
     {% endif %}

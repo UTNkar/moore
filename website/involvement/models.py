@@ -464,7 +464,7 @@ class Application(ClusterableModel):
     # ---- Application Information ------
     cover_letter = models.TextField(
         verbose_name=_('Cover Letter'),
-        help_text=_('Present yourself and state why you are what we are '
+        help_text=_('Present yourself and state why you are who we are '
                     'looking for'),
         blank=True,
     )
