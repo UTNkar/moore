@@ -1,8 +1,6 @@
 {% extends "involvement/base.html" %}
 {% load i18n static wagtailimages_tags involvement_filters %}
 
-{# TODO: move style to SCSS! #}
-
 {% block extra_js %}
 <script type="text/javascript" src="{% static 'js/dynamic_formset.js' %}"></script>
 <script type="text/javascript" src="{% static 'libraries/dirrty/jquery.dirrty.js' %}"></script>
@@ -16,79 +14,66 @@ $('#application-form').dirrty().on('dirty', function(){
 {% endblock %}
 
 {% block involvement_content %}
-<div class="container push-top-bottom">
-    <div class="row">
-        <div class="col-md-5 col-md-push-7">
-            <div class="sidebar">
-                <div class="widget">
-                {% if position.role.team %}
-                    {% with team=position.role.team %}
-                    {% if team.logo %}
-                    {% image team.logo fill-40x40 as logo %}
-                    <div style="border-radius: 50%; float: left; background-image: url('{{ logo.url }}'); width: 40px; height: 40px;margin: 0px 10px 0 0;"></div>
-                    {% else %}
-                        <div style="border-radius: 50%; float: left; background-image: url('{% static 'images/bocken.svg' %}'); width: 40px; height: 40px;margin: 0px 10px 0 0; background-size: contain;"></div>
-                    {% endif %}
-                    <h2>{{ team }}</h2>
-                    <div class="overview">
-                        <ul>
-                            <li>
-                                <strong>{% trans 'about' %}</strong>
-                                <span>{{ team.description|linebreaks }}</span>
-                            </li>
-                            <li>
-                                <strong>{% trans 'contact' %}</strong>
-                                <a href="mailto:{{ team.email }}"><span>{{ team.leader }} &lt;{{ team.email }}&gt;</span></a>
-                            </li>
-                        </ul>
+    <div class="position container">
+        <div class="row">
+            <div class="col s12 m4 push-m8">
+                <div class="card">
+                    <div class="card-image">
+                        {% if position.role.team.logo %}{% image position.role.team.logo original as logo %}{% endif %}
+                        <img src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/bocken.svg' %}{% endif %}">
                     </div>
-                    {% endwith %}
-                {% else %}
-                    <div style="border-radius: 50%; float: left; background-image: url('{% static 'images/bocken.svg' %}'); width: 40px; height: 40px;margin: 0px 10px 0 0; background-size: contain;"></div><h2>{% trans 'unaffiliated'|capfirst %}</h2>
-                    <div class="overview">
-                        <ul>
-                            <li>
-                                <strong>{% trans 'about' %}</strong>
-                                <span>{% trans 'This position is not affiliated with any team or committee. You answer directly to the management team and the board.' %}</span>
-                            </li>
-                            <li>
-                                <strong>{% trans 'contact' %}</strong>
-                                <a href="mailto:ordf@utn.se"><span>{% trans 'chairman'|capfirst %} &lt;ordf@utn.se&gt;</span></a>
-                            </li>
-                        </ul>
+                    <div class="card-content">
+                        {% if position.role.team %}
+                            {% with team=position.role.team %}
+                                <span class="card-title">{{ team }}</span>
+                                <p>{{ team.description|linebreaks }}</p>
+                            {% endwith %}
+                        {% else %}
+                            <h2>{% trans 'unaffiliated'|capfirst %}</h2>
+                            <p>{% trans 'This position is not affiliated with any team or committee. You answer directly to the management team and the board.' %}</p>
+                        {% endif %}
                     </div>
-                {% endif %}
+                    <div class="card-action">
+                        <a href="mailto:{% if position.role.team %}{{ position.role.team.email }}{% else %}styrelsen@utn.se{% endif %}">{% trans 'contact election official' %}</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-7 col-md-pull-5">
-            <div class="listing-detail">
+
+            <div class="col s12 m8 pull-m4">
                 <h1>{{ position }}</h1>
-                <h6 style="margin-top: -30px; color: {{ position.recruitment_end|date_color }};">{% trans 'deadline'|capfirst %}: {{ position.recruitment_end }}</h6>
-                <h2 style="margin-top: 0px; margin-bottom: 15px;">{% trans 'role description'|title %}</h2>
+                <span class="deadline" style="color: {{ position.recruitment_end|date_color }};">{% trans 'deadline'|capfirst %}: {{ position.recruitment_end }}</span>
+
+                <h2>{% trans 'role description'|title %}</h2>
                 <p>{% if position.role.description %}{{ position.role.description|linebreaks }}{% else %}{% trans 'No role description is available at this time. For more information about this position, please get in contact with us.' %}{% endif %}</p>
+
                 {% if position.comment %}
-                <h2 style="margin-top: 25px; margin-bottom: 15px">{% trans 'comments for this year'|title %}</h2>
-                <p>{{ position.comment|linebreaks }}</p>
+                    <h2>{% trans 'comments for this year'|title %}</h2>
+                    <p>{{ position.comment|linebreaks }}</p>
+                {% endif %}
+            </div>
+
+            <div class="col s12">
+                {% if position.is_past_due and status == 'draft' %}
+                    <div class="card-panel primary-color white-text">
+                    {% trans 'The deadline for this application has passed.' %} {% trans 'You can no longer apply for this position.' %}
+                    </div>
+                {% elif form %}
+                    <div class="card">
+                        <div class="card-content">
+                            {% include 'involvement/application_form.html' %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="center">
+                                <h5>{% trans 'Please login to apply to this position' %}</h5>
+                                <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary">{% trans 'login' %}</a>
+                            </div>
+                        </div>
+                    </div>
                 {% endif %}
             </div>
         </div>
     </div>
-    <div class="row">
-    <div class="box">
-    {% if position.is_past_due and status == 'draft' %}
-        <div class="alert alert-info" role="alert">
-        {% trans 'The deadline for this application has passed.' %} {% trans 'You can no longer apply for this position.' %}
-        </div>
-    {% elif form %}
-        {% include 'involvement/application_form.html' %}
-    {% else %}
-        <div class="center">
-            <h5>{% trans 'Please login to apply to this position' %}</h5>
-            <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary btn-large">{% trans 'login' %}</a>
-        </div>
-    {% endif %}
-    </div>
-    </div>
-</div>
 {% endblock %}
