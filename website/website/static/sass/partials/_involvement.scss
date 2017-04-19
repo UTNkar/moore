@@ -1,0 +1,50 @@
+.positions {
+  .collapsible-header {
+    height: 60px;
+
+    img {
+      float: left;
+      margin: 7px 10px 0 0;
+      width: 45px;
+      height: 45px;
+    }
+
+    .apply {
+      text-align: right;
+      line-height: 1.5;
+      .btn {
+        margin-top: 5px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 1.5rem;
+
+      }
+      .hide-on-med-and-up {
+        height: 10px;
+      }
+    }
+
+    .header-text {
+      float: left;
+      line-height: 0;
+      h3 {
+        line-height: 0.8;
+      }
+      .team {
+        margin-left: 0px;
+        i {
+          height: 14px;
+          font-size: 20px;
+          margin-right: 5px;
+          line-height: 0;
+        }
+      }
+    }
+  }
+
+  .collapsible-body {
+    p {
+      margin-top: 0;
+    }
+  }
+}

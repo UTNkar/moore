@@ -3,20 +3,18 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-    <div class="header-colored">
-        <div class="container">
-            {# TODO: Show when screen becomes small #}
-            <div class="header-colored-label">
-                Go to
-            </div><!-- /.header-bottom-label -->
-
-            {# TODO: Mark when on the page?? #}
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a href="{% routablepageurl page 'open_positions' %}" class="nav-link">{% trans 'open positions'|title %}</a></li>
-                <li class="nav-item"><a href="{% routablepageurl page 'my_applications' %}" class="nav-link">{% trans 'my applications'|title %}</a></li>
-            </ul><!-- /.nav -->
-        </div><!-- /.container -->
-    </div><!-- /.header-bottom -->
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3">
+                    <a target="_self" {% if '/my_applications/' not in request.path %}class="active"{% endif %} href="{% routablepageurl page 'open_positions' %}">{% trans 'open positions' %}</a>
+                </li>
+                <li class="tab col s3">
+                    <a target="_self" {% if '/my_applications/' in request.path %}class="active"{% endif %} href="{% routablepageurl page 'my_applications' %}">{% trans 'my applications' %}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
     {% endif %}
     {% block involvement_content %}{% endblock %}
 {% endblock %}
