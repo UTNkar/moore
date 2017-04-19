@@ -48,3 +48,19 @@
     }
   }
 }
+
+#application-form {
+  .chip {
+    margin-left: 15px;
+  }
+  .edit-button {
+    height: 0;
+    margin-left: 45px;
+    a {
+      height: 56px;
+    }
+  }
+  legend i {
+    line-height: 20px;
+  }
+}

@@ -23,6 +23,7 @@ def profile(request):
             form.save()
             messages.add_message(request, messages.SUCCESS,
                                  _('Your account settings have been saved.'))
+            form = MemberForm(instance=request.user)
     else:
         form = MemberForm(instance=request.user)
 
