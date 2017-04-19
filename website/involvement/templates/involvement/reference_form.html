@@ -1,58 +1,34 @@
-{% load i18n %}
-<div id="reference-{{ number }}" class="item">
-    {% if number != 0 %}<div class="col-sm-12"><hr style="border-top-color: #616161;" /></div>{% endif %}
-    <div class="col-sm-11">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                {% if form.name.errors %}<div style="color: red;">{% endif %}
-                {{ form.name.label_tag }}
-                {% if form.name.errors %}</div>{% endif %}
-                {{ form.name }}
-            </div><!-- /.form-group -->
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                {% if form.position.errors %}<div style="color: red;">{% endif %}
-                {{ form.position.label_tag }}
-                {% if form.position.errors %}</div>{% endif %}
-                {{ form.position }}
-            </div><!-- /.form-group -->
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-                {# TODO: ERROR Messages #}
-                {% if form.phone_number.errors %}<div style="color: red;">{% endif %}
-                {{ form.phone_number.label_tag }}
-                {% if form.phone_number.errors %}</div>{% endif %}
-                {{ form.phone_number }}
-            </div><!-- /.form-group -->
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                {% if form.email.errors %}<div style="color: red;">{% endif %}
-                {{ form.email.label_tag }}
-                {% if form.email.errors %}</div>{% endif %}
-                {{ form.email }}
-            </div><!-- /.form-group -->
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                {{ form.comment.label_tag }}
-                {{ form.comment }}
-            </div><!-- /.form-group -->
+{% load i18n materialize %}
+<div id="reference-{{ number }}" class="card col xl4 m6 s12 deletable">
+    <div class="card-content">
+        <div class="row">
+            <div class="col s6">
+                {% materialize_field form.name 'face' %}
+            </div>
+            <div class="col s6">
+                {% materialize_field form.position 'supervisor_account' %}
+            </div>
+
+            <div class="col s6">
+                {% materialize_field form.phone_number 'phone' %}
+            </div>
+            <div class="col s6">
+                {% materialize_field form.email 'email' %}
+            </div>
+
+            <div class="col s12">
+                {% materialize_field form.comment 'comment' %}
+            </div>
+
+            <div class="fab-button delete-button col s12">
+                <div style="display: none;">
+                {{ form.DELETE }}</div>
+                <a class="btn-floating btn-large red right delete" href="#"><i class="material-icons">delete</i></a>
+            </div>
+
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
         </div>
     </div>
-    </div>
-    <div class="col-sm-1 center delete-button">
-        <div style="display: none;">
-        {{ form.DELETE }}</div>
-        <a class="btn delete" href="#" style="margin-top: 60px;"><i class="fa fa-trash"></i></a>
-    </div>
-    {% for hidden in form.hidden_fields %}
-        {{ hidden }}
-    {% endfor %}
-{#    <div class="col-sm-12"><hr style="border-top-color: #616161;" /></div>#}
 </div>
