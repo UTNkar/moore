@@ -1,35 +1,45 @@
-{% load i18n wagtailroutablepage_tags involvement_filters %}
+{% load i18n static wagtailroutablepage_tags wagtailimages_tags involvement_filters %}
 {% with position=application.position %}
-<div class="filter{% if color == 'primary' %} filter-primary{% elif color == 'secondary' %} filter-secondary{% endif %}">
-    <div class="row" style="padding-left: 20px;">
-        <h4>{{ position }}</h4>
-        {% if application.status != 'turned_down' and application.status != 'appointed' and application.status != 'disapproved' %}
-        <p style="margin-top: -15px; color: {{ position.recruitment_end|date_color }};"><b>{% trans 'deadline'|capfirst %}: {{ position.recruitment_end }}</b></p>
-        {% endif %}
-        {% if application.status != 'turned_down' and application.status != 'disapproved' %}
-            <p><b>{% trans 'term of office'|capfirst %}: {{ position.term_from }} - {{ position.term_to }}</b></p>
-        {% endif %}
+    <div class="col l4 m6 s12">
+        <div class="card{% if color == 'primary' %} primary-color white-text{% elif color == 'secondary' %} secondary-color white-text{% endif %}">
+            <div class="card-image">
+                <div class="card-image">
+                    {% if position.role.team.logo %}{% image position.role.team.logo original as logo %}{% endif %}
+                    <img src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/bocken.svg' %}{% endif %}">
+                </div>
+                <span class="btn-floating halfway-fab{% if application.status != 'draft' %} primary-color{% endif %}"><i class="material-icons">{{ application.status|status_icon }}</i></span>
+            </div>
+            <div class="card-content">
+                <span class="card-title">{{ position }}</span>
+
+                {% if application.status != 'draft' %}
+                    <p><b>{% trans 'status'|capfirst %}: {{ application.get_status_display }}</b></p>
+                {% endif %}
+
+                {% if application.status != 'turned_down' and application.status != 'appointed' and application.status != 'disapproved' %}
+                    <p style="color: {{ position.recruitment_end|date_color }};"><b>{% trans 'deadline'|capfirst %}: {{ position.recruitment_end }}</b></p>
+                {% endif %}
+
+                {% if application.status != 'turned_down' and application.status != 'disapproved' %}
+                    <p><b>{% trans 'term of office'|capfirst %}: {{ position.term_from }} - {{ position.term_to }}</b></p>
+                {% endif %}
+
+            </div>
+            <div class="card-action">
+                {% if edit %}
+                    <a href="{% routablepageurl page 'position' position.id  %}">{% trans 'edit application' %}</a>
+                    <form method="post" action="{% routablepageurl page 'my_applications'  %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="application" id="application" value="{{ application.id }}" />
+                        <button name="action" type="submit" class="btn-floating halfway-fab red" value="delete">
+                            <i class="material-icons">delete_forever</i>
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% routablepageurl page 'position' position.id  %}">{% trans 'view application' %}</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <div class="row filter-options">
-        {% if edit %}
-            <div class="col-sm-9"><a class="btn btn-large btn-primary" href="{% routablepageurl page 'position' position.id  %}"><i class="fa {{ application.status|status_icon }}"></i> {% trans 'edit' %}</a></div>
-            <div class="col-sm-3" style="text-align: right;">
-                <form method="post" action="{% routablepageurl page 'my_applications'  %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="application" id="application" value="{{ application.id }}" />
-                    <button name="action" type="submit" class="btn btn-large btn-danger" value="delete">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </form>
-            </div>
-        {% else %}
-            <div class="col-sm-9">
-                <h4><i class="fa {{ application.status|status_icon }}"></i> {{ application.get_status_display }}</h4>
-            </div>
-            <div class="col-sm-3" style="text-align: right;">
-                <a class="btn btn-large btn-primary" href="{% routablepageurl page 'position' position.id  %}">{% trans 'view application' %}</a>
-            </div>
-        {% endif %}
-    </div>
-</div>
+
 {% endwith %}
