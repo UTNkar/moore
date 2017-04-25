@@ -22,16 +22,16 @@ def date_color(value):
 @register.filter
 def status_icon(value):
     if value == 'draft':
-        return 'fa-pencil'
+        return 'edit'
     elif value == 'submitted':
-        return 'fa-envelope-open'
+        return 'send'
     elif value == 'approved':
-        return 'fa-thumbs-up'
+        return 'thumb_up'
     elif value == 'disapproved':
-        return 'fa-thumbs-down'
+        return 'thumb_down'
     elif value == 'appointed':
-        return 'fa-check'
+        return 'person_pin'
     elif value == 'turned_down':
-        return 'fa-close'
+        return 'do_not_disturb'
     else:
-        return 'fa-exclamation-triangle'
+        return 'error'

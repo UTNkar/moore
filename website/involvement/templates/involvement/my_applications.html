@@ -2,40 +2,48 @@
 {% load i18n %}
 
 {% block involvement_content %}
-    <div class="container push-top-bottom">
+    <div class="container">
         {% if drafts %}
-        <div class="page-header"><h2>{% trans 'drafted applications'|title %}</h2></div>
-        {% for a in drafts %}
-            {% include 'involvement/application_summary.html' with application=a edit=True color='primary' %}
-        {% endfor %}
+            <h2>{% trans 'drafted applications'|title %}</h2>
+            <div class="row">
+                {% for a in drafts %}
+                    {% include 'involvement/application_summary.html' with application=a edit=True color='primary' %}
+                {% endfor %}
+            </div>
         {% endif %}
 
         {% if submitted %}
-        <div class="page-header"><h2>{% trans 'submitted applications'|title %}</h2></div>
-        {% for a in submitted %}
-            {% include 'involvement/application_summary.html' with application=a edit=True %}
-        {% endfor %}
+            <h2>{% trans 'submitted applications'|title %}</h2>
+            <div class="row">
+                {% for a in submitted %}
+                    {% include 'involvement/application_summary.html' with application=a edit=True %}
+                {% endfor %}
+            </div>
         {% endif %}
 
         {% if waiting %}
-        <div class="page-header"><h2>{% trans 'waiting applications'|title %}</h2></div>
-        {% for a in waiting %}
-            {% include 'involvement/application_summary.html' with application=a %}
-        {% endfor %}
+            <h2>{% trans 'waiting applications'|title %}</h2>
+            <div class="row">
+                {% for a in waiting %}
+                    {% include 'involvement/application_summary.html' with application=a %}
+                {% endfor %}
+            </div>
         {% endif %}
 
         {% if not drafts and not submitted and not waiting and not old %}
-            <div class="page-header"><h2>{% trans 'submitted applications'|title %}</h2></div>
-            <div class="filter">
-            <b>{% trans 'You currently do not have any submitted applications.' %}</b>
+            <h2>{% trans 'submitted applications'|title %}</h2>
+            <div class="card-panel primary-color white-text">
+                {% trans 'You currently do not have any submitted applications.' %}
             </div>
         {% endif %}
 
         {% if old %}
-        <div class="page-header"><h2>{% trans 'submitted applications'|title %}</h2></div>
-        {% for a in old %}
-            {% include 'involvement/application_summary.html' with application=a color='secondary' %}
-        {% endfor %}
+            <h2>{% trans 'submitted applications'|title %}</h2>
+            <div class="row">
+                {% for a in old %}
+                    {% include 'involvement/application_summary.html' with application=a color='secondary' %}
+                {% endfor %}
+            </div>
         {% endif %}
     </div>
 {% endblock %}

@@ -1,0 +1,13 @@
+@import "base";
+
+.card {
+  .card-image {
+    background-color: #fff;
+  }
+}
+
+.card.primary-color, .card.secondary-color {
+  .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+    color: #fff;
+  }
+}
