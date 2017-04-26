@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - Switch to the materialize CSS/JS framework.
+### Removed
+- Old migrations in the website app.
 
 ## [0.2.0] - 2017-04-07
 ### Added
