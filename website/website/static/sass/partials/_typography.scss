@@ -1,0 +1,11 @@
+@import "base";
+
+a {
+  color: $primary-color;
+  transition: color .15s linear;
+
+  &:hover {
+    color: darken($primary-color, 5%);
+    text-decoration: none;
+  }
+}
