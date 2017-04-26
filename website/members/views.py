@@ -15,9 +15,6 @@ from members.models import Section, StudyProgram
 
 @login_required
 def profile(request):
-    # TODO: Delete?
-    page = {'title': _('Account Settings')}
-
     if request.POST:
         form = MemberForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -41,7 +38,6 @@ def profile(request):
     )
 
     return render(request, 'members/profile.html', {
-        'page': page,
         'form': form,
         'studies': StudyProgram.objects.all(),
         'sections': Section.objects.all(),
