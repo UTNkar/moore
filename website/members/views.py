@@ -15,6 +15,7 @@ from members.models import Section, StudyProgram
 
 @login_required
 def profile(request):
+    # TODO: Delete?
     page = {'title': _('Account Settings')}
 
     if request.POST:
