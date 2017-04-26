@@ -11,6 +11,7 @@
     }
   }
   &:hover {
+    color: $background-color;
     box-shadow: 0 2px 3px rgba(0, 0, 0, .14), 0 4px 7px rgba(0, 0, 0, .18), 0 8px 19px rgba(0, 0, 0, .16);
   }
 }
@@ -29,6 +30,7 @@ nav .btn {
   background-color: $primary-color;
 
   &:hover {
+    color: $background-color;
     background-color: darken($primary-color, 5%);
   }
 }
@@ -38,6 +40,7 @@ nav .btn {
   background-color: $background-color;
 
   &:hover {
+    color: $primary-color;
     background-color: $background-color;
   }
 }
