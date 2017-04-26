@@ -60,8 +60,8 @@
                 </li>
             {% else %}
                 <li class="avatar">
-                    <a href="#" class="dropdown-button" data-activates="user-menu">
-                        <img class="circle" src="{% gravatar_url user.email %}" alt="{% trans 'your avatar' %}">
+                    <a href="{% url 'profile' %}" class="dropdown-button" data-activates="user-menu">
+                        <img src="{% gravatar_url user.email %}" alt="{% trans 'your avatar' %}">
                         <i class="material-icons more-icon">more_vert</i>
                     </a>
                     <ul id="user-menu" class="dropdown-content">

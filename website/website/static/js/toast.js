@@ -52,7 +52,7 @@ $(document).ready(function() {
         if ($(value).hasClass('error')) {
             classes = 'red';
         } else if ($(value).hasClass('warning')) {
-            classes = 'yellow';
+            classes = 'yellow black-text';
         }
         marvin($(this).text(), classes);
     });
