@@ -1,4 +1,4 @@
-function marvin(message, classes) {
+function marvin(message, classes, callback) {
     var marvin_style = 'rounded';
     if(classes !== '') {
         marvin_style += ' ' + classes;
@@ -12,7 +12,8 @@ function marvin(message, classes) {
         + message
         + '</div>',
         null, // Display until dismissed
-        marvin_style
+        marvin_style,
+        callback
     );
 }
 
@@ -43,7 +44,12 @@ function marvin_quote(){
         'Sounds awful.'
     ];
 
-    return QUOTES[Math.floor(Math.random()*QUOTES.length)];
+    var min = 90*1000;
+    var max = 600*1000;
+    var rand = Math.floor(Math.random() * (max - min)) + min;
+    setTimeout(function(){
+        marvin(QUOTES[Math.floor(Math.random()*QUOTES.length)], '', marvin_quote);
+    },rand) ;
 }
 
 $(document).ready(function() {
@@ -54,16 +60,8 @@ $(document).ready(function() {
         } else if ($(value).hasClass('warning')) {
             classes = 'yellow black-text';
         }
-        marvin($(this).text(), classes);
+        marvin($(this).text(), classes, null);
     });
 
-    (function loop() {
-        var min = 90*1000;
-        var max = 600*1000;
-        var rand = Math.floor(Math.random() * (max - min)) + min;
-        setTimeout(function() {
-            marvin(marvin_quote(), '');
-            loop();
-        }, rand);
-    }());
+    marvin_quote();
 });
