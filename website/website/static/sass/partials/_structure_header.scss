@@ -4,14 +4,14 @@
   @extend .hide-on-med-and-down;
 
   height: 40px;
+  line-height: 30px;
   padding: 5px 0;
   box-shadow: none;
+  text-align: center;
 
   .switch {
-    width: 14%;
-    float: left;
-    height: 40px;
-    line-height: 1;
+    display: inline-block;
+    vertical-align: top;
     &>a{
       height: 30px;
       line-height: 30px;
@@ -25,19 +25,17 @@
     margin: 0 3px;
   }
   .left-side {
-    width: 43%;
-    height: 40px;
-    line-height: 1;
-    float: left;
+    width: 42%;
+    height: 30px;
+    display: inline-block;
     .logo {
       float: right;
     }
   }
   .right-side {
-    width: 43%;
-    height: 40px;
-    line-height: 1;
-    float: right;
+    width: 42%;
+    height: 30px;
+    display: inline-block;
     .logo {
       float: left;
     }
