@@ -1,0 +1,50 @@
+@import "base";
+
+.content-title {
+  @extend .clearfix;
+  border-bottom: 1px solid rgba(#000, .07);
+  padding-top: 40px;
+  padding-bottom: 64px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: normal;
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+  @media #{$small-and-down} {
+    .breadcrumbs {
+      clear: both;
+      float: none;
+      padding: 10px 0 0 0;
+    }
+  }
+}
+
+.breadcrumbs {
+  background-color: transparent;
+  border-radius: 0;
+  float: right;
+  list-style: none;
+  margin: 3px 0 0 0;
+  padding: 0;
+
+  a {
+    color: color('grey', 'base');
+  }
+
+  i {
+    color: $primary-color;
+    font-size: 18px;
+    margin: 0 12px;
+    vertical-align: middle;
+  }
+
+  > li {
+    float: left;
+    &.active {
+      color: $breadcrumb-active-color;
+    }
+  }
+}

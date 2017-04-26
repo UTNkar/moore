@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags %}
+
+{% block main %}
+    <div class="content-title">
+        <div class="container">
+            <h1>{% firstof page.translated_title page.title %}</h1>
+            <ul class="breadcrumbs">
+                {% for page in self.get_ancestors %}
+                    {% if page.is_root == False %}
+                        <li><a href="{% pageurl page %}">{% firstof page.translated_title page.title %}</a> <i class="material-icons">keyboard_arrow_right</i></li>
+                    {% endif %}
+                {% endfor %}
+                <li class="active">{% firstof page.translated_title page.title %}</li>
+            </ul>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+{% endblock %}
