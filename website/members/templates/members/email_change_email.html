@@ -1,4 +1,4 @@
-{% load i18n %}{% autoescape off %}{% if new_user %}{% blocktrans %}You're receiving this email because a UTN-account has been created with this e-mail address.{% endblocktrans %}{% else %}{% blocktrans %}You're receiving this email because you registered a new e-mail address for your UTN-account.{% endblocktrans %}{% endif %}
-{% trans "Please go to the following page to confirm your e-mail address" %}{% if new_user %}{% trans " and complete your profile" %}{% endif %}:
+{% load i18n %}{% autoescape off %}{% if new_user %}{% blocktrans %}You're receiving this email because a UTN-account has been created with this email address.{% endblocktrans %}{% else %}{% blocktrans %}You're receiving this email because you registered a new email address for your UTN-account.{% endblocktrans %}{% endif %}
+{% trans "Please go to the following page to confirm your email address" %}{% if new_user %}{% trans " and complete your profile" %}{% endif %}:
 
 {% block confirmation_link %}{{ domain }}{% url 'email_change_confirm' token=token %}{% endblock %}{% endautoescape %}

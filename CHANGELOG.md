@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - A new form field type for person numbers
 ### Changed
 - Switch to the materialize CSS/JS framework.
+- Election contact e-mail has been moved to the Role model and has been labeled as such.
 ### Removed
 - Old migrations in the website app.
 ### Fixed
@@ -47,16 +48,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - FontAwesome support within wagtail icons
 ### Changed
 - Study has been removed from the registration page. Members will instead be
-asked to extend their profile in the registration e-mail.
+asked to extend their profile in the registration email.
 ### Fixed
-- Confirmation e-mails not being sent.
+- Confirmation emails not being sent.
 - Updated translations
 - Production: cross-domain cookies
 - Makes the membership API more reliable
 
 ## [0.1.1] - 2017-03-30
 ### Added
-- Notification on unconfirmed e-mail addresses
+- Notification on unconfirmed email addresses
 - Membership status for all members. It checks against the UTN registry.
 - Cron Tasks
 ### Changed

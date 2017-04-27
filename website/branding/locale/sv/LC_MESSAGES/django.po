@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-04 14:37+0200\n"
+"POT-Creation-Date: 2017-04-27 13:40+0200\n"
 "PO-Revision-Date: 2017-03-31 11:21+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -71,12 +71,28 @@ msgstr "svart logotyp"
 msgid "belongs to"
 msgstr "tillhör"
 
-#: branding/templates/tags/organisation_menu.html:11
-#: branding/templates/tags/organisation_menu.html:19
+#: branding/templates/branding/tags/social_media.html:2
+msgid "Follow us on social media:"
+msgstr ""
+
+#: branding/templates/branding/tags/social_media.html:11
+msgid "facebook icon"
+msgstr ""
+
+#: branding/templates/branding/tags/social_media.html:22
+msgid "twitter icon"
+msgstr ""
+
+#: branding/templates/branding/tags/social_media.html:33
+msgid "instagram icon"
+msgstr ""
+
+#: branding/templates/branding/tags/structure_header.html:10
+#: branding/templates/branding/tags/structure_header.html:18
 msgid "sections"
 msgstr "sektioner"
 
-#: branding/templates/tags/organisation_menu.html:32
-#: branding/templates/tags/organisation_menu.html:40
+#: branding/templates/branding/tags/structure_header.html:31
+#: branding/templates/branding/tags/structure_header.html:39
 msgid "committees"
 msgstr "kommittéer"

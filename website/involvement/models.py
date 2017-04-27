@@ -143,28 +143,6 @@ class Team(models.Model):
 
     description = TranslatedField('description_en', 'description_sv')
 
-    # ---- Contact Information ------
-    leader_en = models.CharField(
-        max_length=255,
-        verbose_name=_('English team leader position name'),
-        help_text=_('Enter the name of position of the team leader'),
-        blank=True,
-    )
-
-    leader_sv = models.CharField(
-        max_length=255,
-        verbose_name=_('Swedish team leader position name'),
-        help_text=_('Enter the name of position of the team leader'),
-        blank=True,
-    )
-
-    leader = TranslatedField('leader_en', 'leader_sv')
-
-    email = models.EmailField(
-        verbose_name=_('Contact e-mail address'),
-        blank=True,
-    )
-
     def __str__(self) -> str:
         return '{}'.format(self.name)
 
@@ -298,6 +276,13 @@ class Role(models.Model):
 
     description = TranslatedField('description_en', 'description_sv')
 
+    election_email = models.EmailField(
+        verbose_name=_('Election contact email address'),
+        help_text=_('The email address to contact for more information '
+                    'regarding the role.'),
+        blank=True,
+    )
+
     def __str__(self) -> str:
         return _('%(role)s in %(team)s') % {
                 'role': self.name,
@@ -311,6 +296,7 @@ class Role(models.Model):
             FieldPanel('name_en'),
             FieldPanel('name_sv'),
         ]),
+        FieldPanel('election_email'),
         FieldPanel('description_en'),
         FieldPanel('description_sv'),
         FieldRowPanel([
@@ -518,8 +504,8 @@ class Reference(Orderable):
     )
 
     email = models.EmailField(
-        verbose_name=_('E-mail address'),
-        help_text=_('Enter an e-mail address on which your reference in '
+        verbose_name=_('email address'),
+        help_text=_('Enter an email address on which your reference in '
                     'reachable'),
         blank=True,
     )

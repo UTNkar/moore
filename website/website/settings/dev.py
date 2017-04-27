@@ -32,7 +32,7 @@ DATABASES = {
 # trailing slash
 BASE_URL = 'http://127.0.0.1:8000'
 
-# E-mail
+# Email
 # https://docs.djangoproject.com/en/1.10/ref/settings/#email-backend
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
