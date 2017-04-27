@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/UTNkar/moore.svg?branch=development)](https://travis-ci.org/UTNkar/moore)
 [![Coverage Status](https://coveralls.io/repos/github/UTNkar/moore/badge.svg?branch=development)](https://coveralls.io/github/UTNkar/moore?branch=development)
+[![Requirements Status](https://requires.io/github/UTNkar/moore/requirements.svg?branch=development)](https://requires.io/github/UTNkar/moore/requirements/?branch=development)
 
 Project Moore is a replacement for many of the [UTN](https://utn.se/) web
 applications. Built using [Wagtail](https://wagtail.io/) and the [Django](https://www.djangoproject.com/) framework, Project
