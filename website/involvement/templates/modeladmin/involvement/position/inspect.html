@@ -1,0 +1,33 @@
+{% extends 'modeladmin/inspect.html' %}
+{% load i18n %}
+
+{% block fields_output %}
+    <dl>
+        <dt>{% trans 'position' %}</dt>
+        <dd>{{ instance }}</dd>
+
+        <dt>{% trans 'applications' %}</dt>
+        <dd>
+            <ul>
+                {% for a in instance.applications.all %}
+                    <li>
+                        {% if a.status == 'draft' %}
+                            <i>{{ a.get_status_display }}:</i>
+                        {% elif a.status != 'submitted' %}
+                            <b>{{ a.get_status_display }}:</b>
+                        {% endif %}
+                        {{ a.applicant }}
+                        {% if a.applicant.email or a.applicant.phone_number %}
+                            &mdash;
+                            {% if a.applicant.email %}<a href="mailto:{{ a.applicant.email }}">{{ a.applicant.email }}</a>{% endif %}
+                            {% if a.applicant.email and a.applicant.phone_number %} or {% endif %}
+                            {% if a.applicant.phone_number %}{{ a.applicant.phone_number }}{% endif %}
+                        {% endif %}
+                    </li>
+                {% empty %}
+                    {% trans 'No applications have been submitted for this position.' %}
+                {% endfor %}
+            </ul>
+        </dd>
+    </dl>
+{% endblock %}

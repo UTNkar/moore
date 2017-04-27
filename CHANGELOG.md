@@ -8,15 +8,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Searching within involvement admin will now search more fields.
 - A new form field type for person numbers
+- Inspection view for Position, showing applicants
 ### Changed
 - Switch to the materialize CSS/JS framework.
 - Election contact e-mail has been moved to the Role model and has been labeled as such.
+- Contact information of team members is now available in the Team inspection view.
 ### Removed
 - Old migrations in the website app.
 ### Fixed
 - Searching for positions within the admin interface will no longer cause an error.
-- Allow person numbers to be "T-numbers"
+- Allow person numbers to be "T-numbers".
 - Several instances where dirrty wasn't triggered at the right time.
+- Improved queries for loading positions.
+- Disallow creating roles outside your team.
 
 ## [0.2.0] - 2017-04-07
 ### Added
