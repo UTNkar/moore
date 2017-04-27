@@ -90,6 +90,8 @@ rules.add_perm('involvement.delete_role', is_admin)
 
 rules.add_perm('involvement.list_position', is_admin | is_official
                | is_approval_committee)
+rules.add_perm('involvement.inspect_position', is_admin | is_position_official
+               | is_approval_committee_for)
 rules.add_perm('involvement.add_position', is_admin | is_official)
 rules.add_perm('involvement.change_position', is_admin | is_position_official)
 rules.add_perm('involvement.approve_position', is_admin
