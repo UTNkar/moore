@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Searching for positions within the admin interface will no longer cause an error.
 - Allow person numbers to be "T-numbers"
+- Several instances where dirrty wasn't triggered at the right time.
 
 ## [0.2.0] - 2017-04-07
 ### Added

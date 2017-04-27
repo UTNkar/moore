@@ -1,12 +1,12 @@
 $(document).ready(function() {
     function deleteItem(btn, ev) {
-       ev.preventDefault();
+        ev.preventDefault();
 
-       $(btn).parents('.deletable').hide();
+        $(btn).parents('.deletable').hide();
 
-       var delbox = $(btn).parents('.delete-button').find('input[type=checkbox]');
+        var delbox = $(btn).parents('.delete-button').find('input[type=checkbox]');
 
-       delbox.prop('checked', true);
+        delbox.prop('checked', true);
     }
 
     $('#add').click(function(ev) {
@@ -23,6 +23,7 @@ $(document).ready(function() {
         // update form count
         // TODO: make non-specific to references
         $('#id_references-TOTAL_FORMS').attr('value', count+1);
+        $('#application-form').dirrty();
     });
 
     $('.delete').click(function(ev) {
