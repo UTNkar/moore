@@ -46,8 +46,8 @@ class RoleAdmin(ModelAdmin):
     menu_icon = 'fa-suitcase'
     menu_order = 200
     list_display = ('team', 'name_en', 'name_sv', 'archived')
-    search_fields = ('name_en', 'name_sv', 'description_en',
-                     'description_sv')
+    search_fields = ('team__name_en', 'team__name_sv', 'name_en', 'name_sv',
+                     'description_en', 'description_sv')
     # TODO: Default to archived==False, might be in
     # https://code.djangoproject.com/ticket/8851#no1
     list_filter = ('team', 'archived')
@@ -217,7 +217,9 @@ class PositionAdmin(ModelAdmin):
     menu_icon = 'fa-address-card'
     menu_order = 300
     list_display = ('role', 'appointments', 'term_from', 'term_to')
-    search_fields = ('comments_en', 'comments_sv')
+    search_fields = ('role__team__name_en', 'role__team__name_sv',
+                     'role__name_en', 'role__name_sv', 'comment_en',
+                     'comment_sv')
     list_filter = ('role__team', PositionYearFilter)
     permission_helper_class = PositionPermissionHelper
     button_helper_class = PositionButtonHelper
@@ -247,6 +249,11 @@ class ApplicationAdmin(ModelAdmin):
     menu_order = 400
     list_display = ('position', 'applicant', 'status')
     list_filter = ('position__role__team', 'status')
+    search_fields = (
+        'position__role__team__name_en', 'position__role__team__name_sv',
+        'position__role__name_en', 'position__role__name_sv',
+        'applicant__first_name', 'applicant__last_name',
+    )
     permission_helper_class = RulesPermissionHelper
 
 
