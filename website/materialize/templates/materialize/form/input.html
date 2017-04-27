@@ -1,6 +1,6 @@
 <div class="input-field">
     {% if prefix %}<i class="material-icons prefix">{{ prefix }}</i>{% endif %}
     {{ field }}
-    <label for="{{ field.auto_id }}">{{ field.label }}</label>
+    {{ field.label_tag }}
     {% if field.errors %}{% include 'materialize/form/field_errors.html' %}{% endif %}
 </div>
