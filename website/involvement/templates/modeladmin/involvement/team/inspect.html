@@ -10,7 +10,7 @@
         <dd>
             <ul>
                 {% for m in instance.get_members %}
-                    {{ m }}
+                    <li>{{ m }}{% if m.email or m.phone_number %} &mdash; {% if m.email %}<a href="mailto:{{ m.email }}">{{ m.email }}</a>{% endif %}{% if m.email and m.phone_number %} or {% endif %}{% if m.phone_number %}{{ m.phone_number }}{% endif %}{% endif %}</li>
                 {% empty %}
                     {% trans 'This team currently does not contain any members.' %}
                 {% endfor %}
@@ -21,7 +21,7 @@
         <dt>{% trans 'manually added members' %}</dt>
         <ul>
             {% for m in instance.get_manual_members %}
-                {{ m }}
+                 <li>{{ m }}{% if m.email or m.phone_number %} &mdash; {% if m.email %}<a href="mailto:{{ m.email }}">{{ m.email }}</a>{% endif %}{% if m.email and m.phone_number %} or {% endif %}{% if m.phone_number %}{{ m.phone_number }}{% endif %}{% endif %}</li>
             {% endfor %}
         </ul>
         {% endif %}
