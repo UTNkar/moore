@@ -13,7 +13,7 @@ from wagtail.contrib.modeladmin.views import CreateView, EditView
 
 from involvement.models import Team, Role, Position, Application, \
     official_of, member_of
-from involvement.rules import is_admin
+from involvement.rules import is_admin, approve_state, appoint_state
 from utils.permissions import RulesPermissionHelper
 
 
@@ -157,13 +157,15 @@ class PositionButtonHelper(ButtonHelper):
         ph = self.permission_helper
         usr = self.request.user
         pk = quote(getattr(obj, self.opts.pk.attname))
-        if 'approve' not in exclude and ph.user_can_approve_obj(usr, obj):
+        if 'approve' not in exclude and approve_state(usr, obj)\
+                and ph.user_can_approve_obj(usr, obj):
             btns.append(
                 self.approve_button(
                     pk, classnames_add, classnames_exclude
                 )
             )
-        if 'appoint' not in exclude and ph.user_can_appoint_obj(usr, obj):
+        if 'appoint' not in exclude and appoint_state(usr, obj)\
+                and ph.user_can_appoint_obj(usr, obj):
             btns.append(
                 self.appoint_button(
                     pk, classnames_add, classnames_exclude
