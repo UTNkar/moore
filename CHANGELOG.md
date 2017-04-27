@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.1] - 2017-04-27
+### Fixed
+- Access the material icon font through https.
+
 ## [0.3.0] - 2017-04-27
 ### Added
 - Searching within involvement admin will now search more fields.
