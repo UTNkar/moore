@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.3.0] - 2017-04-27
 ### Added
 - Searching within involvement admin will now search more fields.
 - A new form field type for person numbers
@@ -85,7 +87,8 @@ asked to extend their profile in the registration email.
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/UTNkar/moore/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/UTNkar/moore/compare/v0.1.3...v0.2.0
 [0.1.3]: https://github.com/UTNkar/moore/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/UTNkar/moore/compare/v0.1.1...v0.1.2
