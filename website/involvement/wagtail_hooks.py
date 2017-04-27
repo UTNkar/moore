@@ -39,6 +39,22 @@ class TeamAdmin(ModelAdmin):
             return qs
 
 
+class RoleCreateView(CreateView):
+    def get_form(self, form_class=None):
+        form = super(RoleCreateView, self).get_form(form_class=form_class)
+        if not is_admin(self.request.user):
+            form.fields['team'].queryset = official_of(self.request.user)
+        return form
+
+
+class RoleEditView(EditView):
+    def get_form(self, form_class=None):
+        form = super(RoleEditView, self).get_form(form_class=form_class)
+        if not is_admin(self.request.user):
+            form.fields['team'].queryset = official_of(self.request.user)
+        return form
+
+
 class RoleAdmin(ModelAdmin):
     model = Role
     menu_label = _('Roles')
@@ -51,6 +67,8 @@ class RoleAdmin(ModelAdmin):
     # https://code.djangoproject.com/ticket/8851#no1
     list_filter = ('team', 'archived')
     permission_helper_class = RulesPermissionHelper
+    create_view_class = RoleCreateView
+    edit_view_class = RoleEditView
 
     def get_queryset(self, request):
         if is_admin(request.user):
