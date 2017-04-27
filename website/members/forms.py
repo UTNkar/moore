@@ -3,26 +3,49 @@ from datetime import datetime
 from django import forms
 from django.contrib.auth import forms as auth
 from django.core import validators
+from django.core.exceptions import ValidationError
+from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailusers import forms as wagtail
 
 from members.models import StudyProgram, Member, Section
 
 
-class MemberForm(forms.ModelForm):
-    person_number = forms.CharField(
-        label=_('Person number'),
-        max_length=13,
-        min_length=12,
-        help_text=_('Person number using the YYYYMMDD-XXXX format.'),
-        validators=[validators.RegexValidator(
-            regex=r'^\d{8}\-?\d{4}$',
+class PersonNumberField(forms.Field):
+    def __init__(self, *args, **kwargs):
+        super(PersonNumberField, self).__init__(*args, **kwargs)
+
+    def to_python(self, value):
+        if value in self.empty_values:
+            return None, ''
+        value = force_text(value)
+        validators.RegexValidator(
+            regex=r'^\d{8}\-?(T|\d)\d{3}$',
             message=_('Use the format YYYYMMDD-XXXX for your person number.')
-        )],
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'YYYYMMDD-XXXX',
-        })
+        )(value)
+        try:
+            date = datetime.strptime(value[:8], '%Y%m%d').date()
+        except ValueError:
+            date = value[:4] + '-' + value[4:6] \
+                   + '-' + value[6:8]
+            raise ValidationError(
+                _('%(date)s is an invalid date'),
+                params={'date': date}
+            )
+        number = value[-4:]
+        return date, number
+
+    def widget_attrs(self, widget):
+        attrs = super(PersonNumberField, self).widget_attrs(widget)
+        attrs['class'] = attrs.get('class', '') + ' person_number'
+        attrs['placeholder'] = 'YYYYMMDD-XXXX'
+        return attrs
+
+
+class MemberForm(forms.ModelForm):
+    person_number = PersonNumberField(
+        label=_('Person number'),
+        help_text=_('Person number using the YYYYMMDD-XXXX format.'),
     )
 
     class Meta:
@@ -42,10 +65,8 @@ class MemberForm(forms.ModelForm):
 
     def save(self, commit=True):
         person_number = self.cleaned_data['person_number']
-        self.instance.birthday = datetime.strptime(
-            person_number[:8], "%Y%m%d"
-        ).date()
-        self.instance.person_number_ext = person_number[-4:]
+        self.instance.birthday = person_number[0]
+        self.instance.person_number_ext = person_number[1]
 
         email = self.cleaned_data['email']
         if self.initial.get('email', '') != '':
@@ -87,20 +108,9 @@ class CustomUserEditForm(wagtail.UserEditForm):
     """
     Custom form to edit users from within the wagtail admin interface.
     """
-    person_number = forms.CharField(
+    person_number = PersonNumberField(
         label=_('Person number'),
-        max_length=13,
-        min_length=12,
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
-        validators=[validators.RegexValidator(
-            regex=r'^\d{8}\-?\d{4}$',
-            message=_('Use the format YYYYMMDD-XXXX for your person number.')
-        )],
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'YYYYMMDD-XXXX',
-        }),
-        required=True,
     )
     phone_number = forms.CharField(
         required=False,
@@ -138,10 +148,8 @@ class CustomUserEditForm(wagtail.UserEditForm):
 
     def save(self, commit=True):
         person_number = self.cleaned_data['person_number']
-        self.instance.birthday = datetime.strptime(
-            person_number[:8], "%Y%m%d"
-        ).date()
-        self.instance.person_number_ext = person_number[-4:]
+        self.instance.birthday = person_number[0]
+        self.instance.person_number_ext = person_number[1]
 
         return super(CustomUserEditForm, self).save(commit=commit)
 
@@ -150,20 +158,9 @@ class CustomUserCreationForm(wagtail.UserCreationForm):
     """
     Custom form to create user from within the Wagtail admin user interface.
     """
-    person_number = forms.CharField(
+    person_number = PersonNumberField(
         label=_('Person number'),
-        max_length=13,
-        min_length=12,
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
-        validators=[validators.RegexValidator(
-            regex=r'^\d{8}\-?\d{4}$',
-            message=_('Use the format YYYYMMDD-XXXX for your person number.')
-        )],
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'YYYYMMDD-XXXX',
-        }),
-        required=True,
     )
     phone_number = forms.CharField(
         required=False,
@@ -202,9 +199,7 @@ class CustomUserCreationForm(wagtail.UserCreationForm):
 
     def save(self, commit=True):
         person_number = self.cleaned_data['person_number']
-        self.instance.birthday = datetime.strptime(
-            person_number[:8], "%Y%m%d"
-        ).date()
-        self.instance.person_number_ext = person_number[-4:]
+        self.instance.birthday = person_number[0]
+        self.instance.person_number_ext = person_number[1]
 
         return super(CustomUserCreationForm, self).save(commit=commit)
