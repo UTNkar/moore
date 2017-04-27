@@ -4,8 +4,16 @@ from django.template import loader
 register = template.Library()
 
 
-def get_widget(field):
+def get_widget_name(field):
     return field.field.widget.__class__.__name__
+
+
+def append_classes(field):
+    classes = field.field.widget.attrs.get('class', '')
+    classes += ' validate'
+    if field.errors:
+        classes += ' invalid'
+    field.field.widget.attrs['class'] = classes
 
 
 def render_field(template, field, prefix=None):
@@ -20,19 +28,10 @@ def render_field(template, field, prefix=None):
 
 @register.simple_tag
 def materialize_field(field, prefix=None):
-    widget = get_widget(field)
-    if widget == 'EmailInput':
-        return render_field('materialize/form/email_input.html', field, prefix)
-    elif widget == 'PasswordInput':
-        return render_field(
-            'materialize/form/password_input.html', field, prefix
-        )
-    elif widget == 'Select':
-        return render_field('materialize/form/select.html', field, prefix)
-
-    elif widget == 'Textarea':
-        return render_field('materialize/form/textarea.html', field, prefix)
-    elif widget == 'TextInput':
-        return render_field('materialize/form/text_input.html', field, prefix)
+    widget = get_widget_name(field)
+    if widget in ['TextInput', 'EmailInput', 'PasswordInput', 'Select',
+                  'Textarea']:
+        append_classes(field)
+        return render_field('materialize/form/input.html', field, prefix)
     else:
         return field.as_widget()
