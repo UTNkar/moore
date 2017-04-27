@@ -170,47 +170,34 @@ class Team(models.Model):
         ]),
         FieldPanel('group'),
         ImageChooserPanel('logo'),
-        FieldRowPanel([
-            FieldPanel('leader_en'),
-            FieldPanel('leader_sv'),
-        ]),
-        FieldPanel('email'),
         FieldPanel('description_en'),
         FieldPanel('description_sv'),
     ])]
 
 
 def official_of(user, pk=False):
-    # TODO : Is this efficient?
-    applications = Application.objects.filter(
-        applicant=user,
-        status='appointed',
-        position__term_from__lte=date.today(),
-        position__term_to__gte=date.today(),
-        position__role__official=True,
-        position__role__team_id__isnull=False,
-    ).select_related('position__role__team')
-    teams = []
-    for i in applications:
-        if pk:
-            teams.append(i.position.role.team.pk)
-        else:
-            teams.append(i.position.role.team)
-
-    return teams
+    teams = Team.objects.filter(
+        roles__official=True,
+        roles__positions__applications__applicant=user,
+        roles__positions__applications__status='appointed',
+        roles__positions__term_from__lte=date.today(),
+        roles__positions__term_to__gte=date.today(),
+    )
+    if pk:
+        return teams.values_list('pk', flat=True)
+    else:
+        return teams
 
 
 def member_of(user, pk=False):
-    # TODO: Optimize.
     groups = user.groups.all()
-    teams = []
-    for group in groups:
-        if hasattr(group, 'team'):
-            if pk:
-                teams.append(group.team.pk)
-            else:
-                teams.append(group.team)
-    return teams
+    teams = Team.objects.filter(
+        group__in=groups
+    )
+    if pk:
+        return teams.values_list('pk', flat=True)
+    else:
+        return teams
 
 
 class Role(models.Model):
