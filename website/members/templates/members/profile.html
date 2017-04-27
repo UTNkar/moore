@@ -7,12 +7,6 @@
     {{ block.super }}
     <script type="text/javascript" src="{% static 'libraries/dirrty/jquery.dirrty.js' %}"></script>
     <script type="text/javascript">
-    $('#account-settings').dirrty().on('dirty', function(){
-        $('#submit').removeClass('disabled');
-    }).on('clean', function(){
-        $('#submit').addClass('disabled');
-    });
-
     function limit_studies(){
         var val = $('#{{ form.section.auto_id }}').val();
         $('#{{ form.study.auto_id }}').html('');
@@ -38,7 +32,15 @@
     }
 
     $('#{{ form.section.auto_id }}').change(limit_studies);
-    $(document).ready(limit_studies);
+    $(document).ready(function(){
+        limit_studies();
+
+        $('#account-settings').dirrty().on('dirty', function(){
+            $('#submit').removeClass('disabled');
+        }).on('clean', function(){
+            $('#submit').addClass('disabled');
+        });
+    });
     </script>
 {% endblock %}
 
