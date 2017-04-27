@@ -28,7 +28,7 @@ def profile(request):
     if len(request.user.get_unconfirmed_emails()) > 0:
         messages.add_message(
             request, messages.WARNING,
-            _('Your newly set e-mail address has not yet been confirmed')
+            _('Your newly set email address has not yet been confirmed')
         )
 
     can_update_status = (
@@ -52,7 +52,7 @@ def email_change_confirm(request, token):
         request.user.set_primary_email(email)
         request.user.remove_old_email()
         messages.add_message(request, messages.SUCCESS,
-                             _('Your e-mail address has been confirmed.'))
+                             _('Your email address has been confirmed.'))
     except ObjectDoesNotExist:
         messages.add_message(request, messages.ERROR,
                              _('The provided confirmation token was invalid.'))

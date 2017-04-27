@@ -140,13 +140,13 @@ class RecruitmentPageTests(WagtailPageTests):
         team = Team.objects.create(
             name_en='Test Team',
             name_sv='Testteam',
-            email='test@localhost',
             group=Group.objects.first()
         )
         role = Role.objects.create(
             team=team,
             name_en='Test Function',
             name_sv='Test Funktion',
+            election_email='test@localhost',
         )
         position = Position.objects.create(
             role=role,
@@ -162,7 +162,7 @@ class RecruitmentPageTests(WagtailPageTests):
 
         self.assertContains(response, team.name,
                             msg_prefix='Position is listed as part of team')
-        self.assertContains(response, team.email,
+        self.assertContains(response, role.election_email,
                             msg_prefix='Team contact information is provided')
 
     # TODO: Add tests for my_positions

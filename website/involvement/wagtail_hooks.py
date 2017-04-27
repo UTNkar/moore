@@ -23,8 +23,7 @@ class TeamAdmin(ModelAdmin):
     menu_icon = 'fa-sitemap'
     menu_order = 100
     list_display = ('name_en', 'name_sv', 'email')
-    search_fields = ('name_en', 'name_sv', 'description_en', 'description_sv',
-                     'leader_en', 'leader_sv', 'email')
+    search_fields = ('name_en', 'name_sv', 'description_en', 'description_sv')
     permission_helper_class = RulesPermissionHelper
     inspect_view_enabled = True
 

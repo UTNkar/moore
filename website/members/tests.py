@@ -95,7 +95,7 @@ class ProfileTest(TestCase):
         self.assertContains(response, self.member.phone_number,
                             msg_prefix='Response contains phone number')
         self.assertContains(response, self.member.email,
-                            msg_prefix='Response contains e-mail address')
+                            msg_prefix='Response contains email address')
         self.assertContains(response,
                             '<option value="'
                             + self.member.study_id.__str__()
@@ -168,10 +168,10 @@ class ProfileTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['form'].errors, {})
 
-        # An unconfirmed e-mail address has been added
+        # An unconfirmed email address has been added
         self.assertContains(
             response,
-            'Your newly set e-mail address has not yet been confirmed',
+            'Your newly set email address has not yet been confirmed',
         )
         member = Member.objects.get(username='moore')
         self.assertIn(new_email, member.get_unconfirmed_emails())
@@ -184,7 +184,7 @@ class ProfileTest(TestCase):
 
 
 class EmailConfirmationTest(TestCase):
-    """Tests for the sending of confirmations of new e-mail addresses"""
+    """Tests for the sending of confirmations of new email addresses"""
 
     def setUp(self):
         # Create test objects
@@ -220,7 +220,7 @@ class EmailConfirmationTest(TestCase):
         }), follow=True)
 
         self.assertContains(
-            response, 'Your e-mail address has been confirmed.',
+            response, 'Your email address has been confirmed.',
         )
         self.assertIn(self.member.email, self.member.get_confirmed_emails())
 

@@ -36,7 +36,7 @@
                         {% endif %}
                     </div>
                     <div class="card-action">
-                        <a href="mailto:{% if position.role.team %}{{ position.role.team.email }}{% else %}styrelsen@utn.se{% endif %}">{% trans 'contact election official' %}</a>
+                        <a href="mailto:{% if position.role.election_email %}{{ position.role.election_email }}{% else %}styrelsen@utn.se{% endif %}">{% trans 'contact election official' %}</a>
                     </div>
                 </div>
             </div>
