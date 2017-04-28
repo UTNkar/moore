@@ -11,7 +11,7 @@
                 <div class="collapsible-header">
                     {% if pos.role.team.logo %}{% image pos.role.team.logo fill-45x45 as logo %}{% endif %}
                     <img class="circle" src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/bocken.svg' %}{% endif %}">
-                    <div class="header-text">
+                    <div class="header-text row">
                         <h3>{{ pos }}</h3>
                         <div class="team">
                             {% if pos.role.team %}
