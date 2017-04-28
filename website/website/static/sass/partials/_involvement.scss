@@ -17,7 +17,6 @@
         height: 30px;
         line-height: 30px;
         padding: 0 1.5rem;
-
       }
       .hide-on-med-and-up {
         height: 10px;
@@ -27,17 +26,25 @@
     .header-text {
       float: left;
       line-height: 0;
+      margin-left: 5px;
+      width: calc(100% - 220px);
       h3 {
+        @extend .truncate;
         line-height: 0.8;
       }
       .team {
-        margin-left: 0px;
+        margin-left: 0;
         i {
           height: 14px;
           font-size: 20px;
           margin-right: 5px;
           line-height: 0;
         }
+      }
+    }
+    @media #{$small-and-down} {
+      .header-text {
+        width: calc(100% - 150px);
       }
     }
   }
