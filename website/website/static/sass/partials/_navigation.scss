@@ -21,6 +21,10 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
   line-height: $line-height;
   padding: $navigation-padding 0;
 
+  ul button.btn {
+    margin-top: -2px; // To match a .btn
+  }
+
   .dropdown-content {
     width: auto !important;
   }
