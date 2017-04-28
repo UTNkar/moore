@@ -2,12 +2,15 @@ import os
 import unittest
 
 from django.core import mail
+from django.core.exceptions import ValidationError
+from django.forms import TextInput
 from django.test import TestCase
 import datetime
 
 from django.urls import reverse
 
 from members import cron
+from members.forms import PersonNumberField
 from members.models import Member, StudyProgram
 
 
@@ -302,3 +305,42 @@ class MembershipAPITest(TestCase):
         self.assertEqual(self.moore.status, 'member')
         self.flash.refresh_from_db()
         self.assertEqual(self.flash.status, 'nonmember')
+
+
+class PersonNumberFieldTestCase(TestCase):
+    def setUp(self):
+        self.field = PersonNumberField()
+
+    def test_blank(self):
+        result = self.field.clean('')
+        self.assertEqual(result, (None, ''))
+
+    def test_pass(self):
+        result = self.field.clean('19290103-1234')
+        self.assertEqual(result, (datetime.date(1929, 1, 3), '1234'))
+
+    def test_t_number(self):
+        result = self.field.clean('19340107-T987')
+        self.assertEqual(result, (datetime.date(1934, 1, 7), 'T987'))
+
+    def test_non_date(self):
+        with self.assertRaises(ValidationError):
+            self.field.clean('00000000-1234')
+
+    def test_incomplete(self):
+        with self.assertRaises(ValidationError):
+            self.field.clean('19290103-12')
+        with self.assertRaises(ValidationError):
+            self.field.clean('1929010-1234')
+
+    def test_illegal_character(self):
+        with self.assertRaises(ValidationError):
+            self.field.clean('19290$03-1234')
+        with self.assertRaises(ValidationError):
+            self.field.clean('19290103-12t4')
+
+    def test_widget_additions(self):
+        widget = TextInput()
+        attrs = self.field.widget_attrs(widget)
+        self.assertIn('person_number', attrs['class'])
+        self.assertEqual(attrs['placeholder'], 'YYYYMMDD-XXXX')
