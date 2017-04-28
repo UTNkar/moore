@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-image">
                         {% if position.role.team.logo %}{% image position.role.team.logo original as logo %}{% endif %}
-                        <img src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/bocken.svg' %}{% endif %}">
+                        <img src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/logo.svg' %}{% endif %}">
                     </div>
                     <div class="card-content">
                         {% if position.role.team %}
