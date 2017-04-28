@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Fixed
+- Position names are now contained by their container in the overview.
+- The language and login buttons are now on the same height.
+- The default team logo in the position view is now the actual UTN logo.
+- Materialized fields no longer contain colons.
 
 ## [0.3.1] - 2017-04-27
 ### Fixed
