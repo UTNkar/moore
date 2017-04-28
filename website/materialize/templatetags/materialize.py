@@ -9,6 +9,7 @@ def get_widget_name(field):
 
 
 def append_classes(field):
+    field.field.label_suffix = ''
     classes = field.field.widget.attrs.get('class', '')
     classes += ' validate'
     if field.errors:
