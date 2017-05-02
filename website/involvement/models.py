@@ -271,7 +271,8 @@ class Role(models.Model):
         verbose_name=_('Election contact email address'),
         help_text=_('The email address to contact for more information '
                     'regarding the role.'),
-        blank=True,
+        blank=False,
+        default='styrelsen@utn.se',
     )
 
     def __str__(self) -> str:
