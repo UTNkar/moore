@@ -13,4 +13,9 @@ urlpatterns = [
         views.admin_appoint,
         name='involvement_position_modeladmin_appoint'
     ),
+    url(
+        r'^admin/involvement/position/exdend/(\d+)/$',
+        views.admin_extend_deadline,
+        name='involvement_position_extend'
+    ),
 ]
