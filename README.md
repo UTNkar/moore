@@ -28,7 +28,7 @@ development environment:
 6. Run `./manage.py migrate` to initialize the database.
 7. Run `./manage.py creatsuperuser` to create an admin user.
 
-During development, you can run a test web server using `./migrate.py
+During development, you can run a test web server using `./manage.py
 runserver`.
 
 ## Documentation
