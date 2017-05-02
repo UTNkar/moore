@@ -1,12 +1,14 @@
 from datetime import date, timedelta
 
 from django.contrib.auth.models import Group, Permission
+from django.core import mail
 from django.test import TestCase
 from django.urls import reverse
 from wagtail.tests.utils import WagtailPageTests
 from wagtail.wagtailcore.models import Page
 
 from home.models import HomePage
+from involvement.cron import send_extension_emails
 from involvement.models import RecruitmentPage, Position, Role, Team, \
     Application
 from members.models import Member
@@ -492,7 +494,7 @@ class AdminPermissionTests(TestCase):
         # Tests that don't require an instance.
         for i, section in AdminPermissionTests.pages.items():
             for action, url in section.items():
-                if action in ['create', 'index']\
+                if action in ['create', 'index'] \
                         and not (i == 'position' and action == 'index'):
                     self.assertNoAccess(reverse(url))
 
@@ -555,3 +557,162 @@ class AdminPermissionTests(TestCase):
                     reverse(url, args=[recruiting_position.pk])
                 )
                 self.assertNoAccess(reverse(url, args=[ready_position.pk]))
+
+
+class RecruitmentExtensionTestCase(TestCase):
+    """
+    Tests for the automated deadline extender. The deadline extender should be
+    triggered for vacant positions of which the deadline has just passed.
+    """
+    def setUp(self):
+        self.role = Role.objects.create(
+            name_en='Test',
+            name_sv='TestSV',
+            election_email='contact@localhost',
+        )
+
+        # Create admin group/user
+        wagtail_acces = Permission.objects.get(name='Can access Wagtail admin')
+        recruitment_admin = Permission.objects.get(
+            name='Can administrate the recruitment process'
+        )
+        admin_group = Group.objects.create(
+            name='Admin Group',
+        )
+        admin_group.permissions.add(wagtail_acces, recruitment_admin)
+        self.admin = Member.objects.create(
+            username='admin',
+        )
+        mail.outbox.pop()
+        admin_group.user_set.add(self.admin)
+        admin_group.save()
+        self.client.force_login(
+            self.admin, 'django.contrib.auth.backends.ModelBackend'
+        )
+
+    def test_send_email(self):
+        """
+        Test that an e-mail is being send when the deadline for an position
+        passes without any applications.
+        """
+        pos = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=10),
+            recruitment_end=date.today() - timedelta(days=1),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        send_extension_emails()
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [self.role.election_email])
+        self.assertContains(
+            mail.outbox[0].body,
+            reverse('involvement_position_extend', args=pos.pk)
+        )
+
+    def test_no_email(self):
+        """
+        Test that no e-mails are being send when the deadline has not passed or
+        when there are applications
+        """
+        Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=10),
+            recruitment_end=date.today(),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        applied = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=10),
+            recruitment_end=date.today() - timedelta(days=1),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        Application.objects.create(
+            position=applied,
+            applicant=self.admin,
+            status='submitted',
+        )
+
+        send_extension_emails()
+
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_extension(self):
+        """Test automatic extension urls"""
+        pos = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=10),
+            recruitment_end=date.today() - timedelta(days=1),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        response = self.client.get(
+            reverse('involvement_position_extend', args=[pos.pk]))
+        self.assertRedirects(response,
+                             reverse('involvement_position_modeladmin_index'))
+
+        pos.refresh_from_db()
+        self.assertGreater(pos.recruitment_end, date.today())
+
+    def test_no_access(self):
+        """Test denial of automatic extension when user has no access."""
+        self.client.logout()
+
+        pos = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=10),
+            recruitment_end=date.today() - timedelta(days=1),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        response = self.client.get(
+            reverse('involvement_position_extend', args=[pos.pk]))
+        self.assertEqual(response.status_code, 302)
+
+    def test_not_ended(self):
+        """
+        Test denial of automatic extension when recruitment has not ended
+        """
+        recruiting = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=10),
+            recruitment_end=date.today(),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        response = self.client.get(
+            reverse('involvement_position_extend', args=[recruiting.pk]))
+        self.assertRedirects(response,
+                             reverse('involvement_position_modeladmin_index'))
+
+        recruiting.refresh_from_db()
+        self.assertEqual(recruiting.recruitment_end, date.today())
+
+    def test_with_applications(self):
+        """
+        Test denial of automatic extension when members have applied
+        """
+        applied = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=10),
+            recruitment_end=date.today()- timedelta(days=1),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        Application.objects.create(
+            position=applied,
+            applicant=self.admin,
+            status='submitted',
+        )
+        response = self.client.get(
+            reverse('involvement_position_extend', args=[applied.pk]))
+        self.assertRedirects(response,
+                             reverse('involvement_position_modeladmin_index'))
+
+        applied.refresh_from_db()
+        self.assertEqual(
+            applied.recruitment_end, date.today() - timedelta(days=1)
+        )
