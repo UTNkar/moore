@@ -79,6 +79,7 @@ def is_past_due(user, application):
 rules.add_perm('involvement', rules.always_allow)
 
 rules.add_perm('involvement.list_team', is_admin | is_official)
+rules.add_perm('involvement.inspect_team', is_admin | is_team_official)
 rules.add_perm('involvement.add_team', is_admin)
 rules.add_perm('involvement.change_team', is_admin | is_team_official)
 rules.add_perm('involvement.delete_team', is_admin)
@@ -102,7 +103,6 @@ rules.add_perm('involvement.delete_position', is_admin
                | (is_position_official & before_recruitment_start))
 
 rules.add_perm('involvement.list_application', is_admin)
-rules.add_perm('involvement.add_application', is_admin | is_official)
-rules.add_perm('involvement.change_application', is_admin | is_applicant)
-rules.add_perm('involvement.delete_application', is_admin
-               | (is_applicant & ~is_past_due))
+rules.add_perm('involvement.add_application', is_admin)
+rules.add_perm('involvement.change_application', is_admin)
+rules.add_perm('involvement.delete_application', is_admin)
