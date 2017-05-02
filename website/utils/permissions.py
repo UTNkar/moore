@@ -10,6 +10,8 @@ class RulesPermissionHelper(PermissionHelper):
         return user.has_perm('%s.%s' % (opts.app_label, codename))
 
     def user_can_inspect_obj(self, user, obj):
+        if not self.inspect_view_enabled:
+            return False
         opts = self.opts
         codename = get_permission_codename('inspect', opts)
         return user.has_perm('%s.%s' % (opts.app_label, codename), obj)
