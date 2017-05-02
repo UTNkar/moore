@@ -1,11 +1,15 @@
 from datetime import date, timedelta
 
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, Permission
+from django.test import TestCase
+from django.urls import reverse
 from wagtail.tests.utils import WagtailPageTests
 from wagtail.wagtailcore.models import Page
 
 from home.models import HomePage
-from involvement.models import RecruitmentPage, Position, Role, Team
+from involvement.models import RecruitmentPage, Position, Role, Team, \
+    Application
+from members.models import Member
 
 
 class RecruitmentPageTests(WagtailPageTests):
@@ -165,4 +169,389 @@ class RecruitmentPageTests(WagtailPageTests):
         self.assertContains(response, role.election_email,
                             msg_prefix='Team contact information is provided')
 
-    # TODO: Add tests for my_positions
+        # TODO: Add tests for my_positions
+
+
+class AdminPermissionTests(TestCase):
+    """
+    Access permission tests for the wagtail admin area of the involvement app.
+    These test ensure that admins, officials, election members and anonymous
+    users have the appropriate amount of access.
+    """
+    pages = {
+        'team': {
+            'index': 'involvement_team_modeladmin_index',
+            'create': 'involvement_team_modeladmin_create',
+            'inspect': 'involvement_team_modeladmin_inspect',
+            'edit': 'involvement_team_modeladmin_edit',
+            'delete': 'involvement_team_modeladmin_delete',
+        },
+        'role': {
+            'index': 'involvement_role_modeladmin_index',
+            'create': 'involvement_role_modeladmin_create',
+            'edit': 'involvement_role_modeladmin_edit',
+            'delete': 'involvement_role_modeladmin_delete',
+        },
+        'position': {
+            'index': 'involvement_position_modeladmin_index',
+            'create': 'involvement_position_modeladmin_create',
+            'inspect': 'involvement_position_modeladmin_inspect',
+            'edit': 'involvement_position_modeladmin_edit',
+            'delete': 'involvement_position_modeladmin_delete',
+            'appoint': 'involvement_position_modeladmin_appoint',
+            'approve': 'involvement_position_modeladmin_approve',
+        },
+        'application': {
+            'index': 'involvement_application_modeladmin_index',
+            'create': 'involvement_application_modeladmin_create',
+            'edit': 'involvement_application_modeladmin_edit',
+            'delete': 'involvement_application_modeladmin_delete',
+        }
+    }
+
+    def assertCanAccess(self, url):
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        return response
+
+    def assertNoAccess(self, url):
+        response = self.client.get(url)
+        self.assertIn(response.status_code, [403, 302])
+        return response
+
+    def setUp(self):
+        """
+        Create users, teams, and groups for use in other tests
+        """
+        wagtail_acces = Permission.objects.get(name='Can access Wagtail admin')
+        recruitment_admin = Permission.objects.get(
+            name='Can administrate the recruitment process'
+        )
+
+        # Create standard team + official
+        self.group = Group.objects.create(
+            name='Test Team',
+        )
+        self.group.permissions.add(wagtail_acces)
+        self.team = Team.objects.create(
+            name_en='Test Team',
+            name_sv='Testteam',
+            group=self.group
+        )
+        self.official = Member.objects.create(
+            username='official',
+        )
+        self.role = Role.objects.create(
+            team=self.team,
+            name_en='Test Function',
+            name_sv='Test Funktion',
+            election_email='test@localhost',
+            official=True,
+        )
+        self.position = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=2),
+            recruitment_end=date.today() - timedelta(days=2),
+            term_from=date.today() - timedelta(days=1),
+            term_to=date.today() + timedelta(days=365),
+        )
+        self.application = Application.objects.create(
+            position=self.position,
+            applicant=self.official,
+            status='appointed',
+        )
+        self.group.user_set.add(self.official)
+        self.group.save()
+
+        # Create admin group/user
+        self.admin_group = Group.objects.create(
+            name='Admin Group',
+        )
+        self.admin_group.permissions.add(wagtail_acces, recruitment_admin)
+        self.admin = Member.objects.create(
+            username='admin',
+        )
+        self.admin_group.user_set.add(self.admin)
+        self.admin_group.save()
+
+        # Create other team + user to be user as election committee
+        self.approval_group = Group.objects.create(
+            name='Approval Team',
+        )
+        self.approval_group.permissions.add(wagtail_acces)
+        self.approval_team = Team.objects.create(
+            name_en='Approval Team',
+            name_sv='Approval Team',
+            group=self.approval_group
+        )
+        self.approver = Member.objects.create(
+            username='approver',
+        )
+        self.approval_group.user_set.add(self.approver)
+        self.approval_group.save()
+
+    def test_not_logged_in(self):
+        """
+        Tests to ensure non-users don't have access to the involvement admin
+        area
+        """
+        # Tests that don't require an instance.
+        for i, section in AdminPermissionTests.pages.items():
+            for action, url in section.items():
+                if action in ['create', 'index']:
+                    self.assertNoAccess(reverse(url))
+
+        # Tests for team specific pages
+        for action, url in AdminPermissionTests.pages['team'].items():
+            if action not in ['create', 'index']:
+                self.assertNoAccess(reverse(url, args=[self.team.pk]))
+
+        # Tests for role specific pages
+        for action, url in AdminPermissionTests.pages['role'].items():
+            if action not in ['create', 'index']:
+                self.assertNoAccess(reverse(url, args=[self.role.pk]))
+
+        # Tests for position specific pages
+        for action, url in AdminPermissionTests.pages['position'].items():
+            if action not in ['create', 'index']:
+                self.assertNoAccess(reverse(url, args=[self.position.pk]))
+
+        # Tests for application specific pages
+        for action, url in AdminPermissionTests.pages['application'].items():
+            if action not in ['create', 'index']:
+                self.assertNoAccess(reverse(url, args=[self.application.pk]))
+
+    def test_admin(self):
+        """
+        Tests to ensure admins have access to all parts of the involvement
+        admin area
+        """
+        self.client.force_login(
+            self.admin, 'django.contrib.auth.backends.ModelBackend'
+        )
+        for i, section in AdminPermissionTests.pages.items():
+            for action, url in section.items():
+                if action in ['create', 'index']:
+                    self.assertCanAccess(reverse(url))
+
+        for action, url in AdminPermissionTests.pages['team'].items():
+            if action not in ['create', 'index']:
+                self.assertCanAccess(reverse(url, args=[self.team.pk]))
+
+        for action, url in AdminPermissionTests.pages['role'].items():
+            if action not in ['create', 'index']:
+                self.assertCanAccess(reverse(url, args=[self.role.pk]))
+
+        for action, url in AdminPermissionTests.pages['position'].items():
+            if action not in ['create', 'index']:
+                self.assertCanAccess(reverse(url, args=[self.position.pk]))
+
+        for action, url in AdminPermissionTests.pages['application'].items():
+            if action not in ['create', 'index']:
+                self.assertCanAccess(reverse(url, args=[self.application.pk]))
+
+    def test_official(self):
+        """
+        Tests to ensure officials have access to admin parts that involve only
+        their team.
+        """
+        self.client.force_login(
+            self.official, 'django.contrib.auth.backends.ModelBackend'
+        )
+        # Tests for team pages
+        for action, url in AdminPermissionTests.pages['team'].items():
+            if action == 'index':
+                response = self.assertCanAccess(reverse(url))
+                self.assertContains(response, self.team.name)
+                self.assertNotContains(response, self.approval_team.name)
+            elif action in ['inspect', 'edit']:
+                self.assertCanAccess(reverse(url, args=[self.team.pk]))
+                self.assertNoAccess(reverse(url, args=[self.approval_team.pk]))
+            elif action == 'delete':
+                self.assertNoAccess(reverse(url, args=[self.team.pk]))
+                self.assertNoAccess(reverse(url, args=[self.approval_team.pk]))
+            elif action == 'create':
+                self.assertNoAccess(reverse(url))
+
+        # Tests for role pages
+        other_role = Role.objects.create(
+            team=self.approval_team,
+            name_en='Other',
+            name_sv='Other SV',
+        )
+        for action, url in AdminPermissionTests.pages['role'].items():
+            if action == 'index':
+                response = self.assertCanAccess(reverse(url))
+                self.assertContains(response, self.role.name)
+                self.assertNotContains(response, other_role.name)
+            elif action == 'edit':
+                self.assertCanAccess(reverse(url, args=[self.role.pk]))
+                self.assertNoAccess(reverse(url, args=[other_role.pk]))
+            elif action == 'delete':
+                self.assertNoAccess(reverse(url, args=[self.role.pk]))
+                self.assertNoAccess(reverse(url, args=[other_role.pk]))
+            elif action == 'create':
+                self.assertCanAccess(reverse(url))
+
+        # Tests for position pages
+        other_position = Position.objects.create(
+            role=other_role,
+            recruitment_start=date.today(),
+            recruitment_end=date.today(),
+            term_from=date.today(),
+            term_to=date.today(),
+        )
+        drafted_position = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() + timedelta(days=2),
+            recruitment_end=date.today() + timedelta(days=5),
+            term_from=date.today() + timedelta(days=10),
+            term_to=date.today() + timedelta(days=365),
+        )
+        recruiting_position = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=2),
+            recruitment_end=date.today() + timedelta(days=3),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        approved_position = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=5),
+            recruitment_end=date.today() - timedelta(days=1),
+            term_from=date.today() + timedelta(days=1),
+            term_to=date.today() + timedelta(days=365),
+        )
+        for action, url in AdminPermissionTests.pages['position'].items():
+            if action == 'index':
+                response = self.assertCanAccess(reverse(url))
+                self.assertContains(response, self.position.role.name,
+                                    count=4)
+                self.assertNotContains(response, other_position.role.name)
+            elif action == 'inspect':
+                self.assertCanAccess(reverse(url, args=[self.position.pk]))
+                self.assertCanAccess(reverse(url, args=[drafted_position.pk]))
+                self.assertCanAccess(
+                    reverse(url, args=[recruiting_position.pk])
+                )
+                self.assertCanAccess(reverse(url, args=[approved_position.pk]))
+                self.assertNoAccess(reverse(url, args=[other_position.pk]))
+            elif action == 'edit':
+                self.assertCanAccess(reverse(url, args=[self.position.pk]))
+                self.assertCanAccess(reverse(url, args=[drafted_position.pk]))
+                self.assertCanAccess(
+                    reverse(url, args=[recruiting_position.pk])
+                )
+                self.assertCanAccess(reverse(url, args=[approved_position.pk]))
+                self.assertNoAccess(reverse(url, args=[other_position.pk]))
+            elif action == 'delete':
+                self.assertNoAccess(reverse(url, args=[self.position.pk]))
+                self.assertCanAccess(reverse(url, args=[drafted_position.pk]))
+                self.assertNoAccess(
+                    reverse(url, args=[recruiting_position.pk])
+                )
+                self.assertNoAccess(reverse(url, args=[approved_position.pk]))
+                self.assertNoAccess(reverse(url, args=[other_position.pk]))
+            elif action == 'create':
+                self.assertCanAccess(reverse(url))
+            elif action == 'approve':
+                self.assertNoAccess(reverse(url, args=[self.position.pk]))
+                self.assertNoAccess(reverse(url, args=[drafted_position.pk]))
+                self.assertNoAccess(
+                    reverse(url, args=[recruiting_position.pk])
+                )
+                self.assertNoAccess(reverse(url, args=[approved_position.pk]))
+                self.assertNoAccess(reverse(url, args=[other_position.pk]))
+            elif action == 'appoint':
+                self.assertNoAccess(reverse(url, args=[self.position.pk]))
+                self.assertNoAccess(reverse(url, args=[drafted_position.pk]))
+                self.assertNoAccess(
+                    reverse(url, args=[recruiting_position.pk])
+                )
+                self.assertCanAccess(
+                    reverse(url, args=[approved_position.pk])
+                )
+                self.assertNoAccess(reverse(url, args=[other_position.pk]))
+
+        # Tests for application pages
+        for action, url in AdminPermissionTests.pages['application'].items():
+            if action in ['index', 'create']:
+                self.assertNoAccess(reverse(url))
+            elif action in ['edit', 'delete']:
+                self.assertNoAccess(reverse(url, args=[self.application.pk]))
+
+    def test_approver(self):
+        """
+        Tests that ensure that approvers have access just to the position
+        pages/instances under their  approval
+        """
+        self.client.force_login(
+            self.approver, 'django.contrib.auth.backends.ModelBackend'
+        )
+
+        # Tests that don't require an instance.
+        for i, section in AdminPermissionTests.pages.items():
+            for action, url in section.items():
+                if action in ['create', 'index']\
+                        and not (i == 'position' and action == 'index'):
+                    self.assertNoAccess(reverse(url))
+
+        # Tests for team specific pages
+        for action, url in AdminPermissionTests.pages['team'].items():
+            if action not in ['create', 'index']:
+                self.assertNoAccess(reverse(url, args=[self.team.pk]))
+
+        # Tests for role specific pages
+        for action, url in AdminPermissionTests.pages['role'].items():
+            if action not in ['create', 'index']:
+                self.assertNoAccess(reverse(url, args=[self.role.pk]))
+
+        # Tests for application specific pages
+        for action, url in AdminPermissionTests.pages['application'].items():
+            if action not in ['create', 'index']:
+                self.assertNoAccess(reverse(url, args=[self.application.pk]))
+
+        # Tests for position specific pages
+        recruiting_position = Position.objects.create(
+            role=self.role,
+            approval_committee=self.approval_team,
+            recruitment_start=date.today() - timedelta(days=2),
+            recruitment_end=date.today() + timedelta(days=3),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        ready_position = Position.objects.create(
+            role=self.role,
+            approval_committee=self.approval_team,
+            recruitment_start=date.today() - timedelta(days=5),
+            recruitment_end=date.today() - timedelta(days=1),
+            term_from=date.today() + timedelta(days=1),
+            term_to=date.today() + timedelta(days=365),
+        )
+        Application.objects.create(
+            position=ready_position,
+            applicant=self.official,
+            status='submitted',
+        )
+        for action, url in AdminPermissionTests.pages['position'].items():
+            if action == 'index':
+                response = self.assertCanAccess(reverse(url))
+                self.assertContains(response, self.role.name, count=2)
+            elif action in 'approve':
+                self.assertNoAccess(reverse(url, args=[self.position.pk]))
+                self.assertNoAccess(
+                    reverse(url, args=[recruiting_position.pk])
+                )
+                self.assertCanAccess(reverse(url, args=[ready_position.pk]))
+            elif action in 'inspect':
+                self.assertNoAccess(reverse(url, args=[self.position.pk]))
+                self.assertCanAccess(
+                    reverse(url, args=[recruiting_position.pk])
+                )
+                self.assertCanAccess(reverse(url, args=[ready_position.pk]))
+            elif action in ['edit', 'appoint', 'delete']:
+                self.assertNoAccess(reverse(url, args=[self.position.pk]))
+                self.assertNoAccess(
+                    reverse(url, args=[recruiting_position.pk])
+                )
+                self.assertNoAccess(reverse(url, args=[ready_position.pk]))

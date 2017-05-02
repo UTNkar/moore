@@ -123,11 +123,6 @@ class PositionYearFilter(admin.SimpleListFilter):
 
 
 class PositionPermissionHelper(RulesPermissionHelper):
-    def user_can_inspect_obj(self, user, obj):
-        opts = self.opts
-        codename = get_permission_codename('inspect', opts)
-        return user.has_perm('%s.%s' % (opts.app_label, codename), obj)
-
     def user_can_approve_obj(self, user, obj):
         opts = self.opts
         codename = get_permission_codename('approve', opts)
@@ -198,7 +193,6 @@ class PositionButtonHelper(ButtonHelper):
             obj, exclude=exclude, classnames_add=classnames_add,
             classnames_exclude=classnames_exclude
         )
-        print(btns)
         return btns
 
 

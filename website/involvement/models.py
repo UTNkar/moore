@@ -176,6 +176,8 @@ class Team(models.Model):
 
 
 def official_of(user, pk=False):
+    if user.is_anonymous:
+        return []
     teams = Team.objects.filter(
         roles__official=True,
         roles__positions__applications__applicant=user,
@@ -190,6 +192,8 @@ def official_of(user, pk=False):
 
 
 def member_of(user, pk=False):
+    if user.is_anonymous:
+        return []
     groups = user.groups.all()
     teams = Team.objects.filter(
         group__in=groups
