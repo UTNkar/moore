@@ -344,3 +344,43 @@ class PersonNumberFieldTestCase(TestCase):
         attrs = self.field.widget_attrs(widget)
         self.assertIn('person_number', attrs['class'])
         self.assertEqual(attrs['placeholder'], 'YYYYMMDD-XXXX')
+
+
+class RegistrationTestCase(TestCase):
+    """
+    Tests for the registration page
+    """
+
+    def test_basic_creation(self):
+        information = {
+            'username': 'moore',
+            'person_number': '19290103-1234',
+            'first_name': 'Gordon',
+            'last_name': 'Moore',
+            'email': 'g.moore@localhost',
+            'phone_number': '+461234567890',
+            'password1': 'Test!234',
+            'password2': 'Test!234',
+        }
+        response = self.client.post(reverse('register'), information)
+
+        # Successful -> redirect to login.
+        self.assertRedirects(response, reverse('login'))
+
+        # A member has been created with the correct information
+        member = Member.objects.get(username='moore')
+        self.assertEqual(member.person_number(), information['person_number'])
+        self.assertEqual(member.first_name, information['first_name'])
+        self.assertEqual(member.last_name, information['last_name'])
+        self.assertEqual(member.email, information['email'])
+        self.assertEqual(member.phone_number, information['phone_number'])
+
+        # Email has been sent to confirm e-mail address
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [information['email']])
+
+        # You can login with the provided credentials
+        self.assertTrue(self.client.login(
+            username=information['username'],
+            password=information['password1'],
+        ))
