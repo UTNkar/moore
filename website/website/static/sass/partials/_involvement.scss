@@ -25,20 +25,21 @@
 
     .header-text {
       float: left;
-      line-height: 0;
+      line-height: 1;
       margin-left: 5px;
       width: calc(100% - 220px);
       h3 {
         @extend .truncate;
-        line-height: 0.8;
+        margin: 0.8rem 0 0 0;
       }
       .team {
         margin-left: 0;
+        @extend .truncate;
         i {
           height: 14px;
           font-size: 20px;
           margin-right: 5px;
-          line-height: 0;
+          line-height: 0.6;
         }
       }
     }
