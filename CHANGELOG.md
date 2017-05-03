@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+## Added
+- Automated extensions of vacant positions. The election contact e-mail address will receive an e-mail.
 ### Fixed
 - Position names are now contained by their container in the overview.
 - The language and login buttons are now on the same height.
