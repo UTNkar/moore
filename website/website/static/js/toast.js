@@ -44,7 +44,7 @@ function marvin_quote(){
         'Sounds awful.'
     ];
 
-    var min = 90*1000;
+    var min = 240*1000;
     var max = 600*1000;
     var rand = Math.floor(Math.random() * (max - min)) + min;
     setTimeout(function(){
