@@ -6,11 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [0.3.3]
+## [0.3.4] - 2017-05-03
+### Fixed
+- Scaling issue on open positions.
+
+## [0.3.3] - 2017-05-03
 ### Fixed
 - Fix a big margin error on the open positions page.
 
-## [0.3.2]
+## [0.3.2] - 2017-05-03
 ### Added
 - Automated extensions of vacant positions. The election contact e-mail address will receive an e-mail.
 ### Changed
@@ -106,7 +110,8 @@ asked to extend their profile in the registration email.
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.3.3...HEAD
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.3.4...HEAD
+[0.3.4]: https://github.com/UTNkar/moore/compare/v0.3.2...v0.3.3
 [0.3.3]: https://github.com/UTNkar/moore/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/UTNkar/moore/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/UTNkar/moore/compare/v0.3.0...v0.3.1
