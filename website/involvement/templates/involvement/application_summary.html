@@ -1,11 +1,11 @@
-{% load i18n static wagtailroutablepage_tags wagtailimages_tags involvement_filters %}
+  {% load i18n static wagtailroutablepage_tags wagtailimages_tags involvement_filters %}
 {% with position=application.position %}
     <div class="col l4 m6 s12">
         <div class="card{% if color == 'primary' %} primary-color white-text{% elif color == 'secondary' %} secondary-color white-text{% endif %}">
             <div class="card-image">
                 <div class="card-image">
                     {% if position.role.team.logo %}{% image position.role.team.logo original as logo %}{% endif %}
-                    <img src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/bocken.svg' %}{% endif %}">
+                    <img src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/logo.svg' %}{% endif %}">
                 </div>
                 <span class="btn-floating halfway-fab{% if application.status != 'draft' %} primary-color{% endif %}"><i class="material-icons">{{ application.status|status_icon }}</i></span>
             </div>
