@@ -606,9 +606,9 @@ class RecruitmentExtensionTestCase(TestCase):
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [self.role.election_email])
-        self.assertContains(
-            mail.outbox[0].body,
-            reverse('involvement_position_extend', args=pos.pk)
+        self.assertIn(
+            reverse('involvement_position_extend', args=[pos.pk]),
+            mail.outbox[0].body
         )
 
     def test_no_email(self):
@@ -698,7 +698,7 @@ class RecruitmentExtensionTestCase(TestCase):
         applied = Position.objects.create(
             role=self.role,
             recruitment_start=date.today() - timedelta(days=10),
-            recruitment_end=date.today()- timedelta(days=1),
+            recruitment_end=date.today() - timedelta(days=1),
             term_from=date.today() + timedelta(days=4),
             term_to=date.today() + timedelta(days=365),
         )

@@ -1,0 +1,5 @@
+{% load i18n %}{% blocktrans %}It seems nobody applied yet for the position `{{ position }}'. The recruitment for this position ended yesterday. If this position should be filled, you can extend the deadline by clicking the following link:{% endblocktrans %}
+
+{% block extension_link %}{{ domain }}{% url 'involvement_position_extend' position.pk %}{% endblock %}
+
+{% blocktrans %}Just extending the deadline might not be enough. Make sure you make some extra noise about the position!{% endblocktrans %}

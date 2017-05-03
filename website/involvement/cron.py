@@ -1,8 +1,11 @@
-from datetime import date
+from datetime import date, timedelta
 
 import kronos
+from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+from django.template import loader
 
-from involvement.models import Team, Application
+from involvement.models import Team, Application, Position
 
 
 @kronos.register('1 0,6,12,18 * * *')  # At minute 1 past hour 0, 6, 12, and 18
@@ -35,3 +38,32 @@ def sync_groups():
                 team.group.user_set.remove(member.applicant)
             member.removed = True
             member.save()
+
+
+@kronos.register('30 6 * * *')  # At 06:30.
+def send_extension_emails():
+    vacant_positions = Position.objects.filter(
+        recruitment_end=date.today() - timedelta(days=1),
+    ).exclude(
+        applications__status='submitted'
+    )
+
+    for pos in vacant_positions:
+        context = {
+            'email': pos.role.election_email,
+            'domain': settings.BASE_URL,
+            'position': pos,
+        }
+        subject = loader.render_to_string(
+            'involvement/admin/extend_deadline_subject.txt', context
+        )
+        # Email subject *must not* contain newlines
+        subject = ''.join(subject.splitlines())
+        body = loader.render_to_string(
+            'involvement/admin/email_extend_deadline.html', context
+        )
+
+        email_message = EmailMultiAlternatives(
+            subject, body, None, [pos.role.election_email]
+        )
+        email_message.send()
