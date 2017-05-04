@@ -15,7 +15,7 @@
                         <h3>{{ pos }}</h3>
                         <div class="team">
                             {% if pos.role.team %}
-                                <i class="material-icons">group</i>{{ pos.role.team|truncatechars:20 }}
+                                <i class="material-icons">group</i>{{ pos.role.team }}
                             {% else %}
                                 <i class="material-icons">person</i>{% trans 'unaffiliated'|capfirst %}
                             {% endif %}
