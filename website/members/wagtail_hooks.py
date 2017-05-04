@@ -1,7 +1,38 @@
+from django.forms import CheckboxSelectMultiple
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
+from wagtail.contrib.modeladmin.views import EditView, CreateView
+from wagtail.wagtailadmin.edit_handlers import TabbedInterface, ObjectList, \
+    FieldPanel
+
 from members.models import StudyProgram, Section
 from django.utils.translation import ugettext_lazy as _
+
+
+class StudyProgramEditHandler:
+    def get_edit_handler_class(self):
+        edit_handler = TabbedInterface([
+            ObjectList([
+                FieldPanel('name_en'),
+                FieldPanel('name_sv'),
+                FieldPanel('degree'),
+            ], heading=_('General'),
+            ),
+            # TODO: http://stackoverflow.com/questions/43188124/
+            # ObjectList([
+            #     FieldPanel('sections', widget=CheckboxSelectMultiple),
+            # ], heading=_('Sections'),
+            # ),
+        ])
+        return edit_handler.bind_to_model(self.model)
+
+
+class StudyProgramEditView(StudyProgramEditHandler, EditView):
+    pass
+
+
+class StudyProgramCreateView(StudyProgramEditHandler, CreateView):
+    pass
 
 
 class StudyProgramAdmin(ModelAdmin):
@@ -10,8 +41,33 @@ class StudyProgramAdmin(ModelAdmin):
     menu_icon = 'fa-graduation-cap'
     menu_order = 510
     add_to_settings_menu = False
+    create_view_class = StudyProgramCreateView
+    edit_view_class = StudyProgramEditView
     list_display = ('degree', 'name_en', 'name_sv')
     search_fields = ('name_en', 'name_sv')
+
+
+class SectionEditHandler:
+    def get_edit_handler_class(self):
+        edit_handler = TabbedInterface([
+            ObjectList([
+                FieldPanel('name_en'),
+                FieldPanel('name_sv'),
+                FieldPanel('abbreviation'),
+            ], heading=_('General'), ),
+            ObjectList([
+                FieldPanel('studies', widget=CheckboxSelectMultiple),
+            ], heading=_('Studies'), ),
+        ])
+        return edit_handler.bind_to_model(self.model)
+
+
+class SectionEditView(SectionEditHandler, EditView):
+    pass
+
+
+class SectionCreateView(SectionEditHandler, CreateView):
+    pass
 
 
 class SectionAdmin(ModelAdmin):
@@ -20,6 +76,8 @@ class SectionAdmin(ModelAdmin):
     menu_icon = 'fa-eye'
     menu_order = 520
     add_to_settings_menu = False
+    create_view_class = SectionCreateView
+    edit_view_class = SectionEditView
     list_display = ('abbreviation', 'name_en', 'name_sv')
     search_fields = ('name_en', 'name_sv', 'abbreviation')
 

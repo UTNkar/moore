@@ -4,13 +4,10 @@ from django.contrib.auth.models import AbstractUser
 from django.core import validators
 from django.db import models
 from django.db.models import ManyToManyField
-from django.forms import CheckboxSelectMultiple
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from requests.auth import HTTPDigestAuth
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
-from wagtail.wagtailadmin.edit_handlers import TabbedInterface, ObjectList, \
-    FieldPanel
 
 from utils.translation import TranslatedField
 
@@ -61,21 +58,6 @@ class StudyProgram(models.Model):
         else:
             return self.name.__str__()
 
-    # ------ Administrator settings ------
-    edit_handler = TabbedInterface([
-        ObjectList([
-            FieldPanel('name_en'),
-            FieldPanel('name_sv'),
-            FieldPanel('degree'),
-        ], heading=_('General'),
-        ),
-        # TODO: http://stackoverflow.com/questions/43188124/
-        # ObjectList([
-        #     FieldPanel('sections', widget=CheckboxSelectMultiple),
-        # ], heading=_('Sections'),
-        # ),
-    ])
-
 
 class Section(models.Model):
     """This class represent a study section"""
@@ -118,20 +100,6 @@ class Section(models.Model):
             return '%s - %s' % (self.abbreviation, self.name)
         else:
             return self.name.__str__()
-
-    # ------ Administrator settings ------
-    edit_handler = TabbedInterface([
-        ObjectList([
-                FieldPanel('name_en'),
-                FieldPanel('name_sv'),
-                FieldPanel('abbreviation'),
-            ], heading=_('General'),
-        ),
-        ObjectList([
-                FieldPanel('studies', widget=CheckboxSelectMultiple),
-            ], heading=_('Studies'),
-        ),
-    ])
 
 
 class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
