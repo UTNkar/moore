@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Close button to close toast notifications.
 ### Fixed
 - Truncate the team name when screen gets too small.
 - Use actual logo as default within the my applications page.
