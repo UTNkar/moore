@@ -583,7 +583,7 @@ class RecruitmentExtensionTestCase(TestCase):
         self.admin = Member.objects.create(
             username='admin',
         )
-        mail.outbox.pop()
+        mail.outbox.clear()
         admin_group.user_set.add(self.admin)
         admin_group.save()
         self.client.force_login(

@@ -102,7 +102,7 @@ class ProfileTest(TestCase):
         self.assertContains(response,
                             '<option value="'
                             + self.member.study_id.__str__()
-                            + '" selected="selected">')
+                            + '" selected>')
         self.assertContains(response, self.member.registration_year,
                             msg_prefix='Response contains registration year')
 
