@@ -8,13 +8,18 @@ function marvin(message, classes, callback) {
         '<div class="message-impl">' +
         // TODO: Replace this static reference.
         '<img class="marvin" src="/static/images/marvin.png">' +
-        '<b>Marvin:</b><br>'
+        '<b>Marvin:</b><a href="#" class="close"><i class="material-icons">close</i></a><br>'
         + message
         + '</div>',
         null, // Display until dismissed
         marvin_style,
         callback
     );
+
+    $('.message-impl > .close').click(function(ev){
+        ev.preventDefault();
+        $(this).closest('.toast').remove();
+    });
 }
 
 function marvin_quote(){
