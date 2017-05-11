@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.4.0]
 ### Added
 - Close button to close toast notifications.
 ### Changed
@@ -121,8 +123,9 @@ asked to extend their profile in the registration email.
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.3.4...HEAD
-[0.3.4]: https://github.com/UTNkar/moore/compare/v0.3.2...v0.3.3
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/UTNkar/moore/compare/v0.3.4...v0.4.0
+[0.3.4]: https://github.com/UTNkar/moore/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/UTNkar/moore/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/UTNkar/moore/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/UTNkar/moore/compare/v0.3.0...v0.3.1
