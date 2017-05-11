@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Close button to close toast notifications.
 ### Changed
 - Updated Wagtail to 1.10, including Django update to 1.11
+- Updated the error pages to be more fun!
 ### Fixed
 - Truncate the team name when screen gets too small.
 - Use actual logo as default within the my applications page.
