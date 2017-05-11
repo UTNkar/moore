@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Updated Wagtail to 1.10, including Django update to 1.11
 - Updated the error pages to be more fun!
+- Updated to Django 1.11.1, email-confirmation 0.22, and requests 2.14.2.
 ### Fixed
 - Truncate the team name when screen gets too small.
 - Use actual logo as default within the my applications page.
