@@ -30,6 +30,7 @@
 </head>
 
 <body class="moore {% block body_class %}{% endblock %}">
+{% block body %}
     {% wagtailuserbar %}
 
     {% block page %}{% endblock %}
@@ -45,6 +46,7 @@
     {% block extra_js %}
         {# Override this in templates to add extra javascript #}
     {% endblock %}
+{% endblock %}
 </body>
 
 </html>

@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Truncate the team name when screen gets too small.
 - Use actual logo as default within the my applications page.
 - Fix the double truncation of team names in the open positions page.
+- Fixed the error 500 page needing a request.
 
 ## [0.3.4] - 2017-05-03
 ### Fixed

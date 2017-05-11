@@ -1,7 +1,21 @@
-{% extends "error.html" %}
+{% extends "skeleton.html" %}
 {% load i18n %}
 
+{% block title %}Error{% endblock %}
 {% block title_suffix %}{% trans 'Uppsala Union of Engineering and Science Students' %}{% endblock %}
 
-{% block error_code %}500{% endblock %}
-{% block error_message %}{% trans 'Internal server error' %}{% endblock %}
+{% block body %}
+    <div class="error-page">
+        {% block error %}
+            <h1>{% block error_code %}{% trans '500' %}{% endblock %}</h1>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/t3otBjVZzT0" frameborder="0" allowfullscreen></iframe>
+            <p>{% block error_message %}{% trans 'Internal Server Error' %}{% endblock %}</p>
+        {% endblock %}
+
+        <div class="container">
+            <div class="divider"></div>
+        </div>
+
+        <a href="/" class="btn btn-secondary btn-large"><i class="material-icons">home</i> {% trans 'Return Home' %}</a>
+    </div>
+{% endblock %}
