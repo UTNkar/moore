@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Update to `rules` 1.2.1 and `wagtail` 1.10.1
 ### Fixed
 - Do not show the error video on logout
 
