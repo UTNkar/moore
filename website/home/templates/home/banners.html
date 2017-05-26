@@ -1,0 +1,31 @@
+{% load static i18n wagtailimages_tags %}
+<div class="banners carousel carousel-slider center">
+    {% if page.banners.all|length > 1 %}
+        <div class="carousel-fixed-item controls">
+            <i class="material-icons carousel-previous">keyboard_arrow_left</i>
+            <i class="material-icons carousel-next">keyboard_arrow_right</i>
+        </div>
+    {% endif %}
+    <div class="carousel-fixed-item center search">
+        <div class="container row">
+            <form action="{% url 'search' %}" method="get">
+                <div class="col s12 m5 offset-m3 input-field">
+                    <i class="material-icons prefix">search</i>
+                    <input class="validate" type="text" id="query" name="query" placeholder="{% trans 'Search our website' %}">
+                </div>
+                <div class="col s12 m1 input-field">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for banner in page.banners.all %}
+        {% image banner.image height-700 as photo %}
+        <div class="carousel-item">
+            {% if banner.image %}<div class="banner-image" style="background-image: url('{{ photo.url }}');"></div>{% endif %}
+            {% if banner.title %}<h2 class="banner-title">{{ banner.title }}</h2>{% endif %}
+            {% if banner.text %}<p class="banner-description">{{ banner.text }}</p>{% endif %}
+            {% if banner.link and banner.button %}<a class="banner-link" href="{{ banner.link }}">{{ banner.button }}</a>{% endif %}
+        </div>
+    {% endfor %}
+</div>
