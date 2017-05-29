@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+{% load wagtailcore_tags %}
 
 {% block content %}
     {% include 'home/banners.html' %}
+    {% include_block page.body %}
 {% endblock %}
