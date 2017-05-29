@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Update to `rules` 1.2.1 and `wagtail` 1.10.1
 ### Fixed
 - Do not show the error video on logout
+- Fit the last apply button within the collapsible header
 
 ## [0.4.0]
 ### Added
