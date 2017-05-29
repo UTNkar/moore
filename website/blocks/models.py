@@ -4,15 +4,6 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from django.utils.translation import ugettext_lazy as _
 
 
-class HeadingBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=True)
-    subtitle = blocks.CharBlock(required=False)
-
-    class Meta:
-        icon = 'fa-header'
-        template = 'blocks/title.html'
-
-
 class CountersBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     counters = blocks.ListBlock(blocks.StructBlock([
@@ -24,8 +15,8 @@ class CountersBlock(blocks.StructBlock):
         ('description', blocks.CharBlock(required=False))
     ]))
     style = blocks.ChoiceBlock(choices=[
-        ('light', 'Light'),
-        ('dark', 'Dark'),
+        ('light', _('Light')),
+        ('dark', _('Dark')),
     ])
 
     class Meta:
@@ -33,9 +24,32 @@ class CountersBlock(blocks.StructBlock):
         template = 'blocks/counter.html'
 
 
+class HeadingBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=True)
+    subtitle = blocks.CharBlock(required=False)
+
+    class Meta:
+        icon = 'fa-header'
+        template = 'blocks/title.html'
+
+
+class ImageDescription(blocks.StructBlock):
+    description = blocks.RichTextBlock()
+    image = ImageChooserBlock()
+    image_alignment = blocks.ChoiceBlock(choices=[
+        ('left', _('Left')),
+        ('right', _('Right')),
+    ])
+    hide_on_med = blocks.BooleanBlock(required=False)
+
+    class Meta:
+        icon = 'fa-picture-o'
+        template = 'blocks/image_description.html'
+
 WAGTAIL_CONTENT_BLOCKTYPES = [
     ('heading', HeadingBlock()),
     ('paragraph', blocks.RichTextBlock()),
+    ('image_description', ImageDescription()),
     ('counters', CountersBlock()),
     ('image', ImageChooserBlock()),
 ]
