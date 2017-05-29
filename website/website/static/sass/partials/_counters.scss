@@ -1,0 +1,51 @@
+@import "base";
+
+.block-counters {
+  .dark, .light {
+    text-align: center;
+    padding: 80px 0;
+  }
+  h2 {
+    align-items: center;
+    display: flex;
+    font-size: 27px;
+    font-weight: 400;
+    height: 100px;
+    justify-content: center;
+    line-height: 1.5;
+  }
+  .material-icons {
+    font-size: 40px;
+    height: auto;
+    margin: 0 0 10px 0;
+    text-align: center;
+    width: 100%;
+  }
+  h3 {
+    margin: 0;
+  }
+  p {
+    font-size: 12px;
+    margin: 0;
+    position: relative;
+    text-align: center;
+  }
+
+  .dark {
+    background-color: $black-color;
+    color: $background-color;
+    p {
+      color: rgba($background-color, 0.8);
+    }
+  }
+  .light {
+    color: $black-color;
+    background-color: $accented-color;
+    p {
+      color: color('grey', 'base');
+    }
+    .material-icons {
+      color: $primary-color;
+    }
+  }
+}

@@ -25,13 +25,14 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
-    'website',  # include for templatetags
+    'blocks',
+    'branding',
     'home',
     'involvement',
+    'materialize',
     'members',
     'search',
-    'branding',
-    'materialize',
+    'website',  # include for templatetags
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',

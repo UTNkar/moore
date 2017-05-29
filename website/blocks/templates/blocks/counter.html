@@ -1,0 +1,18 @@
+<div class="{{ value.style }}">
+    <div class="container row">
+        <div class="col s12 m3">
+            <h2>{{ value.title }}</h2>
+        </div>
+        <div class="col s12 m9">
+            <div class="row">
+                {% for counter in value.counters %}
+                    <div class="col s12 m3">
+                        <i class="material-icons">{{ counter.icon }}</i>
+                        <h3>{{ counter.value }}</h3>
+                        <p>{{ counter.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
