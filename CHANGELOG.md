@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.4.1]
 ### Changed
 - Update to `rules` 1.2.1 and `wagtail` 1.10.1
 - Update to `requests` 2.17.3
@@ -131,7 +133,8 @@ asked to extend their profile in the registration email.
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/UTNkar/moore/compare/v0.4.0...v0.4.0
 [0.4.0]: https://github.com/UTNkar/moore/compare/v0.3.4...v0.4.0
 [0.3.4]: https://github.com/UTNkar/moore/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/UTNkar/moore/compare/v0.3.2...v0.3.3
