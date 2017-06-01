@@ -24,7 +24,7 @@
                     <div class="apply right">
                         <div class="hide-on-med-and-up"></div>
                         <a class="btn" href="{% routablepageurl page 'position' pos.id  %}">{% trans 'apply' %}</a><br>
-                        <div class="hide-on-small-only"><b style="color: {{ pos.recruitment_end|date_color }};">{% trans 'deadline'|capfirst %}: {{ pos.recruitment_end }}</b></div>
+                        <div class="hide-on-small-only"><b style="color: {{ pos.recruitment_end|date_color }};">{% trans 'deadline'|capfirst %}: {{ pos.recruitment_end|date:"SHORT_DATE_FORMAT"  }}</b></div>
                     </div>
                 </div>
                 <div class="collapsible-body">
