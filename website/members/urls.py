@@ -1,4 +1,5 @@
 from django.conf.urls import url, include
+from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 from members import views
@@ -14,7 +15,7 @@ urlpatterns = [
     url('^register/', CreateView.as_view(
         template_name='members/register.html',
         form_class=RegistrationForm,
-        success_url='/accounts/login/'
+        success_url=reverse_lazy('login'),
     ), name='register'),
 
     # Views given by django auth library
