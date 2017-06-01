@@ -107,6 +107,8 @@ class AppointmentForm(forms.Form):
                     )
                 elif self.position.applications.filter(
                     applicant__username=u
+                ).exclude(
+                    status='draft'
                 ).exists():
                     raise forms.ValidationError(
                         _('User %(user)s already applied for this position '
@@ -144,8 +146,11 @@ class AppointmentForm(forms.Form):
             user = get_user_model().objects.get(
                     username=user
             )
-            Application.objects.create(
+            appl, created = Application.objects.get_or_create(
                 position=self.position,
                 applicant=user,
-                status='appointed',
+                defaults={'status': 'appointed'}
             )
+            if not created:
+                appl.status = 'appointed'
+                appl.save()
