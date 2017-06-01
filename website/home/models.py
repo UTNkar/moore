@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import InlinePanel, MultiFieldPanel, \
-    FieldRowPanel, FieldPanel, StreamFieldPanel
+    FieldRowPanel, FieldPanel, StreamFieldPanel, TabbedInterface, ObjectList
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -28,12 +28,23 @@ class HomePage(Page):
     )
     body = TranslatedField('body_en', 'body_sv')
 
-    content_panels = Page.content_panels + [
-        FieldPanel('title_sv'),
+    banner_panels = [InlinePanel('banners', label=_('Banner'))]
+
+    content_panels_en = Page.content_panels + [
         StreamFieldPanel('body_en'),
-        StreamFieldPanel('body_sv'),
-        InlinePanel('banners', label=_('Banner')),
     ]
+
+    content_panels_sv = [
+        FieldPanel('title_sv', classname="full title"),
+        StreamFieldPanel('body_sv'),
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(banner_panels, heading=_('Banners')),
+        ObjectList(content_panels_en, heading=_('English')),
+        ObjectList(content_panels_sv, heading=_('Swedish')),
+        ObjectList(Page.promote_panels, heading=_('Promote')),
+    ])
 
 
 class Banner(Orderable):
