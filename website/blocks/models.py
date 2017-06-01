@@ -51,5 +51,5 @@ WAGTAIL_CONTENT_BLOCKTYPES = [
     ('paragraph', blocks.RichTextBlock()),
     ('image_description', ImageDescription()),
     ('counters', CountersBlock()),
-    ('image', ImageChooserBlock()),
+    ('image', ImageChooserBlock(template='blocks/image.html')),
 ]
