@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Do not show the error video on logout
 - Fit the last apply button within the collapsible header
 - Use short dates on involvement open positions page.
+- Allow users that drafted an application to be appointed using overturn field.
 
 ## [0.4.0]
 ### Added
