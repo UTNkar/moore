@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - Update to `rules` 1.2.1 and `wagtail` 1.10.1
-- Update to `requests` 2.16.5
+- Update to `requests` 2.17.3
 ### Fixed
 - Do not show the error video on logout
 - Fit the last apply button within the collapsible header
