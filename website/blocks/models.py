@@ -72,11 +72,27 @@ class ImageIconsBlock(blocks.StructBlock):
         icon = 'fa-file-excel-o'
         template = 'blocks/image_icons.html'
 
+
+class OverlayBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    title = blocks.CharBlock(required=False)
+    description = blocks.CharBlock(required=False)
+
+    link = blocks.URLBlock(required=False)
+    button = blocks.CharBlock(required=False)
+
+    class Meta:
+        label = _('Image overlay')
+        icon = 'fa-clone'
+        template = 'blocks/overlay.html'
+
+
 WAGTAIL_CONTENT_BLOCKTYPES = [
     ('heading', HeadingBlock()),
     ('paragraph', blocks.RichTextBlock()),
     ('image_description', ImageIconsBlock()),
     ('image_icons', ImageDescriptionBlock()),
+    ('overlay', OverlayBlock()),
     ('logos', blocks.ListBlock(
         ImageChooserBlock(),
         icon='fa-pied-piper',

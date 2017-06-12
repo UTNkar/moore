@@ -1,0 +1,11 @@
+{% load wagtailimages_tags %}
+{% image value.image original as background %}
+<div class="overlay" style="background-image: url('{{ background.url }}');">
+    <div class="container">
+        {% if value.title %}<h2>{{ value.title }}</h2>{% endif %}
+        {% if value.description %}<p>{{ value.description }}</p>{% endif %}
+        {% if value.button and value.link %}
+            <a href="{{ value.link }}" class="btn btn-primary btn-large">{{ value.button }}</a>
+        {% endif %}
+    </div>
+</div>
