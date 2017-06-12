@@ -166,7 +166,7 @@ nav {
       padding-left: 2rem;
 
       &:focus, &[type=text]:valid, &[type=password]:valid,
-      &[type=email]:valid, &[type=url]:valid, &[type=date]:valid {
+      &[type=email]:valid, &[type="url"]:valid, &[type=date]:valid {
         border: none;
         box-shadow: none;
       }
