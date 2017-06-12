@@ -35,7 +35,7 @@ class HeadingBlock(blocks.StructBlock):
         template = 'blocks/title.html'
 
 
-class ImageDescription(blocks.StructBlock):
+class ImageDescriptionBlock(blocks.StructBlock):
     description = blocks.RichTextBlock()
     image = ImageChooserBlock()
     image_alignment = blocks.ChoiceBlock(choices=[
@@ -50,7 +50,7 @@ class ImageDescription(blocks.StructBlock):
         template = 'blocks/image_description.html'
 
 
-class ImageIcons(blocks.StructBlock):
+class ImageIconsBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     image = ImageChooserBlock()
     image_alignment = blocks.ChoiceBlock(choices=[
@@ -75,8 +75,14 @@ class ImageIcons(blocks.StructBlock):
 WAGTAIL_CONTENT_BLOCKTYPES = [
     ('heading', HeadingBlock()),
     ('paragraph', blocks.RichTextBlock()),
-    ('image_description', ImageIcons()),
-    ('image_icons', ImageDescription()),
+    ('image_description', ImageIconsBlock()),
+    ('image_icons', ImageDescriptionBlock()),
+    ('logos', blocks.ListBlock(
+        ImageChooserBlock(),
+        icon='fa-pied-piper',
+        template='blocks/logos.html',
+        label=_('Logos'),
+    )),
     ('counters', CountersBlock()),
     ('image', ImageChooserBlock(template='blocks/image.html')),
 ]

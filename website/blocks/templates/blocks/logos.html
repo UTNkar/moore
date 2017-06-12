@@ -1,0 +1,9 @@
+{% load wagtailimages_tags %}
+<div class="container row">
+    {% for v in value %}
+        <div class="col s12 m3 logo">
+            {% image v original as image%}
+            <img src="{{ image.url }}" alt="{{ image.alt }}">
+        </div>
+    {% endfor %}
+</div>
