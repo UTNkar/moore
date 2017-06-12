@@ -1,4 +1,4 @@
-Django[argon2]==1.11.1
+Django[argon2]==1.11.2
 wagtail==1.10.1
 
 # External Libraries
