@@ -1,5 +1,4 @@
 // Main stylesheet of the Noyce Theme.
-// SASS structure according to: http://thesassway.com/beginner/how-to-structure-a-sass-project
 
 // Modules and Variables
 @import "partials/base";
@@ -8,28 +7,15 @@
 @import "materialize/sass/materialize";
 
 // Partials
-@import "partials/block-image";
-@import "partials/buttons";
-@import "partials/cards";
-@import "partials/carousel";
-@import "partials/colors";
-@import "partials/content-title";
-@import "partials/counters";
-@import "partials/darth";
-@import "partials/empty";
-@import "partials/error_page";
-@import "partials/footer";
-@import "partials/forms";
-@import "partials/grid";
-@import "partials/headings";
-@import "partials/involvement";
-@import "partials/logos";
-@import "partials/messages";
-@import "partials/navigation";
-@import "partials/overlay";
-@import "partials/party";
-@import "partials/structure_header";
-@import "partials/tabs";
-@import "partials/typography";
-@import "partials/wagtail_userbar";
-@import "partials/waves";
+
+// Content Blocks
+@import "partials/blocks/all";
+// Content Elements
+@import "partials/elements/all";
+// Page Layout Components
+@import "partials/layout/all";
+// Full Page Styles
+@import "partials/pages/all";
+
+// Miscellaneous
+@import "partials/misc/all";
