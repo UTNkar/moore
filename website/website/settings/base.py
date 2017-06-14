@@ -27,6 +27,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'blocks',
     'branding',
+    'google',
     'home',
     'involvement',
     'materialize',

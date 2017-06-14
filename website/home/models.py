@@ -10,6 +10,7 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
+from google.models import GoogleFormBlock
 from utils.translation import TranslatedField
 
 
@@ -135,11 +136,15 @@ class WebPage(Page):
     translated_title = TranslatedField('title', 'title_sv')
 
     body_en = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES,
+        WAGTAIL_STATIC_BLOCKTYPES + [
+            ('google_form', GoogleFormBlock()),
+        ],
         blank=True,
     )
     body_sv = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES,
+        WAGTAIL_STATIC_BLOCKTYPES + [
+            ('google_form', GoogleFormBlock()),
+        ],
         blank=True,
     )
     body = TranslatedField('body_en', 'body_sv')
