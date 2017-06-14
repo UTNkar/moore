@@ -10,7 +10,7 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
-from google.models import GoogleFormBlock
+from google.models import GoogleFormBlock, GoogleDriveBlock
 from utils.translation import TranslatedField
 
 
@@ -138,12 +138,14 @@ class WebPage(Page):
     body_en = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
             ('google_form', GoogleFormBlock()),
+            ('google_drive', GoogleDriveBlock()),
         ],
         blank=True,
     )
     body_sv = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
             ('google_form', GoogleFormBlock()),
+            ('google_drive', GoogleDriveBlock()),
         ],
         blank=True,
     )
