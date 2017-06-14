@@ -9,7 +9,7 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
-from blocks.models import WAGTAIL_CONTENT_BLOCKTYPES
+from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from utils.translation import TranslatedField
 
 
@@ -19,11 +19,11 @@ class HomePage(Page):
     translated_title = TranslatedField('title', 'title_sv')
 
     body_en = StreamField(
-        WAGTAIL_CONTENT_BLOCKTYPES,
+        WAGTAIL_STATIC_BLOCKTYPES,
         blank=True,
     )
     body_sv = StreamField(
-        WAGTAIL_CONTENT_BLOCKTYPES,
+        WAGTAIL_STATIC_BLOCKTYPES,
         blank=True,
     )
     body = TranslatedField('body_en', 'body_sv')
@@ -127,3 +127,34 @@ class Banner(Orderable):
             FieldPanel('button_sv'),
         ]),
     ])]
+
+
+class WebPage(Page):
+    # ---- General Page information ------
+    title_sv = models.CharField(max_length=255)
+    translated_title = TranslatedField('title', 'title_sv')
+
+    body_en = StreamField(
+        WAGTAIL_STATIC_BLOCKTYPES,
+        blank=True,
+    )
+    body_sv = StreamField(
+        WAGTAIL_STATIC_BLOCKTYPES,
+        blank=True,
+    )
+    body = TranslatedField('body_en', 'body_sv')
+
+    content_panels_en = Page.content_panels + [
+        StreamFieldPanel('body_en'),
+    ]
+
+    content_panels_sv = [
+        FieldPanel('title_sv', classname="full title"),
+        StreamFieldPanel('body_sv'),
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels_en, heading=_('English')),
+        ObjectList(content_panels_sv, heading=_('Swedish')),
+        ObjectList(Page.promote_panels, heading=_('Promote')),
+    ])

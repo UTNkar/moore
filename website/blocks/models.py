@@ -87,7 +87,7 @@ class OverlayBlock(blocks.StructBlock):
         template = 'blocks/overlay.html'
 
 
-WAGTAIL_CONTENT_BLOCKTYPES = [
+WAGTAIL_STATIC_BLOCKTYPES = [
     ('heading', HeadingBlock()),
     ('paragraph', blocks.RichTextBlock()),
     ('image_description', ImageIconsBlock()),
