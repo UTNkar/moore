@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - First version of HomePage + some building blocks
+- Add StreamField block for Google Drive
+- Add StreamField block and collection pages for Google Forms
 ### Changed
 - Update to `django` 1.11.2
 - Update to `requests` 2.18.1
