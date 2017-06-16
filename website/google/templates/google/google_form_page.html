@@ -1,0 +1,14 @@
+{% extends 'page.html' %}
+{% load i18n wagtailcore_tags %}
+
+{% block content %}
+    {% if page.is_past_due %}
+        {% if page.results %}
+            {% include_block page.results %}
+        {% else %}
+            <div class="container"><p class="flow-text">{% trans 'The deadline for this form has passed. Results might be posted here at a later date.' %}</p></div>
+        {% endif %}
+    {% else %}
+        {% include_block page.form %}
+    {% endif %}
+{% endblock %}

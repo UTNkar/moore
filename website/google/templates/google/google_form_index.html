@@ -1,0 +1,17 @@
+{% extends 'page.html' %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+    <div class="container">
+        <div class="forms">
+            <div class="collection{% if page.description %} with-header{% endif %}">
+                {% if page.description %}
+                    <div class="collection-header">{{ page.description|richtext }}</div>
+                {% endif %}
+                {% for form in google_forms %}
+                    <a href="{% pageurl form %}" class="collection-item">{{ form.translated_title }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
