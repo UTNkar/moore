@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - First version of HomePage + some building blocks
 ### Changed
 - Update to `django` 1.11.2
+- Update to `requests` 2.18.1
 - Restructure the Noyce stylesheets
 ### Fixed
 - Update GitHub button to new syntax (removes warning)
