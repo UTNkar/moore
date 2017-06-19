@@ -1,0 +1,35 @@
+{% extends 'page.html' %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    <div class="container">
+        <div class="posts">
+            {% for item in news_items %}
+                <div class="post">
+                    <div class="post-date">
+                        <div class="day">{{ item.created|date:'d' }}</div>
+                        <div class="month">{{ item.created|date:'b'|capfirst }}</div>
+                    </div>
+                    <div class="post-image">
+                        {% image item.feed_image original as image %}
+                        <a href="{% pageurl item %}" class="post-image-link" style="background-image: url('{{ image.url }}');"></a>
+                    </div>
+                    <div class="post-title">
+                         <a href="{% pageurl item %}">
+                             <h2>{{ item.translated_title }}</h2>
+                         </a>
+                    </div>
+                    <div class="post-content">
+                        {{ item.body|striptags|truncatechars:500 }}
+                    </div>
+                    <div class="post-read-more">
+                        <a href="{% pageurl item %}">Read More <i class="material-icons">keyboard_arrow_right</i></a>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="flow-text">{% trans 'No news articles have been published yet. Try again later.' %}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

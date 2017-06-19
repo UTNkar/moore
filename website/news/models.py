@@ -26,7 +26,7 @@ class NewsIndexPage(Page):
         context = super(NewsIndexPage, self).get_context(request, **kwargs)
 
         # Add extra variables and return the updated context
-        context['news_items'] = NewsIndexPage.objects.child_of(self).live()
+        context['news_items'] = NewsPage.objects.child_of(self).live()
         return context
 
 
