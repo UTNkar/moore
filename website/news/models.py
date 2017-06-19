@@ -66,11 +66,11 @@ class NewsPage(Page):
 
     # Editor panels configuration
     content_panels = Page.content_panels + [
-        FieldPanel('body_en'),
+        FieldPanel('body_en', classname="full"),
     ]
     content_panels_sv = [
         FieldPanel('title_sv', classname="full title"),
-        FieldPanel('body_sv'),
+        FieldPanel('body_sv', classname="full"),
     ]
     promote_panels = [
         ImageChooserPanel('feed_image')
