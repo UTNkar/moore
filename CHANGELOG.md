@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - First version of HomePage + some building blocks
 - Add StreamField block for Google Drive
 - Add StreamField block and collection pages for Google Forms
+- Add News module
 ### Changed
 - Update to `django` 1.11.2
 - Update to `requests` 2.18.1
@@ -16,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Update GitHub button to new syntax (removes warning)
 - Twitter links in the branding buttons
+- New translation for application status
 
 ## [0.4.1]
 ### Changed
