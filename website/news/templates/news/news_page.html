@@ -1,0 +1,10 @@
+{% extends 'page.html' %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+    <div class="container">
+        <div class="post-detail">
+            {{ page.body | richtext }}
+        </div>
+    </div>
+{% endblock %}
