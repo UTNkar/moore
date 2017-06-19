@@ -23,11 +23,11 @@ msgstr "Den angivna statusen var ej giltig."
 
 #: involvement/forms.py:48 involvement/models.py:436
 msgid "Approved"
-msgstr "Beviljad"
+msgstr "Nominerad"
 
 #: involvement/forms.py:49 involvement/models.py:437
 msgid "Disapproved"
-msgstr "Avslagen"
+msgstr "Inte Nominerad"
 
 #: involvement/forms.py:77
 msgid "Overturn"
