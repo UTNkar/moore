@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'involvement',
     'materialize',
     'members',
+    'news',
     'search',
     'website',  # include for templatetags
 
