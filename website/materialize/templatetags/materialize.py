@@ -1,5 +1,4 @@
 from django import template
-from django.shortcuts import render
 from django.template import loader
 
 register = template.Library()
