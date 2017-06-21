@@ -6,7 +6,7 @@ from members import views
 from members.forms import RegistrationForm
 
 urlpatterns = [
-    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/$', views.ProfileView.as_view(), name='profile'),
     url(
         r'^email_change_confirm/(?P<token>[0-9A-Za-z]{12})/$',
         views.email_change_confirm,
