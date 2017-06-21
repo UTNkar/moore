@@ -1,38 +1,64 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
+{% load i18n static wagtailcore_tags materialize %}
 
 {% block body_class %}template-searchresults{% endblock %}
 
 {% block title %}Search{% endblock %}
 
 {% block content %}
-    <h1>Search</h1>
+    <div class="content-title">
+        <div class="container">
+            <h1>{% trans 'Search' %}</h1>
+            <ul class="breadcrumbs">
+                <li><a href="/">{% trans 'Home' %}</a> <i class="material-icons">keyboard_arrow_right</i></li>
+                <li class="active">{% trans 'Search' %}</li>
+            </ul>
+        </div>
+    </div>
 
-    <form action="{% url 'search' %}" method="get">
-        <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-        <input type="submit" value="Search" class="button">
-    </form>
+    <div class="container">
+        <div class="search-form card">
+            <div class="card-content">
+                <form action="{% url 'search' %}" method="get">
+                    <div class="row">
+                        <div class="input-field col s8 offset-s2">
+                            <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+                            <label class="active" for="query">{% trans 'Search our website' %}</label>
+                        </div>
+                    </div>
+                    <button name="{{ form.status.name }}" type="submit" class="btn-floating halfway-fab waves-effect waves-light">
+                        <i class="material-icons">search</i>
+                    </button>
+                </form>
+            </div>
+        </div>
 
-    {% if search_results %}
-        <ul>
-            {% for result in search_results %}
-                <li>
-                    <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-                    {% if result.search_description %}
-                        {{ result.search_description|safe }}
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="search-results">
+        {% if search_results %}
+            <ul class="collapsible" data-collapsible="accordion">
+                {% for result in search_results %}
+                    <li>
+                        <div class="collapsible-header">
+                            <a href="{% pageurl result %}"><i class="material-icons">find_in_page</i>{{ result }}</a>
+                        </div>
+                        {% if result.search_description %}
+                            <div class="collapsible-body">
+                                {{ result.search_description|safe }}
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
 
-        {% if search_results.has_previous %}
-            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
+            {% url 'search' as bare_url %}
+            {% with search_query|urlencode as url_query %}
+                {% with bare_url|add:'?query='|add:url_query|add:'&page=' as url %}
+                    {% materialize_pagination search_results url %}
+                {% endwith %}
+            {% endwith %}
+        {% else %}
+            <p class="flow-text">{% trans 'No results found' %}</p>
         {% endif %}
-
-        {% if search_results.has_next %}
-            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-        {% endif %}
-    {% elif search_query %}
-        No results found
-    {% endif %}
+        </div>
+    </div>
 {% endblock %}
