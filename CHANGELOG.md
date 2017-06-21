@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Update GitHub button to new syntax (removes warning)
 - Twitter links in the branding buttons
 - New translation for application status
+- Avatar overlay on Safari
 
 ## [0.4.1]
 ### Changed

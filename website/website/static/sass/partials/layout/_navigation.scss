@@ -50,7 +50,7 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
       display: block;
       padding: $logo-fallback-difference/2 $logo-fallback-difference/2;
       left: $logo-fallback-margin-left + 1px;
-      top:  $logo-fallback-margin-top - 1px;
+      top:  $logo-fallback-margin-top;
       z-index: 0;
       background-color: $secondary-color;
       width: $logo-height - 2px;
