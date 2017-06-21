@@ -22,7 +22,7 @@ def search(request):
         search_results = Page.objects.none()
 
     # Pagination
-    paginator = Paginator(search_results, 10)
+    paginator = Paginator(search_results, 25)
     try:
         search_results = paginator.page(page)
     except PageNotAnInteger:

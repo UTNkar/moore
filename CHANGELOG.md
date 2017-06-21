@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add StreamField block for Google Drive
 - Add StreamField block and collection pages for Google Forms
 - Add News module
+- Templated search page
+- Pagination rendering in the materialize app
 ### Changed
 - Update to `django` 1.11.2
 - Update to `requests` 2.18.1
