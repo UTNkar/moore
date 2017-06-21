@@ -69,6 +69,13 @@ To create translations for an app:
 since those cannot handle all the subtleties) to fix the translations.
 4. `../manage.py compilemessages`
 
+## Upgrading local installation
+
+1. Pull the project from github ex: `git pull upstream development`
+2. Upgrade python packages ex: `pip install --upgrade -r dev-requirements.txt`
+3. Apply migrations ex: `./manage.py migrate`
+
+
 ## License
 
 [AGPL-v2.0](LICENSE), unless a different, usually external, license is provided within a folder or file.
