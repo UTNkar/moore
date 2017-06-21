@@ -2,47 +2,45 @@ import datetime
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic import UpdateView
 
 from members.forms import MemberForm
 from members.models import Section, StudyProgram
 
 
-@login_required
-def profile(request):
-    if request.POST:
-        form = MemberForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.add_message(request, messages.SUCCESS,
-                                 _('Your account settings have been saved.'))
-            form = MemberForm(instance=request.user)
-    else:
-        form = MemberForm(instance=request.user)
+class ProfileView(LoginRequiredMixin, UpdateView):
+    template_name = 'members/profile.html'
+    form_class = MemberForm
+    success_url = reverse_lazy('profile')
 
-    if len(request.user.get_unconfirmed_emails()) > 0:
-        messages.add_message(
-            request, messages.WARNING,
-            _('Your newly set email address has not yet been confirmed')
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('Your account settings have been saved.'))
+        return super(ProfileView, self).form_valid(form)
+
+    def get_object(self, queryset=None):
+        if len(self.request.user.get_unconfirmed_emails()) > 0:
+            messages.add_message(
+                self.request, messages.WARNING,
+                _('Your newly set email address has not yet been confirmed')
+            )
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        kwargs['studies'] = StudyProgram.objects.all()
+        kwargs['sections'] = Section.objects.all()
+        kwargs['can_update_status'] = (
+            self.request.user.status != 'member'
+            and (timezone.now() - self.request.user.status_changed
+                 > datetime.timedelta(1))
         )
-
-    can_update_status = (
-        request.user.status != 'member'
-        and (timezone.now() - request.user.status_changed
-             > datetime.timedelta(1))
-    )
-
-    return render(request, 'members/profile.html', {
-        'form': form,
-        'studies': StudyProgram.objects.all(),
-        'sections': Section.objects.all(),
-        'can_update_status': can_update_status,
-    })
+        return super(ProfileView, self).get_context_data(**kwargs)
 
 
 @login_required
@@ -56,4 +54,4 @@ def email_change_confirm(request, token):
     except ObjectDoesNotExist:
         messages.add_message(request, messages.ERROR,
                              _('The provided confirmation token was invalid.'))
-    return HttpResponseRedirect(reverse('profile'))
+    return HttpResponseRedirect(reverse_lazy('profile'))

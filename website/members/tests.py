@@ -114,7 +114,7 @@ class ProfileTest(TestCase):
             'phone_number': '+31612345678',
 
         }
-        response = self.client.post(reverse('profile'), data)
+        response = self.client.post(reverse('profile'), data, follow=True)
 
         # No errors occurred in the change
         self.assertEqual(response.status_code, 200)
@@ -145,7 +145,7 @@ class ProfileTest(TestCase):
             'first_name': self.member.first_name,
             'last_name': self.member.last_name,
         }
-        response = self.client.post(reverse('profile'), data)
+        response = self.client.post(reverse('profile'), data, follow=True)
 
         # No errors occurred in the change
         self.assertEqual(response.status_code, 200)
@@ -165,7 +165,7 @@ class ProfileTest(TestCase):
             'first_name': self.member.first_name,
             'last_name': self.member.last_name,
         }
-        response = self.client.post(reverse('profile'), data)
+        response = self.client.post(reverse('profile'), data, follow=True)
 
         # No errors occurred in the change
         self.assertEqual(response.status_code, 200)
