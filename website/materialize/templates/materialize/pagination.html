@@ -1,0 +1,21 @@
+{% if page.has_other_pages %}
+<ul class="pagination">
+    <li class="{% if page.has_previous %}waves-effect{% else %}disabled{% endif %}">
+        <a href="{% if page.has_previous %}{{ url }}{{ page.previous_page_number }}{% endif %}">
+            <i class="material-icons">chevron_left</i>
+        </a>
+    </li>
+    
+    {% for i in paginator.page_range %}
+        <li class="{% if page.number == i %}active{% else %}waves-effect{% endif %}">
+            <a href="{{ url }}{{ i }}">{{ i }}</a>
+        </li>
+    {% endfor %}
+
+    <li class="{% if page.has_next %}waves-effect{% else %}disabled{% endif %}">
+        <a href="{% if page.has_next %}{{ url }}{{ page.next_page_number }}{% endif %}">
+            <i class="material-icons">chevron_right</i>
+        </a>
+    </li>
+</ul>
+{% endif %}

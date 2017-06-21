@@ -1,4 +1,5 @@
 from django import template
+from django.shortcuts import render
 from django.template import loader
 
 register = template.Library()
@@ -23,8 +24,7 @@ def render_field(template, field, prefix=None):
         'field': field,
         'prefix': prefix,
     }
-    html = t.render(c)
-    return html
+    return t.render(c)
 
 
 @register.simple_tag
@@ -36,3 +36,12 @@ def materialize_field(field, prefix=None):
         return render_field('materialize/form/input.html', field, prefix)
     else:
         return field.as_widget()
+
+
+@register.inclusion_tag('materialize/pagination.html')
+def materialize_pagination(page, url):
+    return {
+        'page': page,
+        'paginator': page.paginator,
+        'url': url,
+    }
