@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 13:40+0200\n"
+"POT-Creation-Date: 2017-06-26 10:02+0200\n"
 "PO-Revision-Date: 2017-03-23 14:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,85 +13,87 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.12\n"
 
-#: website/settings/base.py:118
+#: settings/base.py:121
 msgid "English"
 msgstr "engelska"
 
-#: website/settings/base.py:119
+#: settings/base.py:122
 msgid "Swedish"
 msgstr "svenska"
 
-#: website/templates/400.html:5
+#: templates/400.html:5
 msgid "Bad request"
 msgstr "Bad request"
 
-#: website/templates/403.html:5
+#: templates/403.html:5
 msgid "Permission denied"
 msgstr "Du har inte åtkomst till den här sidan"
 
-#: website/templates/404.html:5
+#: templates/404.html:5
 msgid "Page not found"
 msgstr "Sidan kunde inte hittas"
 
-#: website/templates/500.html:4 website/templates/skeleton.html:16
+#: templates/500.html:5 templates/skeleton.html:16
 msgid "Uppsala Union of Engineering and Science Students"
 msgstr "Uppsala teknolog- och naturvetarkår"
 
-#: website/templates/500.html:7
-msgid "Internal server error"
+#: templates/500.html:10
+msgid "500"
+msgstr ""
+
+#: templates/500.html:12
+#, fuzzy
+#| msgid "Internal server error"
+msgid "Internal Server Error"
 msgstr "Internal server error"
 
-#: website/templates/empty.html:10 website/templates/error.html:16
+#: templates/500.html:19 templates/empty.html:10 templates/error.html:18
 msgid "Return Home"
 msgstr "Gå tillbaka till startsidan"
 
-#: website/templates/empty.html:17 website/templates/partials/navigation.html:7
+#: templates/empty.html:17 templates/partials/navigation.html:7
 msgid "The UTN Logo"
 msgstr "UTN-loggan"
 
-#: website/templates/error.html:9
+#: templates/error.html:9
 msgid "Error"
 msgstr "Fel"
 
-#: website/templates/error.html:10
+#: templates/error.html:11
 msgid "An error has occurred"
 msgstr "Ett fel har inträffat"
 
-#: website/templates/partials/footer.html:17
+#: templates/partials/footer.html:17
 msgid "Find us on GitHub"
 msgstr ""
 
-#: website/templates/partials/navigation.html:20
-#: website/templates/partials/navigation.html:58
+#: templates/partials/navigation.html:20 templates/partials/navigation.html:58
 #, fuzzy
 #| msgid "Log out"
 msgid "Log in"
 msgstr "Logga ut"
 
-#: website/templates/partials/navigation.html:33
-#: website/templates/partials/navigation.html:68
+#: templates/partials/navigation.html:33 templates/partials/navigation.html:68
 msgid "account"
 msgstr "konto"
 
-#: website/templates/partials/navigation.html:34
-#: website/templates/partials/navigation.html:69
+#: templates/partials/navigation.html:34 templates/partials/navigation.html:69
 msgid "password"
 msgstr "lösenord"
 
-#: website/templates/partials/navigation.html:35
-#: website/templates/partials/navigation.html:70
+#: templates/partials/navigation.html:35 templates/partials/navigation.html:70
 msgid "Log out"
 msgstr "Logga ut"
 
-#: website/templates/partials/navigation.html:64
+#: templates/partials/navigation.html:64
 msgid "your avatar"
 msgstr ""
 
-#: website/templates/tags/menu.html:4
+#: templates/tags/menu.html:4
 msgid "Home"
 msgstr "Startsida"
 
-#: website/templates/wagtailadmin/home.html:4
+#: templates/wagtailadmin/home.html:4
 msgid "Welcome UTN website administrators!"
 msgstr "Var hälsade, administratörer av UTN:s hemsida!"
 
