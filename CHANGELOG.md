@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Twitter links in the branding buttons
 - New translation for application status
 - Avatar overlay on Safari
+- Update the translation of all translatable strings
 
 ## [0.4.1]
 ### Changed

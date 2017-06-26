@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-26 09:56+0200\n"
-"PO-Revision-Date: 2017-03-31 11:21+0200\n"
+"PO-Revision-Date: 2017-06-26 10:11+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -11,21 +11,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: apps.py:7 wagtail_hooks.py:18
 msgid "Branding"
 msgstr "Branding"
 
 #: models.py:13
-#, fuzzy
-#| msgid "Social media accounts"
 msgid "social media accounts"
 msgstr "Konton på sociala medier"
 
 #: models.py:16
 msgid "Your Facebook page URL"
-msgstr "ULR:en till din facebook"
+msgstr "ULR:en till din Facebook"
 
 #: models.py:21
 msgid "Your Instagram username, without the @"
@@ -73,19 +71,19 @@ msgstr "tillhör"
 
 #: templates/branding/tags/social_media.html:2
 msgid "Follow us on social media:"
-msgstr ""
+msgstr "Följ oss på sociala medier:"
 
 #: templates/branding/tags/social_media.html:11
 msgid "facebook icon"
-msgstr ""
+msgstr "facebookion"
 
 #: templates/branding/tags/social_media.html:22
 msgid "twitter icon"
-msgstr ""
+msgstr "twitterikon"
 
 #: templates/branding/tags/social_media.html:33
 msgid "instagram icon"
-msgstr ""
+msgstr "instagramikon"
 
 #: templates/branding/tags/structure_header.html:10
 #: templates/branding/tags/structure_header.html:18

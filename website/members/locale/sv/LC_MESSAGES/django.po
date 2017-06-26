@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-26 09:57+0200\n"
-"PO-Revision-Date: 2017-04-05 15:15+0200\n"
+"PO-Revision-Date: 2017-06-26 10:25+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: apps.py:7
 msgid "UTN Member Management"
@@ -188,42 +188,30 @@ msgid "Member of section"
 msgstr "Sektionsmedlem i"
 
 #: templates/members/email_change_email.html:1
-#, fuzzy
-#| msgid ""
-#| "You're receiving this email because a UTN-account has been created with "
-#| "this e-mail address."
 msgid ""
 "You're receiving this email because a UTN-account has been created with this "
 "email address."
 msgstr ""
 "Du får detta mail eftersom du har registrerat ett UTN-konto på denna "
-"emailadress"
+"emailadress."
 
 #: templates/members/email_change_email.html:1
-#, fuzzy
-#| msgid ""
-#| "You're receiving this email because you registered a new e-mail address "
-#| "for your UTN-account."
 msgid ""
 "You're receiving this email because you registered a new email address for "
 "your UTN-account."
 msgstr ""
 "Du får detta mail eftersom du har registrerat en ny emailadress för ditt UTN-"
-"konto"
+"konto."
 
 #: templates/members/email_change_email.html:2
-#, fuzzy
-#| msgid "Please go to the following page to confirm your e-mail address"
 msgid "Please go to the following page to confirm your email address"
 msgstr "Fortsätt till denna sida för att bekräfta din emailadress"
 
 #: templates/members/email_change_email.html:2
 msgid " and complete your profile"
-msgstr "och slutför din profil"
+msgstr " och slutför din profil"
 
 #: templates/members/email_change_subject.txt:2
-#, fuzzy
-#| msgid "[UTN] Confirm your e-mail address"
 msgid "[UTN] Confirm your email address"
 msgstr "[UTN] Bekräfta din emailadress"
 
@@ -257,7 +245,7 @@ msgstr "spara"
 
 #: templates/members/register.html:4
 msgid "Register"
-msgstr "Registrera "
+msgstr "Registrera"
 
 #: templates/members/register.html:6 templates/registration/login.html:35
 msgid "Create a UTN account"
@@ -325,7 +313,7 @@ msgid ""
 "password twice so we can verify you typed it in correctly."
 msgstr ""
 "Ange för säkerhet ditt gamla lösenord, och skriv in ditt nya lösenord två "
-"gånger för att verifiera att det skrivits in korrekt"
+"gånger för att verifiera att det skrivits in korrekt."
 
 #: templates/registration/password_change_form.html:50
 #: templates/registration/password_reset_confirm.html:26
@@ -340,10 +328,8 @@ msgid "Password reset"
 msgstr "Återställning av lösenord"
 
 #: templates/registration/password_reset_complete.html:12
-#, fuzzy
-#| msgid "Your password has been set.  You may go ahead and log in now."
 msgid "Your password has been set. You may go ahead and log in now."
-msgstr "Ditt lösenord har aktiverats. Du kan använda det för att logga in nu. "
+msgstr "Ditt lösenord har aktiverats. Du kan använda det för att logga in nu."
 
 #: templates/registration/password_reset_complete.html:14
 msgid "login"
@@ -358,10 +344,6 @@ msgstr ""
 "skrivits in korrekt."
 
 #: templates/registration/password_reset_confirm.html:29
-#, fuzzy
-#| msgid ""
-#| "The password reset link was invalid, possibly because it has already been "
-#| "used.  Please request a new password reset."
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset link."
@@ -372,7 +354,7 @@ msgstr ""
 #: templates/registration/password_reset_done.html:7
 #: templates/registration/password_reset_done.html:9
 msgid "Password reset sent"
-msgstr "En återställning av ditt lösenord har skickats."
+msgstr "En återställning av ditt lösenord har skickats"
 
 #: templates/registration/password_reset_done.html:12
 msgid ""
@@ -381,7 +363,7 @@ msgid ""
 msgstr ""
 "Vi har skickat instruktioner för att återställning av lösenord, förutsatt "
 "att det finns ett konto kopplat till emailadressen du angett. De borde dyka "
-"upp snart. "
+"upp snart."
 
 #: templates/registration/password_reset_done.html:14
 msgid ""
@@ -389,7 +371,7 @@ msgid ""
 "you registered with, and check your spam folder."
 msgstr ""
 "Om du mot förmodan inte får något mail, undersök möjligheten att du angivit "
-"fel mailadress och kolla skräppostinkorgen. "
+"fel mailadress och kolla skräppostinkorgen."
 
 #: templates/registration/password_reset_email.html:2
 msgid ""
@@ -397,7 +379,7 @@ msgid ""
 "UTN-account."
 msgstr ""
 "Du får detta mail eftersom du begärt en återställning av lösenordet till "
-"ditt UTN-konto. "
+"ditt UTN-konto."
 
 #: templates/registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
@@ -416,10 +398,6 @@ msgid "Reset your password"
 msgstr "Återställ ditt lösenord"
 
 #: templates/registration/password_reset_form.html:12
-#, fuzzy
-#| msgid ""
-#| "Forgotten your password? Enter your email address below, and we'll email "
-#| "instructions for setting a new one."
 msgid ""
 "Did you forget your password? Enter your email address below and we'll email "
 "instructions to set a new one."
@@ -440,20 +418,16 @@ msgid "Your account settings have been saved."
 msgstr "Dina kontoinställningar har sparats."
 
 #: views.py:31
-#, fuzzy
-#| msgid "Your newly set e-mail address has not yet been confirmed"
 msgid "Your newly set email address has not yet been confirmed"
 msgstr "Din nya emailadress har inte bekräftats"
 
 #: views.py:53
-#, fuzzy
-#| msgid "Your e-mail address has been confirmed."
 msgid "Your email address has been confirmed."
 msgstr "Din emailadress har bekräftats."
 
 #: views.py:56
 msgid "The provided confirmation token was invalid."
-msgstr "Bekräftelselänken var ogiltig"
+msgstr "Bekräftelselänken var ogiltig."
 
 #: wagtail_hooks.py:19 wagtail_hooks.py:57
 msgid "General"
@@ -470,37 +444,3 @@ msgstr "Sektioner"
 #: wagtail_hooks.py:86
 msgid "Education"
 msgstr "Utbildning"
-
-#~ msgid "English program abbreviation"
-#~ msgstr "Engelsk förkortning av program"
-
-#~ msgid "Enter the abbreviation for the study program"
-#~ msgstr "Ange den engelska förkortningen på programmet"
-
-#~ msgid "Swedish program abbreviation"
-#~ msgstr "Svensk förkortning av program"
-
-#~ msgid "Is this incorrect?"
-#~ msgstr "Är detta fel?"
-
-#~ msgid "Your username and password didn't match. Please try again."
-#~ msgstr ""
-#~ "Ditt användarnamn och lösenord matchar inte. Var vänlig försök igen. "
-
-#~ msgid "username"
-#~ msgstr "användarnamn"
-
-#~ msgid "password"
-#~ msgstr "lösenord"
-
-#~ msgid "Old password"
-#~ msgstr "Nuvarande lösenord"
-
-#~ msgid "New password"
-#~ msgstr "Nytt lösenord"
-
-#~ msgid "Confirm password"
-#~ msgstr "Bekräfta lösenord"
-
-#~ msgid "E-mail address"
-#~ msgstr "Emailadress"
