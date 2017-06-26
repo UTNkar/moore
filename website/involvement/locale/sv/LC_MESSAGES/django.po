@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-26 09:57+0200\n"
-"PO-Revision-Date: 2017-04-04 15:02+0200\n"
+"PO-Revision-Date: 2017-06-26 10:23+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: apps.py:7 wagtail_hooks.py:281
 msgid "Involvement"
@@ -39,7 +39,7 @@ msgid ""
 "even though did not apply for the position."
 msgstr ""
 "Lista användarna du vill tillsätta på posten, separerade med kommatecken, "
-"även om de inte sökte till posten. "
+"även om de inte sökte till posten."
 
 #: forms.py:105
 #, python-format
@@ -52,7 +52,7 @@ msgid ""
 "User %(user)s already applied for this position and can not be appointed "
 "through the overturn field."
 msgstr ""
-"Användaren %(user)s har redan sökt den här posten och kan inte bli tillsatt"
+"Användaren %(user)s har redan sökt den här posten och kan inte bli tillsatt."
 
 #: forms.py:128
 #, python-format
@@ -68,10 +68,9 @@ msgid "Included teams"
 msgstr "Inkluderade grupper"
 
 #: models.py:30
-#, fuzzy
-#| msgid "Choose teams to include on the page"
 msgid "Choose teams to include on the page. This overrulesexcluded teams"
-msgstr "Välj grupper att inkludera på sidan"
+msgstr ""
+"Välj grupper att inkludera på sidan. Det här förbigår exkluderade grupper"
 
 #: models.py:37
 msgid "Excluded teams"
@@ -95,7 +94,7 @@ msgstr "Får administrera rekryterings processen"
 
 #: models.py:110
 msgid "English team name"
-msgstr "Gruppens namn (engelska)"
+msgstr "Gruppens engelska namn"
 
 #: models.py:111 models.py:118
 msgid "Enter the name of the team"
@@ -103,11 +102,11 @@ msgstr "Ange gruppens namn"
 
 #: models.py:117
 msgid "Swedish team name"
-msgstr "Gruppens namn (svenska)"
+msgstr "Gruppens svenska namn"
 
 #: models.py:133
 msgid "English team description"
-msgstr "Beskrivning av gruppen (engelska) "
+msgstr "Beskrivning av gruppen på engelska"
 
 #: models.py:134 models.py:140
 msgid "Enter a description of the team"
@@ -115,7 +114,7 @@ msgstr "Ange en beskrivning av gruppen"
 
 #: models.py:139
 msgid "Swedish team description"
-msgstr "Beskrivning av gruppen (svenska) "
+msgstr "Beskrivning av gruppen på svenska"
 
 #: models.py:213
 msgid "Role"
@@ -143,7 +142,7 @@ msgstr "Dölj rollen från menyer"
 
 #: models.py:242
 msgid "English role name"
-msgstr "Gruppens roll namn (engelska) "
+msgstr "Rollnamn på engelska"
 
 #: models.py:243 models.py:250
 msgid "Enter the name of the role"
@@ -151,11 +150,11 @@ msgstr "Ange rollens namn"
 
 #: models.py:249
 msgid "Swedish role name"
-msgstr "Rollens namn (svenska)"
+msgstr "Rollnamn på svenska"
 
 #: models.py:257
 msgid "English role description"
-msgstr "Beskrivning av rollen (engelska) "
+msgstr "Rollbeskrivning på engelska"
 
 #: models.py:258 models.py:264
 msgid "Enter a description of the role"
@@ -163,7 +162,7 @@ msgstr "Ange en beskrivning av rollen"
 
 #: models.py:263
 msgid "Swedish role description"
-msgstr "Beskrivning av rollen (svenska)"
+msgstr "Rollbeskrivning på svenska"
 
 #: models.py:271
 #, fuzzy
@@ -218,7 +217,7 @@ msgstr "Mandatperiodens slutdatum"
 
 #: models.py:343
 msgid "English extra comments"
-msgstr "Övriga kommenterar (engelska)"
+msgstr "Övriga kommenterar, engelska"
 
 #: models.py:344 models.py:351
 msgid "Enter extra comments specific to the position this year."
@@ -227,7 +226,7 @@ msgstr ""
 
 #: models.py:350
 msgid "Swedish extra comments"
-msgstr "Övriga kommentarer (svenska)"
+msgstr "Övriga kommentarer, svenska"
 
 #: models.py:420
 msgid "Application"
@@ -262,8 +261,6 @@ msgid "Cover Letter"
 msgstr "Ansökningsbrev"
 
 #: models.py:445
-#, fuzzy
-#| msgid "Present yourself and state why you are what we are looking for"
 msgid "Present yourself and state why you are who we are looking for"
 msgstr ""
 "Skriv en presentation av dig själv och en beskrivning av varför du är den vi "
@@ -291,14 +288,10 @@ msgstr "Ange din relation till din referens"
 
 #: models.py:499
 #: templates/involvement/admin/application_overview_fields.html:32
-#, fuzzy
-#| msgid "e-mail address"
 msgid "email address"
 msgstr "emailadress"
 
 #: models.py:500
-#, fuzzy
-#| msgid "Enter an e-mail address on which your reference in reachable"
 msgid "Enter an email address on which your reference in reachable"
 msgstr "Ange en emailadress som din referens kan nås på"
 
@@ -312,7 +305,7 @@ msgstr "Ange ett giltigt telefonnummer"
 
 #: models.py:511
 msgid "Enter a phone number on which your reference is reachable"
-msgstr "Ange ett telefonnummer som din referens kan nås på "
+msgstr "Ange ett telefonnummer som din referens kan nås på"
 
 #: models.py:519
 msgid "Comment"
@@ -320,12 +313,12 @@ msgstr "Kommentar"
 
 #: models.py:520
 msgid "Enter any additional comments regarding your reference"
-msgstr "Är det något mer du vill tillägga om din referens? "
+msgstr "Är det något mer du vill tillägga om din referens"
 
 #: templates/involvement/admin/application_overview_fields.html:5
 #: templates/modeladmin/involvement/team/inspect.html:6
 msgid "name"
-msgstr "Namn"
+msgstr "namn"
 
 #: templates/involvement/admin/application_overview_fields.html:11
 #: templates/involvement/application_form.html:45
@@ -380,7 +373,7 @@ msgid ""
 "carefully!"
 msgstr ""
 "Denna post är för närvarande inte under tillsättning. Använd detta formulär "
-"med tillförsikt! "
+"med tillförsikt!"
 
 #: templates/involvement/admin/position_appointment.html:63
 msgid "overturn"
@@ -402,7 +395,7 @@ msgid ""
 "carefully!"
 msgstr ""
 "Denna post är för närvarande under godkännande. Använd detta formulär med "
-"tillförsikt! "
+"tillförsikt!"
 
 #: templates/involvement/application_form.html:3
 msgid "apply now!"
@@ -411,11 +404,11 @@ msgstr "sök nu!"
 #: templates/involvement/application_form.html:16
 #: templates/involvement/position.html:60
 msgid "The deadline for this application has passed."
-msgstr "Sista ansökningsdatum för den här posten har passerats. "
+msgstr "Sista ansökningsdatum för den här posten har passerats."
 
 #: templates/involvement/application_form.html:16
 msgid "You can no longer change your application."
-msgstr "Du kan inte längre ändra något i din ansökan. "
+msgstr "Du kan inte längre ändra något i din ansökan."
 
 #: templates/involvement/application_form.html:24
 msgid "member information"
@@ -453,10 +446,8 @@ msgid "update"
 msgstr "uppdatera"
 
 #: templates/involvement/application_summary.html:16
-#, fuzzy
-#| msgid "Status"
 msgid "status"
-msgstr "Status"
+msgstr "status"
 
 #: templates/involvement/application_summary.html:20
 #: templates/involvement/open_positions.html:27
@@ -466,10 +457,8 @@ msgid "deadline"
 msgstr "deadline"
 
 #: templates/involvement/application_summary.html:24
-#, fuzzy
-#| msgid "Term of office"
 msgid "term of office"
-msgstr "Mandatperiod"
+msgstr "mandatperiod"
 
 #: templates/involvement/application_summary.html:30
 #, fuzzy
@@ -506,7 +495,7 @@ msgstr "väntande ansökningar"
 
 #: templates/involvement/my_applications.html:36
 msgid "You currently do not have any submitted applications."
-msgstr "Du har inga aktuella inskickade ansökningar"
+msgstr "Du har inga aktuella inskickade ansökningar."
 
 #: templates/involvement/open_positions.html:20
 #: templates/involvement/position.html:34
@@ -573,22 +562,16 @@ msgid "login"
 msgstr "logga in"
 
 #: templates/modeladmin/involvement/position/inspect.html:6
-#, fuzzy
-#| msgid "Position"
 msgid "position"
-msgstr "Post"
+msgstr "post"
 
 #: templates/modeladmin/involvement/position/inspect.html:9
-#, fuzzy
-#| msgid "Applications"
 msgid "applications"
-msgstr "Ansökningar"
+msgstr "ansökningar"
 
 #: templates/modeladmin/involvement/position/inspect.html:28
-#, fuzzy
-#| msgid "Your application has been submitted!"
 msgid "No applications have been submitted for this position."
-msgstr "Din ansökan har skickats!"
+msgstr "Din ansökan har skickats."
 
 #: templates/modeladmin/involvement/team/inspect.html:9
 msgid "members"
@@ -613,7 +596,7 @@ msgstr ""
 
 #: views.py:52
 msgid "Your application has been removed!"
-msgstr "Din ansökan har tagits bort! "
+msgstr "Din ansökan har tagits bort!"
 
 #: views.py:56
 msgid "No action has been supplied!"
@@ -621,7 +604,7 @@ msgstr "Ingen åtgärd har lagts till!"
 
 #: views.py:59
 msgid "This application does not exist!"
-msgstr "Den här ansökan finns inte! "
+msgstr "Den här ansökan finns inte!"
 
 #: views.py:124
 msgid "Your application has been submitted!"
@@ -629,7 +612,7 @@ msgstr "Din ansökan har skickats!"
 
 #: views.py:157 views.py:205
 msgid "Your decisions have successfully been saved."
-msgstr "Dina val har sparats. "
+msgstr "Dina val har sparats."
 
 #: views.py:237
 msgid "This position is not due for an extension yet."
@@ -678,39 +661,3 @@ msgstr "Tillsätt"
 #, python-format
 msgid "Appoint member to %s"
 msgstr "Tillsätt medlem som %s"
-
-#~ msgid "English team leader position name"
-#~ msgstr "Engelsk benämning av gruppledarens post"
-
-#~ msgid "Enter the name of position of the team leader"
-#~ msgstr "Ange gruppledarens postnamn"
-
-#~ msgid "Swedish team leader position name"
-#~ msgstr "Svensk benämning av gruppledarens post"
-
-#~ msgid "E-mail address"
-#~ msgstr "Emailadress"
-
-#~ msgid "An error has been found in the refences."
-#~ msgstr "Ett fel har påträffats bland referenserna"
-
-#~ msgid "These values can be changed in your profile"
-#~ msgstr "Dessa objekt kan ändras i din profil"
-
-#~ msgid "Add a reference"
-#~ msgstr "Lägg till en referens"
-
-#~ msgid "edit"
-#~ msgstr "redigera"
-
-#~ msgid "overview"
-#~ msgstr "översikt"
-
-#~ msgid "about"
-#~ msgstr "om"
-
-#~ msgid "contact"
-#~ msgstr "kontakt"
-
-#~ msgid "chairman"
-#~ msgstr "ordförande"

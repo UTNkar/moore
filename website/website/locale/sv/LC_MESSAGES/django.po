@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-26 10:02+0200\n"
-"PO-Revision-Date: 2017-03-23 14:44+0100\n"
+"PO-Revision-Date: 2017-06-26 10:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -11,15 +11,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: settings/base.py:121
 msgid "English"
-msgstr "engelska"
+msgstr "Engelska"
 
 #: settings/base.py:122
 msgid "Swedish"
-msgstr "svenska"
+msgstr "Svenska"
 
 #: templates/400.html:5
 msgid "Bad request"
@@ -39,13 +39,11 @@ msgstr "Uppsala teknolog- och naturvetarkår"
 
 #: templates/500.html:10
 msgid "500"
-msgstr ""
+msgstr "500"
 
 #: templates/500.html:12
-#, fuzzy
-#| msgid "Internal server error"
 msgid "Internal Server Error"
-msgstr "Internal server error"
+msgstr "Internal Server Error"
 
 #: templates/500.html:19 templates/empty.html:10 templates/error.html:18
 msgid "Return Home"
@@ -65,13 +63,11 @@ msgstr "Ett fel har inträffat"
 
 #: templates/partials/footer.html:17
 msgid "Find us on GitHub"
-msgstr ""
+msgstr "Find us on GitHub"
 
 #: templates/partials/navigation.html:20 templates/partials/navigation.html:58
-#, fuzzy
-#| msgid "Log out"
 msgid "Log in"
-msgstr "Logga ut"
+msgstr "Logga in"
 
 #: templates/partials/navigation.html:33 templates/partials/navigation.html:68
 msgid "account"
@@ -87,7 +83,7 @@ msgstr "Logga ut"
 
 #: templates/partials/navigation.html:64
 msgid "your avatar"
-msgstr ""
+msgstr "din avatar"
 
 #: templates/tags/menu.html:4
 msgid "Home"
@@ -96,9 +92,3 @@ msgstr "Startsida"
 #: templates/wagtailadmin/home.html:4
 msgid "Welcome UTN website administrators!"
 msgstr "Var hälsade, administratörer av UTN:s hemsida!"
-
-#~ msgid "Follow us on social media:"
-#~ msgstr "Följ oss på sociala medier:"
-
-#~ msgid "Developed using"
-#~ msgstr "Sidan är under utveckling"

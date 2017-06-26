@@ -3,81 +3,81 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-26 09:57+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2017-06-26 10:15+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.2\n"
+"Language: sv\n"
 
 #: models.py:32
 msgid "Banner"
-msgstr ""
+msgstr "Banner"
 
 #: models.py:44
 msgid "Banners"
-msgstr ""
+msgstr "Banners"
 
 #: models.py:45 models.py:164
 msgid "English"
-msgstr ""
+msgstr "Engelska"
 
 #: models.py:46 models.py:165
 msgid "Swedish"
-msgstr ""
+msgstr "Svenska"
 
 #: models.py:47 models.py:166
 msgid "Promote"
-msgstr ""
+msgstr "Marknadsför"
 
 #: models.py:69
 msgid "English banner title"
-msgstr ""
+msgstr "Engelsk bannertitel"
 
 #: models.py:70 models.py:77
 msgid "Enter the title to be shown on the banner."
-msgstr ""
+msgstr "Skriv in titeln som ska synas på bannern."
 
 #: models.py:76
 msgid "Swedish banner title"
-msgstr ""
+msgstr "Svensk bannertitel"
 
 #: models.py:84
 msgid "English banner text"
-msgstr ""
+msgstr "Engelsk bannertext"
 
 #: models.py:85 models.py:91
 msgid "Enter a text to be shown on the banner."
-msgstr ""
+msgstr "Skriv in texten som ska synas på bannern."
 
 #: models.py:90
 msgid "Swedish banner text"
-msgstr ""
+msgstr "Svensk bannertext"
 
 #: models.py:98
 msgid "Button URL"
-msgstr ""
+msgstr "KnappURL"
 
 #: models.py:103
 msgid "English button text"
-msgstr ""
+msgstr "Engelsk ikontext"
 
 #: models.py:104 models.py:110
 msgid "Enter the text to be displayed on the button."
-msgstr ""
+msgstr "Skriv in texten som ska synas på ikonen."
 
 #: models.py:109
 msgid "Swedish button text"
-msgstr ""
+msgstr "Svensk ikontext"
 
 #: templates/home/banners.html:14
 msgid "Search our website"
-msgstr ""
+msgstr "Sök på vår hemsida"
