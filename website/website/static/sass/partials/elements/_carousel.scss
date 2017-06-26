@@ -49,6 +49,10 @@ $controls-size: 150px;
           background-color: #fff;
           border: 0;
           border-radius: 0;
+          &:focus {
+            border-bottom: none;
+            box-shadow: none;
+          }
         }
         .btn {
           border-bottom-left-radius: 0;
