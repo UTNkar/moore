@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 13:40+0200\n"
+"POT-Creation-Date: 2017-06-26 09:56+0200\n"
 "PO-Revision-Date: 2017-03-31 11:21+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -13,86 +13,86 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.12\n"
 
-#: branding/apps.py:7 branding/wagtail_hooks.py:18
+#: apps.py:7 wagtail_hooks.py:18
 msgid "Branding"
 msgstr "Branding"
 
-#: branding/models.py:13
+#: models.py:13
 #, fuzzy
 #| msgid "Social media accounts"
 msgid "social media accounts"
 msgstr "Konton på sociala medier"
 
-#: branding/models.py:16
+#: models.py:16
 msgid "Your Facebook page URL"
 msgstr "ULR:en till din facebook"
 
-#: branding/models.py:21
+#: models.py:21
 msgid "Your Instagram username, without the @"
 msgstr "Ditt användarnamn på Instagram, utan @"
 
-#: branding/models.py:26
+#: models.py:26
 msgid "Your Twitter username, without the @"
 msgstr "Ditt användarnamn på Twitter, utan @"
 
-#: branding/models.py:33 branding/models.py:57
+#: models.py:33 models.py:57
 msgid "logo"
 msgstr "logotyp"
 
-#: branding/models.py:34
+#: models.py:34
 msgid "logos"
 msgstr "logotyper"
 
-#: branding/models.py:37
+#: models.py:37
 msgid "Committee"
 msgstr "Kommittée"
 
-#: branding/models.py:38
+#: models.py:38
 msgid "Section"
 msgstr "Sektion"
 
-#: branding/models.py:44
+#: models.py:44
 msgid "category"
 msgstr "kategori"
 
-#: branding/models.py:50
+#: models.py:50
 msgid "links to"
 msgstr "länkar till"
 
-#: branding/models.py:66
+#: models.py:66
 msgid "white logo"
 msgstr "vit logotyp"
 
-#: branding/models.py:75
+#: models.py:75
 msgid "black logo"
 msgstr "svart logotyp"
 
-#: branding/models.py:84
+#: models.py:84
 msgid "belongs to"
 msgstr "tillhör"
 
-#: branding/templates/branding/tags/social_media.html:2
+#: templates/branding/tags/social_media.html:2
 msgid "Follow us on social media:"
 msgstr ""
 
-#: branding/templates/branding/tags/social_media.html:11
+#: templates/branding/tags/social_media.html:11
 msgid "facebook icon"
 msgstr ""
 
-#: branding/templates/branding/tags/social_media.html:22
+#: templates/branding/tags/social_media.html:22
 msgid "twitter icon"
 msgstr ""
 
-#: branding/templates/branding/tags/social_media.html:33
+#: templates/branding/tags/social_media.html:33
 msgid "instagram icon"
 msgstr ""
 
-#: branding/templates/branding/tags/structure_header.html:10
-#: branding/templates/branding/tags/structure_header.html:18
+#: templates/branding/tags/structure_header.html:10
+#: templates/branding/tags/structure_header.html:18
 msgid "sections"
 msgstr "sektioner"
 
-#: branding/templates/branding/tags/structure_header.html:31
-#: branding/templates/branding/tags/structure_header.html:39
+#: templates/branding/tags/structure_header.html:31
+#: templates/branding/tags/structure_header.html:39
 msgid "committees"
 msgstr "kommittéer"

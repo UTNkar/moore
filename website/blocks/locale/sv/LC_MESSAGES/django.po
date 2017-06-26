@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-26 09:56+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: models.py:11 models.py:62
+msgid "Material icon font icon text, as found on: https://material.io/icons"
+msgstr ""
+
+#: models.py:18
+msgid "Light"
+msgstr ""
+
+#: models.py:19
+msgid "Dark"
+msgstr ""
+
+#: models.py:23
+msgid "Counters"
+msgstr ""
+
+#: models.py:33
+msgid "Heading"
+msgstr ""
+
+#: models.py:42 models.py:57
+msgid "Left"
+msgstr ""
+
+#: models.py:43 models.py:58
+msgid "Right"
+msgstr ""
+
+#: models.py:48
+msgid "Image + Description"
+msgstr ""
+
+#: models.py:71
+msgid "Image + Icons"
+msgstr ""
+
+#: models.py:85
+msgid "Image overlay"
+msgstr ""
+
+#: models.py:100
+msgid "Logos"
+msgstr ""
