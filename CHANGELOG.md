@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Latest news block for StreamFields
 ### Fixed
 - Fixes access to the Swedish HomePage banner text
 

@@ -1,0 +1,66 @@
+@import "../base";
+
+.block-news {
+  @extend .block-heading;
+  .card {
+    .card-image {
+      background-size: cover;
+      background: no-repeat center center;
+      border-radius: 3px 3px 0 0;
+      height: 220px;
+      position: relative;
+
+      &:after {
+        background-color: $primary-color;
+        bottom: 0;
+        content: '';
+        height: 4px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        z-index: 10;
+      }
+    }
+    .card-content{
+      padding: 16px;
+      .card-title {
+        text-align: left;
+        display: block;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.7;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+    .card-action {
+      text-align: left;
+      padding: 16px;
+      .action-icon {
+        color: #9E9E9E;
+        font-size: 12px;
+        font-weight: 700;
+        vertical-align: middle;
+        i {
+          vertical-align: middle;
+          margin-right: 10px;
+        }
+      }
+      .read-more {
+        float: right;
+        margin: 4px 0 0 0;
+        font-size: 14px;
+        font-weight: 700;
+      }
+    }
+    .card-reveal{
+      .card-title {
+        color: $primary-color;
+        font-weight: 700;
+      }
+    }
+  }
+}

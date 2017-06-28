@@ -2,12 +2,34 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, TabbedInterface, \
     ObjectList
+from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
 from utils.translation import TranslatedField
+
+
+class LatestNewsBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=False)
+    subtitle = blocks.CharBlock(required=False)
+    index = blocks.PageChooserBlock(target_model='news.NewsIndexPage')
+    items = blocks.IntegerBlock()
+
+    def get_context(self, value, parent_context=None):
+        context = super(LatestNewsBlock, self).get_context(
+            value, parent_context=parent_context
+        )
+        context['news_items'] = NewsPage.objects.\
+            child_of(value['index']).live()
+        return context
+
+
+    class Meta:
+        label = _('Latest News')
+        icon = 'fa-newspaper-o'
+        template = 'news/latest_news.html'
 
 
 class NewsIndexPage(Page):
@@ -24,8 +46,6 @@ class NewsIndexPage(Page):
 
     def get_context(self, request, **kwargs):
         context = super(NewsIndexPage, self).get_context(request, **kwargs)
-
-        # Add extra variables and return the updated context
         context['news_items'] = NewsPage.objects.child_of(self).live()
         return context
 
