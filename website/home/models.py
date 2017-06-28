@@ -121,7 +121,7 @@ class Banner(Orderable):
             FieldPanel('title_sv'),
         ]),
         FieldPanel('text_en'),
-        FieldPanel('text_en'),
+        FieldPanel('text_sv'),
         FieldPanel('link'),
         FieldRowPanel([
             FieldPanel('button_en'),
