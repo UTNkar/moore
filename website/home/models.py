@@ -11,6 +11,7 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from google.models import GoogleFormBlock, GoogleDriveBlock
+from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
 
 
@@ -20,11 +21,13 @@ class HomePage(Page):
     translated_title = TranslatedField('title', 'title_sv')
 
     body_en = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES,
+        WAGTAIL_STATIC_BLOCKTYPES
+        + [('news', LatestNewsBlock())],
         blank=True,
     )
     body_sv = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES,
+        WAGTAIL_STATIC_BLOCKTYPES
+        + [('news', LatestNewsBlock())],
         blank=True,
     )
     body = TranslatedField('body_en', 'body_sv')
@@ -139,6 +142,7 @@ class WebPage(Page):
         WAGTAIL_STATIC_BLOCKTYPES + [
             ('google_form', GoogleFormBlock()),
             ('google_drive', GoogleDriveBlock()),
+            ('news', LatestNewsBlock()),
         ],
         blank=True,
     )
@@ -146,6 +150,7 @@ class WebPage(Page):
         WAGTAIL_STATIC_BLOCKTYPES + [
             ('google_form', GoogleFormBlock()),
             ('google_drive', GoogleDriveBlock()),
+            ('news', LatestNewsBlock()),
         ],
         blank=True,
     )
