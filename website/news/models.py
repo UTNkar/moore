@@ -22,9 +22,8 @@ class LatestNewsBlock(blocks.StructBlock):
             value, parent_context=parent_context
         )
         context['news_items'] = NewsPage.objects.child_of(value['index'])\
-            .live().order_by('-created')
+            .live().order_by('-created')[:value['items']]
         return context
-
 
     class Meta:
         label = _('Latest News')
@@ -46,7 +45,7 @@ class NewsIndexPage(Page):
 
     def get_context(self, request, **kwargs):
         context = super(NewsIndexPage, self).get_context(request, **kwargs)
-        context['news_items'] = NewsPage.objects.child_of(self).live()\
+        context['news_items'] = NewsPage.objects.child_of(self).live() \
             .order_by('-created')
         return context
 
