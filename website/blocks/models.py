@@ -89,7 +89,7 @@ class OverlayBlock(blocks.StructBlock):
 
 WAGTAIL_STATIC_BLOCKTYPES = [
     ('heading', HeadingBlock()),
-    ('paragraph', blocks.RichTextBlock()),
+    ('paragraph', blocks.RichTextBlock(template='blocks/paragraph.html')),
     ('image_description', ImageIconsBlock()),
     ('image_icons', ImageDescriptionBlock()),
     ('overlay', OverlayBlock()),
