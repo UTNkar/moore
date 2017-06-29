@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fixes access to the Swedish HomePage banner text
 - Align paragraph blocks using a container
+- Translations for all page types in the top menu
 
 ## [0.5.0]
 ### Added
