@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Latest news block for StreamFields
 ### Fixed
 - Fixes access to the Swedish HomePage banner text
+- Align paragraph blocks using a container
 
 ## [0.5.0]
 ### Added
