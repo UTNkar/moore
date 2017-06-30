@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Customizable site-specific footers
+### Changed
+- Update to `wagtail` 1.11
 ### Fixed
 - Translation of sub-menus
 - Ordering of the Google Form Index (This is now reverse order of the deadline)
