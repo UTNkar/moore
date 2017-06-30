@@ -124,7 +124,8 @@ def view_position(request, context, page, position=None):
                         _('Your application has been submitted!'),
                     )
                     return HttpResponseRedirect(
-                        page.url + page.reverse_subpage('my_applications')
+                        page.get_url(request=request)
+                        + page.reverse_subpage('my_applications')
                     )
             else:
                 return render(request, 'involvement/position.html', context)
