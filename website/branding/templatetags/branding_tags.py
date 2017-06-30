@@ -1,8 +1,16 @@
 from django import template
 
-from branding.models import Logo, SocialMediaSettings
+from branding.models import Logo, SocialMediaSettings, FooterSettings
 
 register = template.Library()
+
+
+@register.inclusion_tag('branding/tags/footer.html', takes_context=True)
+def custom_footer(context):
+    request = context['request']
+    return {
+        'settings': FooterSettings.for_site(request.site)
+    }
 
 
 @register.inclusion_tag('branding/tags/structure_header.html',

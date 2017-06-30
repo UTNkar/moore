@@ -3,8 +3,28 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, \
-    MultiFieldPanel
+    MultiFieldPanel, StreamFieldPanel
+from wagtail.wagtailcore import blocks
+from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+
+
+@register_setting(icon='fa-window-minimize')
+class FooterSettings(BaseSetting):
+    class Meta:
+        verbose_name = _('footer')
+
+    footer = StreamField(
+        [('column', blocks.StructBlock([
+            ('size', blocks.IntegerBlock(min_value=1, max_value=12)),
+            ('content', blocks.RichTextBlock()),
+        ]))],
+        blank=True,
+    )
+
+    panels = [
+        StreamFieldPanel('footer')
+    ]
 
 
 @register_setting(icon='openquote')
