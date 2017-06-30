@@ -51,7 +51,8 @@ class GoogleFormIndex(Page):
         context = super(GoogleFormIndex, self).get_context(request, **kwargs)
 
         # Add extra variables and return the updated context
-        context['google_forms'] = GoogleFormPage.objects.child_of(self).live()
+        context['google_forms'] = GoogleFormPage.objects.child_of(self).live()\
+            .order_by('-deadline')
         return context
 
 
