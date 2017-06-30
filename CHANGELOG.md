@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Customizable site-specific footers
 ### Fixed
 - Translation of sub-menus
+- Ordering of the Google Form Index (This is now reverse order of the deadline)
 
 ## [0.5.1]
 ### Added
