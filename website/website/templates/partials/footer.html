@@ -1,13 +1,16 @@
 {% load i18n branding_tags %}
-<div class="footer-top container">
-    <div class="row">
-        <div class="social-media col s9">
-            {% social_media %}
-        </div>
-        <div class="col s3">
-        <a class="top-action right" href="#">
-            <i class="material-icons">vertical_align_top</i>
-        </a>
+<div class="footer-top">
+    {% custom_footer %}
+    <div class="container">
+        <div class="social-media row">
+            <div class="col s9">
+                {% social_media %}
+            </div>
+            <div class="col s3">
+                <a class="top-action right" href="#">
+                    <i class="material-icons">vertical_align_top</i>
+                </a>
+            </div>
         </div>
     </div>
 </div>
