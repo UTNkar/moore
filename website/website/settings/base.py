@@ -51,12 +51,13 @@ INSTALLED_APPS = [
     'wagtail.contrib.modeladmin',
     "wagtail.contrib.wagtailroutablepage",
 
-    'modelcluster',
-    'taggit',
     'compressor',
+    'kronos',
+    'modelcluster',
+    'raven.contrib.django.raven_compat',
     'rules.apps.AutodiscoverRulesConfig',
     'simple_email_confirmation',
-    'kronos',
+    'taggit',
     'wagtailfontawesome',
 
     'django.contrib.admin',  # Used for wagtail admin filters
