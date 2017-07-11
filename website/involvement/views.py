@@ -296,6 +296,19 @@ class PositionEditView(EditView):
         return form
 
 
+class PositionInspectView(InspectView):
+    def get_context_data(self, **kwargs):
+        context = super(PositionInspectView, self).get_context_data(**kwargs)
+        applicants = self.instance.applications.all()
+        if self.instance.current_action() == 'done':
+            context['applicants'] = applicants.filter(status='appointed')
+        else:
+            context['applicants'] = applicants.exclude(
+                status__in=['disapproved', 'turned_down']
+            )
+        return context
+
+
 class RoleCreateView(CreateView):
     def get_form(self, form_class=None):
         form = super(RoleCreateView, self).get_form(form_class=form_class)

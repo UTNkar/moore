@@ -13,8 +13,7 @@ from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
 from involvement.models import Team, Role, Position, Application, \
     official_of, member_of
 from involvement.rules import is_admin, approve_state, appoint_state
-from involvement.views import RoleCreateView, RoleEditView, PositionCreateView, \
-    PositionEditView
+from involvement import views
 from utils.permissions import RulesPermissionHelper
 
 
@@ -52,8 +51,8 @@ class RoleAdmin(ModelAdmin):
     # https://code.djangoproject.com/ticket/8851#no1
     list_filter = ('team', 'archived')
     permission_helper_class = RulesPermissionHelper
-    create_view_class = RoleCreateView
-    edit_view_class = RoleEditView
+    create_view_class = views.RoleCreateView
+    edit_view_class = views.RoleEditView
 
     def get_queryset(self, request):
         if is_admin(request.user):
@@ -194,8 +193,9 @@ class PositionAdmin(ModelAdmin):
     inspect_view_enabled = True
     permission_helper_class = PositionPermissionHelper
     button_helper_class = PositionButtonHelper
-    create_view_class = PositionCreateView
-    edit_view_class = PositionEditView
+    create_view_class = views.PositionCreateView
+    edit_view_class = views.PositionEditView
+    inspect_view_class = views.PositionInspectView
 
     def get_queryset(self, request):
         if is_admin(request.user):
