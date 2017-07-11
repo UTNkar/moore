@@ -4,8 +4,14 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from django.utils.translation import ugettext_lazy as _
 
 BASIC_BLOCKTYPES = [
-    ('paragraph', blocks.RichTextBlock(template='blocks/paragraph.html')),
-    ('image', ImageChooserBlock(template='blocks/image.html')),
+    ('paragraph', blocks.RichTextBlock(
+        template='blocks/paragraph.html',
+        group=_('Basic'),
+    )),
+    ('image', ImageChooserBlock(
+        template='blocks/image.html',
+        group=_('Basic'),
+    )),
 ]
 
 
@@ -23,6 +29,7 @@ class ColumnBlock(blocks.StructBlock):
         label = _('Columns')
         icon = 'fa-columns'
         template = 'blocks/columns.html'
+        group = _('Meta')
 
 
 class CountersBlock(blocks.StructBlock):
@@ -44,6 +51,7 @@ class CountersBlock(blocks.StructBlock):
         label = _('Counters')
         icon = 'fa-balance-scale'
         template = 'blocks/counter.html'
+        group = _('Noyce')
 
 
 class HeadingBlock(blocks.StructBlock):
@@ -54,6 +62,7 @@ class HeadingBlock(blocks.StructBlock):
         label = _('Heading')
         icon = 'fa-header'
         template = 'blocks/title.html'
+        group = _('Basic')
 
 
 class ImageDescriptionBlock(blocks.StructBlock):
@@ -69,6 +78,7 @@ class ImageDescriptionBlock(blocks.StructBlock):
         label = _('Image + Description')
         icon = 'fa-file-image-o '
         template = 'blocks/image_description.html'
+        group = _('Noyce')
 
 
 class ImageIconsBlock(blocks.StructBlock):
@@ -92,6 +102,7 @@ class ImageIconsBlock(blocks.StructBlock):
         label = _('Image + Icons')
         icon = 'fa-file-excel-o'
         template = 'blocks/image_icons.html'
+        group = _('Noyce')
 
 
 class OverlayBlock(blocks.StructBlock):
@@ -106,6 +117,7 @@ class OverlayBlock(blocks.StructBlock):
         label = _('Image overlay')
         icon = 'fa-clone'
         template = 'blocks/overlay.html'
+        group = _('Noyce')
 
 
 WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
@@ -118,6 +130,7 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
         icon='fa-pied-piper',
         template='blocks/logos.html',
         label=_('Logos'),
+        group=_('Noyce'),
     )),
     ('counters', CountersBlock()),
     ('columns', ColumnBlock()),
