@@ -67,3 +67,15 @@ def send_extension_emails():
             subject, body, None, [pos.role.election_email]
         )
         email_message.send()
+
+
+@kronos.register('0 3 * * *')  # At 03:00.
+def remove_old_applications():
+    old_applications = Application.objects.filter(
+        position__recruitment_end__lte=date.today() - timedelta(days=730)
+    ).exclude(
+        status='appointed'
+    )
+
+    for app in old_applications:
+        app.delete()
