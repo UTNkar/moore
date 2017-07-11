@@ -9,7 +9,7 @@
         <dt>{% trans 'applications' %}</dt>
         <dd>
             <ul>
-                {% for a in instance.applications.all %}
+                {% for a in applicants %}
                     <li>
                         {% if a.status == 'draft' %}
                             <i>{{ a.get_status_display }}:</i>
