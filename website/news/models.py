@@ -29,6 +29,7 @@ class LatestNewsBlock(blocks.StructBlock):
         label = _('Latest News')
         icon = 'fa-newspaper-o'
         template = 'news/latest_news.html'
+        group = _('Meta')
 
 
 class NewsIndexPage(Page):

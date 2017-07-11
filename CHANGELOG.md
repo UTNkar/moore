@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Column based StreamBlock
 ### Changed
 - Old non-appointed applications are now hidden from the position inspection view
+- All blocks in StreamFields have added to groups
 ### Fixed
 - Release tag for Sentry logging
 

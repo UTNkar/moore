@@ -21,6 +21,7 @@ class GoogleFormBlock(blocks.StructBlock):
         label = _('Google Form')
         icon = 'fa-check-square-o'
         template = 'google/blocks/form.html'
+        group = _('Meta')
 
 
 class GoogleFormIndex(Page):
