@@ -5,15 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Fixed
+- Release tag for Sentry logging
 
-## [0.5.3]
+## [0.5.3] - 2017-07-11
 ### Added
 - Sentry logging in production settings
 ### Changed
 - Update to `wagtail` 1.11.1
 - Update to `django` 1.11.3
 
-## [0.5.2]
+## [0.5.2] - 2017-06-30
 ### Added
 - Customizable site-specific footers
 ### Changed
@@ -22,7 +24,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Translation of sub-menus
 - Ordering of the Google Form Index (This is now reverse order of the deadline)
 
-## [0.5.1]
+## [0.5.1] - 2017-06-29
 ### Added
 - Latest news block for StreamFields
 ### Fixed
@@ -30,7 +32,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Align paragraph blocks using a container
 - Translations for all page types in the top menu
 
-## [0.5.0]
+## [0.5.0] - 2017-06-26
 ### Added
 - First version of HomePage + some building blocks
 - Add StreamField block for Google Drive
@@ -49,7 +51,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Avatar overlay on Safari
 - Update the translation of all translatable strings
 
-## [0.4.1]
+## [0.4.1] - 2017-06-01
 ### Changed
 - Update to `rules` 1.2.1 and `wagtail` 1.10.1
 - Update to `requests` 2.17.3
@@ -59,7 +61,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Use short dates on involvement open positions page.
 - Allow users that drafted an application to be appointed using overturn field.
 
-## [0.4.0]
+## [0.4.0] - 2017-05-11
 ### Added
 - Close button to close toast notifications.
 ### Changed
