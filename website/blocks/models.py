@@ -3,6 +3,27 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 from django.utils.translation import ugettext_lazy as _
 
+BASIC_BLOCKTYPES = [
+    ('paragraph', blocks.RichTextBlock(template='blocks/paragraph.html')),
+    ('image', ImageChooserBlock(template='blocks/image.html')),
+]
+
+
+class ColumnBlock(blocks.StructBlock):
+    columns = blocks.ListBlock(blocks.StructBlock([
+        ('width', blocks.IntegerBlock(
+            min_value=1,
+            max_value=12,
+            help_text=_('Width out of 12'),
+        )),
+        ('content', blocks.StreamBlock(BASIC_BLOCKTYPES))
+    ]))
+
+    class Meta:
+        label = _('Columns')
+        icon = 'fa-columns'
+        template = 'blocks/columns.html'
+
 
 class CountersBlock(blocks.StructBlock):
     title = blocks.CharBlock()
@@ -87,9 +108,8 @@ class OverlayBlock(blocks.StructBlock):
         template = 'blocks/overlay.html'
 
 
-WAGTAIL_STATIC_BLOCKTYPES = [
-    ('heading', HeadingBlock()),
-    ('paragraph', blocks.RichTextBlock(template='blocks/paragraph.html')),
+WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
+    ('heading', HeadingBlock()),  # TODO: Do we use this one?
     ('image_description', ImageIconsBlock()),
     ('image_icons', ImageDescriptionBlock()),
     ('overlay', OverlayBlock()),
@@ -100,5 +120,5 @@ WAGTAIL_STATIC_BLOCKTYPES = [
         label=_('Logos'),
     )),
     ('counters', CountersBlock()),
-    ('image', ImageChooserBlock(template='blocks/image.html')),
+    ('columns', ColumnBlock()),
 ]
