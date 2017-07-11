@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.5.3]
+### Added
+- Sentry logging in production settings
 ### Changed
 - Update to `wagtail` 1.11.1
 - Update to `django` 1.11.3
@@ -173,7 +177,8 @@ asked to extend their profile in the registration email.
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.5.2...HEAD
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.5.3...HEAD
+[0.5.3]: https://github.com/UTNkar/moore/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/UTNkar/moore/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/UTNkar/moore/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/UTNkar/moore/compare/v0.4.1...v0.5.0
