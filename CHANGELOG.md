@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Cron task to delete old non-appointed applications. (2 years after recruitment ends)
+- Column based StreamBlock
 ### Changed
 - Old non-appointed applications are now hidden from the position inspection view
 ### Fixed
