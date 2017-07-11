@@ -10,9 +10,11 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from rules.contrib.views import permission_required
+from wagtail.contrib.modeladmin.views import CreateView, EditView, InspectView
 
 from involvement import forms
-from involvement.models import Position, Team, Application
+from involvement.models import Position, Team, Application, official_of, Role
+from involvement.rules import is_admin
 
 
 def open_positions(request, context):
@@ -258,3 +260,53 @@ def admin_extend_deadline(request, key):
     return HttpResponseRedirect(
         reverse('involvement_position_modeladmin_index')
     )
+
+
+class PositionCreateView(CreateView):
+    def get_form(self, form_class=None):
+        form = super(PositionCreateView, self).get_form(form_class=form_class)
+        queryset = form.fields['role'].queryset
+        queryset = queryset.filter(
+            archived=False
+        )
+        if not is_admin(self.request.user):
+            teams = official_of(self.request.user)
+            queryset = queryset.filter(
+                team__in=teams
+            )
+        form.fields['role'].queryset = queryset
+        return form
+
+
+class PositionEditView(EditView):
+    def get_form(self, form_class=None):
+        form = super(PositionEditView, self).get_form(form_class=form_class)
+        queryset = form.fields['role'].queryset
+        init = Role.objects.get(pk=form.initial['role'])
+        if not init.archived:
+            queryset = queryset.filter(
+                archived=False
+            )
+        if not is_admin(self.request.user):
+            teams = official_of(self.request.user)
+            queryset = queryset.filter(
+                team__in=teams
+            )
+        form.fields['role'].queryset = queryset
+        return form
+
+
+class RoleCreateView(CreateView):
+    def get_form(self, form_class=None):
+        form = super(RoleCreateView, self).get_form(form_class=form_class)
+        if not is_admin(self.request.user):
+            form.fields['team'].queryset = official_of(self.request.user)
+        return form
+
+
+class RoleEditView(EditView):
+    def get_form(self, form_class=None):
+        form = super(RoleEditView, self).get_form(form_class=form_class)
+        if not is_admin(self.request.user):
+            form.fields['team'].queryset = official_of(self.request.user)
+        return form

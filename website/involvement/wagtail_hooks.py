@@ -9,11 +9,12 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
-from wagtail.contrib.modeladmin.views import CreateView, EditView
 
 from involvement.models import Team, Role, Position, Application, \
     official_of, member_of
 from involvement.rules import is_admin, approve_state, appoint_state
+from involvement.views import RoleCreateView, RoleEditView, PositionCreateView, \
+    PositionEditView
 from utils.permissions import RulesPermissionHelper
 
 
@@ -37,22 +38,6 @@ class TeamAdmin(ModelAdmin):
             if ordering:
                 qs = qs.order_by(*ordering)
             return qs
-
-
-class RoleCreateView(CreateView):
-    def get_form(self, form_class=None):
-        form = super(RoleCreateView, self).get_form(form_class=form_class)
-        if not is_admin(self.request.user):
-            form.fields['team'].queryset = official_of(self.request.user)
-        return form
-
-
-class RoleEditView(EditView):
-    def get_form(self, form_class=None):
-        form = super(RoleEditView, self).get_form(form_class=form_class)
-        if not is_admin(self.request.user):
-            form.fields['team'].queryset = official_of(self.request.user)
-        return form
 
 
 class RoleAdmin(ModelAdmin):
@@ -194,40 +179,6 @@ class PositionButtonHelper(ButtonHelper):
             classnames_exclude=classnames_exclude
         )
         return btns
-
-
-class PositionCreateView(CreateView):
-    def get_form(self, form_class=None):
-        form = super(PositionCreateView, self).get_form(form_class=form_class)
-        queryset = form.fields['role'].queryset
-        queryset = queryset.filter(
-            archived=False
-        )
-        if not is_admin(self.request.user):
-            teams = official_of(self.request.user)
-            queryset = queryset.filter(
-                team__in=teams
-            )
-        form.fields['role'].queryset = queryset
-        return form
-
-
-class PositionEditView(EditView):
-    def get_form(self, form_class=None):
-        form = super(PositionEditView, self).get_form(form_class=form_class)
-        queryset = form.fields['role'].queryset
-        init = Role.objects.get(pk=form.initial['role'])
-        if not init.archived:
-            queryset = queryset.filter(
-                archived=False
-            )
-        if not is_admin(self.request.user):
-            teams = official_of(self.request.user)
-            queryset = queryset.filter(
-                team__in=teams
-            )
-        form.fields['role'].queryset = queryset
-        return form
 
 
 class PositionAdmin(ModelAdmin):
