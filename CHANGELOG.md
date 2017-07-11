@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Old non-appointed applications are now hidden from the position inspection view
 - All blocks in StreamFields have added to groups
+- Production errors are no longer sent to the admin e-mails. (This was double with Sentry)
 ### Fixed
 - Release tag for Sentry logging
 

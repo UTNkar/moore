@@ -52,9 +52,7 @@ DEFAULT_FROM_EMAIL = 'info@utn.se'
 
 EMAIL_SUBJECT_PREFIX = '[UTN] '
 
-# Admins - will be sent error messages
-ADMINS = [('UTN System Administrator', 'admin@utn.se')]
-
+# Sentry Configuration - will be sent error messages
 RAVEN_CONFIG = {
     'dsn': os.environ.get('SENTRY_DSN'),
     'release': raven.fetch_git_sha(os.path.dirname(BASE_DIR)),
