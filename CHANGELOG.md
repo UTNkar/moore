@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Cron task to delete old non-appointed applications. (2 years after recruitment ends)
 - Column based StreamBlock
+- Person StreamBlock. This block looks like a contact card.
 ### Changed
 - Old non-appointed applications are now hidden from the position inspection view
 - All blocks in StreamFields have added to groups

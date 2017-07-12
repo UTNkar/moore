@@ -120,6 +120,20 @@ class OverlayBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
+class PersonBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    name = blocks.CharBlock()
+    role = blocks.CharBlock(required=False)
+    description = blocks.RichTextBlock(required=False)
+    email = blocks.EmailBlock(required=False)
+
+    class Meta:
+        label = _('Person')
+        icon = 'fa-user'
+        template = 'blocks/person.html'
+        group = _('Meta')
+
+
 WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('heading', HeadingBlock()),  # TODO: Do we use this one?
     ('image_description', ImageIconsBlock()),
@@ -134,4 +148,5 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     )),
     ('counters', CountersBlock()),
     ('columns', ColumnBlock()),
+    ('person', PersonBlock()),
 ]
