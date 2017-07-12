@@ -1,0 +1,18 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<div class="card horizontal">
+    <div class="card-image">
+        {% image person.image fill-150x225 %}
+    </div>
+    <div class="card-stacked">
+        <div class="card-content">
+            <span class="card-title">{{ person.name }}</span>
+            {% if person.role %}<b>{{ person.role }}</b>{% endif %}
+            {{ person.description|richtext }}
+        </div>
+        {% if person.email %}
+            <div class="card-action">
+                <a href="mailto:{{ person.email }}">This is a link</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
