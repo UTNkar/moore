@@ -129,7 +129,7 @@ class PersonBlock(blocks.StructBlock):
 
     class Meta:
         label = _('Person')
-        icon = 'fa-user'
+        icon = 'user'
         template = 'blocks/person.html'
         group = _('Meta')
 
