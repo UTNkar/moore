@@ -5,14 +5,94 @@ from django.utils.translation import ugettext_lazy as _
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import InlinePanel, MultiFieldPanel, \
     FieldRowPanel, FieldPanel, StreamFieldPanel, TabbedInterface, ObjectList
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore import blocks
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
-from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
+from blocks.models import WAGTAIL_STATIC_BLOCKTYPES, PersonBlock
 from google.models import GoogleFormBlock, GoogleDriveBlock
 from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
+
+
+class ContactPage(Page):
+    # ---- General Page information ------
+    title_sv = models.CharField(max_length=255)
+    translated_title = TranslatedField('title', 'title_sv')
+
+    contact_point_en = StreamField(
+        [('person', PersonBlock())],
+    )
+    contact_point_sv = StreamField(
+        [('person', PersonBlock())],
+    )
+    contact_point = TranslatedField('contact_point_en', 'contact_point_sv')
+
+    other_contacts_en = StreamField(
+        [('contact', blocks.StructBlock([
+            ('person', PersonBlock()),
+            ('group', blocks.CharBlock(required=False))
+        ], icon='user'))],
+    )
+    other_contacts_sv = StreamField(
+        [('contact', blocks.StructBlock([
+            ('person', PersonBlock()),
+            ('group', blocks.CharBlock(required=False))
+        ], icon='user'))],
+    )
+    other_contacts = TranslatedField('other_contacts_en', 'other_contacts_sv')
+
+    map_location = models.CharField(
+        max_length=255,
+        verbose_name=_('Map Location'),
+        help_text=_('Enter comma separated coordinates'),
+        blank=True,
+    )
+
+    location_description = RichTextField(
+        verbose_name=_('Location Description'),
+        help_text=_('Enter the text to show on the map'),
+        blank=True,
+    )
+
+    def get_context(self, request, *args, **kwargs):
+        contacts = {}
+        for contact in self.other_contacts:
+            group = contact.value.get('group', '')
+            l = contacts.get(group, [])
+            l.append(contact.value['person'])
+            contacts[group] = l
+
+        context = super(ContactPage, self).get_context(
+            request, *args, **kwargs
+        )
+        context['contacts'] = contacts
+        return context
+
+    general_panels = [
+        FieldPanel('map_location'),
+        FieldPanel('location_description'),
+    ]
+
+    content_panels_en = Page.content_panels + [
+        StreamFieldPanel('contact_point_en'),
+        StreamFieldPanel('other_contacts_en'),
+    ]
+
+    content_panels_sv = [
+        FieldPanel('title_sv', classname="full title"),
+        StreamFieldPanel('contact_point_sv'),
+        StreamFieldPanel('other_contacts_sv'),
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(general_panels, heading=_('General')),
+        ObjectList(content_panels_en, heading=_('English')),
+        ObjectList(content_panels_sv, heading=_('Swedish')),
+        ObjectList(Page.promote_panels, heading=_('Promote')),
+        ObjectList(Page.settings_panels, heading=_('Settings')),
+    ])
 
 
 class HomePage(Page):
@@ -48,6 +128,7 @@ class HomePage(Page):
         ObjectList(content_panels_en, heading=_('English')),
         ObjectList(content_panels_sv, heading=_('Swedish')),
         ObjectList(Page.promote_panels, heading=_('Promote')),
+        ObjectList(Page.settings_panels, heading=_('Settings')),
     ])
 
 
@@ -169,4 +250,5 @@ class WebPage(Page):
         ObjectList(content_panels_en, heading=_('English')),
         ObjectList(content_panels_sv, heading=_('Swedish')),
         ObjectList(Page.promote_panels, heading=_('Promote')),
+        ObjectList(Page.settings_panels, heading=_('Settings')),
     ])
