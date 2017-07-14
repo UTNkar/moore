@@ -20,7 +20,7 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
   background-color: $background-color;
   height: $navigation-height;
   line-height: $line-height;
-  padding: $navigation-padding 0;
+  padding: $navigation-padding $line-height;
 
   ul button.btn {
     margin-top: -2px; // To match a .btn
@@ -89,7 +89,7 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
   }
 
   .main-menu {
-    margin-left: $logo-width + 50px;
+    margin-left: $logo-width + 20px;
     li {
       a {
         color: rgba($black-color, .8);
