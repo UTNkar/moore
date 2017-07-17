@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- A new page type, FormPage, to accommodate user made forms. The reactions of these forms are send to a given email address.
+### Fixed
+- Materialize Textarea markup of the materialize_field tag
 
 ## [0.6.0]
 ### Added

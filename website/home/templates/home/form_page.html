@@ -1,0 +1,20 @@
+{% extends 'page.html' %}
+{% load i18n materialize wagtailcore_tags %}
+
+{% block content %}
+    {% include_block page.intro_text %}
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ page.form_title }}</span>
+                <form action="{% pageurl page %}" method="POST">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% materialize_field field %}
+                    {% endfor %}
+                    <button id="submit" type="submit" class="btn btn-inverse">{% trans 'send' %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
