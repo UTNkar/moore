@@ -8,6 +8,7 @@ from wagtail.wagtailadmin.edit_handlers import InlinePanel, MultiFieldPanel, \
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Page, Orderable
+from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES, PersonBlock
@@ -84,6 +85,83 @@ class ContactPage(Page):
         FieldPanel('title_sv', classname="full title"),
         StreamFieldPanel('contact_point_sv'),
         StreamFieldPanel('other_contacts_sv'),
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(general_panels, heading=_('General')),
+        ObjectList(content_panels_en, heading=_('English')),
+        ObjectList(content_panels_sv, heading=_('Swedish')),
+        ObjectList(Page.promote_panels, heading=_('Promote')),
+        ObjectList(Page.settings_panels, heading=_('Settings')),
+    ])
+
+
+class FormField(AbstractFormField):
+    page = ParentalKey('FormPage', related_name='form_fields')
+
+
+class FormPage(AbstractEmailForm):
+    title_sv = models.CharField(max_length=255)
+    translated_title = TranslatedField('title', 'title_sv')
+
+    intro_en = StreamField(
+        WAGTAIL_STATIC_BLOCKTYPES,
+        verbose_name=_('English Introduction'),
+        blank=True,
+    )
+    intro_sv = StreamField(
+        WAGTAIL_STATIC_BLOCKTYPES,
+        verbose_name=_('Swedish Introduction'),
+        blank=True,
+    )
+    intro = TranslatedField('intro_en', 'intro_sv')
+
+    thank_you_text_en = StreamField(
+        WAGTAIL_STATIC_BLOCKTYPES,
+        verbose_name=_('English Thank You Text'),
+        blank=True,
+    )
+    thank_you_text_sv = StreamField(
+        WAGTAIL_STATIC_BLOCKTYPES,
+        verbose_name=_('Swedish Thank You Text'),
+        blank=True,
+    )
+    thank_you_text = TranslatedField('thank_you_text_en', 'thank_you_text_sv')
+
+    form_title_en = models.CharField(
+        verbose_name=_('English Form Title'),
+        max_length=255,
+        blank=True
+    )
+    form_title_sv = models.CharField(
+        verbose_name=_('Swedish Form Title'),
+        max_length=255,
+        blank=True,
+    )
+    form_title = TranslatedField('form_title_en', 'form_title_sv')
+
+    general_panels = [
+        InlinePanel('form_fields', label="Form fields"),
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('from_address', classname="col6"),
+                FieldPanel('to_address', classname="col6"),
+            ]),
+            FieldPanel('subject'),
+        ], "Email"),
+    ]
+
+    content_panels_en = AbstractEmailForm.content_panels + [
+        StreamFieldPanel('intro_en'),
+        FieldPanel('form_title_en', classname="full title"),
+        StreamFieldPanel('thank_you_text_en'),
+    ]
+
+    content_panels_sv = [
+        FieldPanel('title_sv', classname="full title"),
+        StreamFieldPanel('intro_sv'),
+        FieldPanel('form_title_sv', classname="full title"),
+        StreamFieldPanel('thank_you_text_sv'),
     ]
 
     edit_handler = TabbedInterface([
