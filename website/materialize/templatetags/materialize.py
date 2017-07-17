@@ -8,12 +8,16 @@ def get_widget_name(field):
     return field.field.widget.__class__.__name__
 
 
-def append_classes(field):
+def append_classes(field, widget=''):
     field.field.label_suffix = ''
     classes = field.field.widget.attrs.get('class', '')
     classes += ' validate'
     if field.errors:
         classes += ' invalid'
+    if widget == 'Textarea':
+        classes += ' materialize-textarea'
+    if widget == 'DateInput':
+        classes += ' datepicker'
     field.field.widget.attrs['class'] = classes
 
 
@@ -29,12 +33,16 @@ def render_field(template, field, prefix=None):
 @register.simple_tag
 def materialize_field(field, prefix=None):
     widget = get_widget_name(field)
-    if widget in ['TextInput', 'EmailInput', 'PasswordInput', 'Select',
-                  'Textarea']:
-        append_classes(field)
+    if widget in ['EmailInput', 'DateInput', 'DateTimeInput', 'NumberInput',
+                  'PasswordInput', 'Select', 'Textarea', 'TextInput',
+                  'URLInput']:
+        append_classes(field, widget)
         return render_field('materialize/form/input.html', field, prefix)
+    elif widget == 'CheckboxInput':
+        return render_field('materialize/form/p_input.html', field)
+    # TODO: CheckboxSelectMultiple, DateTimeInput
     else:
-        return field.as_widget()
+        raise NotImplementedError('Widget %s not yet supported' % widget)
 
 
 @register.inclusion_tag('materialize/pagination.html')
