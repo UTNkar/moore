@@ -7,12 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - A new page type, FormPage, to accommodate user made forms. The reactions of these forms are send to a given email address.
+- A centered image format within the rich text editor.
 ## Changed
 - The folder structure has changed to better reflect their functionality. `website/` has been renamed `src/` and `website/website` has been renamed `src/moore`.
 - Improvements to the Google Drive block layout
 - Height is now configurable for the responsive image block 
 ### Fixed
 - Materialize Textarea markup of the materialize_field tag
+- The standard image formating rules in the rich text editor
 
 ## [0.6.0]
 ### Added
