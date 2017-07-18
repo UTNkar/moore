@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.7.0] - 2017-07-18
 ### Added
 - A new page type, FormPage, to accommodate user made forms. The reactions of these forms are send to a given email address.
 - A centered image format within the rich text editor.
@@ -17,7 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - The standard image formating rules in the rich text editor
 - The bullet points of an unordered list in the paragraph block
 
-## [0.6.0]
+## [0.6.0] - 2017-07-14
 ### Added
 - Cron task to delete old non-appointed applications. (2 years after recruitment ends)
 - Column based StreamBlock
@@ -202,7 +204,8 @@ asked to extend their profile in the registration email.
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/UTNkar/moore/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/UTNkar/moore/compare/v0.5.3...v0.6.0
 [0.5.3]: https://github.com/UTNkar/moore/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/UTNkar/moore/compare/v0.5.1...v0.5.2
