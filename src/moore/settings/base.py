@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'members',
     'news',
     'search',
-    'website',  # include for templatetags
+    'moore',  # include for templatetags
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -83,7 +83,7 @@ MIDDLEWARE = [
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 ]
 
-ROOT_URLCONF = 'website.urls'
+ROOT_URLCONF = 'moore.urls'
 
 TEMPLATES = [
     {
@@ -103,7 +103,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'website.wsgi.application'
+WSGI_APPLICATION = 'moore.wsgi.application'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

@@ -49,8 +49,8 @@ These tests are run automatically using [Travis CI](https://travis-ci.org/).
 If, however, you want to run these tests locally you can run the following
 commands in the project root directory:
 
-- `./website/manage.py test website` - to test with our Django test suites
-- `flake8 website` - to run the flake8 style enforcer
+- `./src/manage.py test src` - to test with our Django test suites
+- `flake8 src` - to run the flake8 style enforcer
 
 ## Translating
 
