@@ -3,15 +3,27 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 from django.utils.translation import ugettext_lazy as _
 
+
+class ResponsiveImageBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    height = blocks.IntegerBlock(
+        min_value=1,
+        default=400,
+    )
+
+    class Meta:
+        label = _('Responsive Image')
+        icon = 'fa-picture-o'
+        template = 'blocks/image.html'
+        group = _('Basic')
+
+
 BASIC_BLOCKTYPES = [
     ('paragraph', blocks.RichTextBlock(
         template='blocks/paragraph.html',
         group=_('Basic'),
     )),
-    ('image', ImageChooserBlock(
-        template='blocks/image.html',
-        group=_('Basic'),
-    )),
+    ('image', ResponsiveImageBlock()),
 ]
 
 
