@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Materialize Textarea markup of the materialize_field tag
 - The standard image formating rules in the rich text editor
+- The bullet points of an unordered list in the paragraph block
 
 ## [0.6.0]
 ### Added

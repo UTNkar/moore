@@ -1,0 +1,10 @@
+@import "../base";
+
+.block-paragraph {
+  ul {
+    padding-left: 40px;
+    &, li {
+      list-style-type: disc;
+    }
+  }
+}
