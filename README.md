@@ -62,9 +62,9 @@ should be translated using translation files.
 
 To create translations for an app:
 
-1. `cd website/<appname>`
+1. `cd src/<appname>`
 1. `../manage.py makemessages -l sv`
-2. This will create or update the files under `website/<appname>/locale/`.
+2. This will create or update the files under `src/<appname>/locale/`.
 3. Use poedit (or your favourite tool -- please do not use a plain text editor
 since those cannot handle all the subtleties) to fix the translations.
 4. `../manage.py compilemessages`
