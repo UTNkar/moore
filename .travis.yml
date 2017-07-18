@@ -6,8 +6,8 @@ install:
 - pip install -r dev-requirements.txt
 - pip install coveralls
 script:
-  - flake8 website
-  - coverage run --source='.' ./website/manage.py test website
+  - flake8 src
+  - coverage run --source='.' ./src/manage.py test src
 after_success:
   coveralls
 notifications:
