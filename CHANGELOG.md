@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Changed
 - The folder structure has changed to better reflect their functionality. `website/` has been renamed `src/` and `website/website` has been renamed `src/moore`.
 - Improvements to the Google Drive block layout
+- Height is now configurable for the responsive image block 
 ### Fixed
 - Materialize Textarea markup of the materialize_field tag
 
