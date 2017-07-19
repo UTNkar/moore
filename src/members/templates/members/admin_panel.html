@@ -1,0 +1,30 @@
+{% load i18n %}
+<div class="panel nice-padding">
+    <section>
+        <h2>{% trans 'system administrators'|title %}</h2>
+    </section>
+    <table class="listing listing-page">
+        <colgroup>
+            <col>
+            <col width="20%">
+            <col width="20%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th class="title">{% trans 'name'|title %}</th>
+                <th>{% trans 'email'|title %}</th>
+                <th>{% trans 'phone number'|title %}</th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for s in supers %}
+            <tr>
+                <td>{% if user.is_superuser %}<a href="{% url 'wagtailusers_users:edit' s.id %}">{{ s }}</a>{% else %}{{ s }}{% endif %}</td>
+                <td><a href="mailto:{{ s.get_primary_email }}">{{ s.get_primary_email }}</a></td>
+                <td>{{ s.phone_number }}</td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+    </table>
+</div>

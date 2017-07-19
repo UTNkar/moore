@@ -1,12 +1,14 @@
 from django.forms import CheckboxSelectMultiple
+from django.template import loader
+from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 from wagtail.contrib.modeladmin.views import EditView, CreateView
 from wagtail.wagtailadmin.edit_handlers import TabbedInterface, ObjectList, \
     FieldPanel
+from wagtail.wagtailcore import hooks
 
-from members.models import StudyProgram, Section
-from django.utils.translation import ugettext_lazy as _
+from members.models import StudyProgram, Section, Member
 
 
 class StudyProgramEditHandler:
@@ -90,3 +92,22 @@ class EducationAdminGroup(ModelAdminGroup):
 
 
 modeladmin_register(EducationAdminGroup)
+
+
+class SuperUserPanel(object):
+    order = 1000
+
+    def __init__(self, request):
+        self.request = request
+
+    def render(self):
+        c = {
+            'supers': Member.objects.filter(is_superuser=True),
+            'user': self.request.user
+        }
+        return loader.get_template('members/admin_panel.html').render(c)
+
+
+@hooks.register('construct_homepage_panels')
+def add_super_user_panel(request, panels):
+    return panels.append(SuperUserPanel(request))
