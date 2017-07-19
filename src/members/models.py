@@ -191,7 +191,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
 
     def __str__(self) -> str:
         if self.first_name and self.last_name:
-            return '%s %s' % (self.first_name, self.last_name)
+            return self.get_full_name()
         else:
             return self.username
 
