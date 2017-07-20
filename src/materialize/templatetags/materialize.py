@@ -21,8 +21,8 @@ def append_classes(field, widget=''):
     field.field.widget.attrs['class'] = classes
 
 
-def render_field(template, field, prefix=None):
-    t = loader.get_template(template)
+def render_field(templ, field, prefix=None):
+    t = loader.get_template(templ)
     c = {
         'field': field,
         'prefix': prefix,
@@ -33,16 +33,23 @@ def render_field(template, field, prefix=None):
 @register.simple_tag
 def materialize_field(field, prefix=None):
     widget = get_widget_name(field)
+    t = ''
+    # TODO: DateTimeInput
     if widget in ['EmailInput', 'DateInput', 'DateTimeInput', 'NumberInput',
                   'PasswordInput', 'Select', 'Textarea', 'TextInput',
                   'URLInput']:
         append_classes(field, widget)
-        return render_field('materialize/form/input.html', field, prefix)
+        t = 'materialize/form/input.html'
     elif widget == 'CheckboxInput':
-        return render_field('materialize/form/p_input.html', field)
-    # TODO: CheckboxSelectMultiple, DateTimeInput
+        t = 'materialize/form/p_input.html'
+    elif widget == 'CheckboxSelectMultiple':
+        w = field.field.widget
+        w.template_name = 'materialize/form/multiple_input.html'
+        t = 'materialize/form/input.html'
     else:
         raise NotImplementedError('Widget %s not yet supported' % widget)
+
+    return render_field(t, field, prefix)
 
 
 @register.inclusion_tag('materialize/pagination.html')

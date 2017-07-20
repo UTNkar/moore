@@ -1,0 +1,17 @@
+{% load i18n %}
+{% with id=widget.attrs.id %}
+    <select name="{{ widget.name }}" {% if id %} id="{{ id }}"{% endif %}{% if widget.attrs.class %} class="{{ widget.attrs.class }}"{% endif %} multiple>
+        <option value="" disabled selected>{% trans 'choose your option'|capfirst %}</option>
+        {% for group, options, index in widget.optgroups %}
+            {% if group %}
+                <optgroup label="{{ group }}" {% if id %} id="{{ id }}_{{ index }}"{% endif %}>
+            {% endif %}
+            {% for option in options %}
+                <option value="{{ option.value }}" {% include "django/forms/widgets/attrs.html" %}>{{ option.value }}</option>
+            {% endfor %}
+            {% if group %}
+                </optgroup>
+            {% endif %}
+        {% endfor %}
+    </select>
+{% endwith %}
