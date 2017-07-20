@@ -11,14 +11,14 @@ function marvin(message, classes, callback) {
         '<b>Marvin:</b><a href="#" class="close"><i class="material-icons">close</i></a><br>'
         + message
         + '</div>',
-        null, // Display until dismissed
+        Infinity, // Display until dismissed
         marvin_style,
         callback
     );
 
     $('.message-impl > .close').click(function(ev){
         ev.preventDefault();
-        $(this).closest('.toast').remove();
+        $(this).closest('.toast')[0].M_Toast.remove();
     });
 }
 
