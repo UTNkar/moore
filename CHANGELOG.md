@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - A panel in the Admin home showing all super users
 ### Changed
 - Updated MaterializeCSS to version 0.100.0
+- Toast removal is executed using Materialize internal methods.
+- Updated frontend to jQuery 3.2.1
 ### Fixed
 - Variable height of the responsive image block
 
