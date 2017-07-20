@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - A panel in the Admin home showing all super users
+### Changed
+- Updated MaterializeCSS to version 0.100.0
 ### Fixed
 - Variable height of the responsive image block
 
