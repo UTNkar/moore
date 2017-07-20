@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - A panel in the Admin home showing all super users
+- Add CheckboxSelectMultiple support to the materialize_field tag
 ### Changed
 - Updated MaterializeCSS to version 0.100.0
 - Toast removal is executed using Materialize internal methods.
