@@ -1,5 +1,5 @@
 {% extends "page.html" %}
-{% load i18n wagtailcore_tags %}
+{% load i18n involvement_tags wagtailcore_tags %}
 
 {% block extra_css %}
     {{ block.super }}
@@ -30,7 +30,9 @@
             <div class="col s12 m5">
                 <h2>{% trans 'for general information'|title %}</h2>
                 {% for c in page.contact_point %}
-                   {% include 'blocks/partials/person_card.html' with person=c.value %}
+                    <div class="row">
+                        {% contact_card c.value 12 %}
+                    </div>
                 {% endfor %}
             </div>
         </div>
@@ -53,9 +55,7 @@
         {% for group, contact_list in contacts.items %}
             <div id="{{ group|slugify }}" class="row">
                 {% for contact in contact_list %}
-                    <div class="col s12 m6">
-                        {% include 'blocks/partials/person_card.html' with person=contact %}
-                    </div>
+                   {% contact_card contact 6 %}
                 {% endfor %}
             </div>
         {% endfor %}

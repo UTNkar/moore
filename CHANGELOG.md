@@ -8,12 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - A panel in the Admin home showing all super users
 - Add CheckboxSelectMultiple support to the materialize_field tag
+- Add Contact Card Snippet model. This model represents the contact cards that can be added to different parts of the website and replace the Person Block
 ### Changed
 - Updated MaterializeCSS to version 0.100.0
 - Toast removal is executed using Materialize internal methods.
 - Updated frontend to jQuery 3.2.1
 ### Fixed
 - Variable height of the responsive image block
+### Removed
+- Person Block, the functionality of this block has been replaced by the Contact Card Block.
 
 ## [0.7.0] - 2017-07-18
 ### Added
