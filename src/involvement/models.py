@@ -13,7 +13,6 @@ from modelcluster.models import ClusterableModel
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel, \
     InlinePanel, FieldRowPanel
-from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
