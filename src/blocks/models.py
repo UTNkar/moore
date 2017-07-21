@@ -116,6 +116,19 @@ class ImageIconsBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
+class LogosBlock(blocks.StructBlock):
+    logos = blocks.ListBlock(blocks.StructBlock([
+        ('image', ImageChooserBlock()),
+        ('link', blocks.URLBlock(required=False)),
+    ]))
+
+    class Meta:
+        label = _('Logos')
+        icon = 'fa-pied-piper'
+        template = 'blocks/logos.html'
+        group = _('Noyce')
+
+
 class OverlayBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     title = blocks.CharBlock(required=False)
@@ -136,13 +149,7 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('image_description', ImageIconsBlock()),
     ('image_icons', ImageDescriptionBlock()),
     ('overlay', OverlayBlock()),
-    ('logos', blocks.ListBlock(
-        ImageChooserBlock(),
-        icon='fa-pied-piper',
-        template='blocks/logos.html',
-        label=_('Logos'),
-        group=_('Noyce'),
-    )),
+    ('logos', LogosBlock()),
     ('counters', CountersBlock()),
     ('columns', ColumnBlock()),
 ]
