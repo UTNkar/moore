@@ -1,18 +1,20 @@
 {% load i18n static wagtailcore_tags wagtailimages_tags %}
 <div class="col m{{ width }} s12">
     <div class="card horizontal">
-        <div class="card-image">
+        <div class="card-image" style="width: 200px; height: 300px">
             {% if card.picture %}
                 {% image card.picture fill-200x300 %}
             {% else %}
-                <img src="{% static 'images/bocken.svg' %}" alt="{% trans 'UTN logo' %}" style="height: 200px; width: 200px;">
+                <img src="{% static 'images/bocken.svg' %}" alt="{% trans 'UTN logo' %}" style="padding: 50px 5px;">
             {% endif %}
         </div>
-        <div class="card-stacked">
+        <div class="card-stacked" style="height: 300px">
             <div class="card-content">
                 <span class="card-title">{% firstof card.name role.name %}</span>
                 {% if card.role_text or role.role_text %}<b>{% firstof card.role_text role.role_text %}</b>{% endif %}
-                {{ card.description|richtext }}
+                <div style="height: 135px; overflow: hidden;">
+                    {{ card.description|richtext }}
+                </div>
             </div>
             {% if card.email or role.email %}
                 <div class="card-action">
