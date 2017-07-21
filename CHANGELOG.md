@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.8.0] - 2017-07-21
 ### Added
 - A panel in the Admin home showing all super users
 - Add CheckboxSelectMultiple support to the materialize_field tag
@@ -217,7 +219,8 @@ asked to extend their profile in the registration email.
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/UTNkar/moore/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/UTNkar/moore/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/UTNkar/moore/compare/v0.5.3...v0.6.0
 [0.5.3]: https://github.com/UTNkar/moore/compare/v0.5.2...v0.5.3
