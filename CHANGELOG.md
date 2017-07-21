@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Updated MaterializeCSS to version 0.100.0
 - Toast removal is executed using Materialize internal methods.
 - Updated frontend to jQuery 3.2.1
+- The logos blocks now also includes links for every logo
 ### Fixed
 - Variable height of the responsive image block
 ### Removed
