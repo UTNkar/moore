@@ -11,8 +11,9 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
-from blocks.models import WAGTAIL_STATIC_BLOCKTYPES, PersonBlock
+from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from google.models import GoogleFormBlock, GoogleDriveBlock
+from involvement.models import ContactCardBlock
 from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
 
@@ -22,27 +23,23 @@ class ContactPage(Page):
     title_sv = models.CharField(max_length=255)
     translated_title = TranslatedField('title', 'title_sv')
 
-    contact_point_en = StreamField(
-        [('person', PersonBlock())],
+    contact_point = StreamField(
+        [('person', ContactCardBlock())],
     )
-    contact_point_sv = StreamField(
-        [('person', PersonBlock())],
-    )
-    contact_point = TranslatedField('contact_point_en', 'contact_point_sv')
 
-    other_contacts_en = StreamField(
+    other_contacts = StreamField(
         [('contact', blocks.StructBlock([
-            ('person', PersonBlock()),
-            ('group', blocks.CharBlock(required=False))
+            ('person', ContactCardBlock()),
+            ('english_groups', blocks.CharBlock(
+                help_text=_('Comma separated list of English group names.'),
+                required=False,
+            )),
+            ('swedish_groups', blocks.CharBlock(
+                help_text=_('Comma separated list of Swedish group names.'),
+                required=False,
+            )),
         ], icon='user'))],
     )
-    other_contacts_sv = StreamField(
-        [('contact', blocks.StructBlock([
-            ('person', PersonBlock()),
-            ('group', blocks.CharBlock(required=False))
-        ], icon='user'))],
-    )
-    other_contacts = TranslatedField('other_contacts_en', 'other_contacts_sv')
 
     map_location = models.CharField(
         max_length=255,
@@ -60,10 +57,17 @@ class ContactPage(Page):
     def get_context(self, request, *args, **kwargs):
         contacts = {}
         for contact in self.other_contacts:
-            group = contact.value.get('group', '')
-            l = contacts.get(group, [])
-            l.append(contact.value['person'])
-            contacts[group] = l
+            if request.LANGUAGE_CODE == 'sv':
+                groups = contact.value.get('swedish_groups', '')
+            else:
+                groups = contact.value.get('english_groups', '')
+            groups = groups.split(',')
+
+            for group in groups:
+                group = group.strip()
+                l = contacts.get(group, [])
+                l.append(contact.value['person'])
+                contacts[group] = l
 
         context = super(ContactPage, self).get_context(
             request, *args, **kwargs
@@ -71,29 +75,13 @@ class ContactPage(Page):
         context['contacts'] = contacts
         return context
 
-    general_panels = [
+    content_panels = Page.content_panels + [
+        FieldPanel('title_sv', classname="full title"),
         FieldPanel('map_location'),
         FieldPanel('location_description'),
+        StreamFieldPanel('contact_point'),
+        StreamFieldPanel('other_contacts'),
     ]
-
-    content_panels_en = Page.content_panels + [
-        StreamFieldPanel('contact_point_en'),
-        StreamFieldPanel('other_contacts_en'),
-    ]
-
-    content_panels_sv = [
-        FieldPanel('title_sv', classname="full title"),
-        StreamFieldPanel('contact_point_sv'),
-        StreamFieldPanel('other_contacts_sv'),
-    ]
-
-    edit_handler = TabbedInterface([
-        ObjectList(general_panels, heading=_('General')),
-        ObjectList(content_panels_en, heading=_('English')),
-        ObjectList(content_panels_sv, heading=_('Swedish')),
-        ObjectList(Page.promote_panels, heading=_('Promote')),
-        ObjectList(Page.settings_panels, heading=_('Settings')),
-    ])
 
 
 class FormField(AbstractFormField):
@@ -105,24 +93,32 @@ class FormPage(AbstractEmailForm):
     translated_title = TranslatedField('title', 'title_sv')
 
     intro_en = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES,
+        WAGTAIL_STATIC_BLOCKTYPES + [
+            ('contact_card', ContactCardBlock()),
+        ],
         verbose_name=_('English Introduction'),
         blank=True,
     )
     intro_sv = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES,
+        WAGTAIL_STATIC_BLOCKTYPES + [
+            ('contact_card', ContactCardBlock()),
+        ],
         verbose_name=_('Swedish Introduction'),
         blank=True,
     )
     intro = TranslatedField('intro_en', 'intro_sv')
 
     thank_you_text_en = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES,
+        WAGTAIL_STATIC_BLOCKTYPES + [
+            ('contact_card', ContactCardBlock()),
+        ],
         verbose_name=_('English Thank You Text'),
         blank=True,
     )
     thank_you_text_sv = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES,
+        WAGTAIL_STATIC_BLOCKTYPES + [
+            ('contact_card', ContactCardBlock()),
+        ],
         verbose_name=_('Swedish Thank You Text'),
         blank=True,
     )
@@ -299,6 +295,7 @@ class WebPage(Page):
 
     body_en = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
+            ('contact_card', ContactCardBlock()),
             ('google_form', GoogleFormBlock()),
             ('google_drive', GoogleDriveBlock()),
             ('news', LatestNewsBlock()),
@@ -307,6 +304,7 @@ class WebPage(Page):
     )
     body_sv = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
+            ('contact_card', ContactCardBlock()),
             ('google_form', GoogleFormBlock()),
             ('google_drive', GoogleDriveBlock()),
             ('news', LatestNewsBlock()),
