@@ -12,7 +12,8 @@ from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
-from google.models import GoogleFormBlock, GoogleDriveBlock
+from google.models import GoogleFormBlock, GoogleDriveBlock, \
+    GoogleCalendarBlock
 from involvement.models import ContactCardBlock
 from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
@@ -296,8 +297,9 @@ class WebPage(Page):
     body_en = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
             ('contact_card', ContactCardBlock()),
-            ('google_form', GoogleFormBlock()),
+            ('google_calendar', GoogleCalendarBlock()),
             ('google_drive', GoogleDriveBlock()),
+            ('google_form', GoogleFormBlock()),
             ('news', LatestNewsBlock()),
         ],
         blank=True,
@@ -305,8 +307,9 @@ class WebPage(Page):
     body_sv = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
             ('contact_card', ContactCardBlock()),
-            ('google_form', GoogleFormBlock()),
+            ('google_calendar', GoogleCalendarBlock()),
             ('google_drive', GoogleDriveBlock()),
+            ('google_form', GoogleFormBlock()),
             ('news', LatestNewsBlock()),
         ],
         blank=True,

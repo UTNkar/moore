@@ -13,6 +13,54 @@ from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from utils.translation import TranslatedField
 
 
+class ColorBlock(blocks.RegexBlock):
+    def __init__(self, required=True, error_messages=None, *args, **kwargs):
+        super(ColorBlock, self).__init__(r'([a-f]|[A-F]|[0-9]){6}', required,
+                                         6, 6, error_messages, *args, **kwargs)
+
+
+class GoogleCalendarBlock(blocks.StructBlock):
+    calendars = blocks.ListBlock(blocks.StructBlock([
+        ('source', blocks.CharBlock(
+            help_text=_('Calendar ID as given by google calendar'),
+        )),
+        ('color', ColorBlock()),
+    ]))
+    mode = blocks.ChoiceBlock(choices=[
+        ('WEEK', _('Week')),
+        ('', _('Month')),
+        ('AGENDA', _('Agenda')),
+    ], required=False)
+    height = blocks.IntegerBlock()
+    background_color = ColorBlock()
+    week_start = blocks.ChoiceBlock(choices=[
+        ('2', _('Monday')),
+        ('1', _('Sunday')),
+        ('7', _('Saturday')),
+    ])
+
+    class Meta:
+        label = _('Google Calendar')
+        icon = 'fa-calendar'
+        template = 'google/blocks/calendar.html'
+        group = _('Embed')
+
+
+class GoogleDriveBlock(blocks.StructBlock):
+    folder_id = blocks.CharBlock()
+    view = blocks.ChoiceBlock(choices=[
+        ('list', _('List')),
+        ('grid', _('Grid')),
+    ])
+    height = blocks.IntegerBlock()
+
+    class Meta:
+        label = _('Google Drive')
+        icon = 'fa-folder-open'
+        template = 'google/blocks/drive.html'
+        group = _('Embed')
+
+
 class GoogleFormBlock(blocks.StructBlock):
     form_id = blocks.CharBlock()
     height = blocks.IntegerBlock()
@@ -110,18 +158,3 @@ class GoogleFormPage(Page):
     # Parent page / subpage type rules
     parent_page_types = ['google.GoogleFormIndex']
     subpage_types = []
-
-
-class GoogleDriveBlock(blocks.StructBlock):
-    folder_id = blocks.CharBlock()
-    view = blocks.ChoiceBlock(choices=[
-        ('list', _('List')),
-        ('grid', _('Grid')),
-    ])
-    height = blocks.IntegerBlock()
-
-    class Meta:
-        label = _('Google Drive')
-        icon = 'fa-folder-open'
-        template = 'google/blocks/drive.html'
-        group = _('Embed')
