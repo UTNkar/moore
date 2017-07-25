@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Changed the overturn field in the appointment window to work with person numbers instead of usernames
 
 ## [0.8.0] - 2017-07-21
 ### Added

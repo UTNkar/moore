@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
 from involvement.models import Application, Reference
+from members.forms import PersonNumberField
 from utils.forms import AdvancedModelMultipleChoiceField
 
 
@@ -75,9 +76,9 @@ class AppointmentForm(forms.Form):
     overturn = forms.CharField(
         required=False,
         label=_('Overturn'),
-        help_text=_('Enter a comma separated list of users you want to '
-                    'appoint to the position, even though did not apply for '
-                    'the position.')
+        help_text=_('Enter a comma separated list of person numbers you want '
+                    'to appoint to the position, even though did not apply for'
+                    ' the position.')
     )
 
     def __init__(self, position, *args, **kwargs):
@@ -96,26 +97,35 @@ class AppointmentForm(forms.Form):
         if string == '':
             return []
         else:
-            users = string.split(',')
-            for u in users:
+            pnrs = string.split(',')
+            users = []
+            for pnr in pnrs:
+                date, number = PersonNumberField().to_python(pnr)
                 if not get_user_model().objects.filter(
-                    username=u
+                    birthday=date,
+                    person_number_ext=number,
                 ).exists():
                     raise forms.ValidationError(
-                        _('No user with the username %(user)s exists.'),
-                        params={'user': u},
+                        _('No user with the person number %(pnr)s exists.'),
+                        params={'pnr': pnr},
                     )
                 elif self.position.applications.filter(
-                    applicant__username=u
+                    applicant__birthday=date,
+                    applicant__person_number_ext=number,
                 ).exclude(
                     status='draft'
                 ).exists():
                     raise forms.ValidationError(
-                        _('User %(user)s already applied for this position '
-                          'and can not be appointed through the overturn '
-                          'field.'),
-                        params={'user': u},
+                        _('User with person number %(pnr)s already applied for'
+                          ' this position and can not be appointed through the'
+                          ' overturn field.'),
+                        params={'pnr': pnr},
                     )
+                else:
+                    users.append(get_user_model().objects.get(
+                        birthday=date,
+                        person_number_ext=number,
+                    ))
             return users
 
     def clean(self):
@@ -143,9 +153,6 @@ class AppointmentForm(forms.Form):
             application.save()
 
         for user in self.cleaned_data['overturn']:
-            user = get_user_model().objects.get(
-                    username=user
-            )
             appl, created = Application.objects.get_or_create(
                 position=self.position,
                 applicant=user,
