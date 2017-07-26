@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Block to embed Google Calendar fields
 ### Changed
 - Changed the overturn field in the appointment window to work with person numbers instead of usernames
+- Update request package to version 2.18.2
 
 ## [0.8.0] - 2017-07-21
 ### Added
