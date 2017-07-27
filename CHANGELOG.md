@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.9.0] - 2017-07-27
 ### Added
 - Block to embed Google Calendar fields
 ### Changed
@@ -33,7 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Changed
 - The folder structure has changed to better reflect their functionality. `website/` has been renamed `src/` and `website/website` has been renamed `src/moore`.
 - Improvements to the Google Drive block layout
-- Height is now configurable for the responsive image block 
+- Height is now configurable for the responsive image block
 ### Fixed
 - Materialize Textarea markup of the materialize_field tag
 - The standard image formating rules in the rich text editor
@@ -224,7 +226,8 @@ asked to extend their profile in the registration email.
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/UTNkar/moore/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/UTNkar/moore/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/UTNkar/moore/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/UTNkar/moore/compare/v0.5.3...v0.6.0
