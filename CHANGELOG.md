@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+Changed the font color on the overlay from #9E9E9E to #424242 
+
 ## [0.9.0] - 2017-07-27
 ### Added
 - Block to embed Google Calendar fields
