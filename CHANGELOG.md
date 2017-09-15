@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Upgrade Django to version 1.11.5, Wagtail to version 1.12.1, compressor to version 2.2, and request to version 2.18.4.
 
 ## [0.9.0] - 2017-07-27
 ### Added
