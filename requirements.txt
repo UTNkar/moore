@@ -1,11 +1,11 @@
-Django[argon2]==1.11.3
-wagtail==1.11.1
+Django[argon2]==1.11.5
+wagtail==1.12.1
 
 # External Libraries
-requests==2.18.2
+requests==2.18.4
 
 # Templates
-django-compressor==2.1.1
+django-compressor==2.2
 django-libsass==0.7
 wagtailfontawesome==1.0.6
 
