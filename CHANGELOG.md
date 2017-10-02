@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Upgrade Django to version 1.11.5, Wagtail to version 1.12.2, compressor to version 2.2, Raven to version 6.2.1, and request to version 2.18.4.
 - Font color of the overlay block. The new font is darker.
+- Upgrade MaterializeCSS framework to version v0.100.2.
 ### Fixed
 - The header padding of the open positions page in the involvement package
 
