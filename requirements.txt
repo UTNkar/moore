@@ -1,5 +1,5 @@
 Django[argon2]==1.11.5
-wagtail==1.12.1
+wagtail==1.12.2
 
 # External Libraries
 requests==2.18.4
@@ -17,4 +17,4 @@ rules==1.2.1
 django-simple-email-confirmation==0.22
 
 # Logging
-raven==6.1.0
+raven==6.2.1
