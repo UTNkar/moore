@@ -9,7 +9,9 @@ from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
 urlpatterns = [
-    url(r'', include('involvement.urls')),  # Needs to be imported before wagtail admin
+    # Needs to be imported before wagtail admin
+    url(r'', include('involvement.urls')),
+
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 
