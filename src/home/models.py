@@ -66,9 +66,9 @@ class ContactPage(Page):
 
             for group in groups:
                 group = group.strip()
-                l = contacts.get(group, [])
-                l.append(contact.value['person'])
-                contacts[group] = l
+                list = contacts.get(group, [])
+                list.append(contact.value['person'])
+                contacts[group] = list
 
         context = super(ContactPage, self).get_context(
             request, *args, **kwargs
