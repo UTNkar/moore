@@ -213,19 +213,19 @@ class AdminPermissionTests(TestCase):
 
     def assertCanAccess(self, url):
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, "Unable to access '%s'" % url)
         return response
 
     def assertNoAccess(self, url):
         response = self.client.get(url)
-        self.assertIn(response.status_code, [403, 302])
+        self.assertIn(response.status_code, [403, 302], "'%s' should not be accessible" % url)
         return response
 
     def setUp(self):
         """
         Create users, teams, and groups for use in other tests
         """
-        wagtail_acces = Permission.objects.get(name='Can access Wagtail admin')
+        wagtail_access = Permission.objects.get(name='Can access Wagtail admin')
         recruitment_admin = Permission.objects.get(
             name='Can administrate the recruitment process'
         )
@@ -234,7 +234,7 @@ class AdminPermissionTests(TestCase):
         self.group = Group.objects.create(
             name='Test Team',
         )
-        self.group.permissions.add(wagtail_acces)
+        self.group.permissions.add(wagtail_access)
         self.team = Team.objects.create(
             name_en='Test Team',
             name_sv='Testteam',
@@ -269,7 +269,7 @@ class AdminPermissionTests(TestCase):
         self.admin_group = Group.objects.create(
             name='Admin Group',
         )
-        self.admin_group.permissions.add(wagtail_acces, recruitment_admin)
+        self.admin_group.permissions.add(wagtail_access, recruitment_admin)
         self.admin = Member.objects.create(
             username='admin',
         )
@@ -280,7 +280,7 @@ class AdminPermissionTests(TestCase):
         self.approval_group = Group.objects.create(
             name='Approval Team',
         )
-        self.approval_group.permissions.add(wagtail_acces)
+        self.approval_group.permissions.add(wagtail_access)
         self.approval_team = Team.objects.create(
             name_en='Approval Team',
             name_sv='Approval Team',
@@ -331,6 +331,7 @@ class AdminPermissionTests(TestCase):
         self.client.force_login(
             self.admin, 'django.contrib.auth.backends.ModelBackend'
         )
+        assert self.admin.is_authenticated()
         for i, section in AdminPermissionTests.pages.items():
             for action, url in section.items():
                 if action in ['create', 'index']:
