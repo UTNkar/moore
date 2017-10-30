@@ -213,19 +213,23 @@ class AdminPermissionTests(TestCase):
 
     def assertCanAccess(self, url):
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 200, "Unable to access '%s'" % url)
+        self.assertEqual(response.status_code, 200,
+                         "Unable to access '%s'" % url)
         return response
 
     def assertNoAccess(self, url):
         response = self.client.get(url)
-        self.assertIn(response.status_code, [403, 302], "'%s' should not be accessible" % url)
+        self.assertIn(response.status_code, [403, 302],
+                      "'%s' should not be accessible" % url)
         return response
 
     def setUp(self):
         """
         Create users, teams, and groups for use in other tests
         """
-        wagtail_access = Permission.objects.get(name='Can access Wagtail admin')
+        wagtail_access = Permission.objects.get(
+            name='Can access Wagtail admin'
+        )
         recruitment_admin = Permission.objects.get(
             name='Can administrate the recruitment process'
         )
