@@ -17,4 +17,4 @@ rules==1.2.1
 django-simple-email-confirmation==0.22
 
 # Logging
-raven==6.3.0
+raven==6.4.0
