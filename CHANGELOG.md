@@ -6,7 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [0.10.0]
+## [0.10.1] - 2018-02-04
+### Changed
+- Upgrade dependencies to current versions
+
+## [0.10.0] - 2017-10-02
 ### Changed
 - Upgrade Django to version 1.11.5, Wagtail to version 1.12.2, compressor to version 2.2, Raven to version 6.2.1, and request to version 2.18.4.
 - Font color of the overlay block. The new font is darker.
@@ -234,7 +238,8 @@ asked to extend their profile in the registration email.
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.10.0...HEAD
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.10.1...HEAD
+[0.10.1]: https://github.com/UTNkar/moore/compare/v0.10.0...v0.10.1
 [0.10.0]: https://github.com/UTNkar/moore/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/UTNkar/moore/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/UTNkar/moore/compare/v0.7.0...v0.8.0
