@@ -26,7 +26,7 @@ development environment:
 4. Run `pip install -r dev-requirements.txt`
 5. Use `cd website` to enter the website directory.
 6. Run `./manage.py migrate` to initialize the database.
-7. Run `./manage.py creatsuperuser` to create an admin user.
+7. Run `./manage.py createsuperuser` to create an admin user.
 
 During development, you can run a test web server using `./manage.py
 runserver`.
