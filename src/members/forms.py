@@ -6,7 +6,7 @@ from django.core import validators
 from django.core.exceptions import ValidationError
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailusers import forms as wagtail
+from wagtail.users import forms as wagtail
 
 from members.models import StudyProgram, Member, Section
 

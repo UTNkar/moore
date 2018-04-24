@@ -1,4 +1,4 @@
-from wagtail.wagtailimages.formats import Format, register_image_format
+from wagtail.images.formats import Format, register_image_format
 
 from django.utils.translation import ugettext_lazy as _
 

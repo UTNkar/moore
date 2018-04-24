@@ -2,12 +2,12 @@ from datetime import date
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, \
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, \
     TabbedInterface, ObjectList
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.fields import StreamField, RichTextField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch import index
+from wagtail.core import blocks
+from wagtail.core.fields import StreamField, RichTextField
+from wagtail.core.models import Page
+from wagtail.search import index
 
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from utils.translation import TranslatedField

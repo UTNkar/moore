@@ -4,9 +4,9 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 from wagtail.contrib.modeladmin.views import EditView, CreateView
-from wagtail.wagtailadmin.edit_handlers import TabbedInterface, ObjectList, \
+from wagtail.admin.edit_handlers import TabbedInterface, ObjectList, \
     FieldPanel
-from wagtail.wagtailcore import hooks
+from wagtail.core import hooks
 
 from members.models import StudyProgram, Section, Member
 

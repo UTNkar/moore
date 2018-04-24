@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             name='FooterSettings',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('footer', wagtail.wagtailcore.fields.StreamField((('column', wagtail.wagtailcore.blocks.StructBlock((('size', wagtail.wagtailcore.blocks.IntegerBlock(max_value=12, min_value=1)), ('content', wagtail.wagtailcore.blocks.RichTextBlock())))),), blank=True)),
+                ('footer', wagtail.core.fields.StreamField((('column', wagtail.core.blocks.StructBlock((('size', wagtail.core.blocks.IntegerBlock(max_value=12, min_value=1)), ('content', wagtail.core.blocks.RichTextBlock())))),), blank=True)),
                 ('site', models.OneToOneField(editable=False, on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site')),
             ],
             options={
