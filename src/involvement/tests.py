@@ -335,7 +335,7 @@ class AdminPermissionTests(TestCase):
         self.client.force_login(
             self.admin, 'django.contrib.auth.backends.ModelBackend'
         )
-        assert self.admin.is_authenticated()
+        assert self.admin.is_authenticated
         for i, section in AdminPermissionTests.pages.items():
             for action, url in section.items():
                 if action in ['create', 'index']:
