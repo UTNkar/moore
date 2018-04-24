@@ -2,11 +2,11 @@ from django.db import models
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, \
+from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, \
     MultiFieldPanel, StreamFieldPanel
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.core import blocks
+from wagtail.core.fields import StreamField
+from wagtail.images.edit_handlers import ImageChooserPanel
 
 
 @register_setting(icon='fa-window-minimize')

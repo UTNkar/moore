@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, TabbedInterface, \
+from wagtail.admin.edit_handlers import FieldPanel, TabbedInterface, \
     ObjectList
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsearch import index
+from wagtail.core import blocks
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import Page
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.search import index
 
 from utils.translation import TranslatedField
 

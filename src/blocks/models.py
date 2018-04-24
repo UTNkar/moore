@@ -1,6 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.core import blocks
+from wagtail.images.blocks import ImageChooserBlock
 
 
 class ResponsiveImageBlock(blocks.StructBlock):

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -19,8 +19,8 @@ class Migration(migrations.Migration):
             name='ContactCard',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description_en', wagtail.wagtailcore.fields.RichTextField(blank=True, verbose_name='English Description')),
-                ('description_sv', wagtail.wagtailcore.fields.RichTextField(blank=True, verbose_name='Swedish Description')),
+                ('description_en', wagtail.core.fields.RichTextField(blank=True, verbose_name='English Description')),
+                ('description_sv', wagtail.core.fields.RichTextField(blank=True, verbose_name='Swedish Description')),
                 ('name', models.CharField(blank=True, help_text='Overrides account name of position holder of the selected role.', max_length=100, verbose_name='Name')),
                 ('role_text_en', models.CharField(blank=True, help_text='Overrides role name from the selected role.', max_length=100, verbose_name='English Role Name')),
                 ('role_text_sv', models.CharField(blank=True, help_text='Overrides role name from the selected role.', max_length=100, verbose_name='Swedish Role Name')),
