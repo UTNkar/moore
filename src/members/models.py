@@ -1,6 +1,6 @@
 import requests
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.core import validators
 from django.db import models
 from django.db.models import ManyToManyField
@@ -12,8 +12,16 @@ from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 from utils.translation import TranslatedField
 
 
+class CaseInsensitiveUsernameUserManager(UserManager):
+    # Get username by insensitive case
+    def get_by_natural_key(self, username):
+        case_insensitive_username_field = '{}__iexact'.format(self.model.USERNAME_FIELD)
+        return self.get(**{case_insensitive_username_field: username})
+
 class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     """This class describes a member"""
+
+    objects = CaseInsensitiveUsernameUserManager()
 
     # ---- Personal information ------
 
