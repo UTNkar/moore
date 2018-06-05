@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-26 09:57+0200\n"
+"POT-Creation-Date: 2018-06-05 16:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,55 +18,91 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps.py:7
+#: google/apps.py:7
 msgid "Google"
 msgstr ""
 
-#: models.py:21
-msgid "Google Form"
+#: google/models.py:25
+msgid "Calendar ID as given by google calendar"
 msgstr ""
 
-#: models.py:31
-msgid "English description"
+#: google/models.py:30
+msgid "Week"
 msgstr ""
 
-#: models.py:35
-msgid "Swedish description"
+#: google/models.py:31
+msgid "Month"
 msgstr ""
 
-#: models.py:67
-msgid "Form deadline"
+#: google/models.py:32
+msgid "Agenda"
 msgstr ""
 
-#: models.py:92
-msgid "Common"
+#: google/models.py:37
+msgid "Monday"
 msgstr ""
 
-#: models.py:93
-msgid "English"
+#: google/models.py:38
+msgid "Sunday"
 msgstr ""
 
-#: models.py:94
-msgid "Swedish"
+#: google/models.py:39
+msgid "Saturday"
 msgstr ""
 
-#: models.py:96
-msgid "Settings"
+#: google/models.py:43
+msgid "Google Calendar"
 msgstr ""
 
-#: models.py:116
+#: google/models.py:46 google/models.py:61 google/models.py:72
+msgid "Embed"
+msgstr ""
+
+#: google/models.py:52
 msgid "List"
 msgstr ""
 
-#: models.py:117
+#: google/models.py:53
 msgid "Grid"
 msgstr ""
 
-#: models.py:122
+#: google/models.py:58
 msgid "Google Drive"
 msgstr ""
 
-#: templates/google/google_form_page.html:9
+#: google/models.py:69
+msgid "Google Form"
+msgstr ""
+
+#: google/models.py:80
+msgid "English description"
+msgstr ""
+
+#: google/models.py:84
+msgid "Swedish description"
+msgstr ""
+
+#: google/models.py:117
+msgid "Form deadline"
+msgstr ""
+
+#: google/models.py:142
+msgid "Common"
+msgstr ""
+
+#: google/models.py:143
+msgid "English"
+msgstr ""
+
+#: google/models.py:144
+msgid "Swedish"
+msgstr ""
+
+#: google/models.py:146
+msgid "Settings"
+msgstr ""
+
+#: google/templates/google/google_form_page.html:9
 msgid ""
 "The deadline for this form has passed. Results might be posted here at a "
 "later date."

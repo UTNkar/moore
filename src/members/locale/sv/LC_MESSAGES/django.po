@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-26 09:57+0200\n"
+"POT-Creation-Date: 2018-06-05 16:11+0200\n"
 "PO-Revision-Date: 2017-06-26 10:25+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -13,133 +13,60 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: apps.py:7
+#: members/apps.py:7
 msgid "UTN Member Management"
 msgstr "Underhåll av UTN-medlemmar"
 
-#: forms.py:24
+#: members/forms.py:24
 msgid "Use the format YYYYMMDD-XXXX for your person number."
 msgstr "Använd formen ÅÅÅÅMMDD-NNNN för ditt personnummer."
 
-#: forms.py:32
+#: members/forms.py:32
 #, python-format
 msgid "%(date)s is an invalid date"
 msgstr ""
 
-#: forms.py:47 forms.py:112 forms.py:162
+#: members/forms.py:47 members/forms.py:112 members/forms.py:162
 msgid "Person number"
 msgstr "Personnummer"
 
-#: forms.py:48 forms.py:113 forms.py:163
+#: members/forms.py:48 members/forms.py:113 members/forms.py:163
 msgid "Person number using the YYYYMMDD-XXXX format."
 msgstr "Personnummer på formen ÅÅÅÅMDD-NNNN."
 
-#: forms.py:117 forms.py:167 models.py:153
+#: members/forms.py:117 members/forms.py:167 members/models.py:71
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: forms.py:121 forms.py:171 models.py:166
+#: members/forms.py:121 members/forms.py:171 members/models.py:84
 msgid "Registration year"
 msgstr "Inskrivningsår"
 
-#: forms.py:126 wagtail_hooks.py:40
+#: members/forms.py:126 members/wagtail_hooks.py:42
 msgid "Study Program"
 msgstr "Program"
 
-#: forms.py:131 forms.py:181
+#: members/forms.py:131 members/forms.py:181
 msgid "Section"
 msgstr "Sektion"
 
-#: forms.py:135 forms.py:186 models.py:140
+#: members/forms.py:135 members/forms.py:186 members/models.py:58
 msgid "Membership status"
 msgstr "Medlemsstatus"
 
-#: forms.py:176 models.py:178
+#: members/forms.py:176 members/models.py:96
 msgid "Study program"
 msgstr "Program"
 
-#: models.py:19
-msgid "study program"
-msgstr "program"
-
-#: models.py:20
-msgid "study programs"
-msgstr "program"
-
-#: models.py:23
-msgid "Bachelor of Science"
-msgstr "Kandidatprogram"
-
-#: models.py:24
-msgid "Master of Science"
-msgstr "Masterprogram"
-
-#: models.py:25
-msgid "Bachelor of Engineering"
-msgstr "Högskoleingenjörsprogrammet"
-
-#: models.py:26
-msgid "Master of Science in Engineering"
-msgstr "Civilingenjörsprogrammet"
-
-#: models.py:31
-msgid "English program name"
-msgstr "Engelsk benämning av program"
-
-#: models.py:32 models.py:39
-msgid "Enter the name of the study program"
-msgstr "Ange namnet på programmet"
-
-#: models.py:38
-msgid "Swedish program name"
-msgstr "Svensk benämning av program"
-
-#: models.py:48
-msgid "Degree type"
-msgstr "Examensnivå"
-
-#: models.py:54
-#, python-format
-msgid "%(degree_type)s in %(study_program)s"
-msgstr "%(degree_type)s i %(study_program)s"
-
-#: models.py:66
-msgid "section"
-msgstr "sektion"
-
-#: models.py:67
-msgid "sections"
-msgstr "sektioner"
-
-#: models.py:71
-msgid "English section name"
-msgstr "Sektionens engelska namn"
-
-#: models.py:72 models.py:79
-msgid "Enter the name of the section"
-msgstr "Ange namnet på sektionen"
-
-#: models.py:78
-msgid "Swedish section name"
-msgstr "Sektionens svenska namn"
-
-#: models.py:87
-msgid "Section abbreviation"
-msgstr "Sektionens bokstavsförkortning"
-
-#: models.py:88
-msgid "Enter the abbreviation for the section"
-msgstr "Ange sektionens bokstavsförkortning"
-
-#: models.py:111
+#: members/models.py:29
 msgid "Birthday"
 msgstr "Födelsedag"
 
-#: models.py:117
+#: members/models.py:35
 msgid "Person number extension"
 msgstr "De fyra sista siffrorna"
 
-#: models.py:118
+#: members/models.py:36
 msgid ""
 "Enter the last four digits of your Swedish person number, given by the "
 "Swedish tax authority"
@@ -147,47 +74,138 @@ msgstr ""
 "Ange de fyra sista siffrorna i ditt svenska personnummer, som du fått från "
 "Skatteverket"
 
-#: models.py:122
+#: members/models.py:40
 msgid "The person number extension consists of four numbers"
 msgstr "Här avses de fyra sista siffrorna i ditt personnummer"
 
-#: models.py:131
+#: members/models.py:49
 msgid "Unknown"
 msgstr "Okänt"
 
-#: models.py:132
+#: members/models.py:50
 msgid "Nonmember"
 msgstr "Icke medlem"
 
-#: models.py:133
+#: members/models.py:51
 msgid "Member"
 msgstr "Medlem"
 
-#: models.py:134
+#: members/models.py:52
 msgid "Alumnus"
 msgstr "Alumn"
 
-#: models.py:154
+#: members/models.py:72
 msgid "Enter a phone number so UTN may reach you"
 msgstr "Ange ett telefonnummer som UTN kan nå dig på"
 
-#: models.py:157
+#: members/models.py:75
 msgid "Please enter a valid phone number"
 msgstr "Var vänlig ange ett giltigt telefonnummer"
 
-#: models.py:167
+#: members/models.py:85
 msgid "Enter the year you started studying at the TakNat faculty"
 msgstr "Ange året då du började studera på TekNat-fakulteten"
 
-#: models.py:171
+#: members/models.py:89
 msgid "Please enter a valid year"
 msgstr "Vänligen ange ett giltigt år"
 
-#: models.py:186
+#: members/models.py:104
 msgid "Member of section"
 msgstr "Sektionsmedlem i"
 
-#: templates/members/email_change_email.html:1
+#: members/models.py:165
+msgid "section"
+msgstr "sektion"
+
+#: members/models.py:166
+msgid "sections"
+msgstr "sektioner"
+
+#: members/models.py:170
+msgid "English section name"
+msgstr "Sektionens engelska namn"
+
+#: members/models.py:171 members/models.py:178
+msgid "Enter the name of the section"
+msgstr "Ange namnet på sektionen"
+
+#: members/models.py:177
+msgid "Swedish section name"
+msgstr "Sektionens svenska namn"
+
+#: members/models.py:186
+msgid "Section abbreviation"
+msgstr "Sektionens bokstavsförkortning"
+
+#: members/models.py:187
+msgid "Enter the abbreviation for the section"
+msgstr "Ange sektionens bokstavsförkortning"
+
+#: members/models.py:208
+msgid "study program"
+msgstr "program"
+
+#: members/models.py:209
+msgid "study programs"
+msgstr "program"
+
+#: members/models.py:212
+msgid "Bachelor of Science"
+msgstr "Kandidatprogram"
+
+#: members/models.py:213
+msgid "Master of Science"
+msgstr "Masterprogram"
+
+#: members/models.py:214
+msgid "Bachelor of Engineering"
+msgstr "Högskoleingenjörsprogrammet"
+
+#: members/models.py:215
+msgid "Master of Science in Engineering"
+msgstr "Civilingenjörsprogrammet"
+
+#: members/models.py:220
+msgid "English program name"
+msgstr "Engelsk benämning av program"
+
+#: members/models.py:221 members/models.py:228
+msgid "Enter the name of the study program"
+msgstr "Ange namnet på programmet"
+
+#: members/models.py:227
+msgid "Swedish program name"
+msgstr "Svensk benämning av program"
+
+#: members/models.py:237
+msgid "Degree type"
+msgstr "Examensnivå"
+
+#: members/models.py:243
+#, python-format
+msgid "%(degree_type)s in %(study_program)s"
+msgstr "%(degree_type)s i %(study_program)s"
+
+#: members/templates/members/admin_panel.html:4
+msgid "system administrators"
+msgstr ""
+
+#: members/templates/members/admin_panel.html:14
+msgid "name"
+msgstr ""
+
+#: members/templates/members/admin_panel.html:15
+msgid "email"
+msgstr ""
+
+#: members/templates/members/admin_panel.html:16
+#, fuzzy
+#| msgid "Phone number"
+msgid "phone number"
+msgstr "Telefonnummer"
+
+#: members/templates/members/email_change_email.html:1
 msgid ""
 "You're receiving this email because a UTN-account has been created with this "
 "email address."
@@ -195,7 +213,7 @@ msgstr ""
 "Du får detta mail eftersom du har registrerat ett UTN-konto på denna "
 "emailadress."
 
-#: templates/members/email_change_email.html:1
+#: members/templates/members/email_change_email.html:1
 msgid ""
 "You're receiving this email because you registered a new email address for "
 "your UTN-account."
@@ -203,75 +221,76 @@ msgstr ""
 "Du får detta mail eftersom du har registrerat en ny emailadress för ditt UTN-"
 "konto."
 
-#: templates/members/email_change_email.html:2
+#: members/templates/members/email_change_email.html:2
 msgid "Please go to the following page to confirm your email address"
 msgstr "Fortsätt till denna sida för att bekräfta din emailadress"
 
-#: templates/members/email_change_email.html:2
+#: members/templates/members/email_change_email.html:2
 msgid " and complete your profile"
 msgstr " och slutför din profil"
 
-#: templates/members/email_change_subject.txt:2
+#: members/templates/members/email_change_subject.txt:2
 msgid "[UTN] Confirm your email address"
 msgstr "[UTN] Bekräfta din emailadress"
 
-#: templates/members/profile.html:4
+#: members/templates/members/profile.html:4
 msgid "Account Settings"
 msgstr "Kontoinställningar"
 
-#: templates/members/profile.html:58
+#: members/templates/members/profile.html:58
 msgid "contact information"
 msgstr "kontaktinformation"
 
-#: templates/members/profile.html:85
+#: members/templates/members/profile.html:85
 msgid "membership status"
 msgstr "medlemsstatus"
 
-#: templates/members/profile.html:86
+#: members/templates/members/profile.html:86
 msgid "current status"
 msgstr "nuvarande status"
 
-#: templates/members/profile.html:89
+#: members/templates/members/profile.html:89
 msgid "recheck status"
 msgstr "uppdatera status"
 
-#: templates/members/profile.html:94
+#: members/templates/members/profile.html:94
 msgid "study information"
 msgstr "utbildningsinformation"
 
-#: templates/members/profile.html:108
+#: members/templates/members/profile.html:108
 msgid "save"
 msgstr "spara"
 
-#: templates/members/register.html:4
+#: members/templates/members/register.html:4
 msgid "Register"
 msgstr "Registrera"
 
-#: templates/members/register.html:6 templates/registration/login.html:35
+#: members/templates/members/register.html:6
+#: members/templates/registration/login.html:35
 msgid "Create a UTN account"
 msgstr "Skapa ett UTN-konto"
 
-#: templates/members/register.html:49
+#: members/templates/members/register.html:49
 msgid "register"
 msgstr "register"
 
-#: templates/registration/logged_out.html:4
+#: members/templates/registration/logged_out.html:4
 msgid "Logged out"
 msgstr "Utloggad"
 
-#: templates/registration/logged_out.html:7
+#: members/templates/registration/logged_out.html:7
 msgid "You have succesfully been logged out."
 msgstr "Du har blivit utloggad."
 
-#: templates/registration/login.html:7
+#: members/templates/registration/login.html:7
 msgid "Login"
 msgstr "Logga in"
 
-#: templates/registration/login.html:9
+#: members/templates/registration/login.html:9
 msgid "Log into your UTN account"
 msgstr "Logga in på ditt UTN-konto"
 
-#: templates/registration/login.html:20
+#: members/templates/registration/login.html:20
 msgid ""
 "Your account doesn't have access to this page. To proceed, please login with "
 "an account that has access."
@@ -279,35 +298,35 @@ msgstr ""
 "Du har inte åtkomst till den här sidan. Var vänlig logga in på ett "
 "autkoriserat konto."
 
-#: templates/registration/login.html:31
+#: members/templates/registration/login.html:31
 msgid "Sign In"
 msgstr "Logga in"
 
-#: templates/registration/login.html:34
+#: members/templates/registration/login.html:34
 msgid "I forgot my password"
 msgstr "Jag har glömt mitt lösenord"
 
-#: templates/registration/password_change_done.html:7
+#: members/templates/registration/password_change_done.html:7
 msgid "Password changed"
 msgstr "Lösenordet har ändrats"
 
-#: templates/registration/password_change_done.html:9
-#: templates/registration/password_change_form.html:11
+#: members/templates/registration/password_change_done.html:9
+#: members/templates/registration/password_change_form.html:11
 msgid "Change your password"
 msgstr "Ändra ditt lösenord"
 
-#: templates/registration/password_change_done.html:12
+#: members/templates/registration/password_change_done.html:12
 msgid ""
 "Your password has succesfully been changed. You can now log in with your new "
 "password."
 msgstr ""
 "Ditt lösenord har blivit ändrat. Nu kan du logga in med ditt nya lösenord."
 
-#: templates/registration/password_change_form.html:9
+#: members/templates/registration/password_change_form.html:9
 msgid "Change Password"
 msgstr "Ändra lösenord"
 
-#: templates/registration/password_change_form.html:14
+#: members/templates/registration/password_change_form.html:14
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
@@ -315,27 +334,27 @@ msgstr ""
 "Ange för säkerhet ditt gamla lösenord, och skriv in ditt nya lösenord två "
 "gånger för att verifiera att det skrivits in korrekt."
 
-#: templates/registration/password_change_form.html:50
-#: templates/registration/password_reset_confirm.html:26
+#: members/templates/registration/password_change_form.html:50
+#: members/templates/registration/password_reset_confirm.html:26
 msgid "Change my password"
 msgstr "Ändra mitt lösenord"
 
-#: templates/registration/password_reset_complete.html:7
-#: templates/registration/password_reset_complete.html:9
-#: templates/registration/password_reset_confirm.html:7
-#: templates/registration/password_reset_confirm.html:9
+#: members/templates/registration/password_reset_complete.html:7
+#: members/templates/registration/password_reset_complete.html:9
+#: members/templates/registration/password_reset_confirm.html:7
+#: members/templates/registration/password_reset_confirm.html:9
 msgid "Password reset"
 msgstr "Återställning av lösenord"
 
-#: templates/registration/password_reset_complete.html:12
+#: members/templates/registration/password_reset_complete.html:12
 msgid "Your password has been set. You may go ahead and log in now."
 msgstr "Ditt lösenord har aktiverats. Du kan använda det för att logga in nu."
 
-#: templates/registration/password_reset_complete.html:14
+#: members/templates/registration/password_reset_complete.html:14
 msgid "login"
 msgstr "logga in"
 
-#: templates/registration/password_reset_confirm.html:13
+#: members/templates/registration/password_reset_confirm.html:13
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
@@ -343,7 +362,7 @@ msgstr ""
 "Var vänlig ange ditt lösenord två gånger för att vara säker på att det "
 "skrivits in korrekt."
 
-#: templates/registration/password_reset_confirm.html:29
+#: members/templates/registration/password_reset_confirm.html:29
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset link."
@@ -351,12 +370,12 @@ msgstr ""
 "Återställningslänken för lösenord var ogiltig, kanske för att den redan har "
 "använts. Var vänlig beställ en ny lösenordsåterställning."
 
-#: templates/registration/password_reset_done.html:7
-#: templates/registration/password_reset_done.html:9
+#: members/templates/registration/password_reset_done.html:7
+#: members/templates/registration/password_reset_done.html:9
 msgid "Password reset sent"
 msgstr "En återställning av ditt lösenord har skickats"
 
-#: templates/registration/password_reset_done.html:12
+#: members/templates/registration/password_reset_done.html:12
 msgid ""
 "We've emailed you instructions for setting your password, if an account "
 "exists with the email you entered. You should receive them shortly."
@@ -365,7 +384,7 @@ msgstr ""
 "att det finns ett konto kopplat till emailadressen du angett. De borde dyka "
 "upp snart."
 
-#: templates/registration/password_reset_done.html:14
+#: members/templates/registration/password_reset_done.html:14
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
@@ -373,7 +392,7 @@ msgstr ""
 "Om du mot förmodan inte får något mail, undersök möjligheten att du angivit "
 "fel mailadress och kolla skräppostinkorgen."
 
-#: templates/registration/password_reset_email.html:2
+#: members/templates/registration/password_reset_email.html:2
 msgid ""
 "You're receiving this email because you requested a password reset for your "
 "UTN-account."
@@ -381,23 +400,23 @@ msgstr ""
 "Du får detta mail eftersom du begärt en återställning av lösenordet till "
 "ditt UTN-konto."
 
-#: templates/registration/password_reset_email.html:4
+#: members/templates/registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
 msgstr "Var vänlig gå vidare till denna sida och välj ett nytt lösenord:"
 
-#: templates/registration/password_reset_email.html:8
+#: members/templates/registration/password_reset_email.html:8
 msgid "Your username, in case you've forgotten:"
 msgstr "Ditt användarnamn, ifall du glömt det:"
 
-#: templates/registration/password_reset_form.html:7
+#: members/templates/registration/password_reset_form.html:7
 msgid "Reset password"
 msgstr "Återställ lösenord"
 
-#: templates/registration/password_reset_form.html:10
+#: members/templates/registration/password_reset_form.html:10
 msgid "Reset your password"
 msgstr "Återställ ditt lösenord"
 
-#: templates/registration/password_reset_form.html:12
+#: members/templates/registration/password_reset_form.html:12
 msgid ""
 "Did you forget your password? Enter your email address below and we'll email "
 "instructions to set a new one."
@@ -405,42 +424,42 @@ msgstr ""
 "Har du glömt ditt lösenord? Skriv in din emailadress nedan så får du "
 "instruktioner om hur du återställer ditt lösenord skickade till dig."
 
-#: templates/registration/password_reset_form.html:23
+#: members/templates/registration/password_reset_form.html:23
 msgid "Reset my password"
 msgstr "Återställ mitt lösenord"
 
-#: templates/registration/password_reset_subject.txt:2
+#: members/templates/registration/password_reset_subject.txt:2
 msgid "[UTN] Password reset request"
 msgstr "[UTN] Återställ lösenord"
 
-#: views.py:24
+#: members/views.py:24
 msgid "Your account settings have been saved."
 msgstr "Dina kontoinställningar har sparats."
 
-#: views.py:31
+#: members/views.py:31
 msgid "Your newly set email address has not yet been confirmed"
 msgstr "Din nya emailadress har inte bekräftats"
 
-#: views.py:53
+#: members/views.py:53
 msgid "Your email address has been confirmed."
 msgstr "Din emailadress har bekräftats."
 
-#: views.py:56
+#: members/views.py:56
 msgid "The provided confirmation token was invalid."
 msgstr "Bekräftelselänken var ogiltig."
 
-#: wagtail_hooks.py:19 wagtail_hooks.py:57
+#: members/wagtail_hooks.py:21 members/wagtail_hooks.py:59
 msgid "General"
 msgstr "Generell"
 
-#: wagtail_hooks.py:60
+#: members/wagtail_hooks.py:62
 msgid "Studies"
 msgstr "Studier"
 
-#: wagtail_hooks.py:75
+#: members/wagtail_hooks.py:77
 msgid "Sections"
 msgstr "Sektioner"
 
-#: wagtail_hooks.py:86
+#: members/wagtail_hooks.py:88
 msgid "Education"
 msgstr "Utbildning"

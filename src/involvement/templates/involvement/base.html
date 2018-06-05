@@ -7,7 +7,10 @@
         <div class="col s12">
             <ul class="tabs">
                 <li class="tab col s3">
-                    <a target="_self" {% if '/my_applications/' not in request.path %}class="active"{% endif %} href="{% routablepageurl page 'open_positions' %}">{% trans 'open positions' %}</a>
+                    <a target="_self" {% if '/my_mandates/' not in request.path and '/my_applications/' not in request.path %}class="active"{% endif %} href="{% routablepageurl page 'open_positions' %}">{% trans 'open positions' %}</a>
+                </li>
+                <li class="tab col s3">
+                    <a target="_self" {% if '/my_mandates/' in request.path %}class="active"{% endif %} href="{% routablepageurl page 'my_mandates' %}">{% trans 'my positions' %}</a>
                 </li>
                 <li class="tab col s3">
                     <a target="_self" {% if '/my_applications/' in request.path %}class="active"{% endif %} href="{% routablepageurl page 'my_applications' %}">{% trans 'my applications' %}</a>

@@ -1,0 +1,23 @@
+{% extends "involvement/base.html" %}
+{% load i18n %}
+
+{% block involvement_content %}
+    <div class="container">
+        <h2>{% trans 'Your posts'|title %}</h2>
+
+        {% if mandates %}
+            <div class="row">
+                {% for h in mandates %}
+                    {% include 'involvement/mandate.html' with mandate=h %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if not mandates %}
+            <div class="card-panel primary-color white-text">
+                {% trans 'You currently do not have any posts.' %}
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}
