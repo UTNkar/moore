@@ -569,6 +569,7 @@ class RecruitmentExtensionTestCase(TestCase):
     Tests for the automated deadline extender. The deadline extender should be
     triggered for vacant positions of which the deadline has just passed.
     """
+
     def setUp(self):
         self.role = Role.objects.create(
             name_en='Test',

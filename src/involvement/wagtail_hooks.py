@@ -10,8 +10,7 @@ from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 
-from involvement.models import Team, Role, Position, Application, \
-    official_of, member_of
+from involvement.models import Team, Role, Position, Application
 from involvement.rules import is_admin, approve_state, appoint_state
 from involvement import views
 from utils.permissions import RulesPermissionHelper
@@ -31,7 +30,7 @@ class TeamAdmin(ModelAdmin):
         if is_admin(request.user):
             return super(TeamAdmin, self).get_queryset(request)
         else:
-            teams = official_of(request.user, pk=True)
+            teams = Team.official_of(request.user, pk=True)
             qs = Team.objects.filter(id__in=teams)
             ordering = self.get_ordering(request)
             if ordering:
@@ -58,7 +57,7 @@ class RoleAdmin(ModelAdmin):
         if is_admin(request.user):
             return super(RoleAdmin, self).get_queryset(request)
         else:
-            teams = official_of(request.user)
+            teams = Team.official_of(request.user)
             qs = Role.objects.filter(team__in=teams)
             ordering = self.get_ordering(request)
             if ordering:
@@ -201,8 +200,8 @@ class PositionAdmin(ModelAdmin):
         if is_admin(request.user):
             return super(PositionAdmin, self).get_queryset(request)
         else:
-            official_teams = official_of(request.user)
-            teams = member_of(request.user)
+            official_teams = Team.official_of(request.user)
+            teams = Team.member_of(request.user)
             qs = Position.objects.filter(
                 Q(role__team__in=official_teams)
                 | Q(approval_committee__in=teams)
