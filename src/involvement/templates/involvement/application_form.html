@@ -16,6 +16,9 @@
     {% trans 'The deadline for this application has passed.' %} {% trans 'You can no longer change your application.' %}
 </div>
 {% endif %}
+
+
+
 <form id="application-form" method="post" action="{% routablepageurl page 'position' position.id  %}#apply">
     {% csrf_token %}
     <fieldset>
@@ -76,7 +79,14 @@
         <legend><i class="material-icons">assignment_ind</i> {{ form.cover_letter.label|title }}</legend>
 
         <div class="input-field">
-            <textarea id="{{ form.cover_letter.auto_id }}" name="{{ form.cover_letter.name }}" type="text" class="materialize-textarea validate{% if form.cover_letter.errors %} invalid{% endif %}">{{ form.cover_letter.initial }}</textarea>
+            <textarea
+                id="{{ form.cover_letter.auto_id }}"
+                name="{{ form.cover_letter.name }}"
+                type="text"
+                {% if status == 'submitted' %} readonly {% endif %}
+                class="materialize-textarea validate{% if form.cover_letter.errors %} invalid{% endif %}">
+                {{ form.cover_letter.initial }}
+            </textarea>
             <label for="{{ form.cover_letter.auto_id }}">{{ form.cover_letter.help_text }}</label>
             {% if form.cover_letter.errors %}{% include 'materialize/form/field_errors.html' %}{% endif %}
         </div>
@@ -86,7 +96,14 @@
         <legend><i class="material-icons">assignment</i> {{ form.qualifications.label|title }}</legend>
 
         <div class="input-field">
-            <textarea id="{{ form.qualifications.auto_id }}" name="{{ form.qualifications.name }}" type="text" class="materialize-textarea validate{% if form.qualifications.errors %} invalid{% endif %}">{{ form.qualifications.initial }}</textarea>
+            <textarea
+                id="{{ form.qualifications.auto_id }}"
+                name="{{ form.qualifications.name }}"
+                type="text"
+                {% if status == 'submitted' %} readonly {% endif %}
+                class="materialize-textarea validate{% if form.qualifications.errors %} invalid{% endif %}">
+                {{ form.qualifications.initial }}
+            </textarea>
             <label for="{{ form.qualifications.auto_id }}">{{ form.qualifications.help_text }}</label>
             {% if form.qualifications.errors %}{% include 'materialize/form/field_errors.html' %}{% endif %}
         </div>
@@ -102,9 +119,11 @@
             {% endfor %}
         </div>
 
-        <div class="col s12 fab-button">
-            <a id="add" class="btn-floating btn-large btn-primary right" href="{% url 'profile' %}"><i class="material-icons">add</i></a>
-        </div>
+        {% if status == 'draft' %}
+            <div class="col s12 fab-button">
+                <a id="add" class="btn-floating btn-large btn-primary right" href="{% url 'profile' %}"><i class="material-icons">add</i></a>
+            </div>
+        {% endif %}
     </fieldset>
 
     {% if not position.is_past_due %}
@@ -112,8 +131,6 @@
         {% if status == 'draft' %}
             <button id="submit" name="{{ form.status.name }}" type="submit" class="save btn btn-inverse disabled" value="draft">{% trans 'save as draft' %}</button>
             <button name="{{ form.status.name }}" type="submit" class="save btn btn-primary" value="submitted">{% trans 'apply' %}</button>
-        {% else %}
-            <button name="{{ form.status.name }}" type="submit" class="save btn btn-primary disabled" value="submitted" id="submit">{% trans 'update' %}</button>
         {% endif %}
     </div><!-- /.center -->
     {% endif %}
@@ -123,4 +140,3 @@
 <script type="text/html" id="formset-template">
     {% include 'involvement/reference_form.html' with form=reference_forms.empty_form number='__prefix__' %}
 </script>
-	

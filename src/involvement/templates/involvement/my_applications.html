@@ -16,7 +16,7 @@
             <h2>{% trans 'submitted applications'|title %}</h2>
             <div class="row">
                 {% for a in submitted %}
-                    {% include 'involvement/application_summary.html' with application=a edit=True %}
+                    {% include 'involvement/application_summary.html' with application=a %}
                 {% endfor %}
             </div>
         {% endif %}
