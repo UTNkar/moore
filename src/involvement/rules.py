@@ -2,7 +2,7 @@ from datetime import date
 
 import rules
 
-from involvement.models import official_of, member_of, Position
+from involvement.models import Team, Position
 
 
 # General Predicates
@@ -13,20 +13,20 @@ def is_admin(user):
 
 @rules.predicate
 def is_official(user):
-    return len(official_of(user)) > 0
+    return len(Team.official_of(user)) > 0
 
 
 @rules.predicate
 def is_approval_committee(user):
     return Position.objects.filter(
-        approval_committee__in=member_of(user)
+        approval_committee__in=Team.member_of(user)
     ).exists()
 
 
 # Team Permissions
 @rules.predicate
 def is_team_official(user, team):
-    return team in official_of(user)
+    return team in Team.official_of(user)
 
 
 # Role Predicates
@@ -56,7 +56,7 @@ def is_approval_committee_for(user, position):
     if position.approval_committee is None:
         return False
     else:
-        return position.approval_committee in member_of(user)
+        return position.approval_committee in Team.member_of(user)
 
 
 @rules.predicate
