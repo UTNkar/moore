@@ -1,70 +1,9 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
-
-from involvement.models import Application, Reference, MandateHistory
+from involvement.models import Application, CurrentMandate, MandateHistory
 from members.forms import PersonNumberField
 from utils.forms import AdvancedModelMultipleChoiceField
-
-
-class ApplicationForm(forms.ModelForm):
-    class Meta:
-        model = Application
-        exclude = ['position', 'applicant']
-        widgets = {
-            'cover_letter': forms.Textarea(attrs={'style': 'height: 200px',
-                                                  'class': 'form-control'}),
-            'qualifications': forms.Textarea(attrs={'style': 'height: 200px',
-                                                    'class': 'form-control'}),
-        }
-
-    def clean_status(self):
-        status = self.cleaned_data['status']
-        if status not in ['draft', 'submitted'] \
-                or (self.initial['status'] == 'submitted'
-                    and status == 'draft'):
-            raise forms.ValidationError(_('The submitted status was invalid.'))
-        return status
-
-
-ReferenceFormSet = forms.inlineformset_factory(
-    Application,
-    Reference,
-    fields=('name', 'position', 'email', 'phone_number', 'comment'),
-    widgets={
-        'name': forms.TextInput(attrs={'class': 'form-control'}),
-        'position': forms.TextInput(attrs={'class': 'form-control'}),
-        'email': forms.TextInput(attrs={'class': 'form-control'}),
-        'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
-        'comment': forms.TextInput(attrs={'class': 'form-control'}),
-    },
-    extra=0,
-)
-
-
-class ApprovalForm(forms.ModelForm):
-    status = forms.ChoiceField(
-        choices=(
-            ('submitted', '---------'),
-            ('approved', _('Approved')),
-            ('disapproved', _('Disapproved')),
-        ),
-    )
-
-    class Meta:
-        model = Application
-        fields = []
-
-    def clean_status(self):
-        status = self.cleaned_data['status']
-        if status not in ['submitted', 'approved', 'disapproved']:
-            raise forms.ValidationError(_('The submitted status was invalid.'))
-        return status
-
-    def save(self, commit=True):
-        self.instance.status = self.cleaned_data['status']
-
-        super(ApprovalForm, self).save(commit)
 
 
 class AppointmentForm(forms.Form):
@@ -155,10 +94,14 @@ class AppointmentForm(forms.Form):
                     term_from=self.position.term_from,
                     term_to=self.position.term_to
                 )
+
+                CurrentMandate.objects.get_or_create(
+                    position=self.position,
+                    applicant=application.applicant,
+                )
             else:
                 application.status = 'turned_down'
             application.save()
-
 
         for user in self.cleaned_data['overturn']:
             appl, created = Application.objects.get_or_create(
@@ -175,4 +118,9 @@ class AppointmentForm(forms.Form):
                 applicant=user,
                 term_from=self.position.term_from,
                 term_to=self.position.term_to
+            )
+
+            CurrentMandate.objects.get_or_create(
+                position=self.position,
+                applicant=user,
             )
