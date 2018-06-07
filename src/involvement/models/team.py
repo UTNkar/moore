@@ -3,7 +3,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, FieldRowPanel
+from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
+    FieldRowPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from utils.translation import TranslatedField
 

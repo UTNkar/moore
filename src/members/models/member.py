@@ -3,20 +3,19 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.core import validators
 from django.db import models
-from django.db.models import ManyToManyField
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from requests.auth import HTTPDigestAuth
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 
-from utils.translation import TranslatedField
-
 
 class CaseInsensitiveUsernameUserManager(UserManager):
     # Get username by insensitive case
     def get_by_natural_key(self, username):
-        case_insensitive_username_field = '{}__iexact'.format(self.model.USERNAME_FIELD)
+        case_insensitive_username_field = '{}__iexact' \
+            .format(self.model.USERNAME_FIELD)
         return self.get(**{case_insensitive_username_field: username})
+
 
 class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     """This class describes a member"""
@@ -156,93 +155,3 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         for email in self.get_confirmed_emails():
             if email != self.email:
                 self.remove_email(email)
-
-
-class Section(models.Model):
-    """This class represent a study section"""
-
-    class Meta:
-        verbose_name = _('section')
-        verbose_name_plural = _('sections')
-
-    name_en = models.CharField(
-        max_length=255,
-        verbose_name=_('English section name'),
-        help_text=_('Enter the name of the section'),
-        blank=False,
-    )
-
-    name_sv = models.CharField(
-        max_length=255,
-        verbose_name=_('Swedish section name'),
-        help_text=_('Enter the name of the section'),
-        blank=False,
-    )
-
-    name = TranslatedField('name_en', 'name_sv')
-
-    abbreviation = models.CharField(
-        max_length=130,
-        verbose_name=_('Section abbreviation'),
-        help_text=_('Enter the abbreviation for the section'),
-        blank=True,
-    )
-
-    studies = ManyToManyField(
-        'StudyProgram',
-        related_name='sections',
-        blank=True,
-    )
-
-    def __str__(self) -> str:
-        if self.abbreviation:
-            return '%s - %s' % (self.abbreviation, self.name)
-        else:
-            return self.name.__str__()
-
-
-class StudyProgram(models.Model):
-    """This class describes a university study program"""
-
-    class Meta:
-        verbose_name = _('study program')
-        verbose_name_plural = _('study programs')
-
-    DEGREE_CHOICES = (
-        ('bsc', _('Bachelor of Science')),
-        ('msc', _('Master of Science')),
-        ('be', _('Bachelor of Engineering')),
-        ('msceng', _('Master of Science in Engineering')),
-    )
-
-    name_en = models.CharField(
-        max_length=255,
-        verbose_name=_('English program name'),
-        help_text=_('Enter the name of the study program'),
-        blank=False,
-    )
-
-    name_sv = models.CharField(
-        max_length=255,
-        verbose_name=_('Swedish program name'),
-        help_text=_('Enter the name of the study program'),
-        blank=False,
-    )
-
-    name = TranslatedField('name_en', 'name_sv')
-
-    degree = models.CharField(
-        max_length=20,
-        choices=DEGREE_CHOICES,
-        verbose_name=_('Degree type'),
-        blank=True,
-    )
-
-    def __str__(self) -> str:
-        if self.degree:
-            return _('%(degree_type)s in %(study_program)s') % {
-                'degree_type': self.get_degree_display(),
-                'study_program': self.name,
-            }
-        else:
-            return self.name.__str__()

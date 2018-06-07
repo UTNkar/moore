@@ -1,8 +1,10 @@
 from datetime import date
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, FieldRowPanel
+from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
+    FieldRowPanel
 from utils.translation import TranslatedField
+from involvement.models import CurrentMandate
 
 
 class Position(models.Model):
@@ -86,6 +88,9 @@ class Position(models.Model):
                 return 'appoint'
         else:
             return 'recruit'
+
+    def current_mandates(self):
+        return CurrentMandate.filter(position=self)
 
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
