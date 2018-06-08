@@ -87,7 +87,6 @@ def is_mandate(user, application):
         position=application.position
     ).exists()
 
-
 # Permissions
 rules.add_perm('involvement', rules.always_allow)
 
@@ -116,6 +115,6 @@ rules.add_perm('involvement.delete_position', is_admin
                | (is_position_official & before_recruitment_start))
 
 rules.add_perm('involvement.list_application', is_admin | has_mandate)
-rules.add_perm('involvement.add_application', is_admin | is_mandate)
+rules.add_perm('involvement.add_application', is_admin | has_mandate)
 rules.add_perm('involvement.change_application', is_admin | is_mandate)
 rules.add_perm('involvement.delete_application', is_admin | is_mandate)
