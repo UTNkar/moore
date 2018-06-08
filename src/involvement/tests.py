@@ -10,7 +10,7 @@ from wagtail.core.models import Page
 from home.models import HomePage
 from involvement.cron import send_extension_emails
 from involvement.models import RecruitmentPage, Position, Role, Team, \
-    Application
+    Application, CurrentMandate
 from members.models import Member
 
 
@@ -261,10 +261,14 @@ class AdminPermissionTests(TestCase):
             term_from=date.today() - timedelta(days=1),
             term_to=date.today() + timedelta(days=365),
         )
-        self.application = Application.objects.create(
+        self.official_application = Application.objects.create(
             position=self.position,
             applicant=self.official,
             status='appointed',
+        )
+        self.current_mandate = CurrentMandate.objects.create(
+            position=self.position,
+            applicant=self.official
         )
         self.group.user_set.add(self.official)
         self.group.save()
@@ -296,6 +300,41 @@ class AdminPermissionTests(TestCase):
         self.approval_group.user_set.add(self.approver)
         self.approval_group.save()
 
+        # Create basic member
+        self.member = Member.objects.create(
+            username='member',
+        )
+
+        # Create secondary position
+        self.group2 = Group.objects.create(
+            name='Secondary Team',
+        )
+        self.team2 = Team.objects.create(
+            name_en='Secondary Team',
+            name_sv='SecondaryTeam',
+            group=self.group2
+        )
+        self.role2 = Role.objects.create(
+            team=self.team2,
+            name_en='Secondary group',
+            name_sv='Secondarygroup',
+            election_email='test@localhost',
+            official=True,
+        )
+        self.position2 = Position.objects.create(
+            role=self.role2,
+            recruitment_start=date.today() - timedelta(days=2),
+            recruitment_end=date.today() - timedelta(days=2),
+            term_from=date.today() - timedelta(days=1),
+            term_to=date.today() + timedelta(days=365),
+        )
+
+        self.member_application = Application.objects.create(
+            position=self.position2,
+            applicant=self.member,
+            status='appointed',
+        )
+
     def test_not_logged_in(self):
         """
         Tests to ensure non-users don't have access to the involvement admin
@@ -325,7 +364,8 @@ class AdminPermissionTests(TestCase):
         # Tests for application specific pages
         for action, url in AdminPermissionTests.pages['application'].items():
             if action not in ['create', 'index']:
-                self.assertNoAccess(reverse(url, args=[self.application.pk]))
+                self.assertNoAccess(reverse(url,
+                                    args=[self.official_application.pk]))
 
     def test_admin(self):
         """
@@ -355,7 +395,8 @@ class AdminPermissionTests(TestCase):
 
         for action, url in AdminPermissionTests.pages['application'].items():
             if action not in ['create', 'index']:
-                self.assertCanAccess(reverse(url, args=[self.application.pk]))
+                self.assertCanAccess(reverse(url,
+                                     args=[self.official_application.pk]))
 
     def test_official(self):
         """
@@ -483,9 +524,13 @@ class AdminPermissionTests(TestCase):
         # Tests for application pages
         for action, url in AdminPermissionTests.pages['application'].items():
             if action in ['index', 'create']:
-                self.assertNoAccess(reverse(url))
+                self.assertCanAccess(reverse(url))
             elif action in ['edit', 'delete']:
-                self.assertNoAccess(reverse(url, args=[self.application.pk]))
+                # Only accessible by official or admin
+                self.assertCanAccess(reverse(url,
+                                     args=[self.official_application.pk]))
+                self.assertNoAccess(reverse(url,
+                                    args=[self.member_application.pk]))
 
     def test_approver(self):
         """
@@ -516,7 +561,8 @@ class AdminPermissionTests(TestCase):
         # Tests for application specific pages
         for action, url in AdminPermissionTests.pages['application'].items():
             if action not in ['create', 'index']:
-                self.assertNoAccess(reverse(url, args=[self.application.pk]))
+                self.assertNoAccess(reverse(url,
+                                    args=[self.official_application.pk]))
 
         # Tests for position specific pages
         recruiting_position = Position.objects.create(
