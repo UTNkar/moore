@@ -6,16 +6,31 @@
         <dt>{% trans 'position' %}</dt>
         <dd>{{ instance }}</dd>
 
-        <dt>{% trans 'applications' %}</dt>
+        <dt>{% trans 'Appointed applicants' %}</dt>
         <dd>
             <ul>
-                {% for a in applicants %}
+                {% for mandate in current_mandates %}
                     <li>
-                        {% if a.status == 'draft' %}
-                            <i>{{ a.get_status_display }}:</i>
-                        {% elif a.status != 'submitted' %}
-                            <b>{{ a.get_status_display }}:</b>
+                        {{ mandate.applicant }}
+                        {% if mandate.applicant.email or mandate.applicant.phone_number %}
+                            &mdash;
+                            {% if mandate.applicant.email %}<a href="mailto:{{ mandate.applicant.email }}">{{ mandate.applicant.email }}</a>{% endif %}
+                            {% if mandate.applicant.email and mandate.applicant.phone_number %} or {% endif %}
+                            {% if mandate.applicant.phone_number %}{{ mandate.applicant.phone_number }}{% endif %}
                         {% endif %}
+                    </li>
+                {% empty %}
+                    {% trans 'No applications have been submitted for this position.' %}
+                {% endfor %}
+            </ul>
+        </dd>
+
+        <dt>{% trans 'submitted applications' %}</dt>
+        <dd>
+            <ul>
+                {% for a in submitted_applications %}
+                    <li>
+                        <b>{{ a.get_status_display }}:</b>
                         {{ a.applicant }}
                         {% if a.applicant.email or a.applicant.phone_number %}
                             &mdash;

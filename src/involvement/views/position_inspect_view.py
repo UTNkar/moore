@@ -4,11 +4,14 @@ from wagtail.contrib.modeladmin.views import InspectView
 class PositionInspectView(InspectView):
     def get_context_data(self, **kwargs):
         context = super(PositionInspectView, self).get_context_data(**kwargs)
-        applicants = self.instance.applications.all()
-        if self.instance.current_action() == 'done':
-            context['applicants'] = applicants.filter(status='appointed')
-        else:
-            context['applicants'] = applicants.exclude(
-                status__in=['disapproved', 'turned_down']
-            )
+        context['current_mandates'] = self.get_mandates
+        context['submitted_applications'] = self.get_submitted_applications
         return context
+
+    def get_mandates(self):
+        return self.instance.current_mandates.all()
+
+    def get_submitted_applications(self):
+        self.instance.applications.filter(
+            status='submitted'
+        )
