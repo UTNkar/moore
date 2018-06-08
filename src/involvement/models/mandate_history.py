@@ -7,7 +7,7 @@ from modelcluster.models import ClusterableModel
 class MandateHistory(ClusterableModel):
     position = models.ForeignKey(
         'Position',
-        related_name='mandate_history',
+        related_name='mandate_histories',
         on_delete=models.PROTECT,
         blank=False,
     )

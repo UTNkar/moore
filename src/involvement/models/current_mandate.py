@@ -7,7 +7,7 @@ from modelcluster.models import ClusterableModel
 class CurrentMandate(ClusterableModel):
     position = models.ForeignKey(
         'Position',
-        related_name='current_mandate',
+        related_name='current_mandates',
         on_delete=models.PROTECT,
         blank=False,
     )
