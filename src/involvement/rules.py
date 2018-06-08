@@ -87,6 +87,7 @@ def is_mandate(user, application):
         position=application.position
     ).exists()
 
+
 # Permissions
 rules.add_perm('involvement', rules.always_allow)
 
