@@ -114,10 +114,7 @@ class Team(models.Model):
             return []
         teams = Team.objects.filter(
             roles__official=True,
-            roles__positions__applications__applicant=user,
-            roles__positions__applications__status='appointed',
-            roles__positions__term_from__lte=date.today(),
-            roles__positions__term_to__gte=date.today(),
+            roles__positions__current_mandates__applicant=user,
         )
         if pk:
             return teams.values_list('pk', flat=True)
