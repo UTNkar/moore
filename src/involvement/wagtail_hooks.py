@@ -1,5 +1,4 @@
 from datetime import date
-
 from django.contrib import admin
 from django.contrib.admin.utils import quote
 from django.contrib.auth import get_permission_codename
@@ -9,7 +8,6 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
-
 from involvement.models import Team, Role, Position, Application
 from involvement.rules import is_admin, approve_state, appoint_state
 from involvement import views
@@ -225,6 +223,22 @@ class ApplicationAdmin(ModelAdmin):
         'applicant__first_name', 'applicant__last_name',
     )
     permission_helper_class = RulesPermissionHelper
+
+    def get_queryset(self, request):
+        if is_admin(request.user):
+            return super(ApplicationAdmin, self).get_queryset(request)
+        else:
+            # Get applications only for positions where the user has a mandate
+            position_ids = request.user.currentmandate_set \
+                                  .values_list('position_id', flat=True)
+            qs = Application.objects.filter(
+                position__in=position_ids,
+                status='submitted'
+            )
+            ordering = self.get_ordering(request)
+            if ordering:
+                qs = qs.order_by(*ordering)
+            return qs
 
 
 class InvolvementAdminGroup(ModelAdminGroup):
