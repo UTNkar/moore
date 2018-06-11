@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-05 16:11+0200\n"
+"POT-Creation-Date: 2018-06-11 10:17+0200\n"
 "PO-Revision-Date: 2017-06-26 10:25+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -34,11 +34,11 @@ msgstr "Personnummer"
 msgid "Person number using the YYYYMMDD-XXXX format."
 msgstr "Personnummer på formen ÅÅÅÅMDD-NNNN."
 
-#: members/forms.py:117 members/forms.py:167 members/models.py:71
+#: members/forms.py:117 members/forms.py:167 members/models/member.py:70
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: members/forms.py:121 members/forms.py:171 members/models.py:84
+#: members/forms.py:121 members/forms.py:171 members/models/member.py:83
 msgid "Registration year"
 msgstr "Inskrivningsår"
 
@@ -50,23 +50,23 @@ msgstr "Program"
 msgid "Section"
 msgstr "Sektion"
 
-#: members/forms.py:135 members/forms.py:186 members/models.py:58
+#: members/forms.py:135 members/forms.py:186 members/models/member.py:57
 msgid "Membership status"
 msgstr "Medlemsstatus"
 
-#: members/forms.py:176 members/models.py:96
+#: members/forms.py:176 members/models/member.py:95
 msgid "Study program"
 msgstr "Program"
 
-#: members/models.py:29
+#: members/models/member.py:28
 msgid "Birthday"
 msgstr "Födelsedag"
 
-#: members/models.py:35
+#: members/models/member.py:34
 msgid "Person number extension"
 msgstr "De fyra sista siffrorna"
 
-#: members/models.py:36
+#: members/models/member.py:35
 msgid ""
 "Enter the last four digits of your Swedish person number, given by the "
 "Swedish tax authority"
@@ -74,115 +74,115 @@ msgstr ""
 "Ange de fyra sista siffrorna i ditt svenska personnummer, som du fått från "
 "Skatteverket"
 
-#: members/models.py:40
+#: members/models/member.py:39
 msgid "The person number extension consists of four numbers"
 msgstr "Här avses de fyra sista siffrorna i ditt personnummer"
 
-#: members/models.py:49
+#: members/models/member.py:48
 msgid "Unknown"
 msgstr "Okänt"
 
-#: members/models.py:50
+#: members/models/member.py:49
 msgid "Nonmember"
 msgstr "Icke medlem"
 
-#: members/models.py:51
+#: members/models/member.py:50
 msgid "Member"
 msgstr "Medlem"
 
-#: members/models.py:52
+#: members/models/member.py:51
 msgid "Alumnus"
 msgstr "Alumn"
 
-#: members/models.py:72
+#: members/models/member.py:71
 msgid "Enter a phone number so UTN may reach you"
 msgstr "Ange ett telefonnummer som UTN kan nå dig på"
 
-#: members/models.py:75
+#: members/models/member.py:74
 msgid "Please enter a valid phone number"
 msgstr "Var vänlig ange ett giltigt telefonnummer"
 
-#: members/models.py:85
+#: members/models/member.py:84
 msgid "Enter the year you started studying at the TakNat faculty"
 msgstr "Ange året då du började studera på TekNat-fakulteten"
 
-#: members/models.py:89
+#: members/models/member.py:88
 msgid "Please enter a valid year"
 msgstr "Vänligen ange ett giltigt år"
 
-#: members/models.py:104
+#: members/models/member.py:103
 msgid "Member of section"
 msgstr "Sektionsmedlem i"
 
-#: members/models.py:165
+#: members/models/section.py:11
 msgid "section"
 msgstr "sektion"
 
-#: members/models.py:166
+#: members/models/section.py:12
 msgid "sections"
 msgstr "sektioner"
 
-#: members/models.py:170
+#: members/models/section.py:16
 msgid "English section name"
 msgstr "Sektionens engelska namn"
 
-#: members/models.py:171 members/models.py:178
+#: members/models/section.py:17 members/models/section.py:24
 msgid "Enter the name of the section"
 msgstr "Ange namnet på sektionen"
 
-#: members/models.py:177
+#: members/models/section.py:23
 msgid "Swedish section name"
 msgstr "Sektionens svenska namn"
 
-#: members/models.py:186
+#: members/models/section.py:32
 msgid "Section abbreviation"
 msgstr "Sektionens bokstavsförkortning"
 
-#: members/models.py:187
+#: members/models/section.py:33
 msgid "Enter the abbreviation for the section"
 msgstr "Ange sektionens bokstavsförkortning"
 
-#: members/models.py:208
+#: members/models/study_program.py:10
 msgid "study program"
 msgstr "program"
 
-#: members/models.py:209
+#: members/models/study_program.py:11
 msgid "study programs"
 msgstr "program"
 
-#: members/models.py:212
+#: members/models/study_program.py:14
 msgid "Bachelor of Science"
 msgstr "Kandidatprogram"
 
-#: members/models.py:213
+#: members/models/study_program.py:15
 msgid "Master of Science"
 msgstr "Masterprogram"
 
-#: members/models.py:214
+#: members/models/study_program.py:16
 msgid "Bachelor of Engineering"
 msgstr "Högskoleingenjörsprogrammet"
 
-#: members/models.py:215
+#: members/models/study_program.py:17
 msgid "Master of Science in Engineering"
 msgstr "Civilingenjörsprogrammet"
 
-#: members/models.py:220
+#: members/models/study_program.py:22
 msgid "English program name"
 msgstr "Engelsk benämning av program"
 
-#: members/models.py:221 members/models.py:228
+#: members/models/study_program.py:23 members/models/study_program.py:30
 msgid "Enter the name of the study program"
 msgstr "Ange namnet på programmet"
 
-#: members/models.py:227
+#: members/models/study_program.py:29
 msgid "Swedish program name"
 msgstr "Svensk benämning av program"
 
-#: members/models.py:237
+#: members/models/study_program.py:39
 msgid "Degree type"
 msgstr "Examensnivå"
 
-#: members/models.py:243
+#: members/models/study_program.py:45
 #, python-format
 msgid "%(degree_type)s in %(study_program)s"
 msgstr "%(degree_type)s i %(study_program)s"
