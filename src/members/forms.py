@@ -63,6 +63,17 @@ class MemberForm(forms.ModelForm):
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
 
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if Member.objects.filter(username__iexact=username).exists():
+            raise forms.ValidationError(
+                _('Username `%(username)s is already in use'),
+                params={
+                    'username': username,
+                },
+            )
+        return username
+
     def save(self, commit=True):
         person_number = self.cleaned_data['person_number']
         self.instance.birthday = person_number[0]
