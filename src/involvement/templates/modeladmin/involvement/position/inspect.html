@@ -9,14 +9,14 @@
         <dt>{% trans 'Appointed applicants' %}</dt>
         <dd>
             <ul>
-                {% for mandate in current_mandates %}
+                {% for a in appointed_applications %}
                     <li>
-                        {{ mandate.applicant }}
-                        {% if mandate.applicant.email or mandate.applicant.phone_number %}
+                        {{ a.applicant }}
+                        {% if a.applicant.email or a.applicant.phone_number %}
                             &mdash;
-                            {% if mandate.applicant.email %}<a href="mailto:{{ mandate.applicant.email }}">{{ mandate.applicant.email }}</a>{% endif %}
-                            {% if mandate.applicant.email and mandate.applicant.phone_number %} or {% endif %}
-                            {% if mandate.applicant.phone_number %}{{ mandate.applicant.phone_number }}{% endif %}
+                            {% if a.applicant.email %}<a href="mailto:{{ a.applicant.email }}">{{ a.applicant.email }}</a>{% endif %}
+                            {% if a.applicant.email and a.applicant.phone_number %} or {% endif %}
+                            {% if a.applicant.phone_number %}{{ a.applicant.phone_number }}{% endif %}
                         {% endif %}
                     </li>
                 {% empty %}
