@@ -18,11 +18,8 @@ class MandateHistory(ClusterableModel):
         blank=False,
     )
 
-    term_from = models.DateField(verbose_name=_('Date of appointment'))
-    term_to = models.DateField(verbose_name=_('End date of appointment'))
-
     class Meta:
         verbose_name = _('Mandate history')
         verbose_name_plural = _('Mandate histories')
-        unique_together = ('position', 'applicant', 'term_from', 'term_to')
+        unique_together = ('position', 'applicant')
         default_permissions = ()

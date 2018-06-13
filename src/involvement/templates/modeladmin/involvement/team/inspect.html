@@ -3,6 +3,7 @@
 
 {% block fields_output %}
     <dl>
+
         <dt>{% trans 'name' %}</dt>
         <dd>{{ instance.name }}</dd>
 
@@ -16,7 +17,7 @@
                 {% endfor %}
             </ul>
         </dd>
-
+{% comment %}
         {% if instance.get_manual_members %}
         <dt>{% trans 'manually added members' %}</dt>
         <ul>
@@ -25,5 +26,6 @@
             {% endfor %}
         </ul>
         {% endif %}
+{% endcomment %}
     </dl>
 {% endblock %}

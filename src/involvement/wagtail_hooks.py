@@ -2,14 +2,13 @@ from datetime import date
 from django.contrib import admin
 from django.contrib.admin.utils import quote
 from django.contrib.auth import get_permission_codename
-from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 from involvement.models import Team, Role, Position, Application
-from involvement.rules import is_admin, approve_state, appoint_state
+from involvement.rules import is_admin, is_action_approve, is_action_appoint
 from involvement import views
 from utils.permissions import RulesPermissionHelper
 
@@ -19,21 +18,10 @@ class TeamAdmin(ModelAdmin):
     menu_label = _('Teams')
     menu_icon = 'fa-sitemap'
     menu_order = 100
-    list_display = ('name_en', 'name_sv', 'group')
+    list_display = ('name_en', 'name_sv')
     search_fields = ('name_en', 'name_sv', 'description_en', 'description_sv')
     permission_helper_class = RulesPermissionHelper
     inspect_view_enabled = True
-
-    def get_queryset(self, request):
-        if is_admin(request.user):
-            return super(TeamAdmin, self).get_queryset(request)
-        else:
-            teams = Team.official_of(request.user, pk=True)
-            qs = Team.objects.filter(id__in=teams)
-            ordering = self.get_ordering(request)
-            if ordering:
-                qs = qs.order_by(*ordering)
-            return qs
 
 
 class RoleAdmin(ModelAdmin):
@@ -41,7 +29,7 @@ class RoleAdmin(ModelAdmin):
     menu_label = _('Roles')
     menu_icon = 'fa-suitcase'
     menu_order = 200
-    list_display = ('team', 'name_en', 'name_sv', 'archived')
+    list_display = ('team', 'name_en', 'name_sv', 'archived', 'group')
     search_fields = ('team__name_en', 'team__name_sv', 'name_en', 'name_sv',
                      'description_en', 'description_sv')
     # TODO: Default to archived==False, might be in
@@ -55,8 +43,7 @@ class RoleAdmin(ModelAdmin):
         if is_admin(request.user):
             return super(RoleAdmin, self).get_queryset(request)
         else:
-            teams = Team.official_of(request.user)
-            qs = Role.objects.filter(team__in=teams)
+            qs = Role.edit_permission_of(request.user)
             ordering = self.get_ordering(request)
             if ordering:
                 qs = qs.order_by(*ordering)
@@ -156,14 +143,14 @@ class PositionButtonHelper(ButtonHelper):
         ph = self.permission_helper
         usr = self.request.user
         pk = quote(getattr(obj, self.opts.pk.attname))
-        if 'approve' not in exclude and approve_state(usr, obj)\
+        if 'approve' not in exclude and is_action_approve(usr, obj)\
                 and ph.user_can_approve_obj(usr, obj):
             btns.append(
                 self.approve_button(
                     pk, classnames_add, classnames_exclude
                 )
             )
-        if 'appoint' not in exclude and appoint_state(usr, obj)\
+        if 'appoint' not in exclude and is_action_appoint(usr, obj)\
                 and ph.user_can_appoint_obj(usr, obj):
             btns.append(
                 self.appoint_button(
@@ -198,11 +185,9 @@ class PositionAdmin(ModelAdmin):
         if is_admin(request.user):
             return super(PositionAdmin, self).get_queryset(request)
         else:
-            official_teams = Team.official_of(request.user)
-            teams = Team.member_of(request.user)
+            roles = Role.edit_permission_of(request.user)
             qs = Position.objects.filter(
-                Q(role__team__in=official_teams)
-                | Q(approval_committee__in=teams)
+                role__in=roles
             )
             ordering = self.get_ordering(request)
             if ordering:
@@ -223,17 +208,18 @@ class ApplicationAdmin(ModelAdmin):
         'applicant__first_name', 'applicant__last_name',
     )
     permission_helper_class = RulesPermissionHelper
+    create_view_class = views.ApplicationCreateView
+    edit_view_class = views.ApplicationEditView
 
     def get_queryset(self, request):
         if is_admin(request.user):
             return super(ApplicationAdmin, self).get_queryset(request)
         else:
-            # Get applications only for positions where the user has a mandate
-            position_ids = request.user.currentmandate_set \
-                                  .values_list('position_id', flat=True)
+            roles = Role.edit_applicant_permission_of(request.user)
             qs = Application.objects.filter(
-                position__in=position_ids,
-                status='submitted'
+                status__in=['turned_down', 'submitted',
+                            'approved', 'disapproved'],
+                position__role__in=roles,
             )
             ordering = self.get_ordering(request)
             if ordering:

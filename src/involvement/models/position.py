@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
     FieldRowPanel
 from utils.translation import TranslatedField
-from involvement.models import CurrentMandate
 
 
 class Position(models.Model):
@@ -20,14 +19,6 @@ class Position(models.Model):
         related_name='positions',
         on_delete=models.PROTECT,
         blank=False,
-    )
-
-    approval_committee = models.ForeignKey(
-        'Team',
-        verbose_name=_('Approval committee'),
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True
     )
 
     recruitment_start = models.DateField(
@@ -78,8 +69,7 @@ class Position(models.Model):
     def current_action(self) -> str:
         if self.is_past_due:
             applications = self.applications.exclude(status='draft')
-            if applications.all().filter(status='submitted').exists() \
-                    and self.approval_committee is not None:
+            if applications.all().filter(status='submitted').exists():
                 return 'approve'
             elif applications.all().filter(status='appointed') \
                     .count() >= self.appointments:
@@ -88,9 +78,6 @@ class Position(models.Model):
                 return 'appoint'
         else:
             return 'recruit'
-
-    def current_mandates(self):
-        return CurrentMandate.filter(position=self)
 
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
@@ -102,7 +89,6 @@ class Position(models.Model):
             FieldPanel('term_from'),
             FieldPanel('term_to'),
         ]),
-        FieldPanel('approval_committee'),
         FieldRowPanel([
             FieldPanel('recruitment_start'),
             FieldPanel('recruitment_end'),

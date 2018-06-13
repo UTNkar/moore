@@ -1,4 +1,5 @@
 from datetime import date
+from django.contrib.auth.models import Group
 from django.apps import apps
 from django.conf import settings
 from django.db import models
@@ -6,6 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
     FieldRowPanel
 from utils.translation import TranslatedField
+from involvement.rule_utils import is_fum, is_board, is_bureau, \
+    is_group_leader
 
 
 class Role(models.Model):
@@ -17,6 +20,20 @@ class Role(models.Model):
         verbose_name = _('Role')
         verbose_name_plural = _('Roles')
         default_permissions = ()
+        permissions = (
+            ('admin', _('Admin')),
+            ('fum', _('FUM')),
+            ('board', _('Board')),
+            ('bureau', _('Bureau')),
+            ('group_leader', _('Group Leader')),
+            ('engaged', _('Engaged')),
+        )
+
+    group = models.ForeignKey(
+        Group,
+        related_name='roles',
+        on_delete=models.PROTECT,
+    )
 
     team = models.ForeignKey(
         'Team',
@@ -24,12 +41,6 @@ class Role(models.Model):
         on_delete=models.PROTECT,
         null=True,
         blank=True,
-    )
-
-    official = models.BooleanField(
-        verbose_name=_('Official'),
-        help_text=_('This is an official role'),
-        default=False,
     )
 
     # Display position in selection?
@@ -88,6 +99,68 @@ class Role(models.Model):
             application__position__term_to__gte=date.today(),
         )
 
+    @staticmethod
+    def editable_codenames(user):
+        if user.is_anonymous:
+            return []
+
+        permission_filter = []
+        if is_fum(user):
+            permission_filter += ['board']
+        if is_board(user):
+            permission_filter += ['bureau']
+        if is_bureau(user):
+            permission_filter += ['group_leader', 'engaged']
+        if is_group_leader(user):
+            permission_filter += ['engaged']
+
+        return permission_filter
+
+    @staticmethod
+    def edit_applicant_codenames(user):
+        if user.is_anonymous:
+            return []
+
+        permission_filter = []
+        if is_fum(user):
+            permission_filter += ['board', 'bureau']
+        if is_board(user):
+            permission_filter += ['bureau']
+        if is_bureau(user):
+            permission_filter += ['group_leader', 'engaged']
+        if is_group_leader(user):
+            permission_filter += ['engaged']
+
+        return permission_filter
+
+    @staticmethod
+    def edit_permission_of(user, pk=False):
+        if user.is_anonymous:
+            return []
+
+        permission_filter = Role.editable_codenames(user)
+        roles = Role.objects.filter(
+            group__permissions__codename__in=permission_filter
+        )
+        if pk:
+            return roles.values_list('pk', flat=True)
+        else:
+            return roles
+
+    @staticmethod
+    def edit_applicant_permission_of(user, pk=False):
+        if user.is_anonymous:
+            return []
+
+        permission_filter = Role.edit_applicant_codenames(user)
+        roles = Role.objects.filter(
+            group__permissions__codename__in=permission_filter
+        )
+        if pk:
+            return roles.values_list('pk', flat=True)
+        else:
+            return roles
+
     def __str__(self) -> str:
         if self.team:
             return _('%(role)s in %(team)s') % {
@@ -104,11 +177,11 @@ class Role(models.Model):
             FieldPanel('name_en'),
             FieldPanel('name_sv'),
         ]),
+        FieldPanel('group'),
         FieldPanel('election_email'),
         FieldPanel('description_en'),
         FieldPanel('description_sv'),
         FieldRowPanel([
             FieldPanel('archived'),
-            FieldPanel('official'),
         ]),
     ])]
