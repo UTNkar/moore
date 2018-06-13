@@ -11,3 +11,5 @@ from .position_edit_view import PositionEditView
 from .position_inspect_view import PositionInspectView
 from .role_create_view import RoleCreateView
 from .role_edit_view import RoleEditView
+from .application_create_view import ApplicationCreateView
+from .application_edit_view import ApplicationEditView

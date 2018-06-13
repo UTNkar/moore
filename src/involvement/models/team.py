@@ -1,5 +1,4 @@
 from datetime import date
-from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -16,14 +15,6 @@ class Team(models.Model):
         verbose_name = _('Team')
         verbose_name_plural = _('Teams')
         default_permissions = ()
-        permissions = (
-            ('admin', _('Can administrate the recruitment process')),
-        )
-
-    group = models.OneToOneField(
-        Group,
-        on_delete=models.PROTECT,
-    )
 
     # ---- General Information ------
     name_en = models.CharField(
@@ -89,34 +80,7 @@ class Team(models.Model):
             FieldPanel('name_en'),
             FieldPanel('name_sv'),
         ]),
-        FieldPanel('group'),
         ImageChooserPanel('logo'),
         FieldPanel('description_en'),
         FieldPanel('description_sv'),
     ])]
-
-    @staticmethod
-    def member_of(user, pk=False):
-        if user.is_anonymous:
-            return []
-        groups = user.groups.all()
-        teams = Team.objects.filter(
-            group__in=groups
-        )
-        if pk:
-            return teams.values_list('pk', flat=True)
-        else:
-            return teams
-
-    @staticmethod
-    def official_of(user, pk=False):
-        if user.is_anonymous:
-            return []
-        teams = Team.objects.filter(
-            roles__official=True,
-            roles__positions__current_mandates__applicant=user,
-        )
-        if pk:
-            return teams.values_list('pk', flat=True)
-        else:
-            return teams
