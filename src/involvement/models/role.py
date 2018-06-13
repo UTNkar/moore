@@ -1,5 +1,6 @@
 from datetime import date
 from django.contrib.auth.models import Group
+from django.core import validators
 from django.apps import apps
 from django.conf import settings
 from django.db import models
@@ -90,6 +91,32 @@ class Role(models.Model):
         default='styrelsen@utn.se',
     )
 
+    phone_number = models.CharField(
+        max_length=20,
+        verbose_name=_('Phone number'),
+        help_text=_('Enter a phone number to contact this role.'),
+        validators=[validators.RegexValidator(
+            regex=r'^\+?\d+$',
+            message=_('Please enter a valid phone number'),
+        )],
+        blank=True,
+    )
+
+    @property
+    def contact_phone_number(self):
+        """
+        Returns:
+            If self.phone_number is blank. Will return first occurence
+            of a current position holder for this role if any,
+            self.phone_number otherwise
+        """
+        if not self.phone_number:
+            current_holder = self.in_role.first()
+            if current_holder is not None:
+                return current_holder.phone_number
+
+        return self.phone_number
+
     def in_role(self):
         member_model = apps.get_model(settings.AUTH_USER_MODEL)
         return member_model.objects.filter(
@@ -179,6 +206,7 @@ class Role(models.Model):
         ]),
         FieldPanel('group'),
         FieldPanel('election_email'),
+        FieldPanel('phone_number'),
         FieldPanel('description_en'),
         FieldPanel('description_sv'),
         FieldRowPanel([
