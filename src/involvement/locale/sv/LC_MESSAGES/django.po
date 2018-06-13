@@ -292,65 +292,77 @@ msgstr "Kommentar"
 msgid "Enter any additional comments regarding your reference"
 msgstr "Är det något mer du vill tillägga om din referens"
 
-#: involvement/models/role.py:17
+#: involvement/models/role.py:18
 msgid "Role"
 msgstr "Roll"
 
-#: involvement/models/role.py:18 involvement/wagtail_hooks.py:41
+#: involvement/models/role.py:19 involvement/wagtail_hooks.py:41
 msgid "Roles"
 msgstr "Roller"
 
-#: involvement/models/role.py:30
-msgid "Official"
-msgstr "Ämbetsman"
+#: involvement/models/role.py:22
+msgid "Admin"
+msgstr "Admin"
 
-#: involvement/models/role.py:31
-msgid "This is an official role"
-msgstr "Detta är en ämbetsmanna roll"
+#: involvement/models/role.py:23
+msgid "FUM"
+msgstr "FUM"
 
-#: involvement/models/role.py:37
+#: involvement/models/role.py:24
+msgid "Board"
+msgstr "Styrelse"
+
+#: involvement/models/role.py:25
+msgid "Bureau"
+msgstr "Presidium"
+
+#: involvement/models/role.py:26
+msgid "Group Leader"
+msgstr "Gruppledare"
+
+#: involvement/models/role.py:45
 msgid "Archived"
 msgstr "Arkiverade"
 
-#: involvement/models/role.py:38
+#: involvement/models/role.py:46
 msgid "Hide the role from menus"
 msgstr "Dölj rollen från menyer"
 
-#: involvement/models/role.py:46
+#: involvement/models/role.py:54
 msgid "English role name"
 msgstr "Rollnamn på engelska"
 
-#: involvement/models/role.py:47 involvement/models/role.py:54
+#: involvement/models/role.py:55 involvement/models/role.py:62
 msgid "Enter the name of the role"
 msgstr "Ange rollens namn"
 
-#: involvement/models/role.py:53
+#: involvement/models/role.py:61
 msgid "Swedish role name"
 msgstr "Rollnamn på svenska"
 
-#: involvement/models/role.py:61
+#: involvement/models/role.py:69
 msgid "English role description"
 msgstr "Rollbeskrivning på engelska"
 
-#: involvement/models/role.py:62 involvement/models/role.py:68
+#: involvement/models/role.py:70 involvement/models/role.py:76
 msgid "Enter a description of the role"
 msgstr "Ange en beskrivning av rollen"
 
-#: involvement/models/role.py:67
+#: involvement/models/role.py:75
 msgid "Swedish role description"
 msgstr "Rollbeskrivning på svenska"
 
-#: involvement/models/role.py:75
+#: involvement/models/role.py:83
 #, fuzzy
 #| msgid "Contact e-mail address"
 msgid "Election contact email address"
 msgstr "Emailadress för kontakt"
 
-#: involvement/models/role.py:76
+#: involvement/models/role.py:84
 msgid "The email address to contact for more information regarding the role."
 msgstr "Email att kontakta för att få mer information angående rollen."
 
-#: involvement/models/role.py:93
+#: involvement/models/role.py:116
 #, python-format
 msgid "%(role)s in %(team)s"
 msgstr "%(role)s i %(team)s"
@@ -363,31 +375,27 @@ msgstr "Grupp"
 msgid "Teams"
 msgstr "Grupper"
 
-#: involvement/models/team.py:20
-msgid "Can administrate the recruitment process"
-msgstr "Får administrera rekryterings processen"
-
-#: involvement/models/team.py:31
+#: involvement/models/team.py:23
 msgid "English team name"
 msgstr "Gruppens engelska namn"
 
-#: involvement/models/team.py:32 involvement/models/team.py:39
+#: involvement/models/team.py:24 involvement/models/team.py:31
 msgid "Enter the name of the team"
 msgstr "Ange gruppens namn"
 
-#: involvement/models/team.py:38
+#: involvement/models/team.py:30
 msgid "Swedish team name"
 msgstr "Gruppens svenska namn"
 
-#: involvement/models/team.py:54
+#: involvement/models/team.py:46
 msgid "English team description"
 msgstr "Beskrivning av gruppen på engelska"
 
-#: involvement/models/team.py:55 involvement/models/team.py:61
+#: involvement/models/team.py:47 involvement/models/team.py:53
 msgid "Enter a description of the team"
 msgstr "Ange en beskrivning av gruppen"
 
-#: involvement/models/team.py:60
+#: involvement/models/team.py:52
 msgid "Swedish team description"
 msgstr "Beskrivning av gruppen på svenska"
 
@@ -765,6 +773,15 @@ msgstr "Tillsätt"
 #, python-format
 msgid "Appoint member to %s"
 msgstr "Tillsätt medlem som %s"
+
+#~ msgid "Official"
+#~ msgstr "Ämbetsman"
+
+#~ msgid "This is an official role"
+#~ msgstr "Detta är en ämbetsmanna roll"
+
+#~ msgid "Can administrate the recruitment process"
+#~ msgstr "Får administrera rekryterings processen"
 
 #~ msgid "applications"
 #~ msgstr "ansökningar"
