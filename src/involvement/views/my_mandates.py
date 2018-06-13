@@ -9,6 +9,6 @@ def my_mandates(request, context):
 
     context['mandates'] = MandateHistory.objects \
         .filter(applicant=request.user) \
-        .order_by('term_to')
+        .order_by('id')
 
     return render(request, 'involvement/my_mandates.html', context)

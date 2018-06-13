@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
-from involvement.models import Application, CurrentMandate, MandateHistory
+from involvement.models import Application, MandateHistory
 from members.forms import PersonNumberField
 from utils.forms import AdvancedModelMultipleChoiceField
 
@@ -95,10 +95,6 @@ class AppointmentForm(forms.Form):
                     term_to=self.position.term_to
                 )
 
-                CurrentMandate.objects.get_or_create(
-                    position=self.position,
-                    applicant=application.applicant,
-                )
             else:
                 application.status = 'turned_down'
             application.save()
@@ -114,13 +110,6 @@ class AppointmentForm(forms.Form):
                 appl.save()
 
             MandateHistory.objects.get_or_create(
-                position=self.position,
-                applicant=user,
-                term_from=self.position.term_from,
-                term_to=self.position.term_to
-            )
-
-            CurrentMandate.objects.get_or_create(
                 position=self.position,
                 applicant=user,
             )
