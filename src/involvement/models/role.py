@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
     FieldRowPanel
 from utils.translation import TranslatedField
-from involvement.rule_utils import is_fum, is_board, is_bureau, \
+from involvement.rule_utils import is_fum, is_board, is_presidium, \
     is_group_leader
 
 
@@ -25,7 +25,7 @@ class Role(models.Model):
             ('admin', _('Admin')),
             ('fum', _('FUM')),
             ('board', _('Board')),
-            ('bureau', _('Bureau')),
+            ('presidium', _('Presidium')),
             ('group_leader', _('Group Leader')),
             ('engaged', _('Engaged')),
         )
@@ -135,8 +135,8 @@ class Role(models.Model):
         if is_fum(user):
             permission_filter += ['board']
         if is_board(user):
-            permission_filter += ['bureau']
-        if is_bureau(user):
+            permission_filter += ['presidium']
+        if is_presidium(user):
             permission_filter += ['group_leader', 'engaged']
         if is_group_leader(user):
             permission_filter += ['engaged']
@@ -150,10 +150,10 @@ class Role(models.Model):
 
         permission_filter = []
         if is_fum(user):
-            permission_filter += ['board', 'bureau']
+            permission_filter += ['board', 'presidium']
         if is_board(user):
-            permission_filter += ['bureau']
-        if is_bureau(user):
+            permission_filter += ['presidium']
+        if is_presidium(user):
             permission_filter += ['group_leader', 'engaged']
         if is_group_leader(user):
             permission_filter += ['engaged']

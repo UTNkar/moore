@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterModelOptions(
             name='role',
-            options={'default_permissions': (), 'permissions': (('admin', 'Admin'), ('fum', 'FUM'), ('board', 'Board'), ('bureau', 'Bureau'), ('group_leader', 'Group Leader'), ('engaged', 'Engaged')), 'verbose_name': 'Role', 'verbose_name_plural': 'Roles'},
+            options={'default_permissions': (), 'permissions': (('admin', 'Admin'), ('fum', 'FUM'), ('board', 'Board'), ('presidium', 'Presidium'), ('group_leader', 'Group Leader'), ('engaged', 'Engaged')), 'verbose_name': 'Role', 'verbose_name_plural': 'Roles'},
         ),
         migrations.AlterUniqueTogether(
             name='mandatehistory',

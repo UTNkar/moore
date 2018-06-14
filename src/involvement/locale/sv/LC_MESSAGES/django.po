@@ -313,7 +313,7 @@ msgid "Board"
 msgstr "Styrelse"
 
 #: involvement/models/role.py:25
-msgid "Bureau"
+msgid "Presidium"
 msgstr "Presidium"
 
 #: involvement/models/role.py:26

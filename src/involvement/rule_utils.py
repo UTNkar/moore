@@ -24,8 +24,8 @@ def is_board(user):
 
 
 @rules.predicate
-def is_bureau(user):
-    return user.has_perm('involvement.bureau')
+def is_presidium(user):
+    return user.has_perm('involvement.presidium')
 
 
 @rules.predicate
@@ -42,5 +42,5 @@ def is_engaged(user):
 def has_role_perm(user):
     return is_fum(user) \
         | is_board(user) \
-        | is_bureau(user) \
+        | is_presidium(user) \
         | is_group_leader(user)

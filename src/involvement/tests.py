@@ -183,7 +183,7 @@ class RecruitmentPageTests(WagtailPageTests):
 class AdminPermissionTests(TestCase):
     """
     Access permission tests for the wagtail admin area of the involvement app.
-    These test ensure that admin, fum, board, bureau, group_leader, engaged and anonymous
+    These test ensure that admin, fum, board, presidium, group_leader, engaged and anonymous
     users have the appropriate amount of access.
     """
     pages = {
@@ -323,7 +323,7 @@ class AdminPermissionTests(TestCase):
 
         wagtail_access = Permission.objects.get(codename='access_admin')
 
-        permission_codenames = ['admin', 'fum', 'board', 'bureau',
+        permission_codenames = ['admin', 'fum', 'board', 'presidium',
                                 'group_leader', 'engaged']
 
         self.members = {}
@@ -402,8 +402,8 @@ class AdminPermissionTests(TestCase):
         self.checkPositions(['board'], ['appoint'])
 
         # Applications
-        # Can view and edit applications for codename 'board' and 'bureau'
-        self.checkApplications(['board', 'bureau'])
+        # Can view and edit applications for codename 'board' and 'presidium'
+        self.checkApplications(['board', 'presidium'])
 
     def test_board(self):
         self.client.force_login(
@@ -416,20 +416,20 @@ class AdminPermissionTests(TestCase):
         self.checkTeams([])
 
         # Roles
-        # Can view and edit roles for codename 'bureau'
-        self.checkRoles(['bureau'])
+        # Can view and edit roles for codename 'presidium'
+        self.checkRoles(['presidium'])
 
         # Position
-        # Can view and edit positions for codename 'bureau'
-        self.checkPositions(['bureau'])
+        # Can view and edit positions for codename 'presidium'
+        self.checkPositions(['presidium'])
 
         # Applications
-        # Can view and edit applications for codename 'bureau'
-        self.checkApplications(['bureau'])
+        # Can view and edit applications for codename 'presidium'
+        self.checkApplications(['presidium'])
 
-    def test_bureau(self):
+    def pest_Presidium(self):
         self.client.force_login(
-            self.members['bureau'],
+            self.members['presidium'],
             'django.contrib.auth.backends.ModelBackend'
         )
 
