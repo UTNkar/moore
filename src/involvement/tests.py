@@ -183,7 +183,8 @@ class RecruitmentPageTests(WagtailPageTests):
 class AdminPermissionTests(TestCase):
     """
     Access permission tests for the wagtail admin area of the involvement app.
-    These test ensure that admin, fum, board, presidium, group_leader, engaged and anonymous
+    These test ensure that admin, fum, board, presidium, group_leader,
+    engaged and anonymous
     users have the appropriate amount of access.
     """
     pages = {
