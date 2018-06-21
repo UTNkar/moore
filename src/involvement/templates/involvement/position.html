@@ -21,15 +21,11 @@
             <div class="col s12 m4 push-m8">
                 <div class="card">
                     <div class="card-image">
-                        {% if position.role.team.logo %}{% image position.role.team.logo original as logo %}{% endif %}
-                        <img src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/logo.svg' %}{% endif %}">
+                        <img src="{% if orig_logo %}{{ orig_logo.url }}{% else %}{% static 'images/logo.svg' %}{% endif %}">
                     </div>
                     <div class="card-content">
-                        {% if position.role.team %}
-                            {% with team=position.role.team %}
-                                <span class="card-title">{{ team }}</span>
-                                <p>{{ team.description|linebreaks }}</p>
-                            {% endwith %}
+                        {% if position.role.teams.count %}
+                            <span class="card-title">{{ position.role.team_names }}</span>
                         {% else %}
                             <h2>{% trans 'unaffiliated'|capfirst %}</h2>
                             <p>{% trans 'This position is not affiliated with any team or committee. You answer directly to the management team and the board.' %}</p>
