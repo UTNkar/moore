@@ -91,8 +91,6 @@ class AppointmentForm(forms.Form):
                 MandateHistory.objects.get_or_create(
                     position=self.position,
                     applicant=application.applicant,
-                    term_from=self.position.term_from,
-                    term_to=self.position.term_to
                 )
 
             else:
