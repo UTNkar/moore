@@ -69,6 +69,7 @@ class RecruitmentPageTests(WagtailPageTests):
         role = Role.objects.create(
             name_en='Test Role',
             name_sv='Test Roll',
+            role_type='engaged',
             group=self.group,
         )
         position = Position.objects.create(
@@ -102,6 +103,7 @@ class RecruitmentPageTests(WagtailPageTests):
         role = Role.objects.create(
             name_en='Test Role',
             name_sv='Test Roll',
+            role_type='engaged',
             group=self.group,
         )
         position = Position.objects.create(
@@ -126,10 +128,10 @@ class RecruitmentPageTests(WagtailPageTests):
 
     def test_position_view_unaffiliated(self):
         role = Role.objects.create(
-            team=None,
             name_en='Test Role',
             name_sv='Test Roll',
             group=self.group,
+            role_type='engaged',
         )
         position = Position.objects.create(
             role=role,
@@ -152,12 +154,13 @@ class RecruitmentPageTests(WagtailPageTests):
             name_sv='Testteam',
         )
         role = Role.objects.create(
-            team=team,
             name_en='Test Function',
             name_sv='Test Funktion',
             election_email='test@localhost',
             group=self.group,
+            role_type='engaged',
         )
+        role.teams.add(team)
         position = Position.objects.create(
             role=role,
             recruitment_start=date.today() - timedelta(days=1),
@@ -169,6 +172,8 @@ class RecruitmentPageTests(WagtailPageTests):
             'position',
             [position.id]
         ))
+
+        self.client.get(self.page.url + self.page.reverse_subpage('position',[position.id]))
 
         self.assertContains(response, team.name,
                             msg_prefix='Position is listed as part of team')
@@ -242,281 +247,301 @@ class AdminPermissionTests(TestCase):
                       "'%s' should not be accessible. %s" % (url, err_msg))
         return response
 
-    # Check each type of position for access.
-    #
-    # create, index and inspect should always be accessible.
-    # accepted_codenames defines when a position should be accessible
-    # for modification
-    def checkPositions(self, accepted_codenames, exclude_actions=[]):
+    def checkPositions(self, mSet, accepted_types, exclude_actions=[]):
         for action, url in AdminPermissionTests.pages['position'].items():
             if action in ['create', 'index']:
                 self.assertCanAccess(action, url)
             else:
-                for codename, position in self.approvable_positions.items():
+                for role_type, position in mSet['approvable_positions'].items():
                     if action not in exclude_actions and \
                         (action == 'inspect' or
-                            (codename in accepted_codenames and
+                            (role_type in accepted_types and
                                 action != 'appoint')):
                         self.assertCanAccess(action, url, position,
-                                             "%s, %s" % (action, codename))
+                                             "%s, %s" % (action, role_type))
                     else:
                         self.assertNoAccess(action, url, position,
-                                            "%s, %s" % (action, codename))
+                                            "%s, %s" % (action, role_type))
 
-                for codename, position in self.appointable_positions.items():
+                for role_type, position in mSet['appointable_positions'].items():
                     if action not in exclude_actions and \
                         (action == 'inspect' or
-                            (codename in accepted_codenames and
+                            (role_type in accepted_types and
                                 action != 'approve')):
                         self.assertCanAccess(action, url, position,
-                                             "%s, %s" % (action, codename))
+                                             "%s, %s" % (action, role_type))
                     else:
                         self.assertNoAccess(action, url, position,
-                                            "%s, %s" % (action, codename))
+                                            "%s, %s" % (action, role_type))
 
-                for codename, position in self.recruiting_positions.items():
+                for role_type, position in mSet['recruiting_positions'].items():
                     if action not in exclude_actions and \
                         (action == 'inspect' or
-                            (codename in accepted_codenames
+                            (role_type in accepted_types
                                 and action not in ['approve', 'appoint'])):
                         self.assertCanAccess(action, url, position,
-                                             "%s, %s" % (action, codename))
+                                             "%s, %s" % (action, role_type))
                     else:
                         self.assertNoAccess(action, url, position,
-                                            "%s, %s" % (action, codename))
+                                            "%s, %s" % (action, role_type))
 
-    def checkRoles(self, accepted_codenames):
+    def checkRoles(self, mSet,accepted_types):
         for action, url in AdminPermissionTests.pages['role'].items():
             if action in ['create', 'index']:
                 self.assertCanAccess(action, url)
             else:
-                for codename, role in self.roles.items():
-                    if codename in accepted_codenames:
+                for role_type, role in mSet['roles'].items():
+                    if role_type in accepted_types:
                         self.assertCanAccess(action, url, role,
-                                             "%s, %s" % (action, codename))
+                                             "%s, %s" % (action, role_type))
                     else:
                         self.assertNoAccess(action, url, role,
-                                            "%s, %s" % (action, codename))
+                                            "%s, %s" % (action, role_type))
 
-    def checkApplications(self, accepted_codenames):
+    def checkApplications(self, mSet, accepted_types):
         for action, url in AdminPermissionTests.pages['application'].items():
             if action in ['create', 'index']:
                 self.assertCanAccess(action, url)
             else:
-                for codename, application in \
-                        self.submitted_applications.items():
-                    if codename in accepted_codenames:
+                for role_type, application in \
+                        mSet['submitted_applications'].items():
+                    if role_type in accepted_types:
                         self.assertCanAccess(action, url, application)
                     else:
                         self.assertNoAccess(action, url, application,
-                                            "%s, %s" % (action, codename))
+                                            "%s, %s" % (action, role_type))
 
-    def checkTeams(self, accepted_codenames):
+    def checkTeams(self, mSet):
         for action, url in AdminPermissionTests.pages['team'].items():
-            for codename, team in self.teams.items():
-                if codename in accepted_codenames:
-                    self.assertCanAccess(action, url, team)
-                else:
-                    self.assertNoAccess(action, url, team,
-                                        "%s, %s" % (action, codename))
+            team = mSet['team']
+            self.assertNoAccess(action, url, team, "%s" % (action))
+
+    def all_modals_no_access(self, mSet):
+        for action, url in AdminPermissionTests.pages['team'].items():
+            if action not in ['index', 'create']:
+                team = mSet['team']
+                self.assertNoAccess(action, url, team, "%s" % (action))
+
+
+        for action, url in AdminPermissionTests.pages['application'].items():
+            if action not in ['create', 'index']:
+                for role_type, application in \
+                        mSet['submitted_applications'].items():
+                    self.assertNoAccess(action, url, application,
+                                            "%s, %s" % (action, role_type))
+
+
+        for action, url in AdminPermissionTests.pages['role'].items():
+            if action not in ['create', 'index']:
+                for role_type, role in mSet['roles'].items():
+                    self.assertNoAccess(action, url, role,
+                                        "%s, %s" % (action, role_type))
+
+
+        for action, url in AdminPermissionTests.pages['position'].items():
+            if action not in ['create', 'index']:
+                for role_type, position in mSet['approvable_positions'].items():
+                    self.assertNoAccess(action, url, position,
+                                         "%s, %s" % (action, role_type))
+
+                for role_type, position in mSet['appointable_positions'].items():
+                    self.assertNoAccess(action, url, position,
+                                        "%s, %s" % (action, role_type))
+
+                for role_type, position in mSet['recruiting_positions'].items():
+                    self.assertNoAccess(action, url, position,
+                                        "%s, %s" % (action, role_type))
 
     def setUp(self):
 
         wagtail_access = Permission.objects.get(codename='access_admin')
 
-        permission_codenames = ['admin', 'fum', 'board', 'presidium',
+        role_types = ['admin', 'fum', 'board', 'presidium',
                                 'group_leader', 'engaged']
 
-        self.members = {}
-        self.groups = {}
-        self.teams = {}
-        self.roles = {}
-        self.approvable_positions = {}
-        self.recruiting_positions = {}
-        self.appointable_positions = {}
-        self.submitted_applications = {}
+        self.primary_set = {
+            'uniq_prefix': 'primary_',
+            'members': {},
+            'groups': {},
+            'roles': {},
+            'approvable_positions': {},
+            'recruiting_positions': {},
+            'appointable_positions': {},
+            'submitted_applications': {},
+        }
 
-        for key in permission_codenames:
-            self.members[key] = Member.objects.create(username=key)
-            permission = Permission.objects.get(codename=key)
-            self.groups[key] = Group.objects.create(name=key)
-            self.groups[key].permissions.add(wagtail_access)
-            self.groups[key].permissions.add(permission)
-            self.groups[key].user_set.add(self.members[key])
+        self.secondary_set = {
+            'uniq_prefix': 'secondary_',
+            'members': {},
+            'groups': {},
+            'roles': {},
+            'approvable_positions': {},
+            'recruiting_positions': {},
+            'appointable_positions': {},
+            'submitted_applications': {},
+        }
 
-            if key != 'admin':
-                self.teams[key] = Team.objects.create(
-                    name_en='Team %s en' % key,
-                    name_sv='Team %s sv' % key,
-                )
-                self.roles[key] = Role.objects.create(
-                    team=self.teams[key],
-                    group=self.groups[key],
-                    name_en='Role %s en' % key,
-                    name_sv='Role %s sv' % key,
+
+        for mSet in [self.primary_set, self.secondary_set]:
+            mSet['team'] = Team.objects.create(
+                name_en='Team %s en' % mSet['uniq_prefix'],
+                name_sv='Team %s sv' % mSet['uniq_prefix'],
+            )
+            for key in role_types:
+                mSet['members'][key] = Member.objects.create(username="%s%s" % (mSet['uniq_prefix'], key))
+                mSet['groups'][key] = Group.objects.create(name="%s%s" % (mSet['uniq_prefix'], key))
+                mSet['groups'][key].permissions.add(wagtail_access)
+                mSet['groups'][key].user_set.add(mSet['members'][key])
+
+                mSet['roles'][key] = Role.objects.create(
+                    group=mSet['groups'][key],
+                    role_type=key,
+                    name_en='Role %s en' % "%s%s" % (mSet['uniq_prefix'], key),
+                    name_sv='Role %s sv' % "%s%s" % (mSet['uniq_prefix'], key),
                     election_email='%s@localhost' % key,
                 )
-                self.approvable_positions[key] = Position.objects.create(
-                    role=self.roles[key],
-                    recruitment_start=date.today() - timedelta(days=5),
-                    recruitment_end=date.today() - timedelta(days=1),
-                    term_from=date.today() + timedelta(days=5),
-                    term_to=date.today() + timedelta(days=365),
-                )
-                self.recruiting_positions[key] = Position.objects.create(
-                    role=self.roles[key],
-                    recruitment_start=date.today() - timedelta(days=5),
-                    recruitment_end=date.today() + timedelta(days=1),
-                    term_from=date.today() + timedelta(days=5),
-                    term_to=date.today() + timedelta(days=365),
-                )
-                self.appointable_positions[key] = Position.objects.create(
-                    role=self.roles[key],
-                    recruitment_start=date.today() - timedelta(days=5),
-                    recruitment_end=date.today() - timedelta(days=1),
-                    term_from=date.today() + timedelta(days=5),
-                    term_to=date.today() + timedelta(days=365),
-                )
-                self.submitted_applications[key] = Application.objects.create(
-                    position=self.approvable_positions[key],
-                    applicant=self.members[key],
-                    status='submitted',
-                )
+                mSet['roles'][key].teams.add(mSet['team'])
+
+                if key != 'admin':
+                    mSet['approvable_positions'][key] = Position.objects.create(
+                        role=mSet['roles'][key],
+                        recruitment_start=date.today() - timedelta(days=5),
+                        recruitment_end=date.today() - timedelta(days=1),
+                        term_from=date.today() + timedelta(days=5),
+                        term_to=date.today() + timedelta(days=365),
+                    )
+                    mSet['recruiting_positions'][key] = Position.objects.create(
+                        role=mSet['roles'][key],
+                        recruitment_start=date.today() - timedelta(days=5),
+                        recruitment_end=date.today() + timedelta(days=1),
+                        term_from=date.today() + timedelta(days=5),
+                        term_to=date.today() + timedelta(days=365),
+                    )
+                    mSet['appointable_positions'][key] = Position.objects.create(
+                        role=mSet['roles'][key],
+                        recruitment_start=date.today() - timedelta(days=5),
+                        recruitment_end=date.today() - timedelta(days=1),
+                        term_from=date.today() + timedelta(days=5),
+                        term_to=date.today() + timedelta(days=365),
+                    )
+                    mSet['submitted_applications'][key] = Application.objects.create(
+                        position=mSet['approvable_positions'][key],
+                        applicant=mSet['members'][key],
+                        status='submitted',
+                    )
 
     def test_fum(self):
         self.client.force_login(
-            self.members['fum'],
+            self.primary_set['members']['fum'],
             'django.contrib.auth.backends.ModelBackend'
         )
 
         # Teams
         # No access to any views
-        self.checkTeams([])
+        self.checkTeams(self.primary_set)
 
         # Roles
-        # Can view and edit roles for codename 'board'
-        self.checkRoles(['board'])
+        # Can view and edit roles for role_type 'board'
+        self.checkRoles(self.primary_set, ['board'])
 
         # Position
-        # Can view and edit positions for codename 'board'
+        # Can view and edit positions for role_type 'board'
         # FUM can never appoint a position
-        self.checkPositions(['board'], ['appoint'])
+        self.checkPositions(self.primary_set, ['board'], ['appoint'])
 
         # Applications
-        # Can view and edit applications for codename 'board' and 'presidium'
-        self.checkApplications(['board', 'presidium'])
+        # Can view and edit applications for role_type 'board' and 'presidium'
+        self.checkApplications(self.primary_set, ['board', 'presidium'])
+
+        # Make sure that we cant access pages were we are not a team-member
+        self.all_modals_no_access(self.secondary_set)
 
     def test_board(self):
         self.client.force_login(
-            self.members['board'],
+            self.primary_set['members']['board'],
             'django.contrib.auth.backends.ModelBackend'
         )
 
         # Teams
         # No access to any views
-        self.checkTeams([])
+        self.checkTeams(self.primary_set)
 
         # Roles
-        # Can view and edit roles for codename 'presidium'
-        self.checkRoles(['presidium'])
+        # Can view and edit roles for role_type 'presidium'
+        self.checkRoles(self.primary_set, ['presidium'])
 
         # Position
-        # Can view and edit positions for codename 'presidium'
-        self.checkPositions(['presidium'])
+        # Can view and edit positions for role_type 'presidium'
+        self.checkPositions(self.primary_set, ['presidium'])
 
         # Applications
-        # Can view and edit applications for codename 'presidium'
-        self.checkApplications(['presidium'])
+        # Can view and edit applications for role_type 'presidium'
+        self.checkApplications(self.primary_set, ['presidium'])
 
-    def pest_Presidium(self):
+        # Make sure that we cant access pages were we are not a team-member
+        self.all_modals_no_access(self.secondary_set)
+
+    def test_presidium(self):
         self.client.force_login(
-            self.members['presidium'],
+            self.primary_set['members']['presidium'],
             'django.contrib.auth.backends.ModelBackend'
         )
 
         # Teams
         # No access to any views
-        self.checkTeams([])
+        self.checkTeams(self.primary_set)
 
         # Roles
-        # Can view and edit roles for codename 'group_leader'
+        # Can view and edit roles for role_type 'group_leader'
         # and 'engaged'
-        self.checkRoles(['group_leader', 'engaged'])
+        self.checkRoles(self.primary_set, ['group_leader', 'engaged'])
 
         # Position
-        # Can view and edit positions for codename 'group_leader'
+        # Can view and edit positions for role_type 'group_leader'
         # and 'engaged'
-        self.checkPositions(['group_leader', 'engaged'])
+        self.checkPositions(self.primary_set, ['group_leader', 'engaged'])
 
         # Applications
-        # Can view and edit applications for codename 'group_leader'
+        # Can view and edit applications for role_type 'group_leader'
         # and 'engaged'
-        self.checkApplications(['group_leader', 'engaged'])
+        self.checkApplications(self.primary_set, ['group_leader', 'engaged'])
+
+        # Make sure that we cant access pages were we are not a team-member
+        self.all_modals_no_access(self.secondary_set)
 
     def test_group_leader(self):
         self.client.force_login(
-            self.members['group_leader'],
+            self.primary_set['members']['group_leader'],
             'django.contrib.auth.backends.ModelBackend'
         )
 
         # Teams
         # No access to any views
-        self.checkTeams([])
+        self.checkTeams(self.primary_set)
 
         # Roles
-        # Can edit roles for codename 'engaged'
-        self.checkRoles(['engaged'])
+        # Can edit roles for role_type 'engaged'
+        self.checkRoles(self.primary_set, ['engaged'])
 
         # Position
-        # Can view and edit positions for codename 'engaged'
-        self.checkPositions(['engaged'])
+        # Can view and edit positions for role_type 'engaged'
+        self.checkPositions(self.primary_set, ['engaged'])
 
         # Applications
-        # Can view and edit applications for codename 'engaged'
-        self.checkApplications(['engaged'])
+        # Can view and edit applications for role_type 'engaged'
+        self.checkApplications(self.primary_set, ['engaged'])
+
+        # Make sure that we cant access pages were we are not a team-member
+        self.all_modals_no_access(self.secondary_set)
 
     def test_engaged(self):
         self.client.force_login(
-            self.members['engaged'],
+            self.primary_set['members']['engaged'],
             'django.contrib.auth.backends.ModelBackend'
         )
 
-        # Teams
-        # No access to any views
-        for action, url in AdminPermissionTests.pages['team'].items():
-            if action in ['create', 'index']:
-                self.assertNoAccess(action, url)
-            else:
-                for codename, team in self.teams.items():
-                    self.assertNoAccess(action, url, team)
-
-        # Roles
-        # No access to any views
-        for action, url in AdminPermissionTests.pages['role'].items():
-            if action in ['create', 'index']:
-                self.assertNoAccess(action, url)
-            else:
-                for codename, role in self.roles.items():
-                    self.assertNoAccess(action, url, role)
-
-        # Position
-        # No access to any views
-        for action, url in AdminPermissionTests.pages['position'].items():
-            if action in ['create', 'index']:
-                self.assertNoAccess(action, url)
-            else:
-                for codename, position in self.approvable_positions.items():
-                    self.assertNoAccess(action, url, position)
-
-        # Applications
-        # No access to any views
-        for action, url in AdminPermissionTests.pages['application'].items():
-            if action in ['create', 'index']:
-                self.assertNoAccess(action, url)
-            else:
-                for codename, application in \
-                        self.submitted_applications.items():
-                    self.assertNoAccess(action, url, application)
+        self.all_modals_no_access(self.primary_set)
+        self.all_modals_no_access(self.secondary_set)
 
     def test_admin(self):
         """
@@ -524,47 +549,33 @@ class AdminPermissionTests(TestCase):
         admin area
         """
         self.client.force_login(
-            self.members['admin'],
+            self.primary_set['members']['admin'],
             'django.contrib.auth.backends.ModelBackend'
         )
-        assert self.members['admin'].is_authenticated
+        assert self.primary_set['members']['admin'].is_authenticated
 
         # Teams
         # Access to all views
         for action, url in AdminPermissionTests.pages['team'].items():
-            if action in ['create', 'index']:
-                self.assertCanAccess(action, url, None)
-            else:
-                for codename, team in self.teams.items():
-                    self.assertCanAccess(action, url, team)
+            team = self.primary_set['team']
+            self.assertCanAccess(action, url, team, "%s" % (action))
+
+        accepted_roles = ['admin', 'fum', 'board', 'presidium', 'group_leader', 'engaged']
 
         # Roles
         # Access to all views
-        for action, url in AdminPermissionTests.pages['role'].items():
-            if action in ['create', 'index']:
-                self.assertCanAccess(action, url, None)
-            else:
-                for codename, role in self.roles.items():
-                    self.assertCanAccess(action, url, role)
+        self.checkRoles(self.primary_set, accepted_roles)
 
         # Position
         # Access to all views
-        for action, url in AdminPermissionTests.pages['position'].items():
-            if action in ['create', 'index']:
-                self.assertCanAccess(action, url, None)
-            else:
-                for codename, position in self.approvable_positions.items():
-                    self.assertCanAccess(action, url, position)
+        self.checkPositions(self.primary_set, accepted_roles)
 
         # Applications
         # Access to all views
-        for action, url in AdminPermissionTests.pages['application'].items():
-            if action in ['create', 'index']:
-                self.assertCanAccess(action, url, None)
-            else:
-                for codename, application in \
-                        self.submitted_applications.items():
-                    self.assertCanAccess(action, url, application)
+        self.checkApplications(self.primary_set, accepted_roles)
+
+        # Make sure that we cant access pages were we are not a team-member
+        self.all_modals_no_access(self.secondary_set)
 
     def test_not_logged_in(self):
         """
@@ -573,48 +584,9 @@ class AdminPermissionTests(TestCase):
         """
         self.client.logout()
 
-        # Tests that don't require an instance.
-        for i, section in AdminPermissionTests.pages.items():
-            for action, url in section.items():
-                if action in ['create', 'index']:
-                    self.assertNoAccess(action, url)
+        self.all_modals_no_access(self.primary_set)
+        self.all_modals_no_access(self.secondary_set)
 
-        # Teams
-        # No access to any views
-        for action, url in AdminPermissionTests.pages['team'].items():
-            if action in ['create', 'index']:
-                self.assertNoAccess(action, url)
-            else:
-                for codename, team in self.teams.items():
-                    self.assertNoAccess(action, url, team)
-
-        # Roles
-        # No access to any views
-        for action, url in AdminPermissionTests.pages['role'].items():
-            if action in ['create', 'index']:
-                self.assertNoAccess(action, url)
-            else:
-                for codename, role in self.roles.items():
-                    self.assertNoAccess(action, url, role)
-
-        # Position
-        # No access to any views
-        for action, url in AdminPermissionTests.pages['position'].items():
-            if action in ['create', 'index']:
-                self.assertNoAccess(action, url)
-            else:
-                for codename, position in self.approvable_positions.items():
-                    self.assertNoAccess(action, url, position)
-
-        # Applications
-        # No access to any views
-        for action, url in AdminPermissionTests.pages['application'].items():
-            if action in ['create', 'index']:
-                self.assertNoAccess(action, url)
-            else:
-                for codename, application in \
-                        self.submitted_applications.items():
-                    self.assertNoAccess(action, url, application)
 
 
 class RecruitmentExtensionTestCase(TestCase):
@@ -622,29 +594,42 @@ class RecruitmentExtensionTestCase(TestCase):
     Tests for the automated deadline extender. The deadline extender should be
     triggered for vacant positions of which the deadline has just passed.
     """
-
     def setUp(self):
+
+        self.team = Team.objects.create(
+            name_en='RecruitmentExtensionTestCase Team EN',
+            name_sv='RecruitmentExtensionTestCase Team SV',
+        )
         self.group = Group.objects.create(name='Test Group')
         self.role = Role.objects.create(
             name_en='Test',
             name_sv='TestSV',
+            role_type='engaged',
             election_email='contact@localhost',
             group=self.group,
         )
+        self.role.teams.add(self.team)
 
         # Create admin group/user
-        wagtail_acces = Permission.objects.get(codename='access_admin')
-        recruitment_admin = Permission.objects.get(
-            codename='admin'
-        )
         admin_group = Group.objects.create(
             name='Admin Group',
         )
-        admin_group.permissions.add(wagtail_acces, recruitment_admin)
+
+        self.adminRole = Role.objects.create(
+            name_en='Admin Role',
+            name_sv='Admin Roll',
+            role_type='admin',
+            election_email='contact@localhost',
+            group=admin_group,
+        )
+        self.adminRole.teams.add(self.team)
+
         self.admin = Member.objects.create(
             username='admin',
         )
-        mail.outbox.clear()
+
+        wagtail_access = Permission.objects.get(codename='access_admin')
+        admin_group.permissions.add(wagtail_access)
         admin_group.user_set.add(self.admin)
         admin_group.save()
         self.client.force_login(
@@ -656,6 +641,7 @@ class RecruitmentExtensionTestCase(TestCase):
         Test that an e-mail is being send when the deadline for an position
         passes without any applications.
         """
+        mail.outbox.clear()
         pos = Position.objects.create(
             role=self.role,
             recruitment_start=date.today() - timedelta(days=10),
@@ -677,6 +663,7 @@ class RecruitmentExtensionTestCase(TestCase):
         Test that no e-mails are being send when the deadline has not passed or
         when there are applications
         """
+        mail.outbox.clear()
         Position.objects.create(
             role=self.role,
             recruitment_start=date.today() - timedelta(days=10),
@@ -703,6 +690,21 @@ class RecruitmentExtensionTestCase(TestCase):
 
     def test_extension(self):
         """Test automatic extension urls"""
+
+        adminPos = Position.objects.create(
+            role=self.adminRole,
+            recruitment_start=date.today() - timedelta(days=5),
+            recruitment_end=date.today() - timedelta(days=1),
+            term_from=date.today() + timedelta(days=5),
+            term_to=date.today() + timedelta(days=365),
+        )
+
+        Application.objects.create(
+            position=adminPos,
+            applicant=self.admin,
+            status='appointed',
+        )
+
         pos = Position.objects.create(
             role=self.role,
             recruitment_start=date.today() - timedelta(days=10),
@@ -710,6 +712,7 @@ class RecruitmentExtensionTestCase(TestCase):
             term_from=date.today() + timedelta(days=4),
             term_to=date.today() + timedelta(days=365),
         )
+
         response = self.client.get(
             reverse('involvement_position_extend', args=[pos.pk]))
         self.assertRedirects(response,
