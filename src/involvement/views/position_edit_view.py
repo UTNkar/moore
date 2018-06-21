@@ -1,6 +1,5 @@
 from wagtail.contrib.modeladmin.views import EditView
 from involvement.models import Role
-from involvement.rules import is_admin
 
 
 class PositionEditView(EditView):

@@ -110,7 +110,6 @@ class Role(models.Model):
         blank=True,
     )
 
-
     @property
     def contact_phone_number(self):
         """
@@ -141,7 +140,8 @@ class Role(models.Model):
             return []
 
         if is_admin(user):
-            return ['admin', 'fum', 'board', 'presidium', 'group_leader', 'engaged']
+            return ['admin', 'fum', 'board', 'presidium',
+                    'group_leader', 'engaged']
         elif is_fum(user):
             return ['board']
         elif is_board(user):
@@ -159,7 +159,8 @@ class Role(models.Model):
             return []
 
         if is_admin(user):
-            return ['admin', 'fum', 'board', 'presidium', 'group_leader', 'engaged']
+            return ['admin', 'fum', 'board', 'presidium',
+                    'group_leader', 'engaged']
         elif is_fum(user):
             return ['board', 'presidium']
         elif is_board(user):

@@ -8,9 +8,10 @@ from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 from involvement.models import Team, Role, Position, Application
-from involvement.rules import is_admin, is_action_approve, is_action_appoint
+from involvement.rules import is_action_approve, is_action_appoint
 from involvement import views
 from utils.permissions import RulesPermissionHelper
+
 
 class TeamAdmin(ModelAdmin):
     model = Team
@@ -28,7 +29,8 @@ class RoleAdmin(ModelAdmin):
     menu_label = _('Roles')
     menu_icon = 'fa-suitcase'
     menu_order = 200
-    list_display = ('team', 'name_en', 'name_sv', 'archived', 'group', 'role_type')
+    list_display = ('team', 'name_en', 'name_sv', 'archived',
+                    'group', 'role_type')
     search_fields = ('team__name_en', 'team__name_sv', 'name_en', 'name_sv',
                      'description_en', 'description_sv')
     # TODO: Default to archived==False, might be in

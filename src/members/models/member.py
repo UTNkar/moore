@@ -2,8 +2,7 @@ import requests
 from datetime import date
 from django.apps import apps
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser, UserManager, \
-        PermissionsMixin
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.core import validators
 from django.db import models
 from django.utils import timezone
@@ -115,7 +114,6 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         else:
             return self.username
 
-
     @property
     def teams(self):
         Team = apps.get_model('involvement', 'Team')
@@ -200,4 +198,3 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     #         or self.roles.filter(
     #             group__permissions__codename=codename,
     #             group__permissions__content_type__app_label=app_label).exists()
-

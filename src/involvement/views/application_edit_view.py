@@ -7,7 +7,8 @@ class ApplicationEditView(EditView):
     def get_form(self, form_class=None):
         form = super(ApplicationEditView, self).get_form(form_class=form_class)
 
-        if not self.request.user.is_superuser and not is_admin(self.request.user):
+        if not self.request.user.is_superuser \
+                and not is_admin(self.request.user):
             # Filter status
             form.fields['status'].choices = form.fields['status'].choices[1:]
             accepted_choices = ['submitted', 'approved', 'disapproved']

@@ -173,7 +173,8 @@ class RecruitmentPageTests(WagtailPageTests):
             [position.id]
         ))
 
-        self.client.get(self.page.url + self.page.reverse_subpage('position',[position.id]))
+        self.client.get(self.page.url
+                        + self.page.reverse_subpage('position', [position.id]))
 
         self.assertContains(response, team.name,
                             msg_prefix='Position is listed as part of team')
@@ -252,7 +253,8 @@ class AdminPermissionTests(TestCase):
             if action in ['create', 'index']:
                 self.assertCanAccess(action, url)
             else:
-                for role_type, position in mSet['approvable_positions'].items():
+                for role_type, position in mSet['approvable_positions'] \
+                        .items():
                     if action not in exclude_actions and \
                         (action == 'inspect' or
                             (role_type in accepted_types and
@@ -263,7 +265,8 @@ class AdminPermissionTests(TestCase):
                         self.assertNoAccess(action, url, position,
                                             "%s, %s" % (action, role_type))
 
-                for role_type, position in mSet['appointable_positions'].items():
+                for role_type, position in mSet['appointable_positions'] \
+                        .items():
                     if action not in exclude_actions and \
                         (action == 'inspect' or
                             (role_type in accepted_types and
@@ -274,7 +277,8 @@ class AdminPermissionTests(TestCase):
                         self.assertNoAccess(action, url, position,
                                             "%s, %s" % (action, role_type))
 
-                for role_type, position in mSet['recruiting_positions'].items():
+                for role_type, position in mSet['recruiting_positions'] \
+                        .items():
                     if action not in exclude_actions and \
                         (action == 'inspect' or
                             (role_type in accepted_types
@@ -285,7 +289,7 @@ class AdminPermissionTests(TestCase):
                         self.assertNoAccess(action, url, position,
                                             "%s, %s" % (action, role_type))
 
-    def checkRoles(self, mSet,accepted_types):
+    def checkRoles(self, mSet, accepted_types):
         for action, url in AdminPermissionTests.pages['role'].items():
             if action in ['create', 'index']:
                 self.assertCanAccess(action, url)
@@ -322,14 +326,12 @@ class AdminPermissionTests(TestCase):
                 team = mSet['team']
                 self.assertNoAccess(action, url, team, "%s" % (action))
 
-
         for action, url in AdminPermissionTests.pages['application'].items():
             if action not in ['create', 'index']:
                 for role_type, application in \
                         mSet['submitted_applications'].items():
                     self.assertNoAccess(action, url, application,
-                                            "%s, %s" % (action, role_type))
-
+                                        "%s, %s" % (action, role_type))
 
         for action, url in AdminPermissionTests.pages['role'].items():
             if action not in ['create', 'index']:
@@ -337,18 +339,20 @@ class AdminPermissionTests(TestCase):
                     self.assertNoAccess(action, url, role,
                                         "%s, %s" % (action, role_type))
 
-
         for action, url in AdminPermissionTests.pages['position'].items():
             if action not in ['create', 'index']:
-                for role_type, position in mSet['approvable_positions'].items():
-                    self.assertNoAccess(action, url, position,
-                                         "%s, %s" % (action, role_type))
-
-                for role_type, position in mSet['appointable_positions'].items():
+                for role_type, position in mSet['approvable_positions'] \
+                                            .items():
                     self.assertNoAccess(action, url, position,
                                         "%s, %s" % (action, role_type))
 
-                for role_type, position in mSet['recruiting_positions'].items():
+                for role_type, position in mSet['appointable_positions'] \
+                        .items():
+                    self.assertNoAccess(action, url, position,
+                                        "%s, %s" % (action, role_type))
+
+                for role_type, position in mSet['recruiting_positions'] \
+                        .items():
                     self.assertNoAccess(action, url, position,
                                         "%s, %s" % (action, role_type))
 
@@ -357,7 +361,7 @@ class AdminPermissionTests(TestCase):
         wagtail_access = Permission.objects.get(codename='access_admin')
 
         role_types = ['admin', 'fum', 'board', 'presidium',
-                                'group_leader', 'engaged']
+                      'group_leader', 'engaged']
 
         self.primary_set = {
             'uniq_prefix': 'primary_',
@@ -381,15 +385,16 @@ class AdminPermissionTests(TestCase):
             'submitted_applications': {},
         }
 
-
         for mSet in [self.primary_set, self.secondary_set]:
             mSet['team'] = Team.objects.create(
                 name_en='Team %s en' % mSet['uniq_prefix'],
                 name_sv='Team %s sv' % mSet['uniq_prefix'],
             )
             for key in role_types:
-                mSet['members'][key] = Member.objects.create(username="%s%s" % (mSet['uniq_prefix'], key))
-                mSet['groups'][key] = Group.objects.create(name="%s%s" % (mSet['uniq_prefix'], key))
+                mSet['members'][key] = Member.objects \
+                    .create(username="%s%s" % (mSet['uniq_prefix'], key))
+                mSet['groups'][key] = Group.objects \
+                    .create(name="%s%s" % (mSet['uniq_prefix'], key))
                 mSet['groups'][key].permissions.add(wagtail_access)
                 mSet['groups'][key].user_set.add(mSet['members'][key])
 
@@ -403,32 +408,36 @@ class AdminPermissionTests(TestCase):
                 mSet['roles'][key].teams.add(mSet['team'])
 
                 if key != 'admin':
-                    mSet['approvable_positions'][key] = Position.objects.create(
-                        role=mSet['roles'][key],
-                        recruitment_start=date.today() - timedelta(days=5),
-                        recruitment_end=date.today() - timedelta(days=1),
-                        term_from=date.today() + timedelta(days=5),
-                        term_to=date.today() + timedelta(days=365),
-                    )
-                    mSet['recruiting_positions'][key] = Position.objects.create(
-                        role=mSet['roles'][key],
-                        recruitment_start=date.today() - timedelta(days=5),
-                        recruitment_end=date.today() + timedelta(days=1),
-                        term_from=date.today() + timedelta(days=5),
-                        term_to=date.today() + timedelta(days=365),
-                    )
-                    mSet['appointable_positions'][key] = Position.objects.create(
-                        role=mSet['roles'][key],
-                        recruitment_start=date.today() - timedelta(days=5),
-                        recruitment_end=date.today() - timedelta(days=1),
-                        term_from=date.today() + timedelta(days=5),
-                        term_to=date.today() + timedelta(days=365),
-                    )
-                    mSet['submitted_applications'][key] = Application.objects.create(
-                        position=mSet['approvable_positions'][key],
-                        applicant=mSet['members'][key],
-                        status='submitted',
-                    )
+                    mSet['approvable_positions'][key] = Position.objects \
+                        .create(
+                            role=mSet['roles'][key],
+                            recruitment_start=date.today() - timedelta(days=5),
+                            recruitment_end=date.today() - timedelta(days=1),
+                            term_from=date.today() + timedelta(days=5),
+                            term_to=date.today() + timedelta(days=365),
+                        )
+                    mSet['recruiting_positions'][key] = Position.objects \
+                        .create(
+                            role=mSet['roles'][key],
+                            recruitment_start=date.today() - timedelta(days=5),
+                            recruitment_end=date.today() + timedelta(days=1),
+                            term_from=date.today() + timedelta(days=5),
+                            term_to=date.today() + timedelta(days=365),
+                        )
+                    mSet['appointable_positions'][key] = Position.objects \
+                        .create(
+                            role=mSet['roles'][key],
+                            recruitment_start=date.today() - timedelta(days=5),
+                            recruitment_end=date.today() - timedelta(days=1),
+                            term_from=date.today() + timedelta(days=5),
+                            term_to=date.today() + timedelta(days=365),
+                        )
+                    mSet['submitted_applications'][key] = Application.objects \
+                        .create(
+                            position=mSet['approvable_positions'][key],
+                            applicant=mSet['members'][key],
+                            status='submitted',
+                        )
 
     def test_fum(self):
         self.client.force_login(
@@ -560,7 +569,8 @@ class AdminPermissionTests(TestCase):
             team = self.primary_set['team']
             self.assertCanAccess(action, url, team, "%s" % (action))
 
-        accepted_roles = ['admin', 'fum', 'board', 'presidium', 'group_leader', 'engaged']
+        accepted_roles = ['admin', 'fum', 'board', 'presidium',
+                          'group_leader', 'engaged']
 
         # Roles
         # Access to all views
@@ -586,7 +596,6 @@ class AdminPermissionTests(TestCase):
 
         self.all_modals_no_access(self.primary_set)
         self.all_modals_no_access(self.secondary_set)
-
 
 
 class RecruitmentExtensionTestCase(TestCase):
