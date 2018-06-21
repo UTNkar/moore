@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('involvement', '0014_populate_role_groups'),
+        ('involvement', '0014_reset_role_dependencies'),
     ]
 
     operations = [
@@ -15,5 +15,10 @@ class Migration(migrations.Migration):
             model_name='role',
             name='group',
             field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='roles', to='auth.Group'),
+        ),
+        migrations.AlterField(
+            model_name='role',
+            name='role_type',
+            field=models.CharField(choices=[('admin', 'Admin'), ('fum', 'FUM'), ('board', 'Board'), ('presidium', 'Presidium'), ('group_leader', 'Group Leader'), ('engaged', 'Engaged')], max_length=20, null=False, blank=False, verbose_name='Role type'),
         ),
     ]

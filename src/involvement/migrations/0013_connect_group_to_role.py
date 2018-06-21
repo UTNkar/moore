@@ -13,10 +13,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterModelOptions(
-            name='role',
-            options={'default_permissions': (), 'permissions': (('admin', 'Admin'), ('fum', 'FUM'), ('board', 'Board'), ('presidium', 'Presidium'), ('group_leader', 'Group Leader')), 'verbose_name': 'Role', 'verbose_name_plural': 'Roles'},
-        ),
-        migrations.AlterModelOptions(
             name='team',
             options={'default_permissions': (), 'verbose_name': 'Team', 'verbose_name_plural': 'Teams'},
         ),
@@ -31,11 +27,25 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='role',
             name='group',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, related_name='roles', to='auth.Group'),
+            field=models.ForeignKey(null=False, on_delete=django.db.models.deletion.PROTECT, related_name='roles', to='auth.Group'),
+        ),
+        migrations.AddField(
+            model_name='role',
+            name='role_type',
+            field=models.CharField(choices=[('admin', 'Admin'), ('fum', 'FUM'), ('board', 'Board'), ('presidium', 'Presidium'), ('group_leader', 'Group Leader'), ('engaged', 'Engaged')], max_length=20, null=True, blank=False, verbose_name='Role type'),
         ),
         migrations.AddField(
             model_name='role',
             name='phone_number',
             field=models.CharField(blank=True, help_text='Enter a phone number to contact this role.', max_length=20, validators=[django.core.validators.RegexValidator(message='Please enter a valid phone number', regex='^\\+?\\d+$')], verbose_name='Phone number'),
+        ),
+        migrations.RemoveField(
+            model_name='role',
+            name='team',
+        ),
+        migrations.AddField(
+            model_name='role',
+            name='teams',
+            field=models.ManyToManyField(blank=True, related_name='roles', to='involvement.Team'),
         ),
     ]
