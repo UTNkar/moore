@@ -58,16 +58,18 @@ class Team(models.Model):
     def __str__(self) -> str:
         return '{}'.format(self.name)
 
-    def get_members(self):
+    @property
+    def members(self):
         return get_user_model().objects.filter(
-            application__position__role__team=self,
+            application__position__role__teams__pk=self.pk,
             application__position__term_from__lte=date.today(),
             application__position__term_to__gte=date.today(),
             application__status='appointed',
         )
 
-    def get_manual_members(self):
-        members = self.get_members().values('pk')
+    @property
+    def manual_members(self):
+        members = self.members.values('pk')
         return get_user_model().objects.filter(
             groups=self.group
         ).exclude(
