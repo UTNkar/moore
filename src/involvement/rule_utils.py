@@ -1,46 +1,41 @@
 import rules
-
+import involvement.models
 
 @rules.predicate
-def has_permission(permissions, permission_filter):
-    if len(permission_filter) > 0:
-        return permissions.filter(codename__in=permission_filter).exists()
-    return False
+def is_super(user):
+    return user.is_superuser
 
 
 @rules.predicate
 def is_admin(user):
-    return user.has_perm('involvement.admin')
+    return not user.is_anonymous and user.roles.filter(role_type='admin').exists()
 
 
 @rules.predicate
 def is_fum(user):
-    return user.has_perm('involvement.fum')
+    return not user.is_anonymous and user.roles.filter(role_type='fum').exists()
 
 
 @rules.predicate
 def is_board(user):
-    return user.has_perm('involvement.board')
+    return not user.is_anonymous and user.roles.filter(role_type='board').exists()
 
 
 @rules.predicate
 def is_presidium(user):
-    return user.has_perm('involvement.presidium')
+    return not user.is_anonymous and user.roles.filter(role_type='presidium').exists()
 
 
 @rules.predicate
 def is_group_leader(user):
-    return user.has_perm('involvement.group_leader')
+    return not user.is_anonymous and user.roles.filter(role_type='group_leader').exists()
 
 
 @rules.predicate
 def is_engaged(user):
-    return user.has_perm('involvement.engaged')
+    return not user.is_anonymous and user.roles.filter(role_type='engaged').exists()
 
 
 @rules.predicate
 def has_role_perm(user):
-    return is_fum(user) \
-        | is_board(user) \
-        | is_presidium(user) \
-        | is_group_leader(user)
+    return not user.is_anonymous and user.roles.exclude(role_type='engaged').exists()
