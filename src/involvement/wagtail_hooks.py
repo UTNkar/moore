@@ -12,7 +12,6 @@ from involvement.rules import is_admin, is_action_approve, is_action_appoint
 from involvement import views
 from utils.permissions import RulesPermissionHelper
 
-
 class TeamAdmin(ModelAdmin):
     model = Team
     menu_label = _('Teams')
@@ -29,21 +28,24 @@ class RoleAdmin(ModelAdmin):
     menu_label = _('Roles')
     menu_icon = 'fa-suitcase'
     menu_order = 200
-    list_display = ('team', 'name_en', 'name_sv', 'archived', 'group')
+    list_display = ('team', 'name_en', 'name_sv', 'archived', 'group', 'role_type')
     search_fields = ('team__name_en', 'team__name_sv', 'name_en', 'name_sv',
                      'description_en', 'description_sv')
     # TODO: Default to archived==False, might be in
     # https://code.djangoproject.com/ticket/8851#no1
-    list_filter = ('team', 'archived')
+    list_filter = ('teams', 'archived')
     permission_helper_class = RulesPermissionHelper
     create_view_class = views.RoleCreateView
     edit_view_class = views.RoleEditView
 
+    def team(self, obj):
+        return ', '.join([str(i) for i in obj.teams.all()])
+
     def get_queryset(self, request):
-        if is_admin(request.user):
+        if request.user.is_superuser:
             return super(RoleAdmin, self).get_queryset(request)
         else:
-            qs = Role.edit_permission_of(request.user)
+            qs = Role.edit_role_types_of(request.user)
             ordering = self.get_ordering(request)
             if ordering:
                 qs = qs.order_by(*ordering)
@@ -170,10 +172,10 @@ class PositionAdmin(ModelAdmin):
     menu_icon = 'fa-address-card'
     menu_order = 300
     list_display = ('role', 'appointments', 'term_from', 'term_to')
-    search_fields = ('role__team__name_en', 'role__team__name_sv',
+    search_fields = ('role__teams__name_en', 'role__teams__name_sv',
                      'role__name_en', 'role__name_sv', 'comment_en',
                      'comment_sv')
-    list_filter = ('role__team', PositionYearFilter)
+    list_filter = ('role__teams', PositionYearFilter)
     inspect_view_enabled = True
     permission_helper_class = PositionPermissionHelper
     button_helper_class = PositionButtonHelper
@@ -182,10 +184,10 @@ class PositionAdmin(ModelAdmin):
     inspect_view_class = views.PositionInspectView
 
     def get_queryset(self, request):
-        if is_admin(request.user):
+        if request.user.is_superuser:
             return super(PositionAdmin, self).get_queryset(request)
         else:
-            roles = Role.edit_permission_of(request.user)
+            roles = Role.edit_role_types_of(request.user)
             qs = Position.objects.filter(
                 role__in=roles
             )
@@ -201,9 +203,9 @@ class ApplicationAdmin(ModelAdmin):
     menu_icon = 'mail'
     menu_order = 400
     list_display = ('position', 'applicant', 'status')
-    list_filter = ('position__role__team', 'status')
+    list_filter = ('position__role__teams', 'status')
     search_fields = (
-        'position__role__team__name_en', 'position__role__team__name_sv',
+        'position__role__teams__name_en', 'position__role__teams__name_sv',
         'position__role__name_en', 'position__role__name_sv',
         'applicant__first_name', 'applicant__last_name',
     )
@@ -212,7 +214,7 @@ class ApplicationAdmin(ModelAdmin):
     edit_view_class = views.ApplicationEditView
 
     def get_queryset(self, request):
-        if is_admin(request.user):
+        if request.user.is_superuser:
             return super(ApplicationAdmin, self).get_queryset(request)
         else:
             roles = Role.edit_applicant_permission_of(request.user)
