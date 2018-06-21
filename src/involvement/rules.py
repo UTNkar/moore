@@ -48,7 +48,8 @@ def can_modify_role(user, role):
 
 @rules.predicate
 def member_of_team_role(user, role):
-    return not user.is_anonymous and user.teams.filter(pk__in=role.teams.values_list('pk', flat=True))
+    return not user.is_anonymous and \
+      user.teams.filter(pk__in=role.teams.values_list('pk', flat=True))
 
 
 # Team predicates
@@ -73,12 +74,15 @@ rules.add_perm('involvement.inspect_position', is_super
                | member_of_team_position & has_role_perm)
 rules.add_perm('involvement.change_position', is_super
                | member_of_team_position & can_modify_position)
-rules.add_perm('involvement.delete_position', is_super | (member_of_team_position & can_modify_position))
+rules.add_perm('involvement.delete_position', is_super
+               | (member_of_team_position & can_modify_position))
 
 rules.add_perm('involvement.approve_position', is_super
-               | (member_of_team_position & is_action_approve & can_modify_position))
+               | (member_of_team_position & is_action_approve
+                  & can_modify_position))
 rules.add_perm('involvement.appoint_position', is_super
-               | (member_of_team_position & is_action_appoint & ~is_fum & can_set_applicant))
+               | (member_of_team_position & is_action_appoint
+                  & ~is_fum & can_set_applicant))
 
 rules.add_perm('involvement.list_role', is_super | has_role_perm)
 rules.add_perm('involvement.add_role', is_super | has_role_perm)

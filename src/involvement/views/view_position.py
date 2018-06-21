@@ -58,5 +58,4 @@ def view_position(request, context, page, position=None):
         context['form'] = ApplicationForm(instance=appl)
         context['reference_forms'] = ReferenceFormSet(instance=appl)
 
-
     return render(request, 'involvement/position.html', context)

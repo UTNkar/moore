@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template import loader
 
-from involvement.models import Team, Role, Application, Position
+from involvement.models import Role, Application, Position
 
 
 @kronos.register('1 0,6,12,18 * * *')  # At minute 1 past hour 0, 6, 12, and 18
