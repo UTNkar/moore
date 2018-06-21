@@ -8,7 +8,7 @@ class ApplicationCreateView(CreateView):
         form = super(ApplicationCreateView, self) \
             .get_form(form_class=form_class)
 
-        if not is_admin(self.request.user):
+        if not self.request.user.is_superuser and not is_admin(self.request.user):
             # Filter status
             form.fields['status'].choices = form.fields['status'].choices[1:]
             accepted_choices = ['submitted', 'approved', 'disapproved']
@@ -20,7 +20,7 @@ class ApplicationCreateView(CreateView):
 
             # Filter position
             position_qs = form.fields['position'].queryset
-            roles = Role.edit_permission_of(self.request.user)
+            roles = Role.edit_role_types_of(self.request.user)
             position_qs = position_qs.filter(role__in=roles)
             form.fields['position'].queryset = position_qs
 
