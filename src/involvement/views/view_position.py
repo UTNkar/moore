@@ -11,7 +11,11 @@ def view_position(request, context, page, position=None):
     """
     View function for specific positions.
     """
-    context['position'] = get_object_or_404(context['positions'], id=position)
+    pos = get_object_or_404(context['positions'], id=position)
+    context['position'] = pos
+
+    if pos.role.teams.count():
+        context['logo'] = pos.role.teams.first().logo
 
     # Load application form if user is logged in
     if request.user.is_authenticated:
@@ -53,5 +57,6 @@ def view_position(request, context, page, position=None):
         # Render fresh: empty or after saving draft.
         context['form'] = ApplicationForm(instance=appl)
         context['reference_forms'] = ReferenceFormSet(instance=appl)
+
 
     return render(request, 'involvement/position.html', context)

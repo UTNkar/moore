@@ -9,13 +9,13 @@
         {% for pos in positions|dictsort:'recruitment_end' %}
             <li>
                 <div class="collapsible-header">
-                    {% if pos.role.team.logo %}{% image pos.role.team.logo fill-45x45 as logo %}{% endif %}
+                    {% if pos.role.team_logo is not None %}{% image pos.role.team_logo fill-45x45 as logo %}{% endif %}
                     <img class="circle" src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/bocken.svg' %}{% endif %}">
                     <div class="header-text">
                         <h3>{{ pos }}</h3>
                         <div class="team">
-                            {% if pos.role.team %}
-                                <i class="material-icons">group</i>{{ pos.role.team }}
+                            {% if pos.role.teams.count %}
+                                <i class="material-icons">group</i>{{ pos.role.team_names }}
                             {% else %}
                                 <i class="material-icons">person</i>{% trans 'unaffiliated'|capfirst %}
                             {% endif %}
