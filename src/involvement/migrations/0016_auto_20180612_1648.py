@@ -24,10 +24,6 @@ class Migration(migrations.Migration):
             model_name='currentmandate',
             name='position',
         ),
-        migrations.AlterModelOptions(
-            name='role',
-            options={'default_permissions': (), 'permissions': (('admin', 'Admin'), ('fum', 'FUM'), ('board', 'Board'), ('presidium', 'Presidium'), ('group_leader', 'Group Leader'), ('engaged', 'Engaged')), 'verbose_name': 'Role', 'verbose_name_plural': 'Roles'},
-        ),
         migrations.AlterUniqueTogether(
             name='mandatehistory',
             unique_together={('position', 'applicant')},
