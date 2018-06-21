@@ -1,6 +1,9 @@
 import requests
+from datetime import date
+from django.apps import apps
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser, UserManager
+from django.contrib.auth.models import AbstractUser, UserManager, \
+        PermissionsMixin
 from django.core import validators
 from django.db import models
 from django.utils import timezone
@@ -112,6 +115,35 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         else:
             return self.username
 
+
+    @property
+    def teams(self):
+        Team = apps.get_model('involvement', 'Team')
+        groups = self.groups.all()
+        return Team.objects.filter(
+            models.Q(
+                roles__positions__term_from__lte=date.today(),
+                roles__positions__term_to__gte=date.today(),
+                roles__positions__applications__applicant=self,
+                roles__positions__applications__status='appointed',
+             ) |
+            models.Q(roles__group__in=groups)
+        )
+
+    @property
+    def roles(self):
+        Role = apps.get_model('involvement', 'Role')
+        groups = self.groups.all()
+        return Role.objects.filter(
+            models.Q(
+                positions__term_from__lte=date.today(),
+                positions__term_to__gte=date.today(),
+                positions__applications__applicant=self,
+                positions__applications__status='appointed',
+             ) |
+            models.Q(group__in=groups)
+        )
+
     def person_number(self) -> str:
         if self.birthday is None or self.person_number_ext is None:
             return ''
@@ -155,3 +187,17 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         for email in self.get_confirmed_emails():
             if email != self.email:
                 self.remove_email(email)
+
+    # def has_perm(self, perm, obj=None):
+    #     if obj is not None:
+    #         return super(Member, self).has_perm(perm, obj)
+
+    #     if super(Member, self).has_perm(perm):
+    #         return True
+
+    #     app_label, codename = perm.split('.')
+    #     return super(Member, self).has_perm(perm) \
+    #         or self.roles.filter(
+    #             group__permissions__codename=codename,
+    #             group__permissions__content_type__app_label=app_label).exists()
+
