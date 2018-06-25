@@ -118,24 +118,20 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     def teams(self):
         Team = apps.get_model('involvement', 'Team')
         return Team.objects.filter(
-            models.Q(
-                roles__positions__term_from__lte=date.today(),
-                roles__positions__term_to__gte=date.today(),
-                roles__positions__applications__applicant=self,
-                roles__positions__applications__status='appointed',
-             )
+            roles__positions__term_from__lte=date.today(),
+            roles__positions__term_to__gte=date.today(),
+            roles__positions__applications__applicant=self,
+            roles__positions__applications__status='appointed',
         )
 
     @property
     def roles(self):
         Role = apps.get_model('involvement', 'Role')
         return Role.objects.filter(
-            models.Q(
-                positions__term_from__lte=date.today(),
-                positions__term_to__gte=date.today(),
-                positions__applications__applicant=self,
-                positions__applications__status='appointed',
-             )
+            positions__term_from__lte=date.today(),
+            positions__term_to__gte=date.today(),
+            positions__applications__applicant=self,
+            positions__applications__status='appointed',
         )
 
     def person_number(self) -> str:
