@@ -1,0 +1,48 @@
+{% extends 'modeladmin/inspect.html' %}
+{% load i18n %}
+
+{% block fields_output %}
+    <dl>
+        <dt>{% trans 'role' %}</dt>
+        <dd>{{ instance }}</dd>
+
+        <dt>{% trans 'Current applicants' %}</dt>
+        <dd>
+            <ul>
+                {% for a in current_applications %}
+                    <li>
+                        {{ a.applicant }}
+                        {% if a.applicant.email or a.applicant.phone_number %}
+                            &mdash;
+                            {% if a.applicant.email %}<a href="mailto:{{ a.applicant.email }}">{{ a.applicant.email }}</a>{% endif %}
+                            {% if a.applicant.email and a.applicant.phone_number %} or {% endif %}
+                            {% if a.applicant.phone_number %}{{ a.applicant.phone_number }}{% endif %}
+                        {% endif %}
+                    </li>
+                {% empty %}
+                    {% trans 'No applications have been approved for this role.' %}
+                {% endfor %}
+            </ul>
+        </dd>
+
+        <dt>{% trans 'Earlier applicants' %}</dt>
+        <dd>
+            <ul>
+                {% for a in old_applications %}
+                    <li>
+                        <b>{{ a.get_status_display }}:</b>
+                        {{ a.applicant }}
+                        {% if a.applicant.email or a.applicant.phone_number %}
+                            &mdash;
+                            {% if a.applicant.email %}<a href="mailto:{{ a.applicant.email }}">{{ a.applicant.email }}</a>{% endif %}
+                            {% if a.applicant.email and a.applicant.phone_number %} or {% endif %}
+                            {% if a.applicant.phone_number %}{{ a.applicant.phone_number }}{% endif %}
+                        {% endif %}
+                    </li>
+                {% empty %}
+                    {% trans 'No earlier applicants have been approved for this role.' %}
+                {% endfor %}
+            </ul>
+        </dd>
+    </dl>
+{% endblock %}
