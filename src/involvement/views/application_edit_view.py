@@ -1,13 +1,13 @@
 from wagtail.contrib.modeladmin.views import EditView
 from involvement.models import Role
-from involvement.rule_utils import is_admin
+from involvement.rule_utils import is_super, is_admin
 
 
 class ApplicationEditView(EditView):
     def get_form(self, form_class=None):
         form = super(ApplicationEditView, self).get_form(form_class=form_class)
 
-        if not self.request.user.is_superuser \
+        if not is_super(self.request.user) \
                 and not is_admin(self.request.user):
             # Filter status
             form.fields['status'].choices = form.fields['status'].choices[1:]
