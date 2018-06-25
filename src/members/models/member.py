@@ -117,29 +117,25 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     @property
     def teams(self):
         Team = apps.get_model('involvement', 'Team')
-        groups = self.groups.all()
         return Team.objects.filter(
             models.Q(
                 roles__positions__term_from__lte=date.today(),
                 roles__positions__term_to__gte=date.today(),
                 roles__positions__applications__applicant=self,
                 roles__positions__applications__status='appointed',
-             ) |
-            models.Q(roles__group__in=groups)
+             )
         )
 
     @property
     def roles(self):
         Role = apps.get_model('involvement', 'Role')
-        groups = self.groups.all()
         return Role.objects.filter(
             models.Q(
                 positions__term_from__lte=date.today(),
                 positions__term_to__gte=date.today(),
                 positions__applications__applicant=self,
                 positions__applications__status='appointed',
-             ) |
-            models.Q(group__in=groups)
+             )
         )
 
     def person_number(self) -> str:
