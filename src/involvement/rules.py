@@ -86,6 +86,8 @@ rules.add_perm('involvement.appoint_position', is_super
 
 rules.add_perm('involvement.list_role', is_super | has_role_perm)
 rules.add_perm('involvement.add_role', is_super | has_role_perm)
+rules.add_perm('involvement.inspect_role', is_super
+               | member_of_team_role & can_modify_role)
 rules.add_perm('involvement.change_role', is_super
                | member_of_team_role & can_modify_role)
 rules.add_perm('involvement.delete_role', is_super
