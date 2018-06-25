@@ -23,6 +23,16 @@ class TeamAdmin(ModelAdmin):
     permission_helper_class = RulesPermissionHelper
     inspect_view_enabled = True
 
+    def get_queryset(self, request):
+        if request.user.is_superuser:
+            return super(TeamAdmin, self).get_queryset(request)
+        else:
+            qs = request.user.teams
+            ordering = self.get_ordering(request)
+            if ordering:
+                qs = qs.order_by(*ordering)
+            return qs
+
 
 class RoleAdmin(ModelAdmin):
     model = Role
@@ -39,6 +49,8 @@ class RoleAdmin(ModelAdmin):
     permission_helper_class = RulesPermissionHelper
     create_view_class = views.RoleCreateView
     edit_view_class = views.RoleEditView
+    inspect_view_enabled = True
+    inspect_view_class = views.RoleInspectView
 
     def team(self, obj):
         return ', '.join([str(i) for i in obj.teams.all()])
@@ -204,7 +216,7 @@ class ApplicationAdmin(ModelAdmin):
     menu_label = _('Applications')
     menu_icon = 'mail'
     menu_order = 400
-    list_display = ('position', 'applicant', 'status')
+    list_display = ('role', 'position', 'applicant', 'status')
     list_filter = ('position__role__teams', 'status')
     search_fields = (
         'position__role__teams__name_en', 'position__role__teams__name_sv',
@@ -229,6 +241,9 @@ class ApplicationAdmin(ModelAdmin):
             if ordering:
                 qs = qs.order_by(*ordering)
             return qs
+
+    def role(self, obj):
+        return obj.position.role
 
 
 class InvolvementAdminGroup(ModelAdminGroup):
