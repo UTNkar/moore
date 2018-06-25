@@ -9,6 +9,7 @@ from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 from involvement.models import Team, Role, Position, Application
 from involvement.rules import is_action_approve, is_action_appoint
+from involvement.rule_utils import is_super
 from involvement import views
 from utils.permissions import RulesPermissionHelper
 
@@ -24,7 +25,7 @@ class TeamAdmin(ModelAdmin):
     inspect_view_enabled = True
 
     def get_queryset(self, request):
-        if request.user.is_superuser:
+        if is_super(request.user):
             return super(TeamAdmin, self).get_queryset(request)
         else:
             qs = request.user.teams
@@ -56,7 +57,7 @@ class RoleAdmin(ModelAdmin):
         return ', '.join([str(i) for i in obj.teams.all()])
 
     def get_queryset(self, request):
-        if request.user.is_superuser:
+        if is_super(request.user):
             return super(RoleAdmin, self).get_queryset(request)
         else:
             qs = Role.edit_role_types_of(request.user)
@@ -198,7 +199,7 @@ class PositionAdmin(ModelAdmin):
     inspect_view_class = views.PositionInspectView
 
     def get_queryset(self, request):
-        if request.user.is_superuser:
+        if is_super(request.user):
             return super(PositionAdmin, self).get_queryset(request)
         else:
             roles = Role.edit_role_types_of(request.user)
@@ -228,7 +229,7 @@ class ApplicationAdmin(ModelAdmin):
     edit_view_class = views.ApplicationEditView
 
     def get_queryset(self, request):
-        if request.user.is_superuser:
+        if is_super(request.user):
             return super(ApplicationAdmin, self).get_queryset(request)
         else:
             roles = Role.edit_applicant_permission_of(request.user)
