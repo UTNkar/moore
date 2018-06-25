@@ -177,16 +177,3 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         for email in self.get_confirmed_emails():
             if email != self.email:
                 self.remove_email(email)
-
-    # def has_perm(self, perm, obj=None):
-    #     if obj is not None:
-    #         return super(Member, self).has_perm(perm, obj)
-
-    #     if super(Member, self).has_perm(perm):
-    #         return True
-
-    #     app_label, codename = perm.split('.')
-    #     return super(Member, self).has_perm(perm) \
-    #         or self.roles.filter(
-    #             group__permissions__codename=codename,
-    #             group__permissions__content_type__app_label=app_label).exists()
