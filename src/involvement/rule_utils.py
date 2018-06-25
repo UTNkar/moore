@@ -3,6 +3,8 @@ import rules
 
 @rules.predicate
 def is_super(user):
+    if not hasattr(user, 'is_superuser'):
+        return False
     return user.is_superuser
 
 
