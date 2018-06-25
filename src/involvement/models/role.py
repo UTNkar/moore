@@ -125,6 +125,7 @@ class Role(models.Model):
 
         return self.phone_number
 
+    @property
     def members(self):
         member_model = apps.get_model(settings.AUTH_USER_MODEL)
         return member_model.objects.filter(
@@ -179,7 +180,8 @@ class Role(models.Model):
 
         role_type_filter = Role.editable_role_types(user)
         roles = Role.objects.filter(
-            role_type__in=role_type_filter
+            role_type__in=role_type_filter,
+            teams__in=user.teams
         )
         if pk:
             return roles.values_list('pk', flat=True)
@@ -193,7 +195,8 @@ class Role(models.Model):
 
         role_type_filter = Role.edit_applicant_role_types(user)
         roles = Role.objects.filter(
-            role_type__in=role_type_filter
+            role_type__in=role_type_filter,
+            teams__in=user.teams
         )
         if pk:
             return roles.values_list('pk', flat=True)
@@ -209,6 +212,19 @@ class Role(models.Model):
         if self.teams.count():
             return self.teams.first().logo
         return None
+
+    @property
+    def current_positions(self):
+        return self.positions.filter(
+            term_from__lte=date.today(),
+            term_to__gte=date.today(),
+        )
+
+    @property
+    def old_positions(self):
+        return self.positions.filter(
+            term_to__lte=date.today()
+        )
 
     def __str__(self) -> str:
         if self.teams:
