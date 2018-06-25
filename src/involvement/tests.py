@@ -407,6 +407,20 @@ class AdminPermissionTests(TestCase):
                 )
                 mSet['roles'][key].teams.add(mSet['team'])
 
+                currentPosition = Position.objects.create(
+                    role=mSet['roles'][key],
+                    recruitment_start=date.today() - timedelta(days=5),
+                    recruitment_end=date.today() - timedelta(days=1),
+                    term_from=date.today() - timedelta(days=5),
+                    term_to=date.today() + timedelta(days=365),
+                )
+
+                Application.objects.create(
+                    position=currentPosition,
+                    applicant=mSet['members'][key],
+                    status='appointed',
+                )
+
                 if key != 'admin':
                     mSet['approvable_positions'][key] = Position.objects \
                         .create(
@@ -605,11 +619,11 @@ class RecruitmentExtensionTestCase(TestCase):
     """
     def setUp(self):
 
+        self.group = Group.objects.create(name='Test Group')
         self.team = Team.objects.create(
             name_en='RecruitmentExtensionTestCase Team EN',
             name_sv='RecruitmentExtensionTestCase Team SV',
         )
-        self.group = Group.objects.create(name='Test Group')
         self.role = Role.objects.create(
             name_en='Test',
             name_sv='TestSV',
@@ -637,12 +651,132 @@ class RecruitmentExtensionTestCase(TestCase):
             username='admin',
         )
 
+        adminPos = Position.objects.create(
+            role=self.adminRole,
+            recruitment_start=date.today() - timedelta(days=5),
+            recruitment_end=date.today() - timedelta(days=1),
+            term_from=date.today() - timedelta(days=5),
+            term_to=date.today() + timedelta(days=365),
+        )
+
+        self.adminApplication = Application.objects.create(
+            position=adminPos,
+            applicant=self.admin,
+            status='appointed',
+        )
+
         wagtail_access = Permission.objects.get(codename='access_admin')
         admin_group.permissions.add(wagtail_access)
         admin_group.user_set.add(self.admin)
         admin_group.save()
         self.client.force_login(
             self.admin, 'django.contrib.auth.backends.ModelBackend'
+        )
+
+    def test_extension(self):
+        """Test automatic extension urls"""
+
+        pos = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=10),
+            recruitment_end=date.today() - timedelta(days=1),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+
+        response = self.client.get(
+            reverse('involvement_position_extend', args=[pos.pk]))
+        self.assertRedirects(response,
+                             reverse('involvement_position_modeladmin_index'))
+
+        pos.refresh_from_db()
+        self.assertGreater(pos.recruitment_end, date.today())
+
+    def test_not_ended(self):
+        """
+        Test denial of automatic extension when recruitment has not ended
+        """
+        recruiting = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=10),
+            recruitment_end=date.today(),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        response = self.client.get(
+            reverse('involvement_position_extend', args=[recruiting.pk]))
+        self.assertRedirects(response,
+                             reverse('involvement_position_modeladmin_index'))
+
+        recruiting.refresh_from_db()
+        self.assertEqual(recruiting.recruitment_end, date.today())
+
+    def test_with_applications(self):
+        """
+        Test denial of automatic extension when members have applied
+        """
+        applied = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=10),
+            recruitment_end=date.today() - timedelta(days=1),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        Application.objects.create(
+            position=applied,
+            applicant=self.admin,
+            status='submitted',
+        )
+        response = self.client.get(
+            reverse('involvement_position_extend', args=[applied.pk]))
+        self.assertRedirects(response,
+                             reverse('involvement_position_modeladmin_index'))
+
+        applied.refresh_from_db()
+        self.assertEqual(
+            applied.recruitment_end, date.today() - timedelta(days=1)
+        )
+
+    def test_no_access(self):
+        """Test denial of automatic extension when user has no access."""
+        self.client.logout()
+
+        pos = Position.objects.create(
+            role=self.role,
+            recruitment_start=date.today() - timedelta(days=10),
+            recruitment_end=date.today() - timedelta(days=1),
+            term_from=date.today() + timedelta(days=4),
+            term_to=date.today() + timedelta(days=365),
+        )
+        response = self.client.get(
+            reverse('involvement_position_extend', args=[pos.pk]))
+        self.assertEqual(response.status_code, 302)
+
+
+class RecruitmentExtensionEmailTestCase(TestCase):
+    """
+    Tests for the automated deadline extender emails. The deadline extender
+    should be triggered for vacant positions of which the deadline has just
+    passed.
+    """
+
+    def setUp(self):
+        self.group = Group.objects.create(name='Test Group')
+        self.team = Team.objects.create(
+            name_en='RecruitmentExtensionTestCase Team EN',
+            name_sv='RecruitmentExtensionTestCase Team SV',
+        )
+        self.role = Role.objects.create(
+            name_en='Test',
+            name_sv='TestSV',
+            role_type='engaged',
+            election_email='contact@localhost',
+            group=self.group,
+        )
+        self.role.teams.add(self.team)
+
+        self.member = Member.objects.create(
+            username='member',
         )
 
     def test_send_email(self):
@@ -689,103 +823,10 @@ class RecruitmentExtensionTestCase(TestCase):
         )
         Application.objects.create(
             position=applied,
-            applicant=self.admin,
+            applicant=self.member,
             status='submitted',
         )
 
         send_extension_emails()
 
         self.assertEqual(len(mail.outbox), 0)
-
-    def test_extension(self):
-        """Test automatic extension urls"""
-
-        adminPos = Position.objects.create(
-            role=self.adminRole,
-            recruitment_start=date.today() - timedelta(days=5),
-            recruitment_end=date.today() - timedelta(days=1),
-            term_from=date.today() + timedelta(days=5),
-            term_to=date.today() + timedelta(days=365),
-        )
-
-        Application.objects.create(
-            position=adminPos,
-            applicant=self.admin,
-            status='appointed',
-        )
-
-        pos = Position.objects.create(
-            role=self.role,
-            recruitment_start=date.today() - timedelta(days=10),
-            recruitment_end=date.today() - timedelta(days=1),
-            term_from=date.today() + timedelta(days=4),
-            term_to=date.today() + timedelta(days=365),
-        )
-
-        response = self.client.get(
-            reverse('involvement_position_extend', args=[pos.pk]))
-        self.assertRedirects(response,
-                             reverse('involvement_position_modeladmin_index'))
-
-        pos.refresh_from_db()
-        self.assertGreater(pos.recruitment_end, date.today())
-
-    def test_no_access(self):
-        """Test denial of automatic extension when user has no access."""
-        self.client.logout()
-
-        pos = Position.objects.create(
-            role=self.role,
-            recruitment_start=date.today() - timedelta(days=10),
-            recruitment_end=date.today() - timedelta(days=1),
-            term_from=date.today() + timedelta(days=4),
-            term_to=date.today() + timedelta(days=365),
-        )
-        response = self.client.get(
-            reverse('involvement_position_extend', args=[pos.pk]))
-        self.assertEqual(response.status_code, 302)
-
-    def test_not_ended(self):
-        """
-        Test denial of automatic extension when recruitment has not ended
-        """
-        recruiting = Position.objects.create(
-            role=self.role,
-            recruitment_start=date.today() - timedelta(days=10),
-            recruitment_end=date.today(),
-            term_from=date.today() + timedelta(days=4),
-            term_to=date.today() + timedelta(days=365),
-        )
-        response = self.client.get(
-            reverse('involvement_position_extend', args=[recruiting.pk]))
-        self.assertRedirects(response,
-                             reverse('involvement_position_modeladmin_index'))
-
-        recruiting.refresh_from_db()
-        self.assertEqual(recruiting.recruitment_end, date.today())
-
-    def test_with_applications(self):
-        """
-        Test denial of automatic extension when members have applied
-        """
-        applied = Position.objects.create(
-            role=self.role,
-            recruitment_start=date.today() - timedelta(days=10),
-            recruitment_end=date.today() - timedelta(days=1),
-            term_from=date.today() + timedelta(days=4),
-            term_to=date.today() + timedelta(days=365),
-        )
-        Application.objects.create(
-            position=applied,
-            applicant=self.admin,
-            status='submitted',
-        )
-        response = self.client.get(
-            reverse('involvement_position_extend', args=[applied.pk]))
-        self.assertRedirects(response,
-                             reverse('involvement_position_modeladmin_index'))
-
-        applied.refresh_from_db()
-        self.assertEqual(
-            applied.recruitment_end, date.today() - timedelta(days=1)
-        )
