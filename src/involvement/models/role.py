@@ -208,6 +208,10 @@ class Role(models.Model):
         return ', '.join([str(i) for i in self.teams.all()])
 
     @property
+    def member_names(self):
+        return ', '.join([str(i) for i in self.members])
+
+    @property
     def team_logo(self):
         if self.teams.count():
             return self.teams.first().logo
