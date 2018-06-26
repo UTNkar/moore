@@ -63,6 +63,12 @@ class Application(ClusterableModel):
         default=False,
     )
 
+    def __str__(self) -> str:
+        return '%(applicant)s - %(position)s' % {
+            'position': self.position,
+            'applicant': self.applicant
+        }
+
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldRowPanel([
