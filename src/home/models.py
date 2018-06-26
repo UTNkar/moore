@@ -1,5 +1,5 @@
 from __future__ import absolute_import, unicode_literals
-
+from django.apps import apps
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.fields import ParentalKey
@@ -14,9 +14,9 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from google.models import GoogleFormBlock, GoogleDriveBlock, \
     GoogleCalendarBlock
-from involvement.models import ContactCardBlock
 from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
+from involvement.blocks import ContactCardBlock
 
 
 class ContactPage(Page):
@@ -90,6 +90,7 @@ class FormField(AbstractFormField):
 
 
 class FormPage(AbstractEmailForm):
+
     title_sv = models.CharField(max_length=255)
     translated_title = TranslatedField('title', 'title_sv')
 
@@ -291,6 +292,8 @@ class Banner(Orderable):
 
 class WebPage(Page):
     # ---- General Page information ------
+
+
     title_sv = models.CharField(max_length=255)
     translated_title = TranslatedField('title', 'title_sv')
 
