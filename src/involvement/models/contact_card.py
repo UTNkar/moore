@@ -40,6 +40,37 @@ class ContactBlockForm(WagtailAdminModelForm):
             )
 
 
+class ContactBlockForm(WagtailAdminModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ContactBlockForm, self).__init__(*args, **kwargs)
+        contact_card = self.instance
+        Application = apps.get_model('involvement', 'Application')
+
+        if contact_card.application:
+            self.fields['application'].queryset = Application.objects.filter(
+                models.Q(
+                    position__term_from__lte=date.today(),
+                    position__term_to__gte=date.today(),
+                    status='appointed',
+                    contact_card__isnull=True,
+                ) | # Keep selected application in list
+                models.Q(
+                    position__term_from__lte=date.today(),
+                    position__term_to__gte=date.today(),
+                    status='appointed',
+                    applicant=contact_card.application.applicant
+                )
+            )
+        else:
+            self.fields['application'].queryset = Application.objects.filter(
+                position__term_from__lte=date.today(),
+                position__term_to__gte=date.today(),
+                status='appointed',
+                contact_card__isnull=True,
+            )
+
+
 @register_snippet
 class ContactCard(models.Model):
 
@@ -75,6 +106,13 @@ class ContactCard(models.Model):
                 'image': '(%s)' % _('picture missing')
                          if not self.picture else '',
             }
+        return '%(name)s - %(role)s' % {
+            'name': self.name,
+            'role': self.role_text
+        }
+
+    list_filter = ('application__position__role__team')
+    base_form_class = ContactBlockForm
 
         return '%(teams)s | %(position)s - %(applicant)s %(image)s' % {
             'teams': self.position.role.team_names,
