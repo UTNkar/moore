@@ -75,8 +75,7 @@
       }
     }
 
-    display: flex;
-
+    @include flexbox();
     .card-image {
       max-width: 50%;
       img {
@@ -87,13 +86,13 @@
     }
 
     .card-stacked {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
+      @include flexbox();
+      @include flex-direction(column);
+      @include flex(1);
       position: relative;
 
       .card-content {
-        flex-grow: 1;
+        @include flex-grow(1);
       }
     }
   }

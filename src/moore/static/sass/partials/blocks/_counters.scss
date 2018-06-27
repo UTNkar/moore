@@ -6,12 +6,12 @@
     padding: 80px 0;
   }
   h2 {
-    align-items: center;
-    display: flex;
+    @include align-items(center);
+    @include flexbox();
     font-size: 27px;
     font-weight: 400;
     height: 100px;
-    justify-content: center;
+    @include justify-content(center);
     line-height: 1.5;
   }
   .material-icons {
