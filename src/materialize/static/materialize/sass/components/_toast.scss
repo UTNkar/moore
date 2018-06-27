@@ -36,9 +36,9 @@
   font-size: 1.1rem;
   font-weight: 300;
   color: $toast-text-color;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include flexbox();
+  @include align-items(center);
+  @include justify-content(space-between);
   cursor: default;
 
   .toast-action {

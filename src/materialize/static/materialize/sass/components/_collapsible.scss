@@ -7,7 +7,7 @@
 }
 
 .collapsible-header {
-  display: flex;
+  @include flexbox();
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   line-height: 1.5;

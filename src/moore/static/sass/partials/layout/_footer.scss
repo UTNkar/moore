@@ -68,11 +68,11 @@ footer {
 
 // Sticky footer
 body {
-  display: flex;
+  @include flexbox();
   min-height: 100vh;
-  flex-direction: column;
+  @include flex-direction(column);
 }
 
 main {
-  flex: 1 0 auto;
+  @include flex(1 0 auto);
 }

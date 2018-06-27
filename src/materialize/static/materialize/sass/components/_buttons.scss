@@ -180,13 +180,13 @@ button.btn-floating {
     height: $button-floating-large-size;
 
     ul {
-      display: flex;
+      @include flexbox();
       top: 0;
       bottom: 0;
       z-index: 1;
 
       li {
-        flex: 1;
+        @include flex(1);
         display: inline-block;
         margin: 0;
         height: 100%;
