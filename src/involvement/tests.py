@@ -10,7 +10,7 @@ from wagtail.core.models import Page
 from home.models import HomePage
 from involvement.cron import send_extension_emails
 from involvement.models import RecruitmentPage, Position, Role, Team, \
-    Application
+    Application, ContactCard
 from members.models import Member
 
 
@@ -221,6 +221,12 @@ class AdminPermissionTests(TestCase):
             'create': 'involvement_application_modeladmin_create',
             'edit': 'involvement_application_modeladmin_edit',
             'delete': 'involvement_application_modeladmin_delete',
+        },
+        'contactcard': {
+            'index': 'involvement_contactcard_modeladmin_index',
+            'create': 'involvement_contactcard_modeladmin_create',
+            'edit': 'involvement_contactcard_modeladmin_edit',
+            'delete': 'involvement_contactcard_modeladmin_delete',
         }
     }
 
@@ -315,6 +321,19 @@ class AdminPermissionTests(TestCase):
                         self.assertNoAccess(action, url, application,
                                             "%s, %s" % (action, role_type))
 
+    def checkContactCards(self, mSet, accepted_types):
+        for action, url in AdminPermissionTests.pages['contactcard'].items():
+            if action in ['create', 'index']:
+                self.assertCanAccess(action, url)
+            else:
+                for role_type, contact_card in \
+                        mSet['contact_cards'].items():
+                    if role_type in accepted_types:
+                        self.assertCanAccess(action, url, contact_card)
+                    else:
+                        self.assertNoAccess(action, url, contact_card,
+                                            "%s, %s" % (action, role_type))
+
     def checkTeams(self, mSet):
         for action, url in AdminPermissionTests.pages['team'].items():
             team = mSet['team']
@@ -331,6 +350,13 @@ class AdminPermissionTests(TestCase):
                 for role_type, application in \
                         mSet['submitted_applications'].items():
                     self.assertNoAccess(action, url, application,
+                                        "%s, %s" % (action, role_type))
+
+        for action, url in AdminPermissionTests.pages['contactcard'].items():
+            if action not in ['create', 'index']:
+                for role_type, contact_card in \
+                        mSet['contact_cards'].items():
+                    self.assertNoAccess(action, url, contact_card,
                                         "%s, %s" % (action, role_type))
 
         for action, url in AdminPermissionTests.pages['role'].items():
@@ -372,6 +398,7 @@ class AdminPermissionTests(TestCase):
             'recruiting_positions': {},
             'appointable_positions': {},
             'submitted_applications': {},
+            'contact_cards': {},
         }
 
         self.secondary_set = {
@@ -383,6 +410,7 @@ class AdminPermissionTests(TestCase):
             'recruiting_positions': {},
             'appointable_positions': {},
             'submitted_applications': {},
+            'contact_cards': {},
         }
 
         for mSet in [self.primary_set, self.secondary_set]:
@@ -419,6 +447,10 @@ class AdminPermissionTests(TestCase):
                     position=currentPosition,
                     applicant=mSet['members'][key],
                     status='appointed',
+                )
+
+                mSet['contact_cards'][key] = ContactCard.objects.create(
+                    position=currentPosition
                 )
 
                 if key != 'admin':
@@ -476,6 +508,10 @@ class AdminPermissionTests(TestCase):
         # Can view and edit applications for role_type 'board' and 'presidium'
         self.checkApplications(self.primary_set, ['board', 'presidium'])
 
+        # Contact Cards
+        # Can view and edit contact cards for role_type 'board' and 'presidium'
+        self.checkContactCards(self.primary_set, ['board', 'presidium'])
+
         # Make sure that we cant access pages were we are not a team-member
         self.all_modals_no_access(self.secondary_set)
 
@@ -500,6 +536,10 @@ class AdminPermissionTests(TestCase):
         # Applications
         # Can view and edit applications for role_type 'presidium'
         self.checkApplications(self.primary_set, ['presidium'])
+
+        # ContactCards
+        # Can view and edit ContactCards for role_type 'presidium'
+        self.checkContactCards(self.primary_set, ['presidium'])
 
         # Make sure that we cant access pages were we are not a team-member
         self.all_modals_no_access(self.secondary_set)
@@ -529,6 +569,11 @@ class AdminPermissionTests(TestCase):
         # and 'engaged'
         self.checkApplications(self.primary_set, ['group_leader', 'engaged'])
 
+        # ContactCards
+        # Can view and edit ContactCards for role_type 'group_leader'
+        # and 'engaged'
+        self.checkContactCards(self.primary_set, ['group_leader', 'engaged'])
+
         # Make sure that we cant access pages were we are not a team-member
         self.all_modals_no_access(self.secondary_set)
 
@@ -553,6 +598,10 @@ class AdminPermissionTests(TestCase):
         # Applications
         # Can view and edit applications for role_type 'engaged'
         self.checkApplications(self.primary_set, ['engaged'])
+
+        # ContactCards
+        # Can view and edit ContactCards for role_type 'engaged'
+        self.checkContactCards(self.primary_set, ['engaged'])
 
         # Make sure that we cant access pages were we are not a team-member
         self.all_modals_no_access(self.secondary_set)
@@ -597,6 +646,10 @@ class AdminPermissionTests(TestCase):
         # Applications
         # Access to all views
         self.checkApplications(self.primary_set, accepted_roles)
+
+        # ContactCards
+        # Access to all views
+        self.checkContactCards(self.primary_set, accepted_roles)
 
         # Make sure that we cant access pages were we are not a team-member
         self.all_modals_no_access(self.secondary_set)
