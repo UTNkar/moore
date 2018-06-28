@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
-from involvement.models import Application, MandateHistory
+from involvement.models import Application
 from members.forms import PersonNumberField
 from utils.forms import AdvancedModelMultipleChoiceField
 
@@ -88,11 +88,6 @@ class AppointmentForm(forms.Form):
             if application in self.cleaned_data['appoint']:
                 application.status = 'appointed'
 
-                MandateHistory.objects.get_or_create(
-                    position=self.position,
-                    applicant=application.applicant,
-                )
-
             else:
                 application.status = 'turned_down'
             application.save()
@@ -106,8 +101,3 @@ class AppointmentForm(forms.Form):
             if not created:
                 appl.status = 'appointed'
                 appl.save()
-
-            MandateHistory.objects.get_or_create(
-                position=self.position,
-                applicant=user,
-            )
