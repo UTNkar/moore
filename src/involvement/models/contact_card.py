@@ -45,12 +45,19 @@ class ContactBlockForm(WagtailAdminModelForm):
 @register_snippet
 class ContactCard(models.Model):
 
+    position = models.ForeignKey(
+        'Position',
+        related_name='contact_cards',
+        on_delete=models.CASCADE,
+        blank=False,
+    )
+
     application = models.OneToOneField(
         'Application',
         on_delete=models.CASCADE,
         related_name='contact_card',
         blank=True,
-        null=True
+        null=True,
     )
 
     picture = models.ForeignKey(
@@ -104,15 +111,17 @@ class ContactCard(models.Model):
     )
 
     def __str__(self) -> str:
-        if self.application:
+        if self.application is not None:
             return '%(teams)s | %(position)s - %(applicant)s' % {
-                'teams': self.application.position.role.team_names,
-                'position': self.application.position,
+                'teams': self.position.role.team_names,
+                'position': self.position,
                 'applicant': self.application.applicant
             }
-        return '%(name)s - %(role)s' % {
-            'name': self.name,
-            'role': self.role_text
+
+        return '%(teams)s | %(position)s - %(applicant)s' % {
+            'teams': self.position.role.team_names,
+            'position': self.position,
+            'applicant': _('Vacant Position')
         }
 
     list_filter = ('application__position__role__team')
