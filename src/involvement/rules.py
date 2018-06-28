@@ -119,3 +119,6 @@ rules.add_perm('involvement.change_team', is_super
                | member_of_team & is_admin)
 rules.add_perm('involvement.delete_team', is_super
                | member_of_team & is_admin)
+
+
+
