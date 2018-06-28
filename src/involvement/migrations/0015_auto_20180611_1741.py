@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('involvement', '0014_reset_role_dependencies'),
+        ('involvement', '0013_connect_group_to_role'),
     ]
 
     operations = [
