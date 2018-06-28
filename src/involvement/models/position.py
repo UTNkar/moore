@@ -1,5 +1,8 @@
 from datetime import date
+from django.apps import apps
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
     FieldRowPanel
@@ -63,6 +66,14 @@ class Position(models.Model):
             return "%s %s" % (self.role.name, self.term_from.year)
 
     @property
+    def appointed_applications(self):
+        Application = apps.get_model('involvement', 'Application')
+        return Application.objects.filter(
+            status='appointed',
+            position=self,
+        )
+
+    @property
     def is_past_due(self):
         return date.today() > self.recruitment_end
 
@@ -96,3 +107,26 @@ class Position(models.Model):
         FieldPanel('comment_en'),
         FieldPanel('comment_sv'),
     ])]
+
+
+@receiver(post_save, sender=Position, dispatch_uid='position_check_contact_card')
+def position_check_contact_card(sender, instance, **kwargs):
+    ContactCard = apps.get_model('involvement', 'ContactCard')
+    cards = ContactCard.objects.filter(
+        position=instance,
+    )
+    if cards.count() < instance.appointments:
+        # We should create vacant contact cards
+        for i in range(0, instance.appointments - cards.count()):
+            ContactCard.objects.create(position=instance)
+
+    if cards.count() > instance.appointments:
+        # We have more cards that should be available.
+        # Remove only vacant contact cards.
+        maxCardsToRemove = cards.count() - instance.appointments
+        removedCards = 0
+        for card in cards.filter(application__isnull=True).all():
+            card.delete()
+            removedCards += 1
+            if removedCards == maxCardsToRemove:
+                break
