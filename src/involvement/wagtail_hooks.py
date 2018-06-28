@@ -14,9 +14,11 @@ from involvement.rule_utils import is_super
 from involvement import views
 from utils.permissions import RulesPermissionHelper
 
+
 @hooks.register('construct_main_menu')
 def hide_snippets_menu_item(request, menu_items):
-  menu_items[:] = [item for item in menu_items if item.name != 'snippets']
+    menu_items[:] = [item for item in menu_items if item.name != 'snippets']
+
 
 class TeamAdmin(ModelAdmin):
     model = Team
@@ -277,7 +279,8 @@ class InvolvementAdminGroup(ModelAdminGroup):
     menu_label = _('Involvement')
     menu_icon = 'fa-address-book'
     menu_order = 500
-    items = (TeamAdmin, RoleAdmin, PositionAdmin, ApplicationAdmin, ContactCardAdmin)
+    items = (TeamAdmin, RoleAdmin, PositionAdmin,
+             ApplicationAdmin, ContactCardAdmin)
 
 
 modeladmin_register(InvolvementAdminGroup)

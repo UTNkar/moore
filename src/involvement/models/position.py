@@ -109,7 +109,8 @@ class Position(models.Model):
     ])]
 
 
-@receiver(post_save, sender=Position, dispatch_uid='position_check_contact_card')
+@receiver(post_save, sender=Position,
+          dispatch_uid='position_check_contact_card')
 def position_check_contact_card(sender, instance, **kwargs):
     ContactCard = apps.get_model('involvement', 'ContactCard')
     cards = ContactCard.objects.filter(

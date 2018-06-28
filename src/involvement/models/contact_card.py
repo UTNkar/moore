@@ -1,14 +1,11 @@
 from datetime import date
-from django import forms
 from django.apps import apps
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.admin.forms import WagtailAdminModelForm
-from wagtail.core.fields import RichTextField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
-from utils.translation import TranslatedField
 
 
 class ContactBlockForm(WagtailAdminModelForm):
@@ -25,7 +22,8 @@ class ContactBlockForm(WagtailAdminModelForm):
                     position__term_to__gte=date.today(),
                     status='appointed',
                     contact_card__isnull=True,
-                ) | # Keep selected application in list
+                ) |
+                # Keep selected application in list
                 models.Q(
                     position__term_from__lte=date.today(),
                     position__term_to__gte=date.today(),
@@ -74,7 +72,8 @@ class ContactCard(models.Model):
                 'teams': self.position.role.team_names,
                 'position': self.position,
                 'applicant': self.application.applicant,
-                'image': '(%s)' % _('picture missing') if not self.picture else '',
+                'image': '(%s)' % _('picture missing')
+                         if not self.picture else '',
             }
 
         return '%(teams)s | %(position)s - %(applicant)s %(image)s' % {

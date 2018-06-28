@@ -85,7 +85,8 @@ class Application(ClusterableModel):
     ])]
 
 
-@receiver(post_save, sender=Application, dispatch_uid='application_check_mandate_history')
+@receiver(post_save, sender=Application,
+          dispatch_uid='application_check_mandate_history')
 def check_mandate_history(sender, instance, **kwargs):
     MandateHistory = apps.get_model('involvement', 'MandateHistory')
     if instance.status == 'appointed':
@@ -94,13 +95,14 @@ def check_mandate_history(sender, instance, **kwargs):
             applicant=instance.applicant,
         )
     else:
-       MandateHistory.objects.filter(
+        MandateHistory.objects.filter(
             position=instance.position,
             applicant=instance.applicant,
         ).delete()
 
 
-@receiver(post_save, sender=Application, dispatch_uid='application_check_contact_card')
+@receiver(post_save, sender=Application,
+          dispatch_uid='application_check_contact_card')
 def check_contact_card(sender, instance, **kwargs):
     ContactCard = apps.get_model('involvement', 'ContactCard')
 
@@ -127,7 +129,8 @@ def check_contact_card(sender, instance, **kwargs):
             # Remove card if appointments for the position is not enough.
             # Otherwise set card as vacant
             card = instance.contact_card
-            if instance.position.appointments < instance.position.contact_cards.count():
+            cards_count = instance.position.contact_cards.count()
+            if instance.position.appointments < cards_count:
                 card.delete()
             else:
                 card.application = None
