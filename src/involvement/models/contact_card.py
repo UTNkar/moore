@@ -54,7 +54,8 @@ class ContactBlockForm(WagtailAdminModelForm):
                     position__term_to__gte=date.today(),
                     status='appointed',
                     contact_card__isnull=True,
-                ) | # Keep selected application in list
+                ) |
+                # Keep selected application in list
                 models.Q(
                     position__term_from__lte=date.today(),
                     position__term_to__gte=date.today(),
