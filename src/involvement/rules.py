@@ -11,7 +11,7 @@ def member_of_team_contactcard(user, card):
 
 @rules.predicate
 def can_modify_contactcard(user, card):
-  return can_set_applicant(user, card.position)
+    return can_set_applicant(user, card.position)
 
 
 # Application predicates
@@ -119,6 +119,3 @@ rules.add_perm('involvement.change_team', is_super
                | member_of_team & is_admin)
 rules.add_perm('involvement.delete_team', is_super
                | member_of_team & is_admin)
-
-
-
