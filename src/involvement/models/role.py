@@ -99,6 +99,12 @@ class Role(models.Model):
         default='styrelsen@utn.se',
     )
 
+    contact_email = models.EmailField(
+        verbose_name=_('Contact email address'),
+        help_text=_('The email address for the current position holder'),
+        blank=True,
+    )
+
     phone_number = models.CharField(
         max_length=20,
         verbose_name=_('Phone number'),
@@ -247,6 +253,7 @@ class Role(models.Model):
         ]),
         FieldPanel('group'),
         FieldPanel('election_email'),
+        FieldPanel('contact_email'),
         FieldPanel('phone_number'),
         FieldPanel('description_en'),
         FieldPanel('description_sv'),
