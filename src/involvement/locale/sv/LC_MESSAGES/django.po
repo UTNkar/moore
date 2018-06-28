@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-12 10:06+0200\n"
+"POT-Creation-Date: 2018-06-28 14:49+0200\n"
 "PO-Revision-Date: 2017-06-26 10:23+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -13,9 +13,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: involvement/apps.py:7 involvement/wagtail_hooks.py:245
+#: involvement/apps.py:7 involvement/wagtail_hooks.py:277
 msgid "Involvement"
 msgstr "Engagemang"
+
+#: involvement/blocks/contact_card_block.py:12
+msgid "Contact Card"
+msgstr "Kontaktkort"
+
+#: involvement/blocks/contact_card_block.py:15
+msgid "Meta"
+msgstr "Meta"
 
 #: involvement/forms/application_form.py:22
 #: involvement/forms/approval_form.py:22
@@ -64,177 +72,119 @@ msgstr ""
 "Du kan inte tillsätta sökande till %(current)s. Det maximala antalet för "
 "denna post är %(max)s."
 
-#: involvement/forms/approval_form.py:10 involvement/models/application.py:34
+#: involvement/forms/approval_form.py:10 involvement/models/application.py:37
 msgid "Approved"
 msgstr "Nominerad"
 
-#: involvement/forms/approval_form.py:11 involvement/models/application.py:35
+#: involvement/forms/approval_form.py:11 involvement/models/application.py:38
 msgid "Disapproved"
 msgstr "Inte Nominerad"
 
-#: involvement/models/application.py:26
+#: involvement/models/application.py:29
 msgid "Application"
 msgstr "Ansökning"
 
-#: involvement/models/application.py:27 involvement/wagtail_hooks.py:215
+#: involvement/models/application.py:30 involvement/wagtail_hooks.py:221
 msgid "Applications"
 msgstr "Ansökningar"
 
-#: involvement/models/application.py:32
+#: involvement/models/application.py:35
 msgid "Draft"
 msgstr "Utkast"
 
-#: involvement/models/application.py:33
+#: involvement/models/application.py:36
 msgid "Submitted"
 msgstr "Inskickade"
 
-#: involvement/models/application.py:36
+#: involvement/models/application.py:39
 msgid "Appointed"
 msgstr "Tillsatt"
 
-#: involvement/models/application.py:37
+#: involvement/models/application.py:40
 msgid "Turned down"
 msgstr "Avslagen"
 
-#: involvement/models/application.py:43
+#: involvement/models/application.py:46
 msgid "Status"
 msgstr "Status"
 
-#: involvement/models/application.py:50
+#: involvement/models/application.py:53
 msgid "Cover Letter"
 msgstr "Ansökningsbrev"
 
-#: involvement/models/application.py:51
+#: involvement/models/application.py:54
 msgid "Present yourself and state why you are who we are looking for"
 msgstr ""
 "Skriv en presentation av dig själv och en beskrivning av varför du är den vi "
 "letar efter"
 
-#: involvement/models/application.py:56
+#: involvement/models/application.py:59
 msgid "Qualifications"
 msgstr "Meriter"
 
-#: involvement/models/application.py:57
+#: involvement/models/application.py:60
 msgid "Give a summary of relevant qualifications"
 msgstr "Ge en sammanfattning av relevanta meriter"
 
-#: involvement/models/contact_card.py:28
-#, fuzzy
-#| msgid "English team description"
-msgid "English Description"
-msgstr "Beskrivning av gruppen på engelska"
+#: involvement/models/contact_card.py:77 involvement/models/contact_card.py:84
+msgid "picture missing"
+msgstr ""
 
-#: involvement/models/contact_card.py:32
-#, fuzzy
-#| msgid "Swedish team description"
-msgid "Swedish Description"
-msgstr "Beskrivning av gruppen på svenska"
+#: involvement/models/contact_card.py:83
+#: involvement/templatetags/involvement_tags.py:31
+msgid "Vacant Position"
+msgstr "Ledig position"
 
-#: involvement/models/contact_card.py:39 involvement/models/reference.py:22
-msgid "Name"
-msgstr "Namn"
-
-#: involvement/models/contact_card.py:40
-msgid "Overrides account name of position holder of the selected role."
-msgstr "Överrider kontonamn för positionsinnehavaren av den valda rollen"
-
-#: involvement/models/contact_card.py:47
-#, fuzzy
-#| msgid "English role name"
-msgid "English Role Name"
-msgstr "Rollnamn på engelska"
-
-#: involvement/models/contact_card.py:48 involvement/models/contact_card.py:54
-msgid "Overrides role name from the selected role."
-msgstr "Överrider namnet för den valda rollen"
-
-#: involvement/models/contact_card.py:53
-#, fuzzy
-#| msgid "Swedish role name"
-msgid "Swedish Role Name"
-msgstr "Rollnamn på svenska"
-
-#: involvement/models/contact_card.py:60
-#, fuzzy
-#| msgid "email address"
-msgid "Email address"
-msgstr "emailadress"
-
-#: involvement/models/contact_card.py:61
-msgid ""
-"Overrides account email address of position holder of the selected role."
-msgstr "Överrider email för positionsinnehavaren av den valda rollen"
-
-#: involvement/models/contact_card_block.py:12
-msgid "Contact Card"
-msgstr "Kontaktkort"
-
-#: involvement/models/contact_card_block.py:15
-msgid "Meta"
-msgstr "Meta"
-
-#: involvement/models/current_mandate.py:22
-msgid "Current mandate"
-msgstr "Nuvarande mandat"
-
-#: involvement/models/current_mandate.py:23
-msgid "Current mandates"
-msgstr "Nuvarande mandat"
-
-#: involvement/models/mandate_history.py:21 involvement/models/position.py:47
-msgid "Date of appointment"
-msgstr "Datum för tillsättning"
-
-#: involvement/models/mandate_history.py:22 involvement/models/position.py:49
-msgid "End date of appointment"
-msgstr "Mandatperiodens slutdatum"
-
-#: involvement/models/mandate_history.py:25
+#: involvement/models/mandate_history.py:22
 msgid "Mandate history"
 msgstr "Mandat historik"
 
-#: involvement/models/mandate_history.py:26
+#: involvement/models/mandate_history.py:23
 msgid "Mandate histories"
 msgstr "Mandat historik"
 
-#: involvement/models/position.py:14 involvement/models/reference.py:29
+#: involvement/models/position.py:16 involvement/models/reference.py:29
 msgid "Position"
 msgstr "Post"
 
-#: involvement/models/position.py:15 involvement/wagtail_hooks.py:182
+#: involvement/models/position.py:17 involvement/wagtail_hooks.py:190
 msgid "Positions"
 msgstr "Poster"
 
-#: involvement/models/position.py:27
-msgid "Approval committee"
-msgstr "Valberedningen"
-
-#: involvement/models/position.py:34
+#: involvement/models/position.py:28
 msgid "Start of recruitment"
 msgstr "Sökstart"
 
-#: involvement/models/position.py:37
+#: involvement/models/position.py:31
 msgid "Recruitment deadline"
 msgstr "Sista ansökningssdag"
 
-#: involvement/models/position.py:41
+#: involvement/models/position.py:35
 msgid "Number of appointments"
 msgstr "Antal tillsättningar"
 
-#: involvement/models/position.py:42
+#: involvement/models/position.py:36
 msgid "Enter the number of concurrent appointments to the position"
 msgstr "Ange antalet samtidiga tillsättningar av posten"
 
-#: involvement/models/position.py:52
+#: involvement/models/position.py:41
+msgid "Date of appointment"
+msgstr "Datum för tillsättning"
+
+#: involvement/models/position.py:43
+msgid "End date of appointment"
+msgstr "Mandatperiodens slutdatum"
+
+#: involvement/models/position.py:46
 msgid "English extra comments"
 msgstr "Övriga kommenterar, engelska"
 
-#: involvement/models/position.py:53 involvement/models/position.py:60
+#: involvement/models/position.py:47 involvement/models/position.py:54
 msgid "Enter extra comments specific to the position this year."
 msgstr ""
 "Ange eventuell extra information om posten som gäller specifikt för detta år."
 
-#: involvement/models/position.py:59
+#: involvement/models/position.py:53
 msgid "Swedish extra comments"
 msgstr "Övriga kommentarer, svenska"
 
@@ -255,6 +205,10 @@ msgstr "Exkluderade grupper"
 msgid "Choose teams to exclude from the page"
 msgstr "Välj grupper att exkludera från sidan"
 
+#: involvement/models/reference.py:22
+msgid "Name"
+msgstr "Namn"
+
 #: involvement/models/reference.py:23
 msgid "Enter the name of your reference"
 msgstr "Ange namnet på din referens"
@@ -272,7 +226,7 @@ msgstr "emailadress"
 msgid "Enter an email address on which your reference in reachable"
 msgstr "Ange en emailadress som din referens kan nås på"
 
-#: involvement/models/reference.py:44
+#: involvement/models/reference.py:44 involvement/models/role.py:110
 msgid "Phone number"
 msgstr "Telefonnummer"
 
@@ -292,115 +246,151 @@ msgstr "Kommentar"
 msgid "Enter any additional comments regarding your reference"
 msgstr "Är det något mer du vill tillägga om din referens"
 
-#: involvement/models/role.py:18
+#: involvement/models/role.py:22
 msgid "Role"
 msgstr "Roll"
 
-#: involvement/models/role.py:19 involvement/wagtail_hooks.py:41
+#: involvement/models/role.py:23 involvement/wagtail_hooks.py:44
 msgid "Roles"
 msgstr "Roller"
 
-#: involvement/models/role.py:22
+#: involvement/models/role.py:27
 msgid "Admin"
 msgstr "Admin"
 
-#: involvement/models/role.py:23
+#: involvement/models/role.py:28
 msgid "FUM"
 msgstr "FUM"
 
-#: involvement/models/role.py:24
+#: involvement/models/role.py:29
 msgid "Board"
 msgstr "Styrelse"
 
-#: involvement/models/role.py:25
+#: involvement/models/role.py:30
 msgid "Presidium"
 msgstr "Presidium"
 
-#: involvement/models/role.py:26
+#: involvement/models/role.py:31
 msgid "Group Leader"
 msgstr "Gruppledare"
 
-#: involvement/models/role.py:45
+#: involvement/models/role.py:32
+msgid "Engaged"
+msgstr ""
+
+#: involvement/models/role.py:38
+#, fuzzy
+#| msgid "Role"
+msgid "Role type"
+msgstr "Roll"
+
+#: involvement/models/role.py:57
 msgid "Archived"
 msgstr "Arkiverade"
 
-#: involvement/models/role.py:46
+#: involvement/models/role.py:58
 msgid "Hide the role from menus"
 msgstr "Dölj rollen från menyer"
 
-#: involvement/models/role.py:54
+#: involvement/models/role.py:66
 msgid "English role name"
 msgstr "Rollnamn på engelska"
 
-#: involvement/models/role.py:55 involvement/models/role.py:62
+#: involvement/models/role.py:67 involvement/models/role.py:74
 msgid "Enter the name of the role"
 msgstr "Ange rollens namn"
 
-#: involvement/models/role.py:61
+#: involvement/models/role.py:73
 msgid "Swedish role name"
 msgstr "Rollnamn på svenska"
 
-#: involvement/models/role.py:69
+#: involvement/models/role.py:81
 msgid "English role description"
 msgstr "Rollbeskrivning på engelska"
 
-#: involvement/models/role.py:70 involvement/models/role.py:76
+#: involvement/models/role.py:82 involvement/models/role.py:88
 msgid "Enter a description of the role"
 msgstr "Ange en beskrivning av rollen"
 
-#: involvement/models/role.py:75
+#: involvement/models/role.py:87
 msgid "Swedish role description"
 msgstr "Rollbeskrivning på svenska"
 
-#: involvement/models/role.py:83
+#: involvement/models/role.py:95
 #, fuzzy
 #| msgid "Contact e-mail address"
 msgid "Election contact email address"
 msgstr "Emailadress för kontakt"
 
-#: involvement/models/role.py:84
+#: involvement/models/role.py:96
 msgid "The email address to contact for more information regarding the role."
 msgstr "Email att kontakta för att få mer information angående rollen."
 
-#: involvement/models/role.py:116
-#, python-format
-msgid "%(role)s in %(team)s"
+#: involvement/models/role.py:103
+#, fuzzy
+#| msgid "Contact e-mail address"
+msgid "Contact email address"
+msgstr "Emailadress för kontakt"
+
+#: involvement/models/role.py:104
+#, fuzzy
+#| msgid ""
+#| "The email address to contact for more information regarding the role."
+msgid "The email address for the current position holder"
+msgstr "Email att kontakta för att få mer information angående rollen."
+
+#: involvement/models/role.py:111
+#, fuzzy
+#| msgid "Enter a phone number on which your reference is reachable"
+msgid "Enter a phone number to contact this role."
+msgstr "Ange ett telefonnummer som din referens kan nås på"
+
+#: involvement/models/role.py:114
+#, fuzzy
+#| msgid "Enter a valid phone number"
+msgid "Please enter a valid phone number"
+msgstr "Ange ett giltigt telefonnummer"
+
+#: involvement/models/role.py:241
+#, fuzzy, python-format
+#| msgid "%(role)s in %(team)s"
+msgid "%(role)s in %(teams)s"
 msgstr "%(role)s i %(team)s"
 
-#: involvement/models/team.py:16
+#: involvement/models/team.py:15
 msgid "Team"
 msgstr "Grupp"
 
-#: involvement/models/team.py:17 involvement/wagtail_hooks.py:19
+#: involvement/models/team.py:16 involvement/wagtail_hooks.py:23
 msgid "Teams"
 msgstr "Grupper"
 
-#: involvement/models/team.py:23
+#: involvement/models/team.py:22
 msgid "English team name"
 msgstr "Gruppens engelska namn"
 
-#: involvement/models/team.py:24 involvement/models/team.py:31
+#: involvement/models/team.py:23 involvement/models/team.py:30
 msgid "Enter the name of the team"
 msgstr "Ange gruppens namn"
 
-#: involvement/models/team.py:30
+#: involvement/models/team.py:29
 msgid "Swedish team name"
 msgstr "Gruppens svenska namn"
 
-#: involvement/models/team.py:46
+#: involvement/models/team.py:45
 msgid "English team description"
 msgstr "Beskrivning av gruppen på engelska"
 
-#: involvement/models/team.py:47 involvement/models/team.py:53
+#: involvement/models/team.py:46 involvement/models/team.py:52
 msgid "Enter a description of the team"
 msgstr "Ange en beskrivning av gruppen"
 
-#: involvement/models/team.py:52
+#: involvement/models/team.py:51
 msgid "Swedish team description"
 msgstr "Beskrivning av gruppen på svenska"
 
 #: involvement/templates/involvement/admin/application_overview_fields.html:5
-#: involvement/templates/modeladmin/involvement/team/inspect.html:6
+#: involvement/templates/modeladmin/involvement/team/inspect.html:7
 msgid "name"
 msgstr "namn"
 
@@ -486,7 +476,7 @@ msgid "apply now!"
 msgstr "sök nu!"
 
 #: involvement/templates/involvement/application_form.html:16
-#: involvement/templates/involvement/position.html:60
+#: involvement/templates/involvement/position.html:56
 msgid "The deadline for this application has passed."
 msgstr "Sista ansökningsdatum för den här posten har passerats."
 
@@ -532,7 +522,7 @@ msgstr "status"
 #: involvement/templates/involvement/application_summary.html:20
 #: involvement/templates/involvement/open_positions.html:27
 #: involvement/templates/involvement/open_positions.html:31
-#: involvement/templates/involvement/position.html:46
+#: involvement/templates/involvement/position.html:42
 msgid "deadline"
 msgstr "deadline"
 
@@ -592,7 +582,7 @@ msgid "You currently do not have any posts."
 msgstr "Du har inga poster."
 
 #: involvement/templates/involvement/open_positions.html:20
-#: involvement/templates/involvement/position.html:34
+#: involvement/templates/involvement/position.html:30
 msgid "unaffiliated"
 msgstr "ej ansluten"
 
@@ -601,7 +591,7 @@ msgid "Term of office"
 msgstr "Mandatperiod"
 
 #: involvement/templates/involvement/open_positions.html:33
-#: involvement/templates/involvement/position.html:48
+#: involvement/templates/involvement/position.html:44
 #, fuzzy
 #| msgid "Role description"
 msgid "role description"
@@ -613,7 +603,7 @@ msgid "Read more"
 msgstr "Läs mer"
 
 #: involvement/templates/involvement/open_positions.html:34
-#: involvement/templates/involvement/position.html:52
+#: involvement/templates/involvement/position.html:48
 msgid "comments for this year"
 msgstr "kommenterar för detta år"
 
@@ -623,7 +613,7 @@ msgstr ""
 "Det finns förnärvarande inga sökbara poster. Välkommen att komma tillbaka "
 "och kolla läget snart igen!"
 
-#: involvement/templates/involvement/position.html:35
+#: involvement/templates/involvement/position.html:31
 msgid ""
 "This position is not affiliated with any team or committee. You answer "
 "directly to the management team and the board."
@@ -631,11 +621,11 @@ msgstr ""
 "Den här posten är inte del av någon grupp eller kommittée. Som innehavare "
 "svarar du direkt till ledningsgruppen och styrelsen."
 
-#: involvement/templates/involvement/position.html:39
+#: involvement/templates/involvement/position.html:35
 msgid "contact election official"
 msgstr ""
 
-#: involvement/templates/involvement/position.html:49
+#: involvement/templates/involvement/position.html:45
 msgid ""
 "No role description is available at this time. For more information about "
 "this position, please get in contact with us."
@@ -643,15 +633,15 @@ msgstr ""
 "Det finns för närvarande ingen information om den här rollen. Var vänlig "
 "kontakta oss för mer information om den här positionen."
 
-#: involvement/templates/involvement/position.html:60
+#: involvement/templates/involvement/position.html:56
 msgid "You can no longer apply for this position."
 msgstr "Den här posten är inte öppen för anmälan."
 
-#: involvement/templates/involvement/position.html:72
+#: involvement/templates/involvement/position.html:68
 msgid "Please login to apply to this position"
 msgstr "Var vänlig logga in för att ansöka om den här posten"
 
-#: involvement/templates/involvement/position.html:73
+#: involvement/templates/involvement/position.html:69
 msgid "login"
 msgstr "logga in"
 
@@ -659,7 +649,7 @@ msgstr "logga in"
 msgid "UTN logo"
 msgstr ""
 
-#: involvement/templates/involvement/tags/contact_card.html:21
+#: involvement/templates/involvement/tags/contact_card.html:23
 #, fuzzy
 #| msgid "e-mail"
 msgid "send email"
@@ -680,21 +670,41 @@ msgstr "Godkänn sökande till %s"
 msgid "No applications have been submitted for this position."
 msgstr "Din ansökan har skickats."
 
-#: involvement/templates/modeladmin/involvement/team/inspect.html:9
+#: involvement/templates/modeladmin/involvement/role/inspect.html:6
+msgid "role"
+msgstr ""
+
+#: involvement/templates/modeladmin/involvement/role/inspect.html:9
+#, fuzzy
+#| msgid "Current mandates"
+msgid "Current applicants"
+msgstr "Nuvarande mandat"
+
+#: involvement/templates/modeladmin/involvement/role/inspect.html:23
+#, fuzzy
+#| msgid "No applications have been submitted for this position."
+msgid "No applications have been approved for this role."
+msgstr "Din ansökan har skickats."
+
+#: involvement/templates/modeladmin/involvement/role/inspect.html:28
+#, fuzzy
+#| msgid "Approve applicants for %s"
+msgid "Earlier applicants"
+msgstr "Godkänn sökande till %s"
+
+#: involvement/templates/modeladmin/involvement/role/inspect.html:43
+#, fuzzy
+#| msgid "No applications have been submitted for this position."
+msgid "No earlier applicants have been approved for this role."
+msgstr "Din ansökan har skickats."
+
+#: involvement/templates/modeladmin/involvement/team/inspect.html:10
 msgid "members"
 msgstr "medlemmar"
 
-#: involvement/templates/modeladmin/involvement/team/inspect.html:15
+#: involvement/templates/modeladmin/involvement/team/inspect.html:16
 msgid "This team currently does not contain any members."
 msgstr "Detta lag innehåller för närvarande inga medlemmar."
-
-#: involvement/templates/modeladmin/involvement/team/inspect.html:21
-msgid "manually added members"
-msgstr "manuellt tillagda medlemmar"
-
-#: involvement/templatetags/involvement_tags.py:19
-msgid "Vacant Position"
-msgstr "Ledig position"
 
 #: involvement/views/admin_appoint.py:26
 #: involvement/views/admin_approve_applicants.py:37
@@ -706,14 +716,15 @@ msgid "This position is not due for an extension yet."
 msgstr ""
 
 #: involvement/views/admin_extend_deadline.py:26
-msgid "A position with submitted applications cannot be automaticallyextended."
-msgstr ""
+msgid ""
+"A position with submitted applications cannot be automatically extended."
+msgstr "En position med inlämnade ansökningar kan inte automatiskt förlängas"
 
 #: involvement/views/admin_extend_deadline.py:34
 #, python-format
 msgid ""
 "The recruitment deadline for %(position)s has been extended until %(date)s"
-msgstr ""
+msgstr "Rekryteringsfristen för %(position)s har förlängts till %(date)s"
 
 #: involvement/views/my_applications.py:22
 msgid "You cannot delete an application that is not yours!"
@@ -736,43 +747,93 @@ msgstr "Ingen åtgärd har lagts till!"
 msgid "This application does not exist!"
 msgstr "Den här ansökan finns inte!"
 
-#: involvement/views/view_position.py:44
+#: involvement/views/view_position.py:48
 msgid "Your application has been submitted!"
 msgstr "Din ansökan har skickats!"
 
-#: involvement/wagtail_hooks.py:67
+#: involvement/wagtail_hooks.py:75
 msgid "year"
 msgstr "år"
 
-#: involvement/wagtail_hooks.py:74
+#: involvement/wagtail_hooks.py:82
 msgid "This Year"
 msgstr "Detta år"
 
-#: involvement/wagtail_hooks.py:75
+#: involvement/wagtail_hooks.py:83
 msgid "Last Year"
 msgstr "Förra året"
 
-#: involvement/wagtail_hooks.py:76
+#: involvement/wagtail_hooks.py:84
 msgid "Before"
 msgstr "Före"
 
-#: involvement/wagtail_hooks.py:128
+#: involvement/wagtail_hooks.py:136
 msgid "Approve"
 msgstr "Bevilja"
 
-#: involvement/wagtail_hooks.py:130
+#: involvement/wagtail_hooks.py:138
 #, python-format
 msgid "Approve applicants for %s"
 msgstr "Godkänn sökande till %s"
 
-#: involvement/wagtail_hooks.py:142
+#: involvement/wagtail_hooks.py:150
 msgid "Appoint"
 msgstr "Tillsätt"
 
-#: involvement/wagtail_hooks.py:144
+#: involvement/wagtail_hooks.py:152
 #, python-format
 msgid "Appoint member to %s"
 msgstr "Tillsätt medlem som %s"
+
+#: involvement/wagtail_hooks.py:256
+#, fuzzy
+#| msgid "Contact Card"
+msgid "Contact Cards"
+msgstr "Kontaktkort"
+
+#, fuzzy
+#~| msgid "English team description"
+#~ msgid "English Description"
+#~ msgstr "Beskrivning av gruppen på engelska"
+
+#, fuzzy
+#~| msgid "Swedish team description"
+#~ msgid "Swedish Description"
+#~ msgstr "Beskrivning av gruppen på svenska"
+
+#~ msgid "Overrides account name of position holder of the selected role."
+#~ msgstr "Överrider kontonamn för positionsinnehavaren av den valda rollen"
+
+#, fuzzy
+#~| msgid "English role name"
+#~ msgid "English Role Name"
+#~ msgstr "Rollnamn på engelska"
+
+#~ msgid "Overrides role name from the selected role."
+#~ msgstr "Överrider namnet för den valda rollen"
+
+#, fuzzy
+#~| msgid "Swedish role name"
+#~ msgid "Swedish Role Name"
+#~ msgstr "Rollnamn på svenska"
+
+#, fuzzy
+#~| msgid "email address"
+#~ msgid "Email address"
+#~ msgstr "emailadress"
+
+#~ msgid ""
+#~ "Overrides account email address of position holder of the selected role."
+#~ msgstr "Överrider email för positionsinnehavaren av den valda rollen"
+
+#~ msgid "Current mandate"
+#~ msgstr "Nuvarande mandat"
+
+#~ msgid "Approval committee"
+#~ msgstr "Valberedningen"
+
+#~ msgid "manually added members"
+#~ msgstr "manuellt tillagda medlemmar"
 
 #~ msgid "Official"
 #~ msgstr "Ämbetsman"

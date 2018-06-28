@@ -23,7 +23,7 @@ def admin_extend_deadline(request, key):
     elif position.applications.exclude(status='draft').exists():
         messages.add_message(
             request, messages.ERROR,
-            _('A position with submitted applications cannot be automatically'
+            _('A position with submitted applications cannot be automatically '
               'extended.')
         )
     else:
