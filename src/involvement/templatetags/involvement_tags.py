@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 register = template.Library()
 
+register = template.Library()
 
 @register.inclusion_tag('involvement/tags/contact_card.html')
 def contact_card(contact_card, width=7):
