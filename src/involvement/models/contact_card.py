@@ -68,48 +68,6 @@ class ContactCard(models.Model):
         related_name='+'
     )
 
-    description_en = RichTextField(
-        verbose_name=_('English Description'),
-        blank=True,
-    )
-
-    description_sv = RichTextField(
-        verbose_name=_('Swedish Description'),
-        blank=True,
-    )
-
-    description = TranslatedField('description_en', 'description_sv')
-
-    name = models.CharField(
-        max_length=100,
-        verbose_name=_('Name'),
-        help_text=_('Overrides account name of position holder of the selected'
-                    ' role.'),
-        blank=True,
-    )
-
-    role_text_en = models.CharField(
-        max_length=100,
-        verbose_name=_('English Role Name'),
-        help_text=_('Overrides role name from the selected role.'),
-        blank=True,
-    )
-
-    role_text_sv = models.CharField(
-        max_length=100,
-        verbose_name=_('Swedish Role Name'),
-        help_text=_('Overrides role name from the selected role.'),
-        blank=True,
-    )
-    role_text = TranslatedField('role_text_en', 'role_text_sv')
-
-    email = models.EmailField(
-        verbose_name=_('Email address'),
-        help_text=_('Overrides account email address of position holder of the'
-                    ' selected role.'),
-        blank=True,
-    )
-
     def __str__(self) -> str:
         if self.application is not None:
             return '%(teams)s | %(position)s - %(applicant)s' % {
@@ -130,10 +88,4 @@ class ContactCard(models.Model):
     panels = [
         FieldPanel('application'),
         ImageChooserPanel('picture'),
-        FieldPanel('description_en'),
-        FieldPanel('description_sv'),
-        FieldPanel('name'),
-        FieldPanel('role_text_en'),
-        FieldPanel('role_text_sv'),
-        FieldPanel('email'),
     ]
