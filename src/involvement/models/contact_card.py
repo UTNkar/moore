@@ -107,10 +107,11 @@ class ContactCard(models.Model):
                          if not self.picture else '',
             }
 
-        return '%(teams)s | %(position)s - %(applicant)s' % {
+        return '%(teams)s | %(position)s - %(applicant)s %(image)s' % {
             'teams': self.position.role.team_names,
             'position': self.position,
-            'applicant': _('Vacant Position')
+            'applicant': _('Vacant Position'),
+            'image': '(%s)' % _('picture missing') if not self.picture else '',
         }
 
     list_filter = ('application__position__role__team')
