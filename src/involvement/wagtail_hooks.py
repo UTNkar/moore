@@ -257,6 +257,20 @@ class ContactCardAdmin(ModelAdmin):
     menu_icon = 'fa-address-card'
     menu_order = 500
     list_filter = ('application__position__role__teams',)
+    permission_helper_class = RulesPermissionHelper
+
+    def get_queryset(self, request):
+        if is_super(request.user):
+            return super(ContactCardAdmin, self).get_queryset(request)
+        else:
+            roles = Role.edit_applicant_permission_of(request.user)
+            qs = ContactCard.objects.filter(
+                position__role__in=roles,
+            )
+            ordering = self.get_ordering(request)
+            if ordering:
+                qs = qs.order_by(*ordering)
+            return qs
 
 
 class InvolvementAdminGroup(ModelAdminGroup):
