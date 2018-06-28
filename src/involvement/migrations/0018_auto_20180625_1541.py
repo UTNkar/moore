@@ -20,4 +20,9 @@ class Migration(migrations.Migration):
             name='application',
             field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='contact_card', to='involvement.Application'),
         ),
+        migrations.AddField(
+            model_name='contactcard',
+            name='position',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='contact_cards', to='involvement.Position'),
+        ),
     ]
