@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-12 10:06+0200\n"
+"POT-Creation-Date: 2018-06-28 14:49+0200\n"
 "PO-Revision-Date: 2017-06-26 10:25+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -26,52 +26,47 @@ msgstr "Använd formen ÅÅÅÅMMDD-NNNN för ditt personnummer."
 msgid "%(date)s is an invalid date"
 msgstr ""
 
-#: members/forms.py:47 members/forms.py:123 members/forms.py:173
+#: members/forms.py:47 members/forms.py:112 members/forms.py:162
 msgid "Person number"
 msgstr "Personnummer"
 
-#: members/forms.py:48 members/forms.py:124 members/forms.py:174
+#: members/forms.py:48 members/forms.py:113 members/forms.py:163
 msgid "Person number using the YYYYMMDD-XXXX format."
 msgstr "Personnummer på formen ÅÅÅÅMDD-NNNN."
 
-#: members/forms.py:70
-#, python-format
-msgid "Username `%(username)s` is already in use"
-msgstr "Användarnamnet `%(username)s` används redan"
-
-#: members/forms.py:128 members/forms.py:178 members/models/member.py:70
+#: members/forms.py:117 members/forms.py:167 members/models/member.py:72
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: members/forms.py:132 members/forms.py:182 members/models/member.py:83
+#: members/forms.py:121 members/forms.py:171 members/models/member.py:85
 msgid "Registration year"
 msgstr "Inskrivningsår"
 
-#: members/forms.py:137 members/wagtail_hooks.py:42
+#: members/forms.py:126 members/wagtail_hooks.py:42
 msgid "Study Program"
 msgstr "Program"
 
-#: members/forms.py:142 members/forms.py:192
+#: members/forms.py:131 members/forms.py:181
 msgid "Section"
 msgstr "Sektion"
 
-#: members/forms.py:146 members/forms.py:197 members/models/member.py:57
+#: members/forms.py:135 members/forms.py:186 members/models/member.py:59
 msgid "Membership status"
 msgstr "Medlemsstatus"
 
-#: members/forms.py:187 members/models/member.py:95
+#: members/forms.py:176 members/models/member.py:97
 msgid "Study program"
 msgstr "Program"
 
-#: members/models/member.py:28
+#: members/models/member.py:30
 msgid "Birthday"
 msgstr "Födelsedag"
 
-#: members/models/member.py:34
+#: members/models/member.py:36
 msgid "Person number extension"
 msgstr "De fyra sista siffrorna"
 
-#: members/models/member.py:35
+#: members/models/member.py:37
 msgid ""
 "Enter the last four digits of your Swedish person number, given by the "
 "Swedish tax authority"
@@ -79,43 +74,43 @@ msgstr ""
 "Ange de fyra sista siffrorna i ditt svenska personnummer, som du fått från "
 "Skatteverket"
 
-#: members/models/member.py:39
+#: members/models/member.py:41
 msgid "The person number extension consists of four numbers"
 msgstr "Här avses de fyra sista siffrorna i ditt personnummer"
 
-#: members/models/member.py:48
+#: members/models/member.py:50
 msgid "Unknown"
 msgstr "Okänt"
 
-#: members/models/member.py:49
+#: members/models/member.py:51
 msgid "Nonmember"
 msgstr "Icke medlem"
 
-#: members/models/member.py:50
+#: members/models/member.py:52
 msgid "Member"
 msgstr "Medlem"
 
-#: members/models/member.py:51
+#: members/models/member.py:53
 msgid "Alumnus"
 msgstr "Alumn"
 
-#: members/models/member.py:71
+#: members/models/member.py:73
 msgid "Enter a phone number so UTN may reach you"
 msgstr "Ange ett telefonnummer som UTN kan nå dig på"
 
-#: members/models/member.py:74
+#: members/models/member.py:76
 msgid "Please enter a valid phone number"
 msgstr "Var vänlig ange ett giltigt telefonnummer"
 
-#: members/models/member.py:84
+#: members/models/member.py:86
 msgid "Enter the year you started studying at the TakNat faculty"
 msgstr "Ange året då du började studera på TekNat-fakulteten"
 
-#: members/models/member.py:88
+#: members/models/member.py:90
 msgid "Please enter a valid year"
 msgstr "Vänligen ange ett giltigt år"
 
-#: members/models/member.py:103
+#: members/models/member.py:105
 msgid "Member of section"
 msgstr "Sektionsmedlem i"
 
@@ -468,3 +463,6 @@ msgstr "Sektioner"
 #: members/wagtail_hooks.py:88
 msgid "Education"
 msgstr "Utbildning"
+
+#~ msgid "Username `%(username)s` is already in use"
+#~ msgstr "Användarnamnet `%(username)s` används redan"
