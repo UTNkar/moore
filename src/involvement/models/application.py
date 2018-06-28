@@ -114,6 +114,7 @@ def check_contact_card(sender, instance, **kwargs):
 
             if card:
                 card.application = instance
+                card.picture = None
                 card.save()
             else:
                 ContactCard.objects.create(
@@ -130,4 +131,5 @@ def check_contact_card(sender, instance, **kwargs):
                 card.delete()
             else:
                 card.application = None
+                card.picture = None
                 card.save()
