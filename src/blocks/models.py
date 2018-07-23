@@ -3,6 +3,7 @@ from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
 
+
 class ResponsiveImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     height = blocks.IntegerBlock(
