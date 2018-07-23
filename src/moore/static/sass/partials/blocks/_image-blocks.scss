@@ -1,9 +1,10 @@
 @import "../base";
 
 .block-image {
+  padding: 50px 25px;
+  text-align: center;
   .image {
-    background: no-repeat center center;
-    background-size: cover;
+    max-width: 100%;
   }
 }
 
