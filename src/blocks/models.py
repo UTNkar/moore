@@ -16,33 +16,6 @@ class ResponsiveImageBlock(blocks.StructBlock):
         template = 'blocks/image.html'
         group = _('Basic')
 
-
-BASIC_BLOCKTYPES = [
-    ('paragraph', blocks.RichTextBlock(
-        template='blocks/paragraph.html',
-        group=_('Basic'),
-    )),
-    ('image', ResponsiveImageBlock()),
-]
-
-
-class ColumnBlock(blocks.StructBlock):
-    columns = blocks.ListBlock(blocks.StructBlock([
-        ('width', blocks.IntegerBlock(
-            min_value=1,
-            max_value=12,
-            help_text=_('Width out of 12'),
-        )),
-        ('content', blocks.StreamBlock(BASIC_BLOCKTYPES))
-    ]))
-
-    class Meta:
-        label = _('Columns')
-        icon = 'fa-columns'
-        template = 'blocks/columns.html'
-        group = _('Meta')
-
-
 class CountersBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     counters = blocks.ListBlock(blocks.StructBlock([
@@ -146,6 +119,29 @@ class OverlayBlock(blocks.StructBlock):
         template = 'blocks/overlay.html'
         group = _('Noyce')
 
+BASIC_BLOCKTYPES = [
+    ('paragraph', blocks.RichTextBlock(
+        template='blocks/paragraph.html',
+        group=_('Basic'),
+    )),
+    ('image', ResponsiveImageBlock()),
+]
+
+class ColumnBlock(blocks.StructBlock):
+    columns = blocks.ListBlock(blocks.StructBlock([
+        ('width', blocks.IntegerBlock(
+            min_value=1,
+            max_value=12,
+            help_text=_('Width out of 12'),
+        )),
+        ('content', blocks.StreamBlock(BASIC_BLOCKTYPES))
+    ]))
+
+    class Meta:
+        label = _('Columns')
+        icon = 'fa-columns'
+        template = 'blocks/columns.html'
+        group = _('Meta')
 
 WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('heading', HeadingBlock()),  # TODO: Do we use this one?
