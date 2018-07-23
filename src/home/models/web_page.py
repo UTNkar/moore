@@ -10,7 +10,6 @@ from google.models import GoogleFormBlock, GoogleDriveBlock, \
     GoogleCalendarBlock
 from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
-from involvement.blocks import ContactCardBlock
 
 
 class WebPage(Page):
@@ -21,7 +20,6 @@ class WebPage(Page):
 
     body_en = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
-            ('contact_card', ContactCardBlock()),
             ('google_calendar', GoogleCalendarBlock()),
             ('google_drive', GoogleDriveBlock()),
             ('google_form', GoogleFormBlock()),
@@ -31,7 +29,6 @@ class WebPage(Page):
     )
     body_sv = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
-            ('contact_card', ContactCardBlock()),
             ('google_calendar', GoogleCalendarBlock()),
             ('google_drive', GoogleDriveBlock()),
             ('google_form', GoogleFormBlock()),

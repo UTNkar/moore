@@ -11,7 +11,7 @@ register = template.Library()
 def contact_card(contact_card, width=7):
 
     data = {
-        'width': width
+        'width': width,
     }
 
     position = contact_card.position
