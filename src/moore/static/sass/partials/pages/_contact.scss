@@ -1,10 +1,13 @@
-#contact-page {
+#contact-page, .block-contacts {
 	.card {
 		height: 300px;
 	}
 	.card-image {
 		width: 200px;
 		height: 100%;
+		img {
+			object-fit: cover;
+		}
 	}
 
 	.card-stacked {

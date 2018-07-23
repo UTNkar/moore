@@ -1,7 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
-
+from involvement.blocks import ContactCardBlock
 
 class ResponsiveImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
@@ -15,6 +15,7 @@ class ResponsiveImageBlock(blocks.StructBlock):
         icon = 'fa-picture-o'
         template = 'blocks/image.html'
         group = _('Basic')
+
 
 class CountersBlock(blocks.StructBlock):
     title = blocks.CharBlock()
@@ -119,6 +120,17 @@ class OverlayBlock(blocks.StructBlock):
         template = 'blocks/overlay.html'
         group = _('Noyce')
 
+
+class ContactsBlock(blocks.StructBlock):
+    contacts = blocks.ListBlock(ContactCardBlock())
+
+    class Meta:
+        label = _('Contact Card')
+        icon = 'user'
+        template = 'involvement/blocks/contact_cards.html'
+        group = _('Meta')
+
+
 BASIC_BLOCKTYPES = [
     ('paragraph', blocks.RichTextBlock(
         template='blocks/paragraph.html',
@@ -126,6 +138,7 @@ BASIC_BLOCKTYPES = [
     )),
     ('image', ResponsiveImageBlock()),
 ]
+
 
 class ColumnBlock(blocks.StructBlock):
     columns = blocks.ListBlock(blocks.StructBlock([
@@ -143,6 +156,7 @@ class ColumnBlock(blocks.StructBlock):
         template = 'blocks/columns.html'
         group = _('Meta')
 
+
 WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('heading', HeadingBlock()),  # TODO: Do we use this one?
     ('image_description', ImageIconsBlock()),
@@ -151,4 +165,5 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('logos', LogosBlock()),
     ('counters', CountersBlock()),
     ('columns', ColumnBlock()),
+    ('contacts', ContactsBlock()),
 ]
