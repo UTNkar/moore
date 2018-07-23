@@ -118,16 +118,6 @@ class ContactCard(models.Model):
     list_filter = ('application__position__role__team')
     base_form_class = ContactBlockForm
 
-        return '%(teams)s | %(position)s - %(applicant)s %(image)s' % {
-            'teams': self.position.role.team_names,
-            'position': self.position,
-            'applicant': _('Vacant Position'),
-            'image': '(%s)' % _('picture missing') if not self.picture else '',
-        }
-
-    list_filter = ('application__position__role__team')
-    base_form_class = ContactBlockForm
-
     panels = [
         FieldPanel('application'),
         ImageChooserPanel('picture'),
