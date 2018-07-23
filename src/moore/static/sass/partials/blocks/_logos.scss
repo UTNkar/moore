@@ -1,24 +1,37 @@
 .block-logos {
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 60px 0;
+  padding: 60px 60px;
   white-space: nowrap;
 
   .logo{
     text-align: center;
     vertical-align: middle;
+    margin: 12.5px 0;
     img {
       box-sizing: content-box;
       display: inline-block;
-      max-width: 80% !important;
+      max-width: 100%;
+      width: 100%;
+      height: 100px;
       opacity: .4;
       transition: all .15s linear;
       vertical-align: middle;
       -webkit-filter: grayscale(1);
-
+      object-fit: contain;
       &:hover {
         -webkit-filter: none;
         opacity: .8;
+      }
+    }
+  }
+}
+
+@media #{$medium-and-down} {
+  .block-logos {
+    .logo {
+      &:last-of-type {
+        margin-bottom: 50px;
       }
     }
   }

@@ -1,3 +1,3 @@
 {% load wagtailimages_tags %}
 {% image value.image original as image %}
-<div class="image" style="background-image: url('{{ image.url }}'); height: {{ value.height }}px;"></div>
+<img class="image" src="{{ image.url }}" style="max-height: {{ value.height }}px;" />
