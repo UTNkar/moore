@@ -1,12 +1,14 @@
 @import "../base";
 
 .rich-text .richtext-image {
+  object-fit: contain;
+  max-width: 400px;
   &.full-width {
+    max-width: none;
     width: 100%;
     height: auto;
   }
   &.left, &.right {
-    width: 40%;
     height: auto;
     padding: 15px;
   }
