@@ -1,0 +1,28 @@
+.content-center-v, .center-content-v {
+	&>* {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	&:before {
+		content: '';
+		display: inline-block;
+		height: 100%;
+		vertical-align: middle;
+	}
+}
+
+
+@media (min-width: $small-screen - 1) {
+	.content-center-v-sm, .center-content-v-sm {
+		&>* {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		&:before {
+			content: '';
+			display: inline-block;
+			height: 100%;
+			vertical-align: middle;
+		}
+	}
+}
