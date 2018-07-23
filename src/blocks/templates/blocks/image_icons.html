@@ -1,6 +1,14 @@
 {% load wagtailimages_tags %}
 <div class="row">
-    <div class="icons col {% if value.hide_on_med %} l7 s12 {% if value.image_alignment == 'left' %} push-l5{% endif %} {% else %}s7 {% if value.image_alignment == 'left' %} push-s5{% endif %}{% endif %}">
+    {% image value.image original as image %}
+
+    {% if value.image_alignment == 'left' %}
+        <div class="col s5 image-holder {% if value.hide_on_med %} hide-on-med-and-down{% endif %}">
+            <img src="{{ image.url }}" />
+        </div>
+    {% endif %}
+
+    <div class="icons col {% if value.hide_on_med %} l7 s12 {% else %} s7 {% endif %}">
         <div class="container">
             <h2>{{ value.title }}</h2>
             <div class="row">
@@ -14,6 +22,9 @@
         </div>
     </div>
 
-    {% image value.image original as image %}
-    <div class="col s5 image-holder {{ value.image_alignment }}{% if value.hide_on_med %} hide-on-med-and-down{% endif %}" style="background-image: url('{{ image.url }}');"></div>
+    {% if value.image_alignment == 'right' %}
+        <div class="col s5 image-holder {% if value.hide_on_med %} hide-on-med-and-down{% endif %}">
+            <img src="{{ image.url }}" />
+        </div>
+    {% endif %}
 </div>
