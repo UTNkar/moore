@@ -8,13 +8,13 @@ html {
 }
 
 body {
-  // display: flex;
+  // @include flexbox();
   // min-height: 100vh;
-  // flex-direction: column;
+  // @include flex-direction(column);
 }
 
 main {
-  // flex: 1 0 auto;
+  // @include flex(1 0 auto);
 }
 
 ul {
@@ -39,8 +39,8 @@ a {
 
 // Positioning
 .valign-wrapper {
-  display: flex;
-  align-items: center;
+  @include flexbox();
+  @include align-items(center);
 }
 
 
@@ -344,8 +344,8 @@ ul.staggered-list li {
   .footer-copyright {
     overflow: hidden;
     min-height: 50px;
-    display: flex;
-    align-items: center;
+    @include flexbox();
+    @include align-items(center);
     padding: 10px 0px;
     color: $footer-copyright-font-color;
     background-color: $footer-copyright-bg-color;

@@ -1,5 +1,8 @@
+from django.apps import apps
 from django.conf import settings
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.models import ClusterableModel
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
@@ -63,6 +66,12 @@ class Application(ClusterableModel):
         default=False,
     )
 
+    def __str__(self) -> str:
+        return '%(applicant)s - %(position)s' % {
+            'position': self.position,
+            'applicant': self.applicant
+        }
+
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldRowPanel([
@@ -74,3 +83,56 @@ class Application(ClusterableModel):
         InlinePanel('references'),
         FieldPanel('status'),
     ])]
+
+
+@receiver(post_save, sender=Application,
+          dispatch_uid='application_check_mandate_history')
+def check_mandate_history(sender, instance, **kwargs):
+    MandateHistory = apps.get_model('involvement', 'MandateHistory')
+    if instance.status == 'appointed':
+        MandateHistory.objects.get_or_create(
+            position=instance.position,
+            applicant=instance.applicant,
+        )
+    else:
+        MandateHistory.objects.filter(
+            position=instance.position,
+            applicant=instance.applicant,
+        ).delete()
+
+
+@receiver(post_save, sender=Application,
+          dispatch_uid='application_check_contact_card')
+def check_contact_card(sender, instance, **kwargs):
+    ContactCard = apps.get_model('involvement', 'ContactCard')
+
+    if instance.status == 'appointed':
+        if not hasattr(instance, 'contact_card'):
+            # Take a vacant position if available or create a new
+            card = ContactCard.objects.filter(
+                position=instance.position,
+                application__isnull=True,
+            ).first()
+
+            if card:
+                card.application = instance
+                card.picture = None
+                card.save()
+            else:
+                ContactCard.objects.create(
+                    position=instance.position,
+                    application=instance,
+                )
+
+    else:
+        if hasattr(instance, 'contact_card'):
+            # Remove card if appointments for the position is not enough.
+            # Otherwise set card as vacant
+            card = instance.contact_card
+            cards_count = instance.position.contact_cards.count()
+            if instance.position.appointments < cards_count:
+                card.delete()
+            else:
+                card.application = None
+                card.picture = None
+                card.save()

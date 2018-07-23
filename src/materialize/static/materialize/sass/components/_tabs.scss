@@ -19,10 +19,9 @@
   }
 
   &.tabs-fixed-width {
-    display: flex;
-
+    @include flexbox();
     .tab {
-      flex-grow: 1;
+      @include flex-grow(1);
     }
   }
 
@@ -80,10 +79,9 @@
 // Fixed sideNav hide on smaller
 @media #{$medium-and-down} {
   .tabs {
-    display: flex;
-
+    @include flexbox();
     .tab {
-      flex-grow: 1;
+      @include flex-grow(1);
 
       a {
         padding: 0 12px;

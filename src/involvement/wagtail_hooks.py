@@ -4,14 +4,20 @@ from django.contrib.admin.utils import quote
 from django.contrib.auth import get_permission_codename
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from wagtail.core import hooks
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
-from involvement.models import Team, Role, Position, Application
+from involvement.models import Team, Role, Position, Application, ContactCard
 from involvement.rules import is_action_approve, is_action_appoint
 from involvement.rule_utils import is_super
 from involvement import views
 from utils.permissions import RulesPermissionHelper
+
+
+@hooks.register('construct_main_menu')
+def hide_snippets_menu_item(request, menu_items):
+    menu_items[:] = [item for item in menu_items if item.name != 'snippets']
 
 
 class TeamAdmin(ModelAdmin):
@@ -247,11 +253,34 @@ class ApplicationAdmin(ModelAdmin):
         return obj.position.role
 
 
+class ContactCardAdmin(ModelAdmin):
+    model = ContactCard
+    menu_label = _('Contact Cards')
+    menu_icon = 'fa-address-card'
+    menu_order = 500
+    list_filter = ('application__position__role__teams',)
+    permission_helper_class = RulesPermissionHelper
+
+    def get_queryset(self, request):
+        if is_super(request.user):
+            return super(ContactCardAdmin, self).get_queryset(request)
+        else:
+            roles = Role.edit_applicant_permission_of(request.user)
+            qs = ContactCard.objects.filter(
+                position__role__in=roles,
+            )
+            ordering = self.get_ordering(request)
+            if ordering:
+                qs = qs.order_by(*ordering)
+            return qs
+
+
 class InvolvementAdminGroup(ModelAdminGroup):
     menu_label = _('Involvement')
     menu_icon = 'fa-address-book'
     menu_order = 500
-    items = (TeamAdmin, RoleAdmin, PositionAdmin, ApplicationAdmin)
+    items = (TeamAdmin, RoleAdmin, PositionAdmin,
+             ApplicationAdmin, ContactCardAdmin)
 
 
 modeladmin_register(InvolvementAdminGroup)

@@ -22,42 +22,44 @@
 {% endblock %}
 
 {% block content %}
-    {% if page.map_location %}
-        <div class="row">
-            <div class="col s12 m7">
-                <div id="findus" style="height: 400px;"></div>
+    <div id="contact-page">
+        {% if page.map_location %}
+            <div class="row">
+                <div class="col s12 m7">
+                    <div id="findus" style="height: 400px;"></div>
+                </div>
+                <div class="col s12 m5">
+                    <h2>{% trans 'for general information'|title %}</h2>
+                    {% for c in page.contact_point %}
+                        <div class="row">
+                            {% contact_card c.value 12 %}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="col s12 m5">
+        {% else %}
+            <div class="container">
                 <h2>{% trans 'for general information'|title %}</h2>
-                {% for c in page.contact_point %}
-                    <div class="row">
-                        {% contact_card c.value 12 %}
-                    </div>
-                {% endfor %}
             </div>
-        </div>
-    {% else %}
-        <div class="container">
-            <h2>{% trans 'for general information'|title %}</h2>
-        </div>
-        {% include_block page.contact_point %}
-    {% endif %}
-
-    <div class="container">
-        <h2>{% trans 'our team'|title %}</h2>
-        {% if contacts|length > 1 %}
-            <ul class="tabs">
-                {% for group, contact_list in contacts.items %}
-                    <li class="tab"><a href="#{{ group|slugify }}">{{ group }}</a></li>
-                {% endfor %}
-            </ul>
+            {% include_block page.contact_point %}
         {% endif %}
-        {% for group, contact_list in contacts.items %}
-            <div id="{{ group|slugify }}" class="row">
-                {% for contact in contact_list %}
-                   {% contact_card contact 6 %}
-                {% endfor %}
-            </div>
-        {% endfor %}
+
+        <div class="container">
+            <h2>{% trans 'our team'|title %}</h2>
+            {% if contacts|length > 1 %}
+                <ul class="tabs">
+                    {% for group, contact_list in contacts.items %}
+                        <li class="tab"><a href="#{{ group|slugify }}">{{ group }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% for group, contact_list in contacts.items %}
+                <div id="{{ group|slugify }}" class="row">
+                    {% for contact in contact_list %}
+                       {% contact_card contact 6 %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
