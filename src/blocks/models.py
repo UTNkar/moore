@@ -133,7 +133,10 @@ class OverlayBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     title = blocks.CharBlock(required=False)
     description = blocks.CharBlock(required=False)
-
+    text_color = blocks.ChoiceBlock(choices=[
+        ('text-light', _('Light')),
+        ('text-dark', _('Dark')),
+    ], default='text-dark')
     link = blocks.URLBlock(required=False)
     button = blocks.CharBlock(required=False)
 
