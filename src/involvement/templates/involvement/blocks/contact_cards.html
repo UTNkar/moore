@@ -1,0 +1,8 @@
+{% load involvement_tags %}
+<div class="container">
+    <div class="row">
+    	{% for contact in value.contacts %}
+        	{% contact_card contact 6 %}
+        {% endfor %}
+    </div>
+</div>

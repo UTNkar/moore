@@ -9,8 +9,9 @@
 // The Materialize Framework
 @import "materialize/sass/materialize";
 
-// Partials
+@import "utils/all";
 
+// Partials
 // Content Blocks
 @import "partials/blocks/all";
 // Content Elements

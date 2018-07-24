@@ -1,6 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
+from involvement.blocks import ContactCardBlock
 
 
 class ResponsiveImageBlock(blocks.StructBlock):
@@ -15,32 +16,6 @@ class ResponsiveImageBlock(blocks.StructBlock):
         icon = 'fa-picture-o'
         template = 'blocks/image.html'
         group = _('Basic')
-
-
-BASIC_BLOCKTYPES = [
-    ('paragraph', blocks.RichTextBlock(
-        template='blocks/paragraph.html',
-        group=_('Basic'),
-    )),
-    ('image', ResponsiveImageBlock()),
-]
-
-
-class ColumnBlock(blocks.StructBlock):
-    columns = blocks.ListBlock(blocks.StructBlock([
-        ('width', blocks.IntegerBlock(
-            min_value=1,
-            max_value=12,
-            help_text=_('Width out of 12'),
-        )),
-        ('content', blocks.StreamBlock(BASIC_BLOCKTYPES))
-    ]))
-
-    class Meta:
-        label = _('Columns')
-        icon = 'fa-columns'
-        template = 'blocks/columns.html'
-        group = _('Meta')
 
 
 class CountersBlock(blocks.StructBlock):
@@ -133,7 +108,10 @@ class OverlayBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     title = blocks.CharBlock(required=False)
     description = blocks.CharBlock(required=False)
-
+    text_color = blocks.ChoiceBlock(choices=[
+        ('text-light', _('Light')),
+        ('text-dark', _('Dark')),
+    ], default='text-dark')
     link = blocks.URLBlock(required=False)
     button = blocks.CharBlock(required=False)
 
@@ -144,6 +122,42 @@ class OverlayBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
+class ContactsBlock(blocks.StructBlock):
+    contacts = blocks.ListBlock(ContactCardBlock())
+
+    class Meta:
+        label = _('Contact Card')
+        icon = 'user'
+        template = 'involvement/blocks/contact_cards.html'
+        group = _('Meta')
+
+
+BASIC_BLOCKTYPES = [
+    ('paragraph', blocks.RichTextBlock(
+        template='blocks/paragraph.html',
+        group=_('Basic'),
+    )),
+    ('image', ResponsiveImageBlock()),
+]
+
+
+class ColumnBlock(blocks.StructBlock):
+    columns = blocks.ListBlock(blocks.StructBlock([
+        ('width', blocks.IntegerBlock(
+            min_value=1,
+            max_value=12,
+            help_text=_('Width out of 12'),
+        )),
+        ('content', blocks.StreamBlock(BASIC_BLOCKTYPES))
+    ]))
+
+    class Meta:
+        label = _('Columns')
+        icon = 'fa-columns'
+        template = 'blocks/columns.html'
+        group = _('Meta')
+
+
 WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('heading', HeadingBlock()),  # TODO: Do we use this one?
     ('image_description', ImageIconsBlock()),
@@ -152,4 +166,5 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('logos', LogosBlock()),
     ('counters', CountersBlock()),
     ('columns', ColumnBlock()),
+    ('contacts', ContactsBlock()),
 ]

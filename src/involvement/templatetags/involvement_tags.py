@@ -1,5 +1,4 @@
 from datetime import date
-
 from django import template
 from django.utils.translation import ugettext_lazy as _
 
@@ -11,7 +10,7 @@ register = template.Library()
 def contact_card(contact_card, width=7):
 
     data = {
-        'width': width
+        'width': width,
     }
 
     position = contact_card.position

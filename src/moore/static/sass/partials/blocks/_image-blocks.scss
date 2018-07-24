@@ -1,9 +1,10 @@
 @import "../base";
 
 .block-image {
+  padding: 50px 25px;
+  text-align: center;
   .image {
-    background: no-repeat center center;
-    background-size: cover;
+    max-width: 100%;
   }
 }
 
@@ -12,17 +13,12 @@
   .description, .icons {
     padding: 80px 0;
   }
-  .row .col.image-holder {
-    background-size: cover;
-    background: no-repeat center;
-    bottom: 0;
-    position: absolute;
-    top: 0;
-    &.left {
-      left: 0;
-    }
-    &.right {
-      right: 0;
+
+  .image-holder {
+    text-align: center;
+    img {
+      max-width: 100%;
+      object-fit: contain;
     }
   }
 
@@ -52,5 +48,4 @@
       }
     }
   }
-
 }
