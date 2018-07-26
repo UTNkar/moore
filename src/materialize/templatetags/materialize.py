@@ -42,7 +42,7 @@ def materialize_field(field, prefix=None):
         t = 'materialize/form/input.html'
     elif widget == 'CheckboxInput':
         t = 'materialize/form/p_input.html'
-    elif widget == 'CheckboxSelectMultiple':
+    elif widget == 'SelectMultiple':
         w = field.field.widget
         w.template_name = 'materialize/form/multiple_input.html'
         t = 'materialize/form/input.html'
