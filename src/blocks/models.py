@@ -97,6 +97,7 @@ class LogosBlock(blocks.StructBlock):
     logos = blocks.ListBlock(blocks.StructBlock([
         ('image', ImageChooserBlock()),
         ('link', blocks.URLBlock(required=False)),
+        ('description', blocks.CharBlock(required=False))
     ]))
 
     class Meta:
