@@ -7,8 +7,8 @@ function marvin(message, classes, callback) {
     Materialize.toast(
         '<div class="message-impl">' +
         // TODO: Replace this static reference.
-        '<img class="marvin" src="/static/images/marvin.png">' +
-        '<b>Marvin:</b><a href="#" class="close"><i class="material-icons">close</i></a><br>'
+        '<img class="marvin" src="/static/images/bocken_white.svg">' +
+        '<b>Bocken:</b><a href="#" class="close"><i class="material-icons">close</i></a><br>'
         + message
         + '</div>',
         Infinity, // Display until dismissed

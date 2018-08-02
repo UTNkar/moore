@@ -6,9 +6,8 @@
 
 .marvin {
   position: absolute;
-  bottom: 0;
-  width: 60px;
-  height: 60px;
+  bottom: 5px;
+  height: calc(100% - 10px);
 }
 
 .message-impl {
