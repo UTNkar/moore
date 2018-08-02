@@ -7,10 +7,12 @@ register = template.Library()
 
 
 @register.inclusion_tag('involvement/tags/contact_card.html')
-def contact_card(contact_card, width=7):
+def contact_card(contact_card, large_width=7, medium_width=12, small_width=12):
 
     data = {
-        'width': width,
+        'large_width': large_width,
+        'medium_width': medium_width,
+        'small_width': small_width,
     }
 
     position = contact_card.position
