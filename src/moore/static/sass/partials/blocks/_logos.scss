@@ -18,7 +18,7 @@
       transition: all .15s linear;
       vertical-align: middle;
       -webkit-filter: grayscale(1);
-      object-fit: contain;
+      object-fit: scale-down;
       &:hover {
         -webkit-filter: none;
         opacity: .8;
