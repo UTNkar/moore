@@ -1,5 +1,5 @@
 Django[argon2]==2.0.7
-wagtail==2.1.1
+wagtail==2.1.2
 
 # External Libraries
 requests==2.19.1
