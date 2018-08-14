@@ -24,35 +24,35 @@ msgstr ""
 
 #: google/models.py:25
 msgid "Calendar ID as given by google calendar"
-msgstr ""
+msgstr "Kalender-ID som ges av google kalender"
 
 #: google/models.py:30
 msgid "Week"
-msgstr ""
+msgstr "Vecka"
 
 #: google/models.py:31
 msgid "Month"
-msgstr ""
+msgstr "Månad"
 
 #: google/models.py:32
 msgid "Agenda"
-msgstr ""
+msgstr "Dagordning"
 
 #: google/models.py:37
 msgid "Monday"
-msgstr ""
+msgstr "Måndag"
 
 #: google/models.py:38
 msgid "Sunday"
-msgstr ""
+msgstr "Söndag"
 
 #: google/models.py:39
 msgid "Saturday"
-msgstr ""
+msgstr "Lördag"
 
 #: google/models.py:43
 msgid "Google Calendar"
-msgstr ""
+msgstr "Google Kalender"
 
 #: google/models.py:46 google/models.py:61 google/models.py:72
 msgid "Embed"
@@ -60,11 +60,11 @@ msgstr ""
 
 #: google/models.py:52
 msgid "List"
-msgstr ""
+msgstr "Lista"
 
 #: google/models.py:53
 msgid "Grid"
-msgstr ""
+msgstr "Rutnät"
 
 #: google/models.py:58
 msgid "Google Drive"
@@ -92,18 +92,19 @@ msgstr ""
 
 #: google/models.py:162
 msgid "English"
-msgstr ""
+msgstr "Engelska"
 
 #: google/models.py:163
 msgid "Swedish"
-msgstr ""
+msgstr "Svenska"
 
 #: google/models.py:165
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 #: google/templates/google/google_form_page.html:9
 msgid ""
 "The deadline for this form has passed. Results might be posted here at a "
 "later date."
-msgstr ""
+msgstr "Deadline för denna blankett har gått. Resultat kan visas här på ett "
+"senare datum"
