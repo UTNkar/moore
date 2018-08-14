@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 14:49+0200\n"
+"POT-Creation-Date: 2018-08-14 14:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,31 +74,31 @@ msgstr ""
 msgid "Google Form"
 msgstr ""
 
-#: google/models.py:80
+#: google/models.py:99
 msgid "English description"
 msgstr ""
 
-#: google/models.py:84
+#: google/models.py:103
 msgid "Swedish description"
 msgstr ""
 
-#: google/models.py:117
+#: google/models.py:136
 msgid "Form deadline"
 msgstr ""
 
-#: google/models.py:142
+#: google/models.py:161
 msgid "Common"
 msgstr ""
 
-#: google/models.py:143
+#: google/models.py:162
 msgid "English"
 msgstr ""
 
-#: google/models.py:144
+#: google/models.py:163
 msgid "Swedish"
 msgstr ""
 
-#: google/models.py:146
+#: google/models.py:165
 msgid "Settings"
 msgstr ""
 
