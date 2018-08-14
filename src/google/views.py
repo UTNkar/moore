@@ -1,11 +1,4 @@
-from django.conf import settings
 from django.http import JsonResponse
-from datetime import datetime
-from dateutil.parser import parse
-from urllib.parse import quote
-import requests
-import json
-
 from google.api import google_calendar_list_events
 
 
