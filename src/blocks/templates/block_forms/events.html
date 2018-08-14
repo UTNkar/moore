@@ -1,0 +1,32 @@
+{% include "wagtailadmin/block_forms/struct.html" %}
+
+<script>
+    var map;
+    if (typeof map === 'undefined') {
+        map = {};
+    }
+    map['#{{ prefix }}-show_facebook'] = '#{{ prefix }}-facebook_page_name';
+    map['#{{ prefix }}-show_youtube'] = '#{{ prefix }}-youtube_channel_id';
+    map['#{{ prefix }}-show_google_calendar'] = '#{{ prefix }}-google_calendar_id';
+
+    function showHideField($checkbox) {
+        var key = '#' + $checkbox.attr('id');
+        var field = $(map[key]).closest('li');
+        // update the visibility of field according to the state of
+        // the checkbox
+        if ($checkbox.is(':checked')) {
+            field.show();
+        } else {
+            field.hide();
+        }
+    }
+
+    $checkboxes = $(Object.keys(map).join(','));
+    $checkboxes.each(function () {
+        showHideField($(this));
+    });
+    $checkboxes.change(function() {
+        showHideField($(this));
+    });
+
+</script>

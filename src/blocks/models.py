@@ -125,6 +125,79 @@ class OverlayBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
+class EventsBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=True)
+    show_facebook = blocks.BooleanBlock(
+        required=False,
+        help_text=_('Whether or not to embed a Facebook page')
+    )
+    facebook_page_name = blocks.CharBlock(
+        required=False,
+        help_text=_('Name of the page to show. (Must be public or accessible by the registered app_id)')
+    )
+
+    show_instagram = blocks.BooleanBlock(
+        required=False,
+        help_text=_('Whether or not to show Instagram the last event from the registered Instagram feed')
+    )
+
+    show_youtube = blocks.BooleanBlock(
+        required=False,
+        help_text=_('Whether or not to show Youtube')
+    )
+    youtube_channel_id = blocks.CharBlock(
+        required=False,
+    )
+
+    show_google_calendar = blocks.BooleanBlock(
+        required=False,
+        help_text=_('Whether or not to show the next few events from a google calendar')
+    )
+    google_calendar_id = blocks.CharBlock(
+        required=False,
+    )
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        left_count = 0
+        for key in ['show_google_calendar', 'show_instagram', 'show_youtube']:
+            if value[key]:
+                left_count += 1
+
+        right_count = 1 if value['show_facebook'] else 0
+
+        two_cols = (left_count > 0 and right_count > 0)
+
+        if two_cols:
+            left_size = 8
+        elif left_count > 0:
+            left_size = 12
+        else:
+            left_size = 0
+
+        right_size = 12 - left_size
+
+
+        if two_cols:
+            insta_cal_size = 6 if value['show_google_calendar'] and value['show_instagram'] else 12
+        else:
+            insta_cal_size = 4
+
+        context['left_size'] = left_size
+        context['right_size'] = right_size
+        context['insta_cal_size'] = insta_cal_size
+        context['two_cols'] = two_cols
+
+        return context
+
+    class Meta:
+        label = _('Events')
+        icon = 'fa-calendar'
+        group = _('Noyce')
+        form_template = 'block_forms/events.html'
+        template = 'blocks/events.html'
+
+
 class ContactsBlock(blocks.StructBlock):
     contacts = blocks.ListBlock(ContactCardBlock())
 
@@ -208,4 +281,5 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('counters', CountersBlock()),
     ('columns', ColumnBlock()),
     ('contacts', ContactsBlock()),
+    ('events', EventsBlock()),
 ]

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 14:49+0200\n"
+"POT-Creation-Date: 2018-08-14 14:26+0200\n"
 "PO-Revision-Date: 2017-06-26 10:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -129,22 +129,22 @@ msgid "General"
 msgstr "Allmän"
 
 #: home/models/form_page.py:89 home/models/home_page.py:43
-#: home/models/web_page.py:54
+#: home/models/web_page.py:51
 msgid "English"
 msgstr "Engelska"
 
 #: home/models/form_page.py:90 home/models/home_page.py:44
-#: home/models/web_page.py:55
+#: home/models/web_page.py:52
 msgid "Swedish"
 msgstr "Svenska"
 
 #: home/models/form_page.py:91 home/models/home_page.py:45
-#: home/models/web_page.py:56
+#: home/models/web_page.py:53
 msgid "Promote"
 msgstr "Marknadsför"
 
 #: home/models/form_page.py:92 home/models/home_page.py:46
-#: home/models/web_page.py:57
+#: home/models/web_page.py:54
 msgid "Settings"
 msgstr "Inställningar"
 
