@@ -129,7 +129,7 @@ class EventsBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True)
     show_facebook = blocks.BooleanBlock(
         required=False,
-        help_text=_('Whether or not to embed a Facebook page')
+        help_text=_('Whether to embed a Facebook page')
     )
     facebook_page_name = blocks.CharBlock(
         required=False,
@@ -139,13 +139,13 @@ class EventsBlock(blocks.StructBlock):
 
     show_instagram = blocks.BooleanBlock(
         required=False,
-        help_text=_('Whether or not to show Instagram the last event from the '
+        help_text=_('Whether to show Instagram the last event from the '
                     'registered Instagram feed')
     )
 
     show_youtube = blocks.BooleanBlock(
         required=False,
-        help_text=_('Whether or not to show Youtube')
+        help_text=_('Whether to show the last video from a Youtube-channel')
     )
     youtube_channel_id = blocks.CharBlock(
         required=False,
@@ -153,7 +153,7 @@ class EventsBlock(blocks.StructBlock):
 
     show_google_calendar = blocks.BooleanBlock(
         required=False,
-        help_text=_('Whether or not to show the next few events from a '
+        help_text=_('Whether to show the next few events from a '
                     'google calendar')
     )
     google_calendar_id = blocks.CharBlock(
