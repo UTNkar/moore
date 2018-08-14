@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'^accounts/', include('members.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
+    url(r'', include('google.urls')),
+
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:

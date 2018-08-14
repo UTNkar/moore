@@ -1,0 +1,101 @@
+.google_calendar_page {
+	padding-top: 100px;
+	#clndr {
+		min-width: 357px;
+
+		.clndr-controls {
+			@include flexbox();
+			@include justify-content(space-between);
+			@include align-items(center);
+			margin-bottom: 20px;
+		}
+
+		.material-icons {
+		    font-size: 34px;
+		    margin: 0 12px;
+		    cursor: pointer;
+		}
+
+		.days {
+			font-size: 0;
+			.day-wrapper {
+				width: 14.285714286%;
+				text-align: center;
+				display: inline-block;
+				padding: 6px;
+				.day {
+					@extend .center-content-v;
+					display: inline-block;
+					color: $black-color;
+					font-weight: bold;
+					text-align: center;
+					height: 45px;
+					width: 45px;
+					border-radius: 23px;
+					vertical-align: middle;
+					cursor: pointer;
+
+					span {
+						font-size: 15px;
+					}
+
+					&.today {
+						border: 1px solid #E8F1FB;
+						background-color: #E8F1FB;
+					}
+
+					&.adjacent-month {
+						color: #aaaaaa;
+					}
+
+					&.event {
+						border: 1px solid $primary-color;
+					}
+
+					&.selected {
+						border: 1px solid $primary-color;
+						background-color: $primary-color;
+						color: white;
+					}
+				}
+			}
+		}
+	}
+
+	#event-info {
+		.event-wrapper {
+			padding-left: 120px;
+			padding-top: 40px;
+			&:first-of-type {
+				padding-top: 0;
+			}
+			.title {
+				color: $black-color;
+				font-weight: bold;
+				font-size: 23;
+			}
+
+			.date {
+				color: $black-color;
+				font-weight: bold;
+				font-size: 15px;
+				margin: 20px 0;
+			}
+		}
+	}
+}
+
+@media #{$medium-and-down} {
+	.google_calendar_page {
+		#event-info {
+			margin-top: 40px;
+			.event-wrapper {
+				padding-left: 0px;
+				.date {
+					margin: 20px 0 5px 0;
+				}
+			}
+		}
+	}
+}
+

@@ -113,6 +113,12 @@ SESSION_COOKIE_SECURE = True
 MEMBERSHIP_API_USER = 'moore'
 MEMBERSHIP_API_PASSWORD = os.environ.get('MEMBERSHIP_API_PASSWORD')
 
+# Google API
+GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
+
+# Instagram API
+INSTAGRAM_ACCESS_TOKEN = os.environ.get('INSTAGRAM_ACCESS_TOKEN')
+
 try:
     from .local import *
 except ImportError:

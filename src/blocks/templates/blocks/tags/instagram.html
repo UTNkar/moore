@@ -1,0 +1,9 @@
+{% load i18n static %}
+<div class="instagram col s12 m{{ size }}">
+	<div class="header">
+		<img class="icon" src="{% static 'branding/images/social/instagram-black.png' %}"
+        	alt="{% trans 'instagram icon'|capfirst %}">
+		<span>{{ item.username }}</span>
+	</div>
+	<img class="image" src="{{ item.image.url }}" />
+</div>

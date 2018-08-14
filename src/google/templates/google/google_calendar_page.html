@@ -1,0 +1,56 @@
+{% extends 'page.html' %}
+{% load i18n wagtailcore_tags static %}
+
+{% block content %}
+	<div class="google_calendar_page">
+		<div class="container">
+			<div class="row">
+				<div class="col s12 l4 col-calendar">
+					<div
+						id="clndr"
+						class="calendar"
+						data-id="{{id}}"
+						{% if date %} data-date="{{date}}" {% endif %}
+					></div>
+				</div>
+				<div id="event-info" class="col s12 l8">
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block extra_js %}
+	<script type="text/template" id="clndr-template">
+	    <div class="clndr-controls">
+	        <i class="material-icons clndr-previous-button">arrow_left</i>
+	        <div class="month">{month} {year}</div>
+	        <i class="material-icons clndr-next-button">arrow_right</i>
+	    </div>
+	    <div class="clndr-grid">
+	        <div class="days">
+	            {days}
+	        </div>
+	    </div>
+	</script>
+
+	<script type="text/template" id="clndr-day-template">
+		<div class="day-wrapper">
+		    <div class="{class}">
+		    	<span>{day}</span>
+		    </div>
+		</div>
+	</script>
+
+	<script type="text/template" id="clndr-event-template">
+		<div class="event-wrapper">
+		    <h4 class="title">{title}</h4>
+		    <p class="date">{date}</p>
+		    <div class="info"></div>
+		</div>
+	</script>
+
+	<script type="text/javascript" src="{% static 'libraries/clndr/clndr.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/google_calendar_clndr.js' %}"></script>
+{% endblock %}
