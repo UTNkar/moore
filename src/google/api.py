@@ -2,13 +2,13 @@ from django.conf import settings
 from dateutil.parser import parse
 from urllib.parse import quote
 import requests
-import json
+
 
 def google_calendar_list_events(id, params):
     params['key'] = settings.GOOGLE_API_KEY,
 
     url = 'https://www.googleapis.com/calendar/v3/calendars/%s/events' \
-            % quote(id, safe="%/:=~+!$,;'@()*[]")
+        % quote(id, safe="%/:=~+!$,;'@()*[]")
     response = requests.get(url, params=params)
     result = response.json()
     items = []
@@ -52,7 +52,7 @@ def youtube_search(params):
     for item in items:
         video_id = item['id']['videoId']
         url = 'https://www.youtube.com/embed/%s?showinfo=0&autoplay=0&rel=0' \
-                % video_id
+            % video_id
         item['embed_url'] = url
 
     return items
