@@ -131,12 +131,14 @@ class EventsBlock(blocks.StructBlock):
     )
     facebook_page_name = blocks.CharBlock(
         required=False,
-        help_text=_('Name of the page to show. (Must be public or accessible by the registered app_id)')
+        help_text=_('Name of the page to show. (Must be public or accessible '
+                    'by the registered app_id)')
     )
 
     show_instagram = blocks.BooleanBlock(
         required=False,
-        help_text=_('Whether or not to show Instagram the last event from the registered Instagram feed')
+        help_text=_('Whether or not to show Instagram the last event from the '
+                    'registered Instagram feed')
     )
 
     show_youtube = blocks.BooleanBlock(
@@ -149,7 +151,8 @@ class EventsBlock(blocks.StructBlock):
 
     show_google_calendar = blocks.BooleanBlock(
         required=False,
-        help_text=_('Whether or not to show the next few events from a google calendar')
+        help_text=_('Whether or not to show the next few events from a '
+                    'google calendar')
     )
     google_calendar_id = blocks.CharBlock(
         required=False,
@@ -175,9 +178,10 @@ class EventsBlock(blocks.StructBlock):
 
         right_size = 12 - left_size
 
-
         if two_cols:
-            insta_cal_size = 6 if value['show_google_calendar'] and value['show_instagram'] else 12
+            insta_cal_size = 6 if value['show_google_calendar'] \
+                and value['show_instagram'] \
+                else 12
         else:
             insta_cal_size = 4
 

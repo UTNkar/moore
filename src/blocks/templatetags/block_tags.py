@@ -1,13 +1,10 @@
 from django.conf import settings
 from django import template
-from django.utils.translation import ugettext_lazy as _
 from datetime import date
-from datetime import datetime
-from urllib.parse import quote
-import requests
 from google.api import google_calendar_list_events, youtube_search
 from google.models import GoogleCalendarPage
 from wagtail.core.models import Page
+import requests
 
 register = template.Library()
 
@@ -36,7 +33,6 @@ def instagram(size):
     )
     json = response.json()
 
-
     item = None
 
     if 'data' in json:
@@ -44,7 +40,6 @@ def instagram(size):
             'image': json['data'][0]['images']['standard_resolution'],
             'username': '@%s' % json['data'][0]['user']['username'],
         }
-
 
     data = {
         'size': size,
@@ -91,14 +86,3 @@ def calendar(id, size):
     data['calendar_url'] = page.get_url() if page else ''
 
     return data
-
-
-
-
-
-
-
-
-
-
-
