@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-14 14:26+0200\n"
+"POT-Creation-Date: 2018-08-14 15:10+0200\n"
 "PO-Revision-Date: 2017-06-26 10:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Responsive Image"
 msgstr "Responsiv bild"
 
-#: blocks/models.py:18 blocks/models.py:51 blocks/models.py:212
+#: blocks/models.py:18 blocks/models.py:51 blocks/models.py:216
 msgid "Basic"
 msgstr ""
 
@@ -44,7 +44,7 @@ msgid "Counters"
 msgstr "Räknare"
 
 #: blocks/models.py:40 blocks/models.py:67 blocks/models.py:91
-#: blocks/models.py:105 blocks/models.py:123 blocks/models.py:194
+#: blocks/models.py:105 blocks/models.py:123 blocks/models.py:198
 msgid "Noyce"
 msgstr ""
 
@@ -77,53 +77,55 @@ msgid "Image overlay"
 msgstr "Bildöverdrag"
 
 #: blocks/models.py:130
-msgid "Whether or not to embed a Facebook page"
+#, fuzzy
+#| msgid "Whether or not to embed a Facebook page"
+msgid "Whether to embed a Facebook page"
 msgstr "Om du vill visa en Facebook-sida"
 
 #: blocks/models.py:134
 msgid ""
 "Name of the page to show. (Must be public or accessible by the registered "
 "app_id)"
-msgstr "Namnet på sidan att visa. (Måste vara en publik sida eller tillgänglig "
-" via den registrerade app-id)"
+msgstr ""
+"Namnet på sidan att visa. (Måste vara en publik sida eller tillgänglig  via "
+"den registrerade app-id)"
 
-#: blocks/models.py:139
+#: blocks/models.py:140
 msgid ""
-"Whether or not to show Instagram the last event from the registered "
-"Instagram feed"
+"Whether to show Instagram the last event from the registered Instagram feed"
 msgstr "Om du vill visa det senaste inlägget från Instagram"
 
-#: blocks/models.py:144
-msgid "Whether or not to show Youtube"
-msgstr "Om du vill visa det senaste Youtube-inlägget"
-
-#: blocks/models.py:152
-msgid "Whether or not to show the next few events from a google calendar"
+#: blocks/models.py:146
+msgid "Whether to show the last video from a Youtube-channel"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: blocks/models.py:192
+#: blocks/models.py:154
+msgid "Whether to show the next few events from a google calendar"
+msgstr "Om du vill visa de senaste händelserna från en Google kalender"
+
+#: blocks/models.py:196
 msgid "Events"
 msgstr "Evenemang"
 
-#: blocks/models.py:203
+#: blocks/models.py:207
 msgid "Contact Card"
 msgstr "Kontaktkort"
 
-#: blocks/models.py:206 blocks/models.py:232
+#: blocks/models.py:210 blocks/models.py:236
 msgid "Meta"
 msgstr ""
 
-#: blocks/models.py:223
+#: blocks/models.py:227
 msgid "Width out of 12"
 msgstr "Bredd, 1 till 12"
 
-#: blocks/models.py:229
+#: blocks/models.py:233
 msgid "Columns"
 msgstr "Kolumner"
 
 #: blocks/templates/blocks/tags/calendar.html:16
-msgid "Se hela kalendern"
-msgstr "See the whole calendar"
+msgid "See the whole calendar"
+msgstr "Se hela kalendern"
 
 #: blocks/templates/blocks/tags/facebook.html:6
 msgid "facebook icon"
