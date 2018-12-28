@@ -15,7 +15,7 @@ administrator](mailto:admin@utn.se).
 Before contributing please read through our [contribution
 guidelines](CONTRIBUTING.md).
 
-## Getting Started
+## Getting Started - Virtual Environment
 
 To get started with Project Moore, follow these instructions to set up a
 development environment:
@@ -30,6 +30,23 @@ development environment:
 
 During development, you can run a test web server using `./manage.py
 runserver`.
+
+## Getting Started - Docker
+
+If you can use Docker, there is an alternative way to get your development
+environment all set up:
+
+1. Clone the repository.
+2. Run `docker -t moore .` to create the moore image.
+3. Run `docker run -d -p 8000:8000 -v $(pwd):/var/www/moore/ --name moore moore` to
+start a new docker container.
+4. Run `docker exec -it moore python src/manage.py migrate` to initialize the
+database
+5. Run `docker exec -it moore python src/ createsuperuser` to create an admin
+user.
+
+The Moore application is now available on `http://localhost:8000` and can be started
+and stopped using `docker start moore` and `docker stop moore`.
 
 ## Documentation
 
