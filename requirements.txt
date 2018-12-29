@@ -13,7 +13,7 @@ wagtailfontawesome==1.1.3
 django-kronos==1.0
 
 # User management
-rules==2.0
+rules==2.0.1
 django-simple-email-confirmation==0.23
 
 # Logging
