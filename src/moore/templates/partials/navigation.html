@@ -1,4 +1,4 @@
-{% load static i18n wagtailcore_tags site_tags gravatar %}
+{% load static i18n wagtailcore_tags site_tags wagtailadmin_tags %}
 {% get_site_root as site_root %}
 <nav class="navigation">
     <a class="brand-logo" href="{% pageurl site_root %}">
@@ -19,7 +19,7 @@
                         </a>
                     </div>
                 {% else %}
-                    <a href="{% url 'profile' %}"><img class="circle" src="{% gravatar_url user.email %}"></a>
+                    <a href="{% url 'profile' %}"><img class="circle" src="{% avatar_url user.email %}"></a>
                     <a href="{% url 'profile' %}"><span class="white-text name">{{ user }}</span></a>
                     <a href="{% url 'profile' %}"><span class="white-text email">{{ user.email }}</span></a>
                 {% endif %}
@@ -59,7 +59,7 @@
         {% else %}
             <li class="avatar">
                 <a href="{% url 'profile' %}" class="dropdown-button" data-activates="user-menu">
-                    <img src="{% gravatar_url user.email %}" alt="{% trans 'your avatar' %}">
+                    <img src="{% avatar_url user.email %}" alt="{% trans 'your avatar' %}">
                     <i class="material-icons more-icon">more_vert</i>
                 </a>
                 <ul id="user-menu" class="dropdown-content">
