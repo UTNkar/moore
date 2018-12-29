@@ -17,7 +17,7 @@ rules==2.0.1
 django-simple-email-confirmation==0.23
 
 # Logging
-raven==6.9.0
+raven==6.10.0
 
 # Postgres
 psycopg2-binary==2.7.6.1
