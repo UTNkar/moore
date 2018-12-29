@@ -6,6 +6,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.11.0] - 2018-12-29
+### Added
+- Added a *mandate* system which tracks positions.
+- Automatically create contact cards for appointed applications and vacant positions.
+### Changed
+- **Switch to a new hierarchical permission system (#254).**
+- Upgrade dependencies to current versions.
+- Improvements to the contact page design.
+- Large python files are restructured into packages (models, forms, and views).
+- Applicants can no longer change their application after submission.
+- Old applications are removed after 7 days.
+### Fixed
+- Fixed crash caused by invalid `SelectMultiple`.
+- Fixes several layout problems and responsive errors.
+- User names are now unique independent of case.
+### Removed
+- Marvin Quotes.
+
 ## [0.10.1] - 2018-02-04
 ### Changed
 - Upgrade dependencies to current versions
@@ -238,7 +256,8 @@ asked to extend their profile in the registration email.
 - First version of the application system
 
 
-[Unreleased]: https://github.com/UTNkar/moore/compare/v0.10.1...HEAD
+[Unreleased]: https://github.com/UTNkar/moore/compare/v0.11.0...HEAD
+[0.11.0]: https://github.com/UTNkar/moore/compare/v0.10.1...v0.11.0
 [0.10.1]: https://github.com/UTNkar/moore/compare/v0.10.0...v0.10.1
 [0.10.0]: https://github.com/UTNkar/moore/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/UTNkar/moore/compare/v0.8.0...v0.9.0
