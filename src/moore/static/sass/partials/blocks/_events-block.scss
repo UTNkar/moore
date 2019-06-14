@@ -94,8 +94,13 @@
 				font-size: 15px;
 				line-height: 23px;
 				word-spacing: normal;
-				vertical-align: top;
-				padding: 15px 0;
+				max-width: calc(100% - 125px);
+				word-break: break-all;
+				overflow: hidden;
+				@include multi-line-ellipsis($lineHeight: 23px, $lineCount: 3, $bgColor: white);
+				span {
+					font-size: 13px;
+				}
 			}
 		}
 
