@@ -16,7 +16,7 @@ django-kronos==1.0
 
 # User management
 rules==2.0.1
-django-simple-email-confirmation==0.23
+django-simple-email-confirmation==0.60
 
 # Logging
 raven==6.10.0
