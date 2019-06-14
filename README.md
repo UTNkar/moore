@@ -43,7 +43,7 @@ database
 user.
 
 The Moore application is now available on `http://localhost:8000` and can be started
-and stopped using `docker-compose up -d` and `docker-compose stop`.
+and stopped using `docker-compose up -d` and `docker-compose stop` (the `-d` flag starts the instance in the background).
 
 ## Documentation
 
