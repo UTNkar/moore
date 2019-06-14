@@ -20,4 +20,4 @@ django-simple-email-confirmation==0.23
 raven==6.10.0
 
 # Postgres
-psycopg2-binary==2.7.7
+psycopg2-binary==2.8.3
