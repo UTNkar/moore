@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from wagtail.admin.edit_handlers import InlinePanel, FieldPanel, \
-        StreamFieldPanel, TabbedInterface, ObjectList, MultiFieldPanel  
+        StreamFieldPanel, TabbedInterface, ObjectList, MultiFieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
@@ -17,13 +17,13 @@ class HomePage(Page):
     show_searchbar = models.BooleanField(default=True)
 
     body_en = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES
-        + [('news', LatestNewsBlock())],
+        WAGTAIL_STATIC_BLOCKTYPES +
+        [('news', LatestNewsBlock())],
         blank=True,
     )
     body_sv = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES
-        + [('news', LatestNewsBlock())],
+        WAGTAIL_STATIC_BLOCKTYPES +
+        [('news', LatestNewsBlock())],
         blank=True,
     )
     body = TranslatedField('body_en', 'body_sv')
@@ -52,3 +52,4 @@ class HomePage(Page):
         ObjectList(Page.promote_panels, heading=_('Promote')),
         ObjectList(custom_settings_panel, heading=_('Settings')),
     ])
+    
