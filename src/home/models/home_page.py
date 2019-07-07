@@ -52,4 +52,3 @@ class HomePage(Page):
         ObjectList(Page.promote_panels, heading=_('Promote')),
         ObjectList(custom_settings_panel, heading=_('Settings')),
     ])
-    
