@@ -6,6 +6,7 @@
             <i class="material-icons carousel-next">keyboard_arrow_right</i>
         </div>
     {% endif %}
+    {% if page.show_searchbar %}
     <div class="carousel-fixed-item center search">
         <div class="container row">
             <form action="{% url 'search' %}" method="get">
@@ -19,6 +20,7 @@
             </form>
         </div>
     </div>
+    {% endif %}
     {% for banner in page.banners.all %}
         {% image banner.image height-700 as photo %}
         <div class="carousel-item">
