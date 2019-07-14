@@ -308,6 +308,7 @@ class WebPage(Page):
             ('google_drive', GoogleDriveBlock()),
             ('google_form', GoogleFormBlock()),
             ('news', LatestNewsBlock()),
+            ('raw_html', blocks.RawHTMLBlock(group="Basic")),
         ],
         blank=True,
     )
@@ -318,6 +319,7 @@ class WebPage(Page):
             ('google_drive', GoogleDriveBlock()),
             ('google_form', GoogleFormBlock()),
             ('news', LatestNewsBlock()),
+            ('raw_html', blocks.RawHTMLBlock(group="Basic")),
         ],
         blank=True,
     )
