@@ -28,3 +28,4 @@ venv/
 
 # PyCharm project settings
 .idea/
+.DS_Store

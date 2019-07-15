@@ -20,17 +20,39 @@ SECRET_KEY = 'l0gkw_q4rgex=0%ep84(yw$gx+mxr)u1e-x5yv@2j)a%(4=1!s'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+if 'TRAVIS' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+elif 'DOCKER' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'moore',
+            'USER': 'moore',
+            'HOST': 'moore-db',
+            'PORT': 5432,
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'moore',
+            'USER': 'moore',
+            'HOST': '127.0.0.1',
+            'PORT': 5432,
+        }
+    }
 
 # Base URL to use when referring to full URLs within the Wagtail admin
 # backend - e.g. in notification emails. Don't include '/admin' or a
 # trailing slash
-BASE_URL = 'http://127.0.0.1:8000'
+BASE_URL = 'http://localhost:8000'
 
 # Email
 # https://docs.djangoproject.com/en/1.10/ref/settings/#email-backend
