@@ -8,7 +8,7 @@ function marvin(message, classes, callback) {
         '<div class="message-impl">' +
         // TODO: Replace this static reference.
         '<img class="marvin" src="/static/images/bocken_white.svg">' +
-        '<b>Marvin:</b><a href="#" class="close"><i class="material-icons">close</i></a><br>'
+        '<b>Bocken:</b><a href="#" class="close"><i class="material-icons">close</i></a><br>'
         + message
         + '</div>',
         Infinity, // Display until dismissed
