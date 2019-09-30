@@ -2,6 +2,13 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
+import json
+import traceback
+import urllib.parse
+import http.client
+import requests
+from http.client import HTTPSConnection
+from wagtail.admin.edit_handlers import FieldPanel
 
 
 class ResponsiveImageBlock(blocks.StructBlock):
@@ -131,6 +138,36 @@ class ContactsBlock(blocks.StructBlock):
         template = 'involvement/blocks/contact_cards.html'
         group = _('Meta')
 
+class EventbriteBlock(blocks.StructBlock):
+	eventbriteToken = blocks.CharBlock(required=True)
+
+	def getEventsJson(self, token):
+		headers = {"Authorization": 'Bearer ' + token}
+		r = requests.get('https://www.eventbriteapi.com/v3/users/me/events/?&expand=venue', headers=headers)
+		return r.json()
+
+	def get_context(self, value, parent_context=None):
+		context = super().get_context(value, parent_context=parent_context)
+		try:
+			context['eventbrite'] = self.getEventsJson(value['eventbriteToken'])
+			context['eventkeys'] = context['events']['events'][1].keys()
+			print('Without error!')
+			
+		except Exception as e: 
+			print(e)
+			traceback.print_exc()
+		finally: 
+			return context
+
+
+	class Meta:
+		label = _('Eventbrite')
+		icon = 'fa-pied-piper'
+		template = 'blocks/eventbrite.html'
+		group = _('Embed')
+
+
+			
 
 BASIC_BLOCKTYPES = [
     ('paragraph', blocks.RichTextBlock(

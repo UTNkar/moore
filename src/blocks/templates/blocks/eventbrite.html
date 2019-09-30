@@ -1,0 +1,39 @@
+<div class="container">
+<p>{{ eventbrite }}</p>
+
+{% for evt in eventbrite.events %}
+<div class="card">
+		<div class="card horizontal">
+			{% if evt.logo.original|length > 0%}
+			<div class="card-image">
+				<img src={{ evt.logo.original.url }}>
+			</div>
+			{% endif %}
+			<div class="card-stacked">
+				<div class="card-content">
+					<span class="card-title">{{ evt.name.text }}</span>
+					<br>
+					<div class="rich-text">
+						<p>{{ evt.description.text }}</p>
+						<br>
+					</div>
+					<div align="bottom">
+						<p><b>Time: </b> {{ evt.start.local }}</p>
+						<p><b>Place: </b> {{ evt.venue.name }}</p>											
+					</div>
+				</div>
+			<div class="card-action">
+				<a href={{ evt.url }} style="text-align:right">Register</a>
+			</div>
+			</div>
+		</div>
+</div>
+{% endfor %}
+</div>
+
+<style>
+	.card-image {
+		max-width=200px;
+		max-height=200px;
+	}
+</style>

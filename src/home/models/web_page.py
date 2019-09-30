@@ -6,7 +6,7 @@ from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, \
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
 from wagtail.core.blocks import RawHTMLBlock
-from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
+from blocks.models import WAGTAIL_STATIC_BLOCKTYPES, EventbriteBlock
 from google.models import GoogleFormBlock, GoogleDriveBlock, \
     GoogleCalendarBlock
 from news.models import LatestNewsBlock
@@ -26,6 +26,7 @@ class WebPage(Page):
             ('google_form', GoogleFormBlock()),
             ('news', LatestNewsBlock()),
             ('html', RawHTMLBlock(group="Basic")),
+	    ('eventbrite', EventbriteBlock()),
         ],
         blank=True,
     )
