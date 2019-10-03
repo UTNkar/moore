@@ -142,7 +142,7 @@ class EventbriteBlock(blocks.StructBlock):
 
 	def getEventsJson(self, token):
 		headers = {"Authorization": 'Bearer ' + token}
-		r = requests.get('https://www.eventbriteapi.com/v3/users/me/events/?time_filter=current_future&expand=venue', headers=headers)
+		r = requests.get('https://www.eventbriteapi.com/v3/users/me/events/?status=all&time_filter=current_future&expand=venue', headers=headers)
 		return r.json()
 
 	def get_context(self, value, parent_context=None):
@@ -154,8 +154,6 @@ class EventbriteBlock(blocks.StructBlock):
 				evt['endtime'] = datetime.strptime(evt['end']['local'], '%Y-%m-%dT%H:%M:%S')
 
 			context['events'] = eventsJson['events']
-			print('Without error!')
-			
 		except Exception as e: 
 			print(e)
 			traceback.print_exc()
@@ -166,7 +164,7 @@ class EventbriteBlock(blocks.StructBlock):
 	class Meta:
 		label = _('Eventbrite')
 		icon = 'fa-pied-piper'
-		template = 'blocks/eventbriteCard.html'
+		template = 'blocks/eventbrite.html'
 		group = _('Embed')
 
 
