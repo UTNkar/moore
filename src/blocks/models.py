@@ -4,9 +4,8 @@ from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
 import json
 import traceback
-import urllib.parse
-import http.client
 import requests
+from datetime import datetime
 from http.client import HTTPSConnection
 from wagtail.admin.edit_handlers import FieldPanel
 
@@ -143,14 +142,18 @@ class EventbriteBlock(blocks.StructBlock):
 
 	def getEventsJson(self, token):
 		headers = {"Authorization": 'Bearer ' + token}
-		r = requests.get('https://www.eventbriteapi.com/v3/users/me/events/?&expand=venue', headers=headers)
+		r = requests.get('https://www.eventbriteapi.com/v3/users/me/events/?time_filter=current_future&expand=venue', headers=headers)
 		return r.json()
 
 	def get_context(self, value, parent_context=None):
 		context = super().get_context(value, parent_context=parent_context)
 		try:
-			context['eventbrite'] = self.getEventsJson(value['eventbriteToken'])
-			context['eventkeys'] = context['events']['events'][1].keys()
+			eventsJson = self.getEventsJson(value['eventbriteToken'])
+			for evt in eventsJson['events']:
+				evt['starttime'] = datetime.strptime(evt['start']['local'], '%Y-%m-%dT%H:%M:%S')
+				evt['endtime'] = datetime.strptime(evt['end']['local'], '%Y-%m-%dT%H:%M:%S')
+
+			context['events'] = eventsJson['events']
 			print('Without error!')
 			
 		except Exception as e: 
@@ -163,7 +166,7 @@ class EventbriteBlock(blocks.StructBlock):
 	class Meta:
 		label = _('Eventbrite')
 		icon = 'fa-pied-piper'
-		template = 'blocks/eventbrite.html'
+		template = 'blocks/eventbriteCard.html'
 		group = _('Embed')
 
 
