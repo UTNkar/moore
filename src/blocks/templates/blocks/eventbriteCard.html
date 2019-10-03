@@ -1,0 +1,60 @@
+<div class="container">
+
+
+<p>{{ events }}</p>
+
+
+{% for evt in events %}
+<div class="card">
+		<div class="card horizontal">
+			{% if evt.logo.original|length > 0%}
+			
+			<div class="card-image" style="url('{{ evt.logo.original.url }}');">
+				<img src={{ evt.logo.url }}>
+			</div>
+			
+			<!--
+			<div class="card-image">
+			<div class="image" style="background-image: url('{{ evt.logo.original.url }}'); height: 400px; width: 600px"></div>
+			</div>
+			-->			
+			{% endif %}
+			<div class="card-stacked">
+				<div class="card-content">
+					<span class="card-title">{{ evt.name.text }}</span>
+					<div class="rich-text">
+						<!-- <p>{{ evt.description.text }}</p> -->
+ 						<p> {{ evt.description.text|truncatechars:500 }} {% if evt.description.text|length > 500 %}<a href="{{ evt.url }}">Read more</a>{% endif %}</p>
+						<br>
+					</div>
+					<div align="bottom">
+						<p><b>Time: </b> {{ evt.starttime|date:'Y-m-d' }}    {{ evt.starttime|date:'H:i' }}-{{ evt.endtime|date:'H:i' }}</p>
+						<p><b>Place: </b> {{ evt.venue.name }}</p>											
+					</div>
+				</div>
+			<div class="card-action">
+				<a href={{ evt.url }} style="text-align:right" target="_blank">Register</a>
+			</div>
+			</div>
+		</div>
+</div>
+{% endfor %}
+</div>
+
+<style>
+	.card-image {
+		width: 40%;
+			
+		overflow: hidden;
+		img {
+			width: 100%;
+			height: 100%;		
+		}
+	}	
+	.card-stacked {
+		max-width: 60%;		
+	}
+
+	
+	
+</style>
