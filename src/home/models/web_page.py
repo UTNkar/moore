@@ -26,7 +26,7 @@ class WebPage(Page):
             ('google_form', GoogleFormBlock()),
             ('news', LatestNewsBlock()),
             ('html', RawHTMLBlock(group="Basic")),
-	    ('eventbrite', EventbriteBlock()),
+            ('eventbrite', EventbriteBlock()),
         ],
         blank=True,
     )
@@ -37,7 +37,7 @@ class WebPage(Page):
             ('google_form', GoogleFormBlock()),
             ('news', LatestNewsBlock()),
             ('html', RawHTMLBlock(group="Basic")),
-	    ('eventbrite', EventbriteBlock())
+            ('eventbrite', EventbriteBlock())
         ],
         blank=True,
     )
