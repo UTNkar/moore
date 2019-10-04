@@ -155,8 +155,7 @@ class EventbriteBlock(blocks.StructBlock):
 
 			context['events'] = eventsJson['events']
 		except Exception as e: 
-			print(e)
-			traceback.print_exc()
+			context['error'] = 'Failed to retrieve events from eventbrite.'
 		finally: 
 			return context
 

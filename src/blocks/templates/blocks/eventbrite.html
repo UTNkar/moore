@@ -1,35 +1,38 @@
 {% load static %}
 
 <div class="container">
-{% if not events %}
-<p>There are no events available at this moment.</p>
-{% endif %}
-{% for evt in events %}
-<div class="card" style="margin-bottom: 1.5em">
-	<div class="card horizontal">
-		<div class="card-image">
-			<img src="{% if evt.logo.url %}{{ evt.logo.url }}{% else %}{% static 'utnarm.png' %}{% endif %}">
-		</div>
-		<div class="card-stacked">
-			<div class="card-content">
-				<span class="card-title">{{ evt.name.text }}</span>
-				<div class="rich-text">
- 					<p> {{ evt.description.text }} </p>
-					<br>
-				</div>
-				<div align="bottom">
-					<p><b>Date: </b> {{ evt.starttime|date:'l, M dS' }}</p>
-                        		<p><b>Time: </b> {{ evt.starttime|date:'H:i' }}-{{ evt.endtime|date:'H:i' }}</p>
-                        		<p><b>Place: </b> {{ evt.venue.name }}</p>											
+	{% if error %}
+		<p>{{ error }}</p>
+	{% elif not events %}
+		<p>There are no events available at this moment.</p>
+	{% else %}
+		{% for evt in events %}
+			<div class="card" style="margin-bottom: 1.5em">
+				<div class="card horizontal">
+					<div class="card-image">
+						<img src="{% if evt.logo.url %}{{ evt.logo.url }}{% else %}{% static 'images/utnarm.png' %}{% endif %}">
+					</div>
+					<div class="card-stacked">
+						<div class="card-content">
+							<span class="card-title">{{ evt.name.text }}</span>
+							<div class="rich-text">
+			 					<p> {{ evt.description.text }} </p>
+								<br>
+							</div>
+							<div align="bottom">
+								<p><b>Date: </b> {{ evt.starttime|date:'l, M dS' }}</p>
+								<p><b>Time: </b> {{ evt.starttime|date:'H:i' }}-{{ evt.endtime|date:'H:i' }}</p>
+								<p><b>Place: </b> {{ evt.venue.name }}</p>											
+							</div>
+						</div>
+						<div class="card-action">
+							<a href={{ evt.url }} style="text-align:right" target="_blank">Read more and Register</a>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="card-action">
-				<a href={{ evt.url }} style="text-align:right" target="_blank">Read more and Register</a>
-			</div>
-		</div>
-	</div>
-</div>
-{% endfor %}
+		{% endfor %}
+	{% endif %}
 </div>
 
 <style>
