@@ -142,7 +142,7 @@ class EventbriteBlock(blocks.StructBlock):
 
 	def getEventsJson(self, token):
 		headers = {"Authorization": 'Bearer ' + token}
-		r = requests.get('https://www.eventbriteapi.com/v3/users/me/events/?status=all&time_filter=current_future&expand=venue', headers=headers)
+		r = requests.get('https://www.eventbriteapi.com/v3/users/me/events/?status=live&time_filter=current_future&expand=venue', headers=headers)
 		return r.json()
 
 	def get_context(self, value, parent_context=None):
