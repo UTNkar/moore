@@ -11,7 +11,7 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
-from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
+from blocks.models import WAGTAIL_STATIC_BLOCKTYPES, EventbriteBlock
 from google.models import GoogleFormBlock, GoogleDriveBlock, \
     GoogleCalendarBlock
 from involvement.models import ContactCardBlock
@@ -309,6 +309,7 @@ class WebPage(Page):
             ('google_form', GoogleFormBlock()),
             ('news', LatestNewsBlock()),
             ('raw_html', blocks.RawHTMLBlock(group="Basic")),
+	    ('eventbrite', EventbriteBlock()),
         ],
         blank=True,
     )
@@ -320,6 +321,7 @@ class WebPage(Page):
             ('google_form', GoogleFormBlock()),
             ('news', LatestNewsBlock()),
             ('raw_html', blocks.RawHTMLBlock(group="Basic")),
+	    ('eventbrite', EventbriteBlock()),
         ],
         blank=True,
     )
