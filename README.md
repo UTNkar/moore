@@ -20,12 +20,16 @@ To get started with Project Moore, follow these instructions to set up a
 development environment:
 
 1. Install Python 3, at least version 3.5 or up.
-2. Clone the repository.
-3. Run `source ./source_me.sh` to create a virtual environment.
-4. Run `pip install -r dev-requirements.txt`
-5. Use `cd src` to enter the website directory.
-6. Run `./manage.py migrate` to initialize the database.
-7. Run `./manage.py createsuperuser` to create an admin user.
+2. Install the following python packages:
+   - python3-venv
+   - python3-dev
+3. Clone the repository.
+4. Run `source ./source_me.sh` to create a virtual environment.
+4. Run `pip install --upgrade pip` to make sure that pip is running the latest version
+5. Run `pip install -r dev-requirements.txt`
+6. Use `cd src` to enter the website directory.
+7. Run `./manage.py migrate` to initialize the database.
+8. Run `./manage.py createsuperuser` to create an admin user.
 
 During development, you can run a test web server using `./manage.py
 runserver`.
