@@ -1,8 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
-import json
-import traceback
 import requests
 from datetime import datetime
 
@@ -147,34 +145,43 @@ class OverlayBlock(blocks.StructBlock):
         template = 'blocks/overlay.html'
         group = _('Noyce')
 
+
 class EventbriteBlock(blocks.StructBlock):
-	eventbriteToken = blocks.CharBlock(required=True)
+    eventbriteToken = blocks.CharBlock(required=True)
 
-	def getEventsJson(self, token):
-		headers = {"Authorization": 'Bearer ' + token}
-		r = requests.get('https://www.eventbriteapi.com/v3/users/me/events/?status=live&time_filter=current_future&expand=venue', headers=headers)
-		return r.json()
+    def getEventsJson(self, token):
+        headers = {"Authorization": 'Bearer ' + token}
+        r = requests.get(
+            'https://www.eventbriteapi.com/v3/users/me/events/' +
+            '?status=live&time_filter=current_future&expand=venue',
+            headers=headers
+        )
+        return r.json()
 
-	def get_context(self, value, parent_context=None):
-		context = super().get_context(value, parent_context=parent_context)
-		try:
-			eventsJson = self.getEventsJson(value['eventbriteToken'])
-			for evt in eventsJson['events']:
-				evt['starttime'] = datetime.strptime(evt['start']['local'], '%Y-%m-%dT%H:%M:%S')
-				evt['endtime'] = datetime.strptime(evt['end']['local'], '%Y-%m-%dT%H:%M:%S')
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        try:
+            eventsJson = self.getEventsJson(value['eventbriteToken'])
+            for evt in eventsJson['events']:
+                evt['starttime'] = datetime.strptime(
+                    evt['start']['local'],
+                    '%Y-%m-%dT%H:%M:%S'
+                )
+                evt['endtime'] = datetime.strptime(
+                    evt['end']['local'],
+                    '%Y-%m-%dT%H:%M:%S'
+                )
+            context['events'] = eventsJson['events']
+        except Exception:
+            context['error'] = 'Failed to retrieve events from eventbrite.'
+        finally:
+            return context
 
-			context['events'] = eventsJson['events']
-		except Exception as e:
-			context['error'] = 'Failed to retrieve events from eventbrite.'
-		finally: 
-			return context
-
-
-	class Meta:
-		label = _('Eventbrite')
-		icon = 'fa-pied-piper'
-		template = 'blocks/eventbrite.html'
-		group = _('Embed')
+    class Meta:
+        label = _('Eventbrite')
+        icon = 'fa-pied-piper'
+        template = 'blocks/eventbrite.html'
+        group = _('Embed')
 
 
 WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
