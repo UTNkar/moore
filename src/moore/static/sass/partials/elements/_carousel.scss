@@ -70,24 +70,27 @@ $controls-size: 150px;
       background: no-repeat center center;
       background-size: cover;
     }
-    .banner-title {
-      margin-top: -500px;
-      color: #fff;
-      font-size: 50px;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    }
-    .banner-description {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 22px;
-      font-weight: 400;
-      margin: 15px 150px;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    }
-    .banner-link {
-      @extend .btn;
-      @extend .btn-large;
-      @extend .btn-primary;
-      margin: 30px 0 0 0;
+    .banner-filling {
+      margin-top: -350px;
+      transform: translateY(-50%);
+      .banner-title {
+        color: #fff;
+        font-size: 50px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+      .banner-description {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 22px;
+        font-weight: 400;
+        margin: 15px 150px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+      .banner-link {
+        @extend .btn;
+        @extend .btn-large;
+        @extend .btn-primary;
+        margin: 30px 0 0 0;
+      }
     }
   }
 }

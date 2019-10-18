@@ -25,9 +25,11 @@
         {% image banner.image height-700 as photo %}
         <div class="carousel-item">
             {% if banner.image %}<div class="banner-image" style="background-image: url('{{ photo.url }}');"></div>{% endif %}
-            {% if banner.title %}<h2 class="banner-title">{{ banner.title }}</h2>{% endif %}
-            {% if banner.text %}<p class="banner-description">{{ banner.text }}</p>{% endif %}
-            {% if banner.link and banner.button %}<a class="banner-link" href="{{ banner.link }}">{{ banner.button }}</a>{% endif %}
+            <div class="banner-filling">
+                {% if banner.title %}<h2 class="banner-title">{{ banner.title }}</h2>{% endif %}
+                {% if banner.text %}<p class="banner-description">{{ banner.text }}</p>{% endif %}
+                {% if banner.link and banner.button %}<a class="banner-link" href="{{ banner.link }}">{{ banner.button }}</a>{% endif %}
+            </div>
         </div>
     {% endfor %}
 </div>
