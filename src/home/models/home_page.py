@@ -15,6 +15,7 @@ class HomePage(Page):
     title_sv = models.CharField(max_length=255)
     translated_title = TranslatedField('title', 'title_sv')
     show_searchbar = models.BooleanField(default=True)
+    add_whitespace_bottom = models.BooleanField(default=True)
 
     body_en = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES +
@@ -41,8 +42,9 @@ class HomePage(Page):
 
     custom_settings_panel = Page.settings_panels + [
         MultiFieldPanel([
-            FieldPanel('show_searchbar')
-        ], 'Searchbar settings')
+            FieldPanel('show_searchbar'),
+            FieldPanel('add_whitespace_bottom')
+        ],  'Banner settings')
     ]
 
     edit_handler = TabbedInterface([
