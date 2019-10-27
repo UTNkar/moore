@@ -1,59 +1,42 @@
-Skip to content
-Why GitHub? 
-Enterprise
-Explore 
-Marketplace
-Pricing 
-Search
-
-Sign in
-Sign up
-365UTNkar/moore
- Code Issues 17 Pull requests 9 Security Insights
-Join GitHub today
-GitHub is home to over 40 million developers working together to host and review code, manage projects, and build software together.
-
-moore/src/blocks/templates/blocks/eventbrite.html
-@Skuldran Skuldran Added eventbrite block (#321)
-5fce5aa 14 days ago
-54 lines (47 sloc)  1.27 KB
- 
 {% load static %}
 
 <div class="container">
-	{% if error %}
-		<p>{{ error }}</p>
-	{% elif not events %}
-		<p>There are no events available at this moment.</p>
-	{% else %}
-		{% for evt in events %}
-			<div class="card" style="margin-bottom: 1.5em">
-				<div class="card horizontal">
-					<div class="card-image">
-						<img src="{% if evt.logo.url %}{{ evt.logo.url }}{% else %}{% static 'images/utnarm.png' %}{% endif %}">
-					</div>
-					<div class="card-stacked">
-						<div class="card-content">
-							<span class="card-title">{{ evt.name.text }}</span>
-							<div class="rich-text">
-			 					<p> {{ evt.description.text }} </p>
-								<br>
-							</div>
-							<div align="bottom">
-								<p><b>Date: </b> {{ evt.starttime|date:'l, M dS' }}</p>
-								<p><b>Time: </b> {{ evt.starttime|date:'H:i' }}-{{ evt.endtime|date:'H:i' }}</p>
-								<p><b>Place: </b> {{ evt.venue.name }}</p>											
-							</div>
-						</div>
-						<div class="card-action">
-							<a href={{ evt.url }} style="text-align:right" target="_blank">Read more and Register</a>
-						</div>
-					</div>
+
+{% if error %}
+<p>{{ error }}</p>
+{% elif not events %}
+<p>There are no events available at this moment.</p>
+{% else %}
+
+{% for evt in events %}
+<div class="card" style="margin-bottom: 1.5em">
+	<div class="card horizontal">
+		<div class="card-image">
+			<img src="{% if evt.logo.url %}{{ evt.logo.url }}{% else %}{% static 'images/utnarm.png' %}{% endif %}">
+		</div>
+		<div class="card-stacked">
+			<div class="card-content">
+				<span class="card-title">{{ evt.name.text }}</span>
+				<div class="rich-text">
+ 					<p> {{ evt.description.text }} </p>
+					<br>
+				</div>
+				<div align="bottom">
+					<p><b>Date: </b> {{ evt.starttime|date:'l, M dS' }}</p>
+                        		<p><b>Time: </b> {{ evt.starttime|date:'H:i' }}-{{ evt.endtime|date:'H:i' }}</p>
+                        		<p><b>Place: </b> {{ evt.venue.name }}</p>											
 				</div>
 			</div>
-		{% endfor %}
-	{% endif %}
+			<div class="card-action">
+				<a href={{ evt.url }} style="text-align:right" target="_blank">Read more and Register</a>
+			</div>
+		</div>
+	</div>
 </div>
+{% endfor %}
+</div>
+{% endif %}
+
 
 <style>
 	.card-image {
@@ -69,6 +52,3 @@ moore/src/blocks/templates/blocks/eventbrite.html
 	
 	
 </style>
-Blog
-About
-
