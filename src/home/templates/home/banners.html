@@ -1,5 +1,6 @@
 {% load static i18n wagtailimages_tags %}
-<div class="banners carousel carousel-slider center">
+<div class="banners carousel carousel-slider center"
+	{% if page.add_whitespace_bottom == False %} style="margin-bottom: 0;" {% endif %}>
     {% if page.banners.all|length > 1 %}
         <div class="carousel-fixed-item controls">
             <i class="material-icons carousel-previous">keyboard_arrow_left</i>
