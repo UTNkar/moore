@@ -5,6 +5,7 @@ from wagtail.admin.edit_handlers import InlinePanel, FieldPanel, \
         StreamFieldPanel, TabbedInterface, ObjectList, MultiFieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
+from wagtail.core.blocks import RawHTMLBlock
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
@@ -18,13 +19,17 @@ class HomePage(Page):
     add_whitespace_bottom = models.BooleanField(default=True)
 
     body_en = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES +
-        [('news', LatestNewsBlock())],
+        WAGTAIL_STATIC_BLOCKTYPES + [
+            ('news', LatestNewsBlock()),
+            ('html', RawHTMLBlock(group="Basic")),
+        ],
         blank=True,
     )
     body_sv = StreamField(
-        WAGTAIL_STATIC_BLOCKTYPES +
-        [('news', LatestNewsBlock())],
+        WAGTAIL_STATIC_BLOCKTYPES + [
+            ('news', LatestNewsBlock()),
+            ('html', RawHTMLBlock(group="Basic")),
+        ],
         blank=True,
     )
     body = TranslatedField('body_en', 'body_sv')
