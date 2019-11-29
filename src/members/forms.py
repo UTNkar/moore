@@ -416,7 +416,7 @@ class CustomUserEditForm(UserEditForm):
             initial['email'] = melos_data['email']
             initial['phone_number'] = melos_data['phone_number']
 
-            status = melos_is_member(person_number)
+            status = MelosClient.is_member(person_number)
             initial['status'] = "member" if status else "nonmember"
 
         super(CustomUserEditForm, self).__init__(
