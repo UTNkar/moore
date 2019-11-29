@@ -5,7 +5,7 @@ from involvement.models import Application
 from members.forms import PersonNumberField
 from utils.forms import AdvancedModelMultipleChoiceField
 from members.models import Member
-from utils.melos_utils import find_melos_id
+from utils.melos_client import MelosClient
 
 class AppointmentForm(forms.Form):
     appoint = AdvancedModelMultipleChoiceField(
@@ -40,7 +40,7 @@ class AppointmentForm(forms.Form):
             pnrs = string.split(',')
             users = []
             for pnr in pnrs:
-                melos_id = find_melos_id(pnr)
+                melos_id = MelosClient.get_melos_id(pnr)
 
                 if not get_user_model().objects.filter(
                     melos_id=melos_id
