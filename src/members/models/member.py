@@ -1,15 +1,13 @@
-import requests
 from datetime import date
 from django.apps import apps
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.core import validators
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from requests.auth import HTTPDigestAuth
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
-
+from utils.melos_utils import melos_request_get
+from utils.utn_api_utils import get_urn_registration_status
 
 class CaseInsensitiveUsernameUserManager(UserManager):
     # Get username by insensitive case
@@ -71,10 +69,6 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         max_length=20,
         verbose_name=_('Phone number'),
         help_text=_('Enter a phone number so UTN may reach you'),
-        validators=[validators.RegexValidator(
-            regex=r'^\+?\d+$',
-            message=_('Please enter a valid phone number'),
-        )],
         blank=True,
     )
 
@@ -108,11 +102,16 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         blank=True,
     )
 
+    # ---- Melos ------
+
+    melos_id = models.IntegerField(
+        blank=True,
+        editable=False,
+        null=True
+    )
+
     def __str__(self) -> str:
-        if self.first_name and self.last_name:
-            return self.get_full_name()
-        else:
-            return self.username
+        return self.username
 
     @property
     def teams(self):
@@ -146,18 +145,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             if self.person_number() == '':
                 return
             try:
-                r = requests.get(
-                    'https://register.utn.se/api.php',
-                    auth=HTTPDigestAuth(settings.MEMBERSHIP_API_USER,
-                                        settings.MEMBERSHIP_API_PASSWORD),
-                    params={
-                        'action': 'check',
-                        'person_number': self.person_number().replace('-', '')
-                    },
-                )
-                data = r.json().get('status')
-            except requests.exceptions.ConnectionError:
-                data = 'unknown'
+                data = get_urn_registration_status(self.person_number().replace('-', ''))
             except ValueError:
                 return
 
@@ -177,3 +165,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         for email in self.get_confirmed_emails():
             if email != self.email:
                 self.remove_email(email)
+
+    def get_status_text(self, status):
+        status = _('Member') if status == 'member' else _('Nonmember')
+        return status

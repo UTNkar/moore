@@ -6,12 +6,12 @@ from involvement.rule_utils import is_super, is_admin, is_fum, has_role_perm
 # Contact card predicates
 @rules.predicate
 def member_of_team_contactcard(user, card):
-    return member_of_team_role(user, card.position.role)
+    return card is not None and member_of_team_role(user, card.position.role)
 
 
 @rules.predicate
 def can_modify_contactcard(user, card):
-    return can_set_applicant(user, card.position)
+    return card is not None and can_set_applicant(user, card.position)
 
 
 # Application predicates

@@ -12,7 +12,7 @@
     <div class="message error">{{ error }}</div>
 {% endfor %}
 
-
+<div class="registration-warning">Om du tidigare har haft ett UTN-konto så kommer du behöva skapa ett nytt, detta på grund av en uppdatering i vår databas.</div>
 
 {% if next %}
     {% if user.is_authenticated %}
@@ -30,7 +30,7 @@
     <div class="row"><button type="submit" class="btn btn-primary right">{% trans 'Sign In' %}</button></div>
 
     <div class="extra-links">
-        <a href="{% url 'password_reset' %}">{% trans 'I forgot my password' %} <i class="material-icons">arrow_forward</i></a><br>
+        <a href="{% url 'password_reset_custom' %}">{% trans 'I forgot my password' %} <i class="material-icons">arrow_forward</i></a><br>
         <a href="{% url 'register' %}">{% trans 'Create a UTN account' %} <i class="material-icons">arrow_forward</i></a>
     </div>
 </form>
