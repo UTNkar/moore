@@ -2,18 +2,6 @@
 
 <ul class="field-row label-above">
     <li class="field-col col4">
-        <label>{% trans 'name'|capfirst %}:</label>
-        <div class="field-content">
-            <span>{{ application.applicant.first_name }} {{ application.applicant.last_name }}</span>
-        </div>
-    </li>
-    <li class="field-col col4">
-        <label>{% trans 'person number'|capfirst %}:</label>
-        <div class="field-content">
-            <span>{{ application.applicant.person_number }}</span>
-        </div>
-    </li>
-    <li class="field-col col4">
         <label>{% trans 'membership status'|capfirst %}:</label>
         <div class="field-content">
             <span>{{ application.applicant.status }}</span>
@@ -22,12 +10,6 @@
 </ul>
 
 <ul class="field-row label-above">
-    <li class="field-col col6">
-        <label>{% trans 'phone number'|capfirst %}:</label>
-        <div class="field-content">
-            <span>{{ application.applicant.phone_number }}</span>
-        </div>
-    </li>
     <li class="field-col col6">
         <label>{% trans 'email address'|capfirst %}:</label>
         <div class="field-content">

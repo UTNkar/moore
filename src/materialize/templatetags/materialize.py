@@ -22,6 +22,8 @@ def append_classes(field, widget=''):
 
 
 def render_field(templ, field, prefix=None):
+    if field == '':
+        return None
     t = loader.get_template(templ)
     c = {
         'field': field,
@@ -32,6 +34,8 @@ def render_field(templ, field, prefix=None):
 
 @register.simple_tag
 def materialize_field(field, prefix=None):
+    if field == '':
+        return
     widget = get_widget_name(field)
     t = ''
     # TODO: DateTimeInput
