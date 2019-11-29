@@ -5,7 +5,7 @@ from django.conf import settings
 class MelosClient:
 
     @staticmethod
-    def request_get(path, params):
+    def request_get(path, params=None):
         if params is not None:
             params['orgId'] = settings.MELOS_ORG_ID
 
@@ -17,7 +17,7 @@ class MelosClient:
 
     @staticmethod
     def get_user_data(melos_id):
-        r = request_get('user' + '/' + str(melos_id))
+        r = MelosClient.request_get('user' + '/' + str(melos_id))
         
         if r.status_code == 200:
             data = {}
@@ -30,7 +30,7 @@ class MelosClient:
 
     @staticmethod
     def is_member(ssn):
-        r = request_get('user/validateMembership', { 'ssn': ssn })
+        r = MelosClient.request_get('user/validateMembership', { 'ssn': ssn })
         return r.status_code == 204
 
     @staticmethod
@@ -40,7 +40,7 @@ class MelosClient:
         if(not isinstance(parsed_ssn, str)):
             parsed_ssn = ssn[0].strftime('%Y%m%d') + '-' + ssn[1]
 
-        r = request_get('user', {
+        r = MelosClient.request_get('user', {
             'ssn': parsed_ssn,
         })
 
