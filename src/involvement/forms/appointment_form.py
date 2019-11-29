@@ -4,7 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 from involvement.models import Application
 from members.forms import PersonNumberField
 from utils.forms import AdvancedModelMultipleChoiceField
-
+from members.models import Member
+from utils.melos_client import MelosClient
 
 class AppointmentForm(forms.Form):
     appoint = AdvancedModelMultipleChoiceField(
@@ -39,18 +40,17 @@ class AppointmentForm(forms.Form):
             pnrs = string.split(',')
             users = []
             for pnr in pnrs:
-                date, number = PersonNumberField().to_python(pnr)
+                melos_id = MelosClient.get_melos_id(pnr)
+
                 if not get_user_model().objects.filter(
-                    birthday=date,
-                    person_number_ext=number,
-                ).exists():
+                    melos_id=melos_id
+                ).exists() or melos_id is False:
                     raise forms.ValidationError(
                         _('No user with the person number %(pnr)s exists.'),
                         params={'pnr': pnr},
                     )
                 elif self.position.applications.filter(
-                    applicant__birthday=date,
-                    applicant__person_number_ext=number,
+                    applicant__melos_id=melos_id,
                 ).exclude(
                     status='draft'
                 ).exists():
@@ -62,8 +62,7 @@ class AppointmentForm(forms.Form):
                     )
                 else:
                     users.append(get_user_model().objects.get(
-                        birthday=date,
-                        person_number_ext=number,
+                        melos_id=melos_id
                     ))
             return users
 

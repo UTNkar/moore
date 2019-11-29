@@ -13,7 +13,7 @@
             <tr>
                 <th class="title">{% trans 'name'|title %}</th>
                 <th>{% trans 'email'|title %}</th>
-                <th>{% trans 'phone number'|title %}</th>
+                <!-- <th>{% trans 'phone number'|title %}</th> -->
             </tr>
         </thead>
     <tbody>
@@ -21,7 +21,7 @@
             <tr>
                 <td>{% if user.is_superuser %}<a href="{% url 'wagtailusers_users:edit' s.id %}">{{ s }}</a>{% else %}{{ s }}{% endif %}</td>
                 <td><a href="mailto:{{ s.get_primary_email }}">{{ s.get_primary_email }}</a></td>
-                <td>{{ s.phone_number }}</td>
+                <!-- <td>{{ s.phone_number }}</td> -->
             </tr>
         {% endfor %}
 

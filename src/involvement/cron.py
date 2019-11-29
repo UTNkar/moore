@@ -78,3 +78,15 @@ def remove_old_applications():
 
     for app in old_applications:
         app.delete()
+
+
+@kronos.register('0 4 * * *')  # At 04:00.
+def remove_disapproved_applications():
+    disapproved_applications = Application.objects.filter(
+        rejection_date__lte=date.today() - timedelta(days=7)
+    ).exclude(
+        status='appointed'
+    )
+
+    for app in disapproved_applications:
+        app.delete()
