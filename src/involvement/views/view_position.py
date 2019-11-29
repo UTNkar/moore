@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from involvement.forms import ApplicationForm, ReferenceFormSet
 from involvement.models import Application
 from members.models import Member
-from utils.melos_utils import melos_user_data, melos_is_member
+from utils.melos_client import MelosClient
 
 
 def view_position(request, context, page, position=None):
@@ -23,9 +23,9 @@ def view_position(request, context, page, position=None):
     if request.user.is_authenticated:
         if request.user.melos_id:
             melos_id = request.user.melos_id
-            melos_data = melos_user_data(melos_id)
+            melos_data = MelosClient.get_user_data(melos_id)
             person_number = melos_data['person_number']
-            status = melos_is_member(person_number)
+            status = MelosClient.is_member(person_number)
             context['membership_status'] = "member" if status else "nonmember"
             context['email'] = melos_data['email']
             # Did the user already have an application?

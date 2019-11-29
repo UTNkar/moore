@@ -6,8 +6,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
-from utils.melos_utils import melos_request_get
-from utils.utn_api_utils import get_urn_registration_status
+from utils.melos_client import MelosClient
+from utils.utn_client import UTNClient
 
 class CaseInsensitiveUsernameUserManager(UserManager):
     # Get username by insensitive case
@@ -145,7 +145,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             if self.person_number() == '':
                 return
             try:
-                data = get_urn_registration_status(self.person_number().replace('-', ''))
+                data = UTNClient.registration_status(self.person_number().replace('-', ''))
             except ValueError:
                 return
 

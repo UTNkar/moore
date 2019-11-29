@@ -20,7 +20,7 @@ from django.utils.http import urlsafe_base64_encode
 
 from members.models import StudyProgram, Member, Section
 
-from utils.melos_utils import melos_user_data, melos_is_member, find_melos_id
+from utils.melos_client import MelosClient
 
 User = get_user_model()
 
@@ -73,7 +73,7 @@ class MemberForm(forms.ModelForm):
 
         if instance is not None:
             melos_user_id = instance.melos_id
-            melos_data = melos_user_data(melos_user_id)
+            melos_data = MelosClient.get_user_data(melos_user_id)
             initial['person_number'] = instance.person_number()
             initial['first_name'] = melos_data['first_name']
             initial['last_name'] = melos_data['last_name']
@@ -99,7 +99,7 @@ class MemberForm(forms.ModelForm):
 
     def clean(self):
         person_number = self.cleaned_data['person_number']
-        melos_id = find_melos_id(person_number)
+        melos_id = MelosClient.get_melos_id(person_number)
         if (Member.objects.exclude(pk=self.instance.pk)
                 .filter(melos_id=melos_id).exists()) or melos_id is False:
             raise forms.ValidationError(_(
@@ -146,7 +146,7 @@ class CustomPasswordResetForm(forms.Form):
     )
 
     def get_email(self, melos_id):
-        data = melos_user_data(melos_id)
+        data = MelosClient.get_user_data(melos_id)
         if data:
             return data['email']
         return ''
@@ -201,7 +201,7 @@ class CustomPasswordResetForm(forms.Form):
         """
 
         person_number = self.cleaned_data['person_number']
-        melos_id = find_melos_id(person_number)
+        melos_id = MelosClient.get_melos_id(person_number)
         if melos_id:
             member = Member.objects.filter(melos_id=int(melos_id)).exists()
             if (member):
@@ -407,7 +407,7 @@ class CustomUserEditForm(UserEditForm):
         initial = kwargs.pop('initial', {})
         if instance is not None:
             melos_user_id = instance.melos_id
-            melos_data = melos_user_data(melos_user_id)
+            melos_data = MelosClient.get_user_data(melos_user_id)
             person_number = melos_data['person_number']
 
             initial['first_name'] = melos_data['first_name']
@@ -489,7 +489,7 @@ class CustomUserCreationForm(UserCreationForm):
     def clean_person_number(self):
         person_number = self.cleaned_data['person_number']
 
-        melos_id = find_melos_id(person_number)
+        melos_id = MelosClient.get_melos_id(person_number)
         if melos_id:
             if (Member.objects.exclude(pk=self.instance.pk)
                     .filter(melos_id=melos_id).exists()):

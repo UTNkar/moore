@@ -21,7 +21,7 @@ from django.utils.decorators import method_decorator
 from members.forms import MemberForm, CustomPasswordResetForm
 from members.models import Section, StudyProgram, Member
 
-from utils.melos_utils import melos_user_data, melos_is_member
+from utils.melos_client import MelosClient
 
 
 class ProfileView(LoginRequiredMixin, UpdateView):
@@ -47,9 +47,9 @@ class ProfileView(LoginRequiredMixin, UpdateView):
         )
 
         melos_id = self.request.user.melos_id
-        melos_data = melos_user_data(melos_id)
+        melos_data = MelosClient.get_user_data(melos_id)
         person_number = melos_data['person_number']
-        status = melos_is_member(person_number)
+        status = MelosClient.is_member(person_number)
         kwargs['status'] = "member" if status else "nonmember"
         return super(ProfileView, self).get_context_data(**kwargs)
 
