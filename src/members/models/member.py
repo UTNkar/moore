@@ -1,23 +1,27 @@
 from datetime import date
 from django.apps import apps
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.core import validators
 from django.db import models
 from django.utils import timezone
-from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 from utils.utn_client import UTNClient
+from utils.melos_client import MelosClient
+
 
 class SSNValidator(validators.RegexValidator):
     def __init__(self):
         super(SSNValidator, self).__init__(
             # The regex checks for the formats: YYYYMMDD-XXXX, YYMMDD-XXXX
             # - Makes sure that the year is either 1900 or 2000
-            regex=r'^[1-2][0|9][0-9]{2}[0-1][0-9][0-3][0-9][-][0-9]{4}$|^[0|9][0-9]{1}[0-1][0-9][0-3][0-9][-][0-9]{4}$',
-            message=_('Use the format YYYYMMDD-XXXX or YYMMDD-XXXX for your ssn.')
+            regex=r'^[1-2][0|9][0-9]{2}[0-1][0-9][0-3][0-9][-][0-9]{4}$ \
+                |^[0|9][0-9]{1}[0-1][0-9][0-3][0-9][-][0-9]{4}$',
+            message=_(
+                'Use the format YYYYMMDD-XXXX or YYMMDD-XXXX for your ssn.'
+            )
         )
+
 
 class CaseInsensitiveUsernameUserManager(UserManager):
     # Search username with insensitive case
@@ -25,6 +29,7 @@ class CaseInsensitiveUsernameUserManager(UserManager):
         case_insensitive_username_field = '{}__iexact' \
             .format(self.model.USERNAME_FIELD)
         return self.get(**{case_insensitive_username_field: username})
+
 
 class MelosUserManager(CaseInsensitiveUsernameUserManager):
     # Search Member through Melos if username is SSN
@@ -34,17 +39,17 @@ class MelosUserManager(CaseInsensitiveUsernameUserManager):
             member = super().get_by_natural_key(username)
         except Exception as e:
             member = Member.find_by_ssn(username)
-            
+
             if member is None:
-                raise e;    
+                raise e
 
         return member
+
 
 class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     """This class describes a member"""
 
-
-    # ---- AbstractUser overrides
+    # ---- AbstractUser overrides ---
 
     objects = MelosUserManager()
 
@@ -171,7 +176,8 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             if self.person_number() == '':
                 return
             try:
-                data = UTNClient.registration_status(self.person_number().replace('-', ''))
+                data = UTNClient.registration_status(
+                    self.person_number().replace('-', ''))
             except ValueError:
                 return
 
@@ -204,7 +210,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             melos_id = MelosClient.get_melos_id(ssn)
             if melos_id is not False:
                 return Member.objects.filter(melos_id=int(melos_id)).first()
-        except Exception as ex:
+        except Exception:
             pass
-            
+
         return None
