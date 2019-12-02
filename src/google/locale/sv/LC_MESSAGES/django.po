@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-29 15:59+0100\n"
+"POT-Creation-Date: 2019-12-02 16:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,91 +18,91 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/google/apps.py:7
+#: google/apps.py:7
 msgid "Google"
 msgstr ""
 
-#: src/google/models.py:25
+#: google/models.py:25
 msgid "Calendar ID as given by google calendar"
 msgstr "Kalender-ID som ges av google kalender"
 
-#: src/google/models.py:30
+#: google/models.py:30
 msgid "Week"
 msgstr "Vecka"
 
-#: src/google/models.py:31
+#: google/models.py:31
 msgid "Month"
 msgstr "Månad"
 
-#: src/google/models.py:32
+#: google/models.py:32
 msgid "Agenda"
 msgstr "Dagordning"
 
-#: src/google/models.py:37
+#: google/models.py:37
 msgid "Monday"
 msgstr "Måndag"
 
-#: src/google/models.py:38
+#: google/models.py:38
 msgid "Sunday"
 msgstr "Söndag"
 
-#: src/google/models.py:39
+#: google/models.py:39
 msgid "Saturday"
 msgstr "Lördag"
 
-#: src/google/models.py:43
+#: google/models.py:43
 msgid "Google Calendar"
 msgstr "Google Kalender"
 
-#: src/google/models.py:46 src/google/models.py:61 src/google/models.py:72
+#: google/models.py:46 google/models.py:61 google/models.py:72
 msgid "Embed"
 msgstr ""
 
-#: src/google/models.py:52
+#: google/models.py:52
 msgid "List"
 msgstr "Lista"
 
-#: src/google/models.py:53
+#: google/models.py:53
 msgid "Grid"
 msgstr "Rutnät"
 
-#: src/google/models.py:58
+#: google/models.py:58
 msgid "Google Drive"
 msgstr ""
 
-#: src/google/models.py:69
+#: google/models.py:69
 msgid "Google Form"
 msgstr ""
 
-#: src/google/models.py:99
+#: google/models.py:99
 msgid "English description"
 msgstr ""
 
-#: src/google/models.py:103
+#: google/models.py:103
 msgid "Swedish description"
 msgstr ""
 
-#: src/google/models.py:136
+#: google/models.py:136
 msgid "Form deadline"
 msgstr ""
 
-#: src/google/models.py:161
+#: google/models.py:161
 msgid "Common"
 msgstr ""
 
-#: src/google/models.py:162
+#: google/models.py:162
 msgid "English"
 msgstr "Engelska"
 
-#: src/google/models.py:163
+#: google/models.py:163
 msgid "Swedish"
 msgstr "Svenska"
 
-#: src/google/models.py:165
+#: google/models.py:165
 msgid "Settings"
 msgstr "Inställningar"
 
-#: src/google/templates/google/google_form_page.html:9
+#: google/templates/google/google_form_page.html:9
 msgid ""
 "The deadline for this form has passed. Results might be posted here at a "
 "later date."

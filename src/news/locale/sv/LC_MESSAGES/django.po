@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-29 15:59+0100\n"
+"POT-Creation-Date: 2019-12-02 16:54+0100\n"
 "PO-Revision-Date: 2017-06-26 10:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,47 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: src/news/apps.py:7
+#: news/apps.py:7
 msgid "News"
 msgstr "Nyheter"
 
-#: src/news/models.py:29
+#: news/models.py:29
 msgid "Latest News"
 msgstr ""
 
-#: src/news/models.py:32
+#: news/models.py:32
 msgid "Meta"
 msgstr ""
 
-#: src/news/models.py:63
+#: news/models.py:63
 msgid "Created at"
 msgstr "Skapad den"
 
-#: src/news/models.py:67
+#: news/models.py:67
 msgid "Modified at"
 msgstr "Redigerad den"
 
-#: src/news/models.py:101
+#: news/models.py:101
 msgid "English"
 msgstr "Engelska"
 
-#: src/news/models.py:102
+#: news/models.py:102
 msgid "Swedish"
 msgstr "Svenska"
 
-#: src/news/models.py:103
+#: news/models.py:103
 msgid "Promote"
 msgstr "Marknadsför"
 
-#: src/news/models.py:104
+#: news/models.py:104
 msgid "Settings"
 msgstr "Inställningar"
 
-#: src/news/templates/news/latest_news.html:22
-#: src/news/templates/news/latest_news.html:27
+#: news/templates/news/latest_news.html:22
+#: news/templates/news/latest_news.html:27
 msgid "read more"
 msgstr ""
 
-#: src/news/templates/news/news_index_page.html:30
+#: news/templates/news/news_index_page.html:30
 msgid "No news articles have been published yet. Try again later."
 msgstr "Inga nyhetsartiklar är publicerade än. Försök igen senare."
