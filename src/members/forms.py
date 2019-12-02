@@ -10,7 +10,10 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.users import forms as wagtail
 from django.utils.html import mark_safe
 from django.contrib.auth import get_user_model
-from django.contrib.auth.password_validation import (password_validators_help_text_html, validate_password)
+from django.contrib.auth.password_validation import (
+    password_validators_help_text_html,
+    validate_password
+)
 from django.template import loader
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.tokens import default_token_generator
@@ -108,7 +111,8 @@ class MemberForm(forms.ModelForm):
         self.instance.melos_id = melos_id
 
     def save(self, commit=True):
-        # Need to reset fields since we don't want to store this data in the database
+        # Need to reset fields since we don't want
+        # to store this data in the database
         self.instance.phone_number = ''
         self.instance.email = ''
         self.instance.birthday = None
@@ -152,7 +156,8 @@ class CustomPasswordResetForm(forms.Form):
         return ''
 
     def send_mail(self, subject_template_name, email_template_name,
-                  context, from_email, to_email, html_email_template_name=None):
+                  context, from_email, to_email,
+                  html_email_template_name=None):
         """
         Send a django.core.mail.EmailMultiAlternatives to `to_email`.
         """
@@ -455,7 +460,7 @@ class UserCreationForm(UserForm):
 class CustomUserCreationForm(UserCreationForm):
     """
     Custom form to create user from within the Wagtail admin user interface.
-    """ 
+    """
     person_number = PersonNumberField(
         label=_('Person number'),
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),

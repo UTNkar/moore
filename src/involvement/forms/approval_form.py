@@ -2,7 +2,6 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from datetime import date
 from involvement.models import Application
-import sys
 
 
 class ApprovalForm(forms.ModelForm):

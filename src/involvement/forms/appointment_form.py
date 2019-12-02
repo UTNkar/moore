@@ -2,10 +2,9 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from involvement.models import Application
-from members.forms import PersonNumberField
 from utils.forms import AdvancedModelMultipleChoiceField
-from members.models import Member
 from utils.melos_client import MelosClient
+
 
 class AppointmentForm(forms.Form):
     appoint = AdvancedModelMultipleChoiceField(

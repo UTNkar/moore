@@ -5,7 +5,6 @@ from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from involvement.forms import ApplicationForm, ReferenceFormSet
 from involvement.models import Application
-from members.models import Member
 from utils.melos_client import MelosClient
 
 
@@ -62,7 +61,7 @@ def view_position(request, context, page, position=None):
                             + page.reverse_subpage('my_applications')
                         )
                 else:
-                    return render(request, 'involvement/position.html', 
+                    return render(request, 'involvement/position.html',
                                   context)
 
             # Render fresh: empty or after saving draft.
