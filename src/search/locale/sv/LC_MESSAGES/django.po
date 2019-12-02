@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-29 15:59+0100\n"
+"POT-Creation-Date: 2019-12-02 16:54+0100\n"
 "PO-Revision-Date: 2017-06-26 10:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,19 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: src/search/templates/search/search.html:11
-#: src/search/templates/search/search.html:14
+#: search/templates/search/search.html:11
+#: search/templates/search/search.html:14
 msgid "Search"
 msgstr "Sök"
 
-#: src/search/templates/search/search.html:13
+#: search/templates/search/search.html:13
 msgid "Home"
 msgstr "Hem"
 
-#: src/search/templates/search/search.html:26
+#: search/templates/search/search.html:26
 msgid "Search our website"
 msgstr "Sök på vår hemsida"
 
-#: src/search/templates/search/search.html:60
+#: search/templates/search/search.html:60
 msgid "No results found"
 msgstr "Inga resultat funna"
