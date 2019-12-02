@@ -24,7 +24,7 @@
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}" />
 
-    {% materialize_field form.username prefix='account_circle' %}
+    {% materialize_field form.username prefix='account_circle' label='Username or SSN (YYYYMMDD-XXXX)' %}
     {% materialize_field form.password prefix='lock' %}
 
     <div class="row"><button type="submit" class="btn btn-primary right">{% trans 'Sign In' %}</button></div>

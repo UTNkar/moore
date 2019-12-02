@@ -1,26 +1,52 @@
 from datetime import date
 from django.apps import apps
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.core import validators
 from django.db import models
 from django.utils import timezone
+from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 from utils.utn_client import UTNClient
 
+class SSNValidator(validators.RegexValidator):
+    def __init__(self):
+        super(SSNValidator, self).__init__(
+            # The regex checks for the formats: YYYYMMDD-XXXX, YYMMDD-XXXX
+            # - Makes sure that the year is either 1900 or 2000
+            regex=r'^[1-2][0|9][0-9]{2}[0-1][0-9][0-3][0-9][-][0-9]{4}$|^[0|9][0-9]{1}[0-1][0-9][0-3][0-9][-][0-9]{4}$',
+            message=_('Use the format YYYYMMDD-XXXX or YYMMDD-XXXX for your ssn.')
+        )
 
 class CaseInsensitiveUsernameUserManager(UserManager):
-    # Get username by insensitive case
+    # Search username with insensitive case
     def get_by_natural_key(self, username):
         case_insensitive_username_field = '{}__iexact' \
             .format(self.model.USERNAME_FIELD)
         return self.get(**{case_insensitive_username_field: username})
 
+class MelosUserManager(CaseInsensitiveUsernameUserManager):
+    # Search Member through Melos if username is SSN
+    def get_by_natural_key(self, username):
+        member = None
+        try:
+            member = super().get_by_natural_key(username)
+        except Exception as e:
+            member = Member.find_by_ssn(username)
+            
+            if member is None:
+                raise e;    
+
+        return member
 
 class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     """This class describes a member"""
 
-    objects = CaseInsensitiveUsernameUserManager()
+
+    # ---- AbstractUser overrides
+
+    objects = MelosUserManager()
 
     # ---- Personal information ------
 
@@ -169,3 +195,16 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     def get_status_text(self, status):
         status = _('Member') if status == 'member' else _('Nonmember')
         return status
+
+    @staticmethod
+    def find_by_ssn(ssn):
+        try:
+            SSNValidator()(ssn)
+
+            melos_id = MelosClient.get_melos_id(ssn)
+            if melos_id is not False:
+                return Member.objects.filter(melos_id=int(melos_id)).first()
+        except Exception as ex:
+            pass
+            
+        return None
