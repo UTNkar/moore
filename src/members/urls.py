@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 from members import views
-from members.forms import RegistrationForm, CustomPasswordResetForm
+from members.forms import RegistrationForm
 
 urlpatterns = [
     url(r'^profile/$', views.ProfileView.as_view(), name='profile'),

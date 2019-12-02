@@ -8,10 +8,6 @@ from modelcluster.models import ClusterableModel
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
     InlinePanel, FieldRowPanel
 
-import requests
-import os
-from requests.auth import HTTPBasicAuth
-
 
 class Application(ClusterableModel):
     """An application is made to strive to acquire an position"""

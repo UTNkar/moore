@@ -1,8 +1,8 @@
-import os
+
 import requests
-from requests.auth import HTTPBasicAuth
 from requests.auth import HTTPDigestAuth
 from django.conf import settings
+
 
 class UTNClient:
 

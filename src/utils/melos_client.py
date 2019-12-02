@@ -2,6 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 from django.conf import settings
 
+
 class MelosClient:
 
     @staticmethod
@@ -18,7 +19,7 @@ class MelosClient:
     @staticmethod
     def get_user_data(melos_id):
         r = MelosClient.request_get('user' + '/' + str(melos_id))
-        
+
         if r.status_code == 200:
             data = {}
             data['first_name'] = r.json()['Fornamn']
@@ -30,7 +31,7 @@ class MelosClient:
 
     @staticmethod
     def is_member(ssn):
-        r = MelosClient.request_get('user/validateMembership', { 'ssn': ssn })
+        r = MelosClient.request_get('user/validateMembership', {'ssn': ssn})
         return r.status_code == 204
 
     @staticmethod

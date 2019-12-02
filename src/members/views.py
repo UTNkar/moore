@@ -1,8 +1,4 @@
 import datetime
-import requests
-import os
-
-from requests.auth import HTTPBasicAuth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
@@ -13,14 +9,11 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView
-from django.conf import settings
 from django.views.generic.edit import FormView
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
-
 from members.forms import MemberForm, CustomPasswordResetForm
-from members.models import Section, StudyProgram, Member
-
+from members.models import Section, StudyProgram
 from utils.melos_client import MelosClient
 
 
