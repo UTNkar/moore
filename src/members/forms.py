@@ -389,14 +389,14 @@ class CustomUserEditForm(UserEditForm):
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
         required=False
     )
-    # phone_number = forms.CharField(
-    #     required=True,
-    #     label=_('Phone number'),
-    # )
-    # email = forms.EmailInput(
-    #     required=True,
-    #     label=_('Email'),
-    # )
+    phone_number = forms.CharField(
+        required=True,
+        label=_('Phone number'),
+    )
+    email = forms.EmailField(
+        required=True,
+        label=_('Email'),
+    )
     registration_year = forms.CharField(
         required=False,
         label=_('Registration year'),
@@ -470,14 +470,14 @@ class CustomUserCreationForm(UserCreationForm):
         label=_('Person number'),
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
     )
-    # email = forms.EmailInput(
-    #     required=True,
-    #     label=_('Email'),
-    # )
-    # phone_number = forms.CharField(
-    #     required=True,
-    #     label=_('Phone number'),
-    # )
+    email = forms.EmailField(
+        required=True,
+        label=_('Email'),
+    )
+    phone_number = forms.CharField(
+        required=True,
+        label=_('Phone number'),
+    )
     registration_year = forms.CharField(
         required=False,
         label=_('Registration year'),
