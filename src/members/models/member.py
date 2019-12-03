@@ -15,8 +15,7 @@ class SSNValidator(validators.RegexValidator):
         super(SSNValidator, self).__init__(
             # The regex checks for the formats: YYYYMMDD-XXXX, YYMMDD-XXXX
             # - Makes sure that the year is either 1900 or 2000
-            regex=r'^[1-2][0|9][0-9]{2}[0-1][0-9][0-3][0-9][-][0-9]{4}$ \
-                |^[0|9][0-9]{1}[0-1][0-9][0-3][0-9][-][0-9]{4}$',
+            regex=r'^[1-2][0|9][0-9]{2}[0-1][0-9][0-3][0-9][-][0-9]{4}$|^[0|9][0-9]{1}[0-1][0-9][0-3][0-9][-][0-9]{4}$',  # noqa: E501
             message=_(
                 'Use the format YYYYMMDD-XXXX or YYMMDD-XXXX for your ssn.'
             )
