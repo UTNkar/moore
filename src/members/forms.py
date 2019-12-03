@@ -81,16 +81,12 @@ class MemberForm(forms.ModelForm):
             initial['first_name'] = melos_data['first_name']
             initial['last_name'] = melos_data['last_name']
             initial['person_number'] = melos_data['person_number']
-            initial['phone_number'] = melos_data['phone_number']
-            initial['email'] = melos_data['email']
 
         super(MemberForm, self).__init__(initial=initial, *args, **kwargs)
         if instance is not None:
             self.fields['first_name'].disabled = True
             self.fields['last_name'].disabled = True
-            self.fields['phone_number'].disabled = True
             self.fields['person_number'].disabled = True
-            self.fields['email'].disabled = True
 
     def clean_username(self):
         username = self.cleaned_data['username']
@@ -113,31 +109,35 @@ class MemberForm(forms.ModelForm):
     def save(self, commit=True):
         # Need to reset fields since we don't want
         # to store this data in the database
-        self.instance.phone_number = ''
-        self.instance.email = ''
         self.instance.birthday = None
         self.instance.person_number_ext = ''
         self.instance.first_name = ''
         self.instance.last_name = ''
         self.instance.status = ''
+
+        email = self.cleaned_data['email']
+        if self.initial.get('email', '') != '':
+            token = self.instance.add_email_if_not_exists(email)
+            if token is None:
+                self.instance.set_primary_email(email)
+            self.instance.email = self.initial['email']
+
         return super(MemberForm, self).save(commit=commit)
 
 
 class RegistrationForm(MemberForm, auth.UserCreationForm):
-
+    username = forms.TextInput(attrs={'class': 'form-control'})
+    email = forms.EmailInput(attrs={'class': 'form-control'})
+    phone_number = forms.TextInput(attrs={'class': 'form-control'})
     section = forms.ModelChoiceField(
         required=False,
         queryset=Section.objects,
         label=_("Section"),
     )
 
-    username = forms.TextInput(
-        attrs={'class': 'form-control'}
-    )
-
     class Meta:
         model = Member
-        fields = ['username', 'section']
+        fields = ['username', 'email', 'phone_number', 'section']
         field_classes = {'username': auth.UsernameField}
 
     def __init__(self, *args, **kwargs):
@@ -158,9 +158,14 @@ class CustomPasswordResetForm(forms.Form):
     )
 
     def get_email(self, melos_id):
+        member = Member.find_by_melos_id(melos_id)
+        if member:
+            return member.email
+
         data = MelosClient.get_user_data(melos_id)
         if data:
             return data['email']
+
         return ''
 
     def send_mail(self, subject_template_name, email_template_name,
@@ -214,17 +219,7 @@ class CustomPasswordResetForm(forms.Form):
         """
 
         person_number = self.cleaned_data['person_number']
-        melos_id = MelosClient.get_melos_id(person_number)
-        if melos_id:
-            member = Member.objects.filter(melos_id=int(melos_id)).exists()
-            if (member):
-                email = self.get_email(melos_id)
-            else:
-                email = ''
-        else:
-            email = ''
-
-        user = Member.objects.filter(melos_id=int(melos_id)).get()
+        user = Member.find_by_ssn(person_number)
 
         if not domain_override:
             current_site = get_current_site(request)
@@ -232,8 +227,9 @@ class CustomPasswordResetForm(forms.Form):
             domain = current_site.domain
         else:
             site_name = domain = domain_override
+
         context = {
-            'email': email,
+            'email': user.email,
             'domain': domain,
             'site_name': site_name,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -244,7 +240,7 @@ class CustomPasswordResetForm(forms.Form):
         }
         self.send_mail(
             subject_template_name, email_template_name, context,
-            from_email, email,
+            from_email, user.email,
             html_email_template_name=html_email_template_name,
         )
 
@@ -393,7 +389,14 @@ class CustomUserEditForm(UserEditForm):
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
         required=False
     )
-
+    # phone_number = forms.CharField(
+    #     required=True,
+    #     label=_('Phone number'),
+    # )
+    # email = forms.EmailInput(
+    #     required=True,
+    #     label=_('Email'),
+    # )
     registration_year = forms.CharField(
         required=False,
         label=_('Registration year'),
@@ -401,16 +404,16 @@ class CustomUserEditForm(UserEditForm):
     study = forms.ModelChoiceField(
         required=False,
         queryset=StudyProgram.objects,
-        label=_("Study Program"),
+        label=_('Study Program'),
     )
     section = forms.ModelChoiceField(
         required=False,
         queryset=Section.objects,
-        label=_("Section"),
+        label=_('Section'),
     )
     status = forms.ChoiceField(
         choices=Member.MEMBERSHIP_CHOICES,
-        label=_("Membership status"),
+        label=_('Membership status'),
         required=False
     )
 
@@ -426,8 +429,6 @@ class CustomUserEditForm(UserEditForm):
             initial['first_name'] = melos_data['first_name']
             initial['last_name'] = melos_data['last_name']
             initial['person_number'] = person_number
-            initial['email'] = melos_data['email']
-            initial['phone_number'] = melos_data['phone_number']
 
             status = MelosClient.is_member(person_number)
             initial['status'] = "member" if status else "nonmember"
@@ -439,17 +440,13 @@ class CustomUserEditForm(UserEditForm):
         self.fields['first_name'].disabled = True
         self.fields['last_name'].disabled = True
         self.fields['person_number'].disabled = True
-        self.fields['phone_number'].disabled = True
-        self.fields['email'].disabled = True
         self.fields['status'].disabled = True
 
     def save(self, commit=True):
-        self.instance.email = ''
         self.instance.birthday = None
         self.instance.person_number_ext = ''
         self.instance.first_name = ''
         self.instance.last_name = ''
-        self.instance.phone_number = ''
         self.instance.status = ''
 
         return super(CustomUserEditForm, self).save(commit=commit)
@@ -473,6 +470,14 @@ class CustomUserCreationForm(UserCreationForm):
         label=_('Person number'),
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
     )
+    # email = forms.EmailInput(
+    #     required=True,
+    #     label=_('Email'),
+    # )
+    # phone_number = forms.CharField(
+    #     required=True,
+    #     label=_('Phone number'),
+    # )
     registration_year = forms.CharField(
         required=False,
         label=_('Registration year'),
