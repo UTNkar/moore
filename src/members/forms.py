@@ -124,13 +124,21 @@ class MemberForm(forms.ModelForm):
 
 
 class RegistrationForm(MemberForm, auth.UserCreationForm):
+
+    section = forms.ModelChoiceField(
+        required=False,
+        queryset=Section.objects,
+        label=_("Section"),
+    )
+
+    username = forms.TextInput(
+        attrs={'class': 'form-control'}
+    )
+
     class Meta:
         model = Member
-        fields = ['username']
+        fields = ['username', 'section']
         field_classes = {'username': auth.UsernameField}
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-        }
 
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
