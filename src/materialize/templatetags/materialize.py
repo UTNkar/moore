@@ -1,5 +1,6 @@
 from django import template
 from django.template import loader
+from django.utils.translation import ugettext_lazy as _
 
 register = template.Library()
 
@@ -21,10 +22,14 @@ def append_classes(field, widget=''):
     field.field.widget.attrs['class'] = classes
 
 
-def render_field(templ, field, prefix=None):
+def render_field(templ, field, label=None, prefix=None):
     if field == '':
         return None
     t = loader.get_template(templ)
+
+    if label is not None:
+        field.label = _(label)
+
     c = {
         'field': field,
         'prefix': prefix,
@@ -33,7 +38,7 @@ def render_field(templ, field, prefix=None):
 
 
 @register.simple_tag
-def materialize_field(field, prefix=None):
+def materialize_field(field, prefix=None, label=None):
     if field == '':
         return
     widget = get_widget_name(field)
@@ -53,7 +58,7 @@ def materialize_field(field, prefix=None):
     else:
         raise NotImplementedError('Widget %s not yet supported' % widget)
 
-    return render_field(t, field, prefix)
+    return render_field(t, field, label, prefix)
 
 
 @register.inclusion_tag('materialize/pagination.html')

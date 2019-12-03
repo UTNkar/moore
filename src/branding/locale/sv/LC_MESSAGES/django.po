@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-29 15:59+0100\n"
+"POT-Creation-Date: 2019-12-02 16:54+0100\n"
 "PO-Revision-Date: 2017-06-26 10:11+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -13,88 +13,88 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: src/branding/apps.py:7 src/branding/wagtail_hooks.py:18
+#: branding/apps.py:7 branding/wagtail_hooks.py:18
 msgid "Branding"
 msgstr "Branding"
 
-#: src/branding/models.py:15
+#: branding/models.py:15
 msgid "footer"
 msgstr ""
 
-#: src/branding/models.py:33
+#: branding/models.py:33
 msgid "social media accounts"
 msgstr "Konton på sociala medier"
 
-#: src/branding/models.py:36
+#: branding/models.py:36
 msgid "Your Facebook page URL"
 msgstr "ULR:en till din Facebook"
 
-#: src/branding/models.py:41
+#: branding/models.py:41
 msgid "Your Instagram username, without the @"
 msgstr "Ditt användarnamn på Instagram, utan @"
 
-#: src/branding/models.py:46
+#: branding/models.py:46
 msgid "Your Twitter username, without the @"
 msgstr "Ditt användarnamn på Twitter, utan @"
 
-#: src/branding/models.py:53 src/branding/models.py:77
+#: branding/models.py:53 branding/models.py:77
 msgid "logo"
 msgstr "logotyp"
 
-#: src/branding/models.py:54
+#: branding/models.py:54
 msgid "logos"
 msgstr "logotyper"
 
-#: src/branding/models.py:57
+#: branding/models.py:57
 msgid "Committee"
 msgstr "Kommittée"
 
-#: src/branding/models.py:58
+#: branding/models.py:58
 msgid "Section"
 msgstr "Sektion"
 
-#: src/branding/models.py:64
+#: branding/models.py:64
 msgid "category"
 msgstr "kategori"
 
-#: src/branding/models.py:70
+#: branding/models.py:70
 msgid "links to"
 msgstr "länkar till"
 
-#: src/branding/models.py:86
+#: branding/models.py:86
 msgid "white logo"
 msgstr "vit logotyp"
 
-#: src/branding/models.py:95
+#: branding/models.py:95
 msgid "black logo"
 msgstr "svart logotyp"
 
-#: src/branding/models.py:104
+#: branding/models.py:104
 msgid "belongs to"
 msgstr "tillhör"
 
-#: src/branding/templates/branding/tags/social_media.html:2
+#: branding/templates/branding/tags/social_media.html:2
 msgid "Follow us on social media:"
 msgstr "Följ oss på sociala medier:"
 
-#: src/branding/templates/branding/tags/social_media.html:11
+#: branding/templates/branding/tags/social_media.html:11
 msgid "facebook icon"
 msgstr "facebookion"
 
-#: src/branding/templates/branding/tags/social_media.html:22
+#: branding/templates/branding/tags/social_media.html:22
 msgid "twitter icon"
 msgstr "twitterikon"
 
-#: src/branding/templates/branding/tags/social_media.html:33
+#: branding/templates/branding/tags/social_media.html:33
 msgid "instagram icon"
 msgstr "instagramikon"
 
-#: src/branding/templates/branding/tags/structure_header.html:10
-#: src/branding/templates/branding/tags/structure_header.html:18
+#: branding/templates/branding/tags/structure_header.html:10
+#: branding/templates/branding/tags/structure_header.html:18
 msgid "sections"
 msgstr "sektioner"
 
-#: src/branding/templates/branding/tags/structure_header.html:31
-#: src/branding/templates/branding/tags/structure_header.html:39
+#: branding/templates/branding/tags/structure_header.html:31
+#: branding/templates/branding/tags/structure_header.html:39
 msgid "committees"
 msgstr "kommittéer"
