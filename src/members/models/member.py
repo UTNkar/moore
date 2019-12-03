@@ -205,13 +205,17 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         return status
 
     @staticmethod
+    def find_by_melos_id(melos_id):
+        if melos_id:
+            return Member.objects.filter(melos_id=int(melos_id)).first()
+        return None
+
+    @staticmethod
     def find_by_ssn(ssn):
         try:
             SSNValidator()(ssn)
-
             melos_id = MelosClient.get_melos_id(ssn)
-            if melos_id is not False:
-                return Member.objects.filter(melos_id=int(melos_id)).first()
+            return Member.find_by_melos_id(melos_id)
         except Exception:
             pass
 
