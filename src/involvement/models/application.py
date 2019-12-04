@@ -92,6 +92,11 @@ class Application(ClusterableModel):
 
 
 @receiver(post_save, sender=Application,
+        dispatch_uid='application_sync_user_groups')
+def sync_user_groups(sender, instance, update_fields, **kwargs):
+    instance.applicant.sync_user_groups()
+
+@receiver(post_save, sender=Application,
           dispatch_uid='application_check_mandate_history')
 def check_mandate_history(sender, instance, **kwargs):
     MandateHistory = apps.get_model('involvement', 'MandateHistory')

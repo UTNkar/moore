@@ -131,3 +131,9 @@ def position_check_contact_card(sender, instance, **kwargs):
             removedCards += 1
             if removedCards == maxCardsToRemove:
                 break
+
+@receiver(post_save, sender=Position,
+          dispatch_uid='position_sync_user_groups')
+def sync_user_groups(sender, instance, **kwargs):
+    for appl in instance.appointed_applications.all():
+        appl.applicant.sync_user_groups()
