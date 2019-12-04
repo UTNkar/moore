@@ -26,17 +26,17 @@ def sync_groups():
                     a.save()
 
         # Remove old members
-        old_members = Application.objects.filter(
+        old_member_applications = Application.objects.filter(
             position__role=role,
             position__term_to__lt=date.today(),
             status='appointed',
             removed=False,
         )
-        for member in old_members:
-            if role.group in member.applicant.groups.all():
-                role.group.user_set.remove(member.applicant)
-            member.removed = True
-            member.save()
+        for application in old_member_applications:
+            if role.group in application.applicant.groups.all():
+                role.group.user_set.remove(application.applicant)
+            application.removed = True
+            application.save()
 
 
 @kronos.register('30 6 * * *')  # At 06:30.
