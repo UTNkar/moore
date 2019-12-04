@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block fields_output %}
-    <dl>
+    <dl class="position-involvement">
         <dt>{% trans 'position' %}</dt>
         <dd>{{ instance }}</dd>
 
@@ -11,13 +11,26 @@
             <ul>
                 {% for a in appointed_applications %}
                     <li>
-                        {{ a.applicant }}
-                        {% if a.applicant.email or a.applicant.phone_number %}
-                            &mdash;
-                            {% if a.applicant.email %}<a href="mailto:{{ a.applicant.email }}">{{ a.applicant.email }}</a>{% endif %}
-                            {% if a.applicant.email and a.applicant.phone_number %} or {% endif %}
-                            {% if a.applicant.phone_number %}{{ a.applicant.phone_number }}{% endif %}
-                        {% endif %}
+                        <div>
+                            <b>{% trans 'email' %}:</b> {% if a.applicant.email %}
+                                <a href="mailto:{{ a.applicant.email }}">{{ a.applicant.email }}</a>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
+                        <div>
+                            <b>{% trans 'phone_number' %}:</b> {% if a.applicant.phone_number %}
+                                <a href="tel:{{ a.applicant.phone_number }}">{{ a.applicant.phone_number }}</a>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
+                        <div>
+                            <b>{% trans 'section' %}:</b> {{ a.applicant.section|default:'-' }}
+                        </div>
+                        <div>
+                            <b>{% trans 'program' %}:</b> {{ a.applicant.program|default:'-'}}
+                        </div>
                     </li>
                 {% empty %}
                     {% trans 'No applications have been submitted for this position.' %}
@@ -29,15 +42,31 @@
         <dd>
             <ul>
                 {% for a in submitted_applications %}
-                    <li>
-                        <b>{{ a.get_status_display }}:</b>
-                        {{ a.applicant }}
-                        {% if a.applicant.email or a.applicant.phone_number %}
-                            &mdash;
-                            {% if a.applicant.email %}<a href="mailto:{{ a.applicant.email }}">{{ a.applicant.email }}</a>{% endif %}
-                            {% if a.applicant.email and a.applicant.phone_number %} or {% endif %}
-                            {% if a.applicant.phone_number %}{{ a.applicant.phone_number }}{% endif %}
-                        {% endif %}
+                    <li class="application">
+                        <div class="application-content">
+                            <b>{{ a.get_status_display }}:</b>
+                            <div class="">
+                                <b>{% trans 'email' %}:</b> {% if a.applicant.email %}
+                                    <a href="mailto:{{ a.applicant.email }}">{{ a.applicant.email }}</a>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </div>
+                            <div>
+                                <b>{% trans 'phone_number' %}:</b> {% if a.applicant.phone_number %}
+                                    <a href="tel:{{ a.applicant.phone_number }}">{{ a.applicant.phone_number }}</a>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </div>
+                            <div>
+                                <b>{% trans 'section' %}:</b> {{ a.applicant.section|default:'-' }}
+                            </div>
+                            <div>
+                                <b>{% trans 'program' %}:</b> {{ a.applicant.program|default:'-'}}
+                            </div>
+                        </div>
+                        <a target="blank" href="/admin/involvement/application/inspect/{{a.id}}/" class="button application-inspect button-small button-secondary" title="{% trans 'See application' %}">{% trans 'See application' %}</a>
                     </li>
                 {% empty %}
                     {% trans 'No applications have been submitted for this position.' %}
