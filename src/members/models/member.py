@@ -238,3 +238,19 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             pass
 
         return None
+
+    def sync_user_groups(self):
+        current_groups = self.groups.all()
+        wanted_groups = list(map(lambda role: role.group, self.roles.filter(
+            positions__applications__removed=False
+        ).all()))
+
+        # Remove unavailable groups
+        for group in current_groups:
+            if group not in wanted_groups:
+                group.user_set.remove(self)
+
+        # Add missing groups
+        for group in wanted_groups:
+            if (group not in current_groups):
+                group.user_set.add(self)
