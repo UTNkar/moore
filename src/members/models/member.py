@@ -55,11 +55,27 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
 
     objects = MelosUserManager()
 
+    first_name = models.CharField(
+        verbose_name=_('first name'),
+        max_length=1,
+        blank=True,
+        null=True
+    )
+
+    last_name = models.CharField(
+        verbose_name=_('last name'),
+        max_length=1,
+        blank=True,
+        null=True
+    )
+
     # ---- Personal information ------
 
     birthday = models.DateField(
         verbose_name=_('Birthday'),
-        null=True
+        blank=True,
+        null=True,
+        editable=False
     )
 
     person_number_ext = models.CharField(
@@ -73,6 +89,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         )],
         unique_for_date="birthday",
         blank=True,
+        null=True
     )
 
     # ---- Membership information ------
@@ -103,6 +120,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         verbose_name=_('Phone number'),
         help_text=_('Enter a phone number so UTN may reach you'),
         blank=True,
+        default='',
     )
 
     # ---- University information ------
@@ -205,13 +223,17 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         return status
 
     @staticmethod
+    def find_by_melos_id(melos_id):
+        if melos_id:
+            return Member.objects.filter(melos_id=int(melos_id)).first()
+        return None
+
+    @staticmethod
     def find_by_ssn(ssn):
         try:
             SSNValidator()(ssn)
-
             melos_id = MelosClient.get_melos_id(ssn)
-            if melos_id is not False:
-                return Member.objects.filter(melos_id=int(melos_id)).first()
+            return Member.find_by_melos_id(melos_id)
         except Exception:
             pass
 

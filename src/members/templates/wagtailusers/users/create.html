@@ -21,6 +21,8 @@
                         {% if form.separate_username_field %}
                             {% include "wagtailadmin/shared/field_as_li.html" with field=form.username_field %}
                         {% endif %}
+                        {% include "wagtailadmin/shared/field_as_li.html" with field=form.email %}
+                        {% include "wagtailadmin/shared/field_as_li.html" with field=form.phone_number %}
                         {% block extra_fields %}
 							{% include "wagtailadmin/shared/field_as_li.html" with field=form.person_number %}
 							{% include "wagtailadmin/shared/field_as_li.html" with field=form.registration_year %}
