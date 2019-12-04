@@ -57,14 +57,14 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
 
     first_name = models.CharField(
         verbose_name=_('first name'),
-        max_length=1,
+        max_length=30,
         blank=True,
         null=True
     )
 
     last_name = models.CharField(
         verbose_name=_('last name'),
-        max_length=1,
+        max_length=150,
         blank=True,
         null=True
     )

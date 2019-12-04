@@ -26,12 +26,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='member',
             name='first_name',
-            field=models.CharField(blank=True, max_length=1, null=True, verbose_name='first name'),
+            field=models.CharField(blank=True, max_length=30, null=True, verbose_name='first name'),
         ),
         migrations.AlterField(
             model_name='member',
             name='last_name',
-            field=models.CharField(blank=True, max_length=1, null=True, verbose_name='last name'),
+            field=models.CharField(blank=True, max_length=150, null=True, verbose_name='last name'),
         ),
         migrations.AlterField(
             model_name='member',
