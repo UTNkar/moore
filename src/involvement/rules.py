@@ -81,6 +81,7 @@ rules.add_perm('involvement.delete_contactcard', is_super
 
 rules.add_perm('involvement.list_application', is_super | has_role_perm)
 rules.add_perm('involvement.add_application', is_super | has_role_perm)
+rules.add_perm('involvement.inspect_application', is_super | has_role_perm)
 rules.add_perm('involvement.change_application', is_super
                | member_of_team_appl & can_modify_application)
 rules.add_perm('involvement.delete_application', is_super
