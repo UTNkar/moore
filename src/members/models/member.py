@@ -198,10 +198,12 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     def update_status(self, data=None, save=True):
         if data is None:
             # Prevent updating this value to often
-            if timezone.now() - self.status_changed >= timedelta(1):
+            if timezone.now() - self.status_changed >= timedelta(days=1):
                 return
 
             user_data = MelosClient.get_user_data(self.melos_id)
+            if user_data is None:
+                return
             is_member = MelosClient.is_member(user_data['person_number'])
             data = "member" if is_member else "nonmember"
 
