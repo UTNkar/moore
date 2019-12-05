@@ -424,14 +424,16 @@ class CustomUserEditForm(UserEditForm):
         if instance is not None:
             melos_user_id = instance.melos_id
             melos_data = MelosClient.get_user_data(melos_user_id)
-            person_number = melos_data['person_number']
 
-            initial['first_name'] = melos_data['first_name']
-            initial['last_name'] = melos_data['last_name']
-            initial['person_number'] = person_number
+            if melos_data is not None:
+                person_number = melos_data['person_number']
 
-            status = MelosClient.is_member(person_number)
-            initial['status'] = "member" if status else "nonmember"
+                initial['first_name'] = melos_data['first_name']
+                initial['last_name'] = melos_data['last_name']
+                initial['person_number'] = person_number
+
+                status = MelosClient.is_member(person_number)
+                initial['status'] = "member" if status else "nonmember"
 
         super(CustomUserEditForm, self).__init__(
             initial=initial, *args, **kwargs
