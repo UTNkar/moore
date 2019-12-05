@@ -92,7 +92,7 @@ class Application(ClusterableModel):
 
 
 @receiver(post_save, sender=Application,
-        dispatch_uid='application_sync_user_groups')
+          dispatch_uid='application_sync_user_groups')
 def sync_user_groups(sender, instance, update_fields, **kwargs):
     instance.applicant.sync_user_groups()
 
