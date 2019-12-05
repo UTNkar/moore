@@ -60,9 +60,9 @@ class AppointmentForm(forms.Form):
                         params={'pnr': pnr},
                     )
                 else:
-                    users.append(get_user_model().objects.get(
+                    users.append(get_user_model().objects.filter(
                         melos_id=melos_id
-                    ))
+                    ).first())
             return users
 
     def clean(self):
