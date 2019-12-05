@@ -339,48 +339,55 @@ class AdminPermissionTests(TestCase):
             team = mSet['team']
             self.assertNoAccess(action, url, team, "%s" % (action))
 
-    def all_modals_no_access(self, mSet):
-        for action, url in AdminPermissionTests.pages['team'].items():
-            if action not in ['index', 'create']:
-                team = mSet['team']
-                self.assertNoAccess(action, url, team, "%s" % (action))
+    def all_modals_no_access(self, mSet, exclude=[]):
+        if 'team' not in exclude:
+            for action, url in AdminPermissionTests.pages['team'].items():
+                if action not in ['index', 'create']:
+                    team = mSet['team']
+                    self.assertNoAccess(action, url, team, "%s" % (action))
 
-        for action, url in AdminPermissionTests.pages['application'].items():
-            if action not in ['create', 'index']:
-                for role_type, application in \
-                        mSet['submitted_applications'].items():
-                    self.assertNoAccess(action, url, application,
-                                        "%s, %s" % (action, role_type))
+        if 'application' not in exclude:
+            for action, url in AdminPermissionTests.pages['application'] \
+                    .items():
+                if action not in ['create', 'index']:
+                    for role_type, application in \
+                            mSet['submitted_applications'].items():
+                        self.assertNoAccess(action, url, application,
+                                            "%s, %s" % (action, role_type))
 
-        for action, url in AdminPermissionTests.pages['contactcard'].items():
-            if action not in ['create', 'index']:
-                for role_type, contact_card in \
-                        mSet['contact_cards'].items():
-                    self.assertNoAccess(action, url, contact_card,
-                                        "%s, %s" % (action, role_type))
+        if 'contactcard' not in exclude:
+            for action, url in AdminPermissionTests.pages['contactcard'] \
+                    .items():
+                if action not in ['create', 'index']:
+                    for role_type, contact_card in \
+                            mSet['contact_cards'].items():
+                        self.assertNoAccess(action, url, contact_card,
+                                            "%s, %s" % (action, role_type))
 
-        for action, url in AdminPermissionTests.pages['role'].items():
-            if action not in ['create', 'index']:
-                for role_type, role in mSet['roles'].items():
-                    self.assertNoAccess(action, url, role,
-                                        "%s, %s" % (action, role_type))
+        if 'role' not in exclude:
+            for action, url in AdminPermissionTests.pages['role'].items():
+                if action not in ['create', 'index']:
+                    for role_type, role in mSet['roles'].items():
+                        self.assertNoAccess(action, url, role,
+                                            "%s, %s" % (action, role_type))
 
-        for action, url in AdminPermissionTests.pages['position'].items():
-            if action not in ['create', 'index']:
-                for role_type, position in mSet['approvable_positions'] \
-                                            .items():
-                    self.assertNoAccess(action, url, position,
-                                        "%s, %s" % (action, role_type))
+        if 'position' not in exclude:
+            for action, url in AdminPermissionTests.pages['position'].items():
+                if action not in ['create', 'index']:
+                    for role_type, position in mSet['approvable_positions'] \
+                                                .items():
+                        self.assertNoAccess(action, url, position,
+                                            "%s, %s" % (action, role_type))
 
-                for role_type, position in mSet['appointable_positions'] \
-                        .items():
-                    self.assertNoAccess(action, url, position,
-                                        "%s, %s" % (action, role_type))
+                    for role_type, position in mSet['appointable_positions'] \
+                            .items():
+                        self.assertNoAccess(action, url, position,
+                                            "%s, %s" % (action, role_type))
 
-                for role_type, position in mSet['recruiting_positions'] \
-                        .items():
-                    self.assertNoAccess(action, url, position,
-                                        "%s, %s" % (action, role_type))
+                    for role_type, position in mSet['recruiting_positions'] \
+                            .items():
+                        self.assertNoAccess(action, url, position,
+                                            "%s, %s" % (action, role_type))
 
     def setUp(self):
 
@@ -505,15 +512,21 @@ class AdminPermissionTests(TestCase):
         self.checkPositions(self.primary_set, ['board'], ['appoint'])
 
         # Applications
-        # Can view and edit applications for role_type 'board' and 'presidium'
+        # Can view and edit applications for
+        # role_type 'board' and 'presidium' in all teams
+        # My team
         self.checkApplications(self.primary_set, ['board', 'presidium'])
+
+        # Others team
+        self.checkApplications(self.secondary_set, ['board', 'presidium'])
 
         # Contact Cards
         # Can view and edit contact cards for role_type 'board' and 'presidium'
         self.checkContactCards(self.primary_set, ['board', 'presidium'])
 
-        # Make sure that we cant access pages were we are not a team-member
-        self.all_modals_no_access(self.secondary_set)
+        # Make sure that we cant access pages were we are not a team-member,
+        # except for applications
+        self.all_modals_no_access(self.secondary_set, exclude=['application'])
 
     def test_board(self):
         self.client.force_login(
@@ -534,15 +547,21 @@ class AdminPermissionTests(TestCase):
         self.checkPositions(self.primary_set, ['presidium'])
 
         # Applications
-        # Can view and edit applications for role_type 'presidium'
+        # Can view and edit applications for
+        # role_type 'presidium' in all teams
+        # My team
         self.checkApplications(self.primary_set, ['presidium'])
+
+        # Others team
+        self.checkApplications(self.secondary_set, ['presidium'])
 
         # ContactCards
         # Can view and edit ContactCards for role_type 'presidium'
         self.checkContactCards(self.primary_set, ['presidium'])
 
-        # Make sure that we cant access pages were we are not a team-member
-        self.all_modals_no_access(self.secondary_set)
+        # Make sure that we cant access pages were we are not a team-member,
+        # except for applications
+        self.all_modals_no_access(self.secondary_set, exclude=['application'])
 
     def test_presidium(self):
         self.client.force_login(
