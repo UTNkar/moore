@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 from django.apps import apps
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.core import validators
@@ -6,7 +6,6 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
-from utils.utn_client import UTNClient
 from utils.melos_client import MelosClient
 
 
@@ -184,6 +183,11 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             positions__applications__status='appointed',
         )
 
+    @property
+    def get_status(self):
+        self.update_status()
+        return self.status
+
     def person_number(self) -> str:
         if self.birthday is None or self.person_number_ext is None:
             return ''
@@ -191,25 +195,26 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             return '%s-%s' % (self.birthday.strftime('%Y%m%d'),
                               self.person_number_ext)
 
-    def update_status(self, data=None):
+    def update_status(self, data=None, save=True):
         if data is None:
-            if self.person_number() == '':
-                return
-            try:
-                data = UTNClient.registration_status(
-                    self.person_number().replace('-', ''))
-            except ValueError:
+            # Prevent updating this value to often
+            if timezone.now() - self.status_changed >= timedelta(1):
                 return
 
+            user_data = MelosClient.get_user_data(self.melos_id)
+            is_member = MelosClient.is_member(user_data['person_number'])
+            data = "member" if is_member else "nonmember"
+
+        self.status = data
         if data == 'member':
             self.status = 'member'
-        elif data == 'nonmember':
-            if self.status in ['unknown', 'nonmember']:
-                self.status = 'nonmember'
-            else:
-                self.status = 'alumnus'
+        elif self.status not in ['member', 'alumn']:
+            self.status = 'nonmember'
 
         self.status_changed = timezone.now()
+
+        if save:
+            self.save()
 
     def remove_old_email(self):
         for email in self.get_unconfirmed_emails() or []:
@@ -221,6 +226,22 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     def get_status_text(self, status):
         status = _('Member') if status == 'member' else _('Nonmember')
         return status
+
+    def sync_user_groups(self):
+        current_groups = self.groups.all()
+        wanted_groups = list(map(lambda role: role.group, self.roles.filter(
+            positions__applications__removed=False
+        ).all()))
+
+        # Remove unavailable groups
+        for group in current_groups:
+            if group not in wanted_groups:
+                group.user_set.remove(self)
+
+        # Add missing groups
+        for group in wanted_groups:
+            if (group not in current_groups):
+                group.user_set.add(self)
 
     @staticmethod
     def find_by_melos_id(melos_id):
@@ -238,19 +259,3 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             pass
 
         return None
-
-    def sync_user_groups(self):
-        current_groups = self.groups.all()
-        wanted_groups = list(map(lambda role: role.group, self.roles.filter(
-            positions__applications__removed=False
-        ).all()))
-
-        # Remove unavailable groups
-        for group in current_groups:
-            if group not in wanted_groups:
-                group.user_set.remove(self)
-
-        # Add missing groups
-        for group in wanted_groups:
-            if (group not in current_groups):
-                group.user_set.add(self)

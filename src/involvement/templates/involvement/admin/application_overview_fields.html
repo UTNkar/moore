@@ -2,7 +2,7 @@
 
 <dl>
     <dt>{% trans 'membership status'|capfirst %}</dt>
-    <dd>{{ application.applicant.status }}</dd>
+    <dd>{{ application.applicant.get_status }}</dd>
     <dt>{% trans 'email address'|capfirst %}</dt>
     <dd>{{ application.applicant.email }}</dd>
     {% if application.cover_letter %}
