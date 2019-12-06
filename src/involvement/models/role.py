@@ -200,10 +200,19 @@ class Role(models.Model):
             return [] if pk else Role.objects.none()
 
         role_type_filter = Role.edit_applicant_role_types(user)
-        roles = Role.objects.filter(
-            role_type__in=role_type_filter,
-            teams__in=user.teams
-        )
+
+        roles = []
+        if is_fum(user) | is_board(user):
+            # Fum and board can see from all teams
+            roles = Role.objects.filter(
+                role_type__in=role_type_filter
+            )
+        else:
+            roles = Role.objects.filter(
+                role_type__in=role_type_filter,
+                teams__in=user.teams
+            )
+
         if pk:
             return roles.values_list('pk', flat=True)
         else:
