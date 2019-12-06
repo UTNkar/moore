@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-02 16:54+0100\n"
+"POT-Creation-Date: 2019-12-06 11:16+0100\n"
 "PO-Revision-Date: 2017-06-26 10:25+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -17,118 +17,136 @@ msgstr ""
 msgid "UTN Member Management"
 msgstr "Underhåll av UTN-medlemmar"
 
-#: members/django_extra_messages.py:6
+#: members/django_extra_messages.py:10
 msgid "Username or SSN (YYYYMMDD-XXXX)"
 msgstr "Användarnamn eller personnummer (YYYYMMDD-XXXX)"
 
-#: members/forms.py:38
+#: members/forms.py:41
 msgid "Use the format YYYYMMDD-XXXX for your person number."
 msgstr "Använd formen ÅÅÅÅMMDD-NNNN för ditt personnummer."
 
-#: members/forms.py:46
+#: members/forms.py:49
 #, python-format
 msgid "%(date)s is an invalid date"
 msgstr ""
 
-#: members/forms.py:61 members/forms.py:144 members/forms.py:379
-#: members/forms.py:460
+#: members/forms.py:64 members/forms.py:153 members/forms.py:380
+#: members/forms.py:456
 msgid "Person number"
 msgstr "Personnummer"
 
-#: members/forms.py:62 members/forms.py:145 members/forms.py:380
-#: members/forms.py:461
+#: members/forms.py:65 members/forms.py:154 members/forms.py:381
+#: members/forms.py:457
 msgid "Person number using the YYYYMMDD-XXXX format."
 msgstr "Personnummer på formen ÅÅÅÅMDD-NNNN."
 
-#: members/forms.py:97 members/forms.py:252
+#: members/forms.py:93 members/forms.py:253
 msgid "A user with that username already exists."
 msgstr ""
 
-#: members/forms.py:106
+#: members/forms.py:102
 msgid "Something went wrong, please try again."
 msgstr ""
 
-#: members/forms.py:253
+#: members/forms.py:132 members/forms.py:404 members/forms.py:479
+msgid "Section"
+msgstr "Sektion"
+
+#: members/forms.py:254
 msgid "The two password fields didn't match."
 msgstr ""
 
-#: members/forms.py:256
+#: members/forms.py:257
 msgid "First Name"
 msgstr ""
 
-#: members/forms.py:257
+#: members/forms.py:258
 msgid "Last Name"
 msgstr ""
 
-#: members/forms.py:260
+#: members/forms.py:261
 #, fuzzy
 #| msgid "Password reset"
 msgid "Password"
 msgstr "Återställning av lösenord"
 
-#: members/forms.py:262
+#: members/forms.py:263
 msgid "Leave blank if not changing."
 msgstr ""
 
-#: members/forms.py:264
+#: members/forms.py:265
 #, fuzzy
 #| msgid "Password changed"
 msgid "Password confirmation"
 msgstr "Lösenordet har ändrats"
 
-#: members/forms.py:266
+#: members/forms.py:267
 #, fuzzy
 #| msgid "Enter the name of the section"
 msgid "Enter the same password as above, for verification."
 msgstr "Ange namnet på sektionen"
 
-#: members/forms.py:269
+#: members/forms.py:270
 msgid "Administrator"
 msgstr ""
 
-#: members/forms.py:270
+#: members/forms.py:271
 msgid "Administrators have full access to manage any object or setting."
 msgstr ""
 
-#: members/forms.py:386 members/forms.py:465 members/models/member.py:106
+#: members/forms.py:386 members/forms.py:465 members/models/member.py:119
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#: members/forms.py:390 members/forms.py:461
+msgid "Email"
+msgstr ""
+
+#: members/forms.py:394 members/forms.py:469 members/models/member.py:129
 msgid "Registration year"
 msgstr "Inskrivningsår"
 
-#: members/forms.py:391 members/wagtail_hooks.py:42
+#: members/forms.py:399 members/wagtail_hooks.py:42
 msgid "Study Program"
 msgstr "Program"
 
-#: members/forms.py:396 members/forms.py:475
-msgid "Section"
-msgstr "Sektion"
-
-#: members/forms.py:400 members/models/member.py:84
+#: members/forms.py:408 members/models/member.py:106
 msgid "Membership status"
 msgstr "Medlemsstatus"
 
-#: members/forms.py:470 members/models/member.py:118
+#: members/forms.py:474 members/models/member.py:141
 msgid "Study program"
 msgstr "Program"
 
-#: members/forms.py:496 members/forms.py:501
+#: members/forms.py:500 members/forms.py:505
 msgid "Incorrect SSN"
 msgstr ""
 
-#: members/models/member.py:20
+#: members/models/member.py:21
 #, fuzzy
 #| msgid "Use the format YYYYMMDD-XXXX for your person number."
-msgid "Use the format YYYYMMDD-XXXX or YYMMDD-XXXX for your ssn."
+msgid ""
+"Use the format YYYYMMDD-XXXX, YYMMDD-XXXX,                 YYYYMMDDXXXX, "
+"YYMMDDXXXX for your ssn."
 msgstr "Använd formen ÅÅÅÅMMDD-NNNN för ditt personnummer."
 
-#: members/models/member.py:55
+#: members/models/member.py:58
+msgid "first name"
+msgstr ""
+
+#: members/models/member.py:65
+msgid "last name"
+msgstr ""
+
+#: members/models/member.py:74
 msgid "Birthday"
 msgstr "Födelsedag"
 
-#: members/models/member.py:61
+#: members/models/member.py:82
 msgid "Person number extension"
 msgstr "De fyra sista siffrorna"
 
-#: members/models/member.py:62
+#: members/models/member.py:83
 msgid ""
 "Enter the last four digits of your Swedish person number, given by the "
 "Swedish tax authority"
@@ -136,43 +154,39 @@ msgstr ""
 "Ange de fyra sista siffrorna i ditt svenska personnummer, som du fått från "
 "Skatteverket"
 
-#: members/models/member.py:66
+#: members/models/member.py:87
 msgid "The person number extension consists of four numbers"
 msgstr "Här avses de fyra sista siffrorna i ditt personnummer"
 
-#: members/models/member.py:75
+#: members/models/member.py:97
 msgid "Unknown"
 msgstr "Okänt"
 
-#: members/models/member.py:76 members/models/member.py:197
+#: members/models/member.py:98 members/models/member.py:256
 msgid "Nonmember"
 msgstr "Icke medlem"
 
-#: members/models/member.py:77 members/models/member.py:197
+#: members/models/member.py:99 members/models/member.py:256
 msgid "Member"
 msgstr "Medlem"
 
-#: members/models/member.py:78
+#: members/models/member.py:100
 msgid "Alumnus"
 msgstr "Alumn"
 
-#: members/models/member.py:97
-msgid "Phone number"
-msgstr "Telefonnummer"
-
-#: members/models/member.py:98
+#: members/models/member.py:120
 msgid "Enter a phone number so UTN may reach you"
 msgstr "Ange ett telefonnummer som UTN kan nå dig på"
 
-#: members/models/member.py:107
+#: members/models/member.py:130
 msgid "Enter the year you started studying at the TakNat faculty"
 msgstr "Ange året då du började studera på TekNat-fakulteten"
 
-#: members/models/member.py:111
+#: members/models/member.py:134
 msgid "Please enter a valid year"
 msgstr "Vänligen ange ett giltigt år"
 
-#: members/models/member.py:126
+#: members/models/member.py:149
 msgid "Member of section"
 msgstr "Sektionsmedlem i"
 
@@ -332,7 +346,7 @@ msgstr "Registrera"
 msgid "Create a UTN account"
 msgstr "Skapa ett UTN-konto"
 
-#: members/templates/members/register.html:34
+#: members/templates/members/register.html:47
 msgid "register"
 msgstr "register"
 
@@ -413,7 +427,7 @@ msgstr "Ändra mitt lösenord"
 #: members/templates/registration/password_reset_complete.html:9
 #: members/templates/registration/password_reset_confirm.html:7
 #: members/templates/registration/password_reset_confirm.html:9
-#: members/views.py:78
+#: members/views.py:59
 msgid "Password reset"
 msgstr "Återställning av lösenord"
 
@@ -505,7 +519,7 @@ msgstr "[UTN] Återställ lösenord"
 
 #: members/templates/wagtailusers/users/create.html:4
 #: members/templates/wagtailusers/users/create.html:7
-#: members/templates/wagtailusers/users/create.html:45
+#: members/templates/wagtailusers/users/create.html:47
 msgid "Add user"
 msgstr ""
 
@@ -517,7 +531,7 @@ msgid "Account"
 msgstr "Kontoinställningar"
 
 #: members/templates/wagtailusers/users/create.html:12
-#: members/templates/wagtailusers/users/create.html:38
+#: members/templates/wagtailusers/users/create.html:40
 #: members/templates/wagtailusers/users/edit.html:12
 msgid "Roles"
 msgstr ""
@@ -537,15 +551,15 @@ msgstr ""
 msgid "Delete user"
 msgstr ""
 
-#: members/views.py:34
+#: members/views.py:24
 msgid "Your account settings have been saved."
 msgstr "Dina kontoinställningar har sparats."
 
-#: members/views.py:107
+#: members/views.py:88
 msgid "Your email address has been confirmed."
 msgstr "Din emailadress har bekräftats."
 
-#: members/views.py:110
+#: members/views.py:91
 msgid "The provided confirmation token was invalid."
 msgstr "Bekräftelselänken var ogiltig."
 
