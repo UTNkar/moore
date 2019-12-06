@@ -156,7 +156,9 @@ class CustomPasswordResetForm(forms.Form):
 
     def get_email(self, melos_id):
         member = Member.find_by_melos_id(melos_id)
-        return member.get_email
+        if member:
+            return member.get_email
+        return ''
 
     def send_mail(self, subject_template_name, email_template_name,
                   context, from_email, to_email,
