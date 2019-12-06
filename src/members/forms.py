@@ -22,7 +22,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 
 from members.models import StudyProgram, Member, Section
-
+from utils.validators import SSNValidator
 from utils.melos_client import MelosClient
 
 User = get_user_model()
@@ -35,22 +35,9 @@ class PersonNumberField(forms.Field):
     def to_python(self, value):
         if value in self.empty_values:
             return None, ''
-        value = force_text(value)
-        validators.RegexValidator(
-            regex=r'^\d{8}\-?(T|\d)\d{3}$',
-            message=_('Use the format YYYYMMDD-XXXX for your person number.')
-        )(value)
-        try:
-            date = datetime.strptime(value[:8], '%Y%m%d').date()
-        except ValueError:
-            date = value[:4] + '-' + value[4:6] \
-                + '-' + value[6:8]
-            raise ValidationError(
-                _('%(date)s is an invalid date'),
-                params={'date': date}
-            )
-        number = value[-4:]
-        return date, number
+        value = force_text(value).strip()
+        SSNValidator()(value)
+        return value
 
     def widget_attrs(self, widget):
         attrs = super(PersonNumberField, self).widget_attrs(widget)
@@ -93,15 +80,15 @@ class MemberForm(forms.ModelForm):
                 "A user with that username already exists."))
         return username
 
-    def clean(self):
+
+    def clean_person_number(self):
         person_number = self.cleaned_data['person_number']
         melos_id = MelosClient.get_melos_id(person_number)
-        if (Member.objects.exclude(pk=self.instance.pk)
-                .filter(melos_id=melos_id).exists()) or melos_id is False:
-            raise forms.ValidationError(_(
-                "Something went wrong, please try again."))
+        if not melos_id or Member.find_by_melos_id(melos_id):
+            raise forms.ValidationError(_("Incorrect SSN"))
 
         self.instance.melos_id = melos_id
+        return person_number
 
     def save(self, commit=True):
         # Need to reset fields since we don't want
@@ -492,21 +479,9 @@ class CustomUserCreationForm(UserCreationForm):
 
     def clean_person_number(self):
         person_number = self.cleaned_data['person_number']
-
         melos_id = MelosClient.get_melos_id(person_number)
-        if melos_id:
-            if (Member.objects.exclude(pk=self.instance.pk)
-                    .filter(melos_id=melos_id).exists()):
-                raise forms.ValidationError(_('Incorrect SSN'))
-            self.instance.melos_id = melos_id
-            return person_number
+        if not melos_id or Member.find_by_melos_id(melos_id):
+            raise forms.ValidationError(_("Incorrect SSN"))
 
-        else:
-            raise forms.ValidationError(_('Incorrect SSN'))
-
-    def save(self, commit=True):
-        person_number = self.cleaned_data['person_number']
-        self.instance.birthday = person_number[0]
-        self.instance.person_number_ext = person_number[1]
-
-        return super(CustomUserCreationForm, self).save(commit=commit)
+        self.instance.melos_id = melos_id
+        return person_number
