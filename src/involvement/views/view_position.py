@@ -5,7 +5,6 @@ from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from involvement.forms import ApplicationForm, ReferenceFormSet
 from involvement.models import Application
-from utils.melos_client import MelosClient
 
 
 def view_position(request, context, page, position=None):
@@ -21,12 +20,8 @@ def view_position(request, context, page, position=None):
     # Load application form if user is logged in
     if request.user.is_authenticated:
         if request.user.melos_id:
-            melos_id = request.user.melos_id
-            melos_data = MelosClient.get_user_data(melos_id)
-            person_number = melos_data['person_number']
-            status = MelosClient.is_member(person_number)
-            context['membership_status'] = "member" if status else "nonmember"
-            context['email'] = melos_data['email']
+            context['membership_status'] = request.user.get_status
+            context['email'] = request.user.get_email
             # Did the user already have an application?
             try:
                 appl = Application.objects.get(applicant=request.user,

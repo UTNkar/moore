@@ -160,6 +160,8 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         null=True
     )
 
+    user_data = None
+
     def __str__(self) -> str:
         return self.username
 
@@ -188,12 +190,37 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         self.update_status()
         return self.status
 
+    @property
+    def get_first_name(self):
+        data = self.get_melos_user_data()
+        return '' if data is None else data['first_name']
+
+    @property
+    def get_last_name(self):
+        data = self.get_melos_user_data()
+        return '' if data is None else data['last_name']
+
+    @property
+    def get_full_name(self):
+        return '{} {}'.format(self.get_first_name, self.get_last_name)
+
+    @property
+    def get_ssn(self):
+        data = self.get_melos_user_data()
+        return None if data is None else data['person_number']
+
+    @property
+    def get_email(self):
+        if not self.email:
+            data = self.get_melos_user_data()
+            if data | data['email']:
+                self.email = data['email']
+                self.save()
+
+        return self.email
+
     def person_number(self) -> str:
-        if self.birthday is None or self.person_number_ext is None:
-            return ''
-        else:
-            return '%s-%s' % (self.birthday.strftime('%Y%m%d'),
-                              self.person_number_ext)
+        return self.get_ssn
 
     def update_status(self, data=None, save=True):
         if data is None:
@@ -201,7 +228,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             if timezone.now() - self.status_changed >= timedelta(days=1):
                 return
 
-            user_data = MelosClient.get_user_data(self.melos_id)
+            user_data = self.get_melos_user_data()
             if user_data is None:
                 return
             is_member = MelosClient.is_member(user_data['person_number'])
@@ -244,6 +271,11 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         for group in wanted_groups:
             if (group not in current_groups):
                 group.user_set.add(self)
+
+    def get_melos_user_data(self):
+        if self.user_data is None:
+            self.user_data = MelosClient.get_user_data(self.melos_id)
+        return self.user_data
 
     @staticmethod
     def find_by_melos_id(melos_id):
