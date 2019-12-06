@@ -1,17 +1,17 @@
-function marvin(message, classes, callback) {
-    var marvin_style = 'rounded';
+function toast(message, classes, callback) {
+    var toast_style = 'rounded';
     if(classes !== '') {
-        marvin_style += ' ' + classes;
+        toast_style += ' ' + classes;
 	}
     Materialize.toast(
         '<div class="message-impl">' +
         // TODO: Replace this static reference.
-        '<img class="marvin" src="/static/images/bocken_white.png">' +
-        '<b>Toast:</b><a href="#" class="close"><i class="material-icons">close</i></a><br>'
+        '<img class="bocken-toast" src="/static/images/bocken_white.png">' +
+        '<b>Bocken:</b><a href="#" class="close"><i class="material-icons">close</i></a><br>'
         + message
         + '</div>',
         Infinity, // Display until dismissed
-        marvin_style,
+        toast_style,
         callback
     );
 
@@ -29,6 +29,6 @@ $(document).ready(function() {
         } else if ($(value).hasClass('warning')) {
             classes = 'yellow black-text';
         }
-        marvin($(this).text(), classes, null);
+        toast($(this).text(), classes, null);
     });
 });

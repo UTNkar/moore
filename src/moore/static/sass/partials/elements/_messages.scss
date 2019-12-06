@@ -4,7 +4,7 @@
   display: none;
 }
 
-.marvin {
+.bocken-toast {
   position: absolute;
   bottom: 5px;
   height: calc(100% - 10px);
@@ -14,7 +14,7 @@
   white-space: pre-wrap;
   word-break: keep-all;
   margin-left: 60px;
-  .marvin {
+  .bocken-toast {
     margin-left: -70px;
   }
   .close {
