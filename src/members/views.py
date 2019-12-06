@@ -1,4 +1,3 @@
-import datetime
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
@@ -6,7 +5,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView
 from django.views.generic.edit import FormView
@@ -14,7 +12,6 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 from members.forms import MemberForm, CustomPasswordResetForm
 from members.models import Section, StudyProgram
-from utils.melos_client import MelosClient
 
 
 class ProfileView(LoginRequiredMixin, UpdateView):
@@ -33,17 +30,8 @@ class ProfileView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         kwargs['studies'] = StudyProgram.objects.all()
         kwargs['sections'] = Section.objects.all()
-        kwargs['can_update_status'] = (
-            self.request.user.status != 'member'
-            and (timezone.now() - self.request.user.status_changed
-                 > datetime.timedelta(1))
-        )
-
-        melos_id = self.request.user.melos_id
-        melos_data = MelosClient.get_user_data(melos_id)
-        person_number = melos_data['person_number']
-        status = MelosClient.is_member(person_number)
-        kwargs['status'] = "member" if status else "nonmember"
+        kwargs['can_update_status'] = self.request.user.get_status != 'member'
+        kwargs['status'] = self.request.user.get_status
         return super(ProfileView, self).get_context_data(**kwargs)
 
 
