@@ -102,10 +102,21 @@
     <div class="col s12">
         {% if status == 'draft' %}
             <button id="submit" name="{{ form.status.name }}" type="submit" class="save btn btn-inverse disabled" value="draft">{% trans 'save as draft' %}</button>
-            <button name="{{ form.status.name }}" type="submit" class="save btn btn-primary" value="submitted">{% trans 'apply' %}</button>
+            <button type="button" class="save btn btn-primary modal-trigger" data-target="application-form-save-modal">{% trans 'apply' %}</button>
         {% endif %}
-    </div><!-- /.center -->
+    </div>
     {% endif %}
+
+
+    <div id="application-form-save-modal" class="modal">
+        <div class="modal-content">
+            <p>När du har skickat in din ansökan kan du inte ändra den. Om du vill göra ändringar kan du spara ett utkast av din ansökan! Vill du skicka in din ansökan?</p>
+            </br>
+            <button name="{{ form.status.name }}" type="submit" value="submitted" data-target="application-form-save-modal" class="btn btn-primary modal-close">Ja</button>
+            <button data-target="application-form-save-modal" class="btn btn-inverse modal-close">Nej</button>
+        </div>
+    </div>
+
 </form>
 
 
