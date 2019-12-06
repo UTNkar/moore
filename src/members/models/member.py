@@ -160,7 +160,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         null=True
     )
 
-    user_data = None
+    melos_user_data = None
 
     def __str__(self) -> str:
         return self.username
@@ -228,10 +228,10 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             if timezone.now() - self.status_changed >= timedelta(days=1):
                 return
 
-            user_data = self.get_melos_user_data()
-            if user_data is None:
+            melos_user_data = self.get_melos_user_data()
+            if melos_user_data is None:
                 return
-            is_member = MelosClient.is_member(user_data['person_number'])
+            is_member = MelosClient.is_member(melos_user_data['person_number'])
             data = "member" if is_member else "nonmember"
 
         self.status = data
@@ -273,9 +273,9 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
                 group.user_set.add(self)
 
     def get_melos_user_data(self):
-        if self.user_data is None:
-            self.user_data = MelosClient.get_user_data(self.melos_id)
-        return self.user_data
+        if self.melos_user_data is None:
+            self.melos_user_data = MelosClient.get_user_data(self.melos_id)
+        return self.melos_user_data
 
     @staticmethod
     def find_by_melos_id(melos_id):
