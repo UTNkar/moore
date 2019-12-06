@@ -75,12 +75,9 @@ class MemberForm(forms.ModelForm):
         initial = kwargs.pop('initial', {})
 
         if instance is not None:
-            melos_user_id = instance.melos_id
-            melos_data = MelosClient.get_user_data(melos_user_id)
-            initial['person_number'] = instance.person_number()
-            initial['first_name'] = melos_data['first_name']
-            initial['last_name'] = melos_data['last_name']
-            initial['person_number'] = melos_data['person_number']
+            initial['person_number'] = instance.get_ssn
+            initial['first_name'] = instance.get_first_name
+            initial['last_name'] = instance.get_last_name
 
         super(MemberForm, self).__init__(initial=initial, *args, **kwargs)
         if instance is not None:
@@ -160,12 +157,7 @@ class CustomPasswordResetForm(forms.Form):
     def get_email(self, melos_id):
         member = Member.find_by_melos_id(melos_id)
         if member:
-            return member.email
-
-        data = MelosClient.get_user_data(melos_id)
-        if data:
-            return data['email']
-
+            return member.get_email
         return ''
 
     def send_mail(self, subject_template_name, email_template_name,
@@ -422,18 +414,10 @@ class CustomUserEditForm(UserEditForm):
 
         initial = kwargs.pop('initial', {})
         if instance is not None:
-            melos_user_id = instance.melos_id
-            melos_data = MelosClient.get_user_data(melos_user_id)
-
-            if melos_data is not None:
-                person_number = melos_data['person_number']
-
-                initial['first_name'] = melos_data['first_name']
-                initial['last_name'] = melos_data['last_name']
-                initial['person_number'] = person_number
-
-                status = MelosClient.is_member(person_number)
-                initial['status'] = "member" if status else "nonmember"
+            initial['first_name'] = instance.get_first_name
+            initial['last_name'] = instance.get_last_name
+            initial['person_number'] = instance.get_ssn
+            initial['status'] = instance.get_status
 
         super(CustomUserEditForm, self).__init__(
             initial=initial, *args, **kwargs
