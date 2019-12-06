@@ -109,10 +109,6 @@ SESSION_COOKIE_DOMAIN = '.utn.se'
 
 SESSION_COOKIE_SECURE = True
 
-# Membership API
-MEMBERSHIP_API_USER = os.environ.get('MEMBERSHIP_API_USER', 'moore')
-MEMBERSHIP_API_PASSWORD = os.environ.get('MEMBERSHIP_API_PASSWORD')
-
 MELOS_URL = os.environ.get('MELOS_URL')
 MELOS_ORG_ID = os.environ.get('MELOS_ORG_ID')
 MELOS_ADMIN = os.environ.get('MELOS_ADMIN')

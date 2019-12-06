@@ -27,7 +27,5 @@ services:
         MELOS_URL: ${MELOS_URL}
         MELOS_ORG_ID: ${MELOS_ORG_ID}
         MELOS_ADMIN: ${MELOS_ADMIN}
-        MEMBERSHIP_API_USER: ${MEMBERSHIP_API_USER}
-        MEMBERSHIP_API_PASSWORD: ${MEMBERSHIP_API_PASSWORD}
       depends_on:
         - moore-db
