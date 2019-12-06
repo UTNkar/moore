@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-06 11:16+0100\n"
+"POT-Creation-Date: 2019-12-06 15:48+0100\n"
 "PO-Revision-Date: 2017-06-26 10:23+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: involvement/apps.py:7 involvement/wagtail_hooks.py:291
+#: involvement/apps.py:7 involvement/wagtail_hooks.py:299
 msgid "Involvement"
 msgstr "Engagemang"
 
@@ -86,7 +86,7 @@ msgstr "Inte Nominerad"
 msgid "Application"
 msgstr "Ansökning"
 
-#: involvement/models/application.py:30 involvement/wagtail_hooks.py:233
+#: involvement/models/application.py:30 involvement/wagtail_hooks.py:241
 msgid "Applications"
 msgstr "Ansökningar"
 
@@ -153,7 +153,7 @@ msgstr "Mandat historik"
 msgid "Position"
 msgstr "Post"
 
-#: involvement/models/position.py:17 involvement/wagtail_hooks.py:202
+#: involvement/models/position.py:17 involvement/wagtail_hooks.py:210
 msgid "Positions"
 msgstr "Poster"
 
@@ -256,7 +256,7 @@ msgstr "Är det något mer du vill tillägga om din referens"
 msgid "Role"
 msgstr "Roll"
 
-#: involvement/models/role.py:23 involvement/wagtail_hooks.py:56
+#: involvement/models/role.py:23 involvement/wagtail_hooks.py:64
 msgid "Roles"
 msgstr "Roller"
 
@@ -367,7 +367,7 @@ msgstr "%(role)s i %(team)s"
 msgid "Team"
 msgstr "Grupp"
 
-#: involvement/models/team.py:16 involvement/wagtail_hooks.py:35
+#: involvement/models/team.py:16 involvement/wagtail_hooks.py:43
 msgid "Teams"
 msgstr "Grupper"
 
@@ -768,41 +768,45 @@ msgstr "Den här ansökan finns inte!"
 msgid "Your application has been submitted!"
 msgstr "Din ansökan har skickats!"
 
-#: involvement/wagtail_hooks.py:87
+#: involvement/wagtail_hooks.py:30
+msgid "Access Groups"
+msgstr "Behörighetsgrupper"
+
+#: involvement/wagtail_hooks.py:95
 msgid "year"
 msgstr "år"
 
-#: involvement/wagtail_hooks.py:94
+#: involvement/wagtail_hooks.py:102
 msgid "This Year"
 msgstr "Detta år"
 
-#: involvement/wagtail_hooks.py:95
+#: involvement/wagtail_hooks.py:103
 msgid "Last Year"
 msgstr "Förra året"
 
-#: involvement/wagtail_hooks.py:96
+#: involvement/wagtail_hooks.py:104
 msgid "Before"
 msgstr "Före"
 
-#: involvement/wagtail_hooks.py:148
+#: involvement/wagtail_hooks.py:156
 msgid "Approve"
 msgstr "Bevilja"
 
-#: involvement/wagtail_hooks.py:150
+#: involvement/wagtail_hooks.py:158
 #, python-format
 msgid "Approve applicants for %s"
 msgstr "Godkänn sökande till %s"
 
-#: involvement/wagtail_hooks.py:162
+#: involvement/wagtail_hooks.py:170
 msgid "Appoint"
 msgstr "Tillsätt"
 
-#: involvement/wagtail_hooks.py:164
+#: involvement/wagtail_hooks.py:172
 #, python-format
 msgid "Appoint member to %s"
 msgstr "Tillsätt medlem som %s"
 
-#: involvement/wagtail_hooks.py:270
+#: involvement/wagtail_hooks.py:278
 #, fuzzy
 #| msgid "Contact Card"
 msgid "Contact Cards"

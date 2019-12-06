@@ -15,11 +15,19 @@ from involvement.rules import is_action_approve, is_action_appoint
 from involvement.rule_utils import is_super
 from involvement import views
 from utils.permissions import RulesPermissionHelper
-
+from wagtail.admin.menu import MenuItem
 
 @hooks.register('construct_main_menu')
-def hide_snippets_menu_item(request, menu_items):
+def construct_main_menu(request, menu_items):
+    # Remove snippets
     menu_items[:] = [item for item in menu_items if item.name != 'snippets']
+
+    # Rename settings/groups
+    for item in menu_items:
+        if item.name == 'settings':
+            for subitem in item.menu._registered_menu_items:
+                if subitem.name == 'groups':
+                    subitem.label = _('Access Groups')
 
 
 @hooks.register("insert_global_admin_css", order=100)
