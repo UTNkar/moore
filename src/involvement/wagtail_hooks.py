@@ -15,7 +15,7 @@ from involvement.rules import is_action_approve, is_action_appoint
 from involvement.rule_utils import is_super
 from involvement import views
 from utils.permissions import RulesPermissionHelper
-from wagtail.admin.menu import MenuItem
+
 
 @hooks.register('construct_main_menu')
 def construct_main_menu(request, menu_items):
