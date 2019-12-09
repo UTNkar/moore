@@ -1,6 +1,7 @@
 from django.core import validators
 from django.utils.translation import ugettext_lazy as _
 
+
 class SSNValidator(validators.RegexValidator):
     def __init__(self):
         super(SSNValidator, self).__init__(

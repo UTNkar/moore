@@ -1,10 +1,6 @@
-from datetime import datetime
-
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth
-from django.core import validators
-from django.core.exceptions import ValidationError
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 from wagtail.users import forms as wagtail
@@ -79,7 +75,6 @@ class MemberForm(forms.ModelForm):
             raise forms.ValidationError(_(
                 "A user with that username already exists."))
         return username
-
 
     def clean_person_number(self):
         person_number = self.cleaned_data['person_number']
