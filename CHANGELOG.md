@@ -34,6 +34,7 @@ Exception to applications where a board member can see and modify applications f
 - A user may now log in using both username or ssn.
 - Firstname, Lastname, SSN, Registration Year and Study Program is no longer stored in Moores database and is instead fetched from Melos.
 - Replaced Marvin to Bocken
+- Upgrade dependencies
 
 ### Fixed
 - Fixes several responsive layout problems.
