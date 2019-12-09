@@ -1,7 +1,7 @@
 from django.apps import apps
 from django.conf import settings
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.models import ClusterableModel
@@ -147,3 +147,10 @@ def check_contact_card(sender, instance, **kwargs):
                 card.application = None
                 card.picture = None
                 card.save()
+
+@receiver(pre_save, sender=Application,
+          dispatch_uid='application_auto_approve')
+def auto_approve(sender, instance, **kwargs):
+    if instance.status == 'submitted' and \
+            instance.position.role.role_type not in ['admin', 'fum', 'board']:
+        instance.status = 'approved'
