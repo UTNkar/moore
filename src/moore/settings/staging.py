@@ -37,7 +37,7 @@ DATABASES = {
 # trailing slash
 BASE_URL = 'moore.swace.se'
 
-ALLOWED_HOSTS = ['moore.swace.se']
+ALLOWED_HOSTS = ['.swace.se', '.utn.swace.se']
 
 # Email
 # https://docs.djangoproject.com/en/1.10/ref/settings/#email-backend
