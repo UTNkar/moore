@@ -56,7 +56,6 @@ class MemberForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         instance = kwargs.get('instance', None)
         initial = kwargs.pop('initial', {})
-
         if instance is not None:
             initial['person_number'] = instance.get_ssn
             initial['first_name'] = instance.get_first_name
@@ -78,11 +77,12 @@ class MemberForm(forms.ModelForm):
 
     def clean_person_number(self):
         person_number = self.cleaned_data['person_number']
-        melos_id = MelosClient.get_melos_id(person_number)
-        if not melos_id or Member.find_by_melos_id(melos_id):
-            raise forms.ValidationError(_("Incorrect SSN"))
+        if self.instance.pk is None:
+            melos_id = MelosClient.get_melos_id(person_number)
+            if not melos_id or not Member.find_by_melos_id(melos_id):
+                raise forms.ValidationError(_("Incorrect SSN"))
+            self.instance.melos_id = melos_id
 
-        self.instance.melos_id = melos_id
         return person_number
 
     def save(self, commit=True):
@@ -92,7 +92,6 @@ class MemberForm(forms.ModelForm):
         self.instance.person_number_ext = ''
         self.instance.first_name = ''
         self.instance.last_name = ''
-        self.instance.status = ''
 
         email = self.cleaned_data['email']
         if self.initial.get('email', '') != '':
@@ -415,7 +414,6 @@ class CustomUserEditForm(UserEditForm):
         self.instance.person_number_ext = ''
         self.instance.first_name = ''
         self.instance.last_name = ''
-        self.instance.status = ''
 
         return super(CustomUserEditForm, self).save(commit=commit)
 
