@@ -12,6 +12,9 @@
                 {% for a in appointed_applications %}
                     <li>
                         <div>
+                            <b>{% trans 'name' %}:</b> {{ a.applicant.get_full_name|default:'-' }}
+                        </div>
+                        <div>
                             <b>{% trans 'email' %}:</b> {% if a.applicant.email %}
                                 <a href="mailto:{{ a.applicant.email }}">{{ a.applicant.email }}</a>
                             {% else %}
@@ -28,9 +31,6 @@
                         <div>
                             <b>{% trans 'section' %}:</b> {{ a.applicant.section|default:'-' }}
                         </div>
-                        <div>
-                            <b>{% trans 'program' %}:</b> {{ a.applicant.program|default:'-'}}
-                        </div>
                     </li>
                 {% empty %}
                     {% trans 'No applications have been submitted for this position.' %}
@@ -45,7 +45,10 @@
                     <li class="application">
                         <div class="application-content">
                             <b>{{ a.get_status_display }}:</b>
-                            <div class="">
+                            <div>
+                                <b>{% trans 'name' %}:</b> {{ a.applicant.get_full_name|default:'-' }}
+                            </div>
+                            <div>
                                 <b>{% trans 'email' %}:</b> {% if a.applicant.email %}
                                     <a href="mailto:{{ a.applicant.email }}">{{ a.applicant.email }}</a>
                                 {% else %}
@@ -61,9 +64,6 @@
                             </div>
                             <div>
                                 <b>{% trans 'section' %}:</b> {{ a.applicant.section|default:'-' }}
-                            </div>
-                            <div>
-                                <b>{% trans 'program' %}:</b> {{ a.applicant.program|default:'-'}}
                             </div>
                         </div>
                         <a target="blank" href="/admin/involvement/application/inspect/{{a.id}}/" class="button application-inspect button-small button-secondary" title="{% trans 'See application' %}">{% trans 'See application' %}</a>
