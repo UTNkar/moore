@@ -1,6 +1,6 @@
 import rules
 from involvement.models import Role
-from involvement.rule_utils import is_super, is_admin, is_fum, has_role_perm
+from involvement.rule_utils import is_super, is_admin, is_fum, is_board, has_role_perm
 
 
 # Contact card predicates
@@ -89,12 +89,14 @@ rules.add_perm('involvement.delete_application', is_super
 
 rules.add_perm('involvement.list_position', is_super | has_role_perm)
 rules.add_perm('involvement.add_position', is_super | has_role_perm)
+
+# Fum and Board may edit for all teams
 rules.add_perm('involvement.inspect_position', is_super
-               | member_of_team_position & has_role_perm)
+               | has_role_perm & (member_of_team_position | is_fum | is_board))
 rules.add_perm('involvement.change_position', is_super
-               | member_of_team_position & can_modify_position)
+               | can_modify_position & (member_of_team_position | is_fum | is_board))
 rules.add_perm('involvement.delete_position', is_super
-               | (member_of_team_position & can_modify_position))
+               | (can_modify_position & (member_of_team_position | is_fum | is_board)))
 
 rules.add_perm('involvement.approve_position', is_super
                | (member_of_team_position & is_action_approve
@@ -105,12 +107,14 @@ rules.add_perm('involvement.appoint_position', is_super
 
 rules.add_perm('involvement.list_role', is_super | has_role_perm)
 rules.add_perm('involvement.add_role', is_super | has_role_perm)
+
+# Fum and Board may edit for all teams
 rules.add_perm('involvement.inspect_role', is_super
-               | member_of_team_role & can_modify_role)
+               | can_modify_role & (member_of_team_role | is_fum | is_board))
 rules.add_perm('involvement.change_role', is_super
-               | member_of_team_role & can_modify_role)
+               | can_modify_role & (member_of_team_role | is_fum | is_board))
 rules.add_perm('involvement.delete_role', is_super
-               | member_of_team_role & can_modify_role)
+               | can_modify_role & (member_of_team_role | is_fum | is_board))
 
 rules.add_perm('involvement.list_team', is_super | is_admin)
 rules.add_perm('involvement.add_team', is_super | is_admin)
