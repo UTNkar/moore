@@ -26,7 +26,6 @@ def construct_main_menu(request, menu_items):
 
     for item in menu_items:
         if item.name == 'settings' or item.name == 'installningar':
-            print(item.menu._registered_menu_items)
             for subitem in item.menu._registered_menu_items:
                 if subitem.name == 'groups' or subitem.name == 'grupper':
                     subitem.label = _('Access Groups')
