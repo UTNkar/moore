@@ -212,7 +212,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     def update_status(self, data=None, save=True):
         if data is None:
             # Prevent updating this value to often
-            if timezone.now() - self.status_changed >= timedelta(days=1):
+            if timezone.now() - self.status_changed < timedelta(days=1):
                 return
 
             melos_user_data = self.get_melos_user_data()
