@@ -185,7 +185,7 @@ class Role(models.Model):
             return [] if pk else Role.objects.none()
 
         role_type_filter = Role.editable_role_types(user)
-        
+
         roles = []
         if is_fum(user) | is_board(user):
             # Fum and board can see from all teams
