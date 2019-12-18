@@ -16,6 +16,7 @@ from __future__ import absolute_import, unicode_literals
 from django.conf.global_settings import LOGIN_URL
 from django.utils.translation import ugettext_lazy as _
 
+import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
@@ -209,3 +210,5 @@ WAGTAIL_USER_EDIT_FORM = 'members.forms.CustomUserEditForm'
 WAGTAIL_USER_CREATION_FORM = 'members.forms.CustomUserCreationForm'
 WAGTAIL_USER_CUSTOM_FIELDS = ['registration_year', 'study',
                               'status', 'section']
+
+IS_RUNNING_TEST = 'test' in sys.argv

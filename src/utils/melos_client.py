@@ -3,10 +3,27 @@ from requests.auth import HTTPBasicAuth
 from django.conf import settings
 
 
-class MelosClient:
+class MockClient:
 
-    @staticmethod
-    def request_get(path, params=None):
+    def get_user_data(self, melos_id):
+        return {
+            'first_name': 'Firstname',
+            'last_name': 'Lastname',
+            'person_number': '199105050203',
+            'phone_number': '0706688668',
+            'email': 'email@email.com'
+        }
+
+    def is_member(self, ssn):
+        return True
+
+    def get_melos_id(self, ssn):
+        return 100000
+
+
+class ApiClient:
+
+    def request_get(self, path, params=None):
         if params is not None:
             params['orgId'] = settings.MELOS_ORG_ID
 
@@ -16,10 +33,8 @@ class MelosClient:
                     params=params,
                 )
 
-    @staticmethod
-    def get_user_data(melos_id):
-        r = MelosClient.request_get('user' + '/' + str(melos_id))
-
+    def get_user_data(self, melos_id):
+        r = self.request_get('user' + '/' + str(melos_id))
         if r.status_code == 200:
             data = {}
             data['first_name'] = r.json()['Fornamn']
@@ -29,19 +44,17 @@ class MelosClient:
             data['email'] = r.json()['Epost']
             return data
 
-    @staticmethod
-    def is_member(ssn):
-        r = MelosClient.request_get('user/validateMembership', {'ssn': ssn})
+    def is_member(self, ssn):
+        r = self.request_get('user/validateMembership', {'ssn': ssn})
         return r.status_code == 204
 
-    @staticmethod
-    def get_melos_id(ssn):
+    def get_melos_id(self, ssn):
         parsed_ssn = ssn
 
         if(not isinstance(parsed_ssn, str)):
             parsed_ssn = ssn[0].strftime('%Y%m%d') + '-' + ssn[1]
 
-        r = MelosClient.request_get('user', {
+        r = self.request_get('user', {
             'ssn': parsed_ssn,
         })
 
@@ -49,3 +62,30 @@ class MelosClient:
             return r.json()['Id']
         else:
             return False
+
+
+class MelosClient:
+    client = None
+
+    @staticmethod
+    def __setup():
+        if MelosClient.client is None:
+            if settings.IS_RUNNING_TEST:
+                MelosClient.client = MockClient()
+            else:
+                MelosClient.client = ApiClient()
+
+    @staticmethod
+    def get_user_data(melos_id):
+        MelosClient.__setup()
+        return MelosClient.client.get_user_data(melos_id)
+
+    @staticmethod
+    def is_member(ssn):
+        MelosClient.__setup()
+        return MelosClient.client.is_member(ssn)
+
+    @staticmethod
+    def get_melos_id(ssn):
+        MelosClient.__setup()
+        return MelosClient.client.get_melos_id(ssn)
