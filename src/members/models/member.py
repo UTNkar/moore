@@ -10,6 +10,10 @@ from utils.melos_client import MelosClient
 from utils.validators import SSNValidator
 
 
+def status_changed_default():
+    return timezone.now() - timedelta(days=2)
+
+
 class CaseInsensitiveUsernameUserManager(UserManager):
     # Search username with insensitive case
     def get_by_natural_key(self, username):
@@ -93,8 +97,9 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         blank=False,
         default='unknown'
     )
+
     status_changed = models.DateTimeField(
-        default=timezone.now,
+        default=status_changed_default,
         null=False,
     )
 
@@ -221,11 +226,13 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             is_member = MelosClient.is_member(melos_user_data['person_number'])
             data = "member" if is_member else "nonmember"
 
-        self.status = data
         if data == 'member':
             self.status = 'member'
-        elif self.status not in ['member', 'alumn']:
-            self.status = 'nonmember'
+        elif data == 'nonmember':
+            if self.status not in ['member', 'alumnus']:
+                self.status = 'nonmember'
+            else:
+                self.status = 'alumnus'
 
         self.status_changed = timezone.now()
 
