@@ -1,5 +1,6 @@
 import kronos
-from datetime import date, timedelta
+from datetime import timedelta
+from django.utils import timezone
 from members.models import Member
 
 
@@ -13,6 +14,6 @@ from members.models import Member
 def update_membership_status():
     for member in Member.objects.filter(
                     status='member',
-                    status_changed__gte=date.today() - timedelta(days=3)
+                    status_changed__gte=timezone.now() - timedelta(days=3)
                 ):
         member.update_status()
