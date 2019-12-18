@@ -79,8 +79,9 @@ class MemberForm(forms.ModelForm):
         person_number = self.cleaned_data['person_number']
         if self.instance.pk is None:
             melos_id = MelosClient.get_melos_id(person_number)
-            if not melos_id or not Member.find_by_melos_id(melos_id):
+            if not melos_id or Member.find_by_melos_id(melos_id):
                 raise forms.ValidationError(_("Incorrect SSN"))
+
             self.instance.melos_id = melos_id
 
         return person_number
