@@ -222,7 +222,7 @@ class AdminPermissionTests(TestCase):
             'edit': 'involvement_application_modeladmin_edit',
             'delete': 'involvement_application_modeladmin_delete',
         },
-        'contactcard': {
+        'contact_card': {
             'index': 'involvement_contactcard_modeladmin_index',
             'create': 'involvement_contactcard_modeladmin_create',
             'edit': 'involvement_contactcard_modeladmin_edit',
@@ -261,10 +261,21 @@ class AdminPermissionTests(TestCase):
             else:
                 for role_type, position in mSet['approvable_positions'] \
                         .items():
-                    if action not in exclude_actions and \
-                        (action == 'inspect' or
-                            (role_type in accepted_types and
-                                action != 'appoint')):
+
+                    if role_type in accepted_types and \
+                            action not in exclude_actions:
+                        if action == 'appoint' and \
+                                position.current_action() == 'approve' or \
+                                action == 'approve' and \
+                                position.current_action() != 'approve':
+                            self.assertNoAccess(action, url, position,
+                                                "%s, %s" % (action, role_type))
+
+                        else:
+                            self.assertCanAccess(action, url, position,
+                                                 "%s, %s" % (action,
+                                                             role_type))
+                    elif action == 'inspect':
                         self.assertCanAccess(action, url, position,
                                              "%s, %s" % (action, role_type))
                     else:
@@ -273,10 +284,11 @@ class AdminPermissionTests(TestCase):
 
                 for role_type, position in mSet['appointable_positions'] \
                         .items():
-                    if action not in exclude_actions and \
-                        (action == 'inspect' or
-                            (role_type in accepted_types and
-                                action != 'approve')):
+
+                    if role_type in accepted_types and \
+                        action not in exclude_actions and \
+                            action != 'approve' or \
+                            action == 'inspect':
                         self.assertCanAccess(action, url, position,
                                              "%s, %s" % (action, role_type))
                     else:
@@ -285,10 +297,11 @@ class AdminPermissionTests(TestCase):
 
                 for role_type, position in mSet['recruiting_positions'] \
                         .items():
-                    if action not in exclude_actions and \
-                        (action == 'inspect' or
-                            (role_type in accepted_types
-                                and action not in ['approve', 'appoint'])):
+
+                    if role_type in accepted_types and \
+                        action not in exclude_actions and \
+                            action not in ['approve', 'appoint'] or \
+                            action == 'inspect':
                         self.assertCanAccess(action, url, position,
                                              "%s, %s" % (action, role_type))
                     else:
@@ -316,20 +329,22 @@ class AdminPermissionTests(TestCase):
                 for role_type, application in \
                         mSet['submitted_applications'].items():
                     if role_type in accepted_types:
-                        self.assertCanAccess(action, url, application)
+                        self.assertCanAccess(action, url, application,
+                                             "%s, %s" % (action, role_type))
                     else:
                         self.assertNoAccess(action, url, application,
                                             "%s, %s" % (action, role_type))
 
     def checkContactCards(self, mSet, accepted_types):
-        for action, url in AdminPermissionTests.pages['contactcard'].items():
+        for action, url in AdminPermissionTests.pages['contact_card'].items():
             if action in ['create', 'index']:
                 self.assertCanAccess(action, url)
             else:
                 for role_type, contact_card in \
                         mSet['contact_cards'].items():
                     if role_type in accepted_types:
-                        self.assertCanAccess(action, url, contact_card)
+                        self.assertCanAccess(action, url, contact_card,
+                                             "%s, %s" % (action, role_type))
                     else:
                         self.assertNoAccess(action, url, contact_card,
                                             "%s, %s" % (action, role_type))
@@ -355,8 +370,8 @@ class AdminPermissionTests(TestCase):
                         self.assertNoAccess(action, url, application,
                                             "%s, %s" % (action, role_type))
 
-        if 'contactcard' not in exclude:
-            for action, url in AdminPermissionTests.pages['contactcard'] \
+        if 'contact_card' not in exclude:
+            for action, url in AdminPermissionTests.pages['contact_card'] \
                     .items():
                 if action not in ['create', 'index']:
                     for role_type, contact_card in \
@@ -373,7 +388,7 @@ class AdminPermissionTests(TestCase):
 
         if 'position' not in exclude:
             for action, url in AdminPermissionTests.pages['position'].items():
-                if action not in ['create', 'index']:
+                if action not in ['create', 'index', 'inspect']:
                     for role_type, position in mSet['approvable_positions'] \
                                                 .items():
                         self.assertNoAccess(action, url, position,
@@ -492,6 +507,10 @@ class AdminPermissionTests(TestCase):
                             status='submitted',
                         )
 
+        for key in role_types:
+            self.primary_set['members'][key].sync_user_groups()
+            self.secondary_set['members'][key].sync_user_groups()
+
     def test_fum(self):
         self.client.force_login(
             self.primary_set['members']['fum'],
@@ -521,12 +540,16 @@ class AdminPermissionTests(TestCase):
         self.checkApplications(self.secondary_set, ['board', 'presidium'])
 
         # Contact Cards
-        # Can view and edit contact cards for role_type 'board' and 'presidium'
-        self.checkContactCards(self.primary_set, ['board', 'presidium'])
+        # Can view and edit contact cards for role_type 'board'
+        self.checkContactCards(self.primary_set, ['board'])
 
         # Make sure that we cant access pages were we are not a team-member,
         # except for applications
-        self.all_modals_no_access(self.secondary_set, exclude=['application'])
+        self.all_modals_no_access(self.secondary_set,
+                                  exclude=['application',
+                                           'role',
+                                           'position',
+                                           'contact_card'])
 
     def test_board(self):
         self.client.force_login(
@@ -561,7 +584,11 @@ class AdminPermissionTests(TestCase):
 
         # Make sure that we cant access pages were we are not a team-member,
         # except for applications
-        self.all_modals_no_access(self.secondary_set, exclude=['application'])
+        self.all_modals_no_access(self.secondary_set,
+                                  exclude=['application',
+                                           'role',
+                                           'position',
+                                           'contact_card'])
 
     def test_presidium(self):
         self.client.force_login(
@@ -602,13 +629,13 @@ class AdminPermissionTests(TestCase):
             'django.contrib.auth.backends.ModelBackend'
         )
 
-        # Teams
-        # No access to any views
-        self.checkTeams(self.primary_set)
+        # # Teams
+        # # No access to any views
+        # self.checkTeams(self.primary_set)
 
-        # Roles
-        # Can edit roles for role_type 'engaged'
-        self.checkRoles(self.primary_set, ['engaged'])
+        # # Roles
+        # # Can edit roles for role_type 'engaged'
+        # self.checkRoles(self.primary_set, ['engaged'])
 
         # Position
         # Can view and edit positions for role_type 'engaged'

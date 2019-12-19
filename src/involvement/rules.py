@@ -7,7 +7,7 @@ from involvement.rule_utils import is_super, is_admin, is_fum, \
 # Contact card predicates
 @rules.predicate
 def member_of_team_contactcard(user, card):
-    return card is not None and member_of_team_role(user, card.position.role)
+    return card is not None and member_of_team_position(user, card.position)
 
 
 @rules.predicate
@@ -18,7 +18,14 @@ def can_modify_contactcard(user, card):
 # Application predicates
 @rules.predicate
 def member_of_team_appl(user, application):
-    return member_of_team_role(user, application.position.role)
+    if user.is_anonymous:
+        return False
+
+    if is_fum(user) or is_board(user):
+        return can_modify_application(user, application)
+
+    team_ids = application.position.role.teams.values_list('pk', flat=True)
+    return user.teams.filter(pk__in=team_ids).exists()
 
 
 @rules.predicate
@@ -60,8 +67,14 @@ def can_modify_role(user, role):
 
 @rules.predicate
 def member_of_team_role(user, role):
-    return not user.is_anonymous and \
-      user.teams.filter(pk__in=role.teams.values_list('pk', flat=True))
+    if user.is_anonymous:
+        return False
+
+    if is_fum(user) or is_board(user):
+        return can_modify_role(user, role)
+
+    team_ids = role.teams.values_list('pk', flat=True)
+    return user.teams.filter(pk__in=team_ids).exists()
 
 
 # Team predicates
@@ -83,7 +96,8 @@ rules.add_perm('involvement.delete_contactcard', is_super
 
 rules.add_perm('involvement.list_application', is_super | has_role_perm)
 rules.add_perm('involvement.add_application', is_super | has_role_perm)
-rules.add_perm('involvement.inspect_application', is_super | has_role_perm)
+rules.add_perm('involvement.inspect_application', is_super
+               | has_role_perm & member_of_team_appl)
 rules.add_perm('involvement.change_application', is_super
                | member_of_team_appl & can_modify_application)
 rules.add_perm('involvement.delete_application', is_super
@@ -94,14 +108,11 @@ rules.add_perm('involvement.add_position', is_super | has_role_perm)
 
 # Fum and Board may edit for all teams
 rules.add_perm('involvement.inspect_position', is_super
-               | has_role_perm
-               & (member_of_team_position | is_fum | is_board))
+               | has_role_perm)
 rules.add_perm('involvement.change_position', is_super
-               | can_modify_position
-               & (member_of_team_position | is_fum | is_board))
+               | can_modify_position & member_of_team_position)
 rules.add_perm('involvement.delete_position', is_super
-               | (can_modify_position
-                  & (member_of_team_position | is_fum | is_board)))
+               | (can_modify_position & member_of_team_position))
 
 rules.add_perm('involvement.approve_position', is_super
                | (member_of_team_position & is_action_approve
