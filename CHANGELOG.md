@@ -4,7 +4,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.0.0] - 2019-12-6
+
+The migrations for this update requires that every table prefixed with `involvement` and `members` is truncated except for:
+- `members_section`
+- `members_section_studies`
+- `members_studyprogram`
+
+
+### Changed
+- Changes to the admin permission system that depends on what role a user has.
+
+The table below shows the permissions a user has depending on what role it has.
+By default, the user only has the permissions inside its team.
+
+Example: If the user is a board member, then that user has full control to modify any roles, positions and contact cards inside its own team.
+Exception to applications where a board member can see and modify applications for all teams.
+
+|               | Admin         | FUM                           | Board                 | Presidium             | Group Leader  | Engaged   |
+| ------------- | ------------- | ----------------------------- | --------------------- | --------------------- | ------------- | --------- |
+| Teams         | Full access   |                               |                       |                       |               |           |
+| Roles         | Full access   | Board                         | Presidium             | Group Leader/Engaged  | Engaged       |           |
+| Position      | Full access   | Board (appoint)               | Presidium             | Group Leader/Engaged  | Engaged       |           |
+| Applications  | Full access   | Board/Presidium (all teams)   | Presidium (all teams) | Group Leader/Engaged  | Engaged       |           |
+| Contact Cards | Full access   | Board/Presidium (all teams)   | Presidium             | Group Leader/Engaged  | Engaged       |           |
+
+- Melos is now used to fetch user-information such as name, ssn and member status.
+- Registering an account requires the SSN to exist in Melos.
+- A user may now log in using both username or ssn.
+- Firstname, Lastname, SSN, Registration Year and Study Program is no longer stored in Moores database and is instead fetched from Melos.
+- Replaced Marvin to Bocken
+- Upgrade dependencies
+
+### Fixed
+- Fixes several responsive layout problems.
+
+### Added
+- Event page where one can connect a Google Calendar, Facebook and Instagram to show upcoming events and image feeds.
 
 ## [0.11.0] - 2018-12-29
 ### Added

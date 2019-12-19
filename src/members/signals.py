@@ -1,10 +1,8 @@
-import datetime
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.template import loader
-from django.utils import timezone
 from simple_email_confirmation import unconfirmed_email_created
 
 from members.models import Member
@@ -35,6 +33,4 @@ def send_confirmation_email(sender, email, user=None, **kwargs):
 
 @receiver(pre_save, sender=Member, dispatch_uid='member_check_membership')
 def check_membership(sender, instance, **kwargs):
-    if timezone.now() - instance.status_changed > datetime.timedelta(1)\
-            or instance.status == 'unknown':
-        instance.update_status()
+    instance.update_status(save=False)

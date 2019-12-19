@@ -40,16 +40,15 @@ If you can use Docker, there is an alternative way to get your development
 environment all set up:
 
 1. Clone the repository.
-2. Run `docker -t moore .` to create the moore image.
-3. Run `docker run -d -p 8000:8000 -v $(pwd):/var/www/moore/ --name moore moore` to
-start a new docker container.
+2. Copy `.env-template` to `.env` and fill in the environments.
+3. Run `docker-compose up` create and start the docker instance
 4. Run `docker exec -it moore python src/manage.py migrate` to initialize the
 database
 5. Run `docker exec -it moore python src/ createsuperuser` to create an admin
 user.
 
 The Moore application is now available on `http://localhost:8000` and can be started
-and stopped using `docker start moore` and `docker stop moore`.
+and stopped using `docker-compose up -d` and `docker-compose stop` (the `-d` flag starts the instance in the background).
 
 ## Documentation
 

@@ -1,7 +1,7 @@
 from django.apps import apps
 from django.conf import settings
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.models import ClusterableModel
@@ -72,6 +72,12 @@ class Application(ClusterableModel):
             'applicant': self.applicant
         }
 
+    rejection_date = models.DateField(
+        verbose_name=_('Rejection date'),
+        null=True,
+        blank=True
+        )
+
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldRowPanel([
@@ -84,6 +90,11 @@ class Application(ClusterableModel):
         FieldPanel('status'),
     ])]
 
+
+@receiver(post_save, sender=Application,
+          dispatch_uid='application_sync_user_groups')
+def sync_user_groups(sender, instance, update_fields, **kwargs):
+    instance.applicant.sync_user_groups()
 
 @receiver(post_save, sender=Application,
           dispatch_uid='application_check_mandate_history')
@@ -136,3 +147,10 @@ def check_contact_card(sender, instance, **kwargs):
                 card.application = None
                 card.picture = None
                 card.save()
+
+@receiver(pre_save, sender=Application,
+          dispatch_uid='application_auto_approve')
+def auto_approve(sender, instance, **kwargs):
+    if instance.status == 'submitted' and \
+            instance.position.role.role_type not in ['admin', 'fum', 'board']:
+        instance.status = 'approved'

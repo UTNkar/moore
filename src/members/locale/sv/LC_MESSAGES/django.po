@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 14:49+0200\n"
+"POT-Creation-Date: 2019-12-06 15:48+0100\n"
 "PO-Revision-Date: 2017-06-26 10:25+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -17,56 +17,115 @@ msgstr ""
 msgid "UTN Member Management"
 msgstr "Underhåll av UTN-medlemmar"
 
-#: members/forms.py:24
-msgid "Use the format YYYYMMDD-XXXX for your person number."
-msgstr "Använd formen ÅÅÅÅMMDD-NNNN för ditt personnummer."
+#: members/django_extra_messages.py:10
+msgid "Username or SSN (YYYYMMDD-XXXX)"
+msgstr "Användarnamn eller personnummer (YYYYMMDD-XXXX)"
 
-#: members/forms.py:32
-#, python-format
-msgid "%(date)s is an invalid date"
-msgstr ""
-
-#: members/forms.py:47 members/forms.py:112 members/forms.py:162
+#: members/forms.py:51 members/forms.py:140 members/forms.py:367
+#: members/forms.py:443
 msgid "Person number"
 msgstr "Personnummer"
 
-#: members/forms.py:48 members/forms.py:113 members/forms.py:163
+#: members/forms.py:52 members/forms.py:141 members/forms.py:368
+#: members/forms.py:444
 msgid "Person number using the YYYYMMDD-XXXX format."
 msgstr "Personnummer på formen ÅÅÅÅMDD-NNNN."
 
-#: members/forms.py:117 members/forms.py:167 members/models/member.py:72
-msgid "Phone number"
-msgstr "Telefonnummer"
+#: members/forms.py:80 members/forms.py:240
+msgid "A user with that username already exists."
+msgstr ""
 
-#: members/forms.py:121 members/forms.py:171 members/models/member.py:85
-msgid "Registration year"
-msgstr "Inskrivningsår"
+#: members/forms.py:88 members/forms.py:484
+msgid "Incorrect SSN"
+msgstr ""
 
-#: members/forms.py:126 members/wagtail_hooks.py:42
-msgid "Study Program"
-msgstr "Program"
-
-#: members/forms.py:131 members/forms.py:181
+#: members/forms.py:119 members/forms.py:391 members/forms.py:466
 msgid "Section"
 msgstr "Sektion"
 
-#: members/forms.py:135 members/forms.py:186 members/models/member.py:59
+#: members/forms.py:241
+msgid "The two password fields didn't match."
+msgstr ""
+
+#: members/forms.py:244
+msgid "First Name"
+msgstr ""
+
+#: members/forms.py:245
+msgid "Last Name"
+msgstr ""
+
+#: members/forms.py:248
+#, fuzzy
+#| msgid "Password reset"
+msgid "Password"
+msgstr "Återställning av lösenord"
+
+#: members/forms.py:250
+msgid "Leave blank if not changing."
+msgstr ""
+
+#: members/forms.py:252
+#, fuzzy
+#| msgid "Password changed"
+msgid "Password confirmation"
+msgstr "Lösenordet har ändrats"
+
+#: members/forms.py:254
+#, fuzzy
+#| msgid "Enter the name of the section"
+msgid "Enter the same password as above, for verification."
+msgstr "Ange namnet på sektionen"
+
+#: members/forms.py:257
+msgid "Administrator"
+msgstr ""
+
+#: members/forms.py:258
+msgid "Administrators have full access to manage any object or setting."
+msgstr ""
+
+#: members/forms.py:373 members/forms.py:452 members/models/member.py:105
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#: members/forms.py:377 members/forms.py:448
+msgid "Email"
+msgstr ""
+
+#: members/forms.py:381 members/forms.py:456 members/models/member.py:115
+msgid "Registration year"
+msgstr "Inskrivningsår"
+
+#: members/forms.py:386 members/wagtail_hooks.py:42
+msgid "Study Program"
+msgstr "Program"
+
+#: members/forms.py:395 members/models/member.py:92
 msgid "Membership status"
 msgstr "Medlemsstatus"
 
-#: members/forms.py:176 members/models/member.py:97
+#: members/forms.py:461 members/models/member.py:127
 msgid "Study program"
 msgstr "Program"
 
-#: members/models/member.py:30
+#: members/models/member.py:44
+msgid "first name"
+msgstr ""
+
+#: members/models/member.py:51
+msgid "last name"
+msgstr ""
+
+#: members/models/member.py:60
 msgid "Birthday"
 msgstr "Födelsedag"
 
-#: members/models/member.py:36
+#: members/models/member.py:68
 msgid "Person number extension"
 msgstr "De fyra sista siffrorna"
 
-#: members/models/member.py:37
+#: members/models/member.py:69
 msgid ""
 "Enter the last four digits of your Swedish person number, given by the "
 "Swedish tax authority"
@@ -74,43 +133,39 @@ msgstr ""
 "Ange de fyra sista siffrorna i ditt svenska personnummer, som du fått från "
 "Skatteverket"
 
-#: members/models/member.py:41
+#: members/models/member.py:73
 msgid "The person number extension consists of four numbers"
 msgstr "Här avses de fyra sista siffrorna i ditt personnummer"
 
-#: members/models/member.py:50
+#: members/models/member.py:83
 msgid "Unknown"
 msgstr "Okänt"
 
-#: members/models/member.py:51
+#: members/models/member.py:84 members/models/member.py:243
 msgid "Nonmember"
 msgstr "Icke medlem"
 
-#: members/models/member.py:52
+#: members/models/member.py:85 members/models/member.py:243
 msgid "Member"
 msgstr "Medlem"
 
-#: members/models/member.py:53
+#: members/models/member.py:86
 msgid "Alumnus"
 msgstr "Alumn"
 
-#: members/models/member.py:73
+#: members/models/member.py:106
 msgid "Enter a phone number so UTN may reach you"
 msgstr "Ange ett telefonnummer som UTN kan nå dig på"
 
-#: members/models/member.py:76
-msgid "Please enter a valid phone number"
-msgstr "Var vänlig ange ett giltigt telefonnummer"
-
-#: members/models/member.py:86
+#: members/models/member.py:116
 msgid "Enter the year you started studying at the TakNat faculty"
 msgstr "Ange året då du började studera på TekNat-fakulteten"
 
-#: members/models/member.py:90
+#: members/models/member.py:120
 msgid "Please enter a valid year"
 msgstr "Vänligen ange ett giltigt år"
 
-#: members/models/member.py:105
+#: members/models/member.py:135
 msgid "Member of section"
 msgstr "Sektionsmedlem i"
 
@@ -241,23 +296,23 @@ msgstr "Kontoinställningar"
 msgid "contact information"
 msgstr "kontaktinformation"
 
-#: members/templates/members/profile.html:85
+#: members/templates/members/profile.html:86
 msgid "membership status"
 msgstr "medlemsstatus"
 
-#: members/templates/members/profile.html:86
+#: members/templates/members/profile.html:87
 msgid "current status"
 msgstr "nuvarande status"
 
-#: members/templates/members/profile.html:89
+#: members/templates/members/profile.html:90
 msgid "recheck status"
 msgstr "uppdatera status"
 
-#: members/templates/members/profile.html:94
+#: members/templates/members/profile.html:95
 msgid "study information"
 msgstr "utbildningsinformation"
 
-#: members/templates/members/profile.html:108
+#: members/templates/members/profile.html:109
 msgid "save"
 msgstr "spara"
 
@@ -270,7 +325,7 @@ msgstr "Registrera"
 msgid "Create a UTN account"
 msgstr "Skapa ett UTN-konto"
 
-#: members/templates/members/register.html:49
+#: members/templates/members/register.html:47
 msgid "register"
 msgstr "register"
 
@@ -289,6 +344,14 @@ msgstr "Logga in"
 #: members/templates/registration/login.html:9
 msgid "Log into your UTN account"
 msgstr "Logga in på ditt UTN-konto"
+
+#: members/templates/registration/login.html:16
+msgid ""
+"If you earlier had an UTN-account, then you may need to create a new one "
+"because of an update of our database."
+msgstr ""
+"Om du tidigare har haft ett UTN-konto så kommer du behöva skapa ett nytt, "
+"detta på grund av en uppdatering i vår databas."
 
 #: members/templates/registration/login.html:20
 msgid ""
@@ -343,6 +406,7 @@ msgstr "Ändra mitt lösenord"
 #: members/templates/registration/password_reset_complete.html:9
 #: members/templates/registration/password_reset_confirm.html:7
 #: members/templates/registration/password_reset_confirm.html:9
+#: members/views.py:59
 msgid "Password reset"
 msgstr "Återställning av lösenord"
 
@@ -432,19 +496,49 @@ msgstr "Återställ mitt lösenord"
 msgid "[UTN] Password reset request"
 msgstr "[UTN] Återställ lösenord"
 
+#: members/templates/wagtailusers/users/create.html:4
+#: members/templates/wagtailusers/users/create.html:7
+#: members/templates/wagtailusers/users/create.html:47
+msgid "Add user"
+msgstr ""
+
+#: members/templates/wagtailusers/users/create.html:11
+#: members/templates/wagtailusers/users/edit.html:11
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Account"
+msgstr "Kontoinställningar"
+
+#: members/templates/wagtailusers/users/create.html:12
+#: members/templates/wagtailusers/users/create.html:40
+#: members/templates/wagtailusers/users/edit.html:12
+msgid "Roles"
+msgstr ""
+
+#: members/templates/wagtailusers/users/edit.html:4
+#: members/templates/wagtailusers/users/edit.html:7
+msgid "Editing"
+msgstr ""
+
+#: members/templates/wagtailusers/users/edit.html:48
+#: members/templates/wagtailusers/users/edit.html:63
+msgid "Save"
+msgstr ""
+
+#: members/templates/wagtailusers/users/edit.html:50
+#: members/templates/wagtailusers/users/edit.html:65
+msgid "Delete user"
+msgstr ""
+
 #: members/views.py:24
 msgid "Your account settings have been saved."
 msgstr "Dina kontoinställningar har sparats."
 
-#: members/views.py:31
-msgid "Your newly set email address has not yet been confirmed"
-msgstr "Din nya emailadress har inte bekräftats"
-
-#: members/views.py:53
+#: members/views.py:88
 msgid "Your email address has been confirmed."
 msgstr "Din emailadress har bekräftats."
 
-#: members/views.py:56
+#: members/views.py:91
 msgid "The provided confirmation token was invalid."
 msgstr "Bekräftelselänken var ogiltig."
 
@@ -463,6 +557,27 @@ msgstr "Sektioner"
 #: members/wagtail_hooks.py:88
 msgid "Education"
 msgstr "Utbildning"
+
+#~ msgid "Use the format YYYYMMDD-XXXX for your person number."
+#~ msgstr "Använd formen ÅÅÅÅMMDD-NNNN för ditt personnummer."
+
+#, fuzzy
+#~| msgid "Use the format YYYYMMDD-XXXX for your person number."
+#~ msgid ""
+#~ "Use the format YYYYMMDD-XXXX, YYMMDD-XXXX,                 YYYYMMDDXXXX, "
+#~ "YYMMDDXXXX for your ssn."
+#~ msgstr "Använd formen ÅÅÅÅMMDD-NNNN för ditt personnummer."
+
+#~ msgid ""
+#~ "Something went wrong. Please make sure that all fields are filled out "
+#~ "correctly."
+#~ msgstr "Något gick fel. Kontrollera att alla fält är korrekt ifyllda."
+
+#~ msgid "Please enter a valid phone number"
+#~ msgstr "Var vänlig ange ett giltigt telefonnummer"
+
+#~ msgid "Your newly set email address has not yet been confirmed"
+#~ msgstr "Din nya emailadress har inte bekräftats"
 
 #~ msgid "Username `%(username)s` is already in use"
 #~ msgstr "Användarnamnet `%(username)s` används redan"

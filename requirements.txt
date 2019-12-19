@@ -1,11 +1,11 @@
-Django[argon2]==2.1.11
-wagtail==2.4
+Django[argon2]==2.2.2
+wagtail==2.7
 
 # External Libraries
-requests==2.21.0
+requests==2.22.0
 
 # Templates
-django-compressor==2.2
+django-compressor==2.3
 django-libsass==0.7
 wagtailfontawesome==1.1.4
 
@@ -13,11 +13,11 @@ wagtailfontawesome==1.1.4
 django-kronos==1.0
 
 # User management
-rules==2.0.1
-django-simple-email-confirmation==0.23
+rules==2.1
+django-simple-email-confirmation==0.60
 
 # Logging
 raven==6.10.0
 
 # Postgres
-psycopg2-binary==2.7.7
+psycopg2-binary==2.8.4

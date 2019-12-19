@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from datetime import date
 from involvement.models import Application
 
 
@@ -23,6 +24,10 @@ class ApprovalForm(forms.ModelForm):
         return status
 
     def save(self, commit=True):
-        self.instance.status = self.cleaned_data['status']
+        status = self.cleaned_data['status']
+        self.instance.status = status
+
+        if (status == 'disapproved'):
+            self.instance.rejection_date = date.today()
 
         super(ApprovalForm, self).save(commit)

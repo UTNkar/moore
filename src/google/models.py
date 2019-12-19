@@ -8,9 +8,9 @@ from wagtail.core import blocks
 from wagtail.core.fields import StreamField, RichTextField
 from wagtail.core.models import Page
 from wagtail.search import index
-
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from utils.translation import TranslatedField
+from urllib.parse import quote
 
 
 class ColorBlock(blocks.RegexBlock):
@@ -70,6 +70,25 @@ class GoogleFormBlock(blocks.StructBlock):
         icon = 'fa-check-square-o'
         template = 'google/blocks/form.html'
         group = _('Embed')
+
+
+class GoogleCalendarPage(Page):
+    title_sv = models.CharField(max_length=255)
+    translated_title = TranslatedField('title', 'title_sv')
+
+    content_panels = Page.content_panels + [
+        FieldPanel('title_sv', classname="full title"),
+    ]
+
+    subpage_types = []
+
+    def get_context(self, request, **kwargs):
+        context = super(GoogleCalendarPage, self) \
+            .get_context(request, **kwargs)
+        id = request.GET.get('id')
+        context['id'] = quote(id, safe="%/:=~+!$,;'@()*[]")
+        context['date'] = request.GET.get('date', None)
+        return context
 
 
 class GoogleFormIndex(Page):

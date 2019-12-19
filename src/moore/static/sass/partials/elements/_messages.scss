@@ -4,19 +4,18 @@
   display: none;
 }
 
-.marvin {
+.bocken-toast {
   position: absolute;
-  bottom: 0;
-  width: 60px;
-  height: 60px;
+  bottom: 5px;
+  height: calc(100% - 10px);
 }
 
 .message-impl {
   white-space: pre-wrap;
   word-break: keep-all;
-  margin-left: 60px;
-  .marvin {
-    margin-left: -70px;
+  margin-left: 82px;
+  .bocken-toast {
+    left: 15px
   }
   .close {
     float: right;
