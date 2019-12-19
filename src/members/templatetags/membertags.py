@@ -5,17 +5,15 @@ register = template.Library()
 
 
 @register.simple_tag
-def status_badge(member):
-    if member.status == 'member':
+def status_badge(member, status):
+    if status == 'member':
         cl = 'green'
-    elif member.status == 'alumnus':
-        cl = 'blue'
-    elif member.status == 'nonmember':
+    elif status == 'nonmember':
         cl = 'red'
     else:
         cl = ''
 
     return format_html(
         '<div class="chip {}">{}</div>',
-        cl, member.get_status_display()
+        cl, member.get_status_text(status)
     )

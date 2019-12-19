@@ -1,0 +1,21 @@
+{% load i18n %}
+
+<div class="calendar col s12 m{{ size }}">
+	{% for item in items %}
+		<a href="{{calendar_url}}?id={{id}}&date={{item.start_date}}" class="event">
+			<div class="date">
+				<div class="day">{{item.day}}</div>
+				<div class="month">{{item.month}}</div>
+			</div>
+			<div class="description">
+				{% firstof item.summary item.description %}
+				{% if item.summary and item.description %} <span></br>{{ item.description }}</span> {% endif %}
+			</div>
+		</a>
+	{% endfor %}
+
+
+	<div class="see-more">
+		<a href="{{calendar_url}}?id={{id}}">{% trans 'See the whole calendar' %}</a>
+	</div>
+</div>

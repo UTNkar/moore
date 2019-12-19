@@ -1,0 +1,31 @@
+
+version: '3.3'
+
+services:
+    moore-db:
+      image: postgres
+      container_name: moore-db
+      environment:
+        POSTGRES_DB: moore
+        POSTGRES_USER: moore
+      ports:
+        - "5433:5432"
+
+    moore:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      command: python src/manage.py runserver 0.0.0.0:8000
+      volumes: 
+        - ./src:/var/www/moore/src
+        - ./requirements.txt:/var/www/moore/requirements.txt
+      container_name: moore
+      ports:
+        - "8000:8000"
+      environment:
+        DOCKER: 'true'
+        MELOS_URL: ${MELOS_URL}
+        MELOS_ORG_ID: ${MELOS_ORG_ID}
+        MELOS_ADMIN: ${MELOS_ADMIN}
+      depends_on:
+        - moore-db

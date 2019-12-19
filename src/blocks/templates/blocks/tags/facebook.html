@@ -1,0 +1,54 @@
+{% load i18n static %}
+
+<div class="facebook col s12 m{{ size }}">
+	<div class="header">
+		<img class="icon" src="{% static 'branding/images/social/facebook-black.png' %}"
+        	alt="{% trans 'facebook icon'|capfirst %}">
+		<span>@{{page_name}}</span>
+	</div>
+
+	<iframe
+		id="facebook-iframe"
+		scrolling="no"
+		frameborder="0"
+		allowTransparency="true"
+		allow="encrypted-media"></iframe>
+
+
+</div>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function load() {
+
+	var timeout = null;
+	var params = {
+		href:'https://www.facebook.com/{{page_name}}',
+		tabs:'timeline',
+		width: 416,
+		height: 900,
+		small_header: 'true',
+		adapt_container_width: 'true',
+		hide_cover: 'true',
+		show_facepile: 'false',
+		appId: '{{page_id}}',
+	};
+
+	var $iframe = $('.events-block #facebook-iframe');
+	$(window).resize(function() {
+		if (timeout) {
+			clearTimeout(timeout);
+		}
+		timeout = setTimeout(setFrame, 200);
+	});
+
+	function setFrame() {
+		params.width = parseInt($iframe.width(), 10);
+		console.log('https://www.facebook.com/plugins/page.php?' + $.param(params));
+		$iframe.attr('src', 'https://www.facebook.com/plugins/page.php?' + $.param(params));
+	}
+
+	setFrame();
+}, false);
+
+</script>

@@ -30,8 +30,8 @@ SECRET_KEY = os.environ.get(
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DJANGO_DB'),
-        'USER': os.environ.get('DJANGO_DB_USER'),
+        'NAME': os.environ.get('DJANGO_DB', 'moore'),
+        'USER': os.environ.get('DJANGO_DB_USER', 'moore'),
         'PASSWORD': os.environ.get('DJANGO_DB_PASS'),
         'HOST': os.environ.get('DJANGO_DB_HOST', '127.0.0.1'),
         'PORT':  os.environ.get('DJANGO_DB_PORT', '5432'),
@@ -109,9 +109,18 @@ SESSION_COOKIE_DOMAIN = '.utn.se'
 
 SESSION_COOKIE_SECURE = True
 
-# Membership API
-MEMBERSHIP_API_USER = 'moore'
-MEMBERSHIP_API_PASSWORD = os.environ.get('MEMBERSHIP_API_PASSWORD')
+MELOS_URL = os.environ.get('MELOS_URL')
+MELOS_ORG_ID = os.environ.get('MELOS_ORG_ID')
+MELOS_ADMIN = os.environ.get('MELOS_ADMIN')
+
+# Google API
+GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
+
+# Instagram API
+INSTAGRAM_ACCESS_TOKEN = os.environ.get('INSTAGRAM_ACCESS_TOKEN')
+
+# Facebook API
+FACEBOOK_APP_ID = os.environ.get('FACEBOOK_APP_ID')
 
 try:
     from .local import *

@@ -28,3 +28,10 @@ venv/
 
 # PyCharm project settings
 .idea/
+.DS_Store
+
+# ENV
+.env
+
+# VSCode
+.vscode

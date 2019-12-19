@@ -25,41 +25,13 @@
         <legend>
             <i class="material-icons">person</i>
             {% trans 'member information'|title %}
-            {% status_badge request.user %}
+			{% status_badge request.user membership_status %}
         </legend>
         <div class="row">
             <div class="col l4 m6">
                 <div class="input-field">
-                    <i class="material-icons prefix">face</i>
-                    <input id="first-name" type="text" placeholder="{{ request.user.first_name }}" readonly>
-                    <label for="first-name">{% trans 'first name' %}</label>
-                </div>
-            </div>
-            <div class="col l4 m6">
-                <div class="input-field">
-                    <input id="last-name" type="text" placeholder="{{ request.user.last_name }}" readonly>
-                    <label for="last-name">{% trans 'last name' %}</label>
-                </div>
-            </div>
-            <div class="col l4 m6">
-                <div class="input-field">
-                    <i class="material-icons prefix">fiber_pin</i>
-                    <input id="person-number" type="text" placeholder="{{ request.user.person_number }}" readonly>
-                    <label for="person-number">{% trans 'person number' %}</label>
-                </div>
-            </div>
-
-            <div class="col l4 m6">
-                <div class="input-field">
-                    <i class="material-icons prefix">phone</i>
-                    <input id="phone" type="text" placeholder="{{ request.user.phone_number }}" readonly>
-                    <label for="phone">{% trans 'phone number' %}</label>
-                </div>
-            </div>
-            <div class="col l4 m6">
-                <div class="input-field">
                     <i class="material-icons prefix">email</i>
-                    <input id="email" type="text" placeholder="{{ request.user.email }}" readonly>
+                    <input id="email" type="text" placeholder="{{ email }}" readonly>
                     <label for="email">{% trans 'email' %}</label>
                 </div>
             </div>
@@ -130,10 +102,21 @@
     <div class="col s12">
         {% if status == 'draft' %}
             <button id="submit" name="{{ form.status.name }}" type="submit" class="save btn btn-inverse disabled" value="draft">{% trans 'save as draft' %}</button>
-            <button name="{{ form.status.name }}" type="submit" class="save btn btn-primary" value="submitted">{% trans 'apply' %}</button>
+            <button type="button" class="save btn btn-primary modal-trigger" data-target="application-form-save-modal">{% trans 'apply' %}</button>
         {% endif %}
-    </div><!-- /.center -->
+    </div>
     {% endif %}
+
+
+    <div id="application-form-save-modal" class="modal">
+        <div class="modal-content">
+            <p>När du har skickat in din ansökan kan du inte ändra den. Om du vill göra ändringar kan du spara ett utkast av din ansökan! Vill du skicka in din ansökan?</p>
+            </br>
+            <button name="{{ form.status.name }}" type="submit" value="submitted" data-target="application-form-save-modal" class="btn btn-primary modal-close">Ja</button>
+            <button data-target="application-form-save-modal" class="btn btn-inverse modal-close">Nej</button>
+        </div>
+    </div>
+
 </form>
 
 

@@ -20,4 +20,8 @@ urlpatterns = [
 
     # Views given by django auth library
     url(r'', include('django.contrib.auth.urls')),
+    url(
+        r'password_reset_custom/',
+        views.CustomPasswordResetView.as_view(),
+        name='password_reset_custom'),
 ]

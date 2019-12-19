@@ -2,6 +2,8 @@ from datetime import date
 from django.contrib import admin
 from django.contrib.admin.utils import quote
 from django.contrib.auth import get_permission_codename
+from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.utils.html import format_html
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from wagtail.core import hooks
@@ -16,8 +18,25 @@ from utils.permissions import RulesPermissionHelper
 
 
 @hooks.register('construct_main_menu')
-def hide_snippets_menu_item(request, menu_items):
+def construct_main_menu(request, menu_items):
+    # Remove snippets
     menu_items[:] = [item for item in menu_items if item.name != 'snippets']
+
+    # Rename settings/groups
+
+    for item in menu_items:
+        if item.name == 'settings' or item.name == 'installningar':
+            for subitem in item.menu._registered_menu_items:
+                if subitem.name == 'groups' or subitem.name == 'grupper':
+                    subitem.label = _('Access Groups')
+
+
+@hooks.register("insert_global_admin_css", order=100)
+def global_admin_css():
+    return format_html(
+        '<link rel="stylesheet" type="text/css" href="{}">',
+        static("css/admin.css")
+    )
 
 
 class TeamAdmin(ModelAdmin):
@@ -233,6 +252,8 @@ class ApplicationAdmin(ModelAdmin):
     permission_helper_class = RulesPermissionHelper
     create_view_class = views.ApplicationCreateView
     edit_view_class = views.ApplicationEditView
+    inspect_view_class = views.ApplicationInspectView
+    inspect_view_enabled = True
 
     def get_queryset(self, request):
         if is_super(request.user):

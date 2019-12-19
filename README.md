@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/UTNkar/moore.svg?branch=development)](https://travis-ci.org/UTNkar/moore)
 [![Coverage Status](https://coveralls.io/repos/github/UTNkar/moore/badge.svg?branch=development)](https://coveralls.io/github/UTNkar/moore?branch=development)
-[![Requirements Status](https://requires.io/github/UTNkar/moore/requirements.svg?branch=development)](https://requires.io/github/UTNkar/moore/requirements/?branch=development)
 
 Project Moore is a replacement for many of the [UTN](https://utn.se/) web
 applications. Built using [Wagtail](https://wagtail.io/) and the [Django](https://www.djangoproject.com/) framework, Project
@@ -21,12 +20,16 @@ To get started with Project Moore, follow these instructions to set up a
 development environment:
 
 1. Install Python 3, at least version 3.5 or up.
-2. Clone the repository.
-3. Run `source ./source_me.sh` to create a virtual environment.
-4. Run `pip install -r dev-requirements.txt`
-5. Use `cd src` to enter the website directory.
-6. Run `./manage.py migrate` to initialize the database.
-7. Run `./manage.py createsuperuser` to create an admin user.
+2. Install the following python packages:
+   - python3-venv
+   - python3-dev
+3. Clone the repository.
+4. Run `source ./source_me.sh` to create a virtual environment.
+4. Run `pip install --upgrade pip` to make sure that pip is running the latest version
+5. Run `pip install -r dev-requirements.txt`
+6. Use `cd src` to enter the website directory.
+7. Run `./manage.py migrate` to initialize the database.
+8. Run `./manage.py createsuperuser` to create an admin user.
 
 During development, you can run a test web server using `./manage.py
 runserver`.
@@ -37,16 +40,15 @@ If you can use Docker, there is an alternative way to get your development
 environment all set up:
 
 1. Clone the repository.
-2. Run `docker -t moore .` to create the moore image.
-3. Run `docker run -d -p 8000:8000 -v $(pwd):/var/www/moore/ --name moore moore` to
-start a new docker container.
+2. Copy `.env-template` to `.env` and fill in the environments.
+3. Run `docker-compose up` create and start the docker instance
 4. Run `docker exec -it moore python src/manage.py migrate` to initialize the
 database
 5. Run `docker exec -it moore python src/ createsuperuser` to create an admin
 user.
 
 The Moore application is now available on `http://localhost:8000` and can be started
-and stopped using `docker start moore` and `docker stop moore`.
+and stopped using `docker-compose up -d` and `docker-compose stop` (the `-d` flag starts the instance in the background).
 
 ## Documentation
 

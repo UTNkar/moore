@@ -25,14 +25,14 @@
     <div id="contact-page">
         {% if page.map_location %}
             <div class="row">
-                <div class="col m12 l5">
+                <div class="col s12 m12 l7">
                     <div id="findus" style="height: 400px;"></div>
                 </div>
-                <div class="col m12 l7">
+                <div class="col s12 m12 l5">
                     <h2>{% trans 'for general information'|title %}</h2>
                     {% for c in page.contact_point %}
                         <div class="row">
-                            {% contact_card c.value 12 %}
+                            {% contact_card c.value 12 12 %}
                         </div>
                     {% endfor %}
                 </div>

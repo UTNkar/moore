@@ -12,7 +12,7 @@
     <div class="message error">{{ error }}</div>
 {% endfor %}
 
-
+<div class="registration-warning">{% blocktrans %}If you earlier had an UTN-account, then you may need to create a new one because of an update of our database.{% endblocktrans %}</div>
 
 {% if next %}
     {% if user.is_authenticated %}
@@ -24,13 +24,13 @@
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}" />
 
-    {% materialize_field form.username prefix='account_circle' %}
+    {% materialize_field form.username prefix='account_circle' label='Username or SSN (YYYYMMDD-XXXX)' %}
     {% materialize_field form.password prefix='lock' %}
 
     <div class="row"><button type="submit" class="btn btn-primary right">{% trans 'Sign In' %}</button></div>
 
     <div class="extra-links">
-        <a href="{% url 'password_reset' %}">{% trans 'I forgot my password' %} <i class="material-icons">arrow_forward</i></a><br>
+        <a href="{% url 'password_reset_custom' %}">{% trans 'I forgot my password' %} <i class="material-icons">arrow_forward</i></a><br>
         <a href="{% url 'register' %}">{% trans 'Create a UTN account' %} <i class="material-icons">arrow_forward</i></a>
     </div>
 </form>
