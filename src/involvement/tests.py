@@ -868,7 +868,7 @@ class RecruitmentExtensionEmailTestCase(TestCase):
         self.role = Role.objects.create(
             name_en='Test',
             name_sv='TestSV',
-            role_type='engaged',
+            role_type='fum',
             election_email='contact@localhost',
             group=self.group,
         )
