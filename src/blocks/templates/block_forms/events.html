@@ -11,7 +11,7 @@
 
     function showHideField($checkbox) {
         var key = '#' + $checkbox.attr('id');
-        var field = $(map[key]).closest('li');
+        var field = $(map[key]).parents('.field').parents('.field').first();
         // update the visibility of field according to the state of
         // the checkbox
         if ($checkbox.is(':checked')) {
