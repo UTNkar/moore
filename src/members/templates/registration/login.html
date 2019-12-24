@@ -12,7 +12,7 @@
     <div class="message error">{{ error }}</div>
 {% endfor %}
 
-<div class="registration-warning">{% blocktrans %}If you earlier had an UTN-account, then you may need to create a new one because of an update of our database.{% endblocktrans %}</div>
+<div class="registration-warning">{% blocktrans %}If you had an UTN-account before the 23rd of December 2019, you must create a new one because of an update of our database.{% endblocktrans %}</div>
 
 {% if next %}
     {% if user.is_authenticated %}
