@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.2] - 2019-12-23
+
+### Changed
+Updated the text on the login page to be more clear
+
+## [1.0.1] - 2019-12-23
+
+### Fixed
+Fixed bug that made event block hiding itself
+
 ## [1.0.0] - 2019-12-6
 
 The migrations for this update requires that every table prefixed with `involvement` and `members` is truncated except for:
