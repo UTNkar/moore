@@ -17,13 +17,15 @@ guidelines](CONTRIBUTING.md).
 ## Getting Started - Virtual Environment
 
 To get started with Project Moore, follow these instructions to set up a
-development environment:
+**development** environment:
 
 1. Install Python 3, at least version 3.5 or up.
 2. Install the following python packages:
    - python3-venv
    - python3-dev
 3. Clone the repository.
+3. Copy the file `.env-template` and name the copy `.env`
+3. Fill in the necessary variables in `.env`. `MELOS_URL` and `MELOS_ADMIN` are required. You might have to fill in some database credidentils. Check `src/moore/settings/dev.py` for which default values are used if you don't specify and credidentials.
 4. Run `source ./source_me.sh` to create a virtual environment.
 4. Run `pip install --upgrade pip` to make sure that pip is running the latest version
 5. Run `pip install -r dev-requirements.txt`
@@ -31,8 +33,9 @@ development environment:
 7. Run `./manage.py migrate` to initialize the database.
 8. Run `./manage.py createsuperuser` to create an admin user.
 
-During development, you can run a test web server using `./manage.py
-runserver`.
+During development, you can run a test web server using `./manage.py runserver`.
+
+**IMPORTANT!** When running any command in moore, you must be in the virtual environment (a.k.a. `source source_me.sh`)
 
 ## Getting Started - Docker
 
