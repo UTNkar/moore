@@ -42,7 +42,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('DJANGO_DB', 'moore'),
+            'NAME': os.environ.get('DJANGO_DB_NAME', 'moore'),
             'USER': os.environ.get('DJANGO_DB_USER', 'moore'),
             'PASSWORD': os.environ.get('DJANGO_DB_PASS', ''),
             'HOST': os.environ.get('DJANGO_DB_HOST', '127.0.0.1'),
