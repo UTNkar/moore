@@ -29,7 +29,7 @@ class MelosUserManager(CaseInsensitiveUsernameUserManager):
         try:
             member = super().get_by_natural_key(username)
         except Exception as e:
-            member = Member.find_by_ssn(username)
+            member, _ = Member.find_by_ssn(username)
 
             if member is None:
                 raise e
@@ -283,8 +283,8 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             ssn = ssn.strip()
             SSNValidator()(ssn)
             melos_id = MelosClient.get_melos_id(ssn)
-            return Member.find_by_melos_id(melos_id)
+            return Member.find_by_melos_id(melos_id), melos_id
         except Exception:
             pass
 
-        return None
+        return None, None
