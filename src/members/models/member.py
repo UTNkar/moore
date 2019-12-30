@@ -36,6 +36,22 @@ class MelosUserManager(CaseInsensitiveUsernameUserManager):
 
         return member
 
+    def create_superuser(
+        self, username, password,
+        email, phone_number, melos_id
+    ):
+        """Creates a new superuser with a melos id."""
+        superuser = Member.objects.create(
+            username=username,
+            melos_id=melos_id,
+            email=email,
+            phone_number=phone_number,
+            is_superuser=True,
+            is_staff=True
+        )
+        superuser.set_password(password)
+        superuser.save()
+
 
 class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     """This class describes a member"""
@@ -43,6 +59,12 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     # ---- AbstractUser overrides ---
 
     objects = MelosUserManager()
+
+    REQUIRED_FIELDS = [
+        AbstractUser.get_email_field_name(),
+        "phone_number",
+        "melos_id"
+    ]
 
     first_name = models.CharField(
         verbose_name=_('first name'),
