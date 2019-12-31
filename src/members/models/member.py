@@ -60,6 +60,9 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
 
     objects = MelosUserManager()
 
+    EMAIL_FIELD = 'email'
+    USERNAME_FIELD = 'username'
+
     REQUIRED_FIELDS = [
         AbstractUser.get_email_field_name(),
         "phone_number",
