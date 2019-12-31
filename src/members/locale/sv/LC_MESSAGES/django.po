@@ -155,6 +155,10 @@ msgstr "Alumn"
 msgid "Enter a phone number so UTN may reach you"
 msgstr "Ange ett telefonnummer som UTN kan nå dig på"
 
+#: models/member.py:117
+msgid "Enter an email adress so UTN may reach you"
+msgstr "Ange en epost adress som UTN kan nå dig på"
+
 #: models/member.py:121
 msgid "Enter the year you started studying at the TakNat faculty"
 msgstr "Ange året då du började studera på TekNat-fakulteten"

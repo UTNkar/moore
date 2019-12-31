@@ -109,8 +109,12 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         max_length=20,
         verbose_name=_('Phone number'),
         help_text=_('Enter a phone number so UTN may reach you'),
-        blank=True,
-        default='',
+    )
+
+    email = models.EmailField(
+        max_length=255,
+        verbose_name=_('email'),
+        help_text=_('Enter an email adress so UTN may reach you')
     )
 
     # ---- University information ------
