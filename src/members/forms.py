@@ -105,28 +105,10 @@ class MemberForm(forms.ModelForm):
 
 
 class RegistrationForm(MemberForm, auth.UserCreationForm):
-    username = forms.TextInput(attrs={'class': 'form-control'})
-    email = forms.EmailInput(attrs={'class': 'form-control'})
-    phone_number = forms.TextInput(attrs={'class': 'form-control'})
-    section = forms.ModelChoiceField(
-        required=False,
-        queryset=Section.objects,
-        label=_("Section"),
-    )
-
     class Meta:
         model = Member
         fields = ['username', 'email', 'phone_number', 'section']
         field_classes = {'username': auth.UsernameField}
-
-    def __init__(self, *args, **kwargs):
-        super(RegistrationForm, self).__init__(*args, **kwargs)
-        self.fields['password1'].widget = forms.PasswordInput(
-            attrs={'class': 'form-control'}
-        )
-        self.fields['password2'].widget = forms.PasswordInput(
-            attrs={'class': 'form-control'}
-        )
 
 
 class CustomPasswordResetForm(forms.Form):
