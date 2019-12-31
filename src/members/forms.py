@@ -67,6 +67,11 @@ class MemberForm(forms.ModelForm):
             self.fields['last_name'].disabled = True
             self.fields['person_number'].disabled = True
 
+    def clean_phone_number(self):
+        # TODO: Implement phone number validation
+        phone_number = self.cleaned_data['phone_number']
+        return phone_number
+
     def clean_username(self):
         username = self.cleaned_data['username']
         if (Member.objects.exclude(pk=self.instance.pk)
