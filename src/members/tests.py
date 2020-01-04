@@ -70,18 +70,6 @@ class ProfileTest(TestCase):
         self.assertContains(response, self.member.registration_year,
                             msg_prefix='Response contains registration year')
 
-    def test_change_contact(self):
-        data = {
-            'first_name': 'Flash',
-            'last_name': 'Gordon',
-        }
-
-        response = self.client.post(reverse('profile'), data, follow=True)
-
-        # No errors occurred in the change
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['form'].errors, {})
-
     def test_change_study(self):
         new_study = StudyProgram.objects.create(
             name_en='Superhero',
