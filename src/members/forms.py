@@ -20,8 +20,24 @@ from django.utils.http import urlsafe_base64_encode
 from members.models import StudyProgram, Member, Section
 from utils.validators import SSNValidator
 from utils.melos_client import MelosClient
+from phonenumbers import parse, is_valid_number
 
 User = get_user_model()
+
+
+class PhoneNumberField(forms.CharField):
+    def __init__(self, *args, **kwargs):
+        super(PhoneNumberField, self).__init__(*args, **kwargs)
+
+    def clean(self, phonenumber):
+        try:
+            parsed_phone = parse(phonenumber, "SE")
+            if not is_valid_number(parsed_phone):
+                raise Exception
+
+            return phonenumber
+        except Exception:
+            raise forms.ValidationError(_("Invalid phonenumber"))
 
 
 class PersonNumberField(forms.Field):
@@ -48,10 +64,14 @@ class MemberForm(forms.ModelForm):
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
     )
 
+    phone_number = PhoneNumberField()
+
     class Meta:
         model = Member
-        fields = ['first_name', 'last_name', 'phone_number',
-                  'registration_year', 'study', 'section', 'email']
+        fields = [
+            'first_name', 'last_name', 'registration_year',
+            'phone_number', 'study', 'section', 'email'
+        ]
 
     def __init__(self, *args, **kwargs):
         instance = kwargs.get('instance', None)
@@ -66,11 +86,6 @@ class MemberForm(forms.ModelForm):
             self.fields['first_name'].disabled = True
             self.fields['last_name'].disabled = True
             self.fields['person_number'].disabled = True
-
-    def clean_phone_number(self):
-        # TODO: Implement phone number validation
-        phone_number = self.cleaned_data['phone_number']
-        return phone_number
 
     def clean_username(self):
         username = self.cleaned_data['username']
