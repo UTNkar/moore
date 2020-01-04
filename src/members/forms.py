@@ -195,7 +195,7 @@ class CustomPasswordResetForm(forms.Form):
         """
 
         person_number = self.cleaned_data['person_number']
-        user = Member.find_by_ssn(person_number)
+        user, _ = Member.find_by_ssn(person_number)
 
         if not domain_override:
             current_site = get_current_site(request)
