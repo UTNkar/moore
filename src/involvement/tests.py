@@ -12,9 +12,28 @@ from involvement.cron import send_extension_emails
 from involvement.models import RecruitmentPage, Position, Role, Team, \
     Application, ContactCard
 from members.models import Member
+from django.contrib.auth import get_user_model
 
 
 class RecruitmentPageTests(WagtailPageTests):
+
+    @staticmethod
+    def create_test_user():
+        """
+        Overrides wagtails create_test_users to
+        provide the extra required fields
+        """
+        user_model = get_user_model()
+        # Create a user
+        user_data = dict()
+        user_data[user_model.USERNAME_FIELD] = 'test@email.com'
+        user_data['password'] = 'password'
+        user_data[user_model.EMAIL_FIELD] = "test@email.com"
+        user_data['phone_number'] = "0733221121"
+        user_data['melos_id'] = 8631280
+
+        return user_model.objects.create_superuser(**user_data)
+
     def setUp(self):
         self.login()
 

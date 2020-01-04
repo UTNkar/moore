@@ -29,12 +29,28 @@ class MelosUserManager(CaseInsensitiveUsernameUserManager):
         try:
             member = super().get_by_natural_key(username)
         except Exception as e:
-            member = Member.find_by_ssn(username)
+            member, _ = Member.find_by_ssn(username)
 
             if member is None:
                 raise e
 
         return member
+
+    def create_superuser(
+        self, username, password,
+        email, phone_number, melos_id
+    ):
+        """Creates a new superuser with a melos id."""
+        superuser = Member.objects.create(
+            username=username,
+            melos_id=melos_id,
+            email=email,
+            phone_number=phone_number,
+            is_superuser=True,
+            is_staff=True
+        )
+        superuser.set_password(password)
+        superuser.save()
 
 
 class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
@@ -43,6 +59,15 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     # ---- AbstractUser overrides ---
 
     objects = MelosUserManager()
+
+    EMAIL_FIELD = 'email'
+    USERNAME_FIELD = 'username'
+
+    REQUIRED_FIELDS = [
+        AbstractUser.get_email_field_name(),
+        "phone_number",
+        "melos_id"
+    ]
 
     first_name = models.CharField(
         verbose_name=_('first name'),
@@ -283,8 +308,8 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
             ssn = ssn.strip()
             SSNValidator()(ssn)
             melos_id = MelosClient.get_melos_id(ssn)
-            return Member.find_by_melos_id(melos_id)
+            return Member.find_by_melos_id(melos_id), melos_id
         except Exception:
             pass
 
-        return None
+        return None, None
