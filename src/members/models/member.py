@@ -139,7 +139,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     email = models.EmailField(
         max_length=255,
         verbose_name=_('email'),
-        help_text=_('Enter an email adress so UTN may reach you')
+        help_text=_('Enter an email address so UTN may reach you')
     )
 
     # ---- University information ------

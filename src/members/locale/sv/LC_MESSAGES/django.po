@@ -160,7 +160,7 @@ msgid "Enter a phone number so UTN may reach you"
 msgstr "Ange ett telefonnummer som UTN kan nå dig på"
 
 #: models/member.py:117
-msgid "Enter an email adress so UTN may reach you"
+msgid "Enter an email address so UTN may reach you"
 msgstr "Ange en epost adress som UTN kan nå dig på"
 
 #: models/member.py:121
