@@ -21,3 +21,5 @@ raven==6.10.0
 
 # Postgres
 psycopg2-binary==2.8.4
+
+phonenumbers==8.11.1
