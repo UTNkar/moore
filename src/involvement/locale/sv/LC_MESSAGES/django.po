@@ -358,10 +358,8 @@ msgid "Please enter a valid phone number"
 msgstr "Ange ett giltigt telefonnummer"
 
 #: involvement/models/role.py:250
-#, fuzzy, python-format
-#| msgid "%(role)s in %(team)s"
-msgid "%(role)s in %(teams)s"
-msgstr "%(role)s i %(team)s"
+msgid "in"
+msgstr "i"
 
 #: involvement/models/team.py:15
 msgid "Team"
