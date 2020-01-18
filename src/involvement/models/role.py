@@ -22,6 +22,7 @@ class Role(models.Model):
         verbose_name = _('Role')
         verbose_name_plural = _('Roles')
         default_permissions = ()
+        ordering = ['teams__name_sv', 'name_sv']
 
     TYPE_CHOICES = (
         ('admin', _('Admin')),

@@ -16,6 +16,7 @@ class Position(models.Model):
         verbose_name = _('Position')
         verbose_name_plural = _('Positions')
         default_permissions = ()
+        ordering = ['role']
 
     role = models.ForeignKey(
         'Role',
