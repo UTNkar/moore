@@ -254,6 +254,7 @@ class ApplicationAdmin(ModelAdmin):
     edit_view_class = views.ApplicationEditView
     inspect_view_class = views.ApplicationInspectView
     inspect_view_enabled = True
+    inspect_view_fields_exclude = ["id", "removed", "rejection_date"]
 
     def get_queryset(self, request):
         if is_super(request.user):
