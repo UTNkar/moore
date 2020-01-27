@@ -44,8 +44,8 @@ class ProfileTest(TestCase):
             username='moore',
             email='g.moore@localhost',
             registration_year='1946',
-            study=self.study,
-            phone_number='0733221131'
+            phone_number="0733221111",
+            study=self.study
         )
         self.member.set_password('Intel1968')
         self.member.save()
@@ -71,18 +71,6 @@ class ProfileTest(TestCase):
         self.assertContains(response, self.member.registration_year,
                             msg_prefix='Response contains registration year')
 
-    def test_change_contact(self):
-        data = {
-            'first_name': 'Flash',
-            'last_name': 'Gordon',
-        }
-
-        response = self.client.post(reverse('profile'), data, follow=True)
-
-        # No errors occurred in the change
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['form'].errors, {})
-
     def test_change_study(self):
         new_study = StudyProgram.objects.create(
             name_en='Superhero',
@@ -92,6 +80,8 @@ class ProfileTest(TestCase):
         data = {
             'study': new_study.id.__str__(),
             'registration_year': '1980',
+            'email': self.member.email,
+            'phone_number': self.member.phone_number
         }
         response = self.client.post(reverse('profile'), data, follow=True)
 
@@ -106,7 +96,7 @@ class ProfileTest(TestCase):
 
     def test_phone_format(self):
         formatted_phone = self.member.get_phone_formatted
-        self.assertEqual(formatted_phone, "073-322 11 31")
+        self.assertEqual(formatted_phone, "073-322 11 11")
 
         self.member.phone_number = "+442083661177"
 
@@ -229,7 +219,7 @@ class RegistrationTestCase(TestCase):
             'username': 'test_basic_creation',
             'person_number': '199100000000',
             'email': 'g.moore@localhost',
-            'phone_number': '070000000',
+            'phone_number': '0700000000',
             'password1': 'Test!234',
             'password2': 'Test!234',
         }
