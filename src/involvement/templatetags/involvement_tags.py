@@ -25,7 +25,7 @@ def contact_card(contact_card, large_width=7, medium_width=12, small_width=12):
 
     if application is not None:
         applicant = application.applicant
-        data['card_name'] = applicant.get_full_name()
+        data['card_name'] = applicant.get_full_name
         data['phone_number'] = role.phone_number \
             if role.phone_number else applicant.phone_number
         data['email'] = role.contact_email \
