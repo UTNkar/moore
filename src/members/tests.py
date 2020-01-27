@@ -45,8 +45,7 @@ class ProfileTest(TestCase):
             email='g.moore@localhost',
             registration_year='1946',
             phone_number="0733221111",
-            study=self.study,
-            phone_number='0733221131'
+            study=self.study
         )
         self.member.set_password('Intel1968')
         self.member.save()
