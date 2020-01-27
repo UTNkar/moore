@@ -15,6 +15,7 @@ class Team(models.Model):
         verbose_name = _('Team')
         verbose_name_plural = _('Teams')
         default_permissions = ()
+        ordering = ["name_sv"]
 
     # ---- General Information ------
     name_en = models.CharField(

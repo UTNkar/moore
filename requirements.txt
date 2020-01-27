@@ -1,12 +1,12 @@
-Django[argon2]==2.2.8
-wagtail==2.7
+Django[argon2]==2.2.9
+wagtail==2.7.1
 
 # External Libraries
 requests==2.22.0
 
 # Templates
 django-compressor==2.4
-django-libsass==0.7
+django-libsass==0.8
 wagtailfontawesome==1.2.1
 
 # Scheduled tasks
