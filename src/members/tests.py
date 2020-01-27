@@ -96,7 +96,7 @@ class ProfileTest(TestCase):
 
     def test_phone_format(self):
         formatted_phone = self.member.get_phone_formatted
-        self.assertEqual(formatted_phone, "073-322 11 31")
+        self.assertEqual(formatted_phone, "073-322 11 11")
 
         self.member.phone_number = "+442083661177"
 
