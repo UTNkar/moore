@@ -6,7 +6,7 @@ requests==2.22.0
 
 # Templates
 django-compressor==2.3
-django-libsass==0.7
+django-libsass==0.8
 wagtailfontawesome==1.2.1
 
 # Scheduled tasks
