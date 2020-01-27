@@ -46,6 +46,7 @@ class ProfileTest(TestCase):
             registration_year='1946',
             phone_number="0733221111",
             study=self.study,
+            phone_number='0733221131'
         )
         self.member.set_password('Intel1968')
         self.member.save()
@@ -93,6 +94,15 @@ class ProfileTest(TestCase):
         member = Member.objects.get(username='moore')
         self.assertEqual(member.study, new_study)
         self.assertEqual(member.registration_year, data['registration_year'])
+
+    def test_phone_format(self):
+        formatted_phone = self.member.get_phone_formatted
+        self.assertEqual(formatted_phone, "073-322 11 31")
+
+        self.member.phone_number = "+442083661177"
+
+        formatted_phone = self.member.get_phone_formatted
+        self.assertEqual(formatted_phone, "+44 20 8366 1177")
 
 
 class EmailConfirmationTest(TestCase):

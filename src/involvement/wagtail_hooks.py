@@ -67,7 +67,7 @@ class RoleAdmin(ModelAdmin):
     menu_order = 200
     list_display = ('team', 'name_en', 'name_sv', 'archived',
                     'group', 'role_type')
-    search_fields = ('team__name_en', 'team__name_sv', 'name_en', 'name_sv',
+    search_fields = ('teams__name_en', 'teams__name_sv', 'name_en', 'name_sv',
                      'description_en', 'description_sv')
     # TODO: Default to archived==False, might be in
     # https://code.djangoproject.com/ticket/8851#no1
@@ -254,6 +254,7 @@ class ApplicationAdmin(ModelAdmin):
     edit_view_class = views.ApplicationEditView
     inspect_view_class = views.ApplicationInspectView
     inspect_view_enabled = True
+    inspect_view_fields_exclude = ["id", "removed", "rejection_date"]
 
     def get_queryset(self, request):
         if is_super(request.user):

@@ -45,7 +45,7 @@ DATABASES = {
 # trailing slash
 BASE_URL = 'https://dev.utn.se'
 
-ALLOWED_HOSTS = ['.utn.se']
+ALLOWED_HOSTS = ['.utn.se', '.utnarm.se']
 
 # Email settings
 DEFAULT_FROM_EMAIL = 'info@utn.se'
