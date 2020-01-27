@@ -4,6 +4,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0] - 2020-01-27
+
+### Added
+
+- Added possibility to add environment variables in dev environment
+- Added validation on registration form
+- Added contact information and references when inspecting an application
+- Added utnarm.se as a allowed host
+
+### Changed
+
+- Extended createsuperuser so it gets a melos id
+- Teams, roles and positions are now ordered alphabetically after their name
+- Updated django-compressor to 2.4
+- Updated django-libsass to 0.8
+- Updated wagtail to 2.7.1
+- Updated rules to 2.2
+- Updated wagtailfontawesome to 1.2.1
+- Updated django to 2.2.9
+
+### Removed
+
+### Fixed
+
+- Fixed a bug with contact cards which caused an error
+- Fixed an error that occured when searching for a role
+- Fixed so that positions with status approved is shown when inspecting a position
+
 ## [1.0.2] - 2019-12-23
 
 ### Changed
