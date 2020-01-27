@@ -354,11 +354,9 @@ msgstr "Ange ett telefonnummer som din referens kan nås på"
 msgid "Please enter a valid phone number"
 msgstr "Ange ett giltigt telefonnummer"
 
-#: models/role.py:258
-#, fuzzy, python-format
-#| msgid "%(role)s in %(team)s"
-msgid "%(role)s in %(teams)s"
-msgstr "%(role)s i %(team)s"
+#: involvement/models/role.py:250
+msgid "in"
+msgstr "i"
 
 #: models/team.py:15
 msgid "Team"

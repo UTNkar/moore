@@ -22,6 +22,7 @@ class Role(models.Model):
         verbose_name = _('Role')
         verbose_name_plural = _('Roles')
         default_permissions = ()
+        ordering = ['teams__name_sv', 'name_sv']
 
     TYPE_CHOICES = (
         ('admin', _('Admin')),
@@ -255,8 +256,9 @@ class Role(models.Model):
 
     def __str__(self) -> str:
         if self.teams:
-            return _('%(role)s in %(teams)s') % {
+            return '%(role)s %(separator)s %(teams)s' % {
                 'role': self.name,
+                'separator': _('in'),
                 'teams': self.team_names,
             }
         else:
