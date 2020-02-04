@@ -1,8 +1,5 @@
 {% load wagtailimages_tags %}
-<div class="container row">
-    {% if value.logos|length < 3 %}
-        <div class="col s12 m2"></div>
-    {% endif %}
+<div class="container row logo-container">
     {% for logo in value.logos %}
         <div class="col s12 m4 logo">
             {% if logo.link %}<a href="{{ logo.link }}">{% endif %}
