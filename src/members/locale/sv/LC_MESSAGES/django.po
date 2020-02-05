@@ -21,6 +21,10 @@ msgstr "Underhåll av UTN-medlemmar"
 msgid "Username or SSN (YYYYMMDD-XXXX)"
 msgstr "Användarnamn eller personnummer (YYYYMMDD-XXXX)"
 
+#: forms.py:30
+msgid "Invalid phonenumber"
+msgstr "Ogiltigt telefonnummer"
+
 #: forms.py:47 forms.py:135 forms.py:362 forms.py:437
 msgid "Person number"
 msgstr "Personnummer"
@@ -31,11 +35,11 @@ msgstr "Personnummer på formen ÅÅÅÅMDD-NNNN."
 
 #: forms.py:75 forms.py:235
 msgid "A user with that username already exists."
-msgstr ""
+msgstr "En användare med det användrnamnet finns redan"
 
 #: forms.py:83 forms.py:478
 msgid "Incorrect SSN"
-msgstr ""
+msgstr "Felaktigt personnummer"
 
 #: forms.py:114 forms.py:386 forms.py:460
 msgid "Section"
@@ -154,6 +158,10 @@ msgstr "Alumn"
 #: models/member.py:111
 msgid "Enter a phone number so UTN may reach you"
 msgstr "Ange ett telefonnummer som UTN kan nå dig på"
+
+#: models/member.py:117
+msgid "Enter an email address so UTN may reach you"
+msgstr "Ange en epost adress som UTN kan nå dig på"
 
 #: models/member.py:121
 msgid "Enter the year you started studying at the TakNat faculty"

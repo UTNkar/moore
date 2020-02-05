@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 from utils.melos_client import MelosClient
 from utils.validators import SSNValidator
+from phonenumbers import format_number, PhoneNumberFormat, parse
 
 
 def status_changed_default():
@@ -134,8 +135,12 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         max_length=20,
         verbose_name=_('Phone number'),
         help_text=_('Enter a phone number so UTN may reach you'),
-        blank=True,
-        default='',
+    )
+
+    email = models.EmailField(
+        max_length=255,
+        verbose_name=_('email'),
+        help_text=_('Enter an email address so UTN may reach you')
     )
 
     # ---- University information ------
@@ -220,6 +225,22 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     @property
     def get_full_name(self):
         return '{} {}'.format(self.get_first_name, self.get_last_name)
+
+    @property
+    def get_phone_formatted(self):
+        try:
+            parsed_number = parse(self.phone_number, "SE")
+            number_format = \
+                PhoneNumberFormat.NATIONAL \
+                if parsed_number.country_code == 46 \
+                else PhoneNumberFormat.INTERNATIONAL
+
+            return format_number(
+                parsed_number,
+                number_format
+            )
+        except Exception:
+            return self.phone_number
 
     @property
     def get_ssn(self):
