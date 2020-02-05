@@ -290,8 +290,8 @@ class TwoColumnGridBlock(blocks.StructBlock):
         )),
         ('image', ImageChooserBlock()),
         ('paragraph', blocks.RichTextBlock(
-        template='blocks/paragraph.html',
-        group=_('Basic'),
+            template='blocks/paragraph.html',
+            group=_('Basic'),
         ))
     ]))
 
@@ -301,7 +301,6 @@ class TwoColumnGridBlock(blocks.StructBlock):
         template = 'blocks/two_column_grid.html'
         group = _('Noyce')
 
-        
 
 WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('heading', HeadingBlock()),  # TODO: Do we use this one?
