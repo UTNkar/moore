@@ -1,0 +1,19 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+<div class="container">
+  {% for row in value.rows %}
+  {% image row.image original as image %}
+  {% if row.flip %}
+  <div class="two-column-row">
+    {% else %}
+    <div class="two-column-row row-reverse">
+      {% endif %}
+      <div style="height:{{value.height}}px" class=" row-paragraph">
+	  {{ row.paragraph }}
+      </div>
+      <div style="height:{{value.height}}px" class="row-image">
+	<img src="{{image.url}}"/>
+      </div>
+    </div>
+    {% endfor%}
+  </div>

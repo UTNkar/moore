@@ -1,0 +1,37 @@
+
+.block-two_column_grid {
+  padding-bottom: 120px;
+  padding-top: 120px;
+  
+  .row-reverse {
+    flex-direction: row-reverse;
+  }
+  
+  .two-column-row {
+    display: flex;
+    flex-wrap: wrap;
+    
+    @media #{$medium-and-down} {
+      flex-direction: column;
+    }
+  }
+  
+  .row-paragraph {
+    flex: 1 0 50%;
+    overflow-y: scroll;
+    padding: 1em;
+  }
+
+  .row-image {
+    flex: 1 0 50%;
+    img {
+      height: 100%;
+      width: 100%;
+      /* 
+	 "object-fit: cover" is not supported on old browsers, but if it 
+	 isn't, the image will just stretch to fit, which we can live with.
+       */
+      object-fit: cover;
+    }
+  }
+}
