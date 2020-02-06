@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.3] - 2020-02-06
+
+### Fixed
+
+- Fix a bug that caused applications with teams without logos to use another logo instead of the default logo
+- Fixed so that the SSN validator can handle T-numbers and people born before 1990
+
+### Changed
+
+- Added text shadow to text in image overlay block
+- Updated phonenumbers to 8.11.3
+
 ## [1.1.2] - 2020-01-28
 
 ### Fixed
