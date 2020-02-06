@@ -4,11 +4,9 @@ from django.core.exceptions import ValidationError
 
 
 class SSNValidatorTests(TestCase):
-    ssn_validator = SSNValidator()
-
     def ssn_is_valid(self, ssn):
         try:
-            self.ssn_validator(ssn)
+            SSNValidator()(ssn)
             return True
         except ValidationError:
             return False
