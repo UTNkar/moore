@@ -281,7 +281,7 @@ class TwoColumnGridBlock(blocks.StructBlock):
         min_value=1,
         default=400,
         max_value=800,
-        help_text=_('row height in px')
+        help_text=_('Row height in px')
     )
     rows = blocks.ListBlock(blocks.StructBlock([
         ('flip', blocks.BooleanBlock(
