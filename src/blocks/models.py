@@ -125,7 +125,6 @@ class OverlayBlock(blocks.StructBlock):
         required=False,
         help_text=('margin-top', _("Include margin above this block"))
     )
-        
 
     class Meta:
         label = _('Image overlay')
