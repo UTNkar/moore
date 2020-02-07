@@ -1,7 +1,7 @@
 {% load wagtailimages_tags %}
 <div class="container row logo-container">
     {% for logo in value.logos %}
-        <div class="col s12 m4 logo">
+        <div class="logo">
             {% if logo.link %}<a href="{{ logo.link }}">{% endif %}
                 {% image logo.image height-75 as image %}
                 <img src="{{ image.url }}" alt="{{ image.alt }}">
