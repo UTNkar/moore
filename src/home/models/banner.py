@@ -17,7 +17,7 @@ def show_my_uploaded_media_only(media, request):
     # Only show video media
     return media.filter(type="video")
 
-    
+
 class Banner(Orderable):
     page = ParentalKey(
         'HomePage',
@@ -36,7 +36,8 @@ class Banner(Orderable):
 
     video = models.ForeignKey(
         'wagtailmedia.Media',
-        help_text=_('Banner video media. If video is not supported by the browser, the image is shown instead.'),
+        help_text=_("""Banner video media. If video is not supported by the 
+        browser, the image is shown instead."""),
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
