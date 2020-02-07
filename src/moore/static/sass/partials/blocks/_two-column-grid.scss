@@ -20,7 +20,7 @@
   
   .row-paragraph {
     flex: 1 0 50%;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 0em 4em 0em 4em;
     
     @media #{$medium-and-down} {
