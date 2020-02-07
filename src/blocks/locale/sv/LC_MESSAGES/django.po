@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-07 16:33+0100\n"
+"POT-Creation-Date: 2020-02-07 16:55+0100\n"
 "PO-Revision-Date: 2017-06-26 10:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,75 +18,79 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: src/blocks/models.py:17
+#: models.py:17
 msgid "Responsive Image"
 msgstr "Responsiv bild"
 
-#: src/blocks/models.py:20 src/blocks/models.py:53 src/blocks/models.py:260
+#: models.py:20 models.py:53 models.py:265
 msgid "Basic"
 msgstr ""
 
 # It's difficult to know this context, don't know if it needs translation
-#: src/blocks/models.py:27 src/blocks/models.py:81
+#: models.py:27 models.py:81
 msgid "Material icon font icon text, as found on: https://material.io/icons"
 msgstr "Material icon font icon text, as found on: https://material.io/icons"
 
-#: src/blocks/models.py:34 src/blocks/models.py:115
+#: models.py:34 models.py:115
 msgid "Light"
 msgstr "Ljus"
 
-#: src/blocks/models.py:35 src/blocks/models.py:116
+#: models.py:35 models.py:116
 msgid "Dark"
 msgstr "Mörk"
 
-#: src/blocks/models.py:39
+#: models.py:39
 msgid "Counters"
 msgstr "Räknare"
 
-#: src/blocks/models.py:42 src/blocks/models.py:69 src/blocks/models.py:93
-#: src/blocks/models.py:107 src/blocks/models.py:129 src/blocks/models.py:204
+#: models.py:42 models.py:69 models.py:93 models.py:107 models.py:134
+#: models.py:209
 msgid "Noyce"
 msgstr ""
 
-#: src/blocks/models.py:50
+#: models.py:50
 msgid "Heading"
 msgstr "Rubrik"
 
-#: src/blocks/models.py:60 src/blocks/models.py:76
+#: models.py:60 models.py:76
 msgid "Left"
 msgstr "Vänster"
 
-#: src/blocks/models.py:61 src/blocks/models.py:77
+#: models.py:61 models.py:77
 msgid "Right"
 msgstr "Höger"
 
-#: src/blocks/models.py:66
+#: models.py:66
 msgid "Image + Description"
 msgstr "Bild + Beskrivning"
 
-#: src/blocks/models.py:90
+#: models.py:90
 msgid "Image + Icons"
 msgstr "Bild + Ikoner"
 
-#: src/blocks/models.py:104
+#: models.py:104
 msgid "Logos"
 msgstr "Logotyper"
 
-#: src/blocks/models.py:122
+#: models.py:122
 msgid "Include margin under this block"
 msgstr "Inkludera marginal under detta block"
 
-#: src/blocks/models.py:126
+#: models.py:126
+msgid "Include margin above this block"
+msgstr "Inkludera marginal under detta block"
+
+#: models.py:131
 msgid "Image overlay"
 msgstr "Bildöverdrag"
 
-#: src/blocks/models.py:136
+#: models.py:141
 #, fuzzy
 #| msgid "Whether or not to embed a Facebook page"
 msgid "Whether to embed a Facebook page"
 msgstr "Om du vill visa en Facebook-sida"
 
-#: src/blocks/models.py:140
+#: models.py:145
 msgid ""
 "Name of the page to show. (Must be public or accessible by the registered "
 "app_id)"
@@ -94,57 +98,57 @@ msgstr ""
 "Namnet på sidan att visa. (Måste vara en publik sida eller tillgänglig  via "
 "den registrerade app-id)"
 
-#: src/blocks/models.py:146
+#: models.py:151
 msgid ""
 "Whether to show Instagram the last event from the registered Instagram feed"
 msgstr "Om du vill visa det senaste inlägget från Instagram"
 
-#: src/blocks/models.py:152
+#: models.py:157
 msgid "Whether to show the last video from a Youtube-channel"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: src/blocks/models.py:160
+#: models.py:165
 msgid "Whether to show the next few events from a google calendar"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: src/blocks/models.py:202
+#: models.py:207
 msgid "Events"
 msgstr "Evenemang"
 
-#: src/blocks/models.py:213
+#: models.py:218
 msgid "Contact Card"
 msgstr "Kontaktkort"
 
-#: src/blocks/models.py:216 src/blocks/models.py:280
+#: models.py:221 models.py:285
 msgid "Meta"
 msgstr ""
 
-#: src/blocks/models.py:251
+#: models.py:256
 #, fuzzy
 #| msgid "Events"
 msgid "Eventbrite"
 msgstr "Evenemang"
 
-#: src/blocks/models.py:254
+#: models.py:259
 msgid "Embed"
 msgstr ""
 
-#: src/blocks/models.py:271
+#: models.py:276
 msgid "Width out of 12"
 msgstr "Bredd, 1 till 12"
 
-#: src/blocks/models.py:277
+#: models.py:282
 msgid "Columns"
 msgstr "Kolumner"
 
-#: src/blocks/templates/blocks/tags/calendar.html:19
+#: templates/blocks/tags/calendar.html:19
 msgid "See the whole calendar"
 msgstr "Se hela kalendern"
 
-#: src/blocks/templates/blocks/tags/facebook.html:6
+#: templates/blocks/tags/facebook.html:6
 msgid "facebook icon"
 msgstr "facebook ikon"
 
-#: src/blocks/templates/blocks/tags/instagram.html:5
+#: templates/blocks/tags/instagram.html:5
 msgid "instagram icon"
 msgstr "instagram ikon"
