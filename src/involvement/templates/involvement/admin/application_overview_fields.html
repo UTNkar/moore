@@ -1,30 +1,51 @@
-{% load i18n %}
+{% load i18n involvement_tags %}
 
-<dl>
-    <dt>{% trans 'name'|capfirst %}</dt>
+<dd>
+    <dt>{% trans 'name' %}</dt>
     <dd>{{ application.applicant.get_full_name|title }}</dd>
-    <dt>{% trans 'membership status'|capfirst %}</dt>
-    <dd>{{ application.applicant.get_status }}</dd>
-    <dt>{% trans 'email address'|capfirst %}</dt>
-    <dd>{{ application.applicant.email }}</dd>
+
+    <dt>{% trans 'postition' %}</dt>
+    <dd>{{ application.position }}</dd>
+
+    <dt>{% trans 'membership status' %}</dt>
+    <dd>
+        {{application.applicant.get_status_display}}
+    </dd>
+    <dt>{% trans 'Contact' %}</dt>
+    <dd>
+        <a href="tel:{{ application.applicant.get_phone_formatted }}">
+            {{ application.applicant.get_phone_formatted }}
+        </a>
+        or
+        <a href="mailto:{{ application.applicant.email }}">
+            {{ application.applicant.email }}
+        </a>
+    </dd>
+
     {% if application.cover_letter %}
-        <dt>{% trans 'cover letter'|capfirst %}</dt>
+        <dt>{% trans 'cover letter' %}</dt>
         <dd>{{ application.cover_letter|linebreaks }}</dd>
     {% endif %}
+
     {% if application.qualifications %}
-        <dt>{% trans 'qualifications'|capfirst %}</dt>
+        <dt>{% trans 'qualifications' %}</dt>
         <dd>{{ application.qualifications }}</dd>
     {% endif %}
 
-    
     {% if application.references.all %}
-        <dt>{% trans 'references'|capfirst %}</dt>
+        <dt>{% trans 'references' %}</dt>
         <dd>
             <ul>
                 {% for ref in application.references.all %}
-                    <li style="padding-top: 10px; margin-left: 20px; list-style-type: circle;">{{ ref|linebreaks }}</li>
+                    <li style="list-style-type: circle;">{{ ref|linebreaks }}</li>
                 {% endfor %}
             </ul>
         </dd>
     {% endif %}
+
+    <dt>{% trans 'application status' %}</dt>
+    <dd>
+        {{application.get_status_display}}
+    </dd>
+    
 </dl>

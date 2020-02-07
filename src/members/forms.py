@@ -20,8 +20,24 @@ from django.utils.http import urlsafe_base64_encode
 from members.models import StudyProgram, Member, Section
 from utils.validators import SSNValidator
 from utils.melos_client import MelosClient
+from phonenumbers import parse, is_valid_number
 
 User = get_user_model()
+
+
+class PhoneNumberField(forms.CharField):
+    def __init__(self, *args, **kwargs):
+        super(PhoneNumberField, self).__init__(*args, **kwargs)
+
+    def clean(self, phonenumber):
+        try:
+            parsed_phone = parse(phonenumber, "SE")
+            if not is_valid_number(parsed_phone):
+                raise Exception
+
+            return phonenumber
+        except Exception:
+            raise forms.ValidationError(_("Invalid phonenumber"))
 
 
 class PersonNumberField(forms.Field):
@@ -48,10 +64,14 @@ class MemberForm(forms.ModelForm):
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
     )
 
+    phone_number = PhoneNumberField()
+
     class Meta:
         model = Member
-        fields = ['first_name', 'last_name', 'phone_number',
-                  'registration_year', 'study', 'section', 'email']
+        fields = [
+            'first_name', 'last_name', 'registration_year',
+            'phone_number', 'study', 'section', 'email'
+        ]
 
     def __init__(self, *args, **kwargs):
         instance = kwargs.get('instance', None)
@@ -105,28 +125,10 @@ class MemberForm(forms.ModelForm):
 
 
 class RegistrationForm(MemberForm, auth.UserCreationForm):
-    username = forms.TextInput(attrs={'class': 'form-control'})
-    email = forms.EmailInput(attrs={'class': 'form-control'})
-    phone_number = forms.TextInput(attrs={'class': 'form-control'})
-    section = forms.ModelChoiceField(
-        required=False,
-        queryset=Section.objects,
-        label=_("Section"),
-    )
-
     class Meta:
         model = Member
         fields = ['username', 'email', 'phone_number', 'section']
         field_classes = {'username': auth.UsernameField}
-
-    def __init__(self, *args, **kwargs):
-        super(RegistrationForm, self).__init__(*args, **kwargs)
-        self.fields['password1'].widget = forms.PasswordInput(
-            attrs={'class': 'form-control'}
-        )
-        self.fields['password2'].widget = forms.PasswordInput(
-            attrs={'class': 'form-control'}
-        )
 
 
 class CustomPasswordResetForm(forms.Form):

@@ -57,7 +57,7 @@
                 type="text"
                 {% if status == 'submitted' %} readonly {% endif %}
                 class="materialize-textarea validate{% if form.cover_letter.errors %} invalid{% endif %}">
-                {{ form.cover_letter.initial }}
+                {{ form.data.cover_letter|default:form.cover_letter.initial }}
             </textarea>
             <label for="{{ form.cover_letter.auto_id }}">{{ form.cover_letter.help_text }}</label>
             {% if form.cover_letter.errors %}{% include 'materialize/form/field_errors.html' %}{% endif %}
@@ -74,7 +74,7 @@
                 type="text"
                 {% if status == 'submitted' %} readonly {% endif %}
                 class="materialize-textarea validate{% if form.qualifications.errors %} invalid{% endif %}">
-                {{ form.qualifications.initial }}
+                {{ form.data.qualifications|default:form.qualifications.initial }}
             </textarea>
             <label for="{{ form.qualifications.auto_id }}">{{ form.qualifications.help_text }}</label>
             {% if form.qualifications.errors %}{% include 'materialize/form/field_errors.html' %}{% endif %}

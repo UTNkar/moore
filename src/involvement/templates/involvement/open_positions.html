@@ -9,8 +9,11 @@
         {% for pos in positions|dictsort:'recruitment_end' %}
             <li>
                 <div class="collapsible-header">
-                    {% if pos.role.team_logo is not None %}{% image pos.role.team_logo fill-45x45 as logo %}{% endif %}
-                    <img class="circle" src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/bocken.svg' %}{% endif %}">
+                    {% if pos.role.team_logo is not None %}
+                        {% image pos.role.team_logo fill-45x45 class=circle%}
+                    {% else %}
+                        <img class="circle" src="{% static 'images/bocken.svg' %}">
+                    {% endif %}
                     <div class="header-text">
                         <h3>{{ pos }}</h3>
                         <div class="team">
