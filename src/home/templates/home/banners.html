@@ -24,8 +24,14 @@
     {% endif %}
     {% for banner in page.banners.all %}
         {% image banner.image height-700 as photo %}
-        <div class="carousel-item content-center-v-sm {% if banner.image %} withImage {% endif %}"><div>
-            {% if banner.image %}<div class="banner-image" style="background-image: url('{{ photo.url }}');"></div>{% endif %}
+    	<div class="carousel-item content-center-v-sm {% if banner.image %} withImage {% endif %}"><div>
+	    {% if banner.video %}
+	    <video autoplay loop muted playsinline class="banner-video">
+	      <source src="{{ banner.video.url }}"/>
+	      <div class="banner-image" style="background-image: url('{{ photo.url }}');"></div>
+	    </video>
+	    {% endif %}
+            {% if banner.image and not banner.video %}<div class="banner-image" style="background-image: url('{{ photo.url }}');"></div>{% endif %}
             {% if banner.title %}<h2 class="banner-title">{{ banner.title }}</h2>{% endif %}
             {% if banner.text %}<p class="banner-description">{{ banner.text }}</p>{% endif %}
             {% if banner.link and banner.button %}<a class="banner-link" href="{{ banner.link }}">{{ banner.button }}</a>{% endif %}

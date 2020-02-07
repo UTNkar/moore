@@ -24,3 +24,6 @@ psycopg2-binary==2.8.4
 
 # Phonenumber validation
 phonenumbers==8.11.3
+
+# Wagtail media module
+'wagtailmedia'
