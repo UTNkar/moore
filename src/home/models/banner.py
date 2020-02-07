@@ -36,7 +36,7 @@ class Banner(Orderable):
 
     video = models.ForeignKey(
         'wagtailmedia.Media',
-        help_text=_("""Banner video media. If video is not supported by the 
+        help_text=_("""Banner video media. If video is not supported by the
         browser, the image is shown instead."""),
         null=True,
         blank=True,
