@@ -19,7 +19,8 @@ guidelines](CONTRIBUTING.md).
 To get started with Project Moore, follow these instructions to set up a
 **development** environment:
 
-1. Install Python 3, at least version 3.5 or up.
+1. Install Python 3, at least version 3.6 or up.
+2. Install [postgresql](https://www.postgresql.org/)
 2. Install the following python packages:
    - python3-venv
    - python3-dev
