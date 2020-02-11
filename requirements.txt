@@ -1,19 +1,19 @@
-Django[argon2]==2.2.8
-wagtail==2.7
+Django[argon2]==2.2.9
+wagtail==2.7.1
 
 # External Libraries
 requests==2.22.0
 
 # Templates
-django-compressor==2.3
-django-libsass==0.7
-wagtailfontawesome==1.1.4
+django-compressor==2.4
+django-libsass==0.8
+wagtailfontawesome==1.2.1
 
 # Scheduled tasks
 django-kronos==1.0
 
 # User management
-rules==2.1
+rules==2.2
 django-simple-email-confirmation==0.60
 
 # Logging
@@ -21,3 +21,6 @@ raven==6.10.0
 
 # Postgres
 psycopg2-binary==2.8.4
+
+# Phonenumber validation
+phonenumbers==8.11.3

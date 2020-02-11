@@ -14,6 +14,9 @@ class PositionInspectView(InspectView):
         )
 
     def get_submitted_applications(self):
+        # Since roles that arent role type styrelse or fum get automatically
+        # set to approved we need to show applications with status approved
+        # when inspecting a role. This is a temporary fix.
         return self.instance.applications.filter(
-            status='submitted'
+            status__in=['submitted', 'approved']
         )

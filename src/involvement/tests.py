@@ -6,6 +6,8 @@ from django.test import TestCase
 from django.urls import reverse
 from wagtail.tests.utils import WagtailPageTests
 from wagtail.core.models import Page
+from wagtail.tests.utils.form_data import inline_formset
+from wagtail.tests.utils.form_data import nested_form_data
 
 from home.models import HomePage
 from involvement.cron import send_extension_emails
@@ -199,6 +201,60 @@ class RecruitmentPageTests(WagtailPageTests):
                             msg_prefix='Position is listed as part of team')
         self.assertContains(response, role.election_email,
                             msg_prefix='Team contact information is provided')
+
+    def test_application_not_empty_on_error(self):
+        """
+        Submit an application where the cover letter and qualifications
+        are valid but the references are invalid. The cover letter and
+        qualifications should not be empty after the submission.
+        """
+        role = Role.objects.create(
+            name_en='Test Role',
+            name_sv='Test Roll',
+            group=self.group,
+            role_type='engaged',
+        )
+        position = Position.objects.create(
+            role=role,
+            recruitment_start=date.today() - timedelta(days=1),
+            recruitment_end=date.today(),
+            term_from=date.today() + timedelta(days=1),
+            term_to=date.today() + timedelta(days=365),
+        )
+        url = \
+            self.page.url + \
+            self.page.reverse_subpage(
+                'position',
+                [position.id]
+            )
+
+        application_data = {
+            "cover_letter": "This is my cover letter",
+            "qualifications": "These are my qualifications",
+            "status": "submitted"
+        }
+
+        invalid_reference_form = nested_form_data({
+            'references': inline_formset([{
+                'name': '',
+                'position': '',
+                'email': '',
+                'phone_number': '',
+                'comment': 'Is a cool person'
+            }])
+        })
+
+        # Merge application data with reference form data
+        post_data = {**application_data, **invalid_reference_form}
+
+        response = self.client.post(
+            url,
+            post_data
+        )
+
+        self.assertNotEqual(response.status_code, 302)
+        self.assertContains(response, application_data['cover_letter'])
+        self.assertContains(response, application_data['qualifications'])
 
         # TODO: Add tests for my_positions
 
