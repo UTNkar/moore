@@ -133,6 +133,14 @@ msgstr "Bredd, 1 till 12"
 msgid "Columns"
 msgstr "Kolumner"
 
+#: blocks/models.py:284
+msgid "Row height in px"
+msgstr "Rad höjd i px"
+
+#: blocks/models.py:289
+msgid "Swap position of image and paragraph"
+msgstr "Byt plats på bild och paragraf"
+
 #: blocks/templates/blocks/tags/calendar.html:19
 msgid "See the whole calendar"
 msgstr "Se hela kalendern"
