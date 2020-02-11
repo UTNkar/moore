@@ -117,6 +117,14 @@ class OverlayBlock(blocks.StructBlock):
     ], default='text-dark')
     link = blocks.URLBlock(required=False)
     button = blocks.CharBlock(required=False)
+    include_bottom_margin = blocks.BooleanBlock(
+        required=False,
+        help_text=('margin-bot', _("Include margin under this block"))
+    )
+    include_top_margin = blocks.BooleanBlock(
+        required=False,
+        help_text=('margin-top', _("Include margin above this block"))
+    )
 
     class Meta:
         label = _('Image overlay')
