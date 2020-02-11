@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-02 16:54+0100\n"
+"POT-Creation-Date: 2020-02-07 15:54+0100\n"
 "PO-Revision-Date: 2017-06-26 10:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,43 +22,50 @@ msgstr ""
 msgid "Centered"
 msgstr ""
 
-#: home/models/banner.py:30
+#: home/models/banner.py:39
+msgid ""
+"Banner video media. If video is not supported by the browser, the image is "
+"shown instead."
+msgstr ""
+"Banner video media. Om video inte stöds av webbläsaren visas bilden istället."
+
+#: home/models/banner.py:48
 msgid "English banner title"
 msgstr "Engelsk bannertitel"
 
-#: home/models/banner.py:31 home/models/banner.py:38
+#: home/models/banner.py:49 home/models/banner.py:56
 msgid "Enter the title to be shown on the banner."
 msgstr "Skriv in titeln som ska synas på bannern."
 
-#: home/models/banner.py:37
+#: home/models/banner.py:55
 msgid "Swedish banner title"
 msgstr "Svensk bannertitel"
 
-#: home/models/banner.py:45
+#: home/models/banner.py:63
 msgid "English banner text"
 msgstr "Engelsk bannertext"
 
-#: home/models/banner.py:46 home/models/banner.py:52
+#: home/models/banner.py:64 home/models/banner.py:70
 msgid "Enter a text to be shown on the banner."
 msgstr "Skriv in texten som ska synas på bannern."
 
-#: home/models/banner.py:51
+#: home/models/banner.py:69
 msgid "Swedish banner text"
 msgstr "Svensk bannertext"
 
-#: home/models/banner.py:59
+#: home/models/banner.py:77
 msgid "Button URL"
 msgstr "KnappURL"
 
-#: home/models/banner.py:64
+#: home/models/banner.py:82
 msgid "English button text"
 msgstr "Engelsk ikontext"
 
-#: home/models/banner.py:65 home/models/banner.py:71
+#: home/models/banner.py:83 home/models/banner.py:89
 msgid "Enter the text to be displayed on the button."
 msgstr "Skriv in texten som ska synas på ikonen."
 
-#: home/models/banner.py:70
+#: home/models/banner.py:88
 msgid "Swedish button text"
 msgstr "Svensk ikontext"
 
@@ -128,31 +135,31 @@ msgstr "Svensk bannertitel"
 msgid "General"
 msgstr "Allmän"
 
-#: home/models/form_page.py:89 home/models/home_page.py:52
+#: home/models/form_page.py:89 home/models/home_page.py:57
 #: home/models/web_page.py:56
 msgid "English"
 msgstr "Engelska"
 
-#: home/models/form_page.py:90 home/models/home_page.py:53
+#: home/models/form_page.py:90 home/models/home_page.py:58
 #: home/models/web_page.py:57
 msgid "Swedish"
 msgstr "Svenska"
 
-#: home/models/form_page.py:91 home/models/home_page.py:54
+#: home/models/form_page.py:91 home/models/home_page.py:59
 #: home/models/web_page.py:58
 msgid "Promote"
 msgstr "Marknadsför"
 
-#: home/models/form_page.py:92 home/models/home_page.py:55
+#: home/models/form_page.py:92 home/models/home_page.py:60
 #: home/models/web_page.py:59
 msgid "Settings"
 msgstr "Inställningar"
 
-#: home/models/home_page.py:32
+#: home/models/home_page.py:37
 msgid "Banner"
 msgstr "Banner"
 
-#: home/models/home_page.py:51
+#: home/models/home_page.py:56
 msgid "Banners"
 msgstr "Banners"
 

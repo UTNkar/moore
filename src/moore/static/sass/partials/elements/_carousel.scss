@@ -79,6 +79,16 @@ $controls-size: 150px;
       background-size: cover;
       z-index: 1;
     }
+
+    .banner-video {
+	position: absolute;
+	min-width: 100%;
+	min-height: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);       
+    }
+    
     .banner-title {
       position: relative;
       z-index: 2;
