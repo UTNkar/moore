@@ -284,6 +284,32 @@ class ColumnBlock(blocks.StructBlock):
         group = _('Meta')
 
 
+class TwoColumnGridBlock(blocks.StructBlock):
+    height = blocks.IntegerBlock(
+        min_value=1,
+        default=400,
+        max_value=800,
+        help_text=_('Row height in px')
+    )
+    rows = blocks.ListBlock(blocks.StructBlock([
+        ('flip', blocks.BooleanBlock(
+            required=False,
+            help_text=_('Swap position of image and paragraph'),
+        )),
+        ('image', ImageChooserBlock()),
+        ('paragraph', blocks.RichTextBlock(
+            template='blocks/paragraph.html',
+            group=_('Basic'),
+        ))
+    ]))
+
+    class Meta:
+        label = _('Two Column Grid')
+        icon = 'fa-columns'
+        template = 'blocks/two_column_grid.html'
+        group = _('Noyce')
+
+
 WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('heading', HeadingBlock()),  # TODO: Do we use this one?
     ('image_description', ImageIconsBlock()),
@@ -294,4 +320,5 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('columns', ColumnBlock()),
     ('contacts', ContactsBlock()),
     ('events', EventsBlock()),
+    ('two_column_grid', TwoColumnGridBlock())
 ]
