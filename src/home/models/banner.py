@@ -8,6 +8,15 @@ from wagtail.core.models import Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from utils.translation import TranslatedField
 
+from wagtailmedia.edit_handlers import MediaChooserPanel
+
+
+from wagtail.core import hooks
+@hooks.register('construct_media_chooser_queryset')
+def show_my_uploaded_media_only(media, request):
+    # Only show video media
+    return media.filter(type="video")
+
 
 class Banner(Orderable):
     page = ParentalKey(
@@ -19,6 +28,16 @@ class Banner(Orderable):
 
     image = models.ForeignKey(
         'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    video = models.ForeignKey(
+        'wagtailmedia.Media',
+        help_text=_("""Banner video media. If video is not supported by the
+        browser, the image is shown instead."""),
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -77,6 +96,7 @@ class Banner(Orderable):
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         ImageChooserPanel('image'),
+        MediaChooserPanel('video'),
         FieldRowPanel([
             FieldPanel('title_en'),
             FieldPanel('title_sv'),
