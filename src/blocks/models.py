@@ -302,6 +302,36 @@ class TwoColumnGridBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
+
+class MapBlock(blocks.StructBlock):
+    height = blocks.IntegerBlock(
+        min_value=1,
+        default=400,
+        max_value=800,
+        help_text=_('Row height in px')
+    )
+
+    
+    rows = blocks.ListBlock(blocks.StructBlock([
+        ('flip', blocks.BooleanBlock(
+            required=False,
+            help_text=_('Swap position of image and paragraph'),
+        )),
+        ('image', ImageChooserBlock()),
+        ('paragraph', blocks.RichTextBlock(
+            template='blocks/paragraph.html',
+            group=_('Basic'),
+        ))
+    ]))
+
+    class Meta:
+        label = _('Map')
+        icon = 'fa-columns'
+        template = 'blocks/map.html'
+        group = _('Meta')
+
+
+        
 WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('heading', HeadingBlock()),  # TODO: Do we use this one?
     ('image_description', ImageIconsBlock()),
