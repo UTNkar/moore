@@ -1,12 +1,37 @@
 from django.utils.translation import ugettext_lazy as _
 from wagtail.core import blocks
+from wagtail.core.blocks import StructValue
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
 import requests
 from datetime import datetime
 
+class MarginStructValue(StructValue):
+    def top_margin(self):
+        return self.get('include_top_margin')
+    def bottom_margin(self):
+        return self.get('include_bottom_margin')
 
-class ResponsiveImageBlock(blocks.StructBlock):
+class SectionBlock(blocks.StructBlock):
+    include_top_margin = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Include margin above this block")
+    )
+    
+    include_bottom_margin = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Include margin under this block")
+    )
+
+    class Meta:
+        abstract = True
+        value_class = MarginStructValue 
+    
+
+
+        
+
+class ResponsiveImageBlock(SectionBlock):
     image = ImageChooserBlock()
     height = blocks.IntegerBlock(
         min_value=1,
@@ -20,9 +45,9 @@ class ResponsiveImageBlock(blocks.StructBlock):
         group = _('Basic')
 
 
-class CountersBlock(blocks.StructBlock):
+class CountersBlock(SectionBlock):
     title = blocks.CharBlock()
-    counters = blocks.ListBlock(blocks.StructBlock([
+    counters = blocks.ListBlock(SectionBlock([
         ('icon', blocks.CharBlock(
             help_text=_('Material icon font icon text, as found on: '
                         'https://material.io/icons'),
@@ -42,7 +67,7 @@ class CountersBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
-class HeadingBlock(blocks.StructBlock):
+class HeadingBlock(SectionBlock):
     title = blocks.CharBlock(required=True)
     subtitle = blocks.CharBlock(required=False)
 
@@ -53,7 +78,7 @@ class HeadingBlock(blocks.StructBlock):
         group = _('Basic')
 
 
-class ImageDescriptionBlock(blocks.StructBlock):
+class ImageDescriptionBlock(SectionBlock):
     description = blocks.RichTextBlock()
     image = ImageChooserBlock()
     image_alignment = blocks.ChoiceBlock(choices=[
@@ -69,7 +94,7 @@ class ImageDescriptionBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
-class ImageIconsBlock(blocks.StructBlock):
+class ImageIconsBlock(SectionBlock):
     title = blocks.CharBlock()
     image = ImageChooserBlock()
     image_alignment = blocks.ChoiceBlock(choices=[
@@ -93,7 +118,7 @@ class ImageIconsBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
-class LogosBlock(blocks.StructBlock):
+class LogosBlock(SectionBlock):
     logos = blocks.ListBlock(blocks.StructBlock([
         ('image', ImageChooserBlock()),
         ('link', blocks.URLBlock(required=False)),
@@ -107,7 +132,7 @@ class LogosBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
-class OverlayBlock(blocks.StructBlock):
+class OverlayBlock(SectionBlock):
     image = ImageChooserBlock()
     title = blocks.CharBlock(required=False)
     description = blocks.CharBlock(required=False)
@@ -117,14 +142,6 @@ class OverlayBlock(blocks.StructBlock):
     ], default='text-dark')
     link = blocks.URLBlock(required=False)
     button = blocks.CharBlock(required=False)
-    include_bottom_margin = blocks.BooleanBlock(
-        required=False,
-        help_text=_("Include margin under this block")
-    )
-    include_top_margin = blocks.BooleanBlock(
-        required=False,
-        help_text=_("Include margin above this block")
-    )
 
     class Meta:
         label = _('Image overlay')
@@ -133,7 +150,7 @@ class OverlayBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
-class EventsBlock(blocks.StructBlock):
+class EventsBlock(SectionBlock):
     title = blocks.CharBlock(required=True)
     show_facebook = blocks.BooleanBlock(
         required=False,
@@ -210,7 +227,7 @@ class EventsBlock(blocks.StructBlock):
         template = 'blocks/events.html'
 
 
-class ContactsBlock(blocks.StructBlock):
+class ContactsBlock(SectionBlock):
     contacts = blocks.ListBlock(ContactCardBlock())
 
     class Meta:
@@ -220,7 +237,7 @@ class ContactsBlock(blocks.StructBlock):
         group = _('Meta')
 
 
-class EventbriteBlock(blocks.StructBlock):
+class EventbriteBlock(SectionBlock):
     eventbriteToken = blocks.CharBlock(required=True)
 
     def getEventsJson(self, token):
@@ -258,16 +275,26 @@ class EventbriteBlock(blocks.StructBlock):
         group = _('Embed')
 
 
+class ParagraphBlock(SectionBlock):
+    text = blocks.RichTextBlock()
+
+    class Meta:
+        template='blocks/paragraph.html',
+        group=_('Basic')
+
+
+        
 BASIC_BLOCKTYPES = [
+    ('para', ParagraphBlock()),
     ('paragraph', blocks.RichTextBlock(
         template='blocks/paragraph.html',
         group=_('Basic'),
     )),
-    ('image', ResponsiveImageBlock()),
+#    ('image', SectionBlock(ResponsiveImageBlock())),
 ]
 
 
-class ColumnBlock(blocks.StructBlock):
+class ColumnBlock(SectionBlock):
     columns = blocks.ListBlock(blocks.StructBlock([
         ('width', blocks.IntegerBlock(
             min_value=1,
@@ -284,7 +311,7 @@ class ColumnBlock(blocks.StructBlock):
         group = _('Meta')
 
 
-class TwoColumnGridBlock(blocks.StructBlock):
+class TwoColumnGridBlock(SectionBlock):
     height = blocks.IntegerBlock(
         min_value=1,
         default=400,
@@ -322,3 +349,26 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('events', EventsBlock()),
     ('two_column_grid', TwoColumnGridBlock())
 ]
+
+
+class ContainerBlock(blocks.ListBlock(blocks.StreamBlock(WAGTAIL_STATIC_BLOCKTYPES))):
+    include_top_margin = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Include margin above this block")
+    )
+    
+    include_bottom_margin = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Include margin under this block")
+    )
+
+#    content = blocks.ListBlock(blocks.StreamBlock(WAGTAIL_STATIC_BLOCKTYPES))
+
+    class Meta:
+        label = _('Container')
+        icon = 'fa-picture-o'
+        template = 'blocks/section.html'
+        group = _('Basic')
+
+
+WAGTAIL_STATIC_BLOCKTYPES = WAGTAIL_STATIC_BLOCKTYPES + [("container", ContainerBlock())]
