@@ -342,4 +342,5 @@ class SectionBlock(blocks.StructBlock):
         group = _('Meta')
 
 
-WAGTAIL_STATIC_BLOCKTYPES = WAGTAIL_STATIC_BLOCKTYPES + [("section", SectionBlock())]
+WAGTAIL_STATIC_BLOCKTYPES = (WAGTAIL_STATIC_BLOCKTYPES +
+                             [("section", SectionBlock())])
