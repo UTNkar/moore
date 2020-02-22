@@ -24,8 +24,8 @@
     {% endif %}
     {% for banner in page.banners.all %}
         {% image banner.image height-700 as photo %}
-    	<div class="carousel-item content-center-v-sm {% if banner.image %} withImage {% endif %}">
-            <div>
+    	<div class="carousel-item {% if banner.image %} withImage {% endif %}">
+            <div class="center">
                 {% if banner.video %}
                     <video autoplay loop muted playsinline class="banner-video">
                         <source src="{{ banner.video.url }}"/>

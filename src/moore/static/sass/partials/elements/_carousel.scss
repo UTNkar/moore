@@ -65,6 +65,13 @@ $controls-size: 150px;
   }
 
   .carousel-item {
+    .center{
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      align-items: center;
+    }
     &.withImage {
       height: $banner-height;
       max-height: 100%;
