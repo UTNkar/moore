@@ -322,3 +322,24 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('events', EventsBlock()),
     ('two_column_grid', TwoColumnGridBlock())
 ]
+
+
+class SectionBlock(blocks.StructBlock):
+    include_top_margin = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Include margin above this block")
+    )
+    include_bottom_margin = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Include margin under this block")
+    )
+    content = blocks.StreamBlock(WAGTAIL_STATIC_BLOCKTYPES)
+
+    class Meta:
+        label = _('Section')
+        icon = 'fa-th-list'
+        template = "blocks/section.html"
+        group = _('Meta')
+
+
+WAGTAIL_STATIC_BLOCKTYPES = WAGTAIL_STATIC_BLOCKTYPES + [("section", SectionBlock())]

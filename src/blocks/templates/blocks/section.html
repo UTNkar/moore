@@ -1,0 +1,15 @@
+{% load wagtailcore_tags %}
+<section style="
+		{% if value.include_top_margin %} 
+		margin-top: 6em; 
+		{% endif %}
+		{% if value.include_bottom_margin %} 
+		margin-bottom: 6em; 
+		{% endif %}
+		">
+  {% for block in value.content %}
+  <div class="block-{{ block.block_type}}">
+    {% include_block block %}
+  </div>
+  {% endfor %}
+</section>
