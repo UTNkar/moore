@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.1] - 2020-02-22
+
+### Fixed
+
+- Uploaded files are now created with permissions 644 instead of 600
+- Fix bug that caused text on banners to dissapear if the text was to long
+- Fix bug that caused help text on image overlay to display unecessary text
+
+### Changed
+
+- Updated django to 2.2.10
+- Updated phonenumber to 8.11.4
+- Updated requests to 2.23.0
+- Updated wagtailmedia to 0.5.0
+
 ## [1.2.0] - 2020-02-11
 
 ### Added
