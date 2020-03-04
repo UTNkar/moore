@@ -8,27 +8,37 @@
         </div>
     {% endif %}
     {% if page.show_searchbar %}
-    <div class="carousel-fixed-item center search">
-        <div class="container row">
-            <form action="{% url 'search' %}" method="get">
-                <div class="col s12 m5 offset-m3 input-field">
-                    <i class="material-icons prefix">search</i>
-                    <input class="validate" type="text" id="query" name="query" placeholder="{% trans 'Search our website' %}">
-                </div>
-                <div class="col s12 m1 input-field">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div>
-            </form>
+        <div class="carousel-fixed-item center search">
+            <div class="container row">
+                <form action="{% url 'search' %}" method="get">
+                    <div class="col s12 m5 offset-m3 input-field">
+                        <i class="material-icons prefix">search</i>
+                        <input class="validate" type="text" id="query" name="query" placeholder="{% trans 'Search our website' %}">
+                    </div>
+                    <div class="col s12 m1 input-field">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
     {% endif %}
     {% for banner in page.banners.all %}
         {% image banner.image height-700 as photo %}
-        <div class="carousel-item content-center-v-sm {% if banner.image %} withImage {% endif %}"><div>
-            {% if banner.image %}<div class="banner-image" style="background-image: url('{{ photo.url }}');"></div>{% endif %}
-            {% if banner.title %}<h2 class="banner-title">{{ banner.title }}</h2>{% endif %}
-            {% if banner.text %}<p class="banner-description">{{ banner.text }}</p>{% endif %}
-            {% if banner.link and banner.button %}<a class="banner-link" href="{{ banner.link }}">{{ banner.button }}</a>{% endif %}
-        </div></div>
+    	<div class="carousel-item {% if banner.image %} withImage {% endif %}">
+            <div class="center">
+                {% if banner.video %}
+                    <video autoplay loop muted playsinline class="banner-video">
+                        <source src="{{ banner.video.url }}"/>
+                        <div class="banner-image" style="background-image: url('{{ photo.url }}');"></div>
+                    </video>
+                {% elif banner.image %}
+                    <div class="banner-image" style="background-image: url('{{ photo.url }}');"></div>
+                {% endif %}
+
+                {% if banner.title %}<h2 class="banner-title">{{ banner.title }}</h2>{% endif %}
+                {% if banner.text %}<p class="banner-description">{{ banner.text }}</p>{% endif %}
+                {% if banner.link and banner.button %}<a class="banner-link" href="{{ banner.link }}">{{ banner.button }}</a>{% endif %}
+            </div>
+        </div>
     {% endfor %}
 </div>

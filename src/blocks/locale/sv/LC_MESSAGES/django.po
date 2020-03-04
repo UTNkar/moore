@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-02 16:54+0100\n"
+"POT-Creation-Date: 2020-02-11 19:05+0100\n"
 "PO-Revision-Date: 2017-06-26 10:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,7 +22,8 @@ msgstr ""
 msgid "Responsive Image"
 msgstr "Responsiv bild"
 
-#: blocks/models.py:20 blocks/models.py:53 blocks/models.py:256
+#: blocks/models.py:20 blocks/models.py:53 blocks/models.py:264
+#: blocks/models.py:302
 msgid "Basic"
 msgstr ""
 
@@ -44,7 +45,8 @@ msgid "Counters"
 msgstr "Räknare"
 
 #: blocks/models.py:42 blocks/models.py:69 blocks/models.py:93
-#: blocks/models.py:107 blocks/models.py:125 blocks/models.py:200
+#: blocks/models.py:107 blocks/models.py:133 blocks/models.py:208
+#: blocks/models.py:310
 msgid "Noyce"
 msgstr ""
 
@@ -73,16 +75,24 @@ msgid "Logos"
 msgstr "Logotyper"
 
 #: blocks/models.py:122
+msgid "Include margin under this block"
+msgstr "Inkludera marginal under detta block"
+
+#: blocks/models.py:126
+msgid "Include margin above this block"
+msgstr "Inkludera marginal under detta block"
+
+#: blocks/models.py:130
 msgid "Image overlay"
 msgstr "Bildöverdrag"
 
-#: blocks/models.py:132
+#: blocks/models.py:140
 #, fuzzy
 #| msgid "Whether or not to embed a Facebook page"
 msgid "Whether to embed a Facebook page"
 msgstr "Om du vill visa en Facebook-sida"
 
-#: blocks/models.py:136
+#: blocks/models.py:144
 msgid ""
 "Name of the page to show. (Must be public or accessible by the registered "
 "app_id)"
@@ -90,56 +100,60 @@ msgstr ""
 "Namnet på sidan att visa. (Måste vara en publik sida eller tillgänglig  via "
 "den registrerade app-id)"
 
-#: blocks/models.py:142
+#: blocks/models.py:150
 msgid ""
 "Whether to show Instagram the last event from the registered Instagram feed"
 msgstr "Om du vill visa det senaste inlägget från Instagram"
 
-#: blocks/models.py:148
+#: blocks/models.py:156
 msgid "Whether to show the last video from a Youtube-channel"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: blocks/models.py:156
+#: blocks/models.py:164
 msgid "Whether to show the next few events from a google calendar"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: blocks/models.py:198
+#: blocks/models.py:206
 msgid "Events"
 msgstr "Evenemang"
 
-#: blocks/models.py:209
+#: blocks/models.py:217
 msgid "Contact Card"
 msgstr "Kontaktkort"
 
-#: blocks/models.py:212 blocks/models.py:276
+#: blocks/models.py:220 blocks/models.py:284
 msgid "Meta"
 msgstr ""
 
-#: blocks/models.py:247
+#: blocks/models.py:255
 #, fuzzy
 #| msgid "Events"
 msgid "Eventbrite"
 msgstr "Evenemang"
 
-#: blocks/models.py:250
+#: blocks/models.py:258
 msgid "Embed"
 msgstr ""
 
-#: blocks/models.py:267
+#: blocks/models.py:275
 msgid "Width out of 12"
 msgstr "Bredd, 1 till 12"
 
-#: blocks/models.py:273
+#: blocks/models.py:281
 msgid "Columns"
 msgstr "Kolumner"
 
-#: blocks/models.py:284
+#: blocks/models.py:292
 msgid "Row height in px"
 msgstr "Rad höjd i px"
 
-#: blocks/models.py:289
+#: blocks/models.py:297
 msgid "Swap position of image and paragraph"
 msgstr "Byt plats på bild och paragraf"
+
+#: blocks/models.py:307
+msgid "Two Column Grid"
+msgstr ""
 
 #: blocks/templates/blocks/tags/calendar.html:19
 msgid "See the whole calendar"

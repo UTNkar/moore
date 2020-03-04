@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.settings',
     'wagtail.contrib.modeladmin',
     "wagtail.contrib.routable_page",
+    'wagtailmedia',
 
     'compressor',
     'kronos',
@@ -144,6 +145,8 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+FILE_UPLOAD_PERMISSIONS = 0o644
 
 # Compressor
 # https://django-compressor.readthedocs.io/en/latest/settings/
