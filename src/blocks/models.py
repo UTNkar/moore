@@ -310,7 +310,6 @@ class TwoColumnGridBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
-
 class MapBlock(blocks.StructBlock):
     height = blocks.IntegerBlock(
         min_value=1,
@@ -318,28 +317,55 @@ class MapBlock(blocks.StructBlock):
         max_value=800,
         help_text=_('Map height in px')
     )
-
-    map_location = blocks.CharBlock(
+    location = blocks.CharBlock(
         max_length=255,
         verbose_name=_('Map Location'),
         help_text=_('Enter comma separated coordinates'),
         blank=True,
     )
+    markers = blocks.ListBlock(blocks.StructBlock([
+        ('marker_location', blocks.CharBlock(
+            max_length=255,
+            verbose_name=_('Marker Location'),
+            help_text=_('Enter comma separated coordinates'),
+            blank=True,
+        )),
+        ('marker_description', blocks.CharBlock(
+            verbose_name=_('Marker Description'),
+            help_text=_('Enter the text to show when clicking on the marker'),
+            blank=True,
+        ))
+    ], icon="fa-map-marker"))
 
-    location_description = blocks.RichTextBlock(
-        verbose_name=_('Location Description'),
-        help_text=_('Enter the text to show on the map'),
-        blank=True,
-    )
+    lines = blocks.ListBlock(blocks.StructBlock([
+        ('start', blocks.CharBlock(
+            max_length=255,
+            verbose_name=_('Line Start'),
+            help_text=_('Enter comma separated coordinates'),
+            blank=True,
+        )),
+        ('points', blocks.ListBlock(blocks.CharBlock(
+            max_length=255,
+            verbose_name=_('Line Point'),
+            help_text=_('Enter comma separated coordinates'),
+            blank=True,
+            icon="fa-map-marker"
+        ))),
+        ('end', blocks.CharBlock(
+            max_length=255,
+            verbose_name=_('Line End'),
+            help_text=_('Enter comma separated coordinates'),
+            blank=True,
+        ))
+    ], icon="fa-arrows-h"))
 
     class Meta:
         label = _('Map')
         icon = 'fa-map'
         template = 'blocks/map.html'
-        group = _('Meta')
+        group = _('Noyce')
 
 
-        
 WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('heading', HeadingBlock()),  # TODO: Do we use this one?
     ('image_description', ImageIconsBlock()),
@@ -350,5 +376,6 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('columns', ColumnBlock()),
     ('contacts', ContactsBlock()),
     ('events', EventsBlock()),
-    ('two_column_grid', TwoColumnGridBlock())
+    ('two_column_grid', TwoColumnGridBlock()),
+    ('map_block', MapBlock())
 ]

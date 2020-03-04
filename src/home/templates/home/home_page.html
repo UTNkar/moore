@@ -3,5 +3,7 @@
 
 {% block content %}
     {% include 'home/banners.html' %}
-    {% include_block page.body %}
+    {% for block in page.body %}
+        {% include_block block with id=block.id %}
+    {% endfor %}
 {% endblock %}
