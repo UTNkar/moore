@@ -308,25 +308,25 @@ class MapBlock(blocks.StructBlock):
         min_value=1,
         default=400,
         max_value=800,
-        help_text=_('Row height in px')
+        help_text=_('Map height in px')
     )
 
-    
-    rows = blocks.ListBlock(blocks.StructBlock([
-        ('flip', blocks.BooleanBlock(
-            required=False,
-            help_text=_('Swap position of image and paragraph'),
-        )),
-        ('image', ImageChooserBlock()),
-        ('paragraph', blocks.RichTextBlock(
-            template='blocks/paragraph.html',
-            group=_('Basic'),
-        ))
-    ]))
+    map_location = blocks.CharBlock(
+        max_length=255,
+        verbose_name=_('Map Location'),
+        help_text=_('Enter comma separated coordinates'),
+        blank=True,
+    )
+
+    location_description = blocks.RichTextBlock(
+        verbose_name=_('Location Description'),
+        help_text=_('Enter the text to show on the map'),
+        blank=True,
+    )
 
     class Meta:
         label = _('Map')
-        icon = 'fa-columns'
+        icon = 'fa-map'
         template = 'blocks/map.html'
         group = _('Meta')
 

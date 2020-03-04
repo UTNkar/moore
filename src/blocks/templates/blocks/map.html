@@ -1,0 +1,17 @@
+{% block extra_js %}
+    {{ block.super }}
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
+    <script>
+        var mymap = L.map('map').setView([{{ value.map_location }}], 13);
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoidXRua2FyIiwiYSI6ImNqNTJrNzF2eTBjNGszMm85bXNiZmFmdHUifQ.FzoCR3MjIP09-4iSw42Vkw'
+        }).addTo(mymap);
+        L.marker([{{ value.map_location }}]).addTo(mymap).bindPopup('{{ location_description }}').openPopup();
+    </script>
+    {% endblock %}
+<div id="map" style="height: {{ value.height }};">
+    
+</div>
