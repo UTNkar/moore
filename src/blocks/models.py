@@ -267,6 +267,19 @@ BASIC_BLOCKTYPES = [
 ]
 
 
+class CollapsibleBlock(blocks.StructBlock):
+    rows = blocks.ListBlock(blocks.StructBlock([
+        ('header',  blocks.CharBlock()),
+        ('body', blocks.StreamBlock(BASIC_BLOCKTYPES))
+    ]))
+
+    class Meta:
+        label = _('Collapsible')
+        icon = 'fa-tasks'
+        template = 'blocks/collapsible.html'
+        group = _('Noyce')
+
+
 class ColumnBlock(blocks.StructBlock):
     columns = blocks.ListBlock(blocks.StructBlock([
         ('width', blocks.IntegerBlock(
@@ -320,5 +333,6 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('columns', ColumnBlock()),
     ('contacts', ContactsBlock()),
     ('events', EventsBlock()),
-    ('two_column_grid', TwoColumnGridBlock())
+    ('two_column_grid', TwoColumnGridBlock()),
+    ('collapsible', CollapsibleBlock())
 ]

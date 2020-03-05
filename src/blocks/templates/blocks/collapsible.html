@@ -1,0 +1,12 @@
+<ul class="collapsible">
+    {% for row in value.rows %}
+    <li>
+	<div class="collapsible-header">
+	    {{ row.header }}
+	</div>
+	<div class="collapsible-body">
+	    {{ row.body.0 }}
+	</div>
+    </li>
+    {% endfor %}
+</ul>
