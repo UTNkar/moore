@@ -118,21 +118,7 @@ class ImageIconsBlock(SectionBlock):
         group = _('Noyce')
 
 
-class LogosBlock(SectionBlock):
-    logos = blocks.ListBlock(blocks.StructBlock([
-        ('image', ImageChooserBlock()),
-        ('link', blocks.URLBlock(required=False)),
-        ('description', blocks.CharBlock(required=False))
-    ]))
-
-    class Meta:
-        label = _('Logos')
-        icon = 'fa-pied-piper'
-        template = 'blocks/logos.html'
-        group = _('Noyce')
-
-
-class OverlayBlock(SectionBlock):
+class OverlayBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     title = blocks.CharBlock(required=False)
     description = blocks.CharBlock(required=False)
@@ -294,24 +280,70 @@ BASIC_BLOCKTYPES = [
 ]
 
 
-class ColumnBlock(SectionBlock):
-    columns = blocks.ListBlock(blocks.StructBlock([
-        ('width', blocks.IntegerBlock(
-            min_value=1,
-            max_value=12,
-            help_text=_('Width out of 12'),
-        )),
-        ('content', blocks.StreamBlock(BASIC_BLOCKTYPES))
+class CollapsibleBlock(blocks.StructBlock):
+    rows = blocks.ListBlock(blocks.StructBlock([
+        ('header',  blocks.CharBlock()),
+        ('body', blocks.StreamBlock(BASIC_BLOCKTYPES))
     ]))
 
     class Meta:
-        label = _('Columns')
-        icon = 'fa-columns'
-        template = 'blocks/columns.html'
-        group = _('Meta')
+        label = _('Collapsible')
+        icon = 'fa-tasks'
+        template = 'blocks/collapsible.html'
+        group = _('Layout')
 
 
-class TwoColumnGridBlock(SectionBlock):
+INLINE_BLOCKTYPES = BASIC_BLOCKTYPES + [
+    ('heading', HeadingBlock()),  # TODO: Do we use this one?
+    ('image_description', ImageIconsBlock()),
+    ('image_icons', ImageDescriptionBlock()),
+    ('overlay', OverlayBlock()),
+    ('counters', CountersBlock()),
+    ('contacts', ContactsBlock()),
+    ('events', EventsBlock()),
+    ("Collapsible", CollapsibleBlock())
+]
+
+class AbstractSectionStructValue(StructValue):
+    def margin_top(self):
+        return self.get('include_margin_top')
+    def margin_bot(self):
+        return self.get('include_margin_bot')
+    def full_width(self):
+        return self.get('extend_full_width')
+
+
+class AbstractSectionBlock(blocks.StructBlock):
+    include_margin_top = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Include margin above this block")
+    )
+
+    extend_full_width = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Expand this section to full width")
+    )
+
+    include_margin_bot = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Include margin under this block")
+    )
+
+    class Meta:
+        abstract = True
+        value_class = AbstractSectionStructValue
+
+
+class ContainerBlock(AbstractSectionBlock):
+    block = blocks.StreamBlock(INLINE_BLOCKTYPES)
+
+    class Meta:
+        label = _('Container')
+        icon = 'fa-tasks'
+        template = 'blocks/container.html'
+        group = _('Sections')
+
+class TwoColumnGridBlock(AbstractSectionBlock):
     height = blocks.IntegerBlock(
         min_value=1,
         default=400,
@@ -334,41 +366,43 @@ class TwoColumnGridBlock(SectionBlock):
         label = _('Two Column Grid')
         icon = 'fa-columns'
         template = 'blocks/two_column_grid.html'
-        group = _('Noyce')
+        group = _('Sections')
 
 
-WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
-    ('heading', HeadingBlock()),  # TODO: Do we use this one?
-    ('image_description', ImageIconsBlock()),
-    ('image_icons', ImageDescriptionBlock()),
-    ('overlay', OverlayBlock()),
-    ('logos', LogosBlock()),
-    ('counters', CountersBlock()),
-    ('columns', ColumnBlock()),
-    ('contacts', ContactsBlock()),
-    ('events', EventsBlock()),
-    ('two_column_grid', TwoColumnGridBlock())
-]
-
-
-class ContainerBlock(blocks.ListBlock(blocks.StreamBlock(WAGTAIL_STATIC_BLOCKTYPES))):
-    include_top_margin = blocks.BooleanBlock(
-        required=False,
-        help_text=_("Include margin above this block")
-    )
-    
-    include_bottom_margin = blocks.BooleanBlock(
-        required=False,
-        help_text=_("Include margin under this block")
-    )
-
-#    content = blocks.ListBlock(blocks.StreamBlock(WAGTAIL_STATIC_BLOCKTYPES))
+class ColumnBlock(AbstractSectionBlock):
+    columns = blocks.ListBlock(blocks.StructBlock([
+        ('width', blocks.IntegerBlock(
+            min_value=1,
+            max_value=12,
+            help_text=_('Width out of 12'),
+        )),
+        ('content', blocks.StreamBlock(INLINE_BLOCKTYPES))
+    ]))
 
     class Meta:
-        label = _('Container')
-        icon = 'fa-picture-o'
-        template = 'blocks/section.html'
-        group = _('Basic')
+        label = _('Columns')
+        icon = 'fa-columns'
+        template = 'blocks/columns.html'
+        group = _('Sections')
 
 
-WAGTAIL_STATIC_BLOCKTYPES = WAGTAIL_STATIC_BLOCKTYPES + [("container", ContainerBlock())]
+class LogosBlock(blocks.StructBlock):
+    logos = blocks.ListBlock(blocks.StructBlock([
+        ('image', ImageChooserBlock()),
+        ('link', blocks.URLBlock(required=False)),
+        ('description', blocks.CharBlock(required=False))
+    ]))
+
+    class Meta:
+        label = _('Logos')
+        icon = 'fa-pied-piper'
+        template = 'blocks/logos.html'
+        group = _('Sections')
+
+
+WAGTAIL_STATIC_BLOCKTYPES = [
+    ("section", ContainerBlock()),
+    ('two_column_grid', TwoColumnGridBlock()),
+    ('columns', ColumnBlock()),
+    ('logos', LogosBlock()),
+]

@@ -5,7 +5,6 @@ $controls-size: 150px;
 
 .carousel.banners {
   height: $banner-height;
-  margin: 0 0 60px 0;
   .carousel-fixed-item {
     &.controls {
       @extend .hide-on-med-and-down;
