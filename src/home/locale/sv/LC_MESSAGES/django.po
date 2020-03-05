@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-07 15:54+0100\n"
+"POT-Creation-Date: 2020-03-05 00:18+0100\n"
 "PO-Revision-Date: 2017-06-26 10:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,49 +23,53 @@ msgid "Centered"
 msgstr ""
 
 #: home/models/banner.py:39
+#, fuzzy
+#| msgid ""
+#| "Banner video media. If video is not supported by the browser, the image "
+#| "is shown instead."
 msgid ""
-"Banner video media. If video is not supported by the browser, the image is "
-"shown instead."
+"Banner video media. If video is not supported by the\n"
+"        browser, the image is shown instead."
 msgstr ""
 "Banner video media. Om video inte stöds av webbläsaren visas bilden istället."
 
-#: home/models/banner.py:48
+#: home/models/banner.py:49
 msgid "English banner title"
 msgstr "Engelsk bannertitel"
 
-#: home/models/banner.py:49 home/models/banner.py:56
+#: home/models/banner.py:50 home/models/banner.py:57
 msgid "Enter the title to be shown on the banner."
 msgstr "Skriv in titeln som ska synas på bannern."
 
-#: home/models/banner.py:55
+#: home/models/banner.py:56
 msgid "Swedish banner title"
 msgstr "Svensk bannertitel"
 
-#: home/models/banner.py:63
+#: home/models/banner.py:64
 msgid "English banner text"
 msgstr "Engelsk bannertext"
 
-#: home/models/banner.py:64 home/models/banner.py:70
+#: home/models/banner.py:65 home/models/banner.py:71
 msgid "Enter a text to be shown on the banner."
 msgstr "Skriv in texten som ska synas på bannern."
 
-#: home/models/banner.py:69
+#: home/models/banner.py:70
 msgid "Swedish banner text"
 msgstr "Svensk bannertext"
 
-#: home/models/banner.py:77
+#: home/models/banner.py:78
 msgid "Button URL"
 msgstr "KnappURL"
 
-#: home/models/banner.py:82
+#: home/models/banner.py:83
 msgid "English button text"
 msgstr "Engelsk ikontext"
 
-#: home/models/banner.py:83 home/models/banner.py:89
+#: home/models/banner.py:84 home/models/banner.py:90
 msgid "Enter the text to be displayed on the button."
 msgstr "Skriv in texten som ska synas på ikonen."
 
-#: home/models/banner.py:88
+#: home/models/banner.py:89
 msgid "Swedish button text"
 msgstr "Svensk ikontext"
 

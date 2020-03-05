@@ -1,6 +1,10 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
-<div class="container">
+<div class="
+  {% if not value.full_width %} container {% endif %}
+  {% if value.margin_top %} margin-top {% endif %}
+  {% if value.margin_bot %} margin-bot {% endif %}
+  ">
   {% for row in value.rows %}
   {% image row.image original as image %}
   {% if row.flip %}
@@ -16,4 +20,4 @@
       </div>
     </div>
     {% endfor%}
-  </div>
+</div>

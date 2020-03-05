@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-06 15:48+0100\n"
+"POT-Creation-Date: 2020-03-05 00:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "choose your option"
 msgstr ""
 
-#: utils/validators.py:13
+#: utils/validators.py:25
 msgid ""
 "Use the format YYYYMMDD-XXXX, YYMMDD-XXXX,                 YYYYMMDDXXXX, "
 "YYMMDDXXXX for your ssn."

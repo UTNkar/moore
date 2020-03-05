@@ -1,6 +1,6 @@
 {% load wagtailimages_tags %}
 {% image value.image original as background %}
-<div class="overlay" style="background-image: url('{{ background.url }}'); {% if value.include_bottom_margin %} margin-bottom: 6em; {% endif %} {% if value.include_top_margin %} margin-top: 6em; {% endif %} ">
+<div class="overlay" style="background-image: url('{{ background.url }}');">
     <div class="container {{ value.text_color }}">
         {% if value.title %}<h2>{{ value.title }}</h2>{% endif %}
         {% if value.description %}<p>{{ value.description }}</p>{% endif %}

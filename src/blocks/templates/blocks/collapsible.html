@@ -5,7 +5,9 @@
 	    {{ row.header }}
 	</div>
 	<div class="collapsible-body">
-	    {{ row.body.0 }}
+	  {% for block in row.body %}
+	  {{ block }}
+	  {% endfor %}
 	</div>
     </li>
     {% endfor %}
