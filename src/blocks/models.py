@@ -66,22 +66,6 @@ class HeadingBlock(blocks.StructBlock):
         group = _('Basic')
 
 
-class ImageDescriptionBlock(blocks.StructBlock):
-    description = blocks.RichTextBlock()
-    image = ImageChooserBlock()
-    image_alignment = blocks.ChoiceBlock(choices=[
-        ('left', _('Left')),
-        ('right', _('Right')),
-    ])
-    hide_on_med = blocks.BooleanBlock(required=False)
-
-    class Meta:
-        label = _('Image + Description')
-        icon = 'fa-file-image-o '
-        template = 'blocks/image_description.html'
-        group = _('Noyce')
-
-
 class OverlayBlock(blocks.StructBlock):
     height = blocks.IntegerBlock(
         min_value=1,
@@ -267,30 +251,6 @@ class CountersBlock(blocks.StructBlock):
         icon = 'fa-balance-scale'
         template = 'blocks/counter.html'
         group = _('Sections')
-
-        
-class ImageIconsBlock(blocks.StructBlock):
-    title = blocks.CharBlock()
-    image = ImageChooserBlock()
-    image_alignment = blocks.ChoiceBlock(choices=[
-        ('left', _('Left')),
-        ('right', _('Right')),
-    ])
-    icons = blocks.ListBlock(blocks.StructBlock([
-        ('icon', blocks.CharBlock(
-            help_text=_('Material icon font icon text, as found on: '
-                        'https://material.io/icons'),
-        )),
-        ('title', blocks.CharBlock()),
-        ('description', blocks.CharBlock())
-    ]))
-    hide_on_med = blocks.BooleanBlock(required=False)
-
-    class Meta:
-        label = _('Image + Icons')
-        icon = 'fa-file-excel-o'
-        template = 'blocks/image_icons.html'
-        group = _('Noyce')
 
 
 
