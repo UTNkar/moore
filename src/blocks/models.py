@@ -186,31 +186,6 @@ class ContainerBlock(AbstractSectionBlock):
         template = 'blocks/container.html'
         group = _('Sections')
 
-class TwoColumnGridBlock(AbstractSectionBlock):
-    height = blocks.IntegerBlock(
-        min_value=1,
-        default=400,
-        max_value=800,
-        help_text=_('Row height in px')
-    )
-    rows = blocks.ListBlock(blocks.StructBlock([
-        ('flip', blocks.BooleanBlock(
-            required=False,
-            help_text=_('Swap position of image and paragraph'),
-        )),
-        ('image', ImageChooserBlock()),
-        ('paragraph', blocks.RichTextBlock(
-            template='blocks/paragraph.html',
-            group=_('Basic'),
-        ))
-    ]))
-
-    class Meta:
-        label = _('Two Column Grid')
-        icon = 'fa-columns'
-        template = 'blocks/two_column_grid.html'
-        group = _('Sections')
-
 
 class FlexColumnsBlock(AbstractSectionBlock):
     height = blocks.IntegerBlock(
@@ -447,7 +422,6 @@ class EventbriteBlock(blocks.StructBlock):
         
 WAGTAIL_STATIC_BLOCKTYPES = [
     ("section", ContainerBlock()),
-    ('two_column_grid', TwoColumnGridBlock()),
     ('columns', ColumnBlock()),
     ('logos', LogosBlock()),
     ('flex_columns', FlexColumnsBlock()),
