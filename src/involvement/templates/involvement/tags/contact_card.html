@@ -1,27 +1,27 @@
 {% load i18n static wagtailcore_tags wagtailimages_tags %}
-<div class="col l{{ large_width }} m{{ medium_width}} s{{ small_width }}">
-    <div class="card horizontal">
-        <div class="card-image">
-            {% if picture %}
-                {% image picture fill-200x300 %}
-            {% else %}
-                <img src="{% static 'images/bocken.svg' %}" alt="{% trans 'UTN logo' %}" style="padding: 50px 5px;">
-            {% endif %}
-        </div>
-        <div class="card-stacked">
-            <div class="card-content">
-                <span class="card-title">{{ card_name }}</span>
-                <div class="rich-text">
-                    <p><b>{{ title }}</b></p>
-                    <p>{{ phone_number }}</p>
-                    <p><a href="mailto:{{ email }}">{{ email }}</a></p>
-                </div>
-            </div>
-            {% if email %}
-                <div class="card-action">
-                    <a href="mailto:{{ email }}">{% trans 'send email'|title %}</a>
-                </div>
-            {% endif %}
-        </div>
+<div class="contact-card">
+  <div class="card horizontal">
+    <div class="card-image">
+      {% if picture %}
+      {% image picture fill-200x300 %}
+      {% else %}
+      <img src="{% static 'images/bocken.svg' %}" alt="{% trans 'UTN logo' %}" style="padding: 50px 5px;">
+      {% endif %}
     </div>
+    <div class="card-stacked">
+      <div class="card-content">
+        <span class="card-title">{{ card_name }}</span>
+        <div class="rich-text">
+          <p><b>{{ title }}</b></p>
+          <p>{{ phone_number }}</p>
+          <p><a href="mailto:{{ email }}">{{ email }}</a></p>
+        </div>
+      </div>
+      {% if email %}
+      <div class="card-action">
+        <a href="mailto:{{ email }}">{% trans 'send email'|title %}</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
 </div>

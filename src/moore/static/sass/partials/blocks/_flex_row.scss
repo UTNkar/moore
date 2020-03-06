@@ -1,0 +1,32 @@
+.block-flex_row {
+  .flex-row {
+      display: flex;
+    
+    @media #{$medium-and-down} {
+	flex-direction: column;
+    }
+    .column{
+	flex: 1;
+	display: flex;
+	@media #{$medium-and-down} {
+	    max-height: unset;
+	    min-height: unset;
+	}
+    }
+  }
+  .padding {
+      padding: 2em 4em;
+      flex: 1;
+      display: flex;
+      overflow-y: auto;
+      @media #{$medium-and-down} {
+	  padding: 2em 0em;
+	  overflow-y: unset;
+      }
+  }
+  .reverse-order {
+      @media #{$medium-and-down} {
+	  flex-direction: column-reverse;
+      }
+  }	
+}

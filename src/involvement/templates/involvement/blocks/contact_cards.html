@@ -1,8 +1,10 @@
 {% load involvement_tags %}
 <div class="container">
     <div class="row">
-    	{% for contact in value.contacts %}
-        	{% contact_card contact 6 %}
+      {% for contact in value.contacts %}
+      <div class="col l6 m12 s12">
+        {% contact_card contact %}
+      </div>
         {% endfor %}
     </div>
 </div>

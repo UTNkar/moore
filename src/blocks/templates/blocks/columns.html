@@ -1,8 +1,7 @@
 {% load wagtailcore_tags %}
 <div class="
 {% if not value.full_width %} container {% endif %}
-{% if value.margin_top %} margin-top {% endif %}
-{% if value.margin_bot %} margin-bot {% endif %}
+{% if value.padding %} section {% endif %}
 ">
     <div class="row">
         {% for column in value.columns %}

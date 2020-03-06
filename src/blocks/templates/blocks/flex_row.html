@@ -1,0 +1,24 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+<div class="flex-row
+  {% if not value.full_width %} container {% endif %}
+  {% if value.padding %} section {% endif %}
+  {% if value.flip %} reverse-order {% endif %}"
+     >
+  {% for column in value.columns %}
+  <div style="min-height:{{value.height}}px; max-height:{{value.height}}px;" class ="column">
+    {% if column.include_padding %}
+    <div class="padding">
+      {% for content in column.content %}
+      {% include_block content %}
+      {% endfor %}
+    </div>
+    {% else %}
+    {% for content in column.content %}
+    {% include_block content %}
+    {% endfor %}
+    {% endif %}
+  </div>
+  {% endfor%}
+</div>

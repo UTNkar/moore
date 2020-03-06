@@ -1,12 +1,14 @@
+{% load wagtailcore_tags %}
+
 <ul class="collapsible">
     {% for row in value.rows %}
     <li>
 	<div class="collapsible-header">
-	    {{ row.header }}
+	    <h4>{{ row.header }}</h4>
 	</div>
 	<div class="collapsible-body">
-	  {% for block in row.body %}
-	  {{ block }}
+	  {% for column in row.body %}
+	  {% include_block column %}
 	  {% endfor %}
 	</div>
     </li>

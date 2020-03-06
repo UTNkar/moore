@@ -1,0 +1,22 @@
+<table class="
+	      {% if value.striped %} striped {% endif %}
+	      {% if value.center %} centered {% endif %}"
+       >
+  <thead>
+    <tr>
+      {% for heading in value.header %}
+      <th> {{heading}} </th>
+      {% endfor %}
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for row in value.rows %}
+    <tr>
+      {% for column in row %}
+      <td> {{ column }} </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
