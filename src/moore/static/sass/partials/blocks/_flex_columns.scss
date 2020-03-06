@@ -1,17 +1,15 @@
-.block-flex_row {
-  .flex-row {
+.block-flex_columns {
+  .flex-columns {
       display: flex;
-    
+      
     @media #{$medium-and-down} {
 	flex-direction: column;
     }
     .column{
 	flex: 1;
 	display: flex;
-	@media #{$medium-and-down} {
-	    max-height: unset;
-	    min-height: unset;
-	}
+	flex-direction: column;
+	justify-content: space-around;
     }
   }
   .padding {

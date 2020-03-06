@@ -83,6 +83,12 @@ class ImageDescriptionBlock(blocks.StructBlock):
 
 
 class OverlayBlock(blocks.StructBlock):
+    height = blocks.IntegerBlock(
+        min_value=1,
+        default=400,
+        max_value=800,
+        help_text=_('Overlay height in px')
+    )
     image = ImageChooserBlock()
     title = blocks.CharBlock(required=False)
     description = blocks.CharBlock(required=False)
@@ -206,7 +212,7 @@ class TwoColumnGridBlock(AbstractSectionBlock):
         group = _('Sections')
 
 
-class FlexRowBlock(AbstractSectionBlock):
+class FlexColumnsBlock(AbstractSectionBlock):
     height = blocks.IntegerBlock(
         min_value=1,
         default=400,
@@ -223,16 +229,16 @@ class FlexRowBlock(AbstractSectionBlock):
         blocks.StructBlock([
             ('include_padding', blocks.BooleanBlock(
                 required=False,
-                help_text=_("Include padding around this image")
+                help_text=_("Include padding around this column")
             )),
             ('content', blocks.StreamBlock(BASIC_BLOCKTYPES))
         ]))
     
 
     class Meta:
-        label = _('Flex Row')
+        label = _('Flex Columns')
         icon = 'fa-columns'
-        template = 'blocks/flex_row.html'
+        template = 'blocks/flex_columns.html'
         group = _('Sections')
 
         
@@ -444,7 +450,7 @@ WAGTAIL_STATIC_BLOCKTYPES = [
     ('two_column_grid', TwoColumnGridBlock()),
     ('columns', ColumnBlock()),
     ('logos', LogosBlock()),
-    ('flex_row', FlexRowBlock()),
+    ('flex_columns', FlexColumnsBlock()),
     ('contacts', ContactsBlock()),
     ('events', EventsBlock()),
     ('counters', CountersBlock())
