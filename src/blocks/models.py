@@ -159,6 +159,18 @@ class MapBlock(blocks.StructBlock):
         template = 'blocks/map.html'
         group = _('Basic')
 
+
+class ButtonBlock(blocks.StructBlock):
+    text = blocks.CharBlock(required=True)
+    link = blocks.URLBlock(required=True)
+
+    class Meta:
+        label = _('Button')
+        icon = 'fa-hand-pointer-o'
+        template = 'blocks/button.html'
+        group = _('Basic')
+
+
         
 BASIC_BLOCKTYPES = [
     ('heading', HeadingBlock()),
@@ -172,7 +184,8 @@ BASIC_BLOCKTYPES = [
     ('table', TableBlock()),
     ('icon', IconBlock()),
     ('contact_card', ContactCardBlock()),
-    ('map_block', MapBlock())
+    ('map_block', MapBlock()),
+    ('button_block', ButtonBlock())
 ]
 
 
