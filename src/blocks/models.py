@@ -103,6 +103,62 @@ class IconBlock(blocks.StructBlock):
         template = 'blocks/icon.html'
         group = _('Basic')
 
+
+class MapBlock(blocks.StructBlock):
+    height = blocks.IntegerBlock(
+        min_value=1,
+        default=400,
+        max_value=800,
+        help_text=_('Map height in px')
+    )
+    location = blocks.CharBlock(
+        max_length=255,
+        verbose_name=_('Map Location'),
+        help_text=_('Enter comma separated coordinates'),
+        blank=True,
+    )
+    markers = blocks.ListBlock(blocks.StructBlock([
+        ('marker_location', blocks.CharBlock(
+            max_length=255,
+            verbose_name=_('Marker Location'),
+            help_text=_('Enter comma separated coordinates'),
+            blank=True,
+        )),
+        ('marker_description', blocks.CharBlock(
+            verbose_name=_('Marker Description'),
+            help_text=_('Enter the text to show when clicking on the marker'),
+            blank=True,
+        ))
+    ], icon="fa-map-marker"))
+
+    lines = blocks.ListBlock(blocks.StructBlock([
+        ('start', blocks.CharBlock(
+            max_length=255,
+            verbose_name=_('Line Start'),
+            help_text=_('Enter comma separated coordinates'),
+            blank=True,
+        )),
+        ('points', blocks.ListBlock(blocks.CharBlock(
+            max_length=255,
+            verbose_name=_('Line Point'),
+            help_text=_('Enter comma separated coordinates'),
+            blank=True,
+            icon="fa-map-marker"
+        ))),
+        ('end', blocks.CharBlock(
+            max_length=255,
+            verbose_name=_('Line End'),
+            help_text=_('Enter comma separated coordinates'),
+            blank=True,
+        ))
+    ], icon="fa-arrows-h"))
+
+    class Meta:
+        label = _('Map')
+        icon = 'fa-map'
+        template = 'blocks/map.html'
+        group = _('Basic')
+
         
 BASIC_BLOCKTYPES = [
     ('heading', HeadingBlock()),
@@ -115,7 +171,8 @@ BASIC_BLOCKTYPES = [
     ('divider', DividerBlock()),
     ('table', TableBlock()),
     ('icon', IconBlock()),
-    ('contact_card', ContactCardBlock())
+    ('contact_card', ContactCardBlock()),
+    ('map_block', MapBlock())
 ]
 
 
@@ -379,9 +436,7 @@ class EventbriteBlock(blocks.StructBlock):
         group = _('Embed')
 
 
-        
-WAGTAIL_STATIC_BLOCKTYPES = [
-    ("section", ContainerBlock()),
+WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('columns', ColumnBlock()),
     ('logos', LogosBlock()),
     ('flex_columns', FlexColumnsBlock()),

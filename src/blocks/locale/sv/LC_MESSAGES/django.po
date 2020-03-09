@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 19:05+0100\n"
+"POT-Creation-Date: 2020-03-05 00:18+0100\n"
 "PO-Revision-Date: 2017-06-26 10:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,7 +46,7 @@ msgstr "Räknare"
 
 #: blocks/models.py:42 blocks/models.py:69 blocks/models.py:93
 #: blocks/models.py:107 blocks/models.py:133 blocks/models.py:208
-#: blocks/models.py:310
+#: blocks/models.py:310 blocks/models.py:366
 msgid "Noyce"
 msgstr ""
 
@@ -154,6 +154,49 @@ msgstr "Byt plats på bild och paragraf"
 #: blocks/models.py:307
 msgid "Two Column Grid"
 msgstr ""
+
+#: blocks/models.py:318
+msgid "Map height in px"
+msgstr "Kartans höjd i px"
+
+#: blocks/models.py:322
+msgid "Map Location"
+msgstr "Kartans fokus"
+
+#: blocks/models.py:323 blocks/models.py:330 blocks/models.py:344
+#: blocks/models.py:350 blocks/models.py:357
+msgid "Enter comma separated coordinates"
+msgstr "Ange kommaseparerade koordinater"
+
+#: blocks/models.py:329
+msgid "Marker Location"
+msgstr "Markörkoordinater"
+
+#: blocks/models.py:334
+#, fuzzy
+#| msgid "Image + Description"
+msgid "Marker Description"
+msgstr "Bild + Beskrivning"
+
+#: blocks/models.py:335
+msgid "Enter the text to show when clicking on the marker"
+msgstr "Ange texten som visas när en trycker på markören"
+
+#: blocks/models.py:343
+msgid "Line Start"
+msgstr "Linje Start"
+
+#: blocks/models.py:349
+msgid "Line Point"
+msgstr "Linje Punkt"
+
+#: blocks/models.py:356
+msgid "Line End"
+msgstr "Linje Slut"
+
+#: blocks/models.py:363
+msgid "Map"
+msgstr "Karta"
 
 #: blocks/templates/blocks/tags/calendar.html:19
 msgid "See the whole calendar"
