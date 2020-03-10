@@ -1,13 +1,8 @@
 {% load wagtailcore_tags %}
-<div class="
-{% if not value.full_width %} container {% endif %}
-{% if value.padding %} section {% endif %}
-">
-    <div class="row">
-        {% for column in value.columns %}
-            <div class="col s12 m{{ column.width }}">
-                {% include_block column.content %}
-            </div>
-        {% endfor %}
-    </div>
+<div class="row">
+  {% for column in value.columns %}
+  <div class="col s12 m{{ column.width }}">
+    {% include_block column.content %}
+  </div>
+  {% endfor %}
 </div>

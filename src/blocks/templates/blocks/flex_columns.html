@@ -1,23 +1,15 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
-{% load wagtailcore_tags %}
-<div class="flex-columns
-  {% if not value.full_width %} container {% endif %}
-  {% if value.padding %} section {% endif %}
-  {% if value.flip %} reverse-order {% endif %}"
-     >
+
+<div class="flex-columns {% if value.flip %} reverse-order {% endif %}">
   {% for column in value.columns %}
-  <div style="height: {{ value.height }}px;" class ="column">
+  <div class ="column">
     {% if column.include_padding %}
     <div class="padding">
-      {% for content in column.content %}
-      {% include_block content %}
-      {% endfor %}
+      {% include_block column.content %}
     </div>
     {% else %}
-    {% for content in column.content %}
-    {% include_block content %}
-    {% endfor %}
+    {% include_block column.content %}
     {% endif %}
   </div>
   {% endfor%}

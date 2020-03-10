@@ -208,40 +208,8 @@ STANDARD_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ("Collapsible", CollapsibleBlock())
 ]
 
-class AbstractSectionStructValue(StructValue):
-    def padding(self):
-        return self.get('include_padding')
-    def full_width(self):
-        return self.get('extend_full_width')
 
-
-class AbstractSectionBlock(blocks.StructBlock):
-    include_padding = blocks.BooleanBlock(
-        required=False,
-        help_text=_("Include padding for this block")
-    )
-
-    extend_full_width = blocks.BooleanBlock(
-        required=False,
-        help_text=_("Expand this section to full width")
-    )
-    
-    class Meta:
-        abstract = True
-        value_class = AbstractSectionStructValue
-
-
-class ContainerBlock(AbstractSectionBlock):
-    block = blocks.StreamBlock(STANDARD_BLOCKTYPES)
-
-    class Meta:
-        label = _('Container')
-        icon = 'fa-tasks'
-        template = 'blocks/container.html'
-        group = _('Sections')
-
-
-class FlexColumnsBlock(AbstractSectionBlock):
+class FlexColumnsBlock(blocks.StructBlock):
     height = blocks.IntegerBlock(
         min_value=1,
         default=400,
@@ -268,10 +236,10 @@ class FlexColumnsBlock(AbstractSectionBlock):
         label = _('Flex Columns')
         icon = 'fa-columns'
         template = 'blocks/flex_columns.html'
-        group = _('Sections')
+        group = _('Layout')
 
         
-class ColumnBlock(AbstractSectionBlock):
+class ColumnBlock(blocks.StructBlock):
     columns = blocks.ListBlock(blocks.StructBlock([
         ('width', blocks.IntegerBlock(
             min_value=1,
@@ -285,7 +253,7 @@ class ColumnBlock(AbstractSectionBlock):
         label = _('Columns')
         icon = 'fa-columns'
         template = 'blocks/columns.html'
-        group = _('Sections')
+        group = _('Layout')
 
 
 class LogosBlock(blocks.StructBlock):
@@ -299,7 +267,7 @@ class LogosBlock(blocks.StructBlock):
         label = _('Logos')
         icon = 'fa-pied-piper'
         template = 'blocks/logos.html'
-        group = _('Sections')
+        group = _('Layout')
 
 class CountersBlock(blocks.StructBlock):
     title = blocks.CharBlock()
@@ -320,7 +288,7 @@ class CountersBlock(blocks.StructBlock):
         label = _('Counters')
         icon = 'fa-balance-scale'
         template = 'blocks/counter.html'
-        group = _('Sections')
+        group = _('Layout')
 
 
 
@@ -401,7 +369,7 @@ class EventsBlock(blocks.StructBlock):
         template = 'blocks/events.html'
 
 
-class ContactsBlock(AbstractSectionBlock):
+class ContactsBlock(blocks.StructBlock):
     contacts = blocks.ListBlock(ContactCardBlock())
 
     class Meta:
@@ -449,7 +417,7 @@ class EventbriteBlock(blocks.StructBlock):
         group = _('Embed')
 
 
-WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
+LAYOUT_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('columns', ColumnBlock()),
     ('logos', LogosBlock()),
     ('flex_columns', FlexColumnsBlock()),
@@ -457,3 +425,24 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('events', EventsBlock()),
     ('counters', CountersBlock())
 ]
+
+class SectionBlock(blocks.StructBlock):
+    padding = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Include padding for this block")
+    )
+    full_width = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Expand this section to full width")
+    )
+
+    body = blocks.StreamBlock(LAYOUT_BLOCKTYPES)
+
+    class Meta:
+        label = _('Section')
+        icon = 'fa-bars'
+        template = 'blocks/section.html'
+        group = _('Sections')
+
+
+WAGTAIL_STATIC_BLOCKTYPES = [("section", SectionBlock())]

@@ -1,15 +1,16 @@
 {% load wagtailimages_tags %}
-<div class="container row logo-container">
-    {% for logo in value.logos %}
-        <div class="logo">
-            {% if logo.link %}<a href="{{ logo.link }}">{% endif %}
-                {% image logo.image height-75 as image %}
-                <img src="{{ image.url }}" alt="{{ image.alt }}">
-            {% if logo.link %}</a>{% endif %}
+<div class="logo-containera">
+  {% for logo in value.logos %}
+  <div class="logo">
+    {% if logo.link %}<a href="{{ logo.link }}">{% endif %}
+      {% image logo.image height-75 as image %}
+      <img src="{{ image.url }}" alt="{{ image.alt }}">
+      {% if logo.link %}</a>{% endif %}
 
-            {% if logo.description %}
-                <p>{{ logo.description }}</p>
-            {% endif %}
-        </div>
-    {% endfor %}
+    {% if logo.description %}
+    <p>{{ logo.description }}</p>
+    {% endif %}
+  </div>
+  {% endfor %}
 </div>
+

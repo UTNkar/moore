@@ -1,12 +1,6 @@
 {% load wagtailcore_tags %}
-<section style="
-		{% if value.include_bottom_margin %} 
-		
-		{% endif %} 
-		">
-  {% for v in value.content %}
-  <div>
-    {% include_block v %}
+<div class="{% if value.padding %}section{% endif %}">
+  <div class="{% if not value.full_width %}container{% endif %}">
+    {% include_block value.body %}
   </div>
-  {% endfor %}
-</section>
+</div>

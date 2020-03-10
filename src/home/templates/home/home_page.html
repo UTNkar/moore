@@ -4,6 +4,6 @@
 {% block content %}
     {% include 'home/banners.html' %}
     {% for block in page.body %}
-        {% include_block block with id=block.id %}
+        <section class="block-{{ block.block_type }}">{% include_block block with id=block.id %}</section>
     {% endfor %}
 {% endblock %}
