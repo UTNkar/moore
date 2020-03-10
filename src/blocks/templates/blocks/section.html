@@ -1,5 +1,13 @@
 {% load wagtailcore_tags %}
-<div class="{% if value.padding %}section{% endif %}">
+<div class="
+{% if value.padding == 'S' %} 
+	padding-small 
+{% elif value.padding == 'M' %}
+	padding-medium
+{% elif value.padding == 'L' %}
+	padding-large
+{% endif %}
+">
   <div class="{% if not value.full_width %}container{% endif %}">
     {% include_block value.body %}
   </div>

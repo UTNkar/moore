@@ -1,10 +1,18 @@
 from django.utils.translation import ugettext_lazy as _
+from django import forms
 from wagtail.core import blocks
 from wagtail.core.blocks import StructValue
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
 import requests
 from datetime import datetime
+
+
+class ChoiceBlock(blocks.FieldBlock):
+    def __init__(self, choices, required=True, help_text=None, **kwargs):
+            
+        self.field = forms.ChoiceField(choices=choices)
+        super().__init__(**kwargs)
         
 # Basic block types
 
@@ -241,9 +249,9 @@ class FlexColumnsBlock(blocks.StructBlock):
         
 class ColumnBlock(blocks.StructBlock):
     columns = blocks.ListBlock(blocks.StructBlock([
-        ('width', blocks.IntegerBlock(
-            min_value=1,
-            max_value=12,
+        ('width', ChoiceBlock(
+            [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7,7),
+             (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)],
             help_text=_('Width out of 12'),
         )),
         ('content', blocks.StreamBlock(STANDARD_BLOCKTYPES))
@@ -426,10 +434,11 @@ LAYOUT_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('counters', CountersBlock())
 ]
 
+
 class SectionBlock(blocks.StructBlock):
-    padding = blocks.BooleanBlock(
-        required=False,
-        help_text=_("Include padding for this block")
+    padding = ChoiceBlock(
+        choices = [("S", "Small"), ("M", "Medium"), ("L", "Large")],
+        help_text= _("Include padding for this section")
     )
     full_width = blocks.BooleanBlock(
         required=False,
@@ -445,4 +454,5 @@ class SectionBlock(blocks.StructBlock):
         group = _('Sections')
 
 
-WAGTAIL_STATIC_BLOCKTYPES = [("section", SectionBlock())]
+
+WAGTAIL_STATIC_BLOCKTYPES = [("section", SectionBlock()), ("divider", DividerBlock())]
