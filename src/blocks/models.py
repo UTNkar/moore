@@ -67,6 +67,27 @@ class HeadingBlock(blocks.StructBlock):
         group = _('Basic')
 
 
+class ButtonBlock(blocks.StructBlock):
+    text = blocks.CharBlock(required=True)
+    link = blocks.URLBlock(required=True)
+
+    class Meta:
+        label = _('Button')
+        icon = 'fa-hand-pointer-o'
+        template = 'blocks/button.html'
+        group = _('Basic')
+
+
+class ButtonGroupBlock(blocks.StreamBlock):
+    button = ButtonBlock()
+
+    class Meta:
+        label = _('Buttons')
+        icon = 'fa-hand-pointer-o'
+        template = 'blocks/button_group.html'
+        group = _('Basic')
+
+
 class OverlayBlock(blocks.StructBlock):
     height = blocks.IntegerBlock(
         min_value=1,
@@ -82,7 +103,7 @@ class OverlayBlock(blocks.StructBlock):
         ('text-dark', _('Dark')),
     ], default='text-dark')
     link = blocks.URLBlock(required=False)
-    button = blocks.CharBlock(required=False)
+    buttons = ButtonGroupBlock(required=False)
 
     class Meta:
         label = _('Image overlay')
@@ -162,17 +183,6 @@ class MapBlock(blocks.StructBlock):
         group = _('Basic')
 
 
-class ButtonBlock(blocks.StructBlock):
-    text = blocks.CharBlock(required=True)
-    link = blocks.URLBlock(required=True)
-
-    class Meta:
-        label = _('Button')
-        icon = 'fa-hand-pointer-o'
-        template = 'blocks/button.html'
-        group = _('Basic')
-
-
 BASIC_BLOCKTYPES = [
     ('heading', HeadingBlock()),
     ('responsive_image', ResponsiveImageBlock()),
@@ -186,11 +196,9 @@ BASIC_BLOCKTYPES = [
     ('icon', IconBlock()),
     ('contact_card', ContactCardBlock()),
     ('map_block', MapBlock()),
-    ('button_block', ButtonBlock())
+    ('button_group_block', ButtonGroupBlock())
 ]
 
-
-# Layout block types
 
 class CollapsibleBlock(blocks.StructBlock):
     rows = blocks.ListBlock(blocks.StructBlock([
@@ -417,7 +425,7 @@ class EventbriteBlock(blocks.StructBlock):
         group = _('Embed')
 
 
-LAYOUT_BLOCKTYPES = BASIC_BLOCKTYPES + [
+LAYOUT_BLOCKTYPES = STANDARD_BLOCKTYPES + [
     ('columns', ColumnBlock()),
     ('logos', LogosBlock()),
     ('flex_columns', FlexColumnsBlock()),

@@ -1,0 +1,5 @@
+<div style="display: flex; justify-content: space-evenly;">
+  {% for button in value %}
+  <a href="{{ button.value.link }}" class="btn btn-primary btn-large">{{ button.value.text }}</a>
+  {% endfor %}
+</div>
