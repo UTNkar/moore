@@ -429,6 +429,7 @@ LAYOUT_BLOCKTYPES = BASIC_BLOCKTYPES + [
 
 class SectionBlock(blocks.StructBlock):
     padding = blocks.ChoiceBlock(
+        required=False,
         choices=[("S", _("Small")), ("M", _("Medium")), ("L", _("Large"))],
         help_text=_("Include padding for this section")
     )
