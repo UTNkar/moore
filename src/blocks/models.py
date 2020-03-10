@@ -6,13 +6,6 @@ from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
 import requests
 from datetime import datetime
-
-
-class ChoiceBlock(blocks.FieldBlock):
-    def __init__(self, choices, required=True, help_text=None, **kwargs):
-            
-        self.field = forms.ChoiceField(choices=choices)
-        super().__init__(**kwargs)
         
 # Basic block types
 
@@ -249,7 +242,7 @@ class FlexColumnsBlock(blocks.StructBlock):
         
 class ColumnBlock(blocks.StructBlock):
     columns = blocks.ListBlock(blocks.StructBlock([
-        ('width', ChoiceBlock(
+        ('width', blocks.ChoiceBlock(
             [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7,7),
              (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)],
             help_text=_('Width out of 12'),
@@ -436,8 +429,8 @@ LAYOUT_BLOCKTYPES = BASIC_BLOCKTYPES + [
 
 
 class SectionBlock(blocks.StructBlock):
-    padding = ChoiceBlock(
-        choices = [("S", "Small"), ("M", "Medium"), ("L", "Large")],
+    padding = blocks.ChoiceBlock(
+        choices = [("S", _("Small")), ("M", _("Medium")), ("L", _("Large"))],
         help_text= _("Include padding for this section")
     )
     full_width = blocks.BooleanBlock(
