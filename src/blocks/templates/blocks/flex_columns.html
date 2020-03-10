@@ -4,13 +4,9 @@
 <div class="flex-columns {% if value.flip %} reverse-order {% endif %}">
   {% for column in value.columns %}
   <div class ="column">
-    {% if column.include_padding %}
-    <div class="padding">
+    <div class="column-content {% if column.include_padding %} padding {% endif %}">
       {% include_block column.content %}
     </div>
-    {% else %}
-    {% include_block column.content %}
-    {% endif %}
   </div>
   {% endfor%}
 </div>

@@ -8,18 +8,13 @@
     .column{
 	flex: 1;
 	display: flex;
-	flex-direction: column;
     }
-  }
-  .padding {
-      padding: 2em 4em;
-      flex: 1;
-      display: flex;
-      overflow-y: auto;
-      @media #{$medium-and-down} {
-	  padding: 2em 0em;
-	  overflow-y: unset;
-      }
+    .padding {
+	padding: 2em 4em;
+    }
+    .column-content {
+	flex: 1;
+    }
   }
   .reverse-order {
       @media #{$medium-and-down} {
