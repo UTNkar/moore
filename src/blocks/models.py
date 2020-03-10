@@ -9,20 +9,16 @@ from datetime import datetime
 
 
 class ResponsiveImageBlock(blocks.StructBlock):
-    frame = blocks.BooleanBlock(
+    padding = blocks.BooleanBlock(
         required=False,
         help_text=_("Include padding around this image")
     )
     image = ImageChooserBlock()
-    height = blocks.IntegerBlock(
-        min_value=1,
-        default=400,
-    )
 
     class Meta:
         label = _('Responsive Image')
         icon = 'fa-picture-o'
-        template = 'blocks/image.html'
+        template = 'blocks/responsive_image.html'
         group = _('Basic')
 
 

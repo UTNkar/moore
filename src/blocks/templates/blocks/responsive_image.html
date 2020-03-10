@@ -1,0 +1,3 @@
+{% load wagtailimages_tags %}
+{% image value.image original as image %}
+<img src="{{ image.url }}" style="{% if value.padding %} padding: 50px 25px; {% endif %};"/>

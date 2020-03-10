@@ -8,6 +8,13 @@
   }
 }
 
+.block-responsive_image {
+    img {
+	height: auto;
+	width: 100%;
+    }
+}
+
 .block-image_description, .block-image_icons {
   position: relative;
   .description, .icons {

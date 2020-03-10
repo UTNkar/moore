@@ -1,5 +1,0 @@
-{% load wagtailimages_tags %}
-{% image value.image original as image %}
-<img class="image" src="{{ image.url }}" style="
-{% if value.frame %} padding: 50px 25px; {% endif %}
-max-height: {{ value.height }}px;" />
