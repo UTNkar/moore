@@ -38,7 +38,7 @@ class TableBlock(blocks.StructBlock):
 
     class Meta:
         label = _('Table')
-        icon = 'fa-picture-o'
+        icon = 'list-ul'
         template = 'blocks/table.html'
         group = _('Basic')
 
@@ -47,7 +47,7 @@ class DividerBlock(blocks.StaticBlock):
 
     class Meta:
         label = _('Divider')
-        icon = 'fa-picture-o'
+        icon = 'horizontalrule'
         template = 'blocks/divider.html'
         group = _('Basic')
 
@@ -179,14 +179,26 @@ class MapBlock(blocks.StructBlock):
         group = _('Basic')
 
 
+class ParagraphBlock(blocks.StructBlock):
+    alignment = blocks.ChoiceBlock([
+        ("Left", _("Left")),
+        ("Center", _("Center")),
+        ("Right", _("Right"))
+    ])
+    text = blocks.RichTextBlock()
+
+    class Meta:
+        label = _('Paragraph')
+        icon = 'edit'
+        template = 'blocks/paragraph.html'
+        group = _('Basic')
+
+
 BASIC_BLOCKTYPES = [
     ('heading', HeadingBlock()),
     ('responsive_image', ResponsiveImageBlock()),
     ('image_overlay', OverlayBlock()),
-    ('paragraph', blocks.RichTextBlock(
-        template='blocks/paragraph.html',
-        group=_('Basic'),
-    )),
+    ('paragraph', ParagraphBlock()),
     ('divider', DividerBlock()),
     ('table', TableBlock()),
     ('icon', IconBlock()),
@@ -204,7 +216,7 @@ class CollapsibleBlock(blocks.StructBlock):
 
     class Meta:
         label = _('Collapsible')
-        icon = 'fa-tasks'
+        icon = 'fa-bars'
         template = 'blocks/collapsible.html'
         group = _('Layout')
 

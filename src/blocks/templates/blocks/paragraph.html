@@ -1,3 +1,12 @@
-<div>
-    {{ value }}
+{% load wagtailcore_tags %}
+<div class="
+{% if value.alignment == 'Left' %}
+	left-align
+{% elif value.alignment == 'Center' %}
+	center-align
+{% elif value.alignment == 'Right' %}
+	right-align
+{% endif %}    
+">
+    {% include_block value.text %}
 </div>
