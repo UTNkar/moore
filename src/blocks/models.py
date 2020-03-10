@@ -1,13 +1,12 @@
 from django.utils.translation import ugettext_lazy as _
-from django import forms
 from wagtail.core import blocks
-from wagtail.core.blocks import StructValue
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
 import requests
 from datetime import datetime
-        
+
 # Basic block types
+
 
 class ResponsiveImageBlock(blocks.StructBlock):
     frame = blocks.BooleanBlock(
@@ -25,7 +24,6 @@ class ResponsiveImageBlock(blocks.StructBlock):
         icon = 'fa-picture-o'
         template = 'blocks/image.html'
         group = _('Basic')
-    
 
 
 class TableBlock(blocks.StructBlock):
@@ -39,8 +37,8 @@ class TableBlock(blocks.StructBlock):
         help_text=_("Center columns")
     )
 
-    header = blocks.ListBlock(blocks.CharBlock);
-    rows = blocks.ListBlock(blocks.ListBlock(blocks.CharBlock));
+    header = blocks.ListBlock(blocks.CharBlock)
+    rows = blocks.ListBlock(blocks.ListBlock(blocks.CharBlock))
 
     class Meta:
         label = _('Table')
@@ -50,11 +48,13 @@ class TableBlock(blocks.StructBlock):
 
 
 class DividerBlock(blocks.StaticBlock):
+
     class Meta:
         label = _('Divider')
         icon = 'fa-picture-o'
         template = 'blocks/divider.html'
         group = _('Basic')
+
 
 class HeadingBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True)
@@ -98,6 +98,7 @@ class IconBlock(blocks.StructBlock):
         help_text=_('Material icon font icon text, as found on: '
                     'https://material.io/icons')
     )
+
     class Meta:
         label = _('Icon')
         icon = 'fa-file-excel-o'
@@ -172,7 +173,6 @@ class ButtonBlock(blocks.StructBlock):
         group = _('Basic')
 
 
-        
 BASIC_BLOCKTYPES = [
     ('heading', HeadingBlock()),
     ('responsive_image', ResponsiveImageBlock()),
@@ -222,7 +222,7 @@ class FlexColumnsBlock(blocks.StructBlock):
         required=False,
         help_text=_("Flip order on small screens")
     )
-        
+
     columns = blocks.ListBlock(
         blocks.StructBlock([
             ('include_padding', blocks.BooleanBlock(
@@ -231,7 +231,6 @@ class FlexColumnsBlock(blocks.StructBlock):
             )),
             ('content', blocks.StreamBlock(BASIC_BLOCKTYPES))
         ]))
-    
 
     class Meta:
         label = _('Flex Columns')
@@ -239,11 +238,11 @@ class FlexColumnsBlock(blocks.StructBlock):
         template = 'blocks/flex_columns.html'
         group = _('Layout')
 
-        
+
 class ColumnBlock(blocks.StructBlock):
     columns = blocks.ListBlock(blocks.StructBlock([
         ('width', blocks.ChoiceBlock(
-            [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7,7),
+            [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
              (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)],
             help_text=_('Width out of 12'),
         )),
@@ -270,6 +269,7 @@ class LogosBlock(blocks.StructBlock):
         template = 'blocks/logos.html'
         group = _('Layout')
 
+
 class CountersBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     counters = blocks.ListBlock(blocks.StructBlock([
@@ -290,7 +290,6 @@ class CountersBlock(blocks.StructBlock):
         icon = 'fa-balance-scale'
         template = 'blocks/counter.html'
         group = _('Layout')
-
 
 
 class EventsBlock(blocks.StructBlock):
@@ -430,8 +429,8 @@ LAYOUT_BLOCKTYPES = BASIC_BLOCKTYPES + [
 
 class SectionBlock(blocks.StructBlock):
     padding = blocks.ChoiceBlock(
-        choices = [("S", _("Small")), ("M", _("Medium")), ("L", _("Large"))],
-        help_text= _("Include padding for this section")
+        choices=[("S", _("Small")), ("M", _("Medium")), ("L", _("Large"))],
+        help_text=_("Include padding for this section")
     )
     full_width = blocks.BooleanBlock(
         required=False,
@@ -447,5 +446,7 @@ class SectionBlock(blocks.StructBlock):
         group = _('Sections')
 
 
-
-WAGTAIL_STATIC_BLOCKTYPES = [("section", SectionBlock()), ("divider", DividerBlock())]
+WAGTAIL_STATIC_BLOCKTYPES = [
+    ("section", SectionBlock()),
+    ("divider", DividerBlock())
+]
