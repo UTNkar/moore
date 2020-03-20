@@ -8,7 +8,13 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from .api import api_router
+
 urlpatterns = [
+
+    # Needs to be imported before wagtail urls
+    url(r'^api/', api_router.urls),
+
     # Needs to be imported before wagtail admin
     url(r'', include('involvement.urls')),
 

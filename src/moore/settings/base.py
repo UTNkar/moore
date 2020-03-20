@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.settings',
     'wagtail.contrib.modeladmin',
     "wagtail.contrib.routable_page",
+    'wagtail.api.v2',
     'wagtailmedia',
 
     'compressor',

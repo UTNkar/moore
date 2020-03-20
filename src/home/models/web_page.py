@@ -11,6 +11,7 @@ from google.models import GoogleFormBlock, GoogleDriveBlock, \
     GoogleCalendarBlock
 from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
+from wagtail.api import APIField
 
 
 class WebPage(Page):
@@ -58,3 +59,9 @@ class WebPage(Page):
         ObjectList(Page.promote_panels, heading=_('Promote')),
         ObjectList(Page.settings_panels, heading=_('Settings')),
     ])
+
+    api_fields = [
+        APIField('title_sv'),
+        APIField('body_en'),
+        APIField('body_sv'),
+    ]

@@ -9,6 +9,7 @@ from wagtail.core.blocks import RawHTMLBlock
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
+from wagtail.api import APIField
 
 
 class HomePage(Page):
@@ -59,3 +60,9 @@ class HomePage(Page):
         ObjectList(Page.promote_panels, heading=_('Promote')),
         ObjectList(custom_settings_panel, heading=_('Settings')),
     ])
+
+    api_fields = [
+        APIField('title_sv'),
+        APIField('body_en'),
+        APIField('body_sv'),
+    ]
