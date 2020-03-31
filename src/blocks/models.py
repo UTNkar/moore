@@ -310,6 +310,17 @@ class TwoColumnGridBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
+class ImageTextCardBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    text = blocks.RichTextBlock()
+
+    class Meta:
+        label = _('Image + Text Card')
+        icon = 'fa-picture-o'
+        template = 'blocks/image_text_card.html'
+        group = _('Noyce')
+
+
 WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('heading', HeadingBlock()),  # TODO: Do we use this one?
     ('image_description', ImageIconsBlock()),
@@ -320,5 +331,6 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('columns', ColumnBlock()),
     ('contacts', ContactsBlock()),
     ('events', EventsBlock()),
-    ('two_column_grid', TwoColumnGridBlock())
+    ('two_column_grid', TwoColumnGridBlock()),
+    ('image_text_card', ImageTextCardBlock())
 ]

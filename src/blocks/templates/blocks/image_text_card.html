@@ -1,0 +1,28 @@
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
+<div class="row">
+    <div class="col s12 m4">
+        <div class="card">
+            {% image value.image width-400 as image%}
+            <div class="card-image activator waves-effect waves-block waves-light">
+                <img src='{{ image.url }}' style="width: 100%;">
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m4">
+        <div class="card">
+            {% image value.image width-400 as image%}
+            <div class="card-image activator waves-effect waves-block waves-light">
+                <img src='{{ image.url }}' style="width: 100%;">
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m4">
+        <div class="card">
+            {% image value.image width-400 as image%}
+            <div class="card-image activator waves-effect waves-block waves-light">
+                <img src='{{ image.url }}' style="width: 100%;">
+            </div>
+        </div>
+    </div>
+</div>
