@@ -259,6 +259,11 @@ class EventbriteBlock(blocks.StructBlock):
 
 
 class ParagraphBlock(blocks.StructBlock):
+    alignment = blocks.ChoiceBlock([
+        ("Left", _("Left")),
+        ("Center", _("Center")),
+        ("Right", _("Right"))
+    ])
     text = blocks.RichTextBlock()
     
     class Meta:
