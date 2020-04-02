@@ -2,26 +2,26 @@
 
 <div class="row">
     <div class="col s12 m4">
-        <div class="card">
-            {% image value.image width-400 as image%}
-            <div class="card-image activator waves-effect waves-block waves-light">
-                <img src='{{ image.url }}' style="width: 100%;">
+        <div class="card medium">
+            {% image value.image width-400 as image %}
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src='{{ image.url }}'>
             </div>
-        </div>
-    </div>
-    <div class="col s12 m4">
-        <div class="card">
-            {% image value.image width-400 as image%}
-            <div class="card-image activator waves-effect waves-block waves-light">
-                <img src='{{ image.url }}' style="width: 100%;">
+            <div class="card-content">
+                <h2 class="card-title">
+                    Digitaliseringskommittén
+                    <p class="read-more activator">{% trans "Read more" %}</p>
+                </h2>
             </div>
-        </div>
-    </div>
-    <div class="col s12 m4">
-        <div class="card">
-            {% image value.image width-400 as image%}
-            <div class="card-image activator waves-effect waves-block waves-light">
-                <img src='{{ image.url }}' style="width: 100%;">
+            <div class="card-reveal">
+                <span class="card-title">
+                    <i class="material-icons right">close</i>
+                    Digitaliseringskommittén
+                </span>
+                Digitaliseringskommittén utvecklar och underhåller kårens hemsidor, appar och IT-system.<br><br>
+                
+                I digitaliseringskommittén finns det två poster, systemutvecklare som utvecklar systemen och designers som tar fram designer och prototyper för hur systemen ska se ut. 
+                Det finns också en projektledare och en vice projektledare som tar fram arbete åt kommittén. Inga förkunskapskrav eller tidigare efrarenhet krävs för att vara med i digitaliseringskommittén, du får lära dig det du behöver kunna!
             </div>
         </div>
     </div>
