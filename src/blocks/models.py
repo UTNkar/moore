@@ -258,11 +258,18 @@ class EventbriteBlock(blocks.StructBlock):
         group = _('Embed')
 
 
+class ParagraphBlock(blocks.StructBlock):
+    text = blocks.RichTextBlock()
+    
+    class Meta:
+        label = _('Paragraph')
+        icon = 'edit'
+        template = 'blocks/paragraph.html'
+        group = _('Basic')
+
+
 BASIC_BLOCKTYPES = [
-    ('paragraph', blocks.RichTextBlock(
-        template='blocks/paragraph.html',
-        group=_('Basic'),
-    )),
+    ('paragraph', ParagraphBlock()),
     ('image', ResponsiveImageBlock()),
 ]
 
@@ -297,10 +304,7 @@ class TwoColumnGridBlock(blocks.StructBlock):
             help_text=_('Swap position of image and paragraph'),
         )),
         ('image', ImageChooserBlock()),
-        ('paragraph', blocks.RichTextBlock(
-            template='blocks/paragraph.html',
-            group=_('Basic'),
-        ))
+        ('paragraph', ParagraphBlock()),
     ]))
 
     class Meta:
