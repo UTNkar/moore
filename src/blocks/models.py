@@ -274,8 +274,10 @@ class ParagraphBlock(blocks.StructBlock):
 
 
 BASIC_BLOCKTYPES = [
-    ('paragraph', ParagraphBlock()),
+    ('heading', HeadingBlock()),
     ('image', ResponsiveImageBlock()),
+    ('image_overlay', OverlayBlock()),
+    ('paragraph', ParagraphBlock()),
 ]
 
 
@@ -319,11 +321,9 @@ class TwoColumnGridBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
-WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
-    ('heading', HeadingBlock()),  # TODO: Do we use this one?
+SECTION_CONTENT_BLOCKTYPES = [
     ('image_description', ImageIconsBlock()),
     ('image_icons', ImageDescriptionBlock()),
-    ('overlay', OverlayBlock()),
     ('logos', LogosBlock()),
     ('counters', CountersBlock()),
     ('columns', ColumnBlock()),
@@ -331,3 +331,5 @@ WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('events', EventsBlock()),
     ('two_column_grid', TwoColumnGridBlock())
 ]
+        
+WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + SECTION_CONTENT_BLOCKTYPES
