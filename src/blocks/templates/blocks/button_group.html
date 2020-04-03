@@ -1,0 +1,6 @@
+{% load wagtailcore_tags %}
+<div style="display: flex; justify-content: space-evenly;">
+  {% for button in value.buttons %}
+  {% include_block button %}
+  {% endfor %}
+</div>

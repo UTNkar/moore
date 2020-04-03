@@ -107,6 +107,26 @@ class LogosBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
+class ButtonBlock(blocks.StructBlock):
+    text = blocks.CharBlock(required=True)
+    link = blocks.URLBlock(required=True)
+
+    class Meta:
+        label = _('Button')
+        icon = 'fa-hand-pointer-o'
+        template = 'blocks/button.html'
+        group = _('Basic')
+
+class ButtonGroupBlock(blocks.StructBlock):
+        buttons = blocks.ListBlock(ButtonBlock)
+
+        class Meta:
+            label = _('Buttons')
+            icon = 'fa-hand-pointer-o'
+            template = 'blocks/button_group.html'
+            group = _('Basic')
+
+
 class OverlayBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     title = blocks.CharBlock(required=False)
@@ -130,7 +150,7 @@ class OverlayBlock(blocks.StructBlock):
         label = _('Image overlay')
         icon = 'fa-clone'
         template = 'blocks/overlay.html'
-        group = _('Noyce')
+        group = _('Basic')
 
 
 class EventsBlock(blocks.StructBlock):
@@ -278,6 +298,7 @@ BASIC_BLOCKTYPES = [
     ('image', ResponsiveImageBlock()),
     ('image_overlay', OverlayBlock()),
     ('paragraph', ParagraphBlock()),
+    ('button_group_block', ButtonGroupBlock())
 ]
 
 
