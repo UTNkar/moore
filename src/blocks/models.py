@@ -333,7 +333,7 @@ class TwoColumnGridBlock(blocks.StructBlock):
         group = _('Noyce')
 
 
-SECTION_CONTENT_BLOCKTYPES = [
+SECTION_CONTENT_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ('image_description', ImageIconsBlock()),
     ('image_icons', ImageDescriptionBlock()),
     ('logos', LogosBlock()),
@@ -343,5 +343,29 @@ SECTION_CONTENT_BLOCKTYPES = [
     ('events', EventsBlock()),
     ('two_column_grid', TwoColumnGridBlock())
 ]
-        
-WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + SECTION_CONTENT_BLOCKTYPES
+
+class SectionBlock(blocks.StructBlock):
+    padding = blocks.ChoiceBlock(
+        required=False,
+        choices=[("S", _("Small")), ("M", _("Medium")), ("L", _("Large"))],
+        help_text=_("Include padding for this section")
+    )
+    full_width = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Expand this section to full page width")
+    )
+
+    body = blocks.StreamBlock(SECTION_CONTENT_BLOCKTYPES)
+
+    class Meta:
+        label = _('Section')
+        icon = 'fa-bars'
+        template = 'blocks/section.html'
+        group = _('Sections')
+
+
+PAGE_BLOCKTYPES = [
+    ('section', SectionBlock()),
+]
+
+WAGTAIL_STATIC_BLOCKTYPES = PAGE_BLOCKTYPES
