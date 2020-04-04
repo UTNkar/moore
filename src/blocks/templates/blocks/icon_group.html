@@ -1,0 +1,6 @@
+{% load wagtailcore_tags %}
+<div style="display: flex; justify-content: space-evenly;">
+  {% for icon in value.icons %}
+  {% include_block icon %}
+  {% endfor %}
+</div>

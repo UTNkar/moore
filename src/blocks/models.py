@@ -9,6 +9,7 @@ from datetime import datetime
 # BASIC BLOCKTYPES
 
 class ResponsiveImageBlock(blocks.StructBlock):
+    padding = blocks.BooleanBlock()
     image = ImageChooserBlock()
     height = blocks.IntegerBlock(
         min_value=1,
@@ -110,41 +111,27 @@ class IconBlock(blocks.StructBlock):
         group = _('Basic')
 
 
+class IconGroupBlock(blocks.StructBlock):
+        icons = blocks.ListBlock(IconBlock)
+
+        class Meta:
+            label = _('Icons')
+            icon = 'fa-file-excel-o'
+            template = 'blocks/icon_group.html'
+            group = _('Basic')
+
+
 BASIC_BLOCKTYPES = [
     ('heading', HeadingBlock()),
     ('image', ResponsiveImageBlock()),
     ('image_overlay', OverlayBlock()),
-    ('icon', IconBlock()),
     ('paragraph', ParagraphBlock()),
     ('divider', DividerBlock()),
-    ('button_group', ButtonGroupBlock())
+    ('button_group', ButtonGroupBlock()),
+    ('icons', IconGroupBlock()),
 ]
 
 # CONTENT BLOCKTYPES
-
-class ImageIconsBlock(blocks.StructBlock):
-    title = blocks.CharBlock()
-    image = ImageChooserBlock()
-    image_alignment = blocks.ChoiceBlock(choices=[
-        ('left', _('Left')),
-        ('right', _('Right')),
-    ])
-    icons = blocks.ListBlock(blocks.StructBlock([
-        ('icon', blocks.CharBlock(
-            help_text=_('Material icon font icon text, as found on: '
-                        'https://material.io/icons'),
-        )),
-        ('title', blocks.CharBlock()),
-        ('description', blocks.CharBlock())
-    ]))
-    hide_on_med = blocks.BooleanBlock(required=False)
-
-    class Meta:
-        label = _('Image + Icons')
-        icon = 'fa-file-excel-o'
-        template = 'blocks/image_icons.html'
-        group = _('Content')
-
 
 class LogosBlock(blocks.StructBlock):
     logos = blocks.ListBlock(blocks.StructBlock([
@@ -311,7 +298,6 @@ class EventbriteBlock(blocks.StructBlock):
 CONTENT_BLOCKTYPES = [
     ('contacts', ContactsBlock()),
     ('events', EventsBlock()),
-    ('image_description', ImageIconsBlock()),
     ('logos', LogosBlock()),
     ('counters', CountersBlock()),
 ]
