@@ -1,26 +1,24 @@
 {% load i18n wagtailcore_tags wagtailimages_tags %}
 
-<div class="row">
+<div class="container card-wrapper">
     {% for card in value.cards %}
-        <div class="col s12 m4">
-            <div class="card">
-                {% image card.image width-400 as image %}
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src='{{ image.url }}'>
-                </div>
-                <div class="card-content">
-                    <h2 class="card-title">
-                        {{ card.title }}
-                        <p class="read-more activator">{% trans "Read more" %}</p>
-                    </h2>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title">
-                        <i class="material-icons right">close</i>
-                        {{ card.title }}
-                    </span>
-                    {{ card.text }}
-                </div>
+        <div class="card">
+            {% image card.image width-400 as image %}
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src='{{ image.url }}'>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">
+                    {{ card.title }}
+                    <p class="read-more activator">{% trans "Read more" %}</p>
+                </h2>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title">
+                    <i class="material-icons right">close</i>
+                    {{ card.title }}
+                </span>
+                {{ card.text }}
             </div>
         </div>
     {% endfor %}

@@ -1,7 +1,18 @@
 @import "../base";
 
 .block-image_text_card{
+    .container{
+        max-width: 1400px;
+    }
+    .card-wrapper {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin: 1em auto;
+    }
     .card {
+        min-height: 300px;
         .card-image{
             border-bottom: 4px solid $primary-color;
             padding: 0.5em;
