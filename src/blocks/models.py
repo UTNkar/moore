@@ -9,7 +9,7 @@ from datetime import datetime
 # BASIC BLOCKTYPES
 
 class ResponsiveImageBlock(blocks.StructBlock):
-    padding = blocks.BooleanBlock()
+    padding = blocks.BooleanBlock(required=False)
     image = ImageChooserBlock()
     height = blocks.IntegerBlock(
         min_value=1,
@@ -302,16 +302,36 @@ CONTENT_BLOCKTYPES = [
     ('counters', CountersBlock()),
 ]
 
+# INLINE LAYOUT BLOCKTYPES
+
+class AccordionBlock(blocks.StructBlock):
+    rows = blocks.ListBlock(blocks.StructBlock([
+        ('header',  blocks.CharBlock()),
+        ('body', blocks.StreamBlock(BASIC_BLOCKTYPES))
+    ]))
+
+    class Meta:
+        label = _('Accordion')
+        icon = 'fa-bars'
+        template = 'blocks/accordion.html'
+        group = _('Layout')
+
+
+INLINE_LAYOUT_BLOCKTYPES = BASIC_BLOCKTYPES + [
+    ("Accordion", AccordionBlock())
+]
+
+
 # LAYOUT BLOCKTYPES
 
 class ColumnBlock(blocks.StructBlock):
     columns = blocks.ListBlock(blocks.StructBlock([
-        ('width', blocks.IntegerBlock(
-            min_value=1,
-            max_value=12,
+        ('width', blocks.ChoiceBlock(
+            [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
+             (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)],
             help_text=_('Width out of 12'),
         )),
-        ('content', blocks.StreamBlock(BASIC_BLOCKTYPES))
+        ('content', blocks.StreamBlock(INLINE_LAYOUT_BLOCKTYPES))
     ]))
 
     class Meta:
@@ -321,35 +341,12 @@ class ColumnBlock(blocks.StructBlock):
         group = _('Layout')
 
 
-class TwoColumnGridBlock(blocks.StructBlock):
-    height = blocks.IntegerBlock(
-        min_value=1,
-        default=400,
-        max_value=800,
-        help_text=_('Row height in px')
-    )
-    rows = blocks.ListBlock(blocks.StructBlock([
-        ('flip', blocks.BooleanBlock(
-            required=False,
-            help_text=_('Swap position of image and paragraph'),
-        )),
-        ('image', ImageChooserBlock()),
-        ('paragraph', ParagraphBlock()),
-    ]))
-
-    class Meta:
-        label = _('Two Column Grid')
-        icon = 'fa-columns'
-        template = 'blocks/two_column_grid.html'
-        group = _('Layout')
-
 LAYOUT_BLOCKTYPES = [
     ('columns', ColumnBlock()),
-    ('two_column_grid', TwoColumnGridBlock())
 ]
 
 
-SECTION_CONTENT_BLOCKTYPES = BASIC_BLOCKTYPES + LAYOUT_BLOCKTYPES + CONTENT_BLOCKTYPES
+SECTION_CONTENT_BLOCKTYPES = INLINE_LAYOUT_BLOCKTYPES + LAYOUT_BLOCKTYPES + CONTENT_BLOCKTYPES
 
 class SectionBlock(blocks.StructBlock):
     padding = blocks.ChoiceBlock(
