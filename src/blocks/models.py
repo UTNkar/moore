@@ -311,13 +311,16 @@ class TwoColumnGridBlock(blocks.StructBlock):
 
 
 class ImageTextCardBlock(blocks.StructBlock):
-    image = ImageChooserBlock()
-    text = blocks.RichTextBlock()
+    cards = blocks.ListBlock(blocks.StructBlock([
+        ('image', ImageChooserBlock()),
+        ('title', blocks.CharBlock()),
+        ('text', blocks.RichTextBlock(required=False))
+    ]))
 
     class Meta:
-        label = _('Image + Text Card')
+        label = _('Image + Text Cards')
         icon = 'fa-picture-o'
-        template = 'blocks/image_text_card.html'
+        template = 'blocks/image_text_cards.html'
         group = _('Noyce')
 
 
