@@ -122,22 +122,6 @@ BASIC_BLOCKTYPES = [
 
 # CONTENT BLOCKTYPES
 
-class ImageDescriptionBlock(blocks.StructBlock):
-    description = blocks.RichTextBlock()
-    image = ImageChooserBlock()
-    image_alignment = blocks.ChoiceBlock(choices=[
-        ('left', _('Left')),
-        ('right', _('Right')),
-    ])
-    hide_on_med = blocks.BooleanBlock(required=False)
-
-    class Meta:
-        label = _('Image + Description')
-        icon = 'fa-file-image-o '
-        template = 'blocks/image_description.html'
-        group = _('Content')
-
-
 class ImageIconsBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     image = ImageChooserBlock()
@@ -328,7 +312,6 @@ CONTENT_BLOCKTYPES = [
     ('contacts', ContactsBlock()),
     ('events', EventsBlock()),
     ('image_description', ImageIconsBlock()),
-    ('image_icons', ImageDescriptionBlock()),
     ('logos', LogosBlock()),
     ('counters', CountersBlock()),
 ]
