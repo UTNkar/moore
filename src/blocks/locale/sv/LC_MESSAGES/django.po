@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 19:05+0100\n"
+"POT-Creation-Date: 2020-04-04 21:55+0200\n"
 "PO-Revision-Date: 2017-06-26 10:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,81 +18,79 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: blocks/models.py:17
+#: models.py:17
 msgid "Responsive Image"
 msgstr "Responsiv bild"
 
-#: blocks/models.py:20 blocks/models.py:53 blocks/models.py:264
-#: blocks/models.py:302
+#: models.py:20 models.py:53 models.py:264 models.py:302
 msgid "Basic"
 msgstr ""
 
 # It's difficult to know this context, don't know if it needs translation
-#: blocks/models.py:27 blocks/models.py:81
+#: models.py:27 models.py:81
 msgid "Material icon font icon text, as found on: https://material.io/icons"
 msgstr "Material icon font icon text, as found on: https://material.io/icons"
 
-#: blocks/models.py:34 blocks/models.py:115
+#: models.py:34 models.py:115
 msgid "Light"
 msgstr "Ljus"
 
-#: blocks/models.py:35 blocks/models.py:116
+#: models.py:35 models.py:116
 msgid "Dark"
 msgstr "Mörk"
 
-#: blocks/models.py:39
+#: models.py:39
 msgid "Counters"
 msgstr "Räknare"
 
-#: blocks/models.py:42 blocks/models.py:69 blocks/models.py:93
-#: blocks/models.py:107 blocks/models.py:133 blocks/models.py:208
-#: blocks/models.py:310
+#: models.py:42 models.py:69 models.py:93 models.py:107 models.py:133
+#: models.py:208 models.py:310 models.py:324
 msgid "Noyce"
 msgstr ""
 
-#: blocks/models.py:50
+#: models.py:50
 msgid "Heading"
 msgstr "Rubrik"
 
-#: blocks/models.py:60 blocks/models.py:76
+#: models.py:60 models.py:76
 msgid "Left"
 msgstr "Vänster"
 
-#: blocks/models.py:61 blocks/models.py:77
+#: models.py:61 models.py:77
 msgid "Right"
 msgstr "Höger"
 
-#: blocks/models.py:66
+#: models.py:66
 msgid "Image + Description"
 msgstr "Bild + Beskrivning"
 
-#: blocks/models.py:90
+#: models.py:90
 msgid "Image + Icons"
 msgstr "Bild + Ikoner"
 
-#: blocks/models.py:104
+#: models.py:104
 msgid "Logos"
 msgstr "Logotyper"
 
-#: blocks/models.py:122
+#: models.py:122
 msgid "Include margin under this block"
 msgstr "Inkludera marginal under detta block"
 
-#: blocks/models.py:126
+#: models.py:126
 msgid "Include margin above this block"
 msgstr "Inkludera marginal under detta block"
 
-#: blocks/models.py:130
+#: models.py:130
 msgid "Image overlay"
 msgstr "Bildöverdrag"
 
-#: blocks/models.py:140
+#: models.py:140
 #, fuzzy
 #| msgid "Whether or not to embed a Facebook page"
 msgid "Whether to embed a Facebook page"
 msgstr "Om du vill visa en Facebook-sida"
 
-#: blocks/models.py:144
+#: models.py:144
 msgid ""
 "Name of the page to show. (Must be public or accessible by the registered "
 "app_id)"
@@ -100,69 +98,77 @@ msgstr ""
 "Namnet på sidan att visa. (Måste vara en publik sida eller tillgänglig  via "
 "den registrerade app-id)"
 
-#: blocks/models.py:150
+#: models.py:150
 msgid ""
 "Whether to show Instagram the last event from the registered Instagram feed"
 msgstr "Om du vill visa det senaste inlägget från Instagram"
 
-#: blocks/models.py:156
+#: models.py:156
 msgid "Whether to show the last video from a Youtube-channel"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: blocks/models.py:164
+#: models.py:164
 msgid "Whether to show the next few events from a google calendar"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: blocks/models.py:206
+#: models.py:206
 msgid "Events"
 msgstr "Evenemang"
 
-#: blocks/models.py:217
+#: models.py:217
 msgid "Contact Card"
 msgstr "Kontaktkort"
 
-#: blocks/models.py:220 blocks/models.py:284
+#: models.py:220 models.py:284
 msgid "Meta"
 msgstr ""
 
-#: blocks/models.py:255
+#: models.py:255
 #, fuzzy
 #| msgid "Events"
 msgid "Eventbrite"
 msgstr "Evenemang"
 
-#: blocks/models.py:258
+#: models.py:258
 msgid "Embed"
 msgstr ""
 
-#: blocks/models.py:275
+#: models.py:275
 msgid "Width out of 12"
 msgstr "Bredd, 1 till 12"
 
-#: blocks/models.py:281
+#: models.py:281
 msgid "Columns"
 msgstr "Kolumner"
 
-#: blocks/models.py:292
+#: models.py:292
 msgid "Row height in px"
 msgstr "Rad höjd i px"
 
-#: blocks/models.py:297
+#: models.py:297
 msgid "Swap position of image and paragraph"
 msgstr "Byt plats på bild och paragraf"
 
-#: blocks/models.py:307
+#: models.py:307
 msgid "Two Column Grid"
 msgstr ""
 
-#: blocks/templates/blocks/tags/calendar.html:19
+#: models.py:321
+msgid "Image + Text Cards"
+msgstr "Bild + Text Kort"
+
+#: templates/blocks/image_text_cards.html:15
+msgid "Read more"
+msgstr "Läs mer"
+
+#: templates/blocks/tags/calendar.html:19
 msgid "See the whole calendar"
 msgstr "Se hela kalendern"
 
-#: blocks/templates/blocks/tags/facebook.html:6
+#: templates/blocks/tags/facebook.html:6
 msgid "facebook icon"
 msgstr "facebook ikon"
 
-#: blocks/templates/blocks/tags/instagram.html:5
+#: templates/blocks/tags/instagram.html:5
 msgid "instagram icon"
 msgstr "instagram ikon"
