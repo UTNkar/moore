@@ -3,9 +3,11 @@
 <div class="container card-wrapper">
     {% for card in value.cards %}
         <div class="card">
-            {% image card.image width-400 as image %}
-            <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src='{{ image.url }}'>
+            <div class="card-image-wrapper">
+                {% image card.image width-400 as image %}
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src='{{ image.url }}'>
+                </div>
             </div>
             <div class="card-content">
                 <h2 class="card-title">

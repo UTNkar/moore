@@ -13,12 +13,19 @@
     }
     .card {
         min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        .card-image-wrapper{
+            flex-grow: 1;
+            display: flex;
+        }
         .card-image{
-            border-bottom: 4px solid $primary-color;
             padding: 0.5em;
+            align-self: center;
         }
         .card-content{
             padding: 1.1em;
+            border-top: 4px solid $primary-color;
             .card-title {
                 color: #424242;
                 text-align: left;
