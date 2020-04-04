@@ -30,7 +30,7 @@ class ParagraphBlock(blocks.StructBlock):
         ("Right", _("Right"))
     ])
     text = blocks.RichTextBlock()
-    
+
     class Meta:
         label = _('Paragraph')
         icon = 'edit'
@@ -70,13 +70,13 @@ class ButtonBlock(blocks.StructBlock):
 
 
 class ButtonGroupBlock(blocks.StructBlock):
-        buttons = blocks.ListBlock(ButtonBlock)
+    buttons = blocks.ListBlock(ButtonBlock)
 
-        class Meta:
-            label = _('Buttons')
-            icon = 'fa-hand-pointer-o'
-            template = 'blocks/button_group.html'
-            group = _('Basic')
+    class Meta:
+        label = _('Buttons')
+        icon = 'fa-hand-pointer-o'
+        template = 'blocks/button_group.html'
+        group = _('Basic')
 
 
 class OverlayBlock(blocks.StructBlock):
@@ -112,13 +112,13 @@ class IconBlock(blocks.StructBlock):
 
 
 class IconGroupBlock(blocks.StructBlock):
-        icons = blocks.ListBlock(IconBlock)
+    icons = blocks.ListBlock(IconBlock)
 
-        class Meta:
-            label = _('Icons')
-            icon = 'fa-file-excel-o'
-            template = 'blocks/icon_group.html'
-            group = _('Basic')
+    class Meta:
+        label = _('Icons')
+        icon = 'fa-file-excel-o'
+        template = 'blocks/icon_group.html'
+        group = _('Basic')
 
 
 BASIC_BLOCKTYPES = [
@@ -132,6 +132,7 @@ BASIC_BLOCKTYPES = [
 ]
 
 # CONTENT BLOCKTYPES
+
 
 class LogosBlock(blocks.StructBlock):
     logos = blocks.ListBlock(blocks.StructBlock([
@@ -281,7 +282,7 @@ class EventbriteBlock(blocks.StructBlock):
                     evt['end']['local'],
                     '%Y-%m-%dT%H:%M:%S'
                 )
-            context['events'] = eventsJson['events']
+                context['events'] = eventsJson['events']
         except Exception:
             context['error'] = 'Failed to retrieve events from eventbrite.'
         finally:
@@ -294,7 +295,6 @@ class EventbriteBlock(blocks.StructBlock):
         group = _('Content')
 
 
-
 CONTENT_BLOCKTYPES = [
     ('contacts', ContactsBlock()),
     ('events', EventsBlock()),
@@ -303,6 +303,7 @@ CONTENT_BLOCKTYPES = [
 ]
 
 # INLINE LAYOUT BLOCKTYPES
+
 
 class AccordionBlock(blocks.StructBlock):
     rows = blocks.ListBlock(blocks.StructBlock([
@@ -346,7 +347,10 @@ LAYOUT_BLOCKTYPES = [
 ]
 
 
-SECTION_CONTENT_BLOCKTYPES = INLINE_LAYOUT_BLOCKTYPES + LAYOUT_BLOCKTYPES + CONTENT_BLOCKTYPES
+SECTION_CONTENT_BLOCKTYPES = INLINE_LAYOUT_BLOCKTYPES + \
+                             LAYOUT_BLOCKTYPES + \
+                             CONTENT_BLOCKTYPES
+
 
 class SectionBlock(blocks.StructBlock):
     padding = blocks.ChoiceBlock(

@@ -3,13 +3,19 @@ from wagtail.core.blocks.stream_block import StreamValue
 from json import dumps
 
 """
-Recursively apply a filter-map operation on a block by traversing it and its children, and calling the mapper_func on each block whose 'type' value matches block_type.
+Recursively apply a filter-map operation on a block by traversing
+it and its children, and calling the mapper_func on each block whose
+'type' value matches block_type.
 
 :param block: The block to apply the filter-map operation on
 :param block_type: The type of blocks to apply the mapper_func on
-:param mapper_func: Function that takes a block and returns a new transformed block
-:return: Returns a new block hierarchy with the matched blocks transformed
+:param mapper_func: Function that takes a block and returns a new
+ transformed block
+:return: Returns a new block hierarchy with the matched blocks
+ transformed
 """
+
+
 def block_filter_map(block, block_type, mapper_func):
     if isinstance(block, list):
         for i in range(len(block)):
@@ -20,18 +26,26 @@ def block_filter_map(block, block_type, mapper_func):
         else:
             for k, v in block.items():
                 block[k] = block_filter_map(v, block_type, mapper_func)
-        
+
     return block
 
-"""
-Recursively apply a filter-map operation on a stream field, replacing every block or sub-block with the same type as block_type with the blocks produced by applying the mapper_func.
 
-:param stream_field: The StreamValue to apply the filter-map operation on
+"""
+Recursively apply a filter-map operation on a stream field,
+replacing every block or sub-block with the same type as block_type
+with the blocks produced by applying the mapper_func.
+
+:param stream_field: The StreamValue to apply the filter-map operation
+ on
 :param block_type: The type of blocks to apply the mapper_func on
-:param mapper_func: Function that takes a block and returns a new transformed block
+:param mapper_func: Function that takes a block and returns a new
+ transformed block
 
-:returns: A new StreamValue with all the blocks and sub-blocks whose type matches block_type transformed by mapper_func
+:returns: A new StreamValue with all the blocks and sub-blocks whose
+ type matches block_type transformed by mapper_func
 """
+
+
 def stream_field_filter_map(stream_field, block_type, mapper_func):
     new_stream_data = []
     for block in stream_field.stream_data:
