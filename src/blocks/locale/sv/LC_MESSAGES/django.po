@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-04 20:23+0200\n"
-"PO-Revision-Date: 2020-04-04 20:26+0200\n"
+"PO-Revision-Date: 2020-04-07 22:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -108,7 +108,7 @@ msgstr ""
 "Namnet på sidan att visa. (Måste vara en publik sida eller tillgänglig  via "
 "den registrerade app-id)"
 
-#: models.py:187
+#: models.py:150
 msgid ""
 "Whether to show Instagram the last event from the registered Instagram feed"
 msgstr "Om du vill visa det senaste inlägget från Instagram"
@@ -177,6 +177,14 @@ msgstr "Sektion\t"
 msgid "Sections"
 msgstr "Sektioner"
 
+#: models.py:321
+msgid "Image + Text Cards"
+msgstr "Bild + Text Kort"
+
+#: templates/blocks/image_text_cards.html:15
+msgid "Read more"
+msgstr "Läs mer"
+
 #: templates/blocks/tags/calendar.html:19
 msgid "See the whole calendar"
 msgstr "Se hela kalendern"
@@ -188,12 +196,6 @@ msgstr "facebook ikon"
 #: templates/blocks/tags/instagram.html:5
 msgid "instagram icon"
 msgstr "instagram ikon"
-
-#~ msgid "Image + Description"
-#~ msgstr "Bild + Beskrivning"
-
-#~ msgid "Image + Icons"
-#~ msgstr "Bild + Ikoner"
 
 #~ msgid "Include margin above this block"
 #~ msgstr "Inkludera marginal under detta block"

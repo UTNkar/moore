@@ -295,11 +295,26 @@ class EventbriteBlock(blocks.StructBlock):
         group = _('Content')
 
 
+class ImageTextCardBlock(blocks.StructBlock):
+    cards = blocks.ListBlock(blocks.StructBlock([
+        ('image', ImageChooserBlock()),
+        ('title', blocks.CharBlock()),
+        ('text', blocks.RichTextBlock(required=False))
+    ]))
+
+    class Meta:
+        label = _('Image + Text Cards')
+        icon = 'fa-picture-o'
+        template = 'blocks/image_text_cards.html'
+        group = _('Content')
+
+
 CONTENT_BLOCKTYPES = [
     ('contacts', ContactsBlock()),
     ('events', EventsBlock()),
     ('logos', LogosBlock()),
     ('counters', CountersBlock()),
+    ('image_text_card', ImageTextCardBlock()),
 ]
 
 # INLINE LAYOUT BLOCKTYPES
