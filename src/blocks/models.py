@@ -379,7 +379,7 @@ class TwoColumnGridBlock(blocks.StructBlock):
         template = 'blocks/two_column_grid.html'
         group = _('Layout')
 
-        
+
 LAYOUT_BLOCKTYPES = [
     ('columns', ColumnBlock()),
     ('two_column_grid', TwoColumnGridBlock())
