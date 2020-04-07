@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 20:23+0200\n"
-"PO-Revision-Date: 2020-04-07 22:56+0200\n"
+"POT-Creation-Date: 2020-04-07 23:39+0200\n"
+"PO-Revision-Date: 2020-04-07 23:41+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -18,89 +18,91 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: models.py:20
+#: blocks/models.py:20
 msgid "Responsive Image"
 msgstr "Responsiv bild"
 
-#: models.py:23 models.py:38 models.py:49 models.py:58 models.py:69
-#: models.py:79 models.py:96 models.py:111 models.py:121
+#: blocks/models.py:23 blocks/models.py:38 blocks/models.py:49
+#: blocks/models.py:58 blocks/models.py:69 blocks/models.py:79
+#: blocks/models.py:96 blocks/models.py:111 blocks/models.py:121
 msgid "Basic"
 msgstr ""
 
-#: models.py:28
+#: blocks/models.py:28
 msgid "Left"
 msgstr "Vänster"
 
-#: models.py:29
+#: blocks/models.py:29
 msgid "Center"
 msgstr "Center"
 
-#: models.py:30
+#: blocks/models.py:30
 msgid "Right"
 msgstr "Höger"
 
-#: models.py:35
+#: blocks/models.py:35
 msgid "Paragraph"
 msgstr "Paragraf"
 
-#: models.py:46
+#: blocks/models.py:46
 msgid "Heading"
 msgstr "Rubrik"
 
-#: models.py:55
+#: blocks/models.py:55
 msgid "Divider"
 msgstr "Delare"
 
-#: models.py:66
+#: blocks/models.py:66
 msgid "Button"
 msgstr "Knapp"
 
-#: models.py:76
+#: blocks/models.py:76
 msgid "Buttons"
 msgstr "Knappar"
 
-#: models.py:87 models.py:162
+#: blocks/models.py:87 blocks/models.py:162
 msgid "Light"
 msgstr "Ljus"
 
-#: models.py:88 models.py:163
+#: blocks/models.py:88 blocks/models.py:163
 msgid "Dark"
 msgstr "Mörk"
 
-#: models.py:93
+#: blocks/models.py:93
 msgid "Image overlay"
 msgstr "Bildöverdrag"
 
 # It's difficult to know this context, don't know if it needs translation
-#: models.py:103 models.py:155
+#: blocks/models.py:103 blocks/models.py:155
 msgid "Material icon font icon text, as found on: https://material.io/icons"
 msgstr "Material icon font icon text, as found on: https://material.io/icons"
 
-#: models.py:108
+#: blocks/models.py:108
 msgid "Icon"
 msgstr "Ikon"
 
-#: models.py:118
+#: blocks/models.py:118
 msgid "Icons"
 msgstr "Ikoner"
 
-#: models.py:145
+#: blocks/models.py:145
 msgid "Logos"
 msgstr "Logotyper"
 
-#: models.py:148 models.py:170 models.py:245 models.py:257 models.py:295
+#: blocks/models.py:148 blocks/models.py:170 blocks/models.py:245
+#: blocks/models.py:257 blocks/models.py:295 blocks/models.py:309
 msgid "Content"
 msgstr "Innehåll"
 
-#: models.py:167
+#: blocks/models.py:167
 msgid "Counters"
 msgstr "Räknare"
 
-#: models.py:177
+#: blocks/models.py:177
 msgid "Whether to embed a Facebook page"
 msgstr "Om du vill visa en Facebook-sida"
 
-#: models.py:181
+#: blocks/models.py:181
 msgid ""
 "Name of the page to show. (Must be public or accessible by the registered "
 "app_id)"
@@ -108,100 +110,106 @@ msgstr ""
 "Namnet på sidan att visa. (Måste vara en publik sida eller tillgänglig  via "
 "den registrerade app-id)"
 
-#: models.py:150
+#: blocks/models.py:187
 msgid ""
 "Whether to show Instagram the last event from the registered Instagram feed"
 msgstr "Om du vill visa det senaste inlägget från Instagram"
 
-#: models.py:193
+#: blocks/models.py:193
 msgid "Whether to show the last video from a Youtube-channel"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: models.py:201
+#: blocks/models.py:201
 msgid "Whether to show the next few events from a google calendar"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: models.py:243
+#: blocks/models.py:243
 msgid "Events"
 msgstr "Evenemang"
 
-#: models.py:254
+#: blocks/models.py:254
 msgid "Contact Card"
 msgstr "Kontaktkort"
 
-#: models.py:292
+#: blocks/models.py:292
 msgid "Eventbrite"
 msgstr "Evenemang"
 
-#: models.py:315
-msgid "Accordion"
-msgstr "Dragspel\t"
-
-#: models.py:318 models.py:342
-msgid "Layout"
-msgstr "Layout"
-
-#: models.py:333
-msgid "Width out of 12"
-msgstr "Bredd, 1 till 12"
-
-#: models.py:339
-msgid "Columns"
-msgstr "Kolumner"
-
-#: models.py:358
-msgid "Small"
-msgstr "Liten"
-
-#: models.py:358
-msgid "Medium"
-msgstr "Mellan"
-
-#: models.py:358
-msgid "Large"
-msgstr "Stor"
-
-#: models.py:359
-msgid "Include padding for this section"
-msgstr "Inkludera marginaler ovan och under denne sektion"
-
-#: models.py:363
-msgid "Expand this section to full page width"
-msgstr "Expandera denna sektion till full bredd"
-
-#: models.py:369
-msgid "Section"
-msgstr "Sektion\t"
-
-#: models.py:372
-msgid "Sections"
-msgstr "Sektioner"
-
-#: models.py:321
+#: blocks/models.py:306
 msgid "Image + Text Cards"
 msgstr "Bild + Text Kort"
 
-#: templates/blocks/image_text_cards.html:15
+#: blocks/models.py:330
+msgid "Accordion"
+msgstr "Dragspel\t"
+
+#: blocks/models.py:333 blocks/models.py:357 blocks/models.py:380
+msgid "Layout"
+msgstr "Layout"
+
+#: blocks/models.py:348
+msgid "Width out of 12"
+msgstr "Bredd, 1 till 12"
+
+#: blocks/models.py:354
+msgid "Columns"
+msgstr "Kolumner"
+
+#: blocks/models.py:365
+msgid "Row height in px"
+msgstr "Rad höjd i px"
+
+#: blocks/models.py:370
+msgid "Swap position of image and paragraph"
+msgstr "Byt plats på bild och paragraf"
+
+#: blocks/models.py:377
+msgid "Two Column Grid"
+msgstr "Två Kolumns Rutnät"
+
+#: blocks/models.py:397
+msgid "Small"
+msgstr "Liten"
+
+#: blocks/models.py:397
+msgid "Medium"
+msgstr "Mellan"
+
+#: blocks/models.py:397
+msgid "Large"
+msgstr "Stor"
+
+#: blocks/models.py:398
+msgid "Include padding for this section"
+msgstr "Inkludera marginaler ovan och under denne sektion"
+
+#: blocks/models.py:402
+msgid "Expand this section to full page width"
+msgstr "Expandera denna sektion till full bredd"
+
+#: blocks/models.py:408
+msgid "Section"
+msgstr "Sektion\t"
+
+#: blocks/models.py:411
+msgid "Sections"
+msgstr "Sektioner"
+
+#: blocks/templates/blocks/image_text_cards.html:15
 msgid "Read more"
 msgstr "Läs mer"
 
-#: templates/blocks/tags/calendar.html:19
+#: blocks/templates/blocks/tags/calendar.html:19
 msgid "See the whole calendar"
 msgstr "Se hela kalendern"
 
-#: templates/blocks/tags/facebook.html:6
+#: blocks/templates/blocks/tags/facebook.html:6
 msgid "facebook icon"
 msgstr "facebook ikon"
 
-#: templates/blocks/tags/instagram.html:5
+#: blocks/templates/blocks/tags/instagram.html:5
 msgid "instagram icon"
 msgstr "instagram ikon"
 
 #~ msgid "Include margin above this block"
 #~ msgstr "Inkludera marginal under detta block"
-
-#~ msgid "Row height in px"
-#~ msgstr "Rad höjd i px"
-
-#~ msgid "Swap position of image and paragraph"
-#~ msgstr "Byt plats på bild och paragraf"

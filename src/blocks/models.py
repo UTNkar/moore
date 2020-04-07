@@ -357,8 +357,32 @@ class ColumnBlock(blocks.StructBlock):
         group = _('Layout')
 
 
+class TwoColumnGridBlock(blocks.StructBlock):
+    height = blocks.IntegerBlock(
+        min_value=1,
+        default=400,
+        max_value=800,
+        help_text=_('Row height in px')
+    )
+    rows = blocks.ListBlock(blocks.StructBlock([
+        ('flip', blocks.BooleanBlock(
+            required=False,
+            help_text=_('Swap position of image and paragraph'),
+        )),
+        ('image', ImageChooserBlock()),
+        ('paragraph', ParagraphBlock()),
+    ]))
+
+    class Meta:
+        label = _('Two Column Grid')
+        icon = 'fa-columns'
+        template = 'blocks/two_column_grid.html'
+        group = _('Layout')
+
+        
 LAYOUT_BLOCKTYPES = [
     ('columns', ColumnBlock()),
+    ('two_column_grid', TwoColumnGridBlock())
 ]
 
 
