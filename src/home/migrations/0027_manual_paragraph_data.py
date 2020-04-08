@@ -9,6 +9,7 @@ def richtext_to_paragraph(block):
         'type': 'paragraph',
         'value': {
             'text':  block['value'],
+            'alignment': "Left"
         }
     }
 
