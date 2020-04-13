@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0] - 2020-04-13
+
+### Added
+
+- Body and title fields in webpage and homepage are now accessible via wagtails api
+- Added an image + text card block
+
+### Changed
+
+- Webpage and homepage blocks are reworked to allow a more simpler designing of webpages
+- Updated django-simple-email-confirmation to 0.70
+- Updated phonenumbers to 8.12.1
+- Updated psycopg2-binary to 2.8.5
+
 ## [1.2.1] - 2020-02-22
 
 ### Fixed
