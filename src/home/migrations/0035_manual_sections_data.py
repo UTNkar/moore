@@ -5,18 +5,24 @@ from itertools import chain
 from django.core.serializers.json import DjangoJSONEncoder
 from json import dumps
 from wagtail.core.blocks.stream_block import StreamValue
+from utils.data_migrations import block_filter
 
+import copy
 
 def body_to_section(stream_field):
+
+    page_blocks = block_filter(copy.deepcopy(stream_field.stream_data),
+                               lambda block: block['type'] == 'html' or block['type'] == 'news')
     section = {
         'type': 'section',
         'value': {
             'padding': "S",
             'full_width': True,
-            'body': stream_field.stream_data,
+            'body': block_filter(copy.deepcopy(stream_field.stream_data),
+                                 lambda block: block['type'] != 'html' and block['type'] != 'news')
         }
     }
-    raw_text = dumps([section], cls=DjangoJSONEncoder)
+    raw_text = dumps([section] + page_blocks, cls=DjangoJSONEncoder)
     stream_block = stream_field.stream_block
     return StreamValue(stream_block, [], is_lazy=True, raw_text=raw_text)
     
