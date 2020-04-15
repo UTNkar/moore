@@ -30,7 +30,7 @@ def block_filter_map(block, block_type, mapper_func):
     return block
 
 
-""" 
+"""
 Recursively apply a filter operation on a block by traversing it
 and its children, and calling the predicate_func on each block. Only
 the blocks that make predicate_func return true are returned back, the
@@ -38,10 +38,11 @@ others have their values cleared. Important: Does not deep copy by
 itself. Make sure to perform a deep copy beforehand!
 
 :param block: The block to apply the filter-map operation on
-:param predicate_func: Function that decides wether or not the block 
+:param predicate_func: Function that decides wether or not the block
 is filtered
 :return: Returns a block hierarchy only containing the passing blocks.
 """
+
 
 def block_filter(block, predicate_func):
     if isinstance(block, list):
@@ -58,7 +59,6 @@ def block_filter(block, predicate_func):
 
     # int or string or something, just return untouched
     return block
-
 
 
 """
