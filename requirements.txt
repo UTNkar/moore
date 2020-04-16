@@ -1,5 +1,5 @@
 Django[argon2]==2.2.10
-wagtail==2.7.1
+wagtail==2.7.2
 
 # External Libraries
 requests==2.23.0
@@ -14,16 +14,16 @@ django-kronos==1.0
 
 # User management
 rules==2.2
-django-simple-email-confirmation==0.60
+django-simple-email-confirmation==0.70
 
 # Logging
 raven==6.10.0
 
 # Postgres
-psycopg2-binary==2.8.4
+psycopg2-binary==2.8.5
 
 # Phonenumber validation
-phonenumbers==8.11.5
+phonenumbers==8.12.1
 
 # Wagtail media module
 wagtailmedia==0.5.0

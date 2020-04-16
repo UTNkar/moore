@@ -6,7 +6,10 @@ import requests
 from datetime import datetime
 
 
+# BASIC BLOCKTYPES
+
 class ResponsiveImageBlock(blocks.StructBlock):
+    padding = blocks.BooleanBlock(required=False)
     image = ImageChooserBlock()
     height = blocks.IntegerBlock(
         min_value=1,
@@ -18,6 +21,131 @@ class ResponsiveImageBlock(blocks.StructBlock):
         icon = 'fa-picture-o'
         template = 'blocks/image.html'
         group = _('Basic')
+
+
+class ParagraphBlock(blocks.StructBlock):
+    alignment = blocks.ChoiceBlock([
+        ("Left", _("Left")),
+        ("Center", _("Center")),
+        ("Right", _("Right"))
+    ])
+    text = blocks.RichTextBlock()
+
+    class Meta:
+        label = _('Paragraph')
+        icon = 'edit'
+        template = 'blocks/paragraph.html'
+        group = _('Basic')
+
+
+class HeadingBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=True)
+    subtitle = blocks.CharBlock(required=False)
+
+    class Meta:
+        label = _('Heading')
+        icon = 'fa-header'
+        template = 'blocks/title.html'
+        group = _('Basic')
+
+
+class DividerBlock(blocks.StaticBlock):
+
+    class Meta:
+        label = _('Divider')
+        icon = 'horizontalrule'
+        template = 'blocks/divider.html'
+        group = _('Basic')
+
+
+class ButtonBlock(blocks.StructBlock):
+    text = blocks.CharBlock(required=True)
+    link = blocks.URLBlock(required=True)
+
+    class Meta:
+        label = _('Button')
+        icon = 'fa-hand-pointer-o'
+        template = 'blocks/button.html'
+        group = _('Basic')
+
+
+class ButtonGroupBlock(blocks.StructBlock):
+    buttons = blocks.ListBlock(ButtonBlock)
+
+    class Meta:
+        label = _('Buttons')
+        icon = 'fa-hand-pointer-o'
+        template = 'blocks/button_group.html'
+        group = _('Basic')
+
+
+class OverlayBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    title = blocks.CharBlock(required=False)
+    description = blocks.CharBlock(required=False)
+    text_color = blocks.ChoiceBlock(choices=[
+        ('text-light', _('Light')),
+        ('text-dark', _('Dark')),
+    ], default='text-dark')
+    buttons = ButtonGroupBlock(required=False)
+
+    class Meta:
+        label = _('Image overlay')
+        icon = 'fa-clone'
+        template = 'blocks/overlay.html'
+        group = _('Basic')
+
+
+class IconBlock(blocks.StructBlock):
+    title = blocks.CharBlock()
+    subtitle = blocks.CharBlock()
+    icon = blocks.CharBlock(
+        help_text=_('Material icon font icon text, as found on: '
+                    'https://material.io/icons')
+    )
+
+    class Meta:
+        label = _('Icon')
+        icon = 'fa-file-excel-o'
+        template = 'blocks/icon.html'
+        group = _('Basic')
+
+
+class IconGroupBlock(blocks.StructBlock):
+    icons = blocks.ListBlock(IconBlock)
+
+    class Meta:
+        label = _('Icons')
+        icon = 'fa-file-excel-o'
+        template = 'blocks/icon_group.html'
+        group = _('Basic')
+
+
+BASIC_BLOCKTYPES = [
+    ('heading', HeadingBlock()),
+    ('image', ResponsiveImageBlock()),
+    ('image_overlay', OverlayBlock()),
+    ('paragraph', ParagraphBlock()),
+    ('divider', DividerBlock()),
+    ('button_group', ButtonGroupBlock()),
+    ('icons', IconGroupBlock()),
+]
+
+# CONTENT BLOCKTYPES
+
+
+class LogosBlock(blocks.StructBlock):
+    logos = blocks.ListBlock(blocks.StructBlock([
+        ('image', ImageChooserBlock()),
+        ('link', blocks.URLBlock(required=False)),
+        ('description', blocks.CharBlock(required=False))
+    ]))
+
+    class Meta:
+        label = _('Logos')
+        icon = 'fa-pied-piper'
+        template = 'blocks/logos.html'
+        group = _('Content')
 
 
 class CountersBlock(blocks.StructBlock):
@@ -39,98 +167,7 @@ class CountersBlock(blocks.StructBlock):
         label = _('Counters')
         icon = 'fa-balance-scale'
         template = 'blocks/counter.html'
-        group = _('Noyce')
-
-
-class HeadingBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=True)
-    subtitle = blocks.CharBlock(required=False)
-
-    class Meta:
-        label = _('Heading')
-        icon = 'fa-header'
-        template = 'blocks/title.html'
-        group = _('Basic')
-
-
-class ImageDescriptionBlock(blocks.StructBlock):
-    description = blocks.RichTextBlock()
-    image = ImageChooserBlock()
-    image_alignment = blocks.ChoiceBlock(choices=[
-        ('left', _('Left')),
-        ('right', _('Right')),
-    ])
-    hide_on_med = blocks.BooleanBlock(required=False)
-
-    class Meta:
-        label = _('Image + Description')
-        icon = 'fa-file-image-o '
-        template = 'blocks/image_description.html'
-        group = _('Noyce')
-
-
-class ImageIconsBlock(blocks.StructBlock):
-    title = blocks.CharBlock()
-    image = ImageChooserBlock()
-    image_alignment = blocks.ChoiceBlock(choices=[
-        ('left', _('Left')),
-        ('right', _('Right')),
-    ])
-    icons = blocks.ListBlock(blocks.StructBlock([
-        ('icon', blocks.CharBlock(
-            help_text=_('Material icon font icon text, as found on: '
-                        'https://material.io/icons'),
-        )),
-        ('title', blocks.CharBlock()),
-        ('description', blocks.CharBlock())
-    ]))
-    hide_on_med = blocks.BooleanBlock(required=False)
-
-    class Meta:
-        label = _('Image + Icons')
-        icon = 'fa-file-excel-o'
-        template = 'blocks/image_icons.html'
-        group = _('Noyce')
-
-
-class LogosBlock(blocks.StructBlock):
-    logos = blocks.ListBlock(blocks.StructBlock([
-        ('image', ImageChooserBlock()),
-        ('link', blocks.URLBlock(required=False)),
-        ('description', blocks.CharBlock(required=False))
-    ]))
-
-    class Meta:
-        label = _('Logos')
-        icon = 'fa-pied-piper'
-        template = 'blocks/logos.html'
-        group = _('Noyce')
-
-
-class OverlayBlock(blocks.StructBlock):
-    image = ImageChooserBlock()
-    title = blocks.CharBlock(required=False)
-    description = blocks.CharBlock(required=False)
-    text_color = blocks.ChoiceBlock(choices=[
-        ('text-light', _('Light')),
-        ('text-dark', _('Dark')),
-    ], default='text-dark')
-    link = blocks.URLBlock(required=False)
-    button = blocks.CharBlock(required=False)
-    include_bottom_margin = blocks.BooleanBlock(
-        required=False,
-        help_text=_("Include margin under this block")
-    )
-    include_top_margin = blocks.BooleanBlock(
-        required=False,
-        help_text=_("Include margin above this block")
-    )
-
-    class Meta:
-        label = _('Image overlay')
-        icon = 'fa-clone'
-        template = 'blocks/overlay.html'
-        group = _('Noyce')
+        group = _('Content')
 
 
 class EventsBlock(blocks.StructBlock):
@@ -205,7 +242,7 @@ class EventsBlock(blocks.StructBlock):
     class Meta:
         label = _('Events')
         icon = 'fa-calendar'
-        group = _('Noyce')
+        group = _('Content')
         form_template = 'block_forms/events.html'
         template = 'blocks/events.html'
 
@@ -217,7 +254,7 @@ class ContactsBlock(blocks.StructBlock):
         label = _('Contact Card')
         icon = 'user'
         template = 'involvement/blocks/contact_cards.html'
-        group = _('Meta')
+        group = _('Content')
 
 
 class EventbriteBlock(blocks.StructBlock):
@@ -245,7 +282,7 @@ class EventbriteBlock(blocks.StructBlock):
                     evt['end']['local'],
                     '%Y-%m-%dT%H:%M:%S'
                 )
-            context['events'] = eventsJson['events']
+                context['events'] = eventsJson['events']
         except Exception:
             context['error'] = 'Failed to retrieve events from eventbrite.'
         finally:
@@ -255,33 +292,69 @@ class EventbriteBlock(blocks.StructBlock):
         label = _('Eventbrite')
         icon = 'fa-pied-piper'
         template = 'blocks/eventbrite.html'
-        group = _('Embed')
+        group = _('Content')
 
 
-BASIC_BLOCKTYPES = [
-    ('paragraph', blocks.RichTextBlock(
-        template='blocks/paragraph.html',
-        group=_('Basic'),
-    )),
-    ('image', ResponsiveImageBlock()),
+class ImageTextCardBlock(blocks.StructBlock):
+    cards = blocks.ListBlock(blocks.StructBlock([
+        ('image', ImageChooserBlock()),
+        ('title', blocks.CharBlock()),
+        ('text', blocks.RichTextBlock(required=False))
+    ]))
+
+    class Meta:
+        label = _('Image + Text Cards')
+        icon = 'fa-picture-o'
+        template = 'blocks/image_text_cards.html'
+        group = _('Content')
+
+
+CONTENT_BLOCKTYPES = [
+    ('contacts', ContactsBlock()),
+    ('events', EventsBlock()),
+    ('logos', LogosBlock()),
+    ('counters', CountersBlock()),
+    ('image_text_card', ImageTextCardBlock()),
+]
+
+# INLINE LAYOUT BLOCKTYPES
+
+
+class AccordionBlock(blocks.StructBlock):
+    rows = blocks.ListBlock(blocks.StructBlock([
+        ('header',  blocks.CharBlock()),
+        ('body', blocks.StreamBlock(BASIC_BLOCKTYPES))
+    ]))
+
+    class Meta:
+        label = _('Accordion')
+        icon = 'fa-bars'
+        template = 'blocks/accordion.html'
+        group = _('Layout')
+
+
+INLINE_LAYOUT_BLOCKTYPES = BASIC_BLOCKTYPES + [
+    ("Accordion", AccordionBlock())
 ]
 
 
+# LAYOUT BLOCKTYPES
+
 class ColumnBlock(blocks.StructBlock):
     columns = blocks.ListBlock(blocks.StructBlock([
-        ('width', blocks.IntegerBlock(
-            min_value=1,
-            max_value=12,
+        ('width', blocks.ChoiceBlock(
+            [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
+             (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)],
             help_text=_('Width out of 12'),
         )),
-        ('content', blocks.StreamBlock(BASIC_BLOCKTYPES))
+        ('content', blocks.StreamBlock(INLINE_LAYOUT_BLOCKTYPES))
     ]))
 
     class Meta:
         label = _('Columns')
         icon = 'fa-columns'
         template = 'blocks/columns.html'
-        group = _('Meta')
+        group = _('Layout')
 
 
 class TwoColumnGridBlock(blocks.StructBlock):
@@ -297,28 +370,50 @@ class TwoColumnGridBlock(blocks.StructBlock):
             help_text=_('Swap position of image and paragraph'),
         )),
         ('image', ImageChooserBlock()),
-        ('paragraph', blocks.RichTextBlock(
-            template='blocks/paragraph.html',
-            group=_('Basic'),
-        ))
+        ('paragraph', ParagraphBlock()),
     ]))
 
     class Meta:
         label = _('Two Column Grid')
         icon = 'fa-columns'
         template = 'blocks/two_column_grid.html'
-        group = _('Noyce')
+        group = _('Layout')
 
 
-WAGTAIL_STATIC_BLOCKTYPES = BASIC_BLOCKTYPES + [
-    ('heading', HeadingBlock()),  # TODO: Do we use this one?
-    ('image_description', ImageIconsBlock()),
-    ('image_icons', ImageDescriptionBlock()),
-    ('overlay', OverlayBlock()),
-    ('logos', LogosBlock()),
-    ('counters', CountersBlock()),
+LAYOUT_BLOCKTYPES = [
     ('columns', ColumnBlock()),
-    ('contacts', ContactsBlock()),
-    ('events', EventsBlock()),
     ('two_column_grid', TwoColumnGridBlock())
 ]
+
+
+SECTION_CONTENT_BLOCKTYPES = INLINE_LAYOUT_BLOCKTYPES + \
+                             LAYOUT_BLOCKTYPES + \
+                             CONTENT_BLOCKTYPES
+
+
+class SectionBlock(blocks.StructBlock):
+    padding = blocks.ChoiceBlock(
+        required=False,
+        choices=[("S", _("Small")), ("M", _("Medium")), ("L", _("Large"))],
+        help_text=_("Include padding for this section")
+    )
+    full_width = blocks.BooleanBlock(
+        required=False,
+        help_text=_("Expand this section to full page width")
+    )
+
+    body = blocks.StreamBlock(SECTION_CONTENT_BLOCKTYPES)
+
+    class Meta:
+        label = _('Section')
+        icon = 'fa-bars'
+        template = 'blocks/section.html'
+        group = _('Sections')
+
+
+PAGE_BLOCKTYPES = [
+    ('section', SectionBlock()),
+    ('divider', DividerBlock()),
+]
+
+WAGTAIL_STATIC_BLOCKTYPES = PAGE_BLOCKTYPES
