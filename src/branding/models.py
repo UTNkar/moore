@@ -53,6 +53,10 @@ class Logo(models.Model):
         verbose_name = _('logo')
         verbose_name_plural = _('logos')
 
+    def __str__(self):
+        logotext = str(_('logo'))
+        return logotext.capitalize()
+
     CATEGORY_CHOICES = (
         ('committee', _('Committee')),
         ('section', _('Section')),
