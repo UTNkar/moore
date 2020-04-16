@@ -17,7 +17,7 @@ def body_to_section(stream_field):
         'type': 'section',
         'value': {
             'padding': "S",
-            'full_width': True,
+            'full_width': False,
             'body': block_filter(copy.deepcopy(stream_field.stream_data),
                                  lambda block: block['type'] != 'html' and block['type'] != 'news')
         }
@@ -48,7 +48,7 @@ def apply_to_all_pages(apps, mapper):
     for obj in chain(hps, wps):
         obj.body_en = mapper(obj.body_en)
         obj.body_sv = mapper(obj.body_sv)
-        obj.save();
+        obj.save()
 
 def forwards(apps, schema_editor):
     apply_to_all_pages(apps, body_to_section)
