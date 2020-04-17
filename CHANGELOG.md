@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.1] - 2020-04-17
+
+### Fixed
+
+- Webpages that are migrated to sections don't take up the full witdh of the page
+- Html and news blocks don't break when being converted
+
+### Changed
+
+- Updated wagtail to 2.7.2
+
 ## [2.0.0] - 2020-04-13
 
 ### Added
