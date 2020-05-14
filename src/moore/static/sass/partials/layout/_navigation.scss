@@ -17,92 +17,12 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
 .navigation {
   @extend .nav-wrapper;
 
-  background-color: $background-color;
-  height: $navigation-height;
-  line-height: $line-height;
-  padding: $navigation-padding $line-height;
-
-  ul button.btn {
-    margin-top: -2px; // To match a .btn
+  background-color: black;
+  .dropdown-content{
+    overflow: visible !important;
   }
-
-  .dropdown-content {
-    width: auto !important;
-  }
-
-  .avatar {
-    height: $line-height;
-
-    &.active, &:hover {
-      background: none;
-      a {
-        color: $black-color;
-        background: inherit;
-      }
-    }
-
-    &:after {
-      @extend .circle;
-      font-family: 'Material Icons';
-      font-size: $logo-fallback-icon-size;
-      content: 'person';
-      position: relative;
-      display: block;
-      padding: $logo-fallback-difference/2 $logo-fallback-difference/2;
-      left: $logo-fallback-margin-left + 1px;
-      top:  $logo-fallback-margin-top;
-      z-index: 0;
-      background-color: $secondary-color;
-      width: $logo-height - 2px;
-      height: $logo-height - 2px;
-    }
-
-    img {
-      @extend .circle;
-      position: relative;
-      margin-top: $logo-margin;
-      height: $logo-height;
-      width: $logo-height;
-      z-index: 100;
-    }
-    .more-icon {
-      color: $black-color;
-      float: right;
-      font-size: 32px;
-      line-height: 32px;
-    }
-    .dropdown-content {
-      margin-top: 32px;
-    }
-  }
-
-  .brand-logo {
-    height: $logo-height;
-    width: $logo-width;
-    margin-top: $logo-margin;
-  }
-
-  .button-collapse i {
-    color: $secondary-color;
-    height: $line-height;
-    line-height: $line-height;
-  }
-
-  .main-menu {
-    margin-left: $logo-width + 20px;
-    li {
-      a {
-        color: rgba($black-color, .8);
-        font-weight: bold;
-        text-transform: uppercase;
-      }
-      &.active, &:hover {
-        background: none;
-        a {
-          color: $black-color;
-          background: inherit;
-        }
-      }
-    }
+  .submenu{
+    left: 100% !important;
+    border-left: 1px solid black;
   }
 }
