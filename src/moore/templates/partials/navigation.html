@@ -25,7 +25,7 @@
                 {% endif %}
             </div>
         </li>
-        {% menu_items parent=site_root sidenav=True %}
+        {% menu_items parent=site_root sidenav=True top_level=True %}
         {% if user.is_authenticated %}
             <li><div class="divider"></div></li>
             <li><a href="{% url 'profile' %}"><i class="material-icons">face</i>{% trans 'account' %}</a></li>
@@ -36,7 +36,7 @@
 
     <ul class="main-menu hide-on-med-and-down">
         <li><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
-        {% menu_items parent=site_root %}
+        {% menu_items parent=site_root top_level=True %}
     </ul>
 
     <ul class="right hide-on-med-and-down">
