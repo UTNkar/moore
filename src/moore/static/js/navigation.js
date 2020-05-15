@@ -3,8 +3,4 @@ $(document).ready(function(){
     $(".dropdown-button").dropdown({
         hover: true
     });
-
-    $('.submenu-toggler').dropdown({
-        hover: true,
-    });
 });
