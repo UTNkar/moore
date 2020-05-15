@@ -18,7 +18,7 @@ def has_menu_children(page):
 # The has_menu_children method is necessary because the bootstrap menu requires
 # a dropdown class to be applied to a parent
 @register.inclusion_tag('tags/menu.html', takes_context=True)
-def menu_items(context, parent, calling_page=None, sidenav=False):
+def menu_items(context, parent, sidenav=False):
     menuitems = parent.get_children().live().in_menu()
     menuitems = [m.specific for m in menuitems]
     for menuitem in menuitems:
@@ -26,10 +26,9 @@ def menu_items(context, parent, calling_page=None, sidenav=False):
         menuitem.active = context['request'].path.startswith(menuitem.url)
 
     return {
-        'calling_page': calling_page,
+        'parent': parent,
         'menuitems': menuitems,
         'sidenav': sidenav,
-        # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
 
@@ -43,6 +42,5 @@ def menu_children(context, parent, sidenav=False):
         'parent': parent,
         'children': children,
         'sidenav': sidenav,
-        # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
