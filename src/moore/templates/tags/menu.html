@@ -21,11 +21,23 @@
 {% else %}
 
 <li {% if menuitem.active %}class="active"{% endif %}>
-    <a {% if menuitem.show_dropdown %}class="dropdown-button" data-activates="{{ menuitem.slug }}"{% endif %} href="{% pageurl menuitem %}">{% firstof menuitem.translated_title menuitem.title %}</a>
+    <a
+        href="{% pageurl menuitem %}"
+        {% if menuitem.show_dropdown %}
+            class="dropdown-button"
+            data-activates="{{ menuitem.slug }}"
+        {% endif %}
+    >
+        {% firstof menuitem.translated_title menuitem.title %}
+    </a>
     {% if menuitem.show_dropdown %}
-        <ul class="dropdown-content" id="{{ menuitem.slug }}">
-            <li><a href="{% pageurl menuitem %}">{% firstof menuitem.translated_title menuitem.title %}</a></li>
-            {% menu_children parent=menuitem %}
+        <ul class="dropdown-content {% if parent.id != site_root.id%}submenu{% endif %}" id="{{ menuitem.slug }}">
+            <li>
+                <a href="{% pageurl menuitem %}">
+                    {% firstof menuitem.translated_title menuitem.title %}
+                </a>
+            </li>
+            {% menu_items parent=menuitem %}
         </ul>
     {% endif %}
 </li>
