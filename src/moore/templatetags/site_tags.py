@@ -23,11 +23,8 @@ def menu_items(context, parent, calling_page=None, sidenav=False):
     menuitems = [m.specific for m in menuitems]
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
-        # We don't directly check if calling_page is None since the template
-        # engine can pass an empty string to calling_page
-        # if the variable passed as calling_page does not exist.
-        menuitem.active = (calling_page.url.startswith(menuitem.url)
-                           if calling_page else False)
+        menuitem.active = context['request'].path.startswith(menuitem.url)
+
     return {
         'calling_page': calling_page,
         'menuitems': menuitems,
