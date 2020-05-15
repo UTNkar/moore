@@ -25,7 +25,7 @@
                 {% endif %}
             </div>
         </li>
-        {% menu_items parent=site_root calling_page=self sidenav=True %}
+        {% menu_items parent=site_root sidenav=True %}
         {% if user.is_authenticated %}
             <li><div class="divider"></div></li>
             <li><a href="{% url 'profile' %}"><i class="material-icons">face</i>{% trans 'account' %}</a></li>
