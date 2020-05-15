@@ -29,11 +29,13 @@
             </a>
             {% if menuitem.has_children %}
                 <ul class="dropdown-content {% if parent.id != site_root.id%}submenu{% endif %}" id="{{ menuitem.slug }}">
-                    <li>
-                        <a href="{% pageurl menuitem %}">
-                            {{ menuitem.title }}
-                        </a>
-                    </li>
+                    {% if top_level %}
+                        <li>
+                            <a href="{% pageurl menuitem %}">
+                                {{ menuitem.title }}
+                            </a>
+                        </li>
+                    {% endif %}
                     {% menu_items parent=menuitem %}
                 </ul>
             {% endif %}
