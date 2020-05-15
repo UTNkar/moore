@@ -22,7 +22,7 @@ def menu_items(context, parent, sidenav=False):
     menuitems = parent.get_children().live().in_menu()
     menuitems = [m.specific for m in menuitems]
     for menuitem in menuitems:
-        menuitem.show_dropdown = has_menu_children(menuitem)
+        menuitem.has_children = has_menu_children(menuitem)
         menuitem.active = context['request'].path.startswith(menuitem.url)
 
     return {
