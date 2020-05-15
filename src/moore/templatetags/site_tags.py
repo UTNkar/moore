@@ -24,6 +24,10 @@ def menu_items(context, parent, sidenav=False):
     for menuitem in menuitems:
         menuitem.has_children = has_menu_children(menuitem)
         menuitem.active = context['request'].path.startswith(menuitem.url)
+        menuitem.title = (
+            menuitem.translated_title
+            if menuitem.translated_title else menuitem.title
+        )
 
     return {
         'parent': parent,

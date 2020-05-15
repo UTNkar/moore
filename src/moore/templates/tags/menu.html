@@ -6,10 +6,10 @@
         <li {% if menuitem.active %}class="active"{% endif %} class="no-padding">
             <ul class="collapsible collapsible-accordion">
                 <li>
-                    <a class="collapsible-header">{% firstof menuitem.translated_title menuitem.title %}<i class="material-icons">arrow_drop_down</i></a>
+                    <a class="collapsible-header">{{ menuitem.title }}<i class="material-icons">arrow_drop_down</i></a>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a href="{% pageurl menuitem %}">{% firstof menuitem.translated_title menuitem.title %}</a></li>
+                            <li><a href="{% pageurl menuitem %}">{{ menuitem.title }}</a></li>
                             {% menu_children parent=menuitem %}
                         </ul>
                     </div>
@@ -25,13 +25,13 @@
                     data-activates="{{ menuitem.slug }}"
                 {% endif %}
             >
-                {% firstof menuitem.translated_title menuitem.title %}
+                {{ menuitem.title }}
             </a>
             {% if menuitem.has_children %}
                 <ul class="dropdown-content {% if parent.id != site_root.id%}submenu{% endif %}" id="{{ menuitem.slug }}">
                     <li>
                         <a href="{% pageurl menuitem %}">
-                            {% firstof menuitem.translated_title menuitem.title %}
+                            {{ menuitem.title }}
                         </a>
                     </li>
                     {% menu_items parent=menuitem %}
