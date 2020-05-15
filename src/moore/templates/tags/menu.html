@@ -30,7 +30,7 @@
                 <ul class="dropdown-content {% if not top_level %}submenu{% endif %}" id="{{ menuitem.slug }}">
                     {# Display the current menu item in the dropdown if the menu item is at the top level of the menu #}
                     {% if top_level %}
-                        <li {% if menuitem.active %}class="active"{% endif %}>
+                        <li>
                             <a href="{% pageurl menuitem %}">
                                 {{ menuitem.title }}
                             </a>
