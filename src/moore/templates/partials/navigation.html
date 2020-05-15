@@ -40,17 +40,28 @@
     </ul>
 
     <ul class="right hide-on-med-and-down">
-        <li><form action="{% url 'set_language' %}" id="set_language_form" method="post">
-            {% csrf_token %}
-            <input name="next" type="hidden" value="{{ request.path }}" />
-            {% if LANGUAGE_CODE == 'sv' %}
-                <input type="hidden" name="language" value="en" />
-                <button class="btn btn-inverse" type="submit"><i class="material-icons">language</i>English</button>
-            {% else %}
-                <input type="hidden" name="language" value="sv" />
-                <button class="btn btn-inverse" type="submit"><i class="material-icons">language</i>Svenska</button>
-            {% endif %}
-        </form></li>
+        <li>
+            <form action="{% url 'set_language' %}" id="set_language_form" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.path }}" />
+                <input 
+                    type="hidden"
+                    name="language"
+                    value="{% if LANGUAGE_CODE == 'sv'%}en{% else %}sv{% endif %}"
+                />
+                <button 
+                    class="btn btn-inverse"
+                    type="submit"
+                >
+                    <i class="material-icons">language</i>
+                    {% if LANGUAGE_CODE == 'sv'%}
+                        English
+                    {% else %}
+                        Svenska
+                    {% endif %}
+                </button>
+            </form>
+        </li>
         {% if not user.is_authenticated %}
             <li>
                 <a class="btn" href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}">
