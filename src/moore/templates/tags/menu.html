@@ -1,5 +1,4 @@
 {% load site_tags wagtailcore_tags i18n %}
-{% get_site_root as site_root %}
 
 {% for menuitem in menuitems %}
     {% if sidenav and menuitem.has_children %}
@@ -28,7 +27,7 @@
                 {{ menuitem.title }}
             </a>
             {% if menuitem.has_children %}
-                <ul class="dropdown-content {% if parent.id != site_root.id%}submenu{% endif %}" id="{{ menuitem.slug }}">
+                <ul class="dropdown-content {% if not top_level %}submenu{% endif %}" id="{{ menuitem.slug }}">
                     {% if top_level %}
                         <li>
                             <a href="{% pageurl menuitem %}">
