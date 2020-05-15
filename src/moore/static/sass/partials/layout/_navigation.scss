@@ -17,12 +17,25 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
 .navigation {
   @extend .nav-wrapper;
 
-  background-color: black;
-  .dropdown-content{
-    overflow: visible !important;
-  }
-  .submenu{
-    left: 100% !important;
-    border-left: 1px solid black;
+  background-color: white;
+
+  .main-menu{
+    li a {
+      color: rgba(66,66,66,.8);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .dropdown-content{
+      //Displays the submenues to the side of the parent menu
+      overflow: visible !important;
+      width: auto !important;
+      white-space: nowrap;
+    }
+
+    .submenu{
+      left: 100% !important;
+      border-left: 1px solid black;
+    }
   }
 }
