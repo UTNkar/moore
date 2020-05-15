@@ -35,30 +35,8 @@
     </ul>
 
     <ul class="main-menu hide-on-med-and-down">
-        {% menu_items parent=site_root calling_page=self %}
-        
-        <li>
-            <a class="dropdown-button" data-activates="test" href="#">Test</a>
-        </li>
-        <ul class="dropdown-content" id="test">
-            <li><a href="#">dwadawd</a></li>
-            <li>
-                <a class='submenu-toggler' href='#' data-activates='dropdown2'>Dropdown></a>
-            </li>
-            <li><a href="#">ggggg</a></li>
-        </ul>
-        <ul id='dropdown2' class='dropdown-content submenu'>
-            <li>
-                <a class='submenu-toggler' href='#' data-activates='dropdown3'>Dropdown></a>
-            </li>
-            <li><a href="#!">two</a></li>
-        </ul>
-        <ul id='dropdown3' class='dropdown-content submenu'>
-            <li>
-               <a href="#">owowo</a>
-            </li>
-            <li><a href="#!">two</a></li>
-        </ul>
+        <li><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
+        {% menu_items parent=site_root %}
     </ul>
 
     <ul class="right hide-on-med-and-down">

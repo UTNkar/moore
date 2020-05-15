@@ -1,7 +1,6 @@
 {% load site_tags wagtailcore_tags i18n %}
 {% get_site_root as site_root %}
 
-<li><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
 {% for menuitem in menuitems %}
 {% if sidenav and menuitem.show_dropdown %}
 
