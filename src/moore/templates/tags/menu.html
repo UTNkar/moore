@@ -2,45 +2,41 @@
 {% get_site_root as site_root %}
 
 {% for menuitem in menuitems %}
-{% if sidenav and menuitem.has_children %}
-
-    <li {% if menuitem.active %}class="active"{% endif %} class="no-padding">
-        <ul class="collapsible collapsible-accordion">
-            <li>
-                <a class="collapsible-header">{% firstof menuitem.translated_title menuitem.title %}<i class="material-icons">arrow_drop_down</i></a>
-                <div class="collapsible-body">
-                    <ul>
-                        <li><a href="{% pageurl menuitem %}">{% firstof menuitem.translated_title menuitem.title %}</a></li>
-                        {% menu_children parent=menuitem %}
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </li>
-
-{% else %}
-
-<li {% if menuitem.active %}class="active"{% endif %}>
-    <a
-        href="{% pageurl menuitem %}"
-        {% if menuitem.has_children %}
-            class="dropdown-button"
-            data-activates="{{ menuitem.slug }}"
-        {% endif %}
-    >
-        {% firstof menuitem.translated_title menuitem.title %}
-    </a>
-    {% if menuitem.has_children %}
-        <ul class="dropdown-content {% if parent.id != site_root.id%}submenu{% endif %}" id="{{ menuitem.slug }}">
-            <li>
-                <a href="{% pageurl menuitem %}">
-                    {% firstof menuitem.translated_title menuitem.title %}
-                </a>
-            </li>
-            {% menu_items parent=menuitem %}
-        </ul>
+    {% if sidenav and menuitem.has_children %}
+        <li {% if menuitem.active %}class="active"{% endif %} class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header">{% firstof menuitem.translated_title menuitem.title %}<i class="material-icons">arrow_drop_down</i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="{% pageurl menuitem %}">{% firstof menuitem.translated_title menuitem.title %}</a></li>
+                            {% menu_children parent=menuitem %}
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    {% else %}
+        <li {% if menuitem.active %}class="active"{% endif %}>
+            <a
+                href="{% pageurl menuitem %}"
+                {% if menuitem.has_children %}
+                    class="dropdown-button"
+                    data-activates="{{ menuitem.slug }}"
+                {% endif %}
+            >
+                {% firstof menuitem.translated_title menuitem.title %}
+            </a>
+            {% if menuitem.has_children %}
+                <ul class="dropdown-content {% if parent.id != site_root.id%}submenu{% endif %}" id="{{ menuitem.slug }}">
+                    <li>
+                        <a href="{% pageurl menuitem %}">
+                            {% firstof menuitem.translated_title menuitem.title %}
+                        </a>
+                    </li>
+                    {% menu_items parent=menuitem %}
+                </ul>
+            {% endif %}
+        </li>
     {% endif %}
-</li>
-
-{% endif %}
 {% endfor %}
