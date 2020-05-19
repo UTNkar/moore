@@ -20,11 +20,18 @@
             <a
                 href="{% pageurl menuitem %}"
                 {% if menuitem.has_children %}
-                    class="dropdown-button"
+                    class="dropdown-button no-right-padding"
                     data-activates="{{ menuitem.slug }}"
                 {% endif %}
             >
-                {{ menuitem.title }}
+                {% if menuitem.has_children and not top_level %}
+                    <div class="menu-text">
+                        <p>{{ menuitem.title }}</p>
+                        <i class="material-icons">chevron_right</i>
+                    </div>
+                {% else %}
+                    {{ menuitem.title }}
+                {% endif %}
             </a>
             {% if menuitem.has_children %}
                 <ul class="dropdown-content {% if not top_level %}submenu{% endif %}" id="{{ menuitem.slug }}">

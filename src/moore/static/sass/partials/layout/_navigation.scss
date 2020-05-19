@@ -31,6 +31,27 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
       overflow: visible !important;
       width: auto !important;
       white-space: nowrap;
+
+      .no-right-padding{
+        padding-right: 0;
+      }
+
+      .menu-text {
+        display:flex; 
+        align-items: center;
+        
+        i {
+          height: initial;
+          line-height: initial;
+        }
+
+        p{
+          display: inline;
+          flex-grow: 1;
+          margin: 0;
+          margin-right: .5em;
+        }
+      }
     }
 
     .submenu{
