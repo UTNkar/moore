@@ -20,6 +20,13 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
   background-color: white;
 
   .main-menu{
+    li.active {
+      background-color: rgba(0, 0, 0, 0.07);
+      & > a{
+        color: black;
+      }
+    }
+
     li a {
       color: rgba(66,66,66,.8);
       font-weight: 700;
