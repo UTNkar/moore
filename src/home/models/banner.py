@@ -12,6 +12,8 @@ from wagtailmedia.edit_handlers import MediaChooserPanel
 
 
 from wagtail.core import hooks
+
+
 @hooks.register('construct_media_chooser_queryset')
 def show_my_uploaded_media_only(media, request):
     # Only show video media

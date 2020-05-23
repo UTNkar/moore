@@ -96,6 +96,7 @@ class Application(ClusterableModel):
 def sync_user_groups(sender, instance, update_fields, **kwargs):
     instance.applicant.sync_user_groups()
 
+
 @receiver(post_save, sender=Application,
           dispatch_uid='application_check_mandate_history')
 def check_mandate_history(sender, instance, **kwargs):
@@ -147,6 +148,7 @@ def check_contact_card(sender, instance, **kwargs):
                 card.application = None
                 card.picture = None
                 card.save()
+
 
 @receiver(pre_save, sender=Application,
           dispatch_uid='application_auto_approve')
