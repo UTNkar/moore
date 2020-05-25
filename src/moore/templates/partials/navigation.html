@@ -70,7 +70,7 @@
             </li>
         {% else %}
             <li class="avatar">
-                <a href="{% url 'profile' %}" class="dropdown-button" data-activates="user-menu">
+                <a href="{% url 'profile' %}" class="dropdown-button" data-activates="user-menu" data-alignment="right" data-belowOrigin="true">
                     <img src="{% avatar_url user.email %}" alt="{% trans 'your avatar' %}">
                     <i class="material-icons more-icon">more_vert</i>
                 </a>
