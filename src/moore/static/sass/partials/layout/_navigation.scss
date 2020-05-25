@@ -6,7 +6,8 @@ $navigation-padding: ($navigation-height - $line-height)/2;
 
 $logo-height: 55px;
 $logo-width: 214px;
-$logo-margin: ($line-height - $logo-height)/2;
+$logo-margin-top: ($navigation-height - $logo-height)/2;
+$logo-margin-left: 15px;
 
 $logo-fallback-icon-size: 40px;
 $shrink: 2px;
@@ -16,10 +17,54 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
 
 .navigation {
   @extend .nav-wrapper;
-
+  display: flex;
+  height: $navigation-height;
   background-color: white;
 
+  .avatar{
+    height: $navigation-height;
+
+    & > a {
+      display: flex;
+      height: $navigation-height;
+      align-items: center;
+    }
+
+    img {
+      @extend .circle;
+      height: 55px;
+      width: 55px;
+    }
+
+    .more-icon{
+      color: black;
+      font-size: 32px;
+      line-height: 32px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .dropdown-content{
+    width: auto !important;
+    white-space: nowrap;
+  }
+
+  .brand-logo {
+    height: $logo-height;
+    width: $logo-width;
+    margin-top: $logo-margin-top;
+    margin-left: 1em;
+  }
+
+  .main-menu > li, .right > li{
+    height: $navigation-height;
+    line-height: $navigation-height;
+  }
+
   .main-menu{
+    flex-grow: 1;
+    margin-left: $logo-width + $logo-margin-left + 32px;
     li.active {
       background-color: rgba(0, 0, 0, 0.07);
       & > a{
@@ -36,17 +81,15 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
     .dropdown-content{
       //Displays the submenues to the side of the parent menu
       overflow: visible !important;
-      width: auto !important;
-      white-space: nowrap;
 
       .no-right-padding{
         padding-right: 0;
       }
 
       .menu-text {
-        display:flex; 
+        display:flex;
         align-items: center;
-        
+
         i {
           height: initial;
           line-height: initial;
