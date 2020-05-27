@@ -18,10 +18,22 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
 .navigation {
   @extend .nav-wrapper;
   display: flex;
+  align-items: center;
   height: $navigation-height;
   background-color: white;
-  padding-left: 1.7em;
-  padding-right: 1.7em;
+  padding-left: 1.4em;
+
+  @media #{$medium-and-up}{
+    padding-left: 1.7em;
+    padding-right: 1.7em;
+  }
+
+  .button-collapse{
+    margin: 0;
+    i {
+      color: #2e2e2e;
+    }
+  }
 
   .avatar{
     height: $navigation-height;
@@ -55,7 +67,6 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
   .brand-logo {
     height: $logo-height;
     width: $logo-width;
-    margin-top: $logo-margin-top;
   }
 
   .main-menu > li, .right > li{
