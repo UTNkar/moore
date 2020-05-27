@@ -1,19 +1,8 @@
 @import "../base";
 
 $navigation-height: 80px;
-$line-height: 32px;
-$navigation-padding: ($navigation-height - $line-height)/2;
-
 $logo-height: 55px;
 $logo-width: 214px;
-$logo-margin-top: ($navigation-height - $logo-height)/2;
-$logo-margin-left: 15px;
-
-$logo-fallback-icon-size: 40px;
-$shrink: 2px;
-$logo-fallback-difference: $logo-height - $shrink - $logo-fallback-icon-size;
-$logo-fallback-margin-left: 15px;
-$logo-fallback-margin-top:  - ($logo-height + 10px);
 
 .navigation {
   @extend .nav-wrapper;
