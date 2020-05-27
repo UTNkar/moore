@@ -3,7 +3,7 @@
 {% for menuitem in menuitems %}
     {% if sidenav %}
         {% if menuitem.has_children %}
-            <li {% if menuitem.active and not top_level %}class="active"{% endif %}>
+            <li>
                 <ul class="collapsible collapsible-accordion">
                     <li>
                         <a class="collapsible-header">{{ menuitem.title }}<i class="material-icons">arrow_drop_down</i></a>
@@ -20,7 +20,7 @@
             <li><a href="{% pageurl menuitem %}">{{ menuitem.title }}</a></li>
         {% endif %}
     {% else %}
-        <li {% if menuitem.active %}class="active"{% endif %}>
+        <li>
             <a
                 href="{% pageurl menuitem %}"
                 {% if top_level %}
