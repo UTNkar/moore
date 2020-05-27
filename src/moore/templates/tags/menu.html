@@ -1,20 +1,24 @@
 {% load site_tags wagtailcore_tags i18n %}
 
 {% for menuitem in menuitems %}
-    {% if sidenav and menuitem.has_children %}
-        <li {% if menuitem.active %}class="active"{% endif %} class="no-padding">
-            <ul class="collapsible collapsible-accordion">
-                <li>
-                    <a class="collapsible-header">{{ menuitem.title }}<i class="material-icons">arrow_drop_down</i></a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li><a href="{% pageurl menuitem %}">{{ menuitem.title }}</a></li>
-                            {% menu_children parent=menuitem %}
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
+    {% if sidenav %}
+        {% if menuitem.has_children %}
+            <li {% if menuitem.active %}class="active"{% endif %} {% if top_level %}class="no-padding"{% endif %}>
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                        <a class="collapsible-header">{{ menuitem.title }}<i class="material-icons">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="{% pageurl menuitem %}">{{ menuitem.title }}</a></li>
+                                {% menu_items parent=menuitem sidenav=True %}
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        {% else %}
+            <li><a href="{% pageurl menuitem %}">{{ menuitem.title }}</a></li>
+        {% endif %}
     {% else %}
         <li {% if menuitem.active %}class="active"{% endif %}>
             <a
