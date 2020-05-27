@@ -20,6 +20,8 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
   display: flex;
   height: $navigation-height;
   background-color: white;
+  padding-left: 1.7em;
+  padding-right: 1.7em;
 
   .avatar{
     height: $navigation-height;
@@ -54,7 +56,6 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
     height: $logo-height;
     width: $logo-width;
     margin-top: $logo-margin-top;
-    margin-left: 1em;
   }
 
   .main-menu > li, .right > li{
@@ -64,7 +65,7 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
 
   .main-menu{
     flex-grow: 1;
-    margin-left: $logo-width + $logo-margin-left + 32px;
+    margin-left: $logo-width + 20px;
     a.active {
       background-color: rgba(0, 0, 0, 0.07);
     }
