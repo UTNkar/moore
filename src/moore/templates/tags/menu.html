@@ -3,7 +3,7 @@
 {% for menuitem in menuitems %}
     {% if sidenav %}
         {% if menuitem.has_children %}
-            <li {% if menuitem.active %}class="active"{% endif %} {% if top_level %}class="no-padding"{% endif %}>
+            <li {% if menuitem.active %}class="active"{% endif %}>
                 <ul class="collapsible collapsible-accordion">
                     <li>
                         <a class="collapsible-header">{{ menuitem.title }}<i class="material-icons">arrow_drop_down</i></a>
