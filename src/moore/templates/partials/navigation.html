@@ -25,6 +25,7 @@
                 {% endif %}
             </div>
         </li>
+        <li class="no-padding"><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
         {% menu_items parent=site_root sidenav=True top_level=True %}
         {% if user.is_authenticated %}
             <li><div class="divider"></div></li>
