@@ -65,11 +65,8 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
   .main-menu{
     flex-grow: 1;
     margin-left: $logo-width + $logo-margin-left + 32px;
-    li.active {
+    a.active {
       background-color: rgba(0, 0, 0, 0.07);
-      & > a{
-        color: black;
-      }
     }
 
     li a {
