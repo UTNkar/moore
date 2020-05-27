@@ -24,8 +24,7 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
   padding-left: 1.4em;
 
   @media #{$medium-and-up}{
-    padding-left: 1.7em;
-    padding-right: 1.7em;
+    padding: 0 1.7em;
   }
 
   .collapsible-header {
@@ -37,7 +36,7 @@ $logo-fallback-margin-top:  - ($logo-height + 10px);
   }
 
   .collapsible-body{
-    padding-left: 20px;
+    padding-left: 1.4em;
   }
 
   .button-collapse{
