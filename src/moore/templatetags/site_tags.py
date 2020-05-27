@@ -42,16 +42,3 @@ def menu_items(context, parent, sidenav=False, top_level=False):
         'sidenav': sidenav,
         'request': context['request'],
     }
-
-
-# Retrieves the children of the top menu items for the drop downs
-@register.inclusion_tag('tags/menu_children.html', takes_context=True)
-def menu_children(context, parent, sidenav=False):
-    children = parent.get_children().live().in_menu()
-    children = [c.specific for c in children]
-    return {
-        'parent': parent,
-        'children': children,
-        'sidenav': sidenav,
-        'request': context['request'],
-    }
