@@ -24,12 +24,6 @@ def menu_items(context, parent, sidenav=False, top_level=False):
     for menuitem in menuitems:
         menuitem.has_children = has_menu_children(menuitem)
 
-        # Only make the top level menu items active
-        menuitem.active = (
-            context['request'].path.startswith(menuitem.url)
-            if top_level else False
-        )
-
         menuitem.title = (
             menuitem.translated_title
             if menuitem.translated_title else menuitem.title
