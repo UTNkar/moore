@@ -19,6 +19,10 @@
         <li {% if menuitem.active %}class="active"{% endif %}>
             <a
                 href="{% pageurl menuitem %}"
+                {% if top_level %}
+                    data-belowOrigin="true"
+                {% endif %}
+
                 {% if menuitem.has_children %}
                     class="dropdown-button no-right-padding"
                     data-activates="{{ menuitem.slug }}"
