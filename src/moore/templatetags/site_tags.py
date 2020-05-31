@@ -18,34 +18,21 @@ def has_menu_children(page):
 # The has_menu_children method is necessary because the bootstrap menu requires
 # a dropdown class to be applied to a parent
 @register.inclusion_tag('tags/menu.html', takes_context=True)
-def menu_items(context, parent, calling_page=None, sidenav=False):
+def menu_items(context, parent, sidenav=False, top_level=False):
     menuitems = parent.get_children().live().in_menu()
     menuitems = [m.specific for m in menuitems]
     for menuitem in menuitems:
-        menuitem.show_dropdown = has_menu_children(menuitem)
-        # We don't directly check if calling_page is None since the template
-        # engine can pass an empty string to calling_page
-        # if the variable passed as calling_page does not exist.
-        menuitem.active = (calling_page.url.startswith(menuitem.url)
-                           if calling_page else False)
-    return {
-        'calling_page': calling_page,
-        'menuitems': menuitems,
-        'sidenav': sidenav,
-        # required by the pageurl tag that we want to use within this template
-        'request': context['request'],
-    }
+        menuitem.has_children = has_menu_children(menuitem)
 
+        menuitem.title = (
+            menuitem.translated_title
+            if menuitem.translated_title else menuitem.title
+        )
 
-# Retrieves the children of the top menu items for the drop downs
-@register.inclusion_tag('tags/menu_children.html', takes_context=True)
-def menu_children(context, parent, sidenav=False):
-    children = parent.get_children().live().in_menu()
-    children = [c.specific for c in children]
     return {
         'parent': parent,
-        'children': children,
+        'top_level': top_level,
+        'menuitems': menuitems,
         'sidenav': sidenav,
-        # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }

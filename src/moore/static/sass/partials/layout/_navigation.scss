@@ -1,108 +1,120 @@
 @import "../base";
 
 $navigation-height: 80px;
-$line-height: 32px;
-$navigation-padding: ($navigation-height - $line-height)/2;
-
 $logo-height: 55px;
 $logo-width: 214px;
-$logo-margin: ($line-height - $logo-height)/2;
-
-$logo-fallback-icon-size: 40px;
-$shrink: 2px;
-$logo-fallback-difference: $logo-height - $shrink - $logo-fallback-icon-size;
-$logo-fallback-margin-left: 15px;
-$logo-fallback-margin-top:  - ($logo-height + 10px);
 
 .navigation {
   @extend .nav-wrapper;
-
-  background-color: $background-color;
+  display: flex;
+  align-items: center;
   height: $navigation-height;
-  line-height: $line-height;
-  padding: $navigation-padding $line-height;
+  background-color: white;
+  padding-left: 1.4em;
 
-  ul button.btn {
-    margin-top: -2px; // To match a .btn
+  @media #{$medium-and-up}{
+    padding: 0 1.7em;
   }
 
-  .dropdown-content {
-    width: auto !important;
-  }
-
-  .avatar {
-    height: $line-height;
-
-    &.active, &:hover {
-      background: none;
-      a {
-        color: $black-color;
-        background: inherit;
-      }
+  .collapsible-header {
+    padding: 0 16px 0 32px !important;
+    i{
+      float: right !important;
+      margin: 0 !important;
     }
+  }
 
-    &:after {
-      @extend .circle;
-      font-family: 'Material Icons';
-      font-size: $logo-fallback-icon-size;
-      content: 'person';
-      position: relative;
-      display: block;
-      padding: $logo-fallback-difference/2 $logo-fallback-difference/2;
-      left: $logo-fallback-margin-left + 1px;
-      top:  $logo-fallback-margin-top;
-      z-index: 0;
-      background-color: $secondary-color;
-      width: $logo-height - 2px;
-      height: $logo-height - 2px;
+  .collapsible-body{
+    padding-left: 1.4em;
+  }
+
+  .button-collapse{
+    margin: 0;
+    i {
+      color: #2e2e2e;
+    }
+  }
+
+  .avatar{
+    height: $navigation-height;
+
+    & > a {
+      display: flex;
+      height: $navigation-height;
+      align-items: center;
     }
 
     img {
       @extend .circle;
-      position: relative;
-      margin-top: $logo-margin;
-      height: $logo-height;
-      width: $logo-height;
-      z-index: 100;
+      height: 55px;
+      width: 55px;
     }
-    .more-icon {
-      color: $black-color;
-      float: right;
+
+    .more-icon{
+      color: black;
       font-size: 32px;
       line-height: 32px;
+      display: flex;
+      align-items: center;
     }
-    .dropdown-content {
-      margin-top: 32px;
-    }
+  }
+
+  .dropdown-content{
+    width: auto !important;
+    white-space: nowrap;
   }
 
   .brand-logo {
     height: $logo-height;
     width: $logo-width;
-    margin-top: $logo-margin;
   }
 
-  .button-collapse i {
-    color: $secondary-color;
-    height: $line-height;
-    line-height: $line-height;
+  .main-menu > li, .right > li{
+    height: $navigation-height;
+    line-height: $navigation-height;
   }
 
-  .main-menu {
+  .main-menu{
+    flex-grow: 1;
     margin-left: $logo-width + 20px;
-    li {
-      a {
-        color: rgba($black-color, .8);
-        font-weight: bold;
-        text-transform: uppercase;
+    a.active {
+      background-color: rgba(0, 0, 0, 0.07);
+    }
+
+    li a {
+      color: rgba(66,66,66,.8);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .dropdown-content{
+      //Displays the submenues to the side of the parent menu
+      overflow: visible !important;
+
+      .no-right-padding{
+        padding-right: 0;
       }
-      &.active, &:hover {
-        background: none;
-        a {
-          color: $black-color;
-          background: inherit;
+
+      .menu-text {
+        display:flex;
+        align-items: center;
+
+        i {
+          height: initial;
+          line-height: initial;
+        }
+
+        p{
+          display: inline;
+          flex-grow: 1;
+          margin: 0;
+          margin-right: .5em;
         }
       }
+    }
+
+    .submenu{
+      left: 100% !important;
     }
   }
 }

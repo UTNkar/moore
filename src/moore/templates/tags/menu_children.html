@@ -1,5 +1,0 @@
-{% load wagtailcore_tags %}
-
-{% for child in children %}
-    <li><a href="{% pageurl child %}">{% firstof child.translated_title child.title %}</a></li>
-{% endfor %}

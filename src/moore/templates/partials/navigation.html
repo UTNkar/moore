@@ -25,7 +25,8 @@
                 {% endif %}
             </div>
         </li>
-        {% menu_items parent=site_root calling_page=self sidenav=True %}
+        <li><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
+        {% menu_items parent=site_root sidenav=True top_level=True %}
         {% if user.is_authenticated %}
             <li><div class="divider"></div></li>
             <li><a href="{% url 'profile' %}"><i class="material-icons">face</i>{% trans 'account' %}</a></li>
@@ -35,30 +36,42 @@
     </ul>
 
     <ul class="main-menu hide-on-med-and-down">
-        {% menu_items parent=site_root calling_page=self %}
+        <li><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
+        {% menu_items parent=site_root top_level=True %}
     </ul>
 
     <ul class="right hide-on-med-and-down">
-        <li><form action="{% url 'set_language' %}" id="set_language_form" method="post">
-            {% csrf_token %}
-            <input name="next" type="hidden" value="{{ request.path }}" />
-            {% if LANGUAGE_CODE == 'sv' %}
-                <input type="hidden" name="language" value="en" />
-                <button class="btn btn-inverse" type="submit"><i class="material-icons">language</i>English</button>
-            {% else %}
-                <input type="hidden" name="language" value="sv" />
-                <button class="btn btn-inverse" type="submit"><i class="material-icons">language</i>Svenska</button>
-            {% endif %}
-        </form></li>
+        <li>
+            <form action="{% url 'set_language' %}" id="set_language_form" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.path }}" />
+                <input 
+                    type="hidden"
+                    name="language"
+                    value="{% if LANGUAGE_CODE == 'sv'%}en{% else %}sv{% endif %}"
+                />
+                <button 
+                    class="btn btn-inverse"
+                    type="submit"
+                >
+                    <i class="material-icons">language</i>
+                    {% if LANGUAGE_CODE == 'sv'%}
+                        English
+                    {% else %}
+                        Svenska
+                    {% endif %}
+                </button>
+            </form>
+        </li>
         {% if not user.is_authenticated %}
             <li>
-                <a class="btn" href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}">
+                <a class="btn" style="margin-top:0;" href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}">
                     <i class="material-icons">account_circle</i>{% trans 'Log in' %}
                 </a>
             </li>
         {% else %}
             <li class="avatar">
-                <a href="{% url 'profile' %}" class="dropdown-button" data-activates="user-menu">
+                <a href="{% url 'profile' %}" class="dropdown-button" data-activates="user-menu" data-alignment="right" data-belowOrigin="true">
                     <img src="{% avatar_url user.email %}" alt="{% trans 'your avatar' %}">
                     <i class="material-icons more-icon">more_vert</i>
                 </a>
