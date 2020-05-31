@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.0] - 2020-05-31
+
+### Changed
+
+- Navigation bar can now handle multilevel pages
+- Updated phonenumbers to 8.12.4
+
+### Fixed
+
+- Removed unnecessary spaces at the start of the application form
+
+### Removed
+
+- Facebook app id since it is not needed for public facebook pages
+
 ## [2.0.1] - 2020-04-17
 
 ### Fixed
