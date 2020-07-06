@@ -5,6 +5,8 @@ services:
     moore-db:
       image: postgres
       container_name: moore-db
+      volumes: 
+        - ./postgres-data:/var/lib/postgresql/data
       environment:
         POSTGRES_DB: moore
         POSTGRES_USER: moore
