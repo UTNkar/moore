@@ -8,8 +8,9 @@ services:
       environment:
         POSTGRES_DB: moore
         POSTGRES_USER: moore
+        POSTGRES_PASSWORD: moore
       ports:
-        - "5433:5432"
+        - "5432:5432"
 
     moore:
       build:

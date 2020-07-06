@@ -35,6 +35,7 @@ elif 'DOCKER' in os.environ:
             'NAME': 'moore',
             'USER': 'moore',
             'HOST': 'moore-db',
+            'PASSWORD': 'moore',
             'PORT': 5432,
         }
     }
