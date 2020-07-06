@@ -32,6 +32,7 @@ venv/
 
 # ENV
 .env
+.env-normal
 
 # VSCode
 .vscode
