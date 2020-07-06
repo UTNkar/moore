@@ -18,8 +18,7 @@ services:
         dockerfile: Dockerfile
       command: python src/manage.py runserver 0.0.0.0:8000
       volumes: 
-        - ./src:/var/www/moore/src
-        - ./requirements.txt:/var/www/moore/requirements.txt
+        - .:/var/www/moore/
       container_name: moore
       ports:
         - "8000:8000"
