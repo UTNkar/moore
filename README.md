@@ -43,12 +43,15 @@ During development, you can run a test web server using `./manage.py runserver`.
 If you can use Docker, there is an alternative way to get your development
 environment all set up:
 
+1. Install [docker engine](https://docs.docker.com/engine/install/)
+1. Install [docker compose](https://docs.docker.com/compose/install/). 
+(On Ubuntu you can install `docker-compose` with `sudo apt install docker-compose`)
 1. Clone the repository.
 2. Copy `.env-template` to `.env` and fill in the environments.
 3. Run `docker-compose up` create and start the docker instance
 4. Run `docker exec -it moore python src/manage.py migrate` to initialize the
 database
-5. Run `docker exec -it moore python src/ createsuperuser` to create an admin
+5. Run `docker exec -it moore python src/manage.py createsuperuser` to create an admin
 user.
 
 The Moore application is now available on `http://localhost:8000` and can be started
