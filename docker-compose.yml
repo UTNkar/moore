@@ -1,5 +1,5 @@
 
-version: '3.3'
+version: '3.7'
 
 services:
     moore-db:
@@ -24,8 +24,7 @@ services:
         - "8000:8000"
       environment:
         DOCKER: 'true'
-        MELOS_URL: ${MELOS_URL}
-        MELOS_ORG_ID: ${MELOS_ORG_ID}
-        MELOS_ADMIN: ${MELOS_ADMIN}
+      env_file: 
+        - .env
       depends_on:
         - moore-db
