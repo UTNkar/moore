@@ -25,7 +25,7 @@ To get started with Project Moore, follow these instructions to set up a
    - python3-venv
    - python3-dev
 3. Clone the repository.
-3. Copy the file `.env-template` and name the copy `.env`
+3. Copy the file `.env-normal-template` and name the copy `.env-normal`
 3. Fill in the necessary variables in `.env`. `MELOS_URL` and `MELOS_ADMIN` are required. You might have to fill in some database credidentils. Check `src/moore/settings/dev.py` for which default values are used if you don't specify and credidentials.
 4. Run `source ./source_me.sh` to create a virtual environment.
 4. Run `pip install --upgrade pip` to make sure that pip is running the latest version
