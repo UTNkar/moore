@@ -1,4 +1,5 @@
 from django import template
+from wagtail.core.models import Site
 
 register = template.Library()
 
@@ -7,7 +8,8 @@ register = template.Library()
 def get_site_root(context):
     # NB this returns a core.Page, not the implementation-specific model used
     # so object-comparison to self will return false as objects would differ
-    return context['request'].site.root_page
+    site = Site.find_for_request(context['request'])
+    return site.root_page
 
 
 def has_menu_children(page):
