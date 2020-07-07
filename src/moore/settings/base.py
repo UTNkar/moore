@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 from __future__ import absolute_import, unicode_literals
 
 from django.conf.global_settings import LOGIN_URL
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
