@@ -25,7 +25,7 @@ To get started with Project Moore, follow these instructions to set up a
    - python3-venv
    - python3-dev
 3. Clone the repository.
-3. Copy the file `.env-template` and name the copy `.env`
+3. Copy the file `.env-normal-template` and name the copy `.env-normal`
 3. Fill in the necessary variables in `.env`. `MELOS_URL` and `MELOS_ADMIN` are required. You might have to fill in some database credidentils. Check `src/moore/settings/dev.py` for which default values are used if you don't specify and credidentials.
 4. Run `source ./source_me.sh` to create a virtual environment.
 4. Run `pip install --upgrade pip` to make sure that pip is running the latest version
@@ -43,16 +43,18 @@ During development, you can run a test web server using `./manage.py runserver`.
 If you can use Docker, there is an alternative way to get your development
 environment all set up:
 
+1. Install [docker engine](https://docs.docker.com/engine/install/)
+1. Install [docker compose](https://docs.docker.com/compose/install/). 
+(On Ubuntu you can install `docker-compose` with `sudo apt install docker-compose`)
 1. Clone the repository.
-2. Copy `.env-template` to `.env` and fill in the environments.
+2. Copy `.env-docker-template` to `.env` and fill in the environments.
 3. Run `docker-compose up` create and start the docker instance
 4. Run `docker exec -it moore python src/manage.py migrate` to initialize the
 database
-5. Run `docker exec -it moore python src/ createsuperuser` to create an admin
+5. Run `docker exec -it moore python src/manage.py createsuperuser` to create an admin
 user.
 
-The Moore application is now available on `http://localhost:8000` and can be started
-and stopped using `docker-compose up -d` and `docker-compose stop` (the `-d` flag starts the instance in the background).
+The Moore application is now available on `http://localhost:8000` and can be started using `docker-compose up -d` (the `-d` flag starts the instance in the background) and stopped `docker-compose stop`.
 
 ## Documentation
 

@@ -1,5 +1,7 @@
-FROM python:3.5
+FROM python:3.8
 
 ENV PYTHONUNBUFFERED 1
 WORKDIR /var/www/moore
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+COPY dev-requirements.txt .
+RUN pip install -r dev-requirements.txt
