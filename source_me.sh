@@ -17,6 +17,6 @@ else
     source venv/bin/activate
 fi
 
-if [ -f .env ]; then
-    source .env
+if [ -f .env-normal ]; then
+    source .env-normal
 fi
