@@ -5,3 +5,7 @@
     align-items: flex-start;
     padding-bottom: 20px;
 }
+
+.object .field-row {
+    padding-top: 0 !important;
+}
