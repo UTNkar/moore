@@ -1,10 +1,8 @@
-from django.conf import settings
 from django import template
 from datetime import date
 from google.api import google_calendar_list_events, youtube_search
 from google.models import GoogleCalendarPage
 from wagtail.core.models import Page
-import requests
 
 register = template.Library()
 
@@ -22,28 +20,10 @@ def facebook(app_id, page_name, size):
 
 
 @register.inclusion_tag('blocks/tags/instagram.html')
-def instagram(size):
-    params = {
-        'access_token': settings.INSTAGRAM_ACCESS_TOKEN,
-    }
-
-    response = requests.get(
-        'https://api.instagram.com/v1/users/self/media/recent',
-        params=params
-    )
-    json = response.json()
-
-    item = None
-
-    if 'data' in json:
-        item = {
-            'image': json['data'][0]['images']['standard_resolution'],
-            'username': '@%s' % json['data'][0]['user']['username'],
-        }
-
+def instagram(size, instagram_account_name):
     data = {
         'size': size,
-        'item': item,
+        'instagram_account_name': instagram_account_name
     }
 
     return data
