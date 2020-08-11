@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.2] - 2020-08-11
+
+### Changed
+
+- Updated requests to 2.24.0
+- Updated phonenumbers to 8.12.7
+- Updated wagtail to 2.7.4
+
+### Added
+
+- Added support for developing moore with docker
+
 ## [2.1.1] - 2020-06-10
 
 ### Changed
