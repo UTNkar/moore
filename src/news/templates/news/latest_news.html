@@ -7,27 +7,34 @@
 
     <div class="row">
         {% for item in news_items %}
-            <div class="col s12 m4">
-                <div class="card">
-                    {% image item.feed_image fill-450x300 as image %}
-                    <div class="card-image activator waves-effect waves-block waves-light" style="background-image: url('{{ image.url }}');"></div>
-                    <div class="card-content">
-                        <h2 class="card-title activator">{{ item.translated_title }}<i class="material-icons right">more_vert</i></h2>
-                    </div>
-                    <div class="card-action">
-                        <span class="action-icon">
-                            <i class="material-icons">access_time</i>
-                            {{ item.created|date:'d b'|title }}
-                        </span>
-                        <a href="{% pageurl item %}" class="read-more">{% trans 'Read more' %}</a>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title">{{ item.translated_title }}<i class="material-icons right">close</i></span>
-                        {{ item.body|striptags|truncatechars:500 }}
-                        <a href="{% pageurl item %}">{% trans 'read more'|title %}</a>
-                    </div>
+        <div class="col s12 m4">
+            <div class="card">
+                {% image item.feed_image fill-450x300 as image %}
+                <div 
+                    class="card-image activator waves-effect waves-block waves-light" 
+                    {% if item.feed_image %}
+                        style="background-image: url('{{ image.url }}');"
+                    {% endif %}
+                >
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title activator">{{ item.translated_title }}<i
+                            class="material-icons right">more_vert</i></h2>
+                </div>
+                <div class="card-action">
+                    <span class="action-icon">
+                        <i class="material-icons">access_time</i>
+                        {{ item.created|date:'d b'|title }}
+                    </span>
+                    <a href="{% pageurl item %}" class="read-more">{% trans 'Read more' %}</a>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title">{{ item.translated_title }}<i class="material-icons right">close</i></span>
+                    {{ item.body|striptags|truncatechars:500 }}
+                    <a href="{% pageurl item %}">{% trans 'read more'|title %}</a>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>
