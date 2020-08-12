@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'simple_email_confirmation',
     'taggit',
     'wagtailfontawesome',
+    'django_instagram',
 
     'django.contrib.admin',  # Used for wagtail admin filters
     'django.contrib.auth',

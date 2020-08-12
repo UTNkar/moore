@@ -116,9 +116,6 @@ MELOS_ADMIN = os.environ.get('MELOS_ADMIN')
 # Google API
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
 
-# Instagram API
-INSTAGRAM_ACCESS_TOKEN = os.environ.get('INSTAGRAM_ACCESS_TOKEN')
-
 try:
     from .local import *
 except ImportError:
