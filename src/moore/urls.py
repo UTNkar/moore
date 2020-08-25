@@ -2,6 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.conf import settings
 from django.conf.urls import include, url
+from django.urls import path
 
 from search import views as search_views
 from wagtail.admin import urls as wagtailadmin_urls
@@ -27,6 +28,8 @@ urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
     url(r'', include('google.urls')),
+
+    path('instagram/', include('instagram.urls')),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
