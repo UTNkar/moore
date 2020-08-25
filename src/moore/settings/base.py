@@ -221,3 +221,7 @@ WAGTAIL_USER_CUSTOM_FIELDS = ['registration_year', 'study',
                               'status', 'section']
 
 IS_RUNNING_TEST = 'test' in sys.argv
+
+INSTAGRAM_APP_ID = os.environ.get('INSTAGRAM_APP_ID')
+INSTAGRAM_APP_SECRET = os.environ.get('INSTAGRAM_APP_SECRET')
+INSTAGRAM_REDIRECT_URL = os.environ.get('INSTAGRAM_REDIRECT_URL')
