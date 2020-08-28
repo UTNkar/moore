@@ -7,6 +7,9 @@ class InstagramFeed(models.Model):
         verbose_name = 'Instagram Feed'
         verbose_name_plural = 'Instagram Feeds'
 
+    def __str__(self):
+        return self.account_name
+
     account_name = models.CharField(max_length=80)
     access_token = models.CharField(max_length=500)
     expires = models.DateTimeField()

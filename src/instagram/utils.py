@@ -93,3 +93,19 @@ class InstagramUtils():
         first_image_dict = decoded_response.get("data")[0]
 
         return first_image_dict
+
+    @staticmethod
+    def get_account_name(access_token):
+        get_params = {
+            "fields": "username",
+            "access_token": access_token,
+        }
+
+        response = requests.get(
+            InstagramUtils._graph_base_url + "/me",
+            params=get_params
+        )
+
+        decoded_response = response.json()
+
+        return decoded_response.get("username")

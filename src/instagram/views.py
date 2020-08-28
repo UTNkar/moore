@@ -11,10 +11,12 @@ def get_code(request):
         InstagramUtils.get_long_lived_token(code)
 
     expires = timezone.now() + datetime.timedelta(seconds=expires_in)
+    account_name = InstagramUtils.get_account_name(access_token)
 
     feed = InstagramFeed.objects.create(
         access_token=access_token,
-        expires=expires
+        expires=expires,
+        account_name=account_name
     )
 
     feed.save()
