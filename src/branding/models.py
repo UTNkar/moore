@@ -122,3 +122,13 @@ class Logo(models.Model):
         ImageChooserPanel('logo_black'),
         FieldPanel('belongs_to'),
     ])]
+
+
+class Instagram(models.Model):
+    class Meta:
+        verbose_name = 'Instagram'
+        verbose_name_plural = 'Instagram'
+
+    account_name = models.CharField(max_length=80)
+    access_token = models.CharField(max_length=500)
+    expires = models.DateTimeField()
