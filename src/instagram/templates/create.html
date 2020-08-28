@@ -1,7 +1,9 @@
 {% extends "modeladmin/create.html" %}
+{% load instagram_tags %}
+
 {% block content %}
 {{ block.super }}
 
-hejhej
+<a href='{% get_authorization_url %}'>Authenticate</a>
 
 {% endblock %}
