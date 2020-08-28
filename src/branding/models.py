@@ -124,10 +124,10 @@ class Logo(models.Model):
     ])]
 
 
-class Instagram(models.Model):
+class InstagramFeed(models.Model):
     class Meta:
-        verbose_name = 'Instagram'
-        verbose_name_plural = 'Instagram'
+        verbose_name = 'Instagram Feed'
+        verbose_name_plural = 'Instagram Feeds'
 
     account_name = models.CharField(max_length=80)
     access_token = models.CharField(max_length=500)
