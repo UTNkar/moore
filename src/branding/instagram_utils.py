@@ -81,8 +81,8 @@ class InstagramUtils():
         get_params = {
             "fields": "permalink, media_url, media_type, username",
             "access_token": access_token,
-
         }
+
         response = requests.get(
             InstagramUtils._graph_base_url + "/me/media",
             params=get_params

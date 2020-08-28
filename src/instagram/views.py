@@ -1,18 +1,18 @@
-from instagram.models import Instagram
+from branding.instagram_utils import InstagramUtils
 from django.http import HttpResponse
 
 
 def authenticate(request):
     return HttpResponse(
         "<a href='" +
-        Instagram.get_authorization_url() +
+        InstagramUtils.get_authorization_url() +
         "'>Authenticate</a>"
     )
 
 
 def get_code(request):
     code = request.GET.get("code")
-    image_dict = Instagram.get_latest_image(code)
+    image_dict = InstagramUtils.get_latest_image(code)
 
     return HttpResponse(
         "<p>" + image_dict.get("username") + "</p>" +
