@@ -132,3 +132,5 @@ class InstagramFeed(models.Model):
     account_name = models.CharField(max_length=80)
     access_token = models.CharField(max_length=500)
     expires = models.DateTimeField()
+
+    panels = []

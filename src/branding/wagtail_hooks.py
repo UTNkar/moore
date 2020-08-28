@@ -18,6 +18,7 @@ class InstagramFeedAdmin(ModelAdmin):
     model = InstagramFeed
     menu_icon = 'fa-instagram'
     menu_order = 110
+    create_template_name = "instagramfeed/create.html"
 
 
 class BrandingAdminGroup(ModelAdminGroup):
