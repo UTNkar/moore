@@ -122,15 +122,3 @@ class Logo(models.Model):
         ImageChooserPanel('logo_black'),
         FieldPanel('belongs_to'),
     ])]
-
-
-class InstagramFeed(models.Model):
-    class Meta:
-        verbose_name = 'Instagram Feed'
-        verbose_name_plural = 'Instagram Feeds'
-
-    account_name = models.CharField(max_length=80)
-    access_token = models.CharField(max_length=500)
-    expires = models.DateTimeField()
-
-    panels = []

@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'google',
     'home',
     'involvement',
+    'instagram',
     'materialize',
     'members',
     'news',

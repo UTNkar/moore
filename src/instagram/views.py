@@ -1,4 +1,4 @@
-from branding.instagram_utils import InstagramUtils
+from instagram.utils import InstagramUtils
 from django.http import HttpResponse
 
 
