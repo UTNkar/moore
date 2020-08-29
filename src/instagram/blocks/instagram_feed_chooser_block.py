@@ -13,10 +13,3 @@ class InstagramFeedChooserBlock(blocks.ChooserBlock):
         icon = "fa-instagram"
         group = _('Basic')
         template = 'instagram_feed.html'
-
-    # Return the key value for the select field
-    def value_for_form(self, value):
-        if isinstance(value, self.target_model):
-            return value.pk
-        else:
-            return value
