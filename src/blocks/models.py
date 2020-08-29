@@ -2,6 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
+from instagram.blocks import InstagramFeedChooserBlock
 import requests
 from datetime import datetime
 
@@ -168,6 +169,10 @@ class CountersBlock(blocks.StructBlock):
         icon = 'fa-balance-scale'
         template = 'blocks/counter.html'
         group = _('Content')
+
+
+class InstagramBlock(blocks.StructBlock):
+    instagram_account = InstagramFeedChooserBlock(required=True)
 
 
 class EventsBlock(blocks.StructBlock):
