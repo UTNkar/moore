@@ -10,7 +10,7 @@ class InstagramFeed(models.Model):
     def __str__(self):
         return self.account_name
 
-    account_name = models.CharField(max_length=80)
+    account_name = models.CharField(max_length=80, primary_key=True)
     access_token = models.CharField(max_length=500)
     expires = models.DateTimeField()
 
