@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-29 12:01+0200\n"
+"POT-Creation-Date: 2020-08-29 19:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,6 +55,14 @@ msgstr ""
 msgid "Add instagram feed"
 msgstr "Skapa instagram feed"
 
-#: views.py:30
+#: views.py:22
+msgid "Could not add your Instagram account since you denied access"
+msgstr "Kunde inte lägga till ditt Instagram konto eftersom att du nekade tillgång"
+
+#: views.py:26
+msgid "Could not add your Instagram account because of an error"
+msgstr "Kunde inte lägga till ditt Instagram konto eftersom att ett fel uppstod"
+
+#: views.py:44
 msgid "Your Instagram account was added"
 msgstr "Ditt Instagram konto skapades"
