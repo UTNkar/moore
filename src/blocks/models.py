@@ -130,6 +130,7 @@ BASIC_BLOCKTYPES = [
     ('divider', DividerBlock()),
     ('button_group', ButtonGroupBlock()),
     ('icons', IconGroupBlock()),
+    ('instagram', InstagramFeedChooserBlock())
 ]
 
 # CONTENT BLOCKTYPES
@@ -169,10 +170,6 @@ class CountersBlock(blocks.StructBlock):
         icon = 'fa-balance-scale'
         template = 'blocks/counter.html'
         group = _('Content')
-
-
-class InstagramBlock(blocks.StructBlock):
-    instagram_account = InstagramFeedChooserBlock(required=True)
 
 
 class EventsBlock(blocks.StructBlock):

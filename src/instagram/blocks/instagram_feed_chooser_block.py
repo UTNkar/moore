@@ -10,8 +10,8 @@ class InstagramFeedChooserBlock(blocks.ChooserBlock):
 
     class Meta:
         label = _('Instagram')
-        icon = "instagram"
-        group = _('Meta')
+        icon = "fa-instagram"
+        group = _('Basic')
         template = 'instagram_feed.html'
 
     # Return the key value for the select field
