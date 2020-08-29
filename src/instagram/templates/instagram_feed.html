@@ -1,11 +1,16 @@
-{% load i18n static %}
-<div class="instagram col s12 m4">
-	<div class="header">
-		<img class="icon" src="{% static 'branding/images/social/instagram-black.png' %}"
-        	alt="{% trans 'instagram icon'|capfirst %}">
-		<span>@{{value.instagram_account}}</span>
-	</div>
-    <a href="//instagram.com/p/" target="_blank">
-        <img class="image" src="" />
-    </a>
+{% load i18n static instagram_tags %}
+<div class="header">
+	<img class="icon" src="{% static 'branding/images/social/instagram-black.png' %}"
+		alt="{% trans 'instagram icon'|capfirst %}">
+	<span>@{{value.account_name}}</span>
 </div>
+{% get_latest_media value.account_name as latest_media %}
+{% if latest_media.media_type == "VIDEO" %}
+<video poster="{{latest_media.thumbnail_url}}" controls>
+	<source src="{{latest_media.media_url}}">
+</video>
+{% else %}
+<a href="{{latest_media.permalink}}" target="_blank">
+	<img src="{{latest_media.media_url}}" />
+</a>
+{% endif %}

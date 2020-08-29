@@ -11,11 +11,13 @@
             margin-right: 20px;
         }
         
-        .instagram {
-            .image {
-                width: 100%;
-                object-fit: contain;
-            }
-        }
+    }
+    img {
+        width: 100%;
+        object-fit: contain;
+    }
+
+    video {
+        width: 100%;
     }
 }
