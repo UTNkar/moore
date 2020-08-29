@@ -1,6 +1,7 @@
 import requests
 from django.conf import settings
 from django.utils.http import urlencode
+from instagram.models import InstagramFeed
 
 
 class InstagramUtils():
@@ -74,13 +75,12 @@ class InstagramUtils():
         )
 
     @staticmethod
-    def get_latest_image(instagram_code):
-        access_token, user_id, _ = \
-            InstagramUtils.get_long_lived_token(instagram_code)
+    def get_latest_media(account_name):
+        account = InstagramFeed.objects.get(pk=account_name)
 
         get_params = {
-            "fields": "permalink, media_url, media_type, username",
-            "access_token": access_token,
+            "fields": "permalink, media_url, media_type, thumbnail_url",
+            "access_token": account.access_token,
         }
 
         response = requests.get(
