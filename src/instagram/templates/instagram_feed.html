@@ -4,13 +4,15 @@
 		alt="{% trans 'instagram icon'|capfirst %}">
 	<span>@{{value.account_name}}</span>
 </div>
-{% get_latest_media value.account_name as latest_media %}
-{% if latest_media.media_type == "VIDEO" %}
-<video poster="{{latest_media.thumbnail_url}}" controls>
-	<source src="{{latest_media.media_url}}">
-</video>
-{% else %}
-<a href="{{latest_media.permalink}}" target="_blank">
-	<img src="{{latest_media.media_url}}" />
-</a>
+{% if value.account_name %}
+	{% get_latest_media value.account_name as latest_media %}
+	{% if latest_media.media_type == "VIDEO" %}
+	<video poster="{{latest_media.thumbnail_url}}" controls>
+		<source src="{{latest_media.media_url}}">
+	</video>
+	{% else %}
+	<a href="{{latest_media.permalink}}" target="_blank">
+		<img src="{{latest_media.media_url}}" />
+	</a>
+	{% endif %}
 {% endif %}
