@@ -1,6 +1,5 @@
 {% extends "modeladmin/create.html" %}
 {% load instagram_tags i18n %}
-
 {% block content %}
 {{ block.super }}
 
@@ -28,5 +27,6 @@
 
 {% endblock %}
 
-{% comment %}Hide the default footer{% endcomment %}
+{% comment %}Hide the default footer and form{% endcomment %}
 {% block footer %}{% endblock %}
+{% block form %}{% endblock %}

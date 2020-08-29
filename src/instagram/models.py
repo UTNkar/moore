@@ -14,8 +14,6 @@ class InstagramFeed(models.Model):
     access_token = models.CharField(max_length=500)
     expires = models.DateTimeField()
 
-    panels = []
-
 
 class InstagramFeedAdmin(ModelAdmin):
     model = InstagramFeed
