@@ -120,3 +120,7 @@ try:
     from .local import *
 except ImportError:
     pass
+
+KRONOS_PREFIX = (
+    'export SENTRY_DSN="{0}" &&'.format(os.environ.get("SENTRY_DSN"))
+)
