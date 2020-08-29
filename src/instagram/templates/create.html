@@ -1,9 +1,32 @@
 {% extends "modeladmin/create.html" %}
-{% load instagram_tags %}
+{% load instagram_tags i18n %}
 
 {% block content %}
 {{ block.super }}
 
-<a href='{% get_authorization_url %}'>Authenticate</a>
+<div class="create-container">
+    <h2>{% trans "Instructions" %}</h2>
+    {% blocktrans trimmed %}
+        Adding an Instagram feed is a little special.
+        You must give your permission to allow your account to be shown on your webpage.
+        Follow the instructions below.
+    {% endblocktrans %}
+    <ol>
+        <li>{% trans "Make sure you are signed in to the instagram account you want to show on your webpage on this device." %}</li>
+        <li>
+            {% blocktrans trimmed %}
+                Press the button to give permission. 
+                This will redirect you to instagram where you will give your permission.
+                Finally you will be redirected back to your website where you should see your newly added instagram account.
+            {% endblocktrans %}
+        </li>
+    </ol>
+    <div class="flex">
+        <a class="add-button" href='{% get_authorization_url %}'>{% trans "Add instagram feed" %}</a>
+    </div>
+</div>
 
 {% endblock %}
+
+{% comment %}Hide the default footer{% endcomment %}
+{% block footer %}{% endblock %}

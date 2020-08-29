@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-29 11:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/create.html:8
+msgid "Instructions"
+msgstr "Instruktioner"
+
+#: templates/create.html:9
+msgid ""
+"Adding an Instagram feed is a little special. You must give your permission "
+"to allow your account to be shown on your webpage. Follow the instructions "
+"below."
+msgstr ""
+"Att lägga till ett Instagram feed är lite speciellt. Du måste ge ditt tillstånd "
+"för att ditt konto ska få visas på din hemsida. Följ instruktionerna nedan."
+
+#: templates/create.html:15
+msgid ""
+"Make sure you are signed in to the instagram account you want to show on "
+"your webpage on this device."
+msgstr ""
+"Se till att du är inloggad med det instagram konto du vill visa på "
+"din hemsida på den här enheten."
+
+#: templates/create.html:17
+msgid ""
+"Press the button to give permission. This will redirect you to instagram "
+"where you will give your permission. Finally you will be redirected back to "
+"your website where you should see your newly added instagram account."
+msgstr ""
+"Tryck på knappen för att ge ditt tillstånd. Du kommer då att bli omdirigerad till instagram "
+"där du kommer att få ge ditt tillstånd. Till sist kommer du att bli omdirigerad tillbaka till din hemsida "
+"där du bör se ditt nyligen tillagda instagram konto."
+
+#: templates/create.html:25
+msgid "Add instagram feed"
+msgstr "Skapa instagram feed"

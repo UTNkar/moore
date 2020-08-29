@@ -22,3 +22,4 @@ class InstagramFeedAdmin(ModelAdmin):
     menu_icon = 'fa-instagram'
     menu_order = 110
     create_template_name = "create.html"
+    form_view_extra_css = ["create.css"]
