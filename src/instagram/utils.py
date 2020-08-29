@@ -19,6 +19,19 @@ class InstagramUtils():
     _graph_base_url = "https://graph.instagram.com"
 
     @staticmethod
+    def _make_api_call(url, type_of_request, params):
+        if type_of_request == "GET":
+            response = requests.get(url, params)
+        elif type_of_request == "POST":
+            response = requests.post(url, params)
+        else:
+            raise ValueError("Invalid type of request: " + type_of_request)
+
+        decoded_response = response.json()
+
+        return decoded_response
+
+    @staticmethod
     def get_authorization_url() -> str:
         """
         Returns the url to Instagram that users has to click to
@@ -57,14 +70,10 @@ class InstagramUtils():
             'code': instagram_code,
         }
 
-        response = requests.post(
-            InstagramUtils._api_base_url + "/oauth/access_token",
-            post_params
-        )
+        url = InstagramUtils._api_base_url + "/oauth/access_token"
+        response = InstagramUtils._make_api_call(url, "POST", post_params)
 
-        decoded_response = response.json()
-
-        return decoded_response.get("access_token"),
+        return response.get("access_token")
 
     @staticmethod
     def get_long_lived_token(instagram_code: str) -> Tuple[str, int]:
@@ -89,16 +98,12 @@ class InstagramUtils():
             'access_token': short_lived_token,
         }
 
-        response = requests.get(
-            InstagramUtils._graph_base_url + "/access_token",
-            get_params
-        )
-
-        decoded_response = response.json()
+        url = InstagramUtils._graph_base_url + "/access_token"
+        response = InstagramUtils._make_api_call(url, "GET", get_params)
 
         return (
-            decoded_response.get("access_token"),
-            decoded_response.get("expires_in")
+            response.get("access_token"),
+            response.get("expires_in")
         )
 
     @staticmethod
@@ -124,14 +129,10 @@ class InstagramUtils():
             "access_token": account.access_token,
         }
 
-        response = requests.get(
-            InstagramUtils._graph_base_url + "/me/media",
-            params=get_params
-        )
+        url = InstagramUtils._graph_base_url + "/me/media"
+        response = InstagramUtils._make_api_call(url, "GET", get_params)
 
-        decoded_response = response.json()
-
-        first_image_dict = decoded_response.get("data")[0]
+        first_image_dict = response.get("data")[0]
 
         return first_image_dict
 
@@ -154,14 +155,10 @@ class InstagramUtils():
             "access_token": access_token,
         }
 
-        response = requests.get(
-            InstagramUtils._graph_base_url + "/me",
-            params=get_params
-        )
+        url = InstagramUtils._graph_base_url + "/me"
+        response = InstagramUtils._make_api_call(url, "GET", get_params)
 
-        decoded_response = response.json()
-
-        return decoded_response.get("username")
+        return response.get("username")
 
     @staticmethod
     def renew_long_lived_tokens():
@@ -180,16 +177,13 @@ class InstagramUtils():
                 "access_token": feed.access_token,
             }
 
-            response = requests.get(
-                InstagramUtils._graph_base_url + "/refresh_access_token",
-                params=get_params
-            )
+            url = InstagramUtils._graph_base_url + "/refresh_access_token"
+            response = InstagramUtils._make_api_call(url, "GET", get_params)
 
-            decoded_response = response.json()
             expires = timezone.now() + \
-                datetime.timedelta(seconds=decoded_response.get("expires_in"))
+                datetime.timedelta(seconds=response.get("expires_in"))
 
-            feed.access_token = decoded_response.get("access_token")
+            feed.access_token = response.get("access_token")
             feed.expires = expires
 
             feed.save()
