@@ -2,6 +2,8 @@ import requests
 from django.conf import settings
 from django.utils.http import urlencode
 from instagram.models import InstagramFeed
+import datetime
+from django.utils.timezone import timezone
 
 
 class InstagramUtils():
@@ -109,3 +111,28 @@ class InstagramUtils():
         decoded_response = response.json()
 
         return decoded_response.get("username")
+
+    @staticmethod
+    def renew_long_lived_tokens():
+        in_ten_days = timezone.now() + datetime.timedelta(days=10)
+        feeds_to_renew = InstagramFeed.objects.filter(expires__gte=in_ten_days)
+
+        for feed in feeds_to_renew:
+            get_params = {
+                "grant_type": "ig_refresh_token",
+                "access_token": feed.access_token,
+            }
+
+            response = requests.get(
+                InstagramUtils._graph_base_url + "/refresh_access_token",
+                params=get_params
+            )
+
+            decoded_response = response.json()
+            expires = timezone.now() + \
+                datetime.timedelta(seconds=decoded_response.get("expires_in"))
+
+            feed.update(
+                access_token=decoded_response.get("access_token"),
+                expires=expires
+            )
