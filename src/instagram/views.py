@@ -7,7 +7,12 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 
 
-def get_code(request):
+def code_from_instagram(request):
+    """
+    When a user has authenticated their instagram account,
+    Instagram sends a request to this view with a code.
+    This code is then used to retreive a long lived token.
+    """
     code = request.GET.get("code")
     access_token, user_id, expires_in = \
         InstagramUtils.get_long_lived_token(code)
