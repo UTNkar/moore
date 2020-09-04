@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'compressor',
     'kronos',
     'modelcluster',
-    'raven.contrib.django.raven_compat',
     'rules.apps.AutodiscoverRulesConfig',
     'simple_email_confirmation',
     'taggit',

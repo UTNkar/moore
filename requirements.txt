@@ -17,7 +17,7 @@ rules==2.2
 django-simple-email-confirmation==0.70
 
 # Logging
-raven==6.10.0
+sentry-sdk==0.17.3
 
 # Postgres
 psycopg2-binary==2.8.5

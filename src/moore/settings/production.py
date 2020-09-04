@@ -11,7 +11,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 from __future__ import absolute_import, unicode_literals
-import raven
+import sentry_sdk
 
 from .base import *
 
@@ -38,6 +38,15 @@ DATABASES = {
     }
 }
 
+sentry_sdk.init(
+    dsn=os.environ.get("SENTRY_DSN"),
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
+
 # CONN_MAX_AGE = 0
 
 # Base URL to use when referring to full URLs within the Wagtail admin
@@ -51,12 +60,6 @@ ALLOWED_HOSTS = ['.utn.se', '.utnarm.se']
 DEFAULT_FROM_EMAIL = 'info@utn.se'
 
 EMAIL_SUBJECT_PREFIX = '[UTN] '
-
-# Sentry Configuration - will be sent error messages
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('SENTRY_DSN'),
-    'release': raven.fetch_git_sha(os.path.dirname(BASE_DIR)),
-}
 
 LOGGING = {
     'version': 1,
@@ -72,12 +75,6 @@ LOGGING = {
         },
     },
     'handlers': {
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat'
-                     '.handlers.SentryHandler',
-            'tags': {'custom-tag': 'x'},
-        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -87,11 +84,6 @@ LOGGING = {
     'loggers': {
         'django.db.backends': {
             'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'DEBUG',
             'handlers': ['console'],
             'propagate': False,
         },
