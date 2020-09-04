@@ -29,7 +29,7 @@ class InstagramUtils():
 
         decoded_response = response.json()
 
-        return decoded_response
+        return decoded_response, response.status_code
 
     @staticmethod
     def get_authorization_url() -> str:
@@ -71,7 +71,11 @@ class InstagramUtils():
         }
 
         url = InstagramUtils._api_base_url + "/oauth/access_token"
-        response = InstagramUtils._make_api_call(url, "POST", post_params)
+        response, status_code = \
+            InstagramUtils._make_api_call(url, "POST", post_params)
+
+        if status_code != 200:
+            return None
 
         return response.get("access_token")
 
@@ -92,6 +96,9 @@ class InstagramUtils():
         short_lived_token = \
             InstagramUtils._get_short_lived_token(instagram_code)
 
+        if short_lived_token is None:
+            return None
+
         get_params = {
             'grant_type': 'ig_exchange_token',
             'client_secret': InstagramUtils._app_secret,
@@ -99,7 +106,11 @@ class InstagramUtils():
         }
 
         url = InstagramUtils._graph_base_url + "/access_token"
-        response = InstagramUtils._make_api_call(url, "GET", get_params)
+        response, status_code = \
+            InstagramUtils._make_api_call(url, "GET", get_params)
+
+        if status_code != 200:
+            return None
 
         return (
             response.get("access_token"),
@@ -122,6 +133,9 @@ class InstagramUtils():
         More details about them are found here:
         https://developers.facebook.com/docs/instagram-basic-display-api/reference/media#fields
         """
+        if not account_name:
+            return None
+
         account = InstagramFeed.objects.get(pk=account_name)
 
         get_params = {
@@ -130,7 +144,11 @@ class InstagramUtils():
         }
 
         url = InstagramUtils._graph_base_url + "/me/media"
-        response = InstagramUtils._make_api_call(url, "GET", get_params)
+        response, status_code = \
+            InstagramUtils._make_api_call(url, "GET", get_params)
+
+        if status_code != 200:
+            return None
 
         first_image_dict = response.get("data")[0]
 
@@ -156,7 +174,11 @@ class InstagramUtils():
         }
 
         url = InstagramUtils._graph_base_url + "/me"
-        response = InstagramUtils._make_api_call(url, "GET", get_params)
+        response, status_code = \
+            InstagramUtils._make_api_call(url, "GET", get_params)
+
+        if status_code != 200:
+            return None
 
         return response.get("username")
 
@@ -178,7 +200,12 @@ class InstagramUtils():
             }
 
             url = InstagramUtils._graph_base_url + "/refresh_access_token"
-            response = InstagramUtils._make_api_call(url, "GET", get_params)
+            response, status_code = \
+                InstagramUtils._make_api_call(url, "GET", get_params)
+
+            if status_code != 200:
+                # capture_exception()
+                pass
 
             expires = timezone.now() + \
                 datetime.timedelta(seconds=response.get("expires_in"))

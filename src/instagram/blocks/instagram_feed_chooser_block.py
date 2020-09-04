@@ -9,7 +9,7 @@ class InstagramFeedChooserBlock(blocks.ChooserBlock):
     widget = forms.Select
 
     class Meta:
-        label = _('Instagram')
+        label = 'Instagram'
         icon = "fa-instagram"
         group = _('Basic')
         template = 'instagram_feed.html'
