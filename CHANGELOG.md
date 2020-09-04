@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.2.0] - 2020-09-04
+
+### Changed
+
+- Rebuilt the counters block
+- Updated wagtailmedia to 0.6.0
+- Updated phonenumbers to 8.12.9
+
 ## [2.1.4] - 2020-08-12
 
 ### Fixed
