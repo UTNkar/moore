@@ -5,7 +5,7 @@ import datetime
 from django.utils import timezone
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
-# from sentry_sdk import capture_exception
+from sentry_sdk import capture_exception
 
 
 def code_from_instagram(request):
@@ -26,9 +26,9 @@ def code_from_instagram(request):
             error_message = _(
                 "Could not add your Instagram account because of an error"
             )
-            # capture_exception(
-            #     Exception("An error occured with the request from Instagram")
-            # )
+            capture_exception(
+                Exception("An error occured with the request from Instagram")
+            )
 
         messages.error(request, error_message)
 

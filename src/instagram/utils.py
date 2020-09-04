@@ -5,6 +5,7 @@ from django.utils.http import urlencode
 from instagram.models import InstagramFeed
 import datetime
 from django.utils import timezone
+from sentry_sdk import capture_exception
 
 
 class InstagramUtils():
@@ -204,7 +205,7 @@ class InstagramUtils():
                 InstagramUtils._make_api_call(url, "GET", get_params)
 
             if status_code != 200:
-                # capture_exception()
+                capture_exception(Exception("An error occured when renewing an instagram token"))
                 pass
 
             expires = timezone.now() + \
