@@ -205,8 +205,11 @@ class InstagramUtils():
                 InstagramUtils._make_api_call(url, "GET", get_params)
 
             if status_code != 200:
-                capture_exception(Exception("An error occured when renewing an instagram token"))
-                pass
+                capture_exception(
+                    Exception(
+                        "An error occured when renewing an instagram token"
+                    )
+                )
 
             expires = timezone.now() + \
                 datetime.timedelta(seconds=response.get("expires_in"))
