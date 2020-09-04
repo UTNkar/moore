@@ -1,5 +1,7 @@
 from django.db import models
+from django import forms
 from wagtail.contrib.modeladmin.options import ModelAdmin
+from wagtail.admin.edit_handlers import FieldPanel
 
 
 class InstagramFeed(models.Model):
@@ -13,6 +15,21 @@ class InstagramFeed(models.Model):
     account_name = models.CharField(max_length=80, primary_key=True)
     access_token = models.CharField(max_length=500)
     expires = models.DateTimeField()
+
+    panels = [
+        FieldPanel(
+            'account_name',
+            widget=forms.TextInput(attrs={"disabled": True})
+        ),
+        FieldPanel(
+            'access_token',
+            widget=forms.TextInput(attrs={"disabled": True})
+        ),
+        FieldPanel(
+            'expires',
+            widget=forms.DateTimeInput(attrs={"disabled": True})
+        ),
+    ]
 
 
 class InstagramFeedAdmin(ModelAdmin):
