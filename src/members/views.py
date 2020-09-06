@@ -16,6 +16,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from members.serializers import MemberCheckSerializer
 from utils.melos_client import MelosClient
+from rest_framework import status
 
 
 class ProfileView(LoginRequiredMixin, UpdateView):
@@ -98,13 +99,24 @@ def email_change_confirm(request, token):
 
 @api_view(['POST'])
 def member_check_api(request):
-    # Validera personnummret
-    # Skicka en förfrågan till medlemregistret med personnummer (is_member)
-    # Formatera responsen
+    """
+    Checks whether a person with a given personnummer is a member in UTN.
+    """
     serializer = MemberCheckSerializer(data=request.data)
+    status_code = None
+    data = {}
 
     if serializer.is_valid():
         ssn = serializer.data.get('ssn')
-        return Response(MelosClient.is_member(ssn))
+        is_member = MelosClient.is_member(ssn)
+        data = {"is_member": is_member}
     else:
-        return Response("ssn: " + ", ".join(serializer.errors.get("ssn")))
+        error = serializer.errors.get("ssn")
+        data = {'error': "Personnummer: " + ", ".join(error)}
+        status_code = status.HTTP_400_BAD_REQUEST
+
+    return Response(
+        data,
+        status=status_code,
+        headers={"Access-Control-Allow-Origin": "*"}
+    )
