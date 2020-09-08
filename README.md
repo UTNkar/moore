@@ -24,6 +24,8 @@ To get started with Project Moore, follow these instructions to set up a
 2. Install the following python packages:
    - python3-venv
    - python3-dev
+   - build-essentials
+   - libpq-dev
 3. Clone the repository.
 3. Copy the file `.env-normal-template` and name the copy `.env-normal`
 3. Fill in the necessary variables in `.env`. `MELOS_URL` and `MELOS_ADMIN` are required. You might have to fill in some database credidentils. Check `src/moore/settings/dev.py` for which default values are used if you don't specify and credidentials.
@@ -44,7 +46,7 @@ If you can use Docker, there is an alternative way to get your development
 environment all set up:
 
 1. Install [docker engine](https://docs.docker.com/engine/install/)
-1. Install [docker compose](https://docs.docker.com/compose/install/). 
+1. Install [docker compose](https://docs.docker.com/compose/install/).
 (On Ubuntu you can install `docker-compose` with `sudo apt install docker-compose`)
 1. Clone the repository.
 2. Copy `.env-docker-template` to `.env` and fill in the environments.
