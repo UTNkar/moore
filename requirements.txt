@@ -29,3 +29,5 @@ phonenumbers==8.12.9
 wagtailmedia==0.6.0
 
 django-instagram==0.3.2
+
+djangorestframework==3.11.1

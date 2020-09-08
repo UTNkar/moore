@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'taggit',
     'wagtailfontawesome',
     'django_instagram',
+    'rest_framework',
 
     'django.contrib.admin',  # Used for wagtail admin filters
     'django.contrib.auth',
@@ -221,3 +222,9 @@ WAGTAIL_USER_CUSTOM_FIELDS = ['registration_year', 'study',
                               'status', 'section']
 
 IS_RUNNING_TEST = 'test' in sys.argv
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+}

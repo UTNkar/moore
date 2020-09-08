@@ -558,15 +558,14 @@ msgstr "Sektioner"
 msgid "Education"
 msgstr "Utbildning"
 
-#~ msgid "Use the format YYYYMMDD-XXXX for your person number."
-#~ msgstr "Använd formen ÅÅÅÅMMDD-NNNN för ditt personnummer."
+msgid "Use the format YYYYMMDD-XXXX for your person number."
+msgstr "Använd formen ÅÅÅÅMMDD-NNNN för ditt personnummer."
 
-#, fuzzy
-#~| msgid "Use the format YYYYMMDD-XXXX for your person number."
-#~ msgid ""
-#~ "Use the format YYYYMMDD-XXXX, YYMMDD-XXXX,                 YYYYMMDDXXXX, "
-#~ "YYMMDDXXXX for your ssn."
-#~ msgstr "Använd formen ÅÅÅÅMMDD-NNNN för ditt personnummer."
+msgid ""
+"Use the format YYYYMMDD-XXXX, YYMMDD-XXXX, YYYYMMDDXXXX, "
+"YYMMDDXXXX for your ssn."
+msgstr "Använd formen ÅÅÅÅMMDD-NNNN, ÅÅMMDD-NNNN, ÅÅÅÅMMDDNNNN, "
+"ÅÅMMDDNNNN för ditt personnummer."
 
 #~ msgid ""
 #~ "Something went wrong. Please make sure that all fields are filled out "

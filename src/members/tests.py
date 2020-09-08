@@ -5,6 +5,43 @@ from django.core import mail
 from django.test import TestCase
 from django.urls import reverse
 from members.models import Member, StudyProgram
+from rest_framework.test import APITestCase
+from rest_framework import status
+
+
+class MemberCheckAPITest(APITestCase):
+    def test_person_is_not_member(self):
+        """
+        Test if a person is not a member of UTN
+        """
+        url = reverse('member_check_api')
+        data = {'ssn': '196001010101'}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data.get('is_member'), False)
+        self.assertEqual(response['Content-Type'], 'application/json')
+
+    def test_person_is_member(self):
+        """
+        Test if a person is a member of UTN
+        """
+        url = reverse('member_check_api')
+        data = {'ssn': '199105050203'}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data.get('is_member'), True)
+        self.assertEqual(response['Content-Type'], 'application/json')
+
+    def test_invalid_ssn(self):
+        """
+        Test if a person with an invalid ssn causes an ERROR
+        """
+        url = reverse('member_check_api')
+        data = {'ssn': '0000'}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertTrue("error" in response.data)
+        self.assertEqual(response['Content-Type'], 'application/json')
 
 
 class MemberTest(TestCase):
