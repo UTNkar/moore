@@ -20,7 +20,7 @@ django-simple-email-confirmation==0.70
 raven==6.10.0
 
 # Postgres
-psycopg2-binary==2.8.5
+psycopg2-binary==2.8.6
 
 # Phonenumber validation
 phonenumbers==8.12.9
