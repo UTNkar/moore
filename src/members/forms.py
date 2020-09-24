@@ -1,7 +1,6 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth
-from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 from wagtail.users import forms as wagtail
 from django.utils.html import mark_safe
@@ -18,44 +17,10 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 
 from members.models import StudyProgram, Member, Section
-from utils.validators import SSNValidator
 from utils.melos_client import MelosClient
-from phonenumbers import parse, is_valid_number
+from mebers.fields import PhoneNumberField, PersonNumberField
 
 User = get_user_model()
-
-
-class PhoneNumberField(forms.CharField):
-    def __init__(self, *args, **kwargs):
-        super(PhoneNumberField, self).__init__(*args, **kwargs)
-
-    def clean(self, phonenumber):
-        try:
-            parsed_phone = parse(phonenumber, "SE")
-            if not is_valid_number(parsed_phone):
-                raise Exception
-
-            return phonenumber
-        except Exception:
-            raise forms.ValidationError(_("Invalid phonenumber"))
-
-
-class PersonNumberField(forms.Field):
-    def __init__(self, *args, **kwargs):
-        super(PersonNumberField, self).__init__(*args, **kwargs)
-
-    def to_python(self, value):
-        if value in self.empty_values:
-            return None, ''
-        value = force_text(value).strip()
-        SSNValidator()(value)
-        return value
-
-    def widget_attrs(self, widget):
-        attrs = super(PersonNumberField, self).widget_attrs(widget)
-        attrs['class'] = attrs.get('class', '') + ' person_number'
-        attrs['placeholder'] = 'YYYYMMDD-XXXX'
-        return attrs
 
 
 class MemberForm(forms.ModelForm):
