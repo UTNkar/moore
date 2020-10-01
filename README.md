@@ -1,4 +1,4 @@
-# Project Moore
+# Project Moore - An amazing project
 
 [![Build Status](https://travis-ci.org/UTNkar/moore.svg?branch=development)](https://travis-ci.org/UTNkar/moore)
 [![Coverage Status](https://coveralls.io/repos/github/UTNkar/moore/badge.svg?branch=development)](https://coveralls.io/github/UTNkar/moore?branch=development)
