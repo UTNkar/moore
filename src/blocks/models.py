@@ -121,6 +121,15 @@ class IconGroupBlock(blocks.StructBlock):
         group = _('Basic')
 
 
+class MemberCheckAPIBlock(blocks.StructBlock):
+
+    class Meta:
+        label = _('Member Check')
+        icon = 'tick'
+        template = 'blocks/member_check.html'
+        group = _('Basic')
+
+
 BASIC_BLOCKTYPES = [
     ('heading', HeadingBlock()),
     ('image', ResponsiveImageBlock()),
@@ -129,6 +138,7 @@ BASIC_BLOCKTYPES = [
     ('divider', DividerBlock()),
     ('button_group', ButtonGroupBlock()),
     ('icons', IconGroupBlock()),
+    ('member_check', MemberCheckAPIBlock())
 ]
 
 # CONTENT BLOCKTYPES

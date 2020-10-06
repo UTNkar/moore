@@ -1,0 +1,29 @@
+{% load wagtailcore_tags site_tags %}
+{% get_site_root as site_root %}
+<h1> Hej </h1>
+
+<a href="/member_check_api/">
+    hej igen
+</a>
+
+<button onclick="check_member()"> Click me</button>
+
+
+<script>
+    function check_member() {
+        const formData = new FormData();
+        formData.append('ssn', '?');
+        fetch("/member_check_api/", {
+            method: 'POST',
+            body: formData,
+            credentials: "omit",
+        })
+        .then(response => {
+            // response.json()
+            console.log(response)
+        })
+}
+</script>
+
+
+<!-- Use PersonalNumberField and also Javascript to send the input from this page to the api located at another domain-->
