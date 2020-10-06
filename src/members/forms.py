@@ -18,7 +18,7 @@ from django.utils.http import urlsafe_base64_encode
 
 from members.models import StudyProgram, Member, Section
 from utils.melos_client import MelosClient
-from mebers.fields import PhoneNumberField, PersonNumberField
+from members.fields import PhoneNumberField, PersonNumberField
 
 User = get_user_model()
 

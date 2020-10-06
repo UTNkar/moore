@@ -3,6 +3,7 @@ from phonenumbers import parse, is_valid_number
 from django.utils.encoding import force_text
 from utils.validators import SSNValidator
 
+
 class PhoneNumberField(forms.CharField):
     def __init__(self, *args, **kwargs):
         super(PhoneNumberField, self).__init__(*args, **kwargs)
@@ -34,4 +35,3 @@ class PersonNumberField(forms.Field):
         attrs['class'] = attrs.get('class', '') + ' person_number'
         attrs['placeholder'] = 'YYYYMMDD-XXXX'
         return attrs
-
