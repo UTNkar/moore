@@ -30,4 +30,4 @@ wagtailmedia==0.6.0
 
 django-instagram==0.3.2
 
-djangorestframework==3.11.1
+djangorestframework==3.12.1
