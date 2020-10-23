@@ -1,7 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from wagtail.users import forms as wagtail
 from django.utils.html import mark_safe
@@ -47,7 +47,7 @@ class PersonNumberField(forms.Field):
     def to_python(self, value):
         if value in self.empty_values:
             return None, ''
-        value = force_text(value).strip()
+        value = force_str(value).strip()
         SSNValidator()(value)
         return value
 
