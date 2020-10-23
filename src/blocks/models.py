@@ -187,6 +187,16 @@ class EventsBlock(blocks.StructBlock):
         help_text=_('Whether to show Instagram the last event from the '
                     'registered Instagram feed')
     )
+    instagram_account_name = blocks.CharBlock(
+        required=False,
+        help_text=_(
+            (
+                "The username of the instagram account, without @. "
+                "The profile must be public"
+            )
+        ),
+        label=_("Instagram username")
+    )
 
     show_youtube = blocks.BooleanBlock(
         required=False,

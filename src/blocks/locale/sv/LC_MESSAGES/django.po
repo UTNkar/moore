@@ -119,6 +119,14 @@ msgstr "Om du vill visa det senaste inlägget från Instagram"
 msgid "Whether to show the last video from a Youtube-channel"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
+#: blocks/models.py:194
+msgid "The username of the instagram account, without @. The profile must be public"
+msgstr "Användarnamnet på instagram kontot, utan @. Profilen måste vara publik"
+
+#: blocks/models.py:198
+msgid "Instagram username"
+msgstr "Instagram användarnamn"
+
 #: blocks/models.py:201
 msgid "Whether to show the next few events from a google calendar"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"

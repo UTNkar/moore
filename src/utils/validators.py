@@ -22,7 +22,7 @@ class SSNValidator(validators.RegexValidator):
         super(SSNValidator, self).__init__(
             regex=regex_pattern,
             message=_(
-                'Use the format YYYYMMDD-XXXX, YYMMDD-XXXX, \
-                YYYYMMDDXXXX, YYMMDDXXXX for your ssn.'
+                'Use the format YYYYMMDD-XXXX, YYMMDD-XXXX, '
+                'YYYYMMDDXXXX, YYMMDDXXXX for your ssn.'
             )
         )

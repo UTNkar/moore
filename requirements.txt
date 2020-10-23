@@ -2,7 +2,7 @@ Django[argon2]==3.1.2
 wagtail==2.10.2
 
 # External Libraries
-requests==2.23.0
+requests==2.24.0
 
 # Templates
 django-compressor==2.4
@@ -20,10 +20,14 @@ django-simple-email-confirmation==0.70
 raven==6.10.0
 
 # Postgres
-psycopg2-binary==2.8.5
+psycopg2==2.8.6
 
 # Phonenumber validation
-phonenumbers==8.12.5
+phonenumbers==8.12.11
 
 # Wagtail media module
-wagtailmedia==0.5.0
+wagtailmedia==0.6.0
+
+django-instagram==0.3.2
+
+djangorestframework==3.12.1

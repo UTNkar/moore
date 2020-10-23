@@ -1,23 +1,60 @@
 @import "../base";
 
 .block-counters {
-  .dark, .light {
+  .main-container {
+    @include flexbox();
+    @include align-items(center);
+    @include flex-direction(column);
     text-align: center;
-    padding: 80px 0;
+    padding: 1em;
+
+    @media #{$large-and-up} {
+      padding: 2em;
+      @include flex-direction(row);
+    }
+  }
+  .items {
+    @include flexbox();
+    @include align-items(center);
+    @include flex-grow(1);
+    @include flex-direction(column);
+    @include justify-content(center);
+
+    @media #{$medium-and-up} {
+      @include flex-direction(row);
+    }
+
+    @media #{$medium-only} {
+      @include flex-wrap(wrap);
+    }
+
+    @media #{$large-and-up} {
+      @include justify-content(start);
+    }
+  }
+  .item {
+    padding: 1em;
+
+    @media #{$large-and-up} {
+      padding: 0 1em;
+    }
   }
   h2 {
-    @include align-items(center);
-    @include flexbox();
-    font-size: 27px;
     font-weight: 400;
-    height: 100px;
-    @include justify-content(center);
     line-height: 1.5;
+    white-space: nowrap;
+    font-size: 2.2em;
+    margin-bottom: 0 0 0.6rem 0;
+
+    @media #{$large-and-up} {
+      font-size: 1.8em;
+      margin: 0 1em 0 0;
+    }
   }
   .material-icons {
-    font-size: 40px;
+    font-size: 2.7em;
     height: auto;
-    margin: 0 0 10px 0;
+    margin: 0 0 .55rem 0;
     text-align: center;
     width: 100%;
   }
@@ -25,9 +62,8 @@
     margin: 0;
   }
   p {
-    font-size: 12px;
+    font-size: 0.8em;
     margin: 0;
-    position: relative;
     text-align: center;
   }
 
@@ -42,7 +78,7 @@
     color: $black-color;
     background-color: $accented-color;
     p {
-      color: color('grey', 'base');
+      color: color('grey', 'darken-3');
     }
     .material-icons {
       color: $primary-color;

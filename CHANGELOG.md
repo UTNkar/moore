@@ -4,6 +4,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.2.0] - 2020-09-04
+
+### Changed
+
+- Rebuilt the counters block
+- Updated wagtailmedia to 0.6.0
+- Updated phonenumbers to 8.12.9
+
+## [2.1.4] - 2020-08-12
+
+### Fixed
+
+- Fix a bug that caused latest news to use wrong images.
+- Fix the instagram block so that it shows pictures again
+
+## [2.1.3] - 2020-08-11
+
+### Changed
+
+- Made manage.py executable
+
+## [2.1.2] - 2020-08-11
+
+### Changed
+
+- Updated requests to 2.24.0
+- Updated phonenumbers to 8.12.7
+- Updated wagtail to 2.7.4
+
+### Added
+
+- Added support for developing moore with docker
+
 ## [2.1.1] - 2020-06-10
 
 ### Changed

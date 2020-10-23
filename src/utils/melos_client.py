@@ -15,7 +15,10 @@ class MockClient:
         }
 
     def is_member(self, ssn):
-        return True
+        if ssn == '196001010101':
+            return False
+        else:
+            return True
 
     def get_melos_id(self, ssn):
         return 100000
