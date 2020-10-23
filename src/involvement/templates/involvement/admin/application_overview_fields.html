@@ -29,7 +29,7 @@
 
     {% if application.qualifications %}
         <dt>{% trans 'qualifications' %}</dt>
-        <dd>{{ application.qualifications }}</dd>
+        <dd>{{ application.qualifications|linebreaks }}</dd>
     {% endif %}
 
     {% if application.references.all %}
@@ -47,5 +47,5 @@
     <dd>
         {{application.get_status_display}}
     </dd>
-    
+
 </dl>
