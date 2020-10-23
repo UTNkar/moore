@@ -47,10 +47,14 @@ class HomePage(Page):
     ]
 
     custom_settings_panel = Page.settings_panels + [
-        MultiFieldPanel([
-            FieldPanel('show_searchbar'),
-            FieldPanel('add_whitespace_bottom')
-        ],  'Banner settings')
+        MultiFieldPanel(
+            [
+                FieldPanel('show_searchbar'),
+                FieldPanel('add_whitespace_bottom')
+            ],
+            heading='Banner settings',
+            classname='utn-extra-margin'
+        )
     ]
 
     edit_handler = TabbedInterface([
