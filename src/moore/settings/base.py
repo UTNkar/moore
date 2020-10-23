@@ -64,6 +64,8 @@ INSTALLED_APPS = [
     'wagtailfontawesome',
     'django_instagram',
     'rest_framework',
+    'wagtailcaptcha',
+    'captcha',
 
     'django.contrib.admin',  # Used for wagtail admin filters
     'django.contrib.auth',

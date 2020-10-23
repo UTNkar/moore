@@ -116,6 +116,9 @@ MELOS_ADMIN = os.environ.get('MELOS_ADMIN')
 # Google API
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
 
+RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "")
+RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", "")
+
 try:
     from .local import *
 except ImportError:
