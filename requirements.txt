@@ -1,5 +1,5 @@
-Django[argon2]==3.0.8
-wagtail==2.9.2
+Django[argon2]==3.1.2
+wagtail==2.10.2
 
 # External Libraries
 requests==2.23.0
