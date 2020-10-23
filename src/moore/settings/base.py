@@ -230,3 +230,5 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     ]
 }
+
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
