@@ -21,7 +21,7 @@ SECRET_KEY = 'l0gkw_q4rgex=0%ep84(yw$gx+mxr)u1e-x5yv@2j)a%(4=1!s'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 
-if 'TRAVIS' in os.environ:
+if IS_RUNNING_TEST:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
