@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.3.0] - 2020-10-24
+
+### Added
+
+- Added editorconfig
+- Added api for member check
+- Added linebreaks to qualifications when inspecting an application
+- Added recaptcha to formpages
+- Added a button for switching language
+
+### Changed
+
+- Replaced psycop2-binary with psycopg2
+- Updated djangorestframework to 3.12.1
+- Updated phonenumbers to 8.12.11
+- Updated django to 3.1.2
+- Updated wagtail to 2.10.2
+
 ## [2.2.0] - 2020-09-04
 
 ### Changed
