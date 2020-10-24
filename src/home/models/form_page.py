@@ -9,12 +9,17 @@ from wagtail.contrib.forms.models import AbstractEmailForm
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from utils.translation import TranslatedField
 from involvement.blocks import ContactCardBlock
+from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 
-class FormPage(AbstractEmailForm):
+class FormPage(WagtailCaptchaEmailForm):
 
     title_sv = models.CharField(max_length=255)
     translated_title = TranslatedField('title', 'title_sv')
+    use_recaptcha = models.BooleanField(
+        default=False,
+        verbose_name=_("Use Recaptcha"),
+    )
 
     intro_en = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
@@ -84,10 +89,16 @@ class FormPage(AbstractEmailForm):
         StreamFieldPanel('thank_you_text_sv'),
     ]
 
+    custom_settings_panel = Page.settings_panels + [
+        MultiFieldPanel([
+            FieldPanel('use_recaptcha'),
+        ],  'Recaptcha')
+    ]
+
     edit_handler = TabbedInterface([
         ObjectList(general_panels, heading=_('General')),
         ObjectList(content_panels_en, heading=_('English')),
         ObjectList(content_panels_sv, heading=_('Swedish')),
         ObjectList(Page.promote_panels, heading=_('Promote')),
-        ObjectList(Page.settings_panels, heading=_('Settings')),
+        ObjectList(custom_settings_panel, heading=_('Settings')),
     ])
