@@ -1,6 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from wagtail.admin.edit_handlers import InlinePanel, FieldPanel, \
         StreamFieldPanel, TabbedInterface, ObjectList, MultiFieldPanel
 from wagtail.core.fields import StreamField
@@ -47,10 +47,14 @@ class HomePage(Page):
     ]
 
     custom_settings_panel = Page.settings_panels + [
-        MultiFieldPanel([
-            FieldPanel('show_searchbar'),
-            FieldPanel('add_whitespace_bottom')
-        ],  'Banner settings')
+        MultiFieldPanel(
+            [
+                FieldPanel('show_searchbar'),
+                FieldPanel('add_whitespace_bottom')
+            ],
+            heading='Banner settings',
+            classname='utn-extra-margin'
+        )
     ]
 
     edit_handler = TabbedInterface([

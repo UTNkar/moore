@@ -1,6 +1,6 @@
 from django.core import validators
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
     FieldRowPanel

@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock

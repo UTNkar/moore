@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser, UserManager
 from django.core import validators
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 from utils.melos_client import MelosClient
 from utils.validators import SSNValidator

@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 from __future__ import absolute_import, unicode_literals
 
 from django.conf.global_settings import LOGIN_URL
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -83,7 +83,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
 
-    'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
@@ -148,8 +147,6 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
-FILE_UPLOAD_PERMISSIONS = 0o644
 
 # Compressor
 # https://django-compressor.readthedocs.io/en/latest/settings/
