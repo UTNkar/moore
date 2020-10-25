@@ -96,6 +96,16 @@ To create translations for an app:
 since those cannot handle all the subtleties) to fix the translations.
 4. `../manage.py compilemessages`
 
+## Notes about the materialize framework
+
+Project moore uses materialize as a css framework to get pre-built components.
+The following components have been disabled in the `materialize.scss` file in the materialize app folder:
+
+- `navbar`
+
+The reason for this is that they are not needed and are interfering with the code that we write. Keep this in mind
+when updating or reinstalling materialize.
+
 ## License
 
 [AGPL-v2.0](LICENSE), unless a different, usually external, license is provided within a folder or file.
