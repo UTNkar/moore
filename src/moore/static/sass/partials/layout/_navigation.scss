@@ -1,20 +1,20 @@
 @import "../base";
 
-$navigation-height: 80px;
-$logo-height: 55px;
+$navigation-bar-height: 5.7em;
 
 nav {
+    /* General for both navigations */
     line-height: 0;
     display: flex;
     align-items: center;
-    height: $navigation-height;
+    height: $navigation-bar-height;
     padding-left: 1.4em;
 
     @media #{$large-and-up}{
         padding: 0 1.7em;
     }
 
-  .logo {
+    .logo {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
@@ -25,7 +25,7 @@ nav {
         }
 
         img{
-            height: $logo-height;
+            height: 3.7em;
         }
     }
 
@@ -33,89 +33,112 @@ nav {
         @media #{$large-and-up}{
             display: none;
         }
-    }
 
-    .collapsible-header {
-        padding: 0 16px 0 32px !important;
-        i{
-        float: right !important;
-        margin: 0 !important;
-        }
-    }
-
-    #set_language_form > button {
-        @media #{$medium-and-down}{
-            background: none;
-            border: none;
-            width: 100%;
-            text-align: left;
-            padding: 0;
-
-            i {
-                float: left;
-                margin: 0 32px 0 0;
-                line-height: 48px;
-                height: 48px;
-                color: rgba(0, 0, 0, 0.54);
-            }
-        }
-    }
-
-    .collapsible-body{
-        padding-left: 1.4em;
-    }
-
-    .button-collapse{
-        margin: 0;
         i {
             color: #2e2e2e;
         }
     }
 
-    .avatar{
-        height: $navigation-height;
-
-        & > a {
-            display: flex;
-            height: $navigation-height;
-            align-items: center;
+    /* Mobile specific */
+    #mobile {
+        .collapsible-header {
+            padding: 0 1.14em 0 2.28em !important;
+            i {
+                float: right !important;
+                margin: 0 !important;
+            }
         }
 
-        img {
-            @extend .circle;
-            height: 55px;
-            width: 55px;
+        .collapsible-body{
+            padding-left: 1.4em !important;
         }
 
-        .more-icon{
-            color: black;
-            font-size: 32px;
-            line-height: 32px;
-            display: flex;
-            align-items: center;
+        #set_language_form > button {
+            @media #{$medium-and-down}{
+                background: none;
+                border: none;
+                width: 100%;
+                text-align: left;
+                padding: 0;
+
+                i {
+                    float: left;
+                    margin: 0 2.28em 0 0;
+                    line-height: 3.43em;
+                    height: 3.43em;
+                    color: rgba(0, 0, 0, 0.54);
+                }
+            }
         }
     }
 
-    .dropdown-content{
+    /* Specifics for the navigation bar used for larger screens */
+    .right-side{
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+
+        i {
+            font-size: 1.7em;
+        }
+
+        .login-button {
+            margin: 0 1em;
+        }
+
+        .avatar{
+            height: $navigation-bar-height;
+
+            & > a {
+                padding: 0 1em;
+                display: flex;
+                height: $navigation-bar-height;
+                align-items: center;
+            }
+
+            img {
+                @extend .circle;
+                height: 3.93em;
+                width: 3.93em;
+            }
+
+            .more-icon{
+                color: black;
+                font-size: 2.28em;
+                line-height: 2.28em;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
+    .main-menu .dropdown-content, .right-side .dropdown-content {
         width: auto !important;
-        white-space: nowrap;
-    }
-
-    .main-menu > li, .right > li{
-        height: $navigation-height;
-        line-height: $navigation-height;
     }
 
     .main-menu{
+        overflow-x: auto;
+        margin: 0 1.2em;
         flex-grow: 1;
-        a.active {
+        display: flex;
+        align-items: center;
+
+        & > a {
+            padding: 0 1em;
+            height: 4.6em;
+            display: flex;
+            align-items: center;
+        }
+
+        & > a:hover, a.active {
             background-color: rgba(0, 0, 0, 0.07);
         }
 
-        li a {
+        a {
             color: rgba(66,66,66,.8);
             font-weight: 700;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .dropdown-content{
@@ -130,16 +153,11 @@ nav {
                 display:flex;
                 align-items: center;
 
-                i {
-                height: initial;
-                line-height: initial;
-                }
-
                 p{
-                display: inline;
-                flex-grow: 1;
-                margin: 0;
-                margin-right: .5em;
+                    display: inline;
+                    flex-grow: 1;
+                    margin: 0;
+                    margin-right: .5em;
                 }
             }
         }
