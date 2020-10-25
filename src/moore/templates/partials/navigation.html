@@ -6,42 +6,7 @@
     </a>
 
     <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    <ul id="mobile" class="side-nav">
-        <li>
-            <div class="userView">
-                <div class="background">
-                    <img src="{% static 'images/uthgard_cut.jpg' %}">
-                </div>
-                {% if not user.is_authenticated %}
-                    <div class="center">
-                        <a class="btn center" href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}">
-                            <i class="material-icons">account_circle</i>{% trans 'Log in' %}
-                        </a>
-                    </div>
-                {% else %}
-                    <a href="{% url 'profile' %}"><img class="circle" src="{% avatar_url user.email %}"></a>
-                    <a href="{% url 'profile' %}"><span class="white-text name">{{ user }}</span></a>
-                    <a href="{% url 'profile' %}"><span class="white-text email">{{ user.email }}</span></a>
-                {% endif %}
-            </div>
-        </li>
-        <li><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
-        {% menu_items parent=site_root sidenav=True top_level=True %}
-
-        <li><div class="divider"></div></li>
-        <li>
-            <a>
-                {% include "partials/switch_language_button.html" with mobile=True %}
-            </a>
-        </li>
-
-        {% if user.is_authenticated %}
-            <li><div class="divider" style="margin:0;"></div></li>
-            <li><a href="{% url 'profile' %}"><i class="material-icons">face</i>{% trans 'account' %}</a></li>
-            <li><a href="{% url 'password_change' %}"><i class="material-icons">lock</i>{% trans 'password' %}</a></li>
-            <li><a href="{% url 'logout' %}"><i class="material-icons">cancel</i>{% trans 'Log out' %}</a></li>
-        {% endif %}
-    </ul>
+    {% include 'partials/mobile_navigation_bar.html' %}
 
     <ul class="main-menu hide-on-med-and-down">
         <li><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
