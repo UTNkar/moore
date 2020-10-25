@@ -2,137 +2,150 @@
 
 $navigation-height: 80px;
 $logo-height: 55px;
-$logo-width: 214px;
 
-.navigation {
-  @extend .nav-wrapper;
-  display: flex;
-  align-items: center;
-  height: $navigation-height;
-  background-color: white;
-  padding-left: 1.4em;
+nav {
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    height: $navigation-height;
+    padding-left: 1.4em;
 
-  @media #{$medium-and-up}{
-    padding: 0 1.7em;
-  }
-
-  .collapsible-header {
-    padding: 0 16px 0 32px !important;
-    i{
-      float: right !important;
-      margin: 0 !important;
+    @media #{$large-and-up}{
+        padding: 0 1.7em;
     }
-  }
 
-  #set_language_form > button {
-    @media #{$medium-and-down}{
-        background: none;
-        border: none;
-        width: 100%;
-        text-align: left;
-        padding: 0;
+  .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
 
-        i {
-            float: left;
-            margin: 0 32px 0 0;
-            line-height: 48px;
-            height: 48px;
-            color: rgba(0, 0, 0, 0.54);
+        @media #{$large-and-up}{
+            position: initial;
+            transform: initial;
+        }
+
+        img{
+            height: $logo-height;
         }
     }
-  }
 
-  .collapsible-body{
-    padding-left: 1.4em;
-  }
-
-  .button-collapse{
-    margin: 0;
-    i {
-      color: #2e2e2e;
-    }
-  }
-
-  .avatar{
-    height: $navigation-height;
-
-    & > a {
-      display: flex;
-      height: $navigation-height;
-      align-items: center;
+    & > .button-collapse {
+        @media #{$large-and-up}{
+            display: none;
+        }
     }
 
-    img {
-      @extend .circle;
-      height: 55px;
-      width: 55px;
+    .collapsible-header {
+        padding: 0 16px 0 32px !important;
+        i{
+        float: right !important;
+        margin: 0 !important;
+        }
     }
 
-    .more-icon{
-      color: black;
-      font-size: 32px;
-      line-height: 32px;
-      display: flex;
-      align-items: center;
-    }
-  }
+    #set_language_form > button {
+        @media #{$medium-and-down}{
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            padding: 0;
 
-  .dropdown-content{
-    width: auto !important;
-    white-space: nowrap;
-  }
-
-  .brand-logo {
-    height: $logo-height;
-    width: $logo-width;
-  }
-
-  .main-menu > li, .right > li{
-    height: $navigation-height;
-    line-height: $navigation-height;
-  }
-
-  .main-menu{
-    flex-grow: 1;
-    margin-left: $logo-width + 20px;
-    a.active {
-      background-color: rgba(0, 0, 0, 0.07);
+            i {
+                float: left;
+                margin: 0 32px 0 0;
+                line-height: 48px;
+                height: 48px;
+                color: rgba(0, 0, 0, 0.54);
+            }
+        }
     }
 
-    li a {
-      color: rgba(66,66,66,.8);
-      font-weight: 700;
-      text-transform: uppercase;
+    .collapsible-body{
+        padding-left: 1.4em;
+    }
+
+    .button-collapse{
+        margin: 0;
+        i {
+            color: #2e2e2e;
+        }
+    }
+
+    .avatar{
+        height: $navigation-height;
+
+        & > a {
+            display: flex;
+            height: $navigation-height;
+            align-items: center;
+        }
+
+        img {
+            @extend .circle;
+            height: 55px;
+            width: 55px;
+        }
+
+        .more-icon{
+            color: black;
+            font-size: 32px;
+            line-height: 32px;
+            display: flex;
+            align-items: center;
+        }
     }
 
     .dropdown-content{
-      //Displays the submenues to the side of the parent menu
-      overflow: visible !important;
-
-      .no-right-padding{
-        padding-right: 0;
-      }
-
-      .menu-text {
-        display:flex;
-        align-items: center;
-
-        i {
-          height: initial;
-          line-height: initial;
-        }
-
-        p{
-          display: inline;
-          flex-grow: 1;
-          margin: 0;
-          margin-right: .5em;
-        }
-      }
+        width: auto !important;
+        white-space: nowrap;
     }
 
-    .submenu{
-      left: 100% !important;
+    .main-menu > li, .right > li{
+        height: $navigation-height;
+        line-height: $navigation-height;
     }
-  }
+
+    .main-menu{
+        flex-grow: 1;
+        a.active {
+            background-color: rgba(0, 0, 0, 0.07);
+        }
+
+        li a {
+            color: rgba(66,66,66,.8);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .dropdown-content{
+            //Displays the submenues to the side of the parent menu
+            overflow: visible !important;
+
+            .no-right-padding{
+                padding-right: 0;
+            }
+
+            .menu-text {
+                display:flex;
+                align-items: center;
+
+                i {
+                height: initial;
+                line-height: initial;
+                }
+
+                p{
+                display: inline;
+                flex-grow: 1;
+                margin: 0;
+                margin-right: .5em;
+                }
+            }
+        }
+
+        .submenu{
+            left: 100% !important;
+        }
+    }
 }

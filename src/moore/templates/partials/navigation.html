@@ -1,7 +1,7 @@
 {% load static i18n wagtailcore_tags site_tags wagtailadmin_tags %}
 {% get_site_root as site_root %}
-<nav class="navigation">
-    <a class="brand-logo" href="{% pageurl site_root %}">
+<nav>
+    <a class="logo" href="{% pageurl site_root %}">
         {% block logo %}<img src="{% static 'images/logo.svg' %}" alt="{% trans 'The UTN Logo' %}">{% endblock %}
     </a>
 
