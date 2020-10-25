@@ -3,7 +3,7 @@ $('#section-switch').click(function(ev) {
     ev.preventDefault();
     setTimeout(function () {
         $('.committees').hide();
-        $('.sections').show();
+        $('.sections').css("display", "flex");
     }, 100);
 });
 $('#committee-switch').click(function(ev) {
