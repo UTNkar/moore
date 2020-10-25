@@ -1,9 +1,9 @@
 @import "../base";
 
 .structure-header {
-  @extend nav;
   @extend .hide-on-med-and-down;
 
+  background-color: $primary-color;
   height: 40px;
   line-height: 30px;
   padding: 5px 0;

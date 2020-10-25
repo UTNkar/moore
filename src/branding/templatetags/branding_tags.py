@@ -23,10 +23,19 @@ def structure_header(context, logo_color=''):
     logos = Logo.objects.exclude(belongs_to=site).all()
     committees = logos.filter(category='committee')
     sections = logos.filter(category='section')
+
+    committees_left = committees[:len(committees) // 2]
+    committees_right = committees[len(committees) // 2:]
+
+    sections_left = sections[:len(sections) // 2]
+    sections_right = sections[len(sections) // 2:]
+
     return {
-        'committees': committees,
-        'sections': sections,
         'color': logo_color,
+        'committees_left': committees_left,
+        'committees_right': committees_right,
+        'sections_left': sections_left,
+        'sections_right': sections_right,
     }
 
 

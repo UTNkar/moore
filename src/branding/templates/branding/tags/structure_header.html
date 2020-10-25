@@ -1,45 +1,8 @@
-{% load i18n %}
 <div class="structure-header">
     <div class="committees">
-        {% widthratio committees|length 2 1 as com_center %}
-        <div class="left-side">
-        {% for committee in committees %}
-            {% if forloop.counter0|slugify == com_center %}
-                </div>
-                <div class="switch">
-                    <a id="section-switch" class="btn" href="#"><i class="material-icons">compare_arrows</i>{% trans 'sections'|title %}</a>
-                </div>
-                <div class="right-side">
-            {% endif %}
-            {% include 'branding/tags/logo.html' with logo=committee %}
-        {% empty %}
-            </div>
-            <div class="switch">
-                <a id="section-switch" class="btn" href="#"><i class="material-icons">compare_arrows</i>{% trans 'sections'|title %}</a>
-            </div>
-            <div class="right-side">
-        {% endfor %}
-        </div>
+        {% include 'branding/tags/structure_header_layer.html' with identifier='committiees' left=committees_left right=committees_right %}
     </div>
     <div class="sections">
-        {% widthratio sections|length 2 1 as sec_center %}
-        <div class="left-side">
-        {% for section in sections %}
-            {% if forloop.counter0|slugify == sec_center %}
-                </div>
-                <div class="switch">
-                    <a id="committee-switch" class="btn" href="#"><i class="material-icons">compare_arrows</i>{% trans 'committees'|title %}</a>
-                </div>
-                <div class="right-side">
-            {% endif %}
-            {% include 'branding/tags/logo.html' with logo=section %}
-        {% empty %}
-            </div>
-            <div class="switch">
-                <a id="committee-switch" class="btn" href="#"><i class="material-icons">compare_arrows</i>{% trans 'committees'|title %}</a>
-            </div>
-            <div class="right-side">
-        {% endfor %}
-        </div>
+        {% include 'branding/tags/structure_header_layer.html' with identifier='sections' left=sections_left right=sections_right %}
     </div>
-</div><!-- /.header-colored -->
+</div>
