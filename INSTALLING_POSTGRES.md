@@ -26,6 +26,6 @@ Follow the installation instructions on [postgresql's website](https://www.postg
 ## Creating a postgres user and database
 
 1. Run the command `createuser -s -P name_of_user` to create a user with super-user privileges and with a password
-2. Run the command `createdb -O name_of_user moore` to create a database called `registrationsystem` with the owner set to the user you created previously
+2. Run the command `createdb -O name_of_user moore` to create a database called `moore` with the owner set to the user you created previously
 
 You have now setup postgresql!
