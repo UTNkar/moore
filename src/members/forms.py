@@ -23,6 +23,13 @@ from members.fields import PhoneNumberField, PersonNumberField
 User = get_user_model()
 
 
+class MemberCheckForm(forms.ModelForm):
+    person_number = PersonNumberField(
+        label=_('Person number'),
+        help_text=_('Person number using the YYYYMMDD-XXXX format.'),
+    )
+
+
 class MemberForm(forms.ModelForm):
     person_number = PersonNumberField(
         label=_('Person number'),

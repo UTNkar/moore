@@ -1,29 +1,35 @@
-{% load wagtailcore_tags site_tags %}
+{% load wagtailcore_tags site_tags i18n %}
 {% get_site_root as site_root %}
-<h1> Hej </h1>
 
-<a href="/member_check_api/">
-    hej igen
-</a>
+<h2 id='member_check_result' style="text-align: center"></h2>
 
-<button onclick="check_member()"> Click me</button>
-
+Personnummer: <input type="text" id="ssn"><br><br>
+<button onclick="check_member()">{% trans "Check!" %}</button>
 
 <script>
     function check_member() {
         const formData = new FormData();
-        formData.append('ssn', '?');
+        formData.append('ssn', document.getElementById("ssn").value);
         fetch("/member_check_api/", {
             method: 'POST',
             body: formData,
             credentials: "omit",
         })
         .then(response => {
-            // response.json()
-            console.log(response)
+            return response.json();
+        }).then(member_status => {
+            populateHeader(member_status.is_member)
         })
+
+    function populateHeader(isMember) {
+        const header = document.querySelector('#member_check_result');
+        if (isMember) {
+            header.textContent = '{% trans "You are a member of UTN!" %}';
+            header.style.color = "green";
+        } else {
+            header.textContent = '{% trans "You are not a member of UTN!" %}';
+            header.style.color = "red";
+        }
+    }
 }
 </script>
-
-
-<!-- Use PersonalNumberField and also Javascript to send the input from this page to the api located at another domain-->
