@@ -1,5 +1,5 @@
-Django[argon2]==2.2.13
-wagtail==2.7.4
+Django[argon2]==3.1.2
+wagtail==2.10.2
 
 # External Libraries
 requests==2.24.0
@@ -23,11 +23,14 @@ raven==6.10.0
 psycopg2==2.8.6
 
 # Phonenumber validation
-phonenumbers==8.12.9
+phonenumbers==8.12.11
 
 # Wagtail media module
 wagtailmedia==0.6.0
 
 django-instagram==0.3.2
 
-djangorestframework==3.11.1
+djangorestframework==3.12.1
+
+# Recaptcha for wagtail form pages
+wagtail-django-recaptcha==1.0

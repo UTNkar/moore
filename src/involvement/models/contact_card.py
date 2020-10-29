@@ -1,7 +1,7 @@
 from datetime import date
 from django.apps import apps
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.admin.forms import WagtailAdminModelForm
 from wagtail.images.edit_handlers import ImageChooserPanel

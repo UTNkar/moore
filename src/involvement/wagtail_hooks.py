@@ -2,10 +2,10 @@ from datetime import date
 from django.contrib import admin
 from django.contrib.admin.utils import quote
 from django.contrib.auth import get_permission_codename
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from django.utils.html import format_html
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from wagtail.core import hooks
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
