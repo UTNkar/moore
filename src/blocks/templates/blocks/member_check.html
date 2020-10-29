@@ -2,12 +2,23 @@
 {% get_site_root as site_root %}
 
 <h2 id='member_check_result' style="text-align: center"></h2>
-
-Personnummer: <input type="text" id="ssn"><br><br>
-<button onclick="check_member()">{% trans "Check!" %}</button>
+<form id="member_check_form">
+    Personnummer (YYYYMMDD-XXXX):
+    <input
+        type="text"
+        id="ssn"
+        placeholder="YYYYMMDD-XXXX"
+        pattern="^[0-9]{8}-(T|t|[0-9])[0-9]{3}$"
+        title="YYYYMMDD-XXXX"
+        required
+    >
+    <br><br>
+    <button type="submit">{% trans "Check!" %}</button>
+</form>
 
 <script>
-    function check_member() {
+    $("#member_check_form").submit(function(event){
+        event.preventDefault();
         const formData = new FormData();
         formData.append('ssn', document.getElementById("ssn").value);
         fetch("/member_check_api/", {
@@ -20,7 +31,7 @@ Personnummer: <input type="text" id="ssn"><br><br>
         }).then(member_status => {
             populateHeader(member_status.is_member)
         })
-
+    })
     function populateHeader(isMember) {
         const header = document.querySelector('#member_check_result');
         if (isMember) {
