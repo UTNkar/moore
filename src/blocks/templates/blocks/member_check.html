@@ -13,7 +13,7 @@
         required
     >
     <br><br>
-    <button type="submit">{% trans "Check!" %}</button>
+    <button type="submit">{% translate "Check!" %}</button>
 </form>
 
 <script>
@@ -35,12 +35,12 @@
     function populateHeader(isMember) {
         const header = document.querySelector('#member_check_result');
         if (isMember) {
-            header.textContent = '{% trans "You are a member of UTN!" %}';
+            header.textContent = '{% translate "You are a member of UTN!" %}';
             header.style.color = "green";
         } else {
-            header.textContent = '{% trans "You are not a member of UTN!" %}';
+            header.textContent = '{% translate "You are not a member of UTN!" %}';
             header.style.color = "red";
         }
     }
-}
+
 </script>
