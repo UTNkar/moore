@@ -1,5 +1,6 @@
 from django import forms
 from phonenumbers import parse, is_valid_number
+from django.utils.translation import gettext_lazy as _
 from django.utils.encoding import force_text
 from utils.validators import SSNValidator
 

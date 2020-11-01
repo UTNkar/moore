@@ -1,7 +1,6 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth
-from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from wagtail.users import forms as wagtail
 from django.utils.html import mark_safe
