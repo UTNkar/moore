@@ -17,20 +17,21 @@
 </form>
 
 <script>
-    $("#member_check_form").submit(function(event){
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append('ssn', document.getElementById("ssn").value);
-        fetch("/member_check_api/", {
-            method: 'POST',
-            body: formData,
-            credentials: "omit",
-        })
-        .then(response => {
-            return response.json();
-        }).then(member_status => {
-            populateHeader(member_status.is_member)
-        })
+    document.addEventListener("DOMContentLoaded", function(){
+        $("#member_check_form").submit(function(event){
+            event.preventDefault();
+            const formData = new FormData();
+            formData.append('ssn', document.getElementById("ssn").value);
+            fetch("/member_check_api/", {
+                method: 'POST',
+                body: formData,
+                credentials: "omit",
+            })
+            .then(response => {
+                return response.json();
+            }).then(member_status => {
+                populateHeader(member_status.is_member)
+            })
     })
     function populateHeader(isMember) {
         const header = document.querySelector('#member_check_result');
@@ -42,5 +43,6 @@
             header.style.color = "red";
         }
     }
+});
 
 </script>
