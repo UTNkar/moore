@@ -123,7 +123,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LANGUAGES = [
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
     ('en', _('English')),
     ('sv', _('Swedish'))
 ]
