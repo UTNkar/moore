@@ -4,9 +4,9 @@ from involvement.rule_utils import is_super, is_admin
 
 
 class ApplicationCreateView(CreateView):
-    def get_form(self, form_class=None):
+    def get_form(self):
         form = super(ApplicationCreateView, self) \
-            .get_form(form_class=form_class)
+            .get_form()
 
         if not is_super(self.request.user) \
                 and not is_admin(self.request.user):

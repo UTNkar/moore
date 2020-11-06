@@ -4,8 +4,8 @@ from involvement.rule_utils import is_super, is_admin
 
 
 class ApplicationEditView(EditView):
-    def get_form(self, form_class=None):
-        form = super(ApplicationEditView, self).get_form(form_class=form_class)
+    def get_form(self):
+        form = super(ApplicationEditView, self).get_form()
 
         if not is_super(self.request.user) \
                 and not is_admin(self.request.user):
