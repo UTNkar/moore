@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.4.0] - 2020-11-06
+
+### Added
+
+- Added a membercheck as a wagtail block and API
+
+### Changed
+
+- Updated wagtail to 2.11
+- Updated django to 3.1.3
+- Updated djangorestframework to 3.12.2
+- Updated phonenumbers to 8.12.12
+
 ## [2.3.0] - 2020-10-24
 
 ### Added
