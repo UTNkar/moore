@@ -4,7 +4,6 @@ from involvement.rule_utils import is_super, is_admin, is_fum, \
     is_board, has_role_perm
 
 
-
 # Contact card predicates
 @rules.predicate
 def member_of_team_contactcard(user, card):
