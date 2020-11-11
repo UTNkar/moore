@@ -34,7 +34,11 @@ class RecruitmentPageTests(WagtailPageTests):
         user_data['phone_number'] = "0733221121"
         user_data['melos_id'] = 8631280
 
-        return user_model.objects.create_superuser(**user_data)
+        user_model.objects.create_superuser(**user_data)
+
+        return user_model.objects.get(
+            username=user_data[user_model.USERNAME_FIELD]
+        )
 
     def setUp(self):
         self.login()

@@ -222,7 +222,6 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         data = self.get_melos_user_data()
         return '' if data is None else data['last_name']
 
-    @property
     def get_full_name(self):
         return '{} {}'.format(self.get_first_name, self.get_last_name)
 
