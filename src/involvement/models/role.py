@@ -153,7 +153,7 @@ class Role(models.Model):
         elif is_fum(user):
             return ['board']
         elif is_board(user):
-            return ['presidium']
+            return ['presidium', 'group_leader', 'engaged']
         elif is_presidium(user):
             return ['group_leader', 'engaged']
         elif is_group_leader(user):
@@ -172,7 +172,7 @@ class Role(models.Model):
         elif is_fum(user):
             return ['board', 'presidium']
         elif is_board(user):
-            return ['presidium']
+            return ['presidium', 'group_leader', 'engaged']
         elif is_presidium(user):
             return ['group_leader', 'engaged']
         elif is_group_leader(user):
