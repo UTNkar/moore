@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.5.0] - 2020-11-16
+
+### Changed
+
+- Role type styrelsen can now see all applications, roles and positions for the role types presidium, group leader, engaged regardless of which teams they belong to
+- Updated phonenumbers to 8.12.13
+
 ## [2.4.0] - 2020-11-06
 
 ### Added
