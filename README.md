@@ -72,7 +72,7 @@ suites](https://docs.djangoproject.com/en/1.10/topics/testing/) and we run the
 [flake8](http://flake8.pycqa.org/en/latest/) style enforcer. Together they can
 promote clean and good code.
 
-These tests are run automatically using [Travis CI](https://travis-ci.org/).
+These tests are run automatically using Github Actions.
 If, however, you want to run these tests locally you can run the following
 commands in the project root directory:
 
