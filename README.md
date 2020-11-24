@@ -20,7 +20,7 @@ To get started with Project Moore, follow these instructions to set up a
 **development** environment:
 
 1. Install Python 3, at least version 3.6 or up.
-2. Install [postgresql](https://www.postgresql.org/)
+2. [Install postgresql](INSTALLING_POSTGRES.md)
 2. Install the following python packages:
    - python3-venv
    - python3-dev
@@ -72,7 +72,7 @@ suites](https://docs.djangoproject.com/en/1.10/topics/testing/) and we run the
 [flake8](http://flake8.pycqa.org/en/latest/) style enforcer. Together they can
 promote clean and good code.
 
-These tests are run automatically using [Travis CI](https://travis-ci.org/).
+These tests are run automatically using Github Actions.
 If, however, you want to run these tests locally you can run the following
 commands in the project root directory:
 

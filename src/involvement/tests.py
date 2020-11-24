@@ -34,7 +34,11 @@ class RecruitmentPageTests(WagtailPageTests):
         user_data['phone_number'] = "0733221121"
         user_data['melos_id'] = 8631280
 
-        return user_model.objects.create_superuser(**user_data)
+        user_model.objects.create_superuser(**user_data)
+
+        return user_model.objects.get(
+            username=user_data[user_model.USERNAME_FIELD]
+        )
 
     def setUp(self):
         self.login()
@@ -638,24 +642,29 @@ class AdminPermissionTests(TestCase):
 
         # Roles
         # Can view and edit roles for role_type 'presidium'
-        self.checkRoles(self.primary_set, ['presidium'])
+        self.checkRoles(self.primary_set,
+                        ['presidium', 'group_leader', 'engaged'])
 
         # Position
         # Can view and edit positions for role_type 'presidium'
-        self.checkPositions(self.primary_set, ['presidium'])
+        self.checkPositions(self.primary_set,
+                            ['presidium', 'group_leader', 'engaged'])
 
         # Applications
         # Can view and edit applications for
         # role_type 'presidium' in all teams
         # My team
-        self.checkApplications(self.primary_set, ['presidium'])
+        self.checkApplications(self.primary_set,
+                               ['presidium', 'group_leader', 'engaged'])
 
         # Others team
-        self.checkApplications(self.secondary_set, ['presidium'])
+        self.checkApplications(self.secondary_set,
+                               ['presidium', 'group_leader', 'engaged'])
 
         # ContactCards
         # Can view and edit ContactCards for role_type 'presidium'
-        self.checkContactCards(self.primary_set, ['presidium'])
+        self.checkContactCards(self.primary_set,
+                               ['presidium', 'group_leader', 'engaged'])
 
         # Make sure that we cant access pages were we are not a team-member,
         # except for applications
