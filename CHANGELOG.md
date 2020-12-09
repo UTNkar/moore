@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.6.0] - 2020-12-09
+
+### Changed
+
+- Wagtail from 2.11.1 to 2.11.2
+- Rebuilding of header
+- Django from 3.1.3 to 3.1.4
+- Phonenumbers from 8.12.13 to 8.12.14
+
 ## [2.5.0] - 2020-11-16
 
 ### Changed
