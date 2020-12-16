@@ -34,8 +34,8 @@ class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = [
-            'first_name', 'last_name', 'registration_year',
-            'phone_number', 'study', 'section', 'email'
+            'name', 'registration_year', 'phone_number',
+            'study', 'section', 'email'
         ]
 
     def __init__(self, *args, **kwargs):
@@ -43,13 +43,11 @@ class MemberForm(forms.ModelForm):
         initial = kwargs.pop('initial', {})
         if instance is not None:
             initial['person_number'] = instance.get_ssn
-            initial['first_name'] = instance.get_first_name
-            initial['last_name'] = instance.get_last_name
+            initial['name'] = instance.get_full_name
 
         super(MemberForm, self).__init__(initial=initial, *args, **kwargs)
         if instance is not None:
-            self.fields['first_name'].disabled = True
-            self.fields['last_name'].disabled = True
+            self.fields['name'].disabled = True
             self.fields['person_number'].disabled = True
 
     def clean_username(self):
@@ -72,13 +70,6 @@ class MemberForm(forms.ModelForm):
         return person_number
 
     def save(self, commit=True):
-        # Need to reset fields since we don't want
-        # to store this data in the database
-        self.instance.birthday = None
-        self.instance.person_number_ext = ''
-        self.instance.first_name = ''
-        self.instance.last_name = ''
-
         email = self.cleaned_data['email']
         if self.initial.get('email', '') != '':
             token = self.instance.add_email_if_not_exists(email)
@@ -203,8 +194,7 @@ class UserForm(wagtail.UsernameForm):
         'password_mismatch': _("The two password fields didn't match."),
     }
 
-    first_name = forms.CharField(required=False, label=_('First Name'))
-    last_name = forms.CharField(required=False, label=_('Last Name'))
+    name = forms.CharField(required=False, label=_('Name'))
 
     password1 = forms.CharField(
         label=_('Password'), required=False,
@@ -222,7 +212,6 @@ class UserForm(wagtail.UsernameForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['first_name']
         if self.password_enabled:
             if self.password_required:
                 self.fields['password1'].help_text = mark_safe(
@@ -312,9 +301,8 @@ class UserEditForm(UserForm):
     class Meta:
         model = Member
         fields = [
-            'username', 'is_superuser', 'groups',
-            'email', 'first_name', 'last_name',
-            'phone_number'
+            'name', 'username', 'is_superuser', 'groups',
+            'email', 'phone_number'
         ]
         widgets = {
             'groups': forms.CheckboxSelectMultiple
@@ -363,27 +351,17 @@ class CustomUserEditForm(UserEditForm):
 
         initial = kwargs.pop('initial', {})
         if instance is not None:
-            initial['first_name'] = instance.get_first_name
-            initial['last_name'] = instance.get_last_name
             initial['person_number'] = instance.get_ssn
+            initial['name'] = instance.get_full_name
             initial['status'] = instance.get_status
 
         super(CustomUserEditForm, self).__init__(
             initial=initial, *args, **kwargs
         )
 
-        self.fields['first_name'].disabled = True
-        self.fields['last_name'].disabled = True
+        self.fields['name'].disabled = True
         self.fields['person_number'].disabled = True
         self.fields['status'].disabled = True
-
-    def save(self, commit=True):
-        self.instance.birthday = None
-        self.instance.person_number_ext = ''
-        self.instance.first_name = ''
-        self.instance.last_name = ''
-
-        return super(CustomUserEditForm, self).save(commit=commit)
 
 
 class UserCreationForm(UserForm):

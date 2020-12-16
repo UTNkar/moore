@@ -232,18 +232,9 @@ class Member(
         self.update_status()
         return self.status
 
-    @property
-    def get_first_name(self):
-        data = self.get_melos_user_data()
-        return '' if data is None else data['first_name']
-
-    @property
-    def get_last_name(self):
-        data = self.get_melos_user_data()
-        return '' if data is None else data['last_name']
-
     def get_full_name(self):
-        return '{} {}'.format(self.get_first_name, self.get_last_name)
+        return "temp name"
+        # return '{} {}'.format(self.get_first_name, self.get_last_name)
 
     @property
     def get_phone_formatted(self):
