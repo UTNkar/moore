@@ -1,6 +1,9 @@
 from datetime import date, timedelta
 from django.apps import apps
-from django.contrib.auth.models import AbstractUser, UserManager
+from django.contrib.auth.models import (
+    AbstractBaseUser, UserManager, PermissionsMixin
+)
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core import validators
 from django.db import models
 from django.utils import timezone
@@ -54,57 +57,70 @@ class MelosUserManager(CaseInsensitiveUsernameUserManager):
         superuser.save()
 
 
-class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
+class Member(
+        SimpleEmailConfirmationUserMixin,
+        AbstractBaseUser,
+        PermissionsMixin):
     """This class describes a member"""
 
-    # ---- AbstractUser overrides ---
-
     objects = MelosUserManager()
+    username_validator = UnicodeUsernameValidator()
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'
 
     REQUIRED_FIELDS = [
-        AbstractUser.get_email_field_name(),
+        AbstractBaseUser.get_email_field_name(),
         "phone_number",
         "melos_id"
     ]
 
-    first_name = models.CharField(
-        verbose_name=_('first name'),
-        max_length=30,
-        blank=True,
-        null=True
-    )
+    # ---- Necessary fields ---
 
-    last_name = models.CharField(
-        verbose_name=_('last name'),
+    username = models.CharField(
+        _('username'),
         max_length=150,
-        blank=True,
-        null=True
+        unique=True,
+        help_text=_(
+            'Required. 150 characters or fewer. '
+            'Letters, digits and @/./+/-/_ only.'
+        ),
+        validators=[username_validator],
+        error_messages={
+            'unique': _("A user with that username already exists."),
+        },
     )
 
-    # ---- Personal information ------
-
-    birthday = models.DateField(
-        verbose_name=_('Birthday'),
-        blank=True,
-        null=True,
-        editable=False
+    is_staff = models.BooleanField(
+        _('staff status'),
+        default=False,
+        help_text=_(
+            'Designates whether the user can log into this admin site.'
+        ),
     )
 
-    person_number_ext = models.CharField(
-        max_length=4,
-        verbose_name=_('Person number extension'),
-        help_text=_('Enter the last four digits of your Swedish person '
-                    'number, given by the Swedish tax authority'),
-        validators=[validators.RegexValidator(
-            regex=r'^\d{4}$',
-            message=_('The person number extension consists of four numbers'),
-        )],
-        unique_for_date="birthday",
-        blank=True,
-        null=True
+    is_active = models.BooleanField(
+        _('active'),
+        default=True,
+        help_text=_(
+            'Designates whether this user should be treated as active. '
+            'Unselect this instead of deleting accounts.'
+        ),
+    )
+
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+
+    # ----- Fields for caching user information from melos
+
+    name = models.CharField(
+        max_length=254,
+        verbose_name=_('Name'),
+        blank=True
+    )
+    person_nr = models.CharField(
+        max_length=13,
+        verbose_name='Person number',
+        blank=True
     )
 
     # ---- Membership information ------
@@ -183,6 +199,10 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
     )
 
     melos_user_data = None
+
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
 
     def __str__(self) -> str:
         return self.username
