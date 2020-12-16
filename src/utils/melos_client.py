@@ -10,8 +10,6 @@ class MockClient:
             'first_name': 'Firstname',
             'last_name': 'Lastname',
             'person_number': '199105050203',
-            'phone_number': '0706688668',
-            'email': 'email@email.com'
         }
 
     def is_member(self, ssn):
@@ -31,21 +29,20 @@ class ApiClient:
             params['orgId'] = settings.MELOS_ORG_ID
 
         return requests.get(
-                    settings.MELOS_URL + "/" + path,
-                    auth=HTTPBasicAuth('admin', settings.MELOS_ADMIN),
-                    params=params,
-                )
+            settings.MELOS_URL + "/" + path,
+            auth=HTTPBasicAuth('admin', settings.MELOS_ADMIN),
+            params=params,
+        )
 
     def get_user_data(self, melos_id):
         r = self.request_get('user' + '/' + str(melos_id))
         if r.status_code == 200:
-            data = {}
-            data['first_name'] = r.json()['Fornamn']
-            data['last_name'] = r.json()['Efternamn']
-            data['person_number'] = r.json()['Personnr']
-            data['phone_number'] = r.json()['Tele2']
-            data['email'] = r.json()['Epost']
-            return data
+            response_json = r.json()
+            return {
+                'first_name': response_json['Fornamn'],
+                'last_name': response_json['Efternamn'],
+                'person_number': response_json['Personnr']
+            }
 
     def is_member(self, ssn):
         r = self.request_get('user/validateMembership', {'ssn': ssn})
