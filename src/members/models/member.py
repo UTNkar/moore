@@ -43,7 +43,8 @@ class MelosUserManager(CaseInsensitiveUsernameUserManager):
     def _create_user(
         self, username, password,
         email, phone_number, melos_id,
-        is_superuser=False, is_staff=False
+        is_superuser=False, is_staff=False,
+        study=None, section=None, registration_year=""
     ):
         melos_data = MelosClient.get_user_data(melos_id)
 
@@ -66,32 +67,40 @@ class MelosUserManager(CaseInsensitiveUsernameUserManager):
             is_superuser=is_superuser,
             is_staff=is_staff,
             name=name,
-            person_nr=person_nr
+            person_nr=person_nr,
+            study=study,
+            section=section,
+            registration_year=registration_year
         )
         user.set_password(password)
+        user.update_status()
         user.save()
 
         return user
 
     def create_superuser(
         self, username, password,
-        email, phone_number, melos_id
+        email, phone_number, melos_id,
+        study=None, section=None, registration_year=""
     ):
         """Creates a new superuser with a melos id."""
         return self._create_user(
             username, password, email,
             phone_number, melos_id,
-            is_superuser=True, is_staff=True
+            is_superuser=True, is_staff=True,
+            study=study, section=section, registration_year=registration_year
         )
 
     def create_user(
         self, username, password,
-        email, phone_number, melos_id
+        email, phone_number, melos_id,
+        study=None, section=None, registration_year=""
     ):
         """Creates a user with a melos id."""
         return self._create_user(
             username, password, email,
-            phone_number, melos_id
+            phone_number, melos_id,
+            study=study, section=section, registration_year=registration_year
         )
 
 
