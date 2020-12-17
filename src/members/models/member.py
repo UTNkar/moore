@@ -123,6 +123,11 @@ class Member(
         blank=True
     )
 
+    # Last time the users info was cached
+    user_info_changed = models.DateTimeField(
+        default=timezone.now
+    )
+
     # ---- Membership information ------
 
     MEMBERSHIP_CHOICES = (
