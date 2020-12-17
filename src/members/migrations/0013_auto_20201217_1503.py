@@ -2,9 +2,9 @@
 
 from django.db import migrations
 from django.db.models import Q
-from members.models import Member
 
 def get_user_info(apps, schema_editor):
+    Member = apps.get_model("members", "Member")
     iterations = 1
     members_to_update = Member.objects.filter(Q(name="") | Q(person_nr=""))
     for member in members_to_update:
