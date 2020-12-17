@@ -12,7 +12,6 @@ from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 from utils.melos_client import MelosClient
 from utils.validators import SSNValidator
 from phonenumbers import format_number, PhoneNumberFormat, parse
-import random
 
 
 def status_changed_default():
@@ -116,17 +115,11 @@ class Member(
     name = models.CharField(
         max_length=254,
         verbose_name=_('Name'),
-        blank=True
-    )
-    person_nr = models.CharField(
-        max_length=13,
-        verbose_name='Person number',
-        blank=True
     )
 
-    # Last time the users info was cached
-    user_info_expires = models.DateTimeField(
-        default=timezone.now
+    person_nr = models.CharField(
+        max_length=13,
+        verbose_name=_('Person number'),
     )
 
     # ---- Membership information ------
@@ -239,29 +232,20 @@ class Member(
         return self.status
 
     def get_full_name(self):
-        if self.user_info_has_expired():
-            self.refresh_user_info()
-
         return self.name
 
-    def user_info_has_expired(self):
-        return self.user_info_expires <= timezone.now()
+    def fetch_and_save_melos_info(self):
+        melos_data = self.get_melos_user_data()
+        if melos_data is not None:
+            self.name = "{} {}".format(
+                melos_data['first_name'].strip(),
+                melos_data['last_name'].strip()
+            )
+            self.person_nr = melos_data['person_number']
+            self.save()
 
-    def refresh_user_info(self):
-        data = self.get_melos_user_data()
-        self.name = "{} {}".format(
-            data['first_name'].strip(),
-            data['last_name'].strip()
-        )
-        self.person_nr = data['person_number']
-
-        # The user data expires in 7-12 days. This is to spread out the
-        # expiration of all users so that everyone doesn't have to be
-        # refreshed at the same time
-        expires_in = random.randint(7, 12)
-
-        self.user_info_expires = timezone.now() + timedelta(days=expires_in)
-        self.save()
+            return True
+        return False
 
     @property
     def get_phone_formatted(self):
@@ -281,9 +265,6 @@ class Member(
 
     @property
     def get_ssn(self):
-        if self.user_info_has_expired():
-            self.refresh_user_info()
-
         return self.person_nr
 
     @property
