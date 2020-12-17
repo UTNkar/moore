@@ -77,15 +77,15 @@ class ProfileTest(TestCase):
             name_sv='Kemi',
             degree='bsc',
         )
-        self.member = Member.objects.create(
+        self.member = Member.objects.create_user(
             username='moore',
+            password='Intel1968',
             email='g.moore@localhost',
-            registration_year='1946',
             phone_number="0733221111",
-            study=self.study
+            melos_id='123456789',
+            study=self.study,
+            registration_year='1946',
         )
-        self.member.set_password('Intel1968')
-        self.member.save()
 
         self.client.login(username='moore', password='Intel1968')
 
