@@ -424,3 +424,12 @@ class CustomUserCreationForm(UserCreationForm):
 
         self.instance.melos_id = melos_id
         return person_number
+
+    def save(self):
+        return Member.objects.create_user(
+            self.cleaned_data["username"],
+            self.cleaned_data["password1"],
+            self.cleaned_data["email"],
+            self.cleaned_data["phone_number"],
+            self.instance.melos_id
+        )

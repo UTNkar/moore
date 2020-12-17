@@ -40,21 +40,59 @@ class MelosUserManager(CaseInsensitiveUsernameUserManager):
 
         return member
 
+    def _create_user(
+        self, username, password,
+        email, phone_number, melos_id,
+        is_superuser=False, is_staff=False
+    ):
+        melos_data = MelosClient.get_user_data(melos_id)
+
+        name = ""
+        person_nr = ""
+
+        if melos_data is not None:
+            name = "{} {}".format(
+                melos_data['first_name'].strip(),
+                melos_data['last_name'].strip()
+            )
+
+            person_nr = melos_data["person_number"]
+
+        user = Member.objects.create(
+            username=username,
+            melos_id=melos_id,
+            email=email,
+            phone_number=phone_number,
+            is_superuser=is_superuser,
+            is_staff=is_staff,
+            name=name,
+            person_nr=person_nr
+        )
+        user.set_password(password)
+        user.save()
+
+        return user
+
     def create_superuser(
         self, username, password,
         email, phone_number, melos_id
     ):
         """Creates a new superuser with a melos id."""
-        superuser = Member.objects.create(
-            username=username,
-            melos_id=melos_id,
-            email=email,
-            phone_number=phone_number,
-            is_superuser=True,
-            is_staff=True
+        return self._create_user(
+            username, password, email,
+            phone_number, melos_id,
+            is_superuser=True, is_staff=True
         )
-        superuser.set_password(password)
-        superuser.save()
+
+    def create_user(
+        self, username, password,
+        email, phone_number, melos_id
+    ):
+        """Creates a user with a melos id."""
+        return self._create_user(
+            username, password, email,
+            phone_number, melos_id
+        )
 
 
 class Member(
