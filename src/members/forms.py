@@ -302,7 +302,7 @@ class UserEditForm(UserForm):
         model = Member
         fields = [
             'name', 'username', 'is_superuser', 'groups',
-            'email', 'phone_number'
+            'email', 'phone_number', 'section', 'study'
         ]
         widgets = {
             'groups': forms.CheckboxSelectMultiple
