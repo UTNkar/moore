@@ -12,6 +12,7 @@ from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 from utils.melos_client import MelosClient
 from utils.validators import SSNValidator
 from phonenumbers import format_number, PhoneNumberFormat, parse
+import random
 
 
 def status_changed_default():
@@ -238,8 +239,29 @@ class Member(
         return self.status
 
     def get_full_name(self):
-        return "temp name"
-        # return '{} {}'.format(self.get_first_name, self.get_last_name)
+        if self.user_info_has_expired():
+            self.refresh_user_info()
+
+        return self.name
+
+    def user_info_has_expired(self):
+        return self.user_info_expires <= timezone.now()
+
+    def refresh_user_info(self):
+        data = self.get_melos_user_data()
+        self.name = "{} {}".format(
+            data['first_name'].strip(),
+            data['last_name'].strip()
+        )
+        self.person_nr = data['person_number']
+
+        # The user data expires in 7-12 days. This is to spread out the
+        # expiration of all users so that everyone doesn't have to be
+        # refreshed at the same time
+        expires_in = random.randint(7, 12)
+
+        self.user_info_expires = timezone.now() + timedelta(days=expires_in)
+        self.save()
 
     @property
     def get_phone_formatted(self):
@@ -259,8 +281,10 @@ class Member(
 
     @property
     def get_ssn(self):
-        data = self.get_melos_user_data()
-        return None if data is None else data['person_number']
+        if self.user_info_has_expired():
+            self.refresh_user_info()
+
+        return self.person_nr
 
     @property
     def get_email(self):
@@ -343,8 +367,13 @@ class Member(
         try:
             ssn = ssn.strip()
             SSNValidator()(ssn)
-            melos_id = MelosClient.get_melos_id(ssn)
-            return Member.find_by_melos_id(melos_id), melos_id
+            user = Member.objects.filter(person_nr=ssn).first()
+
+            if user is None:
+                melos_id = MelosClient.get_melos_id(ssn)
+                return Member.find_by_melos_id(melos_id), melos_id
+            else:
+                return user, user.melos_id
         except Exception:
             pass
 
