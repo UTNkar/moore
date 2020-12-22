@@ -5,6 +5,7 @@ from django.core import mail
 from django.test import TestCase
 from django.urls import reverse
 from members.models import Member, StudyProgram
+from members.forms import CustomUserCreationForm
 from rest_framework.test import APITestCase
 from rest_framework import status
 
@@ -281,3 +282,39 @@ class RegistrationTestCase(TestCase):
             username=information['username'],
             password=information['password1'],
         ))
+
+
+class UserCreationFormTest(TestCase):
+    def setUp(self):
+        self.user = {
+            'username': 'test_basic_creation',
+            'person_number': '199105050203',
+            'email': 'g.moore@localhost',
+            'phone_number': '0700000000',
+            'password1': 'Test!234',
+            'password2': 'Test!234',
+        }
+
+    def test_creation(self):
+        form = CustomUserCreationForm(data=self.user)
+        self.assertTrue(form.is_valid())
+
+        form.save()
+        member = Member.objects.get(username=self.user['username'])
+
+        self.assertEqual(member.username, self.user['username'])
+        self.assertEqual(member.email, self.user['email'])
+        self.assertEqual(member.phone_number, self.user['phone_number'])
+        self.assertEqual(member.person_nr, self.user['person_number'])
+        self.assertEqual(member.name, "Firstname Lastname")
+
+    def test_create_superuser(self):
+        self.user["is_superuser"] = True
+
+        form = CustomUserCreationForm(data=self.user)
+        self.assertTrue(form.is_valid())
+
+        form.save()
+        member = Member.objects.get(username=self.user['username'])
+        self.assertTrue(member.is_superuser)
+        self.assertTrue(member.is_staff)
