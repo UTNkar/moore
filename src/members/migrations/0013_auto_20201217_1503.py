@@ -2,12 +2,39 @@
 
 from django.db import migrations
 from django.db.models import Q
+from utils.melos_client import MelosClient
+
+# This is a copy of the function used to get the melos
+# data for a member. The reason it is copied is that django migrations
+# don't have access to model functions. The solution for this is to
+# make a copy of the functions that populates the fields. This also
+# makes sure that this migration file will work in the future, regardless
+# of the changes to the Member model
+def fetch_and_save_melos_info(melos_id):
+    melos_data = MelosClient.get_user_data(melos_id)
+    if melos_data is not None:
+        name = "{} {}".format(
+            melos_data['first_name'].strip(),
+            melos_data['last_name'].strip()
+        )
+        person_nr = melos_data['person_number']
+        return name, person_nr
+
+    return None, None
 
 def get_user_info(apps, schema_editor):
     Member = apps.get_model("members", "Member")
     iterations = 1
     members_to_update = Member.objects.filter(Q(name="") | Q(person_nr=""))
     for member in members_to_update:
+        name, person_nr = fetch_and_save_melos_info(member.melos_id)
+        if name is None:
+            print("Could not fetch data for user {}".format(member.username))
+        else:
+            member.name = name
+            member.person_nr = person_nr
+            member.save()
+
         if iterations % 5 == 0:
             print(
                 "{} / {} members updated".format(
@@ -15,9 +42,6 @@ def get_user_info(apps, schema_editor):
                     len(members_to_update)
                 )
             )
-        success = member.fetch_and_save_melos_info()
-        if not success:
-            print("Could not fetch data for user {}".format(member.username))
 
         iterations += 1
 
