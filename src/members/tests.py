@@ -285,6 +285,9 @@ class RegistrationTestCase(TestCase):
 
 
 class UserCreationFormTest(TestCase):
+    """
+    Tests for the form where admins can create users
+    """
     def setUp(self):
         self.user = {
             'username': 'test_basic_creation',
@@ -296,6 +299,9 @@ class UserCreationFormTest(TestCase):
         }
 
     def test_creation(self):
+        """
+        Test the creation of a normal user
+        """
         form = CustomUserCreationForm(data=self.user)
         self.assertTrue(form.is_valid())
 
@@ -309,6 +315,9 @@ class UserCreationFormTest(TestCase):
         self.assertEqual(member.name, "Firstname Lastname")
 
     def test_create_superuser(self):
+        """
+        Test creating a superuser
+        """
         self.user["is_superuser"] = True
 
         form = CustomUserCreationForm(data=self.user)
