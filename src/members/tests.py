@@ -254,7 +254,7 @@ class RegistrationTestCase(TestCase):
     def test_basic_creation(self):
         information = {
             'username': 'test_basic_creation',
-            'person_number': '199100000000',
+            'person_number': '199105050203',
             'email': 'g.moore@localhost',
             'phone_number': '0700000000',
             'password1': 'Test!234',
@@ -268,6 +268,9 @@ class RegistrationTestCase(TestCase):
         # A member has been created with the correct information
         member = Member.objects.get(username=information['username'])
         self.assertEqual(member.email, information['email'])
+        self.assertEqual(member.phone_number, information['phone_number'])
+        self.assertEqual(member.name, "Firstname Lastname")
+        self.assertEqual(member.person_nr, information['person_number'])
 
         # Email has been sent to confirm e-mail address
         self.assertEqual(len(mail.outbox), 1)
