@@ -2,7 +2,7 @@ Django[argon2]==3.1.4
 wagtail==2.11.3
 
 # External Libraries
-requests==2.25.0
+requests==2.25.1
 
 # Templates
 django-compressor==2.4
