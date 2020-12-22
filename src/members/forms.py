@@ -86,6 +86,16 @@ class RegistrationForm(MemberForm, auth.UserCreationForm):
         fields = ['username', 'email', 'phone_number', 'section']
         field_classes = {'username': auth.UsernameField}
 
+    def save(self):
+        melos_id = MelosClient.get_melos_id(self.cleaned_data['person_number'])
+        return Member.objects.create_user(
+            self.cleaned_data['username'],
+            self.cleaned_data['password1'],
+            self.cleaned_data['email'],
+            self.cleaned_data['phone_number'],
+            melos_id
+        )
+
 
 class CustomPasswordResetForm(forms.Form):
 
@@ -426,10 +436,17 @@ class CustomUserCreationForm(UserCreationForm):
         return person_number
 
     def save(self):
-        return Member.objects.create_user(
-            self.cleaned_data["username"],
-            self.cleaned_data["password1"],
-            self.cleaned_data["email"],
-            self.cleaned_data["phone_number"],
-            self.instance.melos_id
-        )
+        args = {
+            "username": self.cleaned_data["username"],
+            "password": self.cleaned_data["password1"],
+            "email": self.cleaned_data["email"],
+            "phone_number": self.cleaned_data["phone_number"],
+            "melos_id": self.instance.melos_id,
+            'study': self.cleaned_data['study'],
+            "section": self.cleaned_data["section"],
+            "registration_year": self.cleaned_data["registration_year"]
+        }
+        if self.cleaned_data['is_superuser']:
+            return Member.objects.create_superuser(**args)
+        else:
+            return Member.objects.create_user(**args)
