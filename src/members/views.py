@@ -33,8 +33,12 @@ class ProfileView(LoginRequiredMixin, UpdateView):
         update_member_info = "update_member_info" in request.POST
         if update_member_info:
             request.user.fetch_and_save_melos_info()
-            messages.add_message(self.request, messages.SUCCESS,
-                             _('Your account settings have been saved.'))
+            messages.add_message(
+                self.request,
+                messages.SUCCESS,
+                _('Your account settings have been saved.')
+            )
+
             return super(ProfileView, self).get(request, *args, **kwargs)
         else:
             return super(ProfileView, self).post(request, *args, **kwargs)
