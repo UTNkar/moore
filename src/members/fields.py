@@ -7,7 +7,9 @@ from utils.validators import SSNValidator
 
 class PhoneNumberField(forms.CharField):
     def __init__(self, *args, **kwargs):
-        super(PhoneNumberField, self).__init__(*args, **kwargs)
+        super(PhoneNumberField, self).__init__(
+            *args, label=_('Phone number'), **kwargs
+        )
 
     def clean(self, phonenumber):
         try:
