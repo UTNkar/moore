@@ -296,6 +296,14 @@ msgstr "Kontoinställningar"
 msgid "contact information"
 msgstr "kontaktinformation"
 
+#: templates/members/profile.html:70
+msgid ""
+"The information above is collected from our member registry. If the "
+"information is incorrect, you can try updating it."
+msgstr ""
+"Ovanstående information hämtas från vårt medlemsregister. Om "
+"informationen är felaktig kan du pröva att uppdatera den."
+
 #: templates/members/profile.html:86
 msgid "membership status"
 msgstr "medlemsstatus"
