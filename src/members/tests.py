@@ -141,6 +141,27 @@ class ProfileTest(TestCase):
         formatted_phone = self.member.get_phone_formatted
         self.assertEqual(formatted_phone, "+44 20 8366 1177")
 
+    def test_update_melos_info(self):
+        """
+        Test if a user can update their information from melos
+        """
+        # Some wrong data
+        self.member.name = "Not myname"
+        self.member.person_nr = "199801011234"
+        self.member.save()
+
+        response = self.client.post(
+            reverse('profile'),
+            {"update_member_info": ''},
+            follow=True
+        )
+
+        self.member.refresh_from_db()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.member.name, "Firstname Lastname")
+        self.assertEqual(self.member.person_nr, "199105050203")
+
 
 class EmailConfirmationTest(TestCase):
     """Tests for the sending of confirmations of new email addresses"""
