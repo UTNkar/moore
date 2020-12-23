@@ -353,8 +353,12 @@ msgid "Log into your UTN account"
 msgstr "Logga in på ditt UTN-konto"
 
 #: templates/registration/login.html:16
-msgid "If you had an UTN-account before the 23rd of December 2019, you must create a new one because of an update of our database."
-msgstr "Om du hade ett UTN-konto före den 23:e december måste du skapa ett nytt, detta på grund av en uppdatering i vår databas."
+msgid ""
+"If you had an UTN-account before the 23rd of December 2019, you must create "
+"a new one because of an update of our database."
+msgstr ""
+"Om du hade ett UTN-konto före den 23:e december 2019 måste du skapa ett nytt, "
+"detta på grund av en uppdatering i vår databas."
 
 #: templates/registration/login.html:20
 msgid ""
