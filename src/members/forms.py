@@ -312,7 +312,7 @@ class UserEditForm(UserForm):
         model = Member
         fields = [
             'name', 'username', 'is_superuser', 'groups',
-            'email', 'phone_number', 'section', 'study'
+            'email', 'phone_number', 'section', 'study', 'registration_year'
         ]
         widgets = {
             'groups': forms.CheckboxSelectMultiple
