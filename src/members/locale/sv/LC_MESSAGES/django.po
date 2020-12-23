@@ -260,12 +260,6 @@ msgstr ""
 msgid "email"
 msgstr ""
 
-#: templates/members/admin_panel.html:16
-#, fuzzy
-#| msgid "Phone number"
-msgid "phone number"
-msgstr "Telefonnummer"
-
 #: templates/members/email_change_email.html:1
 msgid ""
 "You're receiving this email because a UTN-account has been created with this "
