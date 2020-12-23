@@ -93,7 +93,8 @@ class RegistrationForm(MemberForm, auth.UserCreationForm):
             self.cleaned_data['password1'],
             self.cleaned_data['email'],
             self.cleaned_data['phone_number'],
-            melos_id
+            melos_id,
+            section=self.cleaned_data['section']
         )
 
 
