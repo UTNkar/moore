@@ -1,6 +1,9 @@
 from datetime import date, timedelta
 from django.apps import apps
-from django.contrib.auth.models import AbstractUser, UserManager
+from django.contrib.auth.models import (
+    AbstractBaseUser, UserManager, PermissionsMixin
+)
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core import validators
 from django.db import models
 from django.utils import timezone
@@ -37,74 +40,133 @@ class MelosUserManager(CaseInsensitiveUsernameUserManager):
 
         return member
 
-    def create_superuser(
+    def _create_user(
         self, username, password,
-        email, phone_number, melos_id
+        email, phone_number, melos_id,
+        is_superuser=False, is_staff=False,
+        study=None, section=None, registration_year=""
     ):
-        """Creates a new superuser with a melos id."""
-        superuser = Member.objects.create(
+        melos_data = MelosClient.get_user_data(melos_id)
+
+        name = ""
+        person_nr = ""
+
+        if melos_data is not None:
+            name = "{} {}".format(
+                melos_data['first_name'].strip(),
+                melos_data['last_name'].strip()
+            )
+
+            person_nr = melos_data["person_number"]
+
+        user = Member.objects.create(
             username=username,
             melos_id=melos_id,
             email=email,
             phone_number=phone_number,
-            is_superuser=True,
-            is_staff=True
+            is_superuser=is_superuser,
+            is_staff=is_staff,
+            name=name,
+            person_nr=person_nr,
+            study=study,
+            section=section,
+            registration_year=registration_year
         )
-        superuser.set_password(password)
-        superuser.save()
+        user.set_password(password)
+        user.update_status()
+        user.save()
+
+        return user
+
+    def create_superuser(
+        self, username, password,
+        email, phone_number, melos_id,
+        study=None, section=None, registration_year=""
+    ):
+        """Creates a new superuser with a melos id."""
+        return self._create_user(
+            username, password, email,
+            phone_number, melos_id,
+            is_superuser=True, is_staff=True,
+            study=study, section=section, registration_year=registration_year
+        )
+
+    def create_user(
+        self, username, password,
+        email, phone_number, melos_id,
+        study=None, section=None, registration_year=""
+    ):
+        """Creates a user with a melos id."""
+        return self._create_user(
+            username, password, email,
+            phone_number, melos_id,
+            study=study, section=section, registration_year=registration_year
+        )
 
 
-class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
+class Member(
+        SimpleEmailConfirmationUserMixin,
+        AbstractBaseUser,
+        PermissionsMixin):
     """This class describes a member"""
 
-    # ---- AbstractUser overrides ---
-
     objects = MelosUserManager()
+    username_validator = UnicodeUsernameValidator()
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'
 
     REQUIRED_FIELDS = [
-        AbstractUser.get_email_field_name(),
+        AbstractBaseUser.get_email_field_name(),
         "phone_number",
         "melos_id"
     ]
 
-    first_name = models.CharField(
-        verbose_name=_('first name'),
-        max_length=30,
-        blank=True,
-        null=True
-    )
+    # ---- Necessary fields ---
 
-    last_name = models.CharField(
-        verbose_name=_('last name'),
+    username = models.CharField(
+        _('username'),
         max_length=150,
-        blank=True,
-        null=True
+        unique=True,
+        help_text=_(
+            'Required. 150 characters or fewer. '
+            'Letters, digits and @/./+/-/_ only.'
+        ),
+        validators=[username_validator],
+        error_messages={
+            'unique': _("A user with that username already exists."),
+        },
     )
 
-    # ---- Personal information ------
-
-    birthday = models.DateField(
-        verbose_name=_('Birthday'),
-        blank=True,
-        null=True,
-        editable=False
+    is_staff = models.BooleanField(
+        _('staff status'),
+        default=False,
+        help_text=_(
+            'Designates whether the user can log into this admin site.'
+        ),
     )
 
-    person_number_ext = models.CharField(
-        max_length=4,
-        verbose_name=_('Person number extension'),
-        help_text=_('Enter the last four digits of your Swedish person '
-                    'number, given by the Swedish tax authority'),
-        validators=[validators.RegexValidator(
-            regex=r'^\d{4}$',
-            message=_('The person number extension consists of four numbers'),
-        )],
-        unique_for_date="birthday",
-        blank=True,
-        null=True
+    is_active = models.BooleanField(
+        _('active'),
+        default=True,
+        help_text=_(
+            'Designates whether this user should be treated as active. '
+            'Unselect this instead of deleting accounts.'
+        ),
+    )
+
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+
+    # ----- Fields for caching user information from melos
+
+    name = models.CharField(
+        max_length=254,
+        verbose_name=_('Name'),
+    )
+
+    person_nr = models.CharField(
+        max_length=13,
+        verbose_name=_('Person number'),
     )
 
     # ---- Membership information ------
@@ -184,6 +246,10 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
 
     melos_user_data = None
 
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
+
     def __str__(self) -> str:
         return self.username
 
@@ -212,18 +278,21 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         self.update_status()
         return self.status
 
-    @property
-    def get_first_name(self):
-        data = self.get_melos_user_data()
-        return '' if data is None else data['first_name']
-
-    @property
-    def get_last_name(self):
-        data = self.get_melos_user_data()
-        return '' if data is None else data['last_name']
-
     def get_full_name(self):
-        return '{} {}'.format(self.get_first_name, self.get_last_name)
+        return self.name
+
+    def fetch_and_save_melos_info(self):
+        melos_data = self.get_melos_user_data()
+        if melos_data is not None:
+            self.name = "{} {}".format(
+                melos_data['first_name'].strip(),
+                melos_data['last_name'].strip()
+            )
+            self.person_nr = melos_data['person_number']
+            self.save()
+
+            return True
+        return False
 
     @property
     def get_phone_formatted(self):
@@ -243,8 +312,7 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
 
     @property
     def get_ssn(self):
-        data = self.get_melos_user_data()
-        return None if data is None else data['person_number']
+        return self.person_nr
 
     @property
     def get_email(self):
@@ -327,8 +395,13 @@ class Member(SimpleEmailConfirmationUserMixin, AbstractUser):
         try:
             ssn = ssn.strip()
             SSNValidator()(ssn)
-            melos_id = MelosClient.get_melos_id(ssn)
-            return Member.find_by_melos_id(melos_id), melos_id
+            user = Member.objects.filter(person_nr=ssn).first()
+
+            if user is None:
+                melos_id = MelosClient.get_melos_id(ssn)
+                return Member.find_by_melos_id(melos_id), melos_id
+            else:
+                return user, user.melos_id
         except Exception:
             pass
 

@@ -247,7 +247,7 @@ class ApplicationAdmin(ModelAdmin):
     search_fields = (
         'position__role__teams__name_en', 'position__role__teams__name_sv',
         'position__role__name_en', 'position__role__name_sv',
-        'applicant__first_name', 'applicant__last_name',
+        'applicant__name',
     )
     permission_helper_class = RulesPermissionHelper
     create_view_class = views.ApplicationCreateView
