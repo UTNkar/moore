@@ -38,6 +38,12 @@ class ApiClient:
         r = self.request_get('user' + '/' + str(melos_id))
         if r.status_code == 200:
             response_json = r.json()
+
+            # person_nr is None for exchange students with T-numbers.
+            # This is becuase Melos stores their personnummer
+            # in medlemsnr instead of person_number
+            if response_json['Personnr'] is None:
+                response_json['Personnr'] = response_json["Medlemsnr"]
             return {
                 'first_name': response_json['Fornamn'],
                 'last_name': response_json['Efternamn'],
