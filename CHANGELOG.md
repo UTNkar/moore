@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.7.0] - 2021-02-02
+
+## Changed
+- Cache data about members [#521](https://github.com/UTNkar/moore/pull/521)
+- Bump requests from 2.25.0 to 2.25.1 
+- Bump phonenumbers from 8.12.14 to 8.12.17
+- Bump django[argon2] from 3.1.4 to 3.1.6 
+- Buggfix exchange students ssn [#529](https://github.com/UTNkar/moore/pull/529)
+
+
 ## [2.6.1] - 2020-12-12
 
 ### Changed
