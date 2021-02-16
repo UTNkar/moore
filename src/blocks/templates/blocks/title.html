@@ -1,2 +1,4 @@
-<h2>{{ value.title }}</h2>
-{% if value.subtitle %}<p>{{ value.subtitle }}</p>{% endif %}
+<h2 style="text-align: {{ value.title_alignment }};">{{ value.title }}</h2>
+{% if value.subtitle %}
+    <p style="text-align: {{ value.subtitle_alignment }};">{{ value.subtitle }}</p>
+{% endif %}

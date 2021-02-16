@@ -40,7 +40,17 @@ class ParagraphBlock(blocks.StructBlock):
 
 class HeadingBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True)
+    title_alignment = blocks.ChoiceBlock(
+        required=True,
+        choices=[("start", _("Start")), ("center", _("Center")), ("end", _("End"))],
+        help_text=_("Choose the Title alignment")
+    )
     subtitle = blocks.CharBlock(required=False)
+    subtitle_alignment = blocks.ChoiceBlock(
+        required=True,
+        choices=[("start", _("Start")), ("center", _("Center")), ("end", _("End"))],
+        help_text=_("Choose the Title alignment")
+    )
 
     class Meta:
         label = _('Heading')
