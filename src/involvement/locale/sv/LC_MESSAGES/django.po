@@ -677,7 +677,7 @@ msgstr "Post"
 #: templates/modeladmin/involvement/position/inspect.html:36
 #: templates/modeladmin/involvement/position/inspect.html:72
 msgid "No applications have been submitted for this position."
-msgstr "Din ansökan har skickats."
+msgstr "Inga ansökningar har skickats in."
 
 #: templates/modeladmin/involvement/position/inspect.html:69
 #, fuzzy
@@ -699,7 +699,7 @@ msgstr "Nuvarande mandat"
 #, fuzzy
 #| msgid "No applications have been submitted for this position."
 msgid "No applications have been approved for this role."
-msgstr "Din ansökan har skickats."
+msgstr "Inga applikationer har godkänts för denna roll."
 
 #: templates/modeladmin/involvement/role/inspect.html:28
 #, fuzzy
@@ -711,7 +711,7 @@ msgstr "Godkänn sökande till %s"
 #, fuzzy
 #| msgid "No applications have been submitted for this position."
 msgid "No earlier applicants have been approved for this role."
-msgstr "Din ansökan har skickats."
+msgstr "Inga tidigare applikationer har godkänts för denna roll."
 
 #: templates/modeladmin/involvement/team/inspect.html:10
 msgid "members"
