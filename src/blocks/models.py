@@ -46,7 +46,7 @@ class HeadingBlock(blocks.StructBlock):
             ("start", _("Start")), 
             ("center", _("Center")), 
             ("end", _("End"))],
-        help_text=_("Choose the Title alignment")
+        help_text=_("Choose the title alignment")
     )
     subtitle = blocks.CharBlock(required=False)
     subtitle_alignment = blocks.ChoiceBlock(
@@ -55,7 +55,7 @@ class HeadingBlock(blocks.StructBlock):
             ("start", _("Start")), 
             ("center", _("Center")), 
             ("end", _("End"))],
-        help_text=_("Choose the Title alignment")
+        help_text=_("Choose the subtitle alignment")
     )
 
     class Meta:
