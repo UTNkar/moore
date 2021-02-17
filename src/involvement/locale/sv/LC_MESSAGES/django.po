@@ -51,7 +51,7 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid "No user with the username %(user)s exists."
 msgid "No user with the person number %(pnr)s exists."
-msgstr "Det finns ingen användare med användarnamnet %(user)s."
+msgstr "Det finns ingen användare med personnummret %(pnr)s."
 
 #: forms/appointment_form.py:57
 #, fuzzy, python-format
@@ -62,7 +62,7 @@ msgid ""
 "User with person number %(pnr)s already applied for this position and can "
 "not be appointed through the overturn field."
 msgstr ""
-"Användaren %(user)s har redan sökt den här posten och kan inte bli tillsatt."
+"Användaren med personnummret %(pnr)s har redan sökt den här posten och kan inte bli tillsatt."
 
 #: forms/appointment_form.py:75
 #, python-format
@@ -440,7 +440,7 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid "Approve applicants for %s"
 msgid "[UTN] No applicants for %(position)s"
-msgstr "Godkänn sökande till %s"
+msgstr "Godkänn sökande till %(position)s"
 
 #: templates/involvement/admin/position_appointment.html:22
 msgid ""
@@ -658,7 +658,7 @@ msgstr "post"
 #, fuzzy
 #| msgid "Approve applicants for %s"
 msgid "Appointed applicants"
-msgstr "Godkänn sökande till %s"
+msgstr "Godkända ansökningar"
 
 #: templates/modeladmin/involvement/position/inspect.html:25
 #: templates/modeladmin/involvement/position/inspect.html:59
@@ -677,7 +677,7 @@ msgstr "Post"
 #: templates/modeladmin/involvement/position/inspect.html:36
 #: templates/modeladmin/involvement/position/inspect.html:72
 msgid "No applications have been submitted for this position."
-msgstr "Din ansökan har skickats."
+msgstr "Inga ansökningar har skickats in."
 
 #: templates/modeladmin/involvement/position/inspect.html:69
 #, fuzzy
@@ -699,19 +699,19 @@ msgstr "Nuvarande mandat"
 #, fuzzy
 #| msgid "No applications have been submitted for this position."
 msgid "No applications have been approved for this role."
-msgstr "Din ansökan har skickats."
+msgstr "Inga ansökningar har godkänts för denna roll."
 
 #: templates/modeladmin/involvement/role/inspect.html:28
 #, fuzzy
 #| msgid "Approve applicants for %s"
 msgid "Earlier applicants"
-msgstr "Godkänn sökande till %s"
+msgstr "Tidigare ansökningar"
 
 #: templates/modeladmin/involvement/role/inspect.html:43
 #, fuzzy
 #| msgid "No applications have been submitted for this position."
 msgid "No earlier applicants have been approved for this role."
-msgstr "Din ansökan har skickats."
+msgstr "Inga tidigare ansökningar har godkänts för denna roll."
 
 #: templates/modeladmin/involvement/team/inspect.html:10
 msgid "members"
