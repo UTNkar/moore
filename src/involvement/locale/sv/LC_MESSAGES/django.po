@@ -699,7 +699,7 @@ msgstr "Nuvarande mandat"
 #, fuzzy
 #| msgid "No applications have been submitted for this position."
 msgid "No applications have been approved for this role."
-msgstr "Inga applikationer har godkänts för denna roll."
+msgstr "Inga ansökningar har godkänts för denna roll."
 
 #: templates/modeladmin/involvement/role/inspect.html:28
 #, fuzzy
@@ -711,7 +711,7 @@ msgstr "Godkänn sökande till %s"
 #, fuzzy
 #| msgid "No applications have been submitted for this position."
 msgid "No earlier applicants have been approved for this role."
-msgstr "Inga tidigare applikationer har godkänts för denna roll."
+msgstr "Inga tidigare ansökningar har godkänts för denna roll."
 
 #: templates/modeladmin/involvement/team/inspect.html:10
 msgid "members"
