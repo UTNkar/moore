@@ -1,5 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 from wagtail.core import blocks
+from wagtail.core.blocks.field_block import CharBlock, ChoiceBlock
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
 import requests
@@ -39,8 +40,26 @@ class ParagraphBlock(blocks.StructBlock):
 
 
 class HeadingBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=True)
-    subtitle = blocks.CharBlock(required=False)
+    title = CharBlock(required=True)
+    title_alignment = ChoiceBlock(
+        default=("center", _("Center")),
+        required=True,
+        choices=[
+            ("start", _("Start")), 
+            ("center", _("Center")), 
+            ("end", _("End"))],
+        help_text=_("Choose the title alignment")
+    )
+    subtitle = CharBlock(required=False)
+    subtitle_alignment = ChoiceBlock(
+        default=("center", _("Center")),
+        required=True,
+        choices=[
+            ("start", _("Start")), 
+            ("center", _("Center")), 
+            ("end", _("End"))],
+        help_text=_("Choose the subtitle alignment")
+    )
 
     class Meta:
         label = _('Heading')
