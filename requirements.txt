@@ -1,5 +1,5 @@
-Django[argon2]==3.1.6
-wagtail==2.11.3
+Django[argon2]==3.1.7
+wagtail==2.12.3
 
 # External Libraries
 requests==2.25.1
@@ -23,7 +23,7 @@ raven==6.10.0
 psycopg2==2.8.6
 
 # Phonenumber validation
-phonenumbers==8.12.17
+phonenumbers==8.12.18
 
 # Wagtail media module
 wagtailmedia==0.7.0
