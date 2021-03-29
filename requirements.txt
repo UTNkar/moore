@@ -30,7 +30,7 @@ wagtailmedia==0.7.0
 
 django-instagram==0.3.2
 
-djangorestframework==3.12.2
+djangorestframework==3.12.4
 
 # Recaptcha for wagtail form pages
 wagtail-django-recaptcha==1.0
