@@ -221,12 +221,6 @@ WAGTAIL_USER_CREATION_FORM = 'members.forms.CustomUserCreationForm'
 WAGTAIL_USER_CUSTOM_FIELDS = ['registration_year', 'study',
                               'status', 'section']
 
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.contrib.postgres_search.backend',
-    }
-}
-
 IS_RUNNING_TEST = 'test' in sys.argv
 
 REST_FRAMEWORK = {
