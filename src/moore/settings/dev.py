@@ -28,11 +28,15 @@ if IS_RUNNING_TEST:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+    # Override search backend to not use postgres
     WAGTAILSEARCH_BACKENDS = {
         'default': {
             'BACKEND': 'wagtail.search.backends.db',
         }
     }
+    # Kinda hacky, but since this app has postgres-specific migrations
+    # it crashes during testing (since we test using sqlite3)
+    INSTALLED_APPS.remove('wagtail.contrib.postgres_search')
 
 elif 'DOCKER' in os.environ:
     DATABASES = {
@@ -45,11 +49,6 @@ elif 'DOCKER' in os.environ:
             'PORT': 5432,
         }
     }
-    WAGTAILSEARCH_BACKENDS = {
-        'default': {
-            'BACKEND': 'wagtail.contrib.postgres_search.backend',
-        }
-    }
 else:
     DATABASES = {
         'default': {
@@ -59,11 +58,6 @@ else:
             'PASSWORD': os.environ.get('DJANGO_DB_PASS', 'moore'),
             'HOST': os.environ.get('DJANGO_DB_HOST', '127.0.0.1'),
             'PORT':  os.environ.get('DJANGO_DB_PORT', '5432'),
-        }
-    }
-    WAGTAILSEARCH_BACKENDS = {
-        'default': {
-            'BACKEND': 'wagtail.contrib.postgres_search.backend',
         }
     }
 
