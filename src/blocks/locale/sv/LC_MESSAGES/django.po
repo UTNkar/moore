@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-29 20:17+0100\n"
-"PO-Revision-Date: 2020-04-07 23:41+0200\n"
+"POT-Creation-Date: 2021-04-01 13:39+0200\n"
+"PO-Revision-Date: 2021-04-01 13:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: models.py:20
 msgid "Responsive Image"
@@ -25,7 +25,7 @@ msgstr "Responsiv bild"
 #: models.py:23 models.py:38 models.py:49 models.py:58 models.py:69
 #: models.py:79 models.py:96 models.py:111 models.py:121 models.py:130
 msgid "Basic"
-msgstr ""
+msgstr "Basic"
 
 #: models.py:28
 msgid "Left"
@@ -59,11 +59,11 @@ msgstr "Knapp"
 msgid "Buttons"
 msgstr "Knappar"
 
-#: models.py:87 models.py:172
+#: models.py:87 models.py:225
 msgid "Light"
 msgstr "Ljus"
 
-#: models.py:88 models.py:173
+#: models.py:88 models.py:226
 msgid "Dark"
 msgstr "Mörk"
 
@@ -72,7 +72,7 @@ msgid "Image overlay"
 msgstr "Bildöverdrag"
 
 # It's difficult to know this context, don't know if it needs translation
-#: models.py:103 models.py:165
+#: models.py:103 models.py:218
 msgid "Material icon font icon text, as found on: https://material.io/icons"
 msgstr "Material icon font icon text, as found on: https://material.io/icons"
 
@@ -86,26 +86,47 @@ msgstr "Ikoner"
 
 #: models.py:127
 msgid "Member Check"
-msgstr ""
+msgstr "Medlemskontroll"
 
-#: models.py:155
-msgid "Logos"
-msgstr "Logotyper"
+#: models.py:150 models.py:471
+msgid "Small"
+msgstr "Liten"
 
-#: models.py:158 models.py:180 models.py:265 models.py:277 models.py:315
-#: models.py:329
+#: models.py:151 models.py:471
+msgid "Medium"
+msgstr "Mellan"
+
+#: models.py:152 models.py:471
+msgid "Large"
+msgstr "Stor"
+
+#: models.py:162 models.py:167 models.py:172 models.py:177 models.py:182
+#: models.py:187
+msgid "leave empty to skip this counter in the countdown"
+msgstr "lämna tom för att hoppa över den här räknaren i nedräkningen"
+
+#: models.py:194
+msgid "Countdown"
+msgstr "Nedräkning"
+
+#: models.py:197 models.py:211 models.py:233 models.py:318 models.py:330
+#: models.py:368 models.py:382
 msgid "Content"
 msgstr "Innehåll"
 
-#: models.py:177
+#: models.py:208
+msgid "Logos"
+msgstr "Logotyper"
+
+#: models.py:230
 msgid "Counters"
 msgstr "Räknare"
 
-#: models.py:187
+#: models.py:240
 msgid "Whether to embed a Facebook page"
 msgstr "Om du vill visa en Facebook-sida"
 
-#: models.py:191
+#: models.py:244
 msgid ""
 "Name of the page to show. (Must be public or accessible by the registered "
 "app_id)"
@@ -113,92 +134,80 @@ msgstr ""
 "Namnet på sidan att visa. (Måste vara en publik sida eller tillgänglig  via "
 "den registrerade app-id)"
 
-#: models.py:197
+#: models.py:250
 msgid ""
 "Whether to show Instagram the last event from the registered Instagram feed"
 msgstr "Om du vill visa det senaste inlägget från Instagram"
 
-#: models.py:208
+#: models.py:261
 msgid "Instagram username"
 msgstr "Instagram användarnamn"
 
-#: models.py:213
+#: models.py:266
 msgid "Whether to show the last video from a Youtube-channel"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: models.py:221
+#: models.py:274
 msgid "Whether to show the next few events from a google calendar"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: models.py:263
+#: models.py:316
 msgid "Events"
 msgstr "Evenemang"
 
-#: models.py:274
+#: models.py:327
 msgid "Contact Card"
 msgstr "Kontaktkort"
 
-#: models.py:312
+#: models.py:365
 msgid "Eventbrite"
 msgstr "Evenemang"
 
-#: models.py:326
+#: models.py:379
 msgid "Image + Text Cards"
 msgstr "Bild + Text Kort"
 
-#: models.py:350
+#: models.py:404
 msgid "Accordion"
-msgstr "Dragspel\t"
+msgstr "Dragspel"
 
-#: models.py:353 models.py:377 models.py:400
+#: models.py:407 models.py:431 models.py:454
 msgid "Layout"
 msgstr "Layout"
 
-#: models.py:368
+#: models.py:422
 msgid "Width out of 12"
 msgstr "Bredd, 1 till 12"
 
-#: models.py:374
+#: models.py:428
 msgid "Columns"
 msgstr "Kolumner"
 
-#: models.py:385
+#: models.py:439
 msgid "Row height in px"
 msgstr "Rad höjd i px"
 
-#: models.py:390
+#: models.py:444
 msgid "Swap position of image and paragraph"
 msgstr "Byt plats på bild och paragraf"
 
-#: models.py:397
+#: models.py:451
 msgid "Two Column Grid"
 msgstr "Två Kolumns Rutnät"
 
-#: models.py:417
-msgid "Small"
-msgstr "Liten"
-
-#: models.py:417
-msgid "Medium"
-msgstr "Mellan"
-
-#: models.py:417
-msgid "Large"
-msgstr "Stor"
-
-#: models.py:418
+#: models.py:472
 msgid "Include padding for this section"
 msgstr "Inkludera marginaler ovan och under denne sektion"
 
-#: models.py:422
+#: models.py:476
 msgid "Expand this section to full page width"
 msgstr "Expandera denna sektion till full bredd"
 
-#: models.py:428
+#: models.py:482
 msgid "Section"
-msgstr "Sektion\t"
+msgstr "Sektion"
 
-#: models.py:431
+#: models.py:485
 msgid "Sections"
 msgstr "Sektioner"
 
@@ -206,15 +215,15 @@ msgstr "Sektioner"
 msgid "Read more"
 msgstr "Läs mer"
 
-#: templates/blocks/member_check.html:7
+#: templates/blocks/member_check.html:16
 msgid "Check!"
 msgstr "Testa!"
 
-#: templates/blocks/member_check.html:27
+#: templates/blocks/member_check.html:39
 msgid "You are a member of UTN!"
 msgstr "Du är medlem i UTN!"
 
-#: templates/blocks/member_check.html:30
+#: templates/blocks/member_check.html:42
 msgid "You are not a member of UTN!"
 msgstr "Du är inte medlem i UTN!"
 
