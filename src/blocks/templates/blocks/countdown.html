@@ -1,0 +1,84 @@
+{% load wagtailcore_tags %}
+<div class="container">
+  <h1>{{value.pre_title}}</h1>
+  <h2 id="{{value.id}}" class="countdown 
+	      {% if value.size == 'S' %} 
+	      countdown-small 
+	      {% elif value.size == 'M' %}
+	      countdown-medium2
+	      {% elif value.size == 'L' %}
+	      countdown-large
+	      {% endif %}
+	      ">
+  </h2>
+  <h3>{{value.post_title}}</h3>
+</div>
+
+<script>
+ var drawCountdown =
+   drawCountdown ||
+   (function(diff, element) {
+     element.html(`
+{% if value.years_label %}
+         <span class="years">${diff.years.toString().padStart(2, "0")}</span> {{value.years_label}}
+{% endif %}
+{% if value.months_label %}
+         <span class="months">${diff.months.toString().padStart(2, "0")}</span> {{ value.months_label }}
+{% endif %}
+{% if value.days_label %}
+         <span class="days">${diff.days.toString().padStart(2, "0")}</span> {{ value.days_label }}
+{% endif %}
+{% if value.hours_label %}
+         <span class="hours">${diff.hours.toString().padStart(2, "0")}</span> {{ value.hours_label }}
+{% endif %}
+{% if value.minutes_label %}
+         <span class="minutes">${diff.minutes.toString().padStart(2, "0")}</span> {{ value.minutes_label }}
+{% endif %}
+{% if value.seconds_label %}
+         <span class="seconds">${diff.seconds.toString().padStart(2, "0")}</span> {{ value.seconds_label }}
+{% endif %}
+     `)
+   })
+ 
+ var startCountdown =
+   startCountdown ||
+   (function(expires, element) {
+     setInterval(function () {
+       var target = moment(expires)
+       var now = moment()
+       
+       if (now.isAfter(target)) {
+         location.reload()
+         return
+       }
+       
+       var years = target.diff(now, 'years')
+       var months = target.subtract(years, 'years').diff(now, 'months')
+       var days = target.subtract(months, 'months').diff(now, 'days')
+       var hours = target.subtract(days, 'days').diff(now, 'hours')
+       var minutes = target.subtract(hours, 'hours').diff(now, 'minutes')
+       var seconds = target.subtract(minutes, 'minutes').diff(now, 'seconds')
+       var diff = {
+         years, months, days, hours, minutes, seconds
+       };
+       drawCountdown(diff, element)
+     }, 1000);
+   })
+
+ document.addEventListener("DOMContentLoaded", function(event) {
+   var expires = '{{ value.expires|date:"c"}}'
+   var diff = {
+     years: 0,
+     months: 0,
+     days: 0,
+     hours:0,
+     minutes: 0,
+     seconds: 0,
+   }
+   drawCountdown(diff, $("#{{value.id}}"))
+   if (moment().isBefore(moment(expires))) {
+     startCountdown(expires, $("#{{value.id}}"))
+   }
+ });
+</script>
+
