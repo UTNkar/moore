@@ -98,11 +98,11 @@ class ContactCard(index.Indexed, models.Model):
             index.RelatedFields('role', [
                 index.RelatedFields('teams', [
                     index.SearchField('name_en'),
-                    index.SearchField('name_se'),
+                    index.SearchField('name_sv'),
                 ])
             ]),
             index.SearchField('name_en'),
-            index.SearchField('name_se'),
+            index.SearchField('name_sv'),
         ])
     ]
 
