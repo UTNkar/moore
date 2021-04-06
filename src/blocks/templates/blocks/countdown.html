@@ -1,18 +1,17 @@
 {% load wagtailcore_tags %}
 <div class="container">
   <h1>{{value.pre_title}}</h1>
-  <h2 id="{{value.id}}" class="countdown 
+  <h2 class="countdown 
 	      {% if value.size == 'S' %} 
 	      countdown-small 
 	      {% elif value.size == 'M' %}
-	      countdown-medium2
+	      countdown-medium
 	      {% elif value.size == 'L' %}
 	      countdown-large
 	      {% endif %}
 	      ">
   </h2>
   <h3>{{value.post_title}}</h3>
-</div>
 
 <script>
  var drawCountdown =
@@ -65,6 +64,8 @@
      }, 1000);
    })
 
+ // the current script is always the last script when loading synchronously ;)
+ var thisScript = document.scripts[document.scripts.length - 1];
  document.addEventListener("DOMContentLoaded", function(event) {
    var expires = '{{ value.expires|date:"c"}}'
    var diff = {
@@ -75,10 +76,12 @@
      minutes: 0,
      seconds: 0,
    }
-   drawCountdown(diff, $("#{{value.id}}"))
+
+   var elem = $(thisScript).parent().find(".countdown")
+   drawCountdown(diff, elem)
    if (moment().isBefore(moment(expires))) {
-     startCountdown(expires, $("#{{value.id}}"))
+     startCountdown(expires, $(elem))
    }
  });
 </script>
-
+</div>

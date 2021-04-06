@@ -145,7 +145,7 @@ BASIC_BLOCKTYPES = [
 
 
 class CountdownBlock(blocks.StructBlock):
-    id = blocks.CharBlock()
+
     size = blocks.ChoiceBlock(
         choices=[("S", _("Small")),
                  ("M", _("Medium")),
