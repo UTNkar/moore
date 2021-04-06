@@ -28,6 +28,18 @@ if IS_RUNNING_TEST:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+    # Override search backend to not use postgres
+    WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.search.backends.db',
+        }
+    }
+    # Since this app has postgres-specific migrations, it is not
+    # compatbile with the other database backends. As the tests run
+    # using sqlite3, we have to remove it when testing or it will
+    # cause a crash.
+    INSTALLED_APPS.remove('wagtail.contrib.postgres_search')
+
 elif 'DOCKER' in os.environ:
     DATABASES = {
         'default': {
@@ -45,7 +57,7 @@ else:
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': os.environ.get('DJANGO_DB_NAME', 'moore'),
             'USER': os.environ.get('DJANGO_DB_USER', 'moore'),
-            'PASSWORD': os.environ.get('DJANGO_DB_PASS', ''),
+            'PASSWORD': os.environ.get('DJANGO_DB_PASS', 'moore'),
             'HOST': os.environ.get('DJANGO_DB_HOST', '127.0.0.1'),
             'PORT':  os.environ.get('DJANGO_DB_PORT', '5432'),
         }
