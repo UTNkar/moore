@@ -9,3 +9,8 @@
 .utn-extra-margin{
     margin-top: 2em;
 }
+
+.CodeMirror * {
+  font-family: monospace;
+  font-size: 16px;
+}
