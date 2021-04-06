@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.8.0] - 2021-04-06
+
+## Changed 
+- Added better html editor [546](https://github.com/UTNkar/moore/pull/546)
+- Add countdown block [545](https://github.com/UTNkar/moore/pull/545)
+- Set postgres as default search backend, add search fields to ContactCard [544](https://github.com/UTNkar/moore/pull/544)
+- Fix information text in reset password [533](https://github.com/UTNkar/moore/pull/533)
+- Bump phonenumbers from 8.12.17 to 8.12.20
+- Bump djangorestframework from 3.12.2 to 3.12.4
+- Bump wagtail from 2.11.3 to 2.12.3
+- Bump django[argon2] from 3.1.6 to 3.1.7
+
+
 ## [2.7.0] - 2021-02-02
 
 ## Changed
