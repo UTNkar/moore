@@ -192,7 +192,7 @@ class CountdownBlock(blocks.StructBlock):
 
     class Meta:
         label = _('Countdown')
-        icon = 'fa-clock'
+        icon = 'fa-clock-o'
         template = 'blocks/countdown.html'
         group = _('Content')
 
