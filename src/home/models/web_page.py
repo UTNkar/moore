@@ -5,8 +5,8 @@ from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, \
         TabbedInterface, ObjectList
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
-from wagtail.core.blocks import RawHTMLBlock
-from blocks.models import WAGTAIL_STATIC_BLOCKTYPES, EventbriteBlock
+from blocks.models import WAGTAIL_STATIC_BLOCKTYPES, EventbriteBlock, \
+    HTMLCodeBlock
 from google.models import GoogleFormBlock, GoogleDriveBlock, \
     GoogleCalendarBlock
 from news.models import LatestNewsBlock
@@ -26,7 +26,7 @@ class WebPage(Page):
             ('google_drive', GoogleDriveBlock()),
             ('google_form', GoogleFormBlock()),
             ('news', LatestNewsBlock()),
-            ('html', RawHTMLBlock(group="Basic")),
+            ('html', HTMLCodeBlock()),
             ('eventbrite', EventbriteBlock()),
         ],
         blank=True,
@@ -37,7 +37,7 @@ class WebPage(Page):
             ('google_drive', GoogleDriveBlock()),
             ('google_form', GoogleFormBlock()),
             ('news', LatestNewsBlock()),
-            ('html', RawHTMLBlock(group="Basic")),
+            ('html', HTMLCodeBlock()),
             ('eventbrite', EventbriteBlock())
         ],
         blank=True,
