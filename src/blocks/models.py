@@ -1,12 +1,38 @@
 from django.utils.translation import gettext_lazy as _
+from django import forms
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
 import requests
 from datetime import datetime
+from blocks.widgets import CodeMirrorWidget
 
 
 # BASIC BLOCKTYPES
+class HTMLCodeBlock(blocks.RawHTMLBlock):
+
+    def __init__(self,
+                 required=True,
+                 help_text=None,
+                 max_length=None,
+                 min_length=None,
+                 validators=(),
+                 **kwargs):
+
+        super().__init__(**kwargs)
+        self.field = forms.CharField(
+            required=required,
+            help_text=help_text,
+            max_length=max_length,
+            min_length=min_length,
+            validators=validators,
+            widget=CodeMirrorWidget)
+
+    class Meta:
+        label = 'HTML'
+        icon = 'fa-code'
+        group = _('Basic')
+
 
 class ResponsiveImageBlock(blocks.StructBlock):
     padding = blocks.BooleanBlock(required=False)
@@ -138,12 +164,12 @@ BASIC_BLOCKTYPES = [
     ('divider', DividerBlock()),
     ('button_group', ButtonGroupBlock()),
     ('icons', IconGroupBlock()),
-    ('member_check', MemberCheckAPIBlock())
+    ('member_check', MemberCheckAPIBlock()),
+    ('html_code_block', HTMLCodeBlock()),
 ]
 
+
 # CONTENT BLOCKTYPES
-
-
 class LogosBlock(blocks.StructBlock):
     logos = blocks.ListBlock(blocks.StructBlock([
         ('image', ImageChooserBlock()),
