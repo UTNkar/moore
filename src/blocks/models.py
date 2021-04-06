@@ -169,7 +169,61 @@ BASIC_BLOCKTYPES = [
 ]
 
 
+class CountdownBlock(blocks.StructBlock):
+
+    size = blocks.ChoiceBlock(
+        choices=[("S", _("Small")),
+                 ("M", _("Medium")),
+                 ("L", _("Large"))]
+    )
+    expires = blocks.DateTimeBlock()
+    pre_title = blocks.CharBlock(required=False)
+
+    # Allow the labels to contain whitespace so that the counter still
+    # renders, but the label is empty. Leave label completely empty to
+    # hide counter.
+    years_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown"),
+    )
+    years_label.field.strip = False
+    months_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown")
+    )
+    months_label.field.strip = False
+    days_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown")
+    )
+    days_label.field.strip = False
+    hours_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown")
+    )
+    hours_label.field.strip = False
+    minutes_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown")
+    )
+    minutes_label.field.strip = False
+    seconds_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown")
+    )
+    seconds_label.field.strip = False
+
+    post_title = blocks.CharBlock(required=False)
+
+    class Meta:
+        label = _('Countdown')
+        icon = 'fa-clock-o'
+        template = 'blocks/countdown.html'
+        group = _('Content')
+
+
 # CONTENT BLOCKTYPES
+
 class LogosBlock(blocks.StructBlock):
     logos = blocks.ListBlock(blocks.StructBlock([
         ('image', ImageChooserBlock()),
@@ -356,6 +410,7 @@ class ImageTextCardBlock(blocks.StructBlock):
 
 
 CONTENT_BLOCKTYPES = [
+    ('countdown', CountdownBlock()),
     ('contacts', ContactsBlock()),
     ('events', EventsBlock()),
     ('logos', LogosBlock()),
