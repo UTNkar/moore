@@ -90,8 +90,8 @@ class ContactCard(index.Indexed, models.Model):
     search_fields = [
         index.RelatedFields('application', [
             index.RelatedFields('applicant', [
-                index.SearchField('first_name'),
-                index.SearchField('last_name'),
+                index.SearchField('name'),
+                index.SearchField('username'),
             ])
         ]),
         index.RelatedFields('position', [
@@ -99,10 +99,10 @@ class ContactCard(index.Indexed, models.Model):
                 index.RelatedFields('teams', [
                     index.SearchField('name_en'),
                     index.SearchField('name_sv'),
-                ])
-            ]),
-            index.SearchField('name_en'),
-            index.SearchField('name_sv'),
+                ]),
+                index.SearchField('name_en'),
+                index.SearchField('name_sv'),
+            ])
         ])
     ]
 
