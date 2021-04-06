@@ -117,4 +117,13 @@
 
 .post-detail {
   padding: 60px 0;
+  ul {
+    & {
+      padding-left: 40px;
+      list-style-type: initial;
+      & > li {
+        list-style-type: initial;
+      }
+    }
+  }
 }

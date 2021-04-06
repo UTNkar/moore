@@ -356,6 +356,10 @@ msgstr "Utloggad"
 msgid "You have succesfully been logged out."
 msgstr "Du har blivit utloggad."
 
+#: templates/registration/logged_out.html:4
+msgid "Goodbye!"
+msgstr "Hejdå!"
+
 #: templates/registration/login.html:7
 msgid "Login"
 msgstr "Logga in"
