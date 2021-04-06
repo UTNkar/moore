@@ -38,6 +38,7 @@ DATABASES = {
     }
 }
 
+
 # CONN_MAX_AGE = 0
 
 # Base URL to use when referring to full URLs within the Wagtail admin

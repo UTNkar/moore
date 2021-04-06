@@ -6,6 +6,7 @@ from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.admin.forms import WagtailAdminModelForm
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
+from wagtail.search import index
 
 
 class ContactBlockForm(WagtailAdminModelForm):
@@ -41,7 +42,7 @@ class ContactBlockForm(WagtailAdminModelForm):
 
 
 @register_snippet
-class ContactCard(models.Model):
+class ContactCard(index.Indexed, models.Model):
 
     position = models.ForeignKey(
         'Position',
@@ -85,6 +86,25 @@ class ContactCard(models.Model):
 
     list_filter = ('application__position__role__team')
     base_form_class = ContactBlockForm
+
+    search_fields = [
+        index.RelatedFields('application', [
+            index.RelatedFields('applicant', [
+                index.SearchField('name'),
+                index.SearchField('username'),
+            ])
+        ]),
+        index.RelatedFields('position', [
+            index.RelatedFields('role', [
+                index.RelatedFields('teams', [
+                    index.SearchField('name_en'),
+                    index.SearchField('name_sv'),
+                ]),
+                index.SearchField('name_en'),
+                index.SearchField('name_sv'),
+            ])
+        ])
+    ]
 
     panels = [
         FieldPanel('application'),
