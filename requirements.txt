@@ -23,7 +23,7 @@ raven==6.10.0
 psycopg2==2.8.6
 
 # Phonenumber validation
-phonenumbers==8.12.20
+phonenumbers==8.12.21
 
 # Wagtail media module
 wagtailmedia==0.7.0
