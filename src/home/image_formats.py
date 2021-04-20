@@ -1,6 +1,6 @@
 from wagtail.images.formats import Format, register_image_format
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 register_image_format(Format(
     'center',

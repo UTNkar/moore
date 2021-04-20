@@ -1,0 +1,24 @@
+{% load i18n %}
+
+<div class="left-side">
+{% for logo in left %}
+    {% include 'branding/tags/logo.html' with logo=logo %}
+{% endfor %}
+</div>
+<a
+    id="{% if identifier == 'sections' %}committee{% else %}section{% endif %}-switch"
+    class="btn"
+    href="#"
+>
+    <i class="material-icons">compare_arrows</i>
+    {% if identifier == 'sections' %}
+        {% trans 'committees'|title %}
+    {% else %}
+        {% trans 'sections'|title %}
+    {% endif %}
+</a>
+<div class="right-side">
+{% for logo in right %}
+    {% include 'branding/tags/logo.html' with logo=logo %}
+{% endfor %}
+</div>

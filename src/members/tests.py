@@ -5,6 +5,44 @@ from django.core import mail
 from django.test import TestCase
 from django.urls import reverse
 from members.models import Member, StudyProgram
+from members.forms import CustomUserCreationForm
+from rest_framework.test import APITestCase
+from rest_framework import status
+
+
+class MemberCheckAPITest(APITestCase):
+    def test_person_is_not_member(self):
+        """
+        Test if a person is not a member of UTN
+        """
+        url = reverse('member_check_api')
+        data = {'ssn': '196001010101'}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data.get('is_member'), False)
+        self.assertEqual(response['Content-Type'], 'application/json')
+
+    def test_person_is_member(self):
+        """
+        Test if a person is a member of UTN
+        """
+        url = reverse('member_check_api')
+        data = {'ssn': '199105050203'}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data.get('is_member'), True)
+        self.assertEqual(response['Content-Type'], 'application/json')
+
+    def test_invalid_ssn(self):
+        """
+        Test if a person with an invalid ssn causes an ERROR
+        """
+        url = reverse('member_check_api')
+        data = {'ssn': '0000'}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertTrue("error" in response.data)
+        self.assertEqual(response['Content-Type'], 'application/json')
 
 
 class MemberTest(TestCase):
@@ -40,15 +78,15 @@ class ProfileTest(TestCase):
             name_sv='Kemi',
             degree='bsc',
         )
-        self.member = Member.objects.create(
+        self.member = Member.objects.create_user(
             username='moore',
+            password='Intel1968',
             email='g.moore@localhost',
-            registration_year='1946',
             phone_number="0733221111",
-            study=self.study
+            melos_id='123456789',
+            study=self.study,
+            registration_year='1946',
         )
-        self.member.set_password('Intel1968')
-        self.member.save()
 
         self.client.login(username='moore', password='Intel1968')
 
@@ -102,6 +140,27 @@ class ProfileTest(TestCase):
 
         formatted_phone = self.member.get_phone_formatted
         self.assertEqual(formatted_phone, "+44 20 8366 1177")
+
+    def test_update_melos_info(self):
+        """
+        Test if a user can update their information from melos
+        """
+        # Some wrong data
+        self.member.name = "Not myname"
+        self.member.person_nr = "199801011234"
+        self.member.save()
+
+        response = self.client.post(
+            reverse('profile'),
+            {"update_member_info": ''},
+            follow=True
+        )
+
+        self.member.refresh_from_db()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.member.name, "Firstname Lastname")
+        self.assertEqual(self.member.person_nr, "199105050203")
 
 
 class EmailConfirmationTest(TestCase):
@@ -217,7 +276,7 @@ class RegistrationTestCase(TestCase):
     def test_basic_creation(self):
         information = {
             'username': 'test_basic_creation',
-            'person_number': '199100000000',
+            'person_number': '199105050203',
             'email': 'g.moore@localhost',
             'phone_number': '0700000000',
             'password1': 'Test!234',
@@ -231,6 +290,9 @@ class RegistrationTestCase(TestCase):
         # A member has been created with the correct information
         member = Member.objects.get(username=information['username'])
         self.assertEqual(member.email, information['email'])
+        self.assertEqual(member.phone_number, information['phone_number'])
+        self.assertEqual(member.name, "Firstname Lastname")
+        self.assertEqual(member.person_nr, information['person_number'])
 
         # Email has been sent to confirm e-mail address
         self.assertEqual(len(mail.outbox), 1)
@@ -241,3 +303,48 @@ class RegistrationTestCase(TestCase):
             username=information['username'],
             password=information['password1'],
         ))
+
+
+class UserCreationFormTest(TestCase):
+    """
+    Tests for the form where admins can create users
+    """
+    def setUp(self):
+        self.user = {
+            'username': 'test_basic_creation',
+            'person_number': '199105050203',
+            'email': 'g.moore@localhost',
+            'phone_number': '0700000000',
+            'password1': 'Test!234',
+            'password2': 'Test!234',
+        }
+
+    def test_creation(self):
+        """
+        Test the creation of a normal user
+        """
+        form = CustomUserCreationForm(data=self.user)
+        self.assertTrue(form.is_valid())
+
+        form.save()
+        member = Member.objects.get(username=self.user['username'])
+
+        self.assertEqual(member.username, self.user['username'])
+        self.assertEqual(member.email, self.user['email'])
+        self.assertEqual(member.phone_number, self.user['phone_number'])
+        self.assertEqual(member.person_nr, self.user['person_number'])
+        self.assertEqual(member.name, "Firstname Lastname")
+
+    def test_create_superuser(self):
+        """
+        Test creating a superuser
+        """
+        self.user["is_superuser"] = True
+
+        form = CustomUserCreationForm(data=self.user)
+        self.assertTrue(form.is_valid())
+
+        form.save()
+        member = Member.objects.get(username=self.user['username'])
+        self.assertTrue(member.is_superuser)
+        self.assertTrue(member.is_staff)

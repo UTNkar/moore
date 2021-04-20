@@ -10,7 +10,11 @@
                 <form action="{% pageurl page %}" method="POST">
                     {% csrf_token %}
                     {% for field in form %}
-                        {% materialize_field field %}
+                        {% if field.id_for_label != 'id_wagtailcaptcha' %}
+                            {% materialize_field field %}
+                        {% elif page.use_recaptcha %}
+                            {{field}}
+                        {% endif %}
                     {% endfor %}
                     <button id="submit" type="submit" class="btn btn-inverse">{% trans 'send' %}</button>
                 </form>

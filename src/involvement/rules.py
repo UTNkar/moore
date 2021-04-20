@@ -35,11 +35,6 @@ def can_modify_application(user, application):
 
 # Position predicates
 @rules.predicate
-def member_of_team_position(user, position):
-    return member_of_team_role(user, position.role)
-
-
-@rules.predicate
 def is_action_approve(user, position):
     return position.current_action() == 'approve'
 
@@ -55,14 +50,8 @@ def can_set_applicant(user, position):
 
 
 @rules.predicate
-def can_modify_position(user, position):
-    return can_modify_role(user, position.role)
-
-
-# Role predicates
-@rules.predicate
-def can_modify_role(user, role):
-    return role.role_type in Role.editable_role_types(user)
+def member_of_team_position(user, position):
+    return member_of_team_role(user, position.role)
 
 
 @rules.predicate
@@ -75,6 +64,17 @@ def member_of_team_role(user, role):
 
     team_ids = role.teams.values_list('pk', flat=True)
     return user.teams.filter(pk__in=team_ids).exists()
+
+
+@rules.predicate
+def can_modify_position(user, position):
+    return can_modify_role(user, position.role)
+
+
+# Role predicates
+@rules.predicate
+def can_modify_role(user, role):
+    return role.role_type in Role.editable_role_types(user)
 
 
 # Team predicates

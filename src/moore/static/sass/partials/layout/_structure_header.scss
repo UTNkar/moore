@@ -1,44 +1,42 @@
 @import "../base";
 
 .structure-header {
-  @extend nav;
-  @extend .hide-on-med-and-down;
+    @extend .hide-on-med-and-down;
+    background-color: $primary-color;
+    height: 2.85em;
+    line-height: 1;
+    padding: 5px 0;
 
-  height: 40px;
-  line-height: 30px;
-  padding: 5px 0;
-  box-shadow: none;
-  text-align: center;
+    .committees, .sections{
+        display: flex;
+    }
 
-  .switch {
-    display: inline-block;
-    vertical-align: top;
-    &>a{
-      height: 30px;
-      line-height: 30px;
+    #section-switch, #committee-switch{
+        height: 2.15em;
+        line-height: 2.15em;
+        flex-shrink: 0;
+        padding: 0 0.5em;
+        margin: 0 0.3em;
     }
-  }
-  .sections {
-    display: none;
-  }
-  .logo {
-    display: block;
-    margin: 0 3px;
-  }
-  .left-side {
-    width: 42%;
-    height: 30px;
-    display: inline-block;
+
+    .sections {
+        display: none;
+    }
     .logo {
-      float: right;
+        margin: 0 3px;
     }
-  }
-  .right-side {
-    width: 42%;
-    height: 30px;
-    display: inline-block;
-    .logo {
-      float: left;
+    .logo a{
+        display: block;
     }
-  }
+    .left-side, .right-side {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        height: 2.15em;
+    }
+
+    .left-side{
+        justify-content: flex-end;
+    }
 }

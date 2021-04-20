@@ -1,12 +1,11 @@
 from __future__ import absolute_import, unicode_literals
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from wagtail.admin.edit_handlers import InlinePanel, FieldPanel, \
         StreamFieldPanel, TabbedInterface, ObjectList, MultiFieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
-from wagtail.core.blocks import RawHTMLBlock
-from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
+from blocks.models import WAGTAIL_STATIC_BLOCKTYPES, HTMLCodeBlock
 from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
 from wagtail.api import APIField
@@ -22,14 +21,14 @@ class HomePage(Page):
     body_en = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
             ('news', LatestNewsBlock()),
-            ('html', RawHTMLBlock(group="Basic")),
+            ('html', HTMLCodeBlock()),
         ],
         blank=True,
     )
     body_sv = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
             ('news', LatestNewsBlock()),
-            ('html', RawHTMLBlock(group="Basic")),
+            ('html', HTMLCodeBlock()),
         ],
         blank=True,
     )
@@ -47,10 +46,14 @@ class HomePage(Page):
     ]
 
     custom_settings_panel = Page.settings_panels + [
-        MultiFieldPanel([
-            FieldPanel('show_searchbar'),
-            FieldPanel('add_whitespace_bottom')
-        ],  'Banner settings')
+        MultiFieldPanel(
+            [
+                FieldPanel('show_searchbar'),
+                FieldPanel('add_whitespace_bottom')
+            ],
+            heading='Banner settings',
+            classname='utn-extra-margin'
+        )
     ]
 
     edit_handler = TabbedInterface([

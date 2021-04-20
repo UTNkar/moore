@@ -1,0 +1,17 @@
+<form action="{% url 'set_language' %}" id="set_language_form" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ request.path }}" />
+    <input
+        type="hidden"
+        name="language"
+        value="{% if LANGUAGE_CODE == 'sv'%}en{% else %}sv{% endif %}"
+    />
+    <button type="submit" {% if not mobile %}class="btn btn-inverse waves-effect waves-primary"{% endif %}>
+        <i class="material-icons">language</i>
+        {% if LANGUAGE_CODE == 'sv'%}
+            English
+        {% else %}
+            Svenska
+        {% endif %}
+    </button>
+</form>

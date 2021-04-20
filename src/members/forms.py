@@ -1,8 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth
-from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from wagtail.users import forms as wagtail
 from django.utils.html import mark_safe
 from django.contrib.auth import get_user_model
@@ -18,44 +17,10 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 
 from members.models import StudyProgram, Member, Section
-from utils.validators import SSNValidator
 from utils.melos_client import MelosClient
-from phonenumbers import parse, is_valid_number
+from members.fields import PhoneNumberField, PersonNumberField
 
 User = get_user_model()
-
-
-class PhoneNumberField(forms.CharField):
-    def __init__(self, *args, **kwargs):
-        super(PhoneNumberField, self).__init__(*args, **kwargs)
-
-    def clean(self, phonenumber):
-        try:
-            parsed_phone = parse(phonenumber, "SE")
-            if not is_valid_number(parsed_phone):
-                raise Exception
-
-            return phonenumber
-        except Exception:
-            raise forms.ValidationError(_("Invalid phonenumber"))
-
-
-class PersonNumberField(forms.Field):
-    def __init__(self, *args, **kwargs):
-        super(PersonNumberField, self).__init__(*args, **kwargs)
-
-    def to_python(self, value):
-        if value in self.empty_values:
-            return None, ''
-        value = force_text(value).strip()
-        SSNValidator()(value)
-        return value
-
-    def widget_attrs(self, widget):
-        attrs = super(PersonNumberField, self).widget_attrs(widget)
-        attrs['class'] = attrs.get('class', '') + ' person_number'
-        attrs['placeholder'] = 'YYYYMMDD-XXXX'
-        return attrs
 
 
 class MemberForm(forms.ModelForm):
@@ -69,8 +34,8 @@ class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = [
-            'first_name', 'last_name', 'registration_year',
-            'phone_number', 'study', 'section', 'email'
+            'name', 'registration_year', 'phone_number',
+            'study', 'section', 'email'
         ]
 
     def __init__(self, *args, **kwargs):
@@ -78,13 +43,11 @@ class MemberForm(forms.ModelForm):
         initial = kwargs.pop('initial', {})
         if instance is not None:
             initial['person_number'] = instance.get_ssn
-            initial['first_name'] = instance.get_first_name
-            initial['last_name'] = instance.get_last_name
+            initial['name'] = instance.get_full_name
 
         super(MemberForm, self).__init__(initial=initial, *args, **kwargs)
         if instance is not None:
-            self.fields['first_name'].disabled = True
-            self.fields['last_name'].disabled = True
+            self.fields['name'].disabled = True
             self.fields['person_number'].disabled = True
 
     def clean_username(self):
@@ -107,13 +70,6 @@ class MemberForm(forms.ModelForm):
         return person_number
 
     def save(self, commit=True):
-        # Need to reset fields since we don't want
-        # to store this data in the database
-        self.instance.birthday = None
-        self.instance.person_number_ext = ''
-        self.instance.first_name = ''
-        self.instance.last_name = ''
-
         email = self.cleaned_data['email']
         if self.initial.get('email', '') != '':
             token = self.instance.add_email_if_not_exists(email)
@@ -129,6 +85,17 @@ class RegistrationForm(MemberForm, auth.UserCreationForm):
         model = Member
         fields = ['username', 'email', 'phone_number', 'section']
         field_classes = {'username': auth.UsernameField}
+
+    def save(self):
+        melos_id = MelosClient.get_melos_id(self.cleaned_data['person_number'])
+        return Member.objects.create_user(
+            self.cleaned_data['username'],
+            self.cleaned_data['password1'],
+            self.cleaned_data['email'],
+            self.cleaned_data['phone_number'],
+            melos_id,
+            section=self.cleaned_data['section']
+        )
 
 
 class CustomPasswordResetForm(forms.Form):
@@ -238,8 +205,7 @@ class UserForm(wagtail.UsernameForm):
         'password_mismatch': _("The two password fields didn't match."),
     }
 
-    first_name = forms.CharField(required=False, label=_('First Name'))
-    last_name = forms.CharField(required=False, label=_('Last Name'))
+    name = forms.CharField(required=False, label=_('Name'))
 
     password1 = forms.CharField(
         label=_('Password'), required=False,
@@ -257,7 +223,6 @@ class UserForm(wagtail.UsernameForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['first_name']
         if self.password_enabled:
             if self.password_required:
                 self.fields['password1'].help_text = mark_safe(
@@ -347,9 +312,8 @@ class UserEditForm(UserForm):
     class Meta:
         model = Member
         fields = [
-            'username', 'is_superuser', 'groups',
-            'email', 'first_name', 'last_name',
-            'phone_number'
+            'name', 'username', 'is_superuser', 'groups',
+            'email', 'phone_number', 'section', 'study', 'registration_year'
         ]
         widgets = {
             'groups': forms.CheckboxSelectMultiple
@@ -398,27 +362,17 @@ class CustomUserEditForm(UserEditForm):
 
         initial = kwargs.pop('initial', {})
         if instance is not None:
-            initial['first_name'] = instance.get_first_name
-            initial['last_name'] = instance.get_last_name
             initial['person_number'] = instance.get_ssn
+            initial['name'] = instance.get_full_name
             initial['status'] = instance.get_status
 
         super(CustomUserEditForm, self).__init__(
             initial=initial, *args, **kwargs
         )
 
-        self.fields['first_name'].disabled = True
-        self.fields['last_name'].disabled = True
+        self.fields['name'].disabled = True
         self.fields['person_number'].disabled = True
         self.fields['status'].disabled = True
-
-    def save(self, commit=True):
-        self.instance.birthday = None
-        self.instance.person_number_ext = ''
-        self.instance.first_name = ''
-        self.instance.last_name = ''
-
-        return super(CustomUserEditForm, self).save(commit=commit)
 
 
 class UserCreationForm(UserForm):
@@ -481,3 +435,19 @@ class CustomUserCreationForm(UserCreationForm):
 
         self.instance.melos_id = melos_id
         return person_number
+
+    def save(self):
+        args = {
+            "username": self.cleaned_data["username"],
+            "password": self.cleaned_data["password1"],
+            "email": self.cleaned_data["email"],
+            "phone_number": self.cleaned_data["phone_number"],
+            "melos_id": self.instance.melos_id,
+            'study': self.cleaned_data['study'],
+            "section": self.cleaned_data["section"],
+            "registration_year": self.cleaned_data["registration_year"]
+        }
+        if self.cleaned_data['is_superuser']:
+            return Member.objects.create_superuser(**args)
+        else:
+            return Member.objects.create_user(**args)

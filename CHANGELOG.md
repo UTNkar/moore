@@ -4,6 +4,83 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.8.0] - 2021-04-06
+
+## Changed 
+- Added better html editor [546](https://github.com/UTNkar/moore/pull/546)
+- Add countdown block [545](https://github.com/UTNkar/moore/pull/545)
+- Set postgres as default search backend, add search fields to ContactCard [544](https://github.com/UTNkar/moore/pull/544)
+- Fix information text in reset password [533](https://github.com/UTNkar/moore/pull/533)
+- Bump phonenumbers from 8.12.17 to 8.12.20
+- Bump djangorestframework from 3.12.2 to 3.12.4
+- Bump wagtail from 2.11.3 to 2.12.3
+- Bump django[argon2] from 3.1.6 to 3.1.7
+
+
+## [2.7.0] - 2021-02-02
+
+## Changed
+- Cache data about members [#521](https://github.com/UTNkar/moore/pull/521)
+- Bump requests from 2.25.0 to 2.25.1 
+- Bump phonenumbers from 8.12.14 to 8.12.17
+- Bump django[argon2] from 3.1.4 to 3.1.6 
+- Buggfix exchange students ssn [#529](https://github.com/UTNkar/moore/pull/529)
+
+
+## [2.6.1] - 2020-12-12
+
+### Changed
+
+- URL changed from dev.utn.se to utn.se
+- Wagtail updated to 2.11.3
+
+## [2.6.0] - 2020-12-09
+
+### Changed
+
+- Wagtail from 2.11.1 to 2.11.2
+- Rebuilding of header
+- Django from 3.1.3 to 3.1.4
+- Phonenumbers from 8.12.13 to 8.12.14
+
+## [2.5.0] - 2020-11-16
+
+### Changed
+
+- Role type styrelsen can now see all applications, roles and positions for the role types presidium, group leader, engaged regardless of which teams they belong to
+- Updated phonenumbers to 8.12.13
+
+## [2.4.0] - 2020-11-06
+
+### Added
+
+- Added a membercheck as a wagtail block and API
+
+### Changed
+
+- Updated wagtail to 2.11
+- Updated django to 3.1.3
+- Updated djangorestframework to 3.12.2
+- Updated phonenumbers to 8.12.12
+
+## [2.3.0] - 2020-10-24
+
+### Added
+
+- Added editorconfig
+- Added api for member check
+- Added linebreaks to qualifications when inspecting an application
+- Added recaptcha to formpages
+- Added a button for switching language
+
+### Changed
+
+- Replaced psycop2-binary with psycopg2
+- Updated djangorestframework to 3.12.1
+- Updated phonenumbers to 8.12.11
+- Updated django to 3.1.2
+- Updated wagtail to 2.10.2
+
 ## [2.2.0] - 2020-09-04
 
 ### Changed

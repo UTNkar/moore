@@ -1,13 +1,39 @@
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
+from django import forms
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
 from instagram.blocks import InstagramFeedChooserBlock
 import requests
 from datetime import datetime
+from blocks.widgets import CodeMirrorWidget
 
 
 # BASIC BLOCKTYPES
+class HTMLCodeBlock(blocks.RawHTMLBlock):
+
+    def __init__(self,
+                 required=True,
+                 help_text=None,
+                 max_length=None,
+                 min_length=None,
+                 validators=(),
+                 **kwargs):
+
+        super().__init__(**kwargs)
+        self.field = forms.CharField(
+            required=required,
+            help_text=help_text,
+            max_length=max_length,
+            min_length=min_length,
+            validators=validators,
+            widget=CodeMirrorWidget)
+
+    class Meta:
+        label = 'HTML'
+        icon = 'fa-code'
+        group = _('Basic')
+
 
 class ResponsiveImageBlock(blocks.StructBlock):
     padding = blocks.BooleanBlock(required=False)
@@ -122,6 +148,15 @@ class IconGroupBlock(blocks.StructBlock):
         group = _('Basic')
 
 
+class MemberCheckAPIBlock(blocks.StructBlock):
+
+    class Meta:
+        label = _('Member Check')
+        icon = 'tick'
+        template = 'blocks/member_check.html'
+        group = _('Basic')
+
+
 BASIC_BLOCKTYPES = [
     ('heading', HeadingBlock()),
     ('image', ResponsiveImageBlock()),
@@ -130,11 +165,66 @@ BASIC_BLOCKTYPES = [
     ('divider', DividerBlock()),
     ('button_group', ButtonGroupBlock()),
     ('icons', IconGroupBlock()),
-    ('instagram', InstagramFeedChooserBlock())
+    ('instagram', InstagramFeedChooserBlock()),
+    ('member_check', MemberCheckAPIBlock()),
+    ('html_code_block', HTMLCodeBlock()),
 ]
 
-# CONTENT BLOCKTYPES
 
+class CountdownBlock(blocks.StructBlock):
+
+    size = blocks.ChoiceBlock(
+        choices=[("S", _("Small")),
+                 ("M", _("Medium")),
+                 ("L", _("Large"))]
+    )
+    expires = blocks.DateTimeBlock()
+    pre_title = blocks.CharBlock(required=False)
+
+    # Allow the labels to contain whitespace so that the counter still
+    # renders, but the label is empty. Leave label completely empty to
+    # hide counter.
+    years_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown"),
+    )
+    years_label.field.strip = False
+    months_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown")
+    )
+    months_label.field.strip = False
+    days_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown")
+    )
+    days_label.field.strip = False
+    hours_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown")
+    )
+    hours_label.field.strip = False
+    minutes_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown")
+    )
+    minutes_label.field.strip = False
+    seconds_label = blocks.CharBlock(
+        required=False,
+        help_text=_("leave empty to skip this counter in the countdown")
+    )
+    seconds_label.field.strip = False
+
+    post_title = blocks.CharBlock(required=False)
+
+    class Meta:
+        label = _('Countdown')
+        icon = 'fa-clock-o'
+        template = 'blocks/countdown.html'
+        group = _('Content')
+
+
+# CONTENT BLOCKTYPES
 
 class LogosBlock(blocks.StructBlock):
     logos = blocks.ListBlock(blocks.StructBlock([
@@ -298,6 +388,7 @@ class ImageTextCardBlock(blocks.StructBlock):
 
 
 CONTENT_BLOCKTYPES = [
+    ('countdown', CountdownBlock()),
     ('contacts', ContactsBlock()),
     ('events', EventsBlock()),
     ('logos', LogosBlock()),

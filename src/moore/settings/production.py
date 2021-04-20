@@ -52,7 +52,7 @@ sentry_sdk.init(
 # Base URL to use when referring to full URLs within the Wagtail admin
 # backend - e.g. in notification emails. Don't include '/admin' or a
 # trailing slash
-BASE_URL = 'https://dev.utn.se'
+BASE_URL = 'https://utn.se'
 
 ALLOWED_HOSTS = ['.utn.se', '.utnarm.se']
 
@@ -107,6 +107,9 @@ MELOS_ADMIN = os.environ.get('MELOS_ADMIN')
 
 # Google API
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
+
+RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "")
+RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", "")
 
 try:
     from .local import *

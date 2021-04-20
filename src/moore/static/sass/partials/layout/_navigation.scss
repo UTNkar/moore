@@ -1,120 +1,178 @@
 @import "../base";
 
-$navigation-height: 80px;
-$logo-height: 55px;
-$logo-width: 214px;
+$navigation-bar-height: 5.7em;
 
-.navigation {
-  @extend .nav-wrapper;
-  display: flex;
-  align-items: center;
-  height: $navigation-height;
-  background-color: white;
-  padding-left: 1.4em;
-
-  @media #{$medium-and-up}{
-    padding: 0 1.7em;
-  }
-
-  .collapsible-header {
-    padding: 0 16px 0 32px !important;
-    i{
-      float: right !important;
-      margin: 0 !important;
-    }
-  }
-
-  .collapsible-body{
+nav {
+    /* General for both navigations */
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    height: $navigation-bar-height;
     padding-left: 1.4em;
-  }
 
-  .button-collapse{
-    margin: 0;
-    i {
-      color: #2e2e2e;
-    }
-  }
+    box-shadow:
+        0 2px 2px 0 rgba(0,0,0,.14),
+        0 1px 5px 0 rgba(0,0,0,.12),
+        0 3px 1px -2px rgba(0,0,0,.2);
 
-  .avatar{
-    height: $navigation-height;
-
-    & > a {
-      display: flex;
-      height: $navigation-height;
-      align-items: center;
+    @media #{$large-and-up}{
+        padding: 0 1.7em;
     }
 
-    img {
-      @extend .circle;
-      height: 55px;
-      width: 55px;
+    .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @media #{$large-and-up}{
+            position: initial;
+            transform: initial;
+        }
+
+        img{
+            height: 3.7em;
+        }
     }
 
-    .more-icon{
-      color: black;
-      font-size: 32px;
-      line-height: 32px;
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  .dropdown-content{
-    width: auto !important;
-    white-space: nowrap;
-  }
-
-  .brand-logo {
-    height: $logo-height;
-    width: $logo-width;
-  }
-
-  .main-menu > li, .right > li{
-    height: $navigation-height;
-    line-height: $navigation-height;
-  }
-
-  .main-menu{
-    flex-grow: 1;
-    margin-left: $logo-width + 20px;
-    a.active {
-      background-color: rgba(0, 0, 0, 0.07);
-    }
-
-    li a {
-      color: rgba(66,66,66,.8);
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .dropdown-content{
-      //Displays the submenues to the side of the parent menu
-      overflow: visible !important;
-
-      .no-right-padding{
-        padding-right: 0;
-      }
-
-      .menu-text {
-        display:flex;
-        align-items: center;
+    & > .button-collapse {
+        @media #{$large-and-up}{
+            display: none;
+        }
 
         i {
-          height: initial;
-          line-height: initial;
+            color: #2e2e2e;
         }
-
-        p{
-          display: inline;
-          flex-grow: 1;
-          margin: 0;
-          margin-right: .5em;
-        }
-      }
     }
 
-    .submenu{
-      left: 100% !important;
+    /* Mobile specific */
+    #mobile {
+        .collapsible-header {
+            padding: 0 1.14em 0 2.28em !important;
+            i {
+                float: right !important;
+                margin: 0 !important;
+            }
+        }
+
+        .collapsible-body{
+            padding-left: 1.4em !important;
+
+            & li{
+                overflow: hidden;
+            }
+        }
+
+        #set_language_form > button {
+            @media #{$medium-and-down}{
+                background: none;
+                border: none;
+                width: 100%;
+                text-align: left;
+                padding: 0;
+
+                i {
+                    float: left;
+                    margin: 0 1.35em 0 0;
+                    line-height: 2em;
+                    height: 2em;
+                    color: rgba(0, 0, 0, 0.54);
+                }
+            }
+        }
     }
-  }
+
+    /* Specifics for the navigation bar used for larger screens */
+    .right-side{
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+
+        i {
+            font-size: 1.7em;
+        }
+
+        .login-button {
+            margin: 0 1em;
+        }
+
+        .avatar{
+            height: $navigation-bar-height;
+
+            & > a {
+                padding: 0 1em;
+                display: flex;
+                height: $navigation-bar-height;
+                align-items: center;
+            }
+
+            img {
+                @extend .circle;
+                height: 3.93em;
+                width: 3.93em;
+            }
+
+            .more-icon{
+                color: black;
+                font-size: 2.28em;
+                line-height: 2.28em;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
+    .main-menu .dropdown-content, .right-side .dropdown-content {
+        width: auto !important;
+    }
+
+    .main-menu{
+        overflow-x: auto;
+        margin: 0 1.2em;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+
+        & > a {
+            padding: 0 1em;
+            height: 4.6em;
+            display: flex;
+            align-items: center;
+        }
+
+        & > a:hover, a.active {
+            background-color: rgba(0, 0, 0, 0.07);
+        }
+
+        a {
+            color: rgba(66,66,66,.8);
+            font-weight: 700;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .dropdown-content{
+            //Displays the submenues to the side of the parent menu
+            overflow: visible !important;
+
+            .no-right-padding{
+                padding-right: 0;
+            }
+
+            .menu-text {
+                display:flex;
+                align-items: center;
+
+                p{
+                    display: inline;
+                    flex-grow: 1;
+                    margin: 0;
+                    margin-right: .5em;
+                }
+            }
+        }
+
+        .submenu{
+            left: 100% !important;
+        }
+    }
 }

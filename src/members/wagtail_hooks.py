@@ -1,6 +1,6 @@
 from django.forms import CheckboxSelectMultiple
 from django.template import loader
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
 from wagtail.contrib.modeladmin.views import EditView, CreateView

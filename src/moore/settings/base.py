@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 from __future__ import absolute_import, unicode_literals
 
 from django.conf.global_settings import LOGIN_URL
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'wagtail.core',
     'wagtail.contrib.settings',
     'wagtail.contrib.modeladmin',
-    "wagtail.contrib.routable_page",
+    'wagtail.contrib.routable_page',
+    'wagtail.contrib.postgres_search',
     'wagtail.api.v2',
     'wagtailmedia',
 
@@ -62,6 +63,9 @@ INSTALLED_APPS = [
     'simple_email_confirmation',
     'taggit',
     'wagtailfontawesome',
+    'rest_framework',
+    'wagtailcaptcha',
+    'captcha',
 
     'django.contrib.admin',  # Used for wagtail admin filters
     'django.contrib.auth',
@@ -81,7 +85,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
 
-    'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
@@ -120,7 +123,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LANGUAGES = [
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
     ('en', _('English')),
     ('sv', _('Swedish'))
 ]
@@ -146,8 +149,6 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
-FILE_UPLOAD_PERMISSIONS = 0o644
 
 # Compressor
 # https://django-compressor.readthedocs.io/en/latest/settings/
@@ -219,8 +220,22 @@ WAGTAIL_USER_CREATION_FORM = 'members.forms.CustomUserCreationForm'
 WAGTAIL_USER_CUSTOM_FIELDS = ['registration_year', 'study',
                               'status', 'section']
 
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.contrib.postgres_search.backend',
+    }
+}
+
 IS_RUNNING_TEST = 'test' in sys.argv
 
 INSTAGRAM_APP_ID = os.environ.get('INSTAGRAM_APP_ID')
 INSTAGRAM_APP_SECRET = os.environ.get('INSTAGRAM_APP_SECRET')
 INSTAGRAM_REDIRECT_URL = os.environ.get('INSTAGRAM_REDIRECT_URL')
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+}
+
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']

@@ -1,76 +1,27 @@
 {% load static i18n wagtailcore_tags site_tags wagtailadmin_tags %}
 {% get_site_root as site_root %}
-<nav class="navigation">
-    <a class="brand-logo" href="{% pageurl site_root %}">
+<nav>
+    <a class="logo" href="{% pageurl site_root %}">
         {% block logo %}<img src="{% static 'images/logo.svg' %}" alt="{% trans 'The UTN Logo' %}">{% endblock %}
     </a>
-
+    <!--Mobile menu-->
     <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    <ul id="mobile" class="side-nav">
-        <li>
-            <div class="userView">
-                <div class="background">
-                    <img src="{% static 'images/uthgard_cut.jpg' %}">
-                </div>
-                {% if not user.is_authenticated %}
-                    <div class="center">
-                        <a class="btn center" href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}">
-                            <i class="material-icons">account_circle</i>{% trans 'Log in' %}
-                        </a>
-                    </div>
-                {% else %}
-                    <a href="{% url 'profile' %}"><img class="circle" src="{% avatar_url user.email %}"></a>
-                    <a href="{% url 'profile' %}"><span class="white-text name">{{ user }}</span></a>
-                    <a href="{% url 'profile' %}"><span class="white-text email">{{ user.email }}</span></a>
-                {% endif %}
-            </div>
-        </li>
-        <li><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
-        {% menu_items parent=site_root sidenav=True top_level=True %}
-        {% if user.is_authenticated %}
-            <li><div class="divider"></div></li>
-            <li><a href="{% url 'profile' %}"><i class="material-icons">face</i>{% trans 'account' %}</a></li>
-            <li><a href="{% url 'password_change' %}"><i class="material-icons">lock</i>{% trans 'password' %}</a></li>
-            <li><a href="{% url 'logout' %}"><i class="material-icons">cancel</i>{% trans 'Log out' %}</a></li>
-        {% endif %}
-    </ul>
+    {% include 'partials/mobile_navigation_bar.html' %}
+    <!--Navigation bar-->
 
-    <ul class="main-menu hide-on-med-and-down">
-        <li><a href="{% pageurl site_root %}">{% trans 'Home' %}</a></li>
+    <div class="main-menu hide-on-med-and-down">
+        <a href="{% pageurl site_root %}">{% trans 'Home' %}</a>
         {% menu_items parent=site_root top_level=True %}
-    </ul>
+    </div>
 
-    <ul class="right hide-on-med-and-down">
-        <li>
-            <form action="{% url 'set_language' %}" id="set_language_form" method="post">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.path }}" />
-                <input 
-                    type="hidden"
-                    name="language"
-                    value="{% if LANGUAGE_CODE == 'sv'%}en{% else %}sv{% endif %}"
-                />
-                <button 
-                    class="btn btn-inverse"
-                    type="submit"
-                >
-                    <i class="material-icons">language</i>
-                    {% if LANGUAGE_CODE == 'sv'%}
-                        English
-                    {% else %}
-                        Svenska
-                    {% endif %}
-                </button>
-            </form>
-        </li>
+    <div class="right-side hide-on-med-and-down">
+        {% include "partials/switch_language_button.html" %}
         {% if not user.is_authenticated %}
-            <li>
-                <a class="btn" style="margin-top:0;" href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}">
-                    <i class="material-icons">account_circle</i>{% trans 'Log in' %}
-                </a>
-            </li>
+            <a class="btn login-button" href="{% url 'login' %}{% if '/logout/' not in request.path %}?next={{ request.path }}{% endif %}">
+                <i class="material-icons">account_circle</i>{% trans 'Log in' %}
+            </a>
         {% else %}
-            <li class="avatar">
+            <div class="avatar">
                 <a href="{% url 'profile' %}" class="dropdown-button" data-activates="user-menu" data-alignment="right" data-belowOrigin="true">
                     <img src="{% avatar_url user.email %}" alt="{% trans 'your avatar' %}">
                     <i class="material-icons more-icon">more_vert</i>
@@ -80,7 +31,7 @@
                     <li><a href="{% url 'password_change' %}"><i class="material-icons">lock</i>{% trans 'password' %}</a></li>
                     <li><a href="{% url 'logout' %}"><i class="material-icons">cancel</i>{% trans 'Log out' %}</a></li>
                 </ul>
-            </li>
+            </div>
         {% endif %}
     </ul>
 </nav>

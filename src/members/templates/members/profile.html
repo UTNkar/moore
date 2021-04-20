@@ -30,11 +30,11 @@
 		$('#{{ form.study.auto_id }} option[value="{{ form.study.value }}"]').attr("selected", "selected");
 		$('select').material_select();
 	}
-	
+
 	$('#{{ form.section.auto_id }}').change(limit_studies);
 	$(document).ready(function(){
 		limit_studies();
-		
+
 		$('#account-settings').dirrty().on('dirty', function(){
 			$('#submit').removeClass('disabled');
 		}).on('clean', function(){
@@ -53,63 +53,69 @@
 			{% endfor %}
 			<form method="post" action="{% url 'profile' %}" id="account-settings">
 				{% csrf_token %}
-				
+
 				<fieldset>
 					<legend>{% trans 'contact information'|title %}</legend>
 					<div class="row">
-						<div class="col s4">
-							{% materialize_field form.first_name 'face' %}
+						<div class="col s12 m6">
+							{% materialize_field form.name 'face' %}
 						</div>
-		
-						<div class="col s4">
-							{% materialize_field form.last_name %}
-						</div>
-		
-						<div class="col s4">
+
+						<div class="col s12 m6">
 							{% materialize_field form.person_number 'fiber_pin' %}
-						</div>
-					</div>
-		
+                        </div>
+
+                        <div class="col">
+                            <p style="font-size: 0.8em; margin-bottom: .5em;">
+                                {% translate 'The information above is collected from our member registry. If the information is incorrect, you can try updating it.' %}
+                            </p>
+                            <button name="update_member_info" type="submit" class="btn btn-primary">
+                                <i class="material-icons">refresh</i>
+                                {% translate 'Update Information' %}
+                            </button>
+                        </div>
+                    </div>
+
 					<div class="row">
-						<div class="col s6">
+						<div class="col s12 m6">
 							{% materialize_field form.phone_number 'phone' %}
 						</div>
-		
-						<div class="col s6">
+
+						<div class="col s12 m6">
 							{% materialize_field form.email 'email' %}
 						</div>
-					
-				</div> 
-			</fieldset>
-			
-			<fieldset>
-				<legend>{% trans 'membership status'|title %}</legend>
-				<h6>{% trans 'current status'|capfirst %}: {% status_badge form.instance status %}</h6>
-				<p></p>
-				{% if can_update_status %}
-				<p><button class="btn btn-primary"><i class="material-icons">refresh</i>{% trans 'recheck status'|capfirst %}</button></p>
-				{% endif %}
-			</fieldset>
-			
-			<fieldset>
-				<legend>{% trans 'study information'|title %}</legend>
-				{% materialize_field form.section 'account_balance' %}
-				<div class="row">
-					<div class="col s8">
-						{% materialize_field form.study 'school' %}
-					</div>
-					
-					<div class="col s4">
-						{% materialize_field form.registration_year %}
-					</div>
-				</div>
-			</fieldset>
-			
-			<div class="center">
-				<button id="submit" class="btn btn-inverse disabled"><i class="material-icons">save</i>{% trans 'save' %}</button>
-			</div>
-		</form>
-	</div>
-</div>
+
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{% trans 'membership status'|title %}</legend>
+                    <h6>{% trans 'current status'|capfirst %}: {% status_badge form.instance status %}</h6>
+                    <p></p>
+                    {% if can_update_status %}
+                    <p><button class="btn btn-primary"><i class="material-icons">refresh</i>{% trans 'recheck status'|capfirst %}</button></p>
+                    {% endif %}
+                </fieldset>
+
+                <fieldset>
+                    <legend>{% trans 'study information'|title %}</legend>
+                    {% materialize_field form.section 'account_balance' %}
+                    <div class="row">
+                        <div class="col s8">
+                            {% materialize_field form.study 'school' %}
+                        </div>
+
+                        <div class="col s4">
+                            {% materialize_field form.registration_year %}
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="center">
+                    <button id="submit" class="btn btn-inverse disabled"><i class="material-icons">save</i>{% trans 'save' %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

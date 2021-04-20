@@ -1,11 +1,11 @@
-Django[argon2]==2.2.13
-wagtail==2.7.4
+Django[argon2]==3.1.7
+wagtail==2.12.4
 
 # External Libraries
-requests==2.24.0
+requests==2.25.1
 
 # Templates
-django-compressor==2.4
+django-compressor==2.4.1
 django-libsass==0.8
 wagtailfontawesome==1.2.1
 
@@ -20,10 +20,15 @@ django-simple-email-confirmation==0.70
 sentry-sdk==0.17.3
 
 # Postgres
-psycopg2-binary==2.8.5
+psycopg2==2.8.6
 
 # Phonenumber validation
-phonenumbers==8.12.9
+phonenumbers==8.12.21
 
 # Wagtail media module
-wagtailmedia==0.6.0
+wagtailmedia==0.7.0
+
+djangorestframework==3.12.4
+
+# Recaptcha for wagtail form pages
+wagtail-django-recaptcha==1.0

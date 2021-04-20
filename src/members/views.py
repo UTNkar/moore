@@ -5,13 +5,18 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import UpdateView
 from django.views.generic.edit import FormView
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 from members.forms import MemberForm, CustomPasswordResetForm
 from members.models import Section, StudyProgram
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from members.serializers import MemberCheckSerializer
+from utils.melos_client import MelosClient
+from rest_framework import status
 
 
 class ProfileView(LoginRequiredMixin, UpdateView):
@@ -23,6 +28,20 @@ class ProfileView(LoginRequiredMixin, UpdateView):
         messages.add_message(self.request, messages.SUCCESS,
                              _('Your account settings have been saved.'))
         return super(ProfileView, self).form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        update_member_info = "update_member_info" in request.POST
+        if update_member_info:
+            request.user.fetch_and_save_melos_info()
+            messages.add_message(
+                self.request,
+                messages.SUCCESS,
+                _('Your account settings have been saved.')
+            )
+
+            return super(ProfileView, self).get(request, *args, **kwargs)
+        else:
+            return super(ProfileView, self).post(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -90,3 +109,28 @@ def email_change_confirm(request, token):
         messages.add_message(request, messages.ERROR,
                              _('The provided confirmation token was invalid.'))
     return HttpResponseRedirect(reverse_lazy('profile'))
+
+
+@api_view(['POST'])
+def member_check_api(request):
+    """
+    Checks whether a person with a given personnummer is a member in UTN.
+    """
+    serializer = MemberCheckSerializer(data=request.data)
+    status_code = None
+    data = {}
+
+    if serializer.is_valid():
+        ssn = serializer.data.get('ssn')
+        is_member = MelosClient.is_member(ssn)
+        data = {"is_member": is_member}
+    else:
+        error = serializer.errors.get("ssn")
+        data = {'error': "Personnummer: " + ", ".join(error)}
+        status_code = status.HTTP_400_BAD_REQUEST
+
+    return Response(
+        data,
+        status=status_code,
+        headers={"Access-Control-Allow-Origin": "*"}
+    )

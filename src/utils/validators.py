@@ -1,5 +1,5 @@
 from django.core import validators
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class SSNValidator(validators.RegexValidator):
@@ -22,7 +22,7 @@ class SSNValidator(validators.RegexValidator):
         super(SSNValidator, self).__init__(
             regex=regex_pattern,
             message=_(
-                'Use the format YYYYMMDD-XXXX, YYMMDD-XXXX, \
-                YYYYMMDDXXXX, YYMMDDXXXX for your ssn.'
+                'Use the format YYYYMMDD-XXXX, YYMMDD-XXXX, '
+                'YYYYMMDDXXXX, YYMMDDXXXX for your ssn.'
             )
         )
