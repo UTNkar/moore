@@ -165,7 +165,12 @@ BASIC_BLOCKTYPES = [
     ('divider', DividerBlock()),
     ('button_group', ButtonGroupBlock()),
     ('icons', IconGroupBlock()),
-    ('instagram', InstagramFeedChooserBlock()),
+    ('instagram', InstagramFeedChooserBlock(
+        help_text=_(
+            "Instagram feeds are created in Branding in the left menu. "
+            "If you can not see it, contact info@utn.se to get access"
+        )
+    )),
     ('member_check', MemberCheckAPIBlock()),
     ('html_code_block', HTMLCodeBlock()),
 ]
