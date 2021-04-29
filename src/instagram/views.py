@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from sentry_sdk import capture_exception
+from .models import InstagramFeedAdmin
 
 
 def code_from_instagram(request):
@@ -47,4 +48,6 @@ def code_from_instagram(request):
 
         messages.success(request, _("Your Instagram account was added"))
 
-    return redirect("/admin/instagram/instagramfeed/")
+    url_helper = InstagramFeedAdmin().url_helper
+    index_url = url_helper.index_url
+    return redirect(index_url)
