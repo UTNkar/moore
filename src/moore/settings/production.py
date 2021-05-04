@@ -97,8 +97,6 @@ LOGGING = {
 
 CSRF_COOKIE_SECURE = True
 
-SESSION_COOKIE_DOMAIN = '.utn.se'
-
 SESSION_COOKIE_SECURE = True
 
 MELOS_URL = os.environ.get('MELOS_URL')
