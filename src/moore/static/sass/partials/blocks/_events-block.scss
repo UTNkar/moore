@@ -48,7 +48,7 @@
 		}
 	}
 
-	.youtube, .instagram, .calendar, .facebook {
+	.youtube, .calendar, .facebook {
 		height: 480px;
 		overflow: hidden;
 	}
@@ -62,15 +62,6 @@
 			overflow:hidden;
 		}
 	}
-
-
-	.instagram {
-		.image {
-			width: 100%;
-			object-fit: contain;
-		}
-	}
-
 
 	.calendar {
 		&>*:nth-child(odd) {

@@ -6,7 +6,6 @@
 	{% if two_cols %}
 		<div class="col left s12 m{{left_size}}">
 			{% if value.show_google_calendar %} {% calendar value.google_calendar_id insta_cal_size %} {% endif %}
-			{% if value.show_instagram %} {% instagram insta_cal_size value.instagram_account_name %} {% endif %}
 			{% if value.show_youtube %} {% youtube value.youtube_channel_id 12 %} {% endif %}
 		</div>
 		<div class="col right s12 m{{right_size}}">
@@ -15,7 +14,6 @@
 	{% else %}
 		<div class="col s12">
 			{% if value.show_google_calendar %} {% calendar value.google_calendar_id insta_cal_size %} {% endif %}
-			{% if value.show_instagram %} {% instagram insta_cal_size value.instagram_account_name %} {% endif %}
 			{% if value.show_youtube %} {% youtube value.youtube_channel_id 8 %} {% endif %}
 			{% if value.show_facebook %} {% facebook value.facebook_app_id value.facebook_page_name 4 %} {% endif %}
 		</div>

@@ -1,0 +1,13 @@
+.create-container {
+    padding: 1em;
+}
+
+.create-container .add-button{
+    padding: 1em;
+    background: #00676a;
+    color: white;
+}
+
+.create-container .flex{
+    display: flex;
+}

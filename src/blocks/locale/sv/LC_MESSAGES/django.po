@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-01 13:39+0200\n"
+"POT-Creation-Date: 2021-04-29 16:29+0200\n"
 "PO-Revision-Date: 2021-04-01 13:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,115 +18,124 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: models.py:20
-msgid "Responsive Image"
-msgstr "Responsiv bild"
-
-#: models.py:23 models.py:38 models.py:49 models.py:58 models.py:69
-#: models.py:79 models.py:96 models.py:111 models.py:121 models.py:130
+#: models.py:35 models.py:50 models.py:65 models.py:76 models.py:85
+#: models.py:96 models.py:106 models.py:123 models.py:138 models.py:148
+#: models.py:157
 msgid "Basic"
 msgstr "Basic"
 
-#: models.py:28
+#: models.py:47
+msgid "Responsive Image"
+msgstr "Responsiv bild"
+
+#: models.py:55
 msgid "Left"
 msgstr "Vänster"
 
-#: models.py:29
+#: models.py:56
 msgid "Center"
 msgstr "Center"
 
-#: models.py:30
+#: models.py:57
 msgid "Right"
 msgstr "Höger"
 
-#: models.py:35
+#: models.py:62
 msgid "Paragraph"
 msgstr "Paragraf"
 
-#: models.py:46
+#: models.py:73
 msgid "Heading"
 msgstr "Rubrik"
 
-#: models.py:55
+#: models.py:82
 msgid "Divider"
 msgstr "Delare"
 
-#: models.py:66
+#: models.py:93
 msgid "Button"
 msgstr "Knapp"
 
-#: models.py:76
+#: models.py:103
 msgid "Buttons"
 msgstr "Knappar"
 
-#: models.py:87 models.py:225
+#: models.py:114 models.py:259
 msgid "Light"
 msgstr "Ljus"
 
-#: models.py:88 models.py:226
+#: models.py:115 models.py:260
 msgid "Dark"
 msgstr "Mörk"
 
-#: models.py:93
+#: models.py:120
 msgid "Image overlay"
 msgstr "Bildöverdrag"
 
 # It's difficult to know this context, don't know if it needs translation
-#: models.py:103 models.py:218
+#: models.py:130 models.py:252
 msgid "Material icon font icon text, as found on: https://material.io/icons"
 msgstr "Material icon font icon text, as found on: https://material.io/icons"
 
-#: models.py:108
+#: models.py:135
 msgid "Icon"
 msgstr "Ikon"
 
-#: models.py:118
+#: models.py:145
 msgid "Icons"
 msgstr "Ikoner"
 
-#: models.py:127
+#: models.py:154
 msgid "Member Check"
 msgstr "Medlemskontroll"
 
-#: models.py:150 models.py:471
+#: models.py:170
+msgid ""
+"Instagram feeds are created in Branding in the left menu. If you can not see "
+"it, contact info@utn.se to get access"
+msgstr ""
+"Instagram flöden skapas på Branding i den vänstra menyn. Om du inte kan se "
+"den, kontakta info@utn.se för att få access"
+
+#: models.py:182 models.py:481
 msgid "Small"
 msgstr "Liten"
 
-#: models.py:151 models.py:471
+#: models.py:183 models.py:481
 msgid "Medium"
 msgstr "Mellan"
 
-#: models.py:152 models.py:471
+#: models.py:184 models.py:481
 msgid "Large"
 msgstr "Stor"
 
-#: models.py:162 models.py:167 models.py:172 models.py:177 models.py:182
-#: models.py:187
+#: models.py:194 models.py:199 models.py:204 models.py:209 models.py:214
+#: models.py:219
 msgid "leave empty to skip this counter in the countdown"
 msgstr "lämna tom för att hoppa över den här räknaren i nedräkningen"
 
-#: models.py:194
+#: models.py:226
 msgid "Countdown"
 msgstr "Nedräkning"
 
-#: models.py:197 models.py:211 models.py:233 models.py:318 models.py:330
-#: models.py:368 models.py:382
+#: models.py:229 models.py:245 models.py:267 models.py:328 models.py:340
+#: models.py:378 models.py:392
 msgid "Content"
 msgstr "Innehåll"
 
-#: models.py:208
+#: models.py:242
 msgid "Logos"
 msgstr "Logotyper"
 
-#: models.py:230
+#: models.py:264
 msgid "Counters"
 msgstr "Räknare"
 
-#: models.py:240
+#: models.py:274
 msgid "Whether to embed a Facebook page"
 msgstr "Om du vill visa en Facebook-sida"
 
-#: models.py:244
+#: models.py:278
 msgid ""
 "Name of the page to show. (Must be public or accessible by the registered "
 "app_id)"
@@ -134,80 +143,71 @@ msgstr ""
 "Namnet på sidan att visa. (Måste vara en publik sida eller tillgänglig  via "
 "den registrerade app-id)"
 
-#: models.py:250
-msgid ""
-"Whether to show Instagram the last event from the registered Instagram feed"
-msgstr "Om du vill visa det senaste inlägget från Instagram"
-
-#: models.py:261
-msgid "Instagram username"
-msgstr "Instagram användarnamn"
-
-#: models.py:266
+#: models.py:284
 msgid "Whether to show the last video from a Youtube-channel"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: models.py:274
+#: models.py:292
 msgid "Whether to show the next few events from a google calendar"
 msgstr "Om du vill visa de senaste händelserna från en Google kalender"
 
-#: models.py:316
+#: models.py:326
 msgid "Events"
 msgstr "Evenemang"
 
-#: models.py:327
+#: models.py:337
 msgid "Contact Card"
 msgstr "Kontaktkort"
 
-#: models.py:365
+#: models.py:375
 msgid "Eventbrite"
 msgstr "Evenemang"
 
-#: models.py:379
+#: models.py:389
 msgid "Image + Text Cards"
 msgstr "Bild + Text Kort"
 
-#: models.py:404
+#: models.py:414
 msgid "Accordion"
 msgstr "Dragspel"
 
-#: models.py:407 models.py:431 models.py:454
+#: models.py:417 models.py:441 models.py:464
 msgid "Layout"
 msgstr "Layout"
 
-#: models.py:422
+#: models.py:432
 msgid "Width out of 12"
 msgstr "Bredd, 1 till 12"
 
-#: models.py:428
+#: models.py:438
 msgid "Columns"
 msgstr "Kolumner"
 
-#: models.py:439
+#: models.py:449
 msgid "Row height in px"
 msgstr "Rad höjd i px"
 
-#: models.py:444
+#: models.py:454
 msgid "Swap position of image and paragraph"
 msgstr "Byt plats på bild och paragraf"
 
-#: models.py:451
+#: models.py:461
 msgid "Two Column Grid"
 msgstr "Två Kolumns Rutnät"
 
-#: models.py:472
+#: models.py:482
 msgid "Include padding for this section"
 msgstr "Inkludera marginaler ovan och under denne sektion"
 
-#: models.py:476
+#: models.py:486
 msgid "Expand this section to full page width"
 msgstr "Expandera denna sektion till full bredd"
 
-#: models.py:482
+#: models.py:492
 msgid "Section"
 msgstr "Sektion"
 
-#: models.py:485
+#: models.py:495
 msgid "Sections"
 msgstr "Sektioner"
 
@@ -234,16 +234,3 @@ msgstr "Se hela kalendern"
 #: templates/blocks/tags/facebook.html:6
 msgid "facebook icon"
 msgstr "facebook ikon"
-
-#: templates/blocks/tags/instagram.html:5
-msgid "instagram icon"
-msgstr "instagram ikon"
-
-#~ msgid ""
-#~ "The username of the instagram account, without @. The profile must be "
-#~ "public"
-#~ msgstr ""
-#~ "Användarnamnet på instagram kontot, utan @. Profilen måste vara publik"
-
-#~ msgid "Include margin above this block"
-#~ msgstr "Inkludera marginal under detta block"
