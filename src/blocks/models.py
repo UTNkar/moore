@@ -41,6 +41,7 @@ class ResponsiveImageBlock(blocks.StructBlock):
         min_value=1,
         default=400,
     )
+    link = blocks.URLBlock(required=False)
 
     class Meta:
         label = _('Responsive Image')
@@ -434,8 +435,10 @@ class AccordionBlock(blocks.StructBlock):
         group = _('Layout')
 
 
+
+
 INLINE_LAYOUT_BLOCKTYPES = BASIC_BLOCKTYPES + [
-    ("Accordion", AccordionBlock())
+    ("Accordion", AccordionBlock()),
 ]
 
 
@@ -483,7 +486,7 @@ class TwoColumnGridBlock(blocks.StructBlock):
 
 LAYOUT_BLOCKTYPES = [
     ('columns', ColumnBlock()),
-    ('two_column_grid', TwoColumnGridBlock())
+    ('two_column_grid', TwoColumnGridBlock()),
 ]
 
 
