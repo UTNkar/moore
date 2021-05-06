@@ -435,10 +435,20 @@ class AccordionBlock(blocks.StructBlock):
         group = _('Layout')
 
 
+class ModalImageBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    body = blocks.StreamBlock(BASIC_BLOCKTYPES)
+
+    class Meta:
+        label = _('Modal Image')
+        icon = 'fa-ghost'
+        template = 'blocks/modal.html'
+        group = _('Layout')
 
 
 INLINE_LAYOUT_BLOCKTYPES = BASIC_BLOCKTYPES + [
     ("Accordion", AccordionBlock()),
+    ('modal_image', ModalImageBlock()),
 ]
 
 

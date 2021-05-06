@@ -1,0 +1,21 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<div class="block-image">
+    <a id="derp" class="materialize-modal-trigger" href="#modal1">
+    {% image value.image original as image %}
+        <img class="image" src="{{ image.url }}" style="max-height: {{ value.height }}px; {% if value.padding %}  padding: 50px 25px; {% endif %}" />
+    </a>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            {% include_block value.body %}
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("derp").addEventListener("click", function(){
+        $('.modal').modal({ dismissible: true });
+        $('#modal1').modal('open');
+    });
+</script>
