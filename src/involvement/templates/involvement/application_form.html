@@ -25,8 +25,12 @@
         <legend>
             <i class="material-icons">person</i>
             {% trans 'member information'|title %}
-			{% status_badge request.user membership_status %}
         </legend>
+		<div class="row">
+            <div class="col">
+        	    {% trans 'membership status'|title %}: {% status_badge request.user membership_status %}
+            </div>
+        </div>
         <div class="row">
             <div class="col l4 m6">
                 <div class="input-field">
@@ -37,12 +41,18 @@
             </div>
             <div class="col l4 m6">
                 <div class="input-field">
-                    <i class="material-icons prefix">school</i>
-                    <input id="study" type="text" placeholder="{{ request.user.study }}" readonly>
-                    <label for="study">{% trans 'study program' %}</label>
+                    <i class="material-icons prefix">phone</i>
+                    <input id="phone" type="text" placeholder="{{ phone }}" readonly>
+                    <label for="phone">{% trans 'Phone number' %}</label>
                 </div>
             </div>
-
+            <div class="col l4 m6">
+                <div class="input-field">
+                    <i class="material-icons prefix">school</i>
+                    <input id="study" type="text" placeholder="{{ request.user.section }}" readonly>
+                    <label for="study">{% trans 'section' %}</label>
+                </div>
+            </div>
             <div class="fab-button col s12">
                 <a class="btn-floating btn-large btn-primary right" href="{% url 'profile' %}">
                     <i class="material-icons">edit</i>

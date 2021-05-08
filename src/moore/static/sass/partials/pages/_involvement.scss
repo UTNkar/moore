@@ -58,10 +58,13 @@
   }
 }
 
+.position {
+    .card-title {
+        word-wrap: break-word;
+    }
+}
+
 #application-form {
-  .chip {
-    margin-left: 15px;
-  }
   .fab-button {
     height: 0;
     margin-left: 45px;
@@ -75,5 +78,9 @@
 
   .textarea-helptext {
     margin-bottom: 1.2em;
+  }
+
+  fieldset{
+    padding: 1em;
   }
 }
