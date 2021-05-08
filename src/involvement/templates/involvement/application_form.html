@@ -25,8 +25,12 @@
         <legend>
             <i class="material-icons">person</i>
             {% trans 'member information'|title %}
-			{% status_badge request.user membership_status %}
         </legend>
+		<div class="row">
+            <div class="col">
+        	    {% trans 'membership status'|title %}: {% status_badge request.user membership_status %}
+            </div>
+        </div>
         <div class="row">
             <div class="col l4 m6">
                 <div class="input-field">
@@ -37,51 +41,65 @@
             </div>
             <div class="col l4 m6">
                 <div class="input-field">
-                    <i class="material-icons prefix">school</i>
-                    <input id="study" type="text" placeholder="{{ request.user.study }}" readonly>
-                    <label for="study">{% trans 'study program' %}</label>
+                    <i class="material-icons prefix">phone</i>
+                    <input id="phone" type="text" placeholder="{{ phone }}" readonly>
+                    <label for="phone">{% trans 'Phone number' %}</label>
                 </div>
             </div>
-
-            <div class="fab-button col s12"><a class="btn-floating btn-large btn-primary right" href="{% url 'profile' %}"><i class="material-icons">edit</i></a></div>
+            <div class="col l4 m6">
+                <div class="input-field">
+                    <i class="material-icons prefix">school</i>
+                    <input id="study" type="text" placeholder="{{ request.user.section }}" readonly>
+                    <label for="study">{% trans 'section' %}</label>
+                </div>
+            </div>
+            <div class="fab-button col s12">
+                <a class="btn-floating btn-large btn-primary right" href="{% url 'profile' %}">
+                    <i class="material-icons">edit</i>
+                </a>
+            </div>
         </div>
     </fieldset>
 
     <fieldset>
-        <legend><i class="material-icons">assignment_ind</i> {{ form.cover_letter.label|title }}</legend>
+        <legend>
+            <i class="material-icons">assignment_ind</i>
+            {{ form.cover_letter.label|title }}
+        </legend>
+
+        <p class="textarea-helptext">{{ form.cover_letter.help_text }}</p>
 
         <div class="input-field">
-            {% spaceless %}
             <textarea
                 id="{{ form.cover_letter.auto_id }}"
                 name="{{ form.cover_letter.name }}"
                 type="text"
                 {% if status == 'submitted' %} readonly {% endif %}
-                class="materialize-textarea validate{% if form.cover_letter.errors %} invalid{% endif %}">
-                {{ form.data.cover_letter|default:form.cover_letter.initial }}
-            </textarea>
-            <label for="{{ form.cover_letter.auto_id }}">{{ form.cover_letter.help_text }}</label>
+                class="materialize-textarea{% if form.cover_letter.errors %} invalid{% endif %}"
+                >{{ form.data.cover_letter|default:form.cover_letter.initial }}</textarea>
+            <label for="{{ form.cover_letter.auto_id }}">{{ form.cover_letter.label}}</label>
             {% if form.cover_letter.errors %}{% include 'materialize/form/field_errors.html' %}{% endif %}
-            {% endspaceless %}
         </div>
     </fieldset>
 
     <fieldset>
-        <legend><i class="material-icons">assignment</i> {{ form.qualifications.label|title }}</legend>
+        <legend>
+            <i class="material-icons">assignment</i>
+            {{ form.qualifications.label|title }}
+        </legend>
+
+        <p class="textarea-helptext">{{ form.qualifications.help_text }}</p>
 
         <div class="input-field">
-            {% spaceless %}
             <textarea
                 id="{{ form.qualifications.auto_id }}"
                 name="{{ form.qualifications.name }}"
                 type="text"
                 {% if status == 'submitted' %} readonly {% endif %}
-                class="materialize-textarea validate{% if form.qualifications.errors %} invalid{% endif %}">
-                {{ form.data.qualifications|default:form.qualifications.initial }}
-            </textarea>
-            <label for="{{ form.qualifications.auto_id }}">{{ form.qualifications.help_text }}</label>
+                class="materialize-textarea{% if form.qualifications.errors %} invalid{% endif %}"
+                >{{ form.data.qualifications|default:form.qualifications.initial }}</textarea>
+            <label for="{{ form.qualifications.auto_id }}">{{ form.qualifications.label }}</label>
             {% if form.qualifications.errors %}{% include 'materialize/form/field_errors.html' %}{% endif %}
-            {% endspaceless %}
         </div>
     </fieldset>
 
@@ -123,7 +141,13 @@
 
 </form>
 
-
+<script>
+    //Trigger a resize if there is a lot of text in the textareas
+    window.addEventListener("load", function(){
+        $('#{{ form.cover_letter.auto_id }}').trigger('autoresize');
+        $('#{{ form.qualifications.auto_id }}').trigger('autoresize');
+    });
+</script>
 <script type="text/html" id="formset-template">
     {% include 'involvement/reference_form.html' with form=reference_forms.empty_form number='__prefix__' %}
 </script>
