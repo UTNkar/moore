@@ -22,19 +22,28 @@
     {% else %}
     {% if not top_level %}<li>{% endif %}
         <a
-            href="{% pageurl menuitem %}"
             {% if menuitem.has_children %}
+                href="#"
                 class="dropdown-button no-right-padding"
+                style="cursor: default;"
                 data-activates="{{ menuitem.slug }}"
                 {% if top_level %}
                 data-belowOrigin="true"
                 {% endif %}
+            {% else %}
+                href="{% pageurl menuitem %}"
             {% endif %}
         >
-            {% if menuitem.has_children and not top_level %}
+            {% if menuitem.has_children %}
                 <div class="menu-text">
                     <p>{{ menuitem.title }}</p>
-                    <i class="material-icons">chevron_right</i>
+                    <i class="material-icons">
+                        {% if top_level %}
+                            expand_more
+                        {% else %}
+                            chevron_right
+                        {% endif %}
+                    </i>
                 </div>
             {% else %}
                 {{ menuitem.title }}
@@ -46,8 +55,12 @@
                 {% if not top_level %}submenu{% endif %}"
                 id="{{ menuitem.slug }}"
             >
-                    {% menu_items parent=menuitem %}
-
+                <li>
+                    <a href="{% pageurl menuitem %}">
+                        {{ menuitem.title }}
+                    </a>
+                </li>
+                {% menu_items parent=menuitem %}
             </ul>
         {% endif %}
     {% if not top_level %}</li>{% endif %}
