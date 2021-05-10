@@ -23,7 +23,7 @@ sentry-sdk==0.17.3
 psycopg2==2.8.6
 
 # Phonenumber validation
-phonenumbers==8.12.21
+phonenumbers==8.12.22
 
 # Wagtail media module
 wagtailmedia==0.7.0

@@ -16,6 +16,11 @@
                     {% endif %}
                     <div class="header-text">
                         <h3>{{ pos }}</h3>
+                        <div class="hide-on-med-and-up">
+                            <b style="color: {{ pos.recruitment_end|date_color }};">
+                                {% trans 'deadline'|capfirst %}: {{ pos.recruitment_end }}
+                            </b>
+                        </div>
                         <div class="team">
                             {% if pos.role.teams.count %}
                                 <i class="material-icons">group</i>{{ pos.role.team_names }}
@@ -24,17 +29,41 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="apply right">
-                        <div class="hide-on-med-and-up"></div>
+                    <div class="apply hide-on-small-and-down">
                         <a class="btn" href="{% routablepageurl page 'position' pos.id  %}">{% trans 'apply' %}</a><br>
                         <div class="hide-on-small-only"><b style="color: {{ pos.recruitment_end|date_color }};">{% trans 'deadline'|capfirst %}: {{ pos.recruitment_end|date:"SHORT_DATE_FORMAT"  }}</b></div>
                     </div>
                 </div>
                 <div class="collapsible-body">
-                    <div class="hide-on-med-and-up"><b style="color: {{ pos.recruitment_end|date_color }};">{% trans 'deadline'|capfirst %}: {{ pos.recruitment_end }}</b></div>
-                    <b>{% trans 'Term of office' %}: </b><span>{{ pos.term_from }} &mdash; {{ pos.term_to }}</span><br>
-                    {% if pos.role.description %}<b>{% trans 'role description'|title %}:</b><p>{{ pos.role.description|truncatechars:600 }} {% if pos.role.description|length > 600 %}<a href="{% routablepageurl page 'position' pos.id %}">{% trans 'Read more' %}</a>{% endif %}</p>{% endif %}
-                    {% if pos.comment %}<b>{% trans 'comments for this year'|title %}:</b><p>{{ pos.comment|truncatechars:600 }} {% if pos.role.description|length > 600 %}<a href="{% routablepageurl page 'position' pos.id  %}">{% trans 'Read more' %}</a>{% endif %}</p>{% endif %}
+                    <b>{% trans 'Term of office' %}: </b>
+                    <span>{{ pos.term_from }} &mdash; {{ pos.term_to }}</span><br>
+
+                    {% if pos.role.description %}
+                    <b>{% trans 'role description'|title %}:</b>
+                    <p>{{ pos.role.description|truncatechars:600 }}
+                        {% if pos.role.description|length > 600 %}
+                        <a href="{% routablepageurl page 'position' pos.id %}">
+                            {% trans 'Read more' %}
+                        </a>
+                        {% endif %}
+                    </p>
+                    {% endif %}
+
+                    {% if pos.comment %}
+                    <b>{% trans 'comments for this year'|title %}:</b>
+                    <p>
+                        {{ pos.comment|truncatechars:600 }}
+                        {% if pos.role.description|length > 600 %}
+                        <a href="{% routablepageurl page 'position' pos.id  %}">
+                            {% trans 'Read more' %}
+                        </a>
+                        {% endif %}
+                    </p>
+                    {% endif %}
+
+                    <div class="apply hide-on-med-and-up" style="text-align: center">
+                        <a class="btn" href="{% routablepageurl page 'position' pos.id  %}">{% trans 'apply' %}</a><br>
+                    </div>
                 </div>
             </li>
         {% endfor %}
