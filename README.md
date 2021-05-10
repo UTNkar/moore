@@ -106,6 +106,11 @@ The following components have been disabled in the `materialize.scss` file in th
 The reason for this is that they are not needed and are interfering with the code that we write. Keep this in mind
 when updating or reinstalling materialize.
 
+## Instagram feeds
+
+Moore features a block that displays the latest image from instagram.
+Using and developing it is a bit special so it has some separate instructions which can be read in its [README](/src/instagram/README.md)
+
 ## License
 
 [AGPL-v2.0](LICENSE), unless a different, usually external, license is provided within a folder or file.
