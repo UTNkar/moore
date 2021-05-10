@@ -1,13 +1,12 @@
 .positions {
   .collapsible-header {
-    height: 60px;
     padding: 0 1rem;
+    align-items: center;
 
     img {
-      float: left;
-      margin: 7px 10px 0 0;
       width: 45px;
       height: 45px;
+      margin-right: .5em;
     }
 
     .apply {
@@ -25,11 +24,11 @@
     }
 
     .header-text {
-      float: left;
-      line-height: 1;
+      flex: 1;
       margin-left: 5px;
       width: calc(100% - 225px);
       h3 {
+        white-space: normal;
         @extend .truncate;
         margin: 0.8rem 0 0 0;
       }
@@ -44,11 +43,6 @@
         }
       }
     }
-    @media #{$small-and-down} {
-      .header-text {
-        width: calc(100% - 160px);
-      }
-    }
   }
 
   .collapsible-body {
@@ -58,10 +52,13 @@
   }
 }
 
+.position {
+    .card-title {
+        word-wrap: break-word;
+    }
+}
+
 #application-form {
-  .chip {
-    margin-left: 15px;
-  }
   .fab-button {
     height: 0;
     margin-left: 45px;
@@ -71,5 +68,17 @@
   }
   legend i {
     line-height: 20px;
+  }
+
+  .textarea-helptext {
+    margin-bottom: 1.2em;
+  }
+
+  fieldset{
+    padding: 1em;
+  }
+
+  .reference-content {
+    padding: 1em 0 0;
   }
 }

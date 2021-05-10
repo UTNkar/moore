@@ -53,12 +53,10 @@ class Application(ClusterableModel):
         verbose_name=_('Cover Letter'),
         help_text=_('Present yourself and state why you are who we are '
                     'looking for'),
-        blank=True,
     )
     qualifications = models.TextField(
         verbose_name=_('Qualifications'),
         help_text=_('Give a summary of relevant qualifications'),
-        blank=True,
     )
 
     # Access overhead
@@ -76,7 +74,7 @@ class Application(ClusterableModel):
         verbose_name=_('Rejection date'),
         null=True,
         blank=True
-        )
+    )
 
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([

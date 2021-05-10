@@ -22,6 +22,7 @@ def view_position(request, context, page, position=None):
         if request.user.melos_id:
             context['membership_status'] = request.user.get_status
             context['email'] = request.user.get_email
+            context['phone'] = request.user.get_phone_formatted
             # Did the user already have an application?
             try:
                 appl = Application.objects.get(applicant=request.user,
