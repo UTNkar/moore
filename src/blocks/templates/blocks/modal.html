@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 <div class="block-image">
-    <a id="derp" class="materialize-modal-trigger" href="#modal1">
+    <a id="modalImage" class="materialize-modal-trigger" href="#modal1">
     {% image value.image original as image %}
         <img class="image" src="{{ image.url }}" style="max-height: {{ value.height }}px; {% if value.padding %}  padding: 50px 25px; {% endif %}" />
     </a>
@@ -14,7 +14,7 @@
     </div>
 </div>
 <script>
-    document.getElementById("derp").addEventListener("click", function(){
+    document.getElementById("modalImage").addEventListener("click", function(){
         $('.modal').modal({ dismissible: true });
         $('#modal1').modal('open');
     });
