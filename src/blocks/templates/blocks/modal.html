@@ -1,10 +1,16 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags block_tags%}
 <div class="block-image">
-    <a id="derp" class="materialize-modal-trigger" href="#modal1">
+    {% get_random_id as id %}
+    <a class="modal-trigger" href="#modal-{{ id }}">
     {% image value.image original as image %}
-        <img class="image" src="{{ image.url }}" style="max-height: {{ value.height }}px; {% if value.padding %}  padding: 50px 25px; {% endif %}" />
+        <img
+            class="image"
+            src="{{ image.url }}"
+            style="max-height: {{ value.height }}px;
+            {% if value.padding %}  padding: 50px 25px; {% endif %}"
+        />
     </a>
-    <div id="modal1" class="modal">
+    <div id="modal-{{ id }}" class="modal">
         <div class="modal-content">
             {% include_block value.body %}
         </div>
@@ -13,9 +19,10 @@
         </div>
     </div>
 </div>
+
 <script>
-    document.getElementById("derp").addEventListener("click", function(){
-        $('.modal').modal({ dismissible: true });
-        $('#modal1').modal('open');
-    });
+window.addEventListener("load", function(){
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
 </script>
