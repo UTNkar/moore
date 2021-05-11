@@ -3,6 +3,7 @@ from django import forms
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
+from instagram.blocks import InstagramFeedChooserBlock
 import requests
 from datetime import datetime
 from blocks.widgets import CodeMirrorWidget
@@ -165,6 +166,12 @@ BASIC_BLOCKTYPES = [
     ('divider', DividerBlock()),
     ('button_group', ButtonGroupBlock()),
     ('icons', IconGroupBlock()),
+    ('instagram', InstagramFeedChooserBlock(
+        help_text=_(
+            "Instagram feeds are created in Branding in the left menu. "
+            "If you can not see it, contact info@utn.se to get access"
+        )
+    )),
     ('member_check', MemberCheckAPIBlock()),
     ('html_code_block', HTMLCodeBlock()),
 ]
@@ -273,22 +280,6 @@ class EventsBlock(blocks.StructBlock):
                     'by the registered app_id)')
     )
 
-    show_instagram = blocks.BooleanBlock(
-        required=False,
-        help_text=_('Whether to show Instagram the last event from the '
-                    'registered Instagram feed')
-    )
-    instagram_account_name = blocks.CharBlock(
-        required=False,
-        help_text=_(
-            (
-                "The username of the instagram account, without @. "
-                "The profile must be public"
-            )
-        ),
-        label=_("Instagram username")
-    )
-
     show_youtube = blocks.BooleanBlock(
         required=False,
         help_text=_('Whether to show the last video from a Youtube-channel')
@@ -309,7 +300,7 @@ class EventsBlock(blocks.StructBlock):
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)
         left_count = 0
-        for key in ['show_google_calendar', 'show_instagram', 'show_youtube']:
+        for key in ['show_google_calendar', 'show_youtube']:
             if value[key]:
                 left_count += 1
 
@@ -326,16 +317,8 @@ class EventsBlock(blocks.StructBlock):
 
         right_size = 12 - left_size
 
-        if two_cols:
-            insta_cal_size = 6 if value['show_google_calendar'] \
-                and value['show_instagram'] \
-                else 12
-        else:
-            insta_cal_size = 4
-
         context['left_size'] = left_size
         context['right_size'] = right_size
-        context['insta_cal_size'] = insta_cal_size
         context['two_cols'] = two_cols
 
         return context

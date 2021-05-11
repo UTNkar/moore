@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'google',
     'home',
     'involvement',
+    'instagram',
     'materialize',
     'members',
     'news',
@@ -58,12 +59,10 @@ INSTALLED_APPS = [
     'compressor',
     'kronos',
     'modelcluster',
-    'raven.contrib.django.raven_compat',
     'rules.apps.AutodiscoverRulesConfig',
     'simple_email_confirmation',
     'taggit',
     'wagtailfontawesome',
-    'django_instagram',
     'rest_framework',
     'wagtailcaptcha',
     'captcha',
@@ -228,6 +227,10 @@ WAGTAILSEARCH_BACKENDS = {
 }
 
 IS_RUNNING_TEST = 'test' in sys.argv
+
+INSTAGRAM_APP_ID = os.environ.get('INSTAGRAM_APP_ID')
+INSTAGRAM_APP_SECRET = os.environ.get('INSTAGRAM_APP_SECRET')
+INSTAGRAM_REDIRECT_URL = os.environ.get('INSTAGRAM_REDIRECT_URL')
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [

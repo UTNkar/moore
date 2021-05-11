@@ -20,16 +20,6 @@ def facebook(app_id, page_name, size):
     return data
 
 
-@register.inclusion_tag('blocks/tags/instagram.html')
-def instagram(size, instagram_account_name):
-    data = {
-        'size': size,
-        'instagram_account_name': instagram_account_name
-    }
-
-    return data
-
-
 @register.inclusion_tag('blocks/tags/youtube.html')
 def youtube(channel_id, size):
 
