@@ -3,6 +3,7 @@ from datetime import date
 from google.api import google_calendar_list_events, youtube_search
 from google.models import GoogleCalendarPage
 from wagtail.core.models import Page
+import uuid
 
 register = template.Library()
 
@@ -56,3 +57,8 @@ def calendar(id, size):
     data['calendar_url'] = page.get_url() if page else ''
 
     return data
+
+
+@register.simple_tag()
+def get_random_id():
+    return uuid.uuid4()

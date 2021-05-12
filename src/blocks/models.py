@@ -42,6 +42,7 @@ class ResponsiveImageBlock(blocks.StructBlock):
         min_value=1,
         default=400,
     )
+    link = blocks.URLBlock(required=False)
 
     class Meta:
         label = _('Responsive Image')
@@ -417,8 +418,20 @@ class AccordionBlock(blocks.StructBlock):
         group = _('Layout')
 
 
+class ModalImageBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    body = blocks.StreamBlock(BASIC_BLOCKTYPES)
+
+    class Meta:
+        label = _('Modal Image')
+        icon = 'fa-ghost'
+        template = 'blocks/modal.html'
+        group = _('Layout')
+
+
 INLINE_LAYOUT_BLOCKTYPES = BASIC_BLOCKTYPES + [
-    ("Accordion", AccordionBlock())
+    ("Accordion", AccordionBlock()),
+    ('modal_image', ModalImageBlock()),
 ]
 
 
@@ -466,7 +479,7 @@ class TwoColumnGridBlock(blocks.StructBlock):
 
 LAYOUT_BLOCKTYPES = [
     ('columns', ColumnBlock()),
-    ('two_column_grid', TwoColumnGridBlock())
+    ('two_column_grid', TwoColumnGridBlock()),
 ]
 
 
