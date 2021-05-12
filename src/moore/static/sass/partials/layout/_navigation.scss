@@ -150,25 +150,25 @@ nav {
             white-space: nowrap;
         }
 
+        .menu-text {
+            display:flex;
+            align-items: center;
+
+            p{
+                display: inline;
+                flex-grow: 1;
+                margin: 0;
+                margin-right: .5em;
+            }
+        }
+
+        .no-right-padding{
+            padding-right: 0;
+        }
+
         .dropdown-content{
             //Displays the submenues to the side of the parent menu
             overflow: visible !important;
-
-            .no-right-padding{
-                padding-right: 0;
-            }
-
-            .menu-text {
-                display:flex;
-                align-items: center;
-
-                p{
-                    display: inline;
-                    flex-grow: 1;
-                    margin: 0;
-                    margin-right: .5em;
-                }
-            }
         }
 
         .submenu{
