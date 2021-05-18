@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [3.0.0] - 2021-05-18
+- Added Modal image, responsive image and new function for uuid generation [#560](https://github.com/UTNkar/moore/pull/560)
+- Fix mobile userfriendlyness [#556](https://github.com/UTNkar/moore/pull/556)
+- Fix navigation menu [#557](https://github.com/UTNkar/moore/pull/557)
+- Fix use default session cookie domain [#554](https://github.com/UTNkar/moore/pull/554)
+- Bump phonenumbers from 8.12.20 to 8.12.23 [#562](https://github.com/UTNkar/moore/pull/562)
+- Bump wagtail from 2.12.3 to 2.13 [#561](https://github.com/UTNkar/moore/pull/561)
+- Bump rules from 2.2 to 3.0  [#559](https://github.com/UTNkar/moore/pull/559)
+- Bump sentry-sdk from 0.17.3 to 1.1.0 [#558](https://github.com/UTNkar/moore/pull/558)
+- Bump django-compressor from 2.4 to 2.4.1 [#551](https://github.com/UTNkar/moore/pull/551)
+
+
 ## [2.8.0] - 2021-04-06
 
 ## Changed 
