@@ -1,7 +1,7 @@
 from wagtail.contrib.modeladmin.options import ModelAdmin, \
     modeladmin_register, ThumbnailMixin, ModelAdminGroup
-from django.utils.translation import gettext_lazy as _
-
+from django.utils.translation import ugettext_lazy as _
+from instagram.models import InstagramFeedAdmin
 from branding.models import Logo
 
 
@@ -18,7 +18,7 @@ class BrandingAdminGroup(ModelAdminGroup):
     menu_label = _('Branding')
     menu_icon = 'fa-paint-brush'
     menu_order = 600
-    items = (LogoAdmin,)
+    items = (LogoAdmin, InstagramFeedAdmin)
 
 
 modeladmin_register(BrandingAdminGroup)

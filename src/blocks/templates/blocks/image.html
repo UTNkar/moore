@@ -1,3 +1,5 @@
 {% load wagtailimages_tags %}
 {% image value.image original as image %}
+{% if value.link %}<a href="{{ value.link }}" target="_blank" rel="noopener bireferrer">{% endif %}
 <img class="image" src="{{ image.url }}" style="max-height: {{ value.height }}px; {% if value.padding %}  padding: 50px 25px; {% endif %}" />
+{% if value.link %}</a>{% endif %}

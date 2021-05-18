@@ -1,0 +1,28 @@
+{% load wagtailcore_tags wagtailimages_tags block_tags%}
+<div class="block-image">
+    {% get_random_id as id %}
+    <a class="modal-trigger" href="#modal-{{ id }}">
+    {% image value.image original as image %}
+        <img
+            class="image"
+            src="{{ image.url }}"
+            style="max-height: {{ value.height }}px;
+            {% if value.padding %}  padding: 50px 25px; {% endif %}"
+        />
+    </a>
+    <div id="modal-{{ id }}" class="modal">
+        <div class="modal-content">
+            {% include_block value.body %}
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+</div>
+
+<script>
+window.addEventListener("load", function(){
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
+</script>

@@ -3,6 +3,7 @@ from datetime import date
 from google.api import google_calendar_list_events, youtube_search
 from google.models import GoogleCalendarPage
 from wagtail.core.models import Page
+import uuid
 
 register = template.Library()
 
@@ -14,16 +15,6 @@ def facebook(app_id, page_name, size):
         'app_id': app_id,
         'page_name': page_name,
         'size': size,
-    }
-
-    return data
-
-
-@register.inclusion_tag('blocks/tags/instagram.html')
-def instagram(size, instagram_account_name):
-    data = {
-        'size': size,
-        'instagram_account_name': instagram_account_name
     }
 
     return data
@@ -66,3 +57,8 @@ def calendar(id, size):
     data['calendar_url'] = page.get_url() if page else ''
 
     return data
+
+
+@register.simple_tag()
+def get_random_id():
+    return uuid.uuid4()

@@ -26,7 +26,7 @@ class Reference(Orderable):
 
     position = models.CharField(
         max_length=255,
-        verbose_name=_('Position'),
+        verbose_name=_('Title/Role e.g. Boss'),
         help_text=_('Enter the position in which your reference relates to '
                     'you'),
         blank=False,
