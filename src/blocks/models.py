@@ -7,6 +7,9 @@ from instagram.blocks import InstagramFeedChooserBlock
 import requests
 from datetime import datetime
 from blocks.widgets import CodeMirrorWidget
+from wagtail.core.blocks.struct_block import StructBlockAdapter
+from wagtail.core.telepath import register
+from django.utils.functional import cached_property
 
 
 # BASIC BLOCKTYPES
@@ -327,8 +330,24 @@ class EventsBlock(blocks.StructBlock):
         label = _('Events')
         icon = 'fa-calendar'
         group = _('Content')
-        form_template = 'block_forms/events.html'
         template = 'blocks/events.html'
+
+
+class EventsBlockAdapter(StructBlockAdapter):
+    """Javascript adaptor for the events block in the editing view"""
+
+    js_constructor = 'moore.blocks.EventsBlock'
+
+    @cached_property
+    def media(self):
+        structblock_media = super().media
+        return forms.Media(
+            js=structblock_media._js + ['js/events_block.js'],
+            css=structblock_media._css
+        )
+
+
+register(EventsBlockAdapter(), EventsBlock)
 
 
 class ContactsBlock(blocks.StructBlock):
