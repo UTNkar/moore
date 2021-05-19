@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [3.0.1] - 2021-05-19
+- Fix forgot import in production [#565](https://github.com/UTNkar/moore/pull/565)
+- Bump django[argon2] from 3.2 to 3.2.3 [#564](https://github.com/UTNkar/moore/pull/564)
+
+
 ## [3.0.0] - 2021-05-18
 - Added Modal image, responsive image and new function for uuid generation [#560](https://github.com/UTNkar/moore/pull/560)
 - Fix mobile userfriendlyness [#556](https://github.com/UTNkar/moore/pull/556)
