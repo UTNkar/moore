@@ -239,3 +239,5 @@ REST_FRAMEWORK = {
 }
 
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
