@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 from __future__ import absolute_import, unicode_literals
 import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 from .base import *
 
