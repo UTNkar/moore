@@ -18,7 +18,7 @@ class CodeMirrorWidget(WidgetWithScript, forms.Textarea):
             )
         }});
         """
-        return js.format(id=id, value=value)
+        return js.format(id=id)
 
     @property
     def media(self):
