@@ -5,6 +5,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [3.0.3] - 2021-05-24
+- Fix html not loading the initial value [#569](https://github.com/UTNkar/moore/pull/569)
+- Rebuild create and edit users templates [#570](https://github.com/UTNkar/moore/pull/570)
+
+
+## [3.0.2] - 2021-05-19
+- Fix Wagtail 2.13 changed custom block js. [#568](https://github.com/UTNkar/moore/pull/568)
+
+
 ## [3.0.1] - 2021-05-19
 - Fix forgot import in production [#565](https://github.com/UTNkar/moore/pull/565)
 - Bump django[argon2] from 3.2 to 3.2.3 [#564](https://github.com/UTNkar/moore/pull/564)
