@@ -242,7 +242,7 @@ class ApplicationAdmin(ModelAdmin):
     menu_label = _('Applications')
     menu_icon = 'mail'
     menu_order = 400
-    list_display = ('role', 'position', 'applicant', 'status')
+    list_display = ('position_full_name', 'applicant_name', 'status')
     list_filter = ('position__role__teams', 'status')
     search_fields = (
         'position__role__teams__name_en', 'position__role__teams__name_sv',
@@ -271,8 +271,21 @@ class ApplicationAdmin(ModelAdmin):
                 qs = qs.order_by(*ordering)
             return qs
 
-    def role(self, obj):
-        return obj.position.role
+    def position_full_name(self, obj):
+        """Used by list_display since obj contains foreign keys."""
+        return '%(position)s %(separator)s %(teams)s' % {
+                'position': str(obj.position),
+                'separator': _('in'),
+                'teams': obj.position.role.team_names
+            }
+    position_full_name.short_description = _('Position')
+    position_full_name.admin_order_field = 'position'
+
+    def applicant_name(self, obj):
+        """Used by list_display since obj contains foreign keys."""
+        return obj.applicant.name
+    applicant_name.admin_order_field = 'applicant__name'
+    applicant_name.short_description = _('Name')
 
 
 class ContactCardAdmin(ModelAdmin):
