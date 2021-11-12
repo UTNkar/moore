@@ -22,7 +22,7 @@ django-simple-email-confirmation==0.70
 sentry-sdk==1.1.0
 
 # Postgres
-psycopg2==2.8.6
+psycopg2==2.9.2
 
 # Phonenumber validation
 phonenumbers==8.12.23
