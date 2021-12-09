@@ -1,0 +1,6 @@
+{% load wagtailcore_tags %}
+<div class="container">
+  {% for event in self.events %}
+      {% include "events/blocks/event.html" with event=event %}
+  {% endfor %}
+</div>

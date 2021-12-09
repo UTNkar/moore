@@ -28,6 +28,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'blocks',
     'branding',
+    'events',
     'google',
     'home',
     'involvement',
@@ -66,6 +67,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'wagtailcaptcha',
     'captcha',
+    'jsonschemaform',
 
     'django.contrib.admin',  # Used for wagtail admin filters
     'django.contrib.auth',
@@ -241,3 +243,14 @@ REST_FRAMEWORK = {
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+JSONSCHEMAFORM = {
+    'options': {
+        'theme': 'bootstrap3',
+        'disable_edit_json': True,
+        'disable_collapse': True,
+        'disable_properties': True,
+        'no_additional_properties': True,
+        'max_depth': 1,
+    }
+}

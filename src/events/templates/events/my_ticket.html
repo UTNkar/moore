@@ -1,0 +1,41 @@
+{% extends "page.html" %}
+{% load i18n static wagtailimages_tags involvement_tags %}
+
+{% block content %}
+<div class="container">
+  <h3>Your entry to <br><h1><strong>{{ ticket.event.title }}</strong></h1></h3>
+
+  <p>{{ ticket.event.description }}</p>
+  <h3>Participants</h3>
+  <form method="post">
+    {{ participants_formset.management_form }}
+    {% csrf_token %}
+    <input type="submit" name="save_form" value="{% trans 'SAVE' %}" class="btn btn-primary">
+    {% if not max_num_participants %}<input type="submit" name="add_participant" value="{% trans 'ADD PARTICIPANT' %}" class="btn btn-primary">{% endif %}
+    {% for form in participants_formset %}
+        <div class="card" style="margin-bottom: 5px">
+          <div class="card-content">
+            {% for field in form.hidden_fields %}
+                {{ field }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                <strong style="color: red">{{ field.errors }}</strong>
+                {% if field.field.widget.input_type == "checkbox" %}
+                    <div class="field boolean_field checkbox_input">
+                    <input type="checkbox" name="{{field.html_name}}" id="{{field.auto_id}}" class="filled-in" {% if field.initial %}checked{% endif %}/>
+                    <label for="{{field.auto_id}}" style="margin-bottom: 10px; color: black">{{field.label}}</label>
+                    </div>
+                    <br>
+                {% else %}
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% endif %}
+            {% endfor %}
+            <input type="submit" name="delete_{{ form.instance.id }}" value="{% trans 'REMOVE' %}" class="btn">
+          </div>
+        </div>
+    {% endfor %}
+  </form>
+</div>
+{% endblock %}

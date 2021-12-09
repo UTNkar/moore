@@ -9,6 +9,7 @@ from blocks.models import WAGTAIL_STATIC_BLOCKTYPES, EventbriteBlock, \
     HTMLCodeBlock
 from google.models import GoogleFormBlock, GoogleDriveBlock, \
     GoogleCalendarBlock
+from events.blocks import EventListBlock
 from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
 from wagtail.api import APIField
@@ -28,6 +29,7 @@ class WebPage(Page):
             ('news', LatestNewsBlock()),
             ('html', HTMLCodeBlock()),
             ('eventbrite', EventbriteBlock()),
+            ('events', EventListBlock()),
         ],
         blank=True,
     )
