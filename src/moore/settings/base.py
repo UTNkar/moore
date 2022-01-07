@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'members',
     'news',
     'search',
-    'swish_integration',
     'moore',  # include for templatetags
 
     'wagtail.contrib.forms',
