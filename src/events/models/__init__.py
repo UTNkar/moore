@@ -1,3 +1,4 @@
+# flake8: noqa
 from .ticket import Ticket
 from .event import Event
 from .costs import Costs

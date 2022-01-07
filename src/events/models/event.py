@@ -1,16 +1,13 @@
 from django.db import models
-from django.apps import apps
-from django.conf import settings
-from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
-from modelcluster.models import ClusterableModel
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
-    InlinePanel, FieldRowPanel
+    FieldRowPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 from events.models import Ticket
+
 
 @register_snippet
 class Event(models.Model):
@@ -21,13 +18,16 @@ class Event(models.Model):
     )
 
     description = models.TextField(
-        help_text=_('This is the long text shown as description for the event.'),
+        help_text=_(
+            'This is the long text shown as description for the event.'),
         verbose_name=_('Description for event'),
         max_length=1000
     )
 
     info_for_participants = models.TextField(
-        help_text=_('This separate information will be presented to those who recieve tickets.'),
+        help_text=_(
+            'This separate information will be '
+            'presented to those who recieve tickets.'),
         verbose_name=_('Information for participants'),
         null=True,
         blank=True,
@@ -46,7 +46,7 @@ class Event(models.Model):
 
     end_of_application = models.DateTimeField(
         verbose_name=_('Application end time'),
-        help_text=_('After this date, it will no longer be possible to apply.'),
+        help_text=_('After this date it will no longer be possible to apply.'),
     )
 
     num_tickets = models.IntegerField(
@@ -58,8 +58,8 @@ class Event(models.Model):
 
     num_participants_per_ticket = models.IntegerField(
         verbose_name=_('Number of participants per ticket'),
-        help_text=_('This dictates the number of participants that each ticket entry allows. '
-                    'For example, the puzzle hunt rally would want this to be 9. '
+        help_text=_('This dictates the number of participants per ticket. '
+                    'For example, the ball would set this to 2. '
                     'Don\'t set this to be less than 1.'),
         default=1
     )
@@ -71,13 +71,17 @@ class Event(models.Model):
     )
 
     price_per_participant = models.IntegerField(
-        help_text=_('Price per participant, independent of their order. For example, 1100 for a ball seat'),
+        help_text=_(
+            'Price per participant, independent of their order. '
+            'For example, 1100 for a ball seat'),
         verbose_name=_('Price per participant'),
         default=0
     )
 
     price_per_participant_nonmember = models.IntegerField(
-        help_text=_('Price per non-UTN-member participant, independent of their order. For example, 1100 for a ball seat'),
+        help_text=_(
+            'Price per non-UTN-member participant, excluding of their order. '
+            'For example, 1200 for a ball seat'),
         verbose_name=_('Price per non-member participant'),
         default=0
     )
@@ -104,23 +108,31 @@ class Event(models.Model):
     first_come_first_serve = models.BooleanField(
         default=False,
         verbose_name=_('First come first serve'),
-        help_text=_('Immediately assign applicants first-come-first-serve. Not suitable for events that raffle their entries.')
+        help_text=_(
+            'Immediately assign applicants first-come-first-serve. '
+            'Not suitable for events that raffle their entries.')
     )
 
     last_payment_date = models.DateTimeField(
         verbose_name=_('Event final payment date & time'),
-        help_text=_('After this time, the event is no longer payed for, and unpaid tickets are invalidated.'),
+        help_text=_(
+            'After this time, the event is no longer payed for'
+            ', and unpaid tickets are invalidated.'),
         null=True
     )
 
-    published = models.BooleanField(default=False,
-                                    verbose_name=_('Event published'),
-                                    help_text=_('Determines if the event is visible or not'))
+    published = models.BooleanField(
+        default=False,
+        verbose_name=_('Event published'),
+        help_text=_('Determines if the event is visible or not')
+    )
 
-    contact_email = models.EmailField(blank=True,
-                                      null=True,
-                                      verbose_name=_('Email for contact'),
-                                      help_text=_('Email address for who to contact regarding this event.'))
+    contact_email = models.EmailField(
+        blank=True,
+        null=True,
+        verbose_name=_('Email for contact'),
+        help_text=_('Email address for who to contact regarding this event.')
+    )
 
     class Meta:
         verbose_name = _('event')
@@ -160,13 +172,15 @@ class Event(models.Model):
         ]),
         FieldPanel('contact_email'),
         FieldPanel('published'),
-        ])
+    ])
     ]
 
     def is_free(self):
-        price_list_cost = sum([ order['Price'] for order in self.price_list.fields ])
+        price_list_cost = sum([order['Price']
+                              for order in self.price_list.fields])
         cost = self.base_price + self.price_per_participant + price_list_cost
         return cost == 0
+
 
 @receiver(post_save, sender=Event)
 def post_save(sender, instance, created, **kwargs):
@@ -175,7 +189,14 @@ def post_save(sender, instance, created, **kwargs):
         tickets = []
 
         for ticket_number in range(1, event.num_tickets + 1):
-            if Ticket.objects.filter(ticket_number=ticket_number, event=event).count() == 0:
-                tickets.append(Ticket(ticket_number=ticket_number, event=event, owner=None))
+            if Ticket.objects.filter(ticket_number=ticket_number,
+                                     event=event).count() == 0:
+                tickets.append(
+                    Ticket(
+                        ticket_number=ticket_number,
+                        event=event,
+                        owner=None
+                    )
+                )
 
         Ticket.objects.bulk_create(tickets)

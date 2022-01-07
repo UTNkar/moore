@@ -76,10 +76,10 @@ class MelosClient:
     @staticmethod
     def __setup():
         if MelosClient.client is None:
-            if settings.IS_RUNNING_TEST:
-                MelosClient.client = MockClient()
-            else:
-                MelosClient.client = ApiClient()
+            # if settings.IS_RUNNING_TEST:
+            MelosClient.client = MockClient()
+            # else:
+            #     MelosClient.client = ApiClient()
 
     @staticmethod
     def get_user_data(melos_id):

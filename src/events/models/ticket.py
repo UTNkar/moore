@@ -1,14 +1,11 @@
 from django.db import models
-from django.apps import apps
 from django.conf import settings
-from django.db import models
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
-from modelcluster.models import ClusterableModel
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
-    InlinePanel, FieldRowPanel
+from wagtail.admin.edit_handlers import FieldPanel
 import events.models as event_models
+
 
 class Ticket(models.Model):
     """A ticket type determines what allows a user entry to an event"""
@@ -32,13 +29,16 @@ class Ticket(models.Model):
 
     num_extra_participants = models.IntegerField(
         verbose_name=_('Extra participants'),
-        help_text=_('Dictates the number of participants in the ticket besides the ticket owner.'),
+        help_text=_(
+            'Dictates the number of participants '
+            'in the ticket besides the ticket owner.'),
         default=0)
 
     locked = models.BooleanField(
         default=False,
         verbose_name=_("Locked for payment"),
-        help_text=_("This field is filled in if the ticket owner has signaled that they are ready to pay."))
+        help_text=_('This field is filled in if the ticket '
+                    'owner has signaled that they are ready to pay.'))
 
     PAYMENT_STATUSES = (
         ('unpaid', ('Unpaid')),
@@ -47,7 +47,7 @@ class Ticket(models.Model):
     )
 
     payment_status = models.CharField(
-        max_length = 16,
+        max_length=16,
         choices=PAYMENT_STATUSES,
         blank=False,
         null=False,
@@ -71,7 +71,7 @@ class Ticket(models.Model):
         return 'Ticket %s for event "%s"' % (
             str(self.ticket_number),
             str(self.event),
-)
+        )
 
     # ------ Administrator settings ------
     panels = [
@@ -81,15 +81,21 @@ class Ticket(models.Model):
         FieldPanel('locked'),
     ]
 
+
 @receiver(post_save, sender=Ticket)
 def post_save(sender, instance, created, **kwargs):
     if not created:
         ticket = instance
-        participants = event_models.Participant.objects.filter(ticket=ticket).order_by('id')
+        participants = event_models.Participant.objects.filter(
+            ticket=ticket).order_by('id')
 
         if ticket.owner is not None:
             if participants.count() < 1:
-                event_models.Participant(name=ticket.owner.name, person_nr=ticket.owner.person_nr, ticket=ticket).save()
+                event_models.Participant(
+                    name=ticket.owner.name,
+                    person_nr=ticket.owner.person_nr,
+                    ticket=ticket
+                ).save()
             else:
                 owner = participants[0]
                 owner.person_nr = ticket.owner.person_nr

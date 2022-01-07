@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='num_tickets',
-            field=models.IntegerField(default=1, help_text='This dictates the number of individual entries to the event.', verbose_name='Number of entries'),
+            field=models.IntegerField(default=1, help_text='This dictates the number of entries to the event.', verbose_name='Number of entries'),
         ),
         migrations.AddField(
             model_name='ticket',

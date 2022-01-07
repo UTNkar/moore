@@ -1,17 +1,6 @@
-from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
-from django.forms import Form, NumberInput
-from rules.contrib.views import permission_required
-from utils.view_utils import get_position_by_pk
-from events.models import Event, Ticket, EventApplication
-from django.forms import modelformset_factory, IntegerField
-from django.forms.models import model_to_dict
-from django.contrib.auth import get_user_model
-from events.forms import EventAssignmentForm
-from events.models import Participant, EventApplication
+from events.models import Event, EventApplication
+
 
 def admin_remove_applications(request, pos_id=None):
     """

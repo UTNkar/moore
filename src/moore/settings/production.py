@@ -15,6 +15,7 @@ import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
 from .base import *
+import swish
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -105,6 +106,12 @@ GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
 
 RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "")
 RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", "")
+
+SWISH_MERCHANT_NUMBER = os.environ.get("SWISH_MERCHANT_NUMBER", "")
+SWISH_CERT_PATH = os.environ.get("SWISH_CERT_PATH", "")
+SWISH_KEY_PATH = os.environ.get("SWISH_KEY_PATH", "")
+SWISH_VERIFY_PATH = os.environ.get("SWISH_VERIFY_PATH", "")
+SWISH_ENVIRONMENT = swish.Environment.Test if DEBUG else swish.Environment.Production
 
 try:
     from .local import *

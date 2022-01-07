@@ -1,11 +1,8 @@
 from django.db import models
-from django.apps import apps
 from django.conf import settings
-from django.db import models
 from django.utils.translation import gettext_lazy as _
-from modelcluster.models import ClusterableModel
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
-    InlinePanel, FieldRowPanel
+from wagtail.admin.edit_handlers import FieldPanel
+
 
 class EventApplication(models.Model):
     event_applicant = models.ForeignKey(
@@ -37,4 +34,7 @@ class EventApplication(models.Model):
     ]
 
     def __str__(self):
-        return "Application by " + str(self.event_applicant) + " " + str(self.event_applicant.person_nr)
+        return ("Application by "
+                + str(self.event_applicant)
+                + " "
+                + str(self.event_applicant.person_nr))

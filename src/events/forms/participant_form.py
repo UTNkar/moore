@@ -1,12 +1,13 @@
-from django.forms import (MultiValueField, MultiWidget, ModelForm, BaseModelFormSet, BooleanField, IntegerField, ChoiceField,
-                          TextInput, Textarea, NumberInput, CheckboxInput, Select, CharField)
+from django.forms import (ModelForm, BooleanField, IntegerField, ChoiceField,
+                          Textarea, CharField)
 from events.models import Participant
 from utils.validators import SSNValidator
-from django.core.exceptions import ValidationError
+
 
 class ParticipantForm(ModelForm):
     name = CharField(max_length=100, required=False)
-    person_nr = CharField(max_length=13, validators=[SSNValidator()], required=False)
+    person_nr = CharField(max_length=13, validators=[
+                          SSNValidator()], required=False)
 
     def __init__(self, price_list, locked=False, *args, **kwargs):
         super(ParticipantForm, self).__init__(*args, **kwargs)
@@ -20,13 +21,22 @@ class ParticipantForm(ModelForm):
             if field_type == "checkbox":
                 field = BooleanField(label=field_name, required=required)
             elif field_type == "text":
-                field = CharField(label=field_name, required=required, max_length=100)
+                field = CharField(label=field_name,
+                                  required=required, max_length=100)
             elif field_type == "long text":
-                field = CharField(label=field_name, required=required, max_length=1000, widget=Textarea)
+                field = CharField(
+                    label=field_name, required=required,
+                    max_length=1000, widget=Textarea
+                )
             elif field_type == "number":
-                field = IntegerField(label=field_name, required=required, disabled=locked)
+                field = IntegerField(
+                    label=field_name, required=required, disabled=locked)
             elif field_type == "Dropdown":
-                field = ChoiceField(label=field_name, choices=[(x, x) for x in price_field.get("Choices")], required=required, disabled=locked)
+                field = ChoiceField(
+                    label=field_name,
+                    choices=[(x, x) for x in price_field.get("Choices")],
+                    required=required,
+                    disabled=locked)
             if instance:
                 initial = instance.order.get(field_name)
                 field.initial = initial
@@ -46,4 +56,7 @@ class ParticipantForm(ModelForm):
         name = cleaned_data.pop('name', '')
         person_nr = cleaned_data.pop('person_nr', '')
 
-        return {'id': pk, 'name': name, 'person_nr': person_nr, 'order': cleaned_data}
+        return {'id': pk,
+                'name': name,
+                'person_nr': person_nr,
+                'order': cleaned_data}

@@ -31,7 +31,7 @@ class EventButtonHelper(ButtonHelper):
 
         return {
             'url': self.url_helper.get_action_url('assign_tickets', quote(pk)),
-            'label': _('Assign tickets'),
+            'label': text,
             'classname': cn,
             'title': _('Assign applicants to tickets randomly')
         }
@@ -47,13 +47,17 @@ class EventButtonHelper(ButtonHelper):
         text = _('Unassign unpaid tickets')
 
         return {
-            'url': self.url_helper.get_action_url('unassign_unpaid_tickets', quote(pk)),
-            'label': _('Unassign unpaid tickets'),
+            'url': self.url_helper.get_action_url('unassign_unpaid_tickets',
+                                                  quote(pk)),
+            'label': text,
             'classname': cn,
-            'title': _('Unassign unpaid tickets and clear participant information')
+            'title': _('Unassign unpaid tickets and '
+                       'clear participant information')
         }
 
-    def remove_applications_button(self, pk, classnames_add, classnames_exclude):
+    def remove_applications_button(self, pk,
+                                   classnames_add,
+                                   classnames_exclude):
         if classnames_add is None:
             classnames_add = []
         if classnames_exclude is None:
@@ -64,10 +68,12 @@ class EventButtonHelper(ButtonHelper):
         text = _('Remove applications')
 
         return {
-            'url': self.url_helper.get_action_url('remove_applications', quote(pk)),
-            'label': _('Remove applications'),
+            'url': self.url_helper.get_action_url(
+                'remove_applications', quote(pk)
+            ),
+            'label': text,
             'classname': cn,
-            'title': _('Remove applications')
+            'title': text,
         }
 
     def get_buttons_for_obj(self, obj, exclude=None, classnames_add=None,
@@ -79,16 +85,22 @@ class EventButtonHelper(ButtonHelper):
             classnames_add = []
         if classnames_exclude is None:
             classnames_exclude = []
-        ph = self.permission_helper
-        usr = self.request.user
         pk = quote(getattr(obj, self.opts.pk.attname))
         btns += super(EventButtonHelper, self).get_buttons_for_obj(
             obj, exclude=exclude, classnames_add=classnames_add,
             classnames_exclude=classnames_exclude)
-        btns.append(self.assign_tickets_button(pk, classnames_add, classnames_exclude))
-        btns.append(self.unassign_unpaid_button(pk, classnames_add, classnames_exclude))
-        btns.append(self.remove_applications_button(pk, classnames_add, classnames_exclude))
+
+        btns.append(self.assign_tickets_button(
+            pk, classnames_add, classnames_exclude))
+
+        btns.append(self.unassign_unpaid_button(
+            pk, classnames_add, classnames_exclude))
+
+        btns.append(self.remove_applications_button(
+            pk, classnames_add, classnames_exclude))
+
         return btns
+
 
 class EventAdmin(ModelAdmin):
     model = Event
@@ -100,6 +112,7 @@ class EventAdmin(ModelAdmin):
     add_to_settings_menu = False
     list_display = ('title', 'description')
 
+
 class CostsAdmin(ModelAdmin):
     model = Costs
     menu_label = _('Price lists')
@@ -108,14 +121,16 @@ class CostsAdmin(ModelAdmin):
     permission_helper_class = RulesPermissionHelper
     add_to_settings_menu = False
 
+
 class TicketAdmin(ModelAdmin):
     model = Ticket
     menu_label = _('Tickets')
     menu_icon = 'fa-ticket'
     menu_order = 300
     list_display = ['owner_person_nr', 'owner_email', 'event', 'ticket_number']
-    list_filter = ('event','payment_status')
-    list_export = ('event', 'owner_person_nr', 'owner_email', 'ticket_number', 'payment_status')
+    list_filter = ('event', 'payment_status')
+    list_export = ('event', 'owner_person_nr', 'owner_email',
+                   'ticket_number', 'payment_status')
     search_fields = ('owner__person_nr', 'owner__email')
     permission_helper_class = RulesPermissionHelper
     add_to_settings_menu = False
@@ -138,7 +153,7 @@ class TicketAdmin(ModelAdmin):
 class EventApplicationAdmin(ModelAdmin):
     model = EventApplication
     menu_label = _('Event applications')
-    menu_icon = 'fa-file-text-o' # TODO
+    menu_icon = 'fa-file-text-o'
     list_display = ['applicant_person_nr', 'applicant_email', 'event']
     menu_order = 400
     permission_helper_class = RulesPermissionHelper
@@ -158,10 +173,12 @@ class EventApplicationAdmin(ModelAdmin):
         else:
             return "No email"
 
+
 class EventAdminGroup(ModelAdminGroup):
     menu_label = _('Events')
     menu_icon = 'fa-star'
     menu_order = 600
     items = (EventAdmin, CostsAdmin, TicketAdmin, EventApplicationAdmin)
+
 
 modeladmin_register(EventAdminGroup)

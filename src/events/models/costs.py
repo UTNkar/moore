@@ -1,15 +1,6 @@
 from django.db import models
-from django.apps import apps
-from django.conf import settings
-from django.db import models
-from django.db.models.signals import post_save, pre_save
-from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
-from modelcluster.models import ClusterableModel
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
-    InlinePanel, FieldRowPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
-from members.fields import PersonNumberField
+from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel
 from jsonschemaform.admin.widgets.jsonschema_widget import JSONSchemaWidget
 
 schema = {
@@ -20,9 +11,9 @@ schema = {
     "items": {
         "type": "object",
         "properties": {
-            "Name": { "type": "string" },
-            "Price": { "type": "integer" },
-            "Non-member price": { "type": "integer" },
+            "Name": {"type": "string"},
+            "Price": {"type": "integer"},
+            "Non-member price": {"type": "integer"},
             "Type": {
                 "type": "string",
                 "default": "Checkbox",
@@ -34,7 +25,8 @@ schema = {
                 "items": {
                     "type": "string",
                 },
-                "description": "These are only in effect if the type of choice is Dropdown"
+                "description": "These are only in effect "
+                               "if the type of choice is Dropdown"
             },
             "Required": {
                 "type": "checkbox"
@@ -42,6 +34,7 @@ schema = {
         }
     }
 }
+
 
 class Costs(models.Model):
     name = models.CharField(
