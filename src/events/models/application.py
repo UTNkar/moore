@@ -8,8 +8,6 @@ from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
     InlinePanel, FieldRowPanel
 
 class EventApplication(models.Model):
-    """A ticket type determines what allows a user entry to an event"""
-
     event_applicant = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,

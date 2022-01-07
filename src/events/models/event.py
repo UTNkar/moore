@@ -2,7 +2,7 @@ from django.db import models
 from django.apps import apps
 from django.conf import settings
 from django.db import models
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from modelcluster.models import ClusterableModel
@@ -10,6 +10,7 @@ from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
     InlinePanel, FieldRowPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
+from events.models import Ticket
 
 @register_snippet
 class Event(models.Model):
@@ -25,6 +26,14 @@ class Event(models.Model):
         max_length=1000
     )
 
+    info_for_participants = models.TextField(
+        help_text=_('This separate information will be presented to those who recieve tickets.'),
+        verbose_name=_('Information for participants'),
+        null=True,
+        blank=True,
+        max_length=1000,
+    )
+
     start_date = models.DateTimeField(
         verbose_name=_('Event start time'),
         help_text=_('This dictates when the event is considered as ongoing.')
@@ -33,6 +42,11 @@ class Event(models.Model):
     end_date = models.DateTimeField(
         verbose_name=_('Event end time'),
         help_text=_('This dictates when the event is considered finished.')
+    )
+
+    end_of_application = models.DateTimeField(
+        verbose_name=_('Application end time'),
+        help_text=_('After this date, it will no longer be possible to apply.'),
     )
 
     num_tickets = models.IntegerField(
@@ -48,6 +62,24 @@ class Event(models.Model):
                     'For example, the puzzle hunt rally would want this to be 9. '
                     'Don\'t set this to be less than 1.'),
         default=1
+    )
+
+    base_price = models.IntegerField(
+        help_text=_('Base ticket price. For example, 600 for a rally entry.'),
+        verbose_name=_('Ticket price'),
+        default=0
+    )
+
+    price_per_participant = models.IntegerField(
+        help_text=_('Price per participant, independent of their order. For example, 1100 for a ball seat'),
+        verbose_name=_('Price per participant'),
+        default=0
+    )
+
+    price_per_participant_nonmember = models.IntegerField(
+        help_text=_('Price per non-UTN-member participant, independent of their order. For example, 1100 for a ball seat'),
+        verbose_name=_('Price per non-member participant'),
+        default=0
     )
 
     price_list = models.ForeignKey(
@@ -75,19 +107,26 @@ class Event(models.Model):
         help_text=_('Immediately assign applicants first-come-first-serve. Not suitable for events that raffle their entries.')
     )
 
+    last_payment_date = models.DateTimeField(
+        verbose_name=_('Event final payment date & time'),
+        help_text=_('After this time, the event is no longer payed for, and unpaid tickets are invalidated.'),
+        null=True
+    )
+
+    published = models.BooleanField(default=False,
+                                    verbose_name=_('Event published'),
+                                    help_text=_('Determines if the event is visible or not'))
+
+    contact_email = models.EmailField(blank=True,
+                                      null=True,
+                                      verbose_name=_('Email for contact'),
+                                      help_text=_('Email address for who to contact regarding this event.'))
 
     class Meta:
         verbose_name = _('event')
         verbose_name_plural = _('events')
         default_permissions = ()
         ordering = ['title']
-
-    STATUS_CHOICES = (
-        ('published', _('Published')),
-        ('unpublished', _('Unpublished')),
-        ('ongoing', _('Ongoing')),
-        ('finished', _('Finished')),
-    )
 
     # Access overhead
     removed = models.BooleanField(
@@ -99,14 +138,44 @@ class Event(models.Model):
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldPanel('title'),
+        ImageChooserPanel('image'),
         FieldPanel('description'),
-        FieldPanel('num_tickets'),
-        FieldPanel('num_participants_per_ticket'),
+        FieldPanel('info_for_participants'),
+        FieldPanel('end_of_application'),
+        FieldRowPanel([
+            FieldPanel('num_tickets'),
+            FieldPanel('num_participants_per_ticket'),
+        ]),
+        FieldPanel('first_come_first_serve'),
+        FieldPanel('base_price'),
+        FieldRowPanel([
+            FieldPanel('price_per_participant'),
+            FieldPanel('price_per_participant_nonmember'),
+        ]),
         FieldPanel('price_list'),
+        FieldPanel('last_payment_date'),
         FieldRowPanel([
             FieldPanel('start_date'),
             FieldPanel('end_date'),
-            ]),
-        ImageChooserPanel('image'),
+        ]),
+        FieldPanel('contact_email'),
+        FieldPanel('published'),
         ])
     ]
+
+    def is_free(self):
+        price_list_cost = sum([ order['Price'] for order in self.price_list.fields ])
+        cost = self.base_price + self.price_per_participant + price_list_cost
+        return cost == 0
+
+@receiver(post_save, sender=Event)
+def post_save(sender, instance, created, **kwargs):
+    if created:
+        event = instance
+        tickets = []
+
+        for ticket_number in range(1, event.num_tickets + 1):
+            if Ticket.objects.filter(ticket_number=ticket_number, event=event).count() == 0:
+                tickets.append(Ticket(ticket_number=ticket_number, event=event, owner=None))
+
+        Ticket.objects.bulk_create(tickets)

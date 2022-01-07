@@ -22,10 +22,11 @@ schema = {
         "properties": {
             "Name": { "type": "string" },
             "Price": { "type": "integer" },
+            "Non-member price": { "type": "integer" },
             "Type": {
                 "type": "string",
                 "default": "Checkbox",
-                "enum": ["number", "checkbox", "Dropdown"]
+                "enum": ["text", "long text", "number", "checkbox", "Dropdown"]
             },
             "Choices": {
                 "type": "array",
@@ -34,6 +35,9 @@ schema = {
                     "type": "string",
                 },
                 "description": "These are only in effect if the type of choice is Dropdown"
+            },
+            "Required": {
+                "type": "checkbox"
             }
         }
     }

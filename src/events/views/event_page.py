@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.utils import timezone as tz
 from django.urls import reverse
 from django.views.generic import DetailView
 from django.views.generic.edit import FormMixin
@@ -17,9 +18,18 @@ class EventView(FormMixin, DetailView):
         # We're using filter here in case of bugs, but there _should_ only be one application or ticket for
         # a certain user.
         event = self.get_object()
-        application = EventApplication.objects.filter(event_applicant=self.request.user, event=event)
-        ticket = Ticket.objects.filter(owner=self.request.user, event=event)
-        print(ticket)
+        application = None
+        ticket = None
+
+        if self.request.user.is_authenticated:
+            # There should never be more than one, so this may be unnecessarily defensive, but helps during testing
+            application = EventApplication.objects.filter(event_applicant=self.request.user, event=event)
+            if application.count() > 0:
+                application = application[0]
+
+            ticket = Ticket.objects.filter(owner=self.request.user, event=event)
+            if ticket.count() > 0:
+                ticket = ticket[0]
 
         if ticket:
             context['has_ticket'] = True
@@ -27,6 +37,7 @@ class EventView(FormMixin, DetailView):
         if application:
             context['already_applied'] = True
 
+        context['can_still_apply'] = event.end_of_application > tz.now()
         return context
 
     def get_success_url(self):
@@ -43,10 +54,10 @@ class EventView(FormMixin, DetailView):
                 ticket.owner = user # it is assumed that the user here is authenticated
                 ticket.save()
             except IndexError as e:
-                pass # TODO
+                print(e) # TODO
         else:
-            application_exists = EventApplication.objects.filter(event_applicant=user)
-            if application_exists:
+            applications = EventApplication.objects.filter(event_applicant=user, event=event)
+            if applications.count() > 0:
                 pass # Shouldn't reach here as it shouldn't be presented to the user.
             else:
                 EventApplication(event_applicant=user, event=event).save()

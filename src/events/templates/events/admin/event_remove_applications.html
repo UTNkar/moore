@@ -1,0 +1,42 @@
+{% extends "modeladmin/create.html" %}
+{% load i18n %}
+
+{% block extra_head %}
+{{ block.super }}
+<style>
+.field-content {
+    font-size: 1.1em;
+}
+.field-content span {
+    float: left;
+    padding-top: 1.2em;
+}
+</style>
+{% endblock %}
+
+{% block form_action %}{% url 'events_event_modeladmin_remove_applications' event.id %}{% endblock %}
+
+{% block form %}
+<div class="objects">
+  <p>The following applications will be deleted:</p>
+    <table>
+        <thead>
+          <th>Application owners email</th>
+        </thead>
+        <tbody>
+          {% for application in applications %}
+            <tr>
+               <td>{{ application.event_applicant.email }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+{% block form_actions %}
+      <button type="submit" name="confirm" class="button action-save button-longrunning" tabindex="3" data-clicked-text="{% trans 'Removing...' %}">
+            <span class="icon icon-spinner"></span><em>{% trans 'confirm' %}</em>
+        </button>
+{% endblock %}

@@ -10,6 +10,7 @@ from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
     InlinePanel, FieldRowPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from members.fields import PersonNumberField
+from utils.melos_client import MelosClient
 
 class Participant(models.Model):
     name = models.CharField(
@@ -33,12 +34,10 @@ class Participant(models.Model):
         FieldPanel('person_nr'),
     ])]
 
-    costs = models.ForeignKey('Costs',
-                              on_delete=models.SET_NULL,
-                              null=True)
-
     ticket = models.ForeignKey('Ticket',
                                on_delete=models.CASCADE)
+
+
 
 
     class Meta:
@@ -49,3 +48,22 @@ class Participant(models.Model):
 
     def __str__(self):
         return str(self.name) + str(self.person_nr) + str(self.order)
+
+    def calculate_order_cost(self):
+        cost = 0
+        price_list = self.ticket.event.price_list
+        is_member = self.person_nr and MelosClient.is_member(self.person_nr)
+
+        if is_member:
+            cost += self.ticket.event.price_per_participant
+        else:
+            cost += self.ticket.event.price_per_participant_nonmember
+
+        for orderable in price_list.fields:
+            if self.order.get(orderable['Name']):
+                if is_member:
+                    cost += orderable.get('Price', 0)
+                else:
+                    cost += orderable.get('Non-member price', 0)
+
+        return cost

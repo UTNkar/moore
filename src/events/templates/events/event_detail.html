@@ -11,6 +11,8 @@
       <div class="center">
         {% if not user.is_authenticated %}
         <h5>{% trans 'Please login to apply to this position' %}</h5>
+        <strong>If you are unable to log in or create an account but still want to apply, contact {{ event.contact_email }}</strong>
+        <br>
         <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary">{% trans 'login' %}</a>
         {% elif has_ticket %}
         <h5>{% trans 'You have a spot for this event!' %}</h5>
@@ -18,12 +20,18 @@
         {% elif already_applied %}
         <h5>{% trans 'You have applied to this event. Stay tuned!' %}</h5>
         {% else %}
-        <h5>{% trans 'You can apply to this event.' %}</h5>
-        <form method="post">
-          {% csrf_token %}
-          {{ form }}
-          <input type="submit" value="{% trans 'Apply' %}" class="btn btn-primary">
-        </form>
+
+          {% if can_still_apply %}
+          <h5>{% trans 'You can apply to this event.' %}</h5>
+          <strong>Apply before {{ event.end_of_application }}</strong>
+          <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="{% trans 'Apply' %}" class="btn btn-primary">
+          </form>
+          {% else %}
+          <h5>{% trans 'Application date has passed.' %}</h5>
+          {% endif %}
         {% endif %}
       </div>
     </div>
