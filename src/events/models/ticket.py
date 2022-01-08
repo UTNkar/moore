@@ -57,7 +57,6 @@ class Ticket(models.Model):
     class Meta:
         verbose_name = _('Ticket')
         verbose_name_plural = _('Tickets')
-        default_permissions = ()
 
     # Access overhead
     removed = models.BooleanField(
