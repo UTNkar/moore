@@ -20,7 +20,6 @@ class EventApplication(models.Model):
     class Meta:
         verbose_name = _('Event Application')
         verbose_name_plural = _('Event Applications')
-        default_permissions = ()
 
     # Access overhead
     removed = models.BooleanField(

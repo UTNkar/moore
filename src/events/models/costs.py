@@ -57,7 +57,6 @@ class Costs(models.Model):
     class Meta:
         verbose_name = _('Costs')
         verbose_name_plural = _('Costs')
-        default_permissions = ()
         ordering = ['name']
 
     def __str__(self):

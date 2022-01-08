@@ -6,7 +6,6 @@ from wagtail.core import hooks
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
-from utils.permissions import RulesPermissionHelper
 from events.models import Event, Ticket, Costs, EventApplication
 
 
@@ -131,7 +130,6 @@ class EventAdmin(ModelAdmin):
     menu_label = _('Events')
     menu_icon = 'fa-star'
     menu_order = 100
-    permission_helper_class = RulesPermissionHelper
     button_helper_class = EventButtonHelper
     add_to_settings_menu = False
     list_display = ('title', 'description')
@@ -142,7 +140,6 @@ class CostsAdmin(ModelAdmin):
     menu_label = _('Price lists')
     menu_icon = 'fa-money'
     menu_order = 200
-    permission_helper_class = RulesPermissionHelper
     add_to_settings_menu = False
 
 
@@ -156,7 +153,6 @@ class TicketAdmin(ModelAdmin):
     list_export = ('event', 'owner_person_nr', 'owner_email',
                    'ticket_number', 'payment_status')
     search_fields = ('owner__person_nr', 'owner__email')
-    permission_helper_class = RulesPermissionHelper
     add_to_settings_menu = False
 
     def owner_person_nr(self, obj):
@@ -182,7 +178,6 @@ class EventApplicationAdmin(ModelAdmin):
     list_filter = ('event',)
     search_fields = ('applicant__person_nr', 'applicant__email')
     menu_order = 400
-    permission_helper_class = RulesPermissionHelper
     add_to_settings_menu = False
 
     def applicant_person_nr(self, obj):
