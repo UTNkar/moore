@@ -32,7 +32,6 @@ class Participant(models.Model):
     class Meta:
         verbose_name = _('ParticipantType')
         verbose_name_plural = _('ParticipantTypes')
-        default_permissions = ()
         ordering = ['name']
 
     def __str__(self):
