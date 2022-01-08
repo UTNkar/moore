@@ -34,3 +34,5 @@ djangorestframework==3.12.4
 
 # Recaptcha for wagtail form pages
 wagtail-django-recaptcha==1.0
+
+django-jsonschema-form==1.0.3

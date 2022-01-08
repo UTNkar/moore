@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [3.0.4] - 2022-01-08
+- New feature for event management [#612](https://github.com/UTNkar/moore/pull/612)
+
+
 ## [3.0.3] - 2021-05-24
 - Fix html not loading the initial value [#569](https://github.com/UTNkar/moore/pull/569)
 - Rebuild create and edit users templates [#570](https://github.com/UTNkar/moore/pull/570)
