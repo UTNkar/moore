@@ -25,4 +25,9 @@ urlpatterns = [
         views.admin_remove_applications,
         name='events_event_modeladmin_remove_applications'
     ),
+    re_path(
+        r'^admin/events/event/export_participants/(\d+)/$',
+        views.admin_export_participants,
+        name='events_event_modeladmin_export_participants'
+    ),
 ]

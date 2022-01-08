@@ -76,6 +76,27 @@ class EventButtonHelper(ButtonHelper):
             'title': text,
         }
 
+    def export_participants_button(self, pk,
+                                   classnames_add,
+                                   classnames_exclude):
+        if classnames_add is None:
+            classnames_add = []
+        if classnames_exclude is None:
+            classnames_exclude = []
+
+        classnames = self.edit_button_classnames + classnames_add
+        cn = self.finalise_classname(classnames, classnames_exclude)
+        text = _('Export participants')
+
+        return {
+            'url': self.url_helper.get_action_url(
+                'export_participants', quote(pk)
+            ),
+            'label': text,
+            'classname': cn,
+            'title': text,
+        }
+
     def get_buttons_for_obj(self, obj, exclude=None, classnames_add=None,
                             classnames_exclude=None):
         btns = []
@@ -97,6 +118,9 @@ class EventButtonHelper(ButtonHelper):
             pk, classnames_add, classnames_exclude))
 
         btns.append(self.remove_applications_button(
+            pk, classnames_add, classnames_exclude))
+
+        btns.append(self.export_participants_button(
             pk, classnames_add, classnames_exclude))
 
         return btns
@@ -155,6 +179,8 @@ class EventApplicationAdmin(ModelAdmin):
     menu_label = _('Event applications')
     menu_icon = 'fa-file-text-o'
     list_display = ['applicant_person_nr', 'applicant_email', 'event']
+    list_filter = ('event',)
+    search_fields = ('applicant__person_nr', 'applicant__email')
     menu_order = 400
     permission_helper_class = RulesPermissionHelper
     add_to_settings_menu = False
