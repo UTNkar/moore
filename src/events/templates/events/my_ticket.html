@@ -1,0 +1,73 @@
+{% extends "page.html" %}
+{% load i18n static wagtailimages_tags involvement_tags %}
+{% block content %}
+<div class="container">
+  <h3>Your entry to <br><h1><strong>{{ ticket.event.title }}</strong></h1></h3>
+
+  <p>{{ ticket.event.description }}</p>
+  <p>{{ ticket.event.info_for_participants }}</p>
+  {% if not event.is_free %}
+  <p>{% if can_still_pay %}<strong>Payment is due {{ last_payment_date }}{% else %}Payment date has passed.{% endif %}</strong></p>
+  {% endif %}
+  <h3>Participants</h3>
+  <form method="post">
+    {{ participants_formset.management_form }}
+    {% csrf_token %}
+
+    {% if not ticket.locked %}
+        <input type="submit" name="save_form" value="{% trans 'SAVE' %}" class="btn btn-primary">
+
+      {% if not max_num_participants %}
+        <input type="submit" name="add_participant" value="{% trans 'Add participant' %}" class="btn btn-primary">
+      {% endif %}
+
+      {% if not event.is_free %}
+        <input type="submit" name="lock_for_payment" value="{% trans 'I\'m ready to pay' %}" class="btn btn-primary">
+      {% endif %}
+    {% endif %}
+
+    {% if not event.is_free %}
+      <p>Cost: {{ cost }} SEK. Payment status: <strong>{{ ticket.payment_status }}</strong></p>
+    {% endif %}
+
+    {% if participants_formset.total_error_count > 0 %}
+    <strong style="color: red">{% trans "There are errors in the forms below." %}</strong>
+    {% endif %}
+
+    {% for form in participants_formset %}
+        <div class="card" style="margin-bottom: 5px">
+          <div class="card-content">
+            {% for field in form.hidden_fields %}
+                {{ field }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                <strong style="color: red">{{ field.errors }}</strong>
+                {% if field.field.widget.input_type == "checkbox" %}
+                <!--
+                 !-- This is a workaround due to some type of css bug.
+                  -->
+                    <div class="field boolean_field checkbox_input">
+                      <input type="checkbox" name="{{field.html_name}}" id="{{field.auto_id}}" class="filled-in"
+                             {% if field.initial %}checked{% endif %} {% if ticket.locked %}disabled{% endif %}/>
+                      <label for="{{field.auto_id}}" style="margin-bottom: 10px; color: black">{{field.label}}</label>
+                    </div>
+                    <br>
+                {% else %}
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% endif %}
+            {% endfor %}
+            {% if not ticket.locked and forloop.counter != 1 %}
+              <div style="display: flex">
+                <div style="flex-grow: 1">
+                </div>
+                <input type="submit" name="delete_{{ form.instance.id }}" value="{% trans 'REMOVE' %}" class="btn">
+              </div>
+            {% endif %}
+          </div>
+        </div>
+    {% endfor %}
+  </form>
+</div>
+{% endblock %}
