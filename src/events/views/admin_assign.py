@@ -2,29 +2,25 @@ from django.shortcuts import render, get_object_or_404
 from django.forms import Form
 from events.models import Event, Ticket, EventApplication
 from django.forms import modelformset_factory, IntegerField, ChoiceField
-from django.contrib.auth import get_user_model
+from random import shuffle
 
 
 def random_assignment(event, num_to_assign, priority):
     """Randomly assigns a number of applications to empty tickets"""
-    user_model = get_user_model()
+    random_applications = (list(
+            EventApplication.objects.filter(ticket=None)
+        ))
 
-    # First, find all tickets with owners and disqualify those owners.
-    assigned_tickets = Ticket.objects.exclude(event=event, owner=None)
-    applicants_without_tickets = user_model.objects.exclude(
-        ticket__in=assigned_tickets, status=priority)
+    shuffle(random_applications)
+    random_applications = random_applications[:num_to_assign]
 
-    # Then, take applications made by those without tickets in random order,
-    # and take the first num_to_assign
-    random_applications = EventApplication.objects.filter(
-        event_applicant__in=applicants_without_tickets
-    ).order_by('?')[:num_to_assign]
     unassigned_tickets = Ticket.objects.filter(
         event=event, owner=None).order_by('ticket_number')
 
     for ticket, application in zip(unassigned_tickets, random_applications):
         # assign them
         ticket.owner = application.event_applicant
+        application.ticket = ticket
 
     return unassigned_tickets
 

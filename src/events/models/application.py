@@ -7,14 +7,21 @@ from wagtail.admin.edit_handlers import FieldPanel
 class EventApplication(models.Model):
     event_applicant = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         blank=True,
     )
 
     event = models.ForeignKey(
         'Event',
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         blank=False,
+    )
+
+    ticket = models.ForeignKey(
+        'Ticket',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
     )
 
     class Meta:
@@ -30,6 +37,7 @@ class EventApplication(models.Model):
     panels = [
         FieldPanel('event_applicant'),
         FieldPanel('event'),
+        FieldPanel('ticket'),
     ]
 
     def __str__(self):

@@ -78,6 +78,7 @@ class Ticket(models.Model):
         FieldPanel('event'),
         FieldPanel('ticket_number'),
         FieldPanel('locked'),
+        FieldPanel('payment_status'),
     ]
 
 
