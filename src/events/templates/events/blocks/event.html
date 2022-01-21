@@ -1,10 +1,11 @@
 {% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
 <div class="card horizontal">
   <div>
     <div class="card-stacked">
       <div class="card-content">
         <span class="card-title"> {{ event.title }}</span>
-        <div class="rich-text"><p>{{ event.description }}</p></div>
+        <div class="rich-text"><p>{{ event.description|richtext }}</p></div>
         <div align="bottom">
           <p><b>Date: </b> {{ event.start_date|date:'l, M dS' }}</p>
           <p><b>Time: </b> {{ event.start_date|date:'H:i' }}-{{ event.end_date|date:'H:i' }}</p>

@@ -1,24 +1,31 @@
 {% extends "page.html" %}
 {% load i18n static wagtailimages_tags involvement_tags %}
+{% load wagtailcore_tags %}
 
 {% block content %}
 <div class="container">
   <h1>{{ object.title }}</h1>
-  <p>{{ object.description}}</p>
+  <p>{{ object.description|richtext }}</p>
 
   <div class="card">
     <div class="card-content">
       <div class="center">
         {% if not user.is_authenticated %}
-        <h5>{% trans 'Please login to apply to this position' %}</h5>
+        <h5>{% trans 'Please log in to apply to this event' %}</h5>
         <strong>If you are unable to log in or create an account but still want to apply, contact {{ event.contact_email }}</strong>
         <br>
-        <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary">{% trans 'login' %}</a>
+        <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary">{% trans 'log in' %}</a>
         {% elif has_ticket %}
         <h5>{% trans 'You have a spot for this event!' %}</h5>
         <a href="{% url 'my-ticket' object.id %}" class="btn btn-primary">{% trans 'View my spot' %}</a>
         {% elif already_applied %}
         <h5>{% trans 'You have applied to this event. Stay tuned!' %}</h5>
+
+          <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" name='cancel_application' value="{% trans 'Cancel my application' %}" class="btn btn-primary">
+          </form>
         {% else %}
 
           {% if can_still_apply %}

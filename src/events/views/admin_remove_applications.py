@@ -7,7 +7,7 @@ def admin_remove_applications(request, pos_id=None):
     Admin view to appoint members to the position
     """
     event = get_object_or_404(Event, pk=pos_id)
-    applications = EventApplication.objects.filter(event=event)
+    applications = EventApplication.objects.filter(event=event, ticket=None)
 
     if request.method == 'POST':
         if 'confirm' in request.POST:

@@ -48,6 +48,11 @@ class EventView(FormMixin, DetailView):
         user = request.user
         event = self.get_object()
         form = self.get_form()
+
+        if 'cancel_application' in request.POST:
+            EventApplication.objects.get(event_applicant=user).delete()
+            return self.form_valid(form)
+
         if event.first_come_first_serve:
             try:
                 # Lowest unassigned ticket
