@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
     FieldRowPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.core.fields import RichTextField
 from wagtail.snippets.models import register_snippet
 from events.models import Ticket
 
@@ -17,14 +18,14 @@ class Event(models.Model):
         max_length=255
     )
 
-    description = models.TextField(
+    description = RichTextField(
         help_text=_(
             'This is the long text shown as description for the event.'),
         verbose_name=_('Description for event'),
         max_length=1000
     )
 
-    info_for_participants = models.TextField(
+    info_for_participants = RichTextField(
         help_text=_(
             'This separate information will be '
             'presented to those who recieve tickets.'),

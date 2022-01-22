@@ -174,20 +174,24 @@ class EventApplicationAdmin(ModelAdmin):
     model = EventApplication
     menu_label = _('Event applications')
     menu_icon = 'fa-file-text-o'
-    list_display = ['applicant_person_nr', 'applicant_email', 'event']
+    list_display = ['event_applicant_person_nr',
+                    'event_applicant_email',
+                    'event',
+                    'ticket']
+    list_export = ('event', 'event_applicant', 'ticket__ticket_number')
     list_filter = ('event',)
-    search_fields = ('applicant__person_nr', 'applicant__email')
+    search_fields = ('event_applicant__person_nr', 'event_applicant__email')
     menu_order = 400
     add_to_settings_menu = False
 
-    def applicant_person_nr(self, obj):
+    def event_applicant_person_nr(self, obj):
         owner = obj.event_applicant
         if owner:
             return str(owner.person_nr)
         else:
             "None"
 
-    def applicant_email(self, obj):
+    def event_applicant_email(self, obj):
         owner = obj.event_applicant
         if owner:
             return str(owner.email)
