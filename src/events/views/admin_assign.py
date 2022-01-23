@@ -15,7 +15,7 @@ def random_assignment(event, num_to_assign, priority):
     random_applications = random_applications[:num_to_assign]
 
     unassigned_tickets = Ticket.objects.filter(
-        event=event, owner=None).order_by('ticket_number')
+        event=event, owner=None).order_by('ticket_number')[:num_to_assign]
 
     for ticket, application in zip(unassigned_tickets, random_applications):
         # assign them
