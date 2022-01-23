@@ -10,6 +10,7 @@ def random_assignment(event, num_to_assign, priority):
     random_applications = (list(
             EventApplication.objects.filter(ticket=None)
         ))
+
     shuffle(random_applications)
     random_applications = random_applications[:num_to_assign]
 
