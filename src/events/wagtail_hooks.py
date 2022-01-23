@@ -178,7 +178,8 @@ class EventApplicationAdmin(ModelAdmin):
                     'event_applicant_email',
                     'event',
                     'ticket']
-    list_export = ('event', 'event_applicant', 'ticket__ticket_number')
+    list_export = ('event', 'event_applicant',
+                   'event_applicant_email', 'event_applicant_ticket_number')
     list_filter = ('event',)
     search_fields = ('event_applicant__person_nr', 'event_applicant__email')
     menu_order = 400
@@ -197,6 +198,12 @@ class EventApplicationAdmin(ModelAdmin):
             return str(owner.email)
         else:
             return "No email"
+
+    def event_applicant_ticket_number(self, obj):
+        if obj.ticket:
+            return str(obj.ticket.ticket_number)
+        else:
+            return "-"
 
 
 class EventAdminGroup(ModelAdminGroup):
