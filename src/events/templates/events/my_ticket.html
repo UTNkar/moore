@@ -1,11 +1,13 @@
 {% extends "page.html" %}
 {% load i18n static wagtailimages_tags involvement_tags %}
+{% load wagtailcore_tags %}
+
 {% block content %}
 <div class="container">
   <h3>Your entry to <br><h1><strong>{{ ticket.event.title }}</strong></h1></h3>
 
-  <p>{{ ticket.event.description }}</p>
-  <p>{{ ticket.event.info_for_participants }}</p>
+  <p>{{ ticket.event.description|richtext }}</p>
+  <p>{{ ticket.event.info_for_participants|richtext }}</p>
   {% if not event.is_free %}
   <p>{% if can_still_pay %}<strong>Payment is due {{ last_payment_date }}{% else %}Payment date has passed.{% endif %}</strong></p>
   {% endif %}

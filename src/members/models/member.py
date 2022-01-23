@@ -251,7 +251,12 @@ class Member(
         verbose_name_plural = _('users')
 
     def __str__(self) -> str:
-        return self.username
+        return "{0} - {1} - {2} - {3}".format(
+            self.username,
+            self.email,
+            self.name,
+            self.person_nr
+        )
 
     @property
     def teams(self):
