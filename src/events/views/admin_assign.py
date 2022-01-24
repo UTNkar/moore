@@ -67,9 +67,8 @@ def admin_assign(request, pos_id=None):
                 assignments = random_assignment(
                     event, num_to_randomize, priority)
 
-                disabled = False
                 if num_to_randomize > 0 and assignments.count() > 0:
-                    disabled = True
+                    disabled = False
 
                 ticket_formset = formset(queryset=assignments)
             elif 'save' in request.POST:
