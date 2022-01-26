@@ -6,7 +6,7 @@ from wagtail.core import hooks
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register
-from events.models import Event, Ticket, Costs, EventApplication
+from events.models import Event, Ticket, Costs, EventApplication, Participant
 
 
 @hooks.register("insert_global_admin_css", order=100)
@@ -206,11 +206,32 @@ class EventApplicationAdmin(ModelAdmin):
             return "-"
 
 
+class ParticipantAdmin(ModelAdmin):
+    model = Participant
+    menu_label = _('Participants')
+    list_display = ['name',
+                    'person_nr',
+                    'formatted_order',
+                    'ticket']
+    list_export = ('name', 'person_nr', 'formatted_order', 'ticket')
+    list_filter = ('ticket__event',)
+    menu_icon = 'fa-user-plus'
+    menu_order = 200
+    add_to_settings_menu = False
+
+    def formatted_order(self, obj):
+        s = ""
+        for key in obj.order:
+            s += "{}: {} | ".format(key, obj.order.get(key, "-"))
+        return s
+
+
 class EventAdminGroup(ModelAdminGroup):
     menu_label = _('Events')
     menu_icon = 'fa-star'
     menu_order = 600
-    items = (EventAdmin, CostsAdmin, TicketAdmin, EventApplicationAdmin)
+    items = (EventAdmin, CostsAdmin, TicketAdmin,
+             EventApplicationAdmin, ParticipantAdmin)
 
 
 modeladmin_register(EventAdminGroup)

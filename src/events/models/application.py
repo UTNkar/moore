@@ -1,7 +1,10 @@
 from django.db import models
+from django.dispatch import receiver
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from wagtail.admin.edit_handlers import FieldPanel
+from django.db.models.signals import post_save
+from events.models import Ticket
 
 
 class EventApplication(models.Model):
@@ -45,3 +48,18 @@ class EventApplication(models.Model):
                 + str(self.event_applicant)
                 + " "
                 + str(self.event_applicant.person_nr))
+
+
+@receiver(post_save, sender=EventApplication)
+def ensure_ticket(sender, instance, created, **kwargs):
+    # Ensure that if someone who already holds a ticket makes an application
+    # their ticket is correctly registered with the application.
+    # This fixes a bug where someone could get a ticket but their
+    # application was ticketless, and so participate in future raffles.
+    ticket = Ticket.objects.filter(
+        event=instance.event,
+        owner=instance.event_applicant
+    )
+    if ticket.exists() and instance.ticket is None:
+        instance.ticket = ticket[0]
+        instance.save()
