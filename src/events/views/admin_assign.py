@@ -20,7 +20,6 @@ def random_assignment(event, num_to_assign, priority):
     for ticket, application in zip(unassigned_tickets, random_applications):
         # assign them
         ticket.owner = application.event_applicant
-        application.ticket = ticket
 
     return unassigned_tickets
 
@@ -72,7 +71,16 @@ def admin_assign(request, pos_id=None):
 
                 ticket_formset = formset(queryset=assignments)
             elif 'save' in request.POST:
-                ticket_formset.save()
+                tickets = ticket_formset.save()
+
+                for ticket in tickets:
+                    application = EventApplication.objects.get(
+                        event_applicant=ticket.owner,
+                        event=ticket.event
+                    )
+                    application.ticket = ticket
+                    application.save()
+
                 ticket_formset = formset(queryset=Ticket.objects.none())
 
     view = {
