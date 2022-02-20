@@ -1,0 +1,44 @@
+{% extends "modeladmin/create.html" %}
+{% load i18n %}
+
+{% block extra_head %}
+{{ block.super }}
+<style>
+.field-content {
+    font-size: 1.1em;
+}
+.field-content span {
+    float: left;
+    padding-top: 1.2em;
+}
+</style>
+{% endblock %}
+
+{% block form_action %}{% url 'events_event_modeladmin_unassign_unpaid_tickets' event.id %}{% endblock %}
+
+{% block form %}
+<div class="objects">
+  <p>The following tickets will be unassigned:</p>
+    <table>
+        <thead>
+          <th>Ticket number</th>
+          <th>Owner email</th>
+        </thead>
+        <tbody>
+          {% for ticket in tickets %}
+            <tr>
+               <td>{{ ticket.ticket_number }}</td>
+               <td>{{ ticket.owner.email }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+{% block form_actions %}
+      <button type="submit" name="confirm" class="button action-save button-longrunning" tabindex="3" data-clicked-text="{% trans 'Unassigning...' %}">
+            <span class="icon icon-spinner"></span><em>{% trans 'confirm' %}</em>
+        </button>
+{% endblock %}

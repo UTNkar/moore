@@ -1,0 +1,68 @@
+{% extends "modeladmin/create.html" %}
+{% load i18n %}
+
+{% block extra_head %}
+{{ block.super }}
+<style>
+.field-content {
+    font-size: 1.1em;
+}
+.field-content span {
+    float: left;
+    padding-top: 1.2em;
+}
+</style>
+{% endblock %}
+
+{% block form_action %}{% url 'events_event_modeladmin_assign_tickets' event.id %}{% endblock %}
+
+{% block form %}
+{% if form.errors %}
+<div class="help-block help-critical">
+    <ul>
+    {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<div class="objects">
+  {% csrf_token %}
+  {{ num_randomize_form }}
+  {{ formset.management_form }}
+    <table>
+        <thead>
+            {% for form in formset.forms %}
+                {% if forloop.first %}
+                    {% for field in form.visible_fields %}
+                        <th>{{ field.label_tag }}</th>
+                    {% endfor %}
+                {% endif %}
+        </thead>
+        <tbody>
+                <tr>
+                    {% for field in form.visible_fields %}
+                        <td>{{ field }}</td>
+                    {% endfor %}
+                    {% for field in form.hidden_fields %}
+                        <td>{{ field }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+{% block form_actions %}
+      <button type="submit" name="save" class="button action-save button-longrunning" tabindex="3" data-clicked-text="{% trans 'Assigning...' %}" {% if disabled %}disabled {% endif %}>
+            <span class="icon icon-spinner"></span><em>{% trans 'Save' %}</em>
+        </button>
+
+        <button type="submit" name="randomize" class="button action-save button-longrunning" tabindex="6" data-clicked-text="{% trans 'Randomizing...' %}">
+            <span class="icon icon-spinner"></span><em>{% trans 'Random assignment' %}</em>
+        </button>
+{% endblock %}

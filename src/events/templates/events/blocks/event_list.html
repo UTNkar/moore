@@ -1,0 +1,8 @@
+{% load wagtailcore_tags %}
+<div class="container">
+  {% for event in self.events %}
+      {% if event.published %}
+        {% include "events/blocks/event.html" with event=event %}
+      {% endif %}
+  {% endfor %}
+</div>

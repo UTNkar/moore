@@ -20,6 +20,7 @@ urlpatterns = [
 
     # Needs to be imported before wagtail admin
     url(r'', include('involvement.urls')),
+    url(r'', include('events.urls')),
     path('member_check_api/', member_check_api, name='member_check_api'),
 
     url(r'^admin/', include(wagtailadmin_urls)),
