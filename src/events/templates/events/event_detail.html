@@ -19,7 +19,11 @@
         <h5>{% trans 'You have a spot for this event!' %}</h5>
         <a href="{% url 'my-ticket' object.id %}" class="btn btn-primary">{% trans 'View my spot' %}</a>
         {% elif already_applied %}
-        <h5>{% trans 'You have applied to this event. Stay tuned!' %}</h5>
+          {% if not object.raffle_has_been_held %}
+            <h5>{% trans 'You have applied to this event. Stay tuned!' %}</h5>
+          {% else %}
+            <h5>{% trans "You have applied to this event, but you haven't recieved an entry yet." %}</h5>
+          {% endif %}
 
           <form method="post">
             {% csrf_token %}
@@ -37,7 +41,11 @@
             <input type="submit" value="{% trans 'Apply' %}" class="btn btn-primary">
           </form>
           {% else %}
-          <h5>{% trans 'Application date has passed.' %}</h5>
+              {% if object.raffle_has_been_held %}
+                  <h5>{% trans "You don't have a ticket to this event." %}</h5>
+              {% else %}
+                  <h5>{% trans 'Application date has passed.' %}</h5>
+              {% endif %}
           {% endif %}
         {% endif %}
       </div>
