@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from wagtail.admin.edit_handlers import FieldPanel
 import events.models as event_models
 from members.models import Member
-from wagtail.admin.edit_handlers import FieldPanel
+
 
 class OwnerFieldPanel(FieldPanel):
     def on_form_bound(self):
@@ -14,6 +14,7 @@ class OwnerFieldPanel(FieldPanel):
         self.form.fields['owner'].queryset = choices
         self.form.fields['owner'].empty_label = None
         super().on_form_bound()
+
 
 class Ticket(models.Model):
     """A ticket type determines what allows a user entry to an event"""
@@ -81,10 +82,9 @@ class Ticket(models.Model):
         )
 
     def get_owner_choices(self):
-        return Member.objects.all().order_by('email');
+        return Member.objects.all().order_by('email')
 
-
-    # ------ Administrator settings ------
+# ------ Administrator settings ------
     panels = [
         OwnerFieldPanel('owner'),
         FieldPanel('event'),
@@ -92,7 +92,6 @@ class Ticket(models.Model):
         FieldPanel('locked'),
         FieldPanel('payment_status'),
     ]
-
 
 @receiver(post_save, sender=Ticket)
 def post_save(sender, instance, created, **kwargs):
