@@ -139,7 +139,8 @@ class Event(models.Model):
         default=False,
         verbose_name=_('Raffle has been held'),
         help_text=_('This signals to users whether a raffle has been held. '
-                    'This field populates automatically once a raffle has been held.')
+                    'This field populates automatically once a '
+                    ' raffle has been held.')
     )
 
     class Meta:

@@ -93,6 +93,7 @@ class Ticket(models.Model):
         FieldPanel('payment_status'),
     ]
 
+
 @receiver(post_save, sender=Ticket)
 def post_save(sender, instance, created, **kwargs):
     if not created:

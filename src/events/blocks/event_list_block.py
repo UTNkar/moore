@@ -3,6 +3,7 @@ from wagtail.snippets.blocks import SnippetChooserBlock
 from wagtail.core import blocks
 from events.models import Ticket
 
+
 class EventBlock(SnippetChooserBlock):
     def __init__(self, **kwargs):
         super(EventBlock, self).__init__(
@@ -23,7 +24,9 @@ class EventListBlock(blocks.StructBlock):
         ctx = super().get_context(value, parent_context=parent_context)
 
         for event in ctx['self']['events']:
-            event.user_has_ticket = Ticket.objects.filter(owner=ctx['user'], event=event).exists()
+            event.user_has_ticket = Ticket.objects.filter(
+                owner=ctx['user'], event=event
+            ).exists()
 
         return ctx
 
