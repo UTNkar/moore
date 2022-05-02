@@ -29,12 +29,12 @@
                 </div>
             </div>
 
-            <div class="col s12 m8 pull-m4">
+            <div class="col s12 m8 pull-m4" style="overflow-wrap:anywhere">
                 <h1>{{ position }}</h1>
                 <span class="deadline" style="color: {{ position.recruitment_end|date_color }};">{% trans 'deadline'|capfirst %}: {{ position.recruitment_end }}</span>
 
                 <h2>{% trans 'role description'|title %}</h2>
-                <p>{% if position.role.description %}{{ position.role.description|linebreaks }}{% else %}{% trans 'No role description is available at this time. For more information about this position, please get in contact with us.' %}{% endif %}</p>
+                <div>{% if position.role.description %}{{ position.role.description|linebreaks|urlize }}{% else %}{% trans 'No role description is available at this time. For more information about this position, please get in contact with us.' %}{% endif %}</div>
 
                 {% if position.comment %}
                     <h2>{% trans 'comments for this year'|title %}</h2>
