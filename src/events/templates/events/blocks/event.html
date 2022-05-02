@@ -12,7 +12,11 @@
         </div>
       </div>
       <div class="card-action">
-        <a href="{% url 'single-event-page' event.id %}">Read more and register</a>
+        {% if event.user_has_ticket %}
+            <a href="{% url 'my-ticket' event.id %}">View my entry</a>
+        {% else %}
+            <a href="{% url 'single-event-page' event.id %}">Read more and register</a>
+        {% endif %}
       </div>
     </div>
   </div>

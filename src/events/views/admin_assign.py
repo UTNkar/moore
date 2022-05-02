@@ -81,6 +81,8 @@ def admin_assign(request, pos_id=None):
                     application.ticket = ticket
                     application.save()
 
+                event.raffle_has_been_held = True
+                event.save()
                 ticket_formset = formset(queryset=Ticket.objects.none())
 
     view = {

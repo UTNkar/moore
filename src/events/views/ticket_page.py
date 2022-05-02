@@ -48,6 +48,7 @@ def my_ticket(request, event_pk):
                         instance.delete()
                     elif 'lock_for_payment' in request.POST:
                         ticket.locked = True
+                        instance.save()
                     else:
                         cleaned_data = form.cleaned_data
                         instance.order = cleaned_data['order']
