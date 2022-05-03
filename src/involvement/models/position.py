@@ -67,6 +67,23 @@ class Position(models.Model):
             return "%s %s" % (self.role.name, self.term_from.year)
 
     @property
+    def long_name(self):
+        """
+        Return the long name of this position.
+
+        The long name contains the team_names that the positions role
+        is a part of
+        """
+        return '%(position)s %(separator)s %(teams)s' % {
+                'position': str(self),
+                'separator': _('in'),
+                'teams': self.role.team_names
+            }
+    # fget is a python thing that is needed since long_name is a property
+    long_name.fget.short_description = _('Position')
+    long_name.fget.admin_order_field = 'position'
+
+    @property
     def appointed_applications(self):
         Application = apps.get_model('involvement', 'Application')
         return Application.objects.filter(

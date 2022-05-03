@@ -211,7 +211,7 @@ class PositionAdmin(ModelAdmin):
     menu_label = _('Positions')
     menu_icon = 'fa-address-card'
     menu_order = 300
-    list_display = ('role', 'appointments', 'term_from', 'term_to')
+    list_display = ('long_name', 'appointments', 'term_from', 'term_to')
     search_fields = ('role__teams__name_en', 'role__teams__name_sv',
                      'role__name_en', 'role__name_sv', 'comment_en',
                      'comment_sv')
@@ -242,7 +242,7 @@ class ApplicationAdmin(ModelAdmin):
     menu_label = _('Applications')
     menu_icon = 'mail'
     menu_order = 400
-    list_display = ('role', 'position', 'applicant', 'status')
+    list_display = ('position_long_name', 'applicant_name', 'status')
     list_filter = ('position__role__teams', 'status')
     search_fields = (
         'position__role__teams__name_en', 'position__role__teams__name_sv',
@@ -271,8 +271,16 @@ class ApplicationAdmin(ModelAdmin):
                 qs = qs.order_by(*ordering)
             return qs
 
-    def role(self, obj):
-        return obj.position.role
+    def position_long_name(self, obj):
+        return obj.position.long_name
+    position_long_name.short_description = _('Position')
+    position_long_name.admin_order_field = 'position'
+
+    def applicant_name(self, obj):
+        """Used by list_display since obj contains foreign keys."""
+        return obj.applicant.name
+    applicant_name.admin_order_field = 'applicant__name'
+    applicant_name.short_description = _('Name')
 
 
 class ContactCardAdmin(ModelAdmin):
