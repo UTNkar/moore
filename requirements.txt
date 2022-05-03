@@ -8,7 +8,7 @@ requests==2.27.1
 
 # Templates
 django-compressor==2.4.1
-django-libsass==0.8
+django-libsass==0.9
 wagtailfontawesome==1.2.1
 
 # Scheduled tasks
@@ -30,7 +30,7 @@ phonenumbers==8.12.47
 # Wagtail media module
 wagtailmedia==0.9.0
 
-djangorestframework==3.12.4
+djangorestframework==3.13.1
 
 # Recaptcha for wagtail form pages
 wagtail-django-recaptcha==1.0
