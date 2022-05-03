@@ -7,7 +7,7 @@ wagtail==2.13
 requests==2.27.1
 
 # Templates
-django-compressor==2.4.1
+django-compressor==4.0
 django-libsass==0.9
 wagtailfontawesome==1.2.1
 
