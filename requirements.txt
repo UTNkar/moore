@@ -8,14 +8,14 @@ requests==2.27.1
 
 # Templates
 django-compressor==2.4.1
-django-libsass==0.8
+django-libsass==0.9
 wagtailfontawesome==1.2.1
 
 # Scheduled tasks
 django-kronos==1.0
 
 # User management
-rules==3.0
+rules==3.3
 django-simple-email-confirmation==0.70
 
 # Logging
