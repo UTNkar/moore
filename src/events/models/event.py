@@ -135,6 +135,14 @@ class Event(models.Model):
         help_text=_('Email address for who to contact regarding this event.')
     )
 
+    raffle_has_been_held = models.BooleanField(
+        default=False,
+        verbose_name=_('Raffle has been held'),
+        help_text=_('This signals to users whether a raffle has been held. '
+                    'This field populates automatically once a '
+                    ' raffle has been held.')
+    )
+
     class Meta:
         verbose_name = _('event')
         verbose_name_plural = _('events')
@@ -172,6 +180,7 @@ class Event(models.Model):
         ]),
         FieldPanel('contact_email'),
         FieldPanel('published'),
+        FieldPanel('raffle_has_been_held'),
     ])
     ]
 
