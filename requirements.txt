@@ -4,7 +4,7 @@ wagtail==2.13
 
 
 # External Libraries
-requests==2.25.1
+requests==2.27.1
 
 # Templates
 django-compressor==2.4.1
