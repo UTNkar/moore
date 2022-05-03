@@ -5,6 +5,15 @@ from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from wagtail.admin.edit_handlers import FieldPanel
 import events.models as event_models
+from members.models import Member
+
+
+class OwnerFieldPanel(FieldPanel):
+    def on_form_bound(self):
+        choices = self.model.get_owner_choices(self.model)
+        self.form.fields['owner'].queryset = choices
+        self.form.fields['owner'].empty_label = None
+        super().on_form_bound()
 
 
 class Ticket(models.Model):
@@ -72,9 +81,12 @@ class Ticket(models.Model):
             str(self.event),
         )
 
-    # ------ Administrator settings ------
+    def get_owner_choices(self):
+        return Member.objects.all().order_by('email')
+
+# ------ Administrator settings ------
     panels = [
-        FieldPanel('owner'),
+        OwnerFieldPanel('owner'),
         FieldPanel('event'),
         FieldPanel('ticket_number'),
         FieldPanel('locked'),
