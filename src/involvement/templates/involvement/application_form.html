@@ -120,6 +120,23 @@
         {% endif %}
     </fieldset>
 
+    <fieldset>
+      <legend><i class="material-icons">gavel</i>{{ form.gdpr.label|title }}</legend>
+      <div class="form-check">
+        <input 
+          id="{{ form.gdpr.auto_id }}"
+          name="{{ form.gdpr.name }}"
+          type="checkbox" 
+          {% if status == 'submitted' %} readonly {% endif %}
+          {% if form.gdpr.initial %} checked {% endif %}
+          class="filled-in"
+          required>
+          <label for="{{ form.gdpr.auto_id }}">
+            {{ form.gdpr.help_text }}
+        </label>
+      </div>
+    </fieldset>
+
     {% if not position.is_past_due %}
     <div class="col s12">
         {% if status == 'draft' %}
