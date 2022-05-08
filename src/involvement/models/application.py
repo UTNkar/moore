@@ -59,6 +59,12 @@ class Application(ClusterableModel):
         help_text=_('Give a summary of relevant qualifications'),
     )
 
+    gdpr = models.BooleanField(
+        default=False,
+        verbose_name=_('GDPR'),
+        help_text=_('GDPR text...'),
+      )
+
     # Access overhead
     removed = models.BooleanField(
         default=False,
@@ -86,6 +92,7 @@ class Application(ClusterableModel):
         FieldPanel('qualifications'),
         InlinePanel('references'),
         FieldPanel('status'),
+        FieldPanel('gdpr'),
     ])]
 
 
