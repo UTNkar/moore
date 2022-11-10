@@ -57,7 +57,7 @@ class ApiClient:
     def get_melos_id(self, ssn):
         parsed_ssn = ssn
 
-        if(not isinstance(parsed_ssn, str)):
+        if (not isinstance(parsed_ssn, str)):
             parsed_ssn = ssn[0].strftime('%Y%m%d') + '-' + ssn[1]
 
         r = self.request_get('user', {
