@@ -127,13 +127,12 @@
           id="{{ form.gdpr.auto_id }}"
           name="{{ form.gdpr.name }}"
           type="checkbox" 
-          {% if status == 'submitted' %} readonly {% endif %}
+          {% if status == 'submitted' %} {% endif %}
           {% if form.gdpr.initial %} checked {% endif %}
           class="filled-in"
           required>
-          <label for="{{ form.gdpr.auto_id }}">
-            {{ form.gdpr.help_text }}
-        </label>
+          <label for="{{ form.gdpr.auto_id }}">{{ form.gdpr.help_text }}</label>
+        <label><a href="https://www.utn.se/about-union/document-archive/">https://www.utn.se/about-union/document-archive/</a></label>
       </div>
     </fieldset>
 
