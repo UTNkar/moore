@@ -63,8 +63,8 @@ class Application(ClusterableModel):
 
     gdpr = models.BooleanField(
         default=False,
-        verbose_name=_('GDPR'),
-        help_text=mark_safe('I accept that my data is saved in accordance with Uppsala Union of Engineering and Science Students integrity policy that can be found within the link below:'),
+        verbose_name=('GDPR'),
+        help_text=_('I accept that my data is saved in accordance with Uppsala Union of Engineering and Science Students integrity policy that can be found within the link: '),
       )
 
     # Access overhead

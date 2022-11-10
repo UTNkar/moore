@@ -121,13 +121,13 @@
     </fieldset>
 
     <fieldset>
-      <legend><i class="material-icons">gavel</i>{{ form.gdpr.label|title }}</legend>
+      <legend><i class="material-icons">gavel</i>{{ form.gdpr.label|title|upper }}</legend>
       <div class="form-check">
         <input 
           id="{{ form.gdpr.auto_id }}"
           name="{{ form.gdpr.name }}"
           type="checkbox" 
-          {% if status == 'submitted' %} {% endif %}
+          {% if status == 'submitted' %} readonly {% endif %}
           {% if form.gdpr.initial %} checked {% endif %}
           class="filled-in"
           required>
