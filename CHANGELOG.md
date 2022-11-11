@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [3.0.5] - 2022-01-26
+- Buggfixes [#613](https://github.com/UTNkar/moore/pull/613),[#624](https://github.com/UTNkar/moore/pull/624),[#625](https://github.com/UTNkar/moore/pull/625), [#627](https://github.com/UTNkar/moore/pull/627). 
+- Added participants model [#628](https://github.com/UTNkar/moore/pull/628).
+
+
+
 ## [3.0.4] - 2022-01-08
 - New feature for event management [#612](https://github.com/UTNkar/moore/pull/612)
 
