@@ -59,6 +59,16 @@ class Application(ClusterableModel):
         help_text=_('Give a summary of relevant qualifications'),
     )
 
+    gdpr = models.BooleanField(
+        default=False,
+        verbose_name=('GDPR'),
+        help_text=_("""
+            I accept that my data is saved in accordance
+            with Uppsala Union of Engineering and Science Students integrity
+            policy that can be found within the link:
+        """),
+      )
+
     # Access overhead
     removed = models.BooleanField(
         default=False,
@@ -86,6 +96,7 @@ class Application(ClusterableModel):
         FieldPanel('qualifications'),
         InlinePanel('references'),
         FieldPanel('status'),
+        FieldPanel('gdpr')
     ])]
 
 
