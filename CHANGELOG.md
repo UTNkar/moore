@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1.0] - 2022-11-11
+- Changed list display for applications and positions [#573](https://github.com/UTNkar/moore/pull/573)
+- Fix urlize links in role descriptions and avoid long links to break the page [#638](https://github.com/UTNkar/moore/pull/638)
+- Added feature gdpr-button [#678](https://github.com/UTNkar/moore/pull/687)
+- Bugfixes [#640](https://github.com/UTNkar/moore/pull/640)
+- Bump psycopg2 from 2.8.6 to 2.9.3 [#610](https://github.com/UTNkar/moore/pull/610)
+- Bump wagtailmedia from 0.7.0 to 0.9.0 [#639](https://github.com/UTNkar/moore/pull/639)
+- Bump phonenumbers from 8.12.23 to 8.12.47 [#47](https://github.com/UTNkar/moore/pull/647)
+- Bump rules from 3.0 to 3.3 [#651](https://github.com/UTNkar/moore/pull/651)
+- Bump requests from 2.25.1 to 2.27.1 [#652](https://github.com/UTNkar/moore/pull/652)
+- Bump djangorestframework from 3.12.4 to 3.13.1 [#653](https://github.com/UTNkar/moore/pull/653)
+- Bump django-libsass from 0.8 to 0.9 [#654](https://github.com/UTNkar/moore/pull/654) 
+- Bump sentry-sdk from 1.1.0 to 1.5.11 [#655](https://github.com/UTNkar/moore/pull/655) 
+- Bump phonenumbers from 8.12.47 to 8.12.48 [#656](https://github.com/UTNkar/moore/pull/656)
 
 ## [3.0.5] - 2022-01-26
 - Buggfixes [#613](https://github.com/UTNkar/moore/pull/613),[#624](https://github.com/UTNkar/moore/pull/624),[#625](https://github.com/UTNkar/moore/pull/625), [#627](https://github.com/UTNkar/moore/pull/627). 
