@@ -113,4 +113,4 @@ Using and developing it is a bit special so it has some separate instructions wh
 
 ## License
 
-[AGPL-v2.0](LICENSE), unless a different, usually external, license is provided within a folder or file.
+[AGPL-v3.0](LICENSE), unless a different, usually external, license is provided within a folder or file.
