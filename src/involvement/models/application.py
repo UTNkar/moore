@@ -3,7 +3,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-from django.utils.translation import gettext_lazy as _ 
+from django.utils.translation import gettext_lazy as _
 from modelcluster.models import ClusterableModel
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
     InlinePanel, FieldRowPanel
@@ -62,10 +62,12 @@ class Application(ClusterableModel):
     gdpr = models.BooleanField(
         default=False,
         verbose_name=('GDPR'),
-        help_text=_("""I accept that my data is saved in accordance with
-                    Uppsala Union of Engineering and Science Students 
-                    integrity policy that can be found within the link: """),
-                    )
+        help_text=_("""
+            I accept that my data is saved in accordance
+            with Uppsala Union of Engineering and Science Students integrity
+            policy that can be found within the link:
+        """),
+      )
 
     # Access overhead
     removed = models.BooleanField(
