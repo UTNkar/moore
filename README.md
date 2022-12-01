@@ -14,6 +14,26 @@ administrator](mailto:admin@utn.se).
 Before contributing please read through our [contribution
 guidelines](CONTRIBUTING.md).
 
+To set up a local version of moore, use either Docker (**recommended**) or a virtual environment.
+
+## Getting Started - Docker
+
+If you can use Docker, there is an alternative way to get your development
+environment all set up:
+
+1. Install [docker engine](https://docs.docker.com/engine/install/)
+1. Install [docker compose](https://docs.docker.com/compose/install/).
+(On Ubuntu you can install `docker-compose` with `sudo apt install docker-compose`)
+1. Clone the repository.
+2. Copy `.env-docker-template` to `.env` and fill in the environments.
+3. Run `docker-compose up` create and start the docker instance
+4. Run `docker exec -it moore python src/manage.py migrate` to initialize the
+database
+5. Run `docker exec -it moore python src/manage.py createsuperuser` to create an admin
+user.
+
+The Moore application is now available on `http://localhost:8000` and can be started using `docker-compose up -d` (the `-d` flag starts the instance in the background) and stopped `docker-compose stop`.
+
 ## Getting Started - Virtual Environment
 
 To get started with Project Moore, follow these instructions to set up a
@@ -40,23 +60,6 @@ During development, you can run a test web server using `./manage.py runserver`.
 
 **IMPORTANT!** When running any command in moore, you must be in the virtual environment (a.k.a. `source source_me.sh`)
 
-## Getting Started - Docker
-
-If you can use Docker, there is an alternative way to get your development
-environment all set up:
-
-1. Install [docker engine](https://docs.docker.com/engine/install/)
-1. Install [docker compose](https://docs.docker.com/compose/install/).
-(On Ubuntu you can install `docker-compose` with `sudo apt install docker-compose`)
-1. Clone the repository.
-2. Copy `.env-docker-template` to `.env` and fill in the environments.
-3. Run `docker-compose up` create and start the docker instance
-4. Run `docker exec -it moore python src/manage.py migrate` to initialize the
-database
-5. Run `docker exec -it moore python src/manage.py createsuperuser` to create an admin
-user.
-
-The Moore application is now available on `http://localhost:8000` and can be started using `docker-compose up -d` (the `-d` flag starts the instance in the background) and stopped `docker-compose stop`.
 
 ## Documentation
 
