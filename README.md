@@ -14,7 +14,7 @@ administrator](mailto:admin@utn.se).
 Before contributing please read through our [contribution
 guidelines](CONTRIBUTING.md).
 
-To set up a local version of moore, use either Docker (**recommended**) or a virtual environment.
+To set up a local version of moore, use either Docker or a virtual environment (**recommended**).
 
 ## Getting Started - Docker
 
@@ -44,7 +44,7 @@ To get started with Project Moore, follow these instructions to set up a
 2. Install the following python packages:
    - python3-venv
    - python3-dev
-   - build-essentials
+   - build-essential
    - libpq-dev
 3. Clone the repository.
 3. Copy the file `.env-normal-template` and name the copy `.env-normal`
