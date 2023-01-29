@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-08 17:23+0200\n"
+"POT-Creation-Date: 2022-11-10 20:55+0100\n"
 "PO-Revision-Date: 2017-06-26 10:23+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: apps.py:7 wagtail_hooks.py:301
+#: apps.py:7 wagtail_hooks.py:309
 msgid "Involvement"
 msgstr "Engagemang"
 
@@ -73,61 +73,70 @@ msgstr ""
 "Du kan inte tillsätta sökande till %(current)s. Det maximala antalet för "
 "denna post är %(max)s."
 
-#: forms/approval_form.py:11 models/application.py:37
+#: forms/approval_form.py:11 models/application.py:39
 msgid "Approved"
 msgstr "Nominerad"
 
-#: forms/approval_form.py:12 models/application.py:38
+#: forms/approval_form.py:12 models/application.py:40
 msgid "Disapproved"
 msgstr "Inte Nominerad"
 
-#: models/application.py:29
+#: models/application.py:31
 msgid "Application"
 msgstr "Ansökning"
 
-#: models/application.py:30 wagtail_hooks.py:242
+#: models/application.py:32 wagtail_hooks.py:242
 msgid "Applications"
 msgstr "Ansökningar"
 
-#: models/application.py:35
+#: models/application.py:37
 msgid "Draft"
 msgstr "Utkast"
 
-#: models/application.py:36
+#: models/application.py:38
 msgid "Submitted"
 msgstr "Inskickade"
 
-#: models/application.py:39
+#: models/application.py:41
 msgid "Appointed"
 msgstr "Tillsatt"
 
-#: models/application.py:40
+#: models/application.py:42
 msgid "Turned down"
 msgstr "Avslagen"
 
-#: models/application.py:46
+#: models/application.py:48
 msgid "Status"
 msgstr "Status"
 
-#: models/application.py:53
+#: models/application.py:55
 msgid "Cover Letter"
 msgstr "Ansökningsbrev"
 
-#: models/application.py:54
+#: models/application.py:56
 msgid "Present yourself and state why you are who we are looking for"
 msgstr ""
 "Skriv en presentation av dig själv och en beskrivning av varför du är den vi "
 "letar efter"
 
-#: models/application.py:58
+#: models/application.py:60
 msgid "Qualifications"
 msgstr "Meriter"
 
-#: models/application.py:59
+#: models/application.py:61
 msgid "Give a summary of relevant qualifications"
 msgstr "Ge en sammanfattning av relevanta meriter"
 
-#: models/application.py:74
+#: models/application.py:67
+msgid ""
+"I accept that my data is saved in accordance with Uppsala Union of "
+"Engineering and Science Students integrity policy that can be found within "
+"the link: "
+msgstr ""
+"Jag godkänner att mina uppgifter sparas i enlighet med Uppsala teknolog- och "
+"naturvetarkårs integritetspolicy som går att hitta på: "
+
+#: models/application.py:82
 msgid "Rejection date"
 msgstr ""
 
@@ -147,7 +156,7 @@ msgstr "Mandat historik"
 msgid "Mandate histories"
 msgstr "Mandat historik"
 
-#: models/position.py:16
+#: models/position.py:16 models/position.py:83 wagtail_hooks.py:276
 msgid "Position"
 msgstr "Post"
 
@@ -192,6 +201,10 @@ msgstr ""
 msgid "Swedish extra comments"
 msgstr "Övriga kommentarer, svenska"
 
+#: models/position.py:79 models/role.py:261
+msgid "in"
+msgstr "i"
+
 #: models/recruitment_page.py:20
 msgid "Included teams"
 msgstr "Inkluderade grupper"
@@ -209,7 +222,7 @@ msgstr "Exkluderade grupper"
 msgid "Choose teams to exclude from the page"
 msgstr "Välj grupper att exkludera från sidan"
 
-#: models/reference.py:22
+#: models/reference.py:22 wagtail_hooks.py:283
 msgid "Name"
 msgstr "Namn"
 
@@ -346,10 +359,6 @@ msgstr "Ange ett telefonnummer som din referens kan nås på"
 #, fuzzy
 msgid "Please enter a valid phone number"
 msgstr "Ange ett giltigt telefonnummer"
-
-#: models/role.py:261
-msgid "in"
-msgstr "i"
 
 #: models/team.py:15
 msgid "Team"
@@ -499,12 +508,13 @@ msgstr "email"
 msgid "section"
 msgstr "sektion"
 
-#: templates/involvement/application_form.html:126
+#: templates/involvement/application_form.html:142
 msgid "save as draft"
 msgstr "spara utkast"
 
-#: templates/involvement/application_form.html:127
-#: templates/involvement/open_positions.html:29
+#: templates/involvement/application_form.html:143
+#: templates/involvement/open_positions.html:33
+#: templates/involvement/open_positions.html:65
 msgid "apply"
 msgstr "ansök"
 
@@ -513,7 +523,7 @@ msgid "status"
 msgstr "status"
 
 #: templates/involvement/application_summary.html:20
-#: templates/involvement/open_positions.html:30
+#: templates/involvement/open_positions.html:21
 #: templates/involvement/open_positions.html:34
 #: templates/involvement/position.html:34
 msgid "deadline"
@@ -532,16 +542,16 @@ msgstr "redigera ansökan"
 msgid "view application"
 msgstr "granska ansökan"
 
-#: templates/involvement/base.html:10
+#: templates/involvement/base.html:8
 #: templates/involvement/open_positions.html:6
 msgid "open positions"
 msgstr "sökbara poster"
 
-#: templates/involvement/base.html:13
+#: templates/involvement/base.html:11
 msgid "my positions"
 msgstr "mina poster"
 
-#: templates/involvement/base.html:16
+#: templates/involvement/base.html:14
 msgid "my applications"
 msgstr "mina ansökningar"
 
@@ -572,31 +582,31 @@ msgstr "Dina poster"
 msgid "You currently do not have any posts."
 msgstr "Du har inga poster."
 
-#: templates/involvement/open_positions.html:23
+#: templates/involvement/open_positions.html:28
 #: templates/involvement/position.html:22
 msgid "unaffiliated"
 msgstr "ej ansluten"
 
-#: templates/involvement/open_positions.html:35
+#: templates/involvement/open_positions.html:38
 msgid "Term of office"
 msgstr "Mandatperiod"
 
-#: templates/involvement/open_positions.html:36
+#: templates/involvement/open_positions.html:42
 #: templates/involvement/position.html:36
 msgid "role description"
 msgstr "Rollbeskrivning"
 
-#: templates/involvement/open_positions.html:36
-#: templates/involvement/open_positions.html:37
+#: templates/involvement/open_positions.html:46
+#: templates/involvement/open_positions.html:58
 msgid "Read more"
 msgstr "Läs mer"
 
-#: templates/involvement/open_positions.html:37
+#: templates/involvement/open_positions.html:53
 #: templates/involvement/position.html:40
 msgid "comments for this year"
 msgstr "kommenterar för detta år"
 
-#: templates/involvement/open_positions.html:43
+#: templates/involvement/open_positions.html:72
 msgid "There are currently no open positions. Check back later!"
 msgstr ""
 "Det finns för närvarande inga sökbara poster. Välkommen att komma tillbaka "
@@ -774,6 +784,6 @@ msgstr "Tillsätt"
 msgid "Appoint member to %s"
 msgstr "Tillsätt medlem som %s"
 
-#: wagtail_hooks.py:280
+#: wagtail_hooks.py:288
 msgid "Contact Cards"
 msgstr "Kontaktkort"

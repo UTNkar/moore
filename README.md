@@ -14,31 +14,7 @@ administrator](mailto:admin@utn.se).
 Before contributing please read through our [contribution
 guidelines](CONTRIBUTING.md).
 
-## Getting Started - Virtual Environment
-
-To get started with Project Moore, follow these instructions to set up a
-**development** environment:
-
-1. Install Python 3, at least version 3.6 or up.
-2. [Install postgresql](INSTALLING_POSTGRES.md)
-2. Install the following python packages:
-   - python3-venv
-   - python3-dev
-   - build-essentials
-   - libpq-dev
-3. Clone the repository.
-3. Copy the file `.env-normal-template` and name the copy `.env-normal`
-3. Fill in the necessary variables in `.env`. `MELOS_URL` and `MELOS_ADMIN` are required. You might have to fill in some database credidentils. Check `src/moore/settings/dev.py` for which default values are used if you don't specify and credidentials.
-4. Run `source ./source_me.sh` to create a virtual environment.
-4. Run `pip install --upgrade pip` to make sure that pip is running the latest version
-5. Run `pip install -r dev-requirements.txt`
-6. Use `cd src` to enter the website directory.
-7. Run `./manage.py migrate` to initialize the database.
-8. Run `./manage.py createsuperuser` to create an admin user.
-
-During development, you can run a test web server using `./manage.py runserver`.
-
-**IMPORTANT!** When running any command in moore, you must be in the virtual environment (a.k.a. `source source_me.sh`)
+To set up a local version of moore, use either Docker or a virtual environment (**recommended**).
 
 ## Getting Started - Docker
 
@@ -57,6 +33,33 @@ database
 user.
 
 The Moore application is now available on `http://localhost:8000` and can be started using `docker-compose up -d` (the `-d` flag starts the instance in the background) and stopped `docker-compose stop`.
+
+## Getting Started - Virtual Environment
+
+To get started with Project Moore, follow these instructions to set up a
+**development** environment:
+
+1. Install Python 3, at least version 3.6 or up.
+2. [Install postgresql](INSTALLING_POSTGRES.md)
+2. Install the following python packages:
+   - python3-venv
+   - python3-dev
+   - build-essential
+   - libpq-dev
+3. Clone the repository.
+3. Copy the file `.env-normal-template` and name the copy `.env-normal`
+3. Fill in the necessary variables in `.env`. `MELOS_URL` and `MELOS_ADMIN` are required. You might have to fill in some database credidentils. Check `src/moore/settings/dev.py` for which default values are used if you don't specify and credidentials.
+4. Run `source ./source_me.sh` to create a virtual environment.
+4. Run `pip install --upgrade pip` to make sure that pip is running the latest version
+5. Run `pip install -r dev-requirements.txt`
+6. Use `cd src` to enter the website directory.
+7. Run `./manage.py migrate` to initialize the database.
+8. Run `./manage.py createsuperuser` to create an admin user.
+
+During development, you can run a test web server using `./manage.py runserver`.
+
+**IMPORTANT!** When running any command in moore, you must be in the virtual environment (a.k.a. `source source_me.sh`)
+
 
 ## Documentation
 
@@ -113,4 +116,4 @@ Using and developing it is a bit special so it has some separate instructions wh
 
 ## License
 
-[AGPL-v2.0](LICENSE), unless a different, usually external, license is provided within a folder or file.
+[AGPL-v3.0](LICENSE), unless a different, usually external, license is provided within a folder or file.
