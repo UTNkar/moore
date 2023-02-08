@@ -1,5 +1,5 @@
 
-Django[argon2]==3.2.3
+Django[argon2]==3.2.18
 wagtail==2.13
 
 
