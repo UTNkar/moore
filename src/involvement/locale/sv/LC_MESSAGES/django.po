@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-10 20:55+0100\n"
+"POT-Creation-Date: 2023-02-15 23:58+0100\n"
 "PO-Revision-Date: 2017-06-26 10:23+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -51,7 +51,7 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid "No user with the username %(user)s exists."
 msgid "No user with the person number %(pnr)s exists."
-msgstr "Det finns ingen användare med användarnamnet %(user)s."
+msgstr "Det finns ingen användare med personnummret %(pnr)s."
 
 #: forms/appointment_form.py:57
 #, fuzzy, python-format
@@ -62,7 +62,8 @@ msgid ""
 "User with person number %(pnr)s already applied for this position and can "
 "not be appointed through the overturn field."
 msgstr ""
-"Användaren %(user)s har redan sökt den här posten och kan inte bli tillsatt."
+"Användaren med personnummret %(pnr)s har redan sökt den här posten och kan "
+"inte bli tillsatt."
 
 #: forms/appointment_form.py:75
 #, python-format
@@ -73,70 +74,78 @@ msgstr ""
 "Du kan inte tillsätta sökande till %(current)s. Det maximala antalet för "
 "denna post är %(max)s."
 
-#: forms/approval_form.py:11 models/application.py:39
+#: forms/approval_form.py:11 models/application.py:37
 msgid "Approved"
 msgstr "Nominerad"
 
-#: forms/approval_form.py:12 models/application.py:40
+#: forms/approval_form.py:12 models/application.py:38
 msgid "Disapproved"
 msgstr "Inte Nominerad"
 
-#: models/application.py:31
+#: models/application.py:29
 msgid "Application"
 msgstr "Ansökning"
 
-#: models/application.py:32 wagtail_hooks.py:242
+#: models/application.py:30 wagtail_hooks.py:242
 msgid "Applications"
 msgstr "Ansökningar"
 
-#: models/application.py:37
+#: models/application.py:35
 msgid "Draft"
 msgstr "Utkast"
 
-#: models/application.py:38
+#: models/application.py:36
 msgid "Submitted"
 msgstr "Inskickade"
 
-#: models/application.py:41
+#: models/application.py:39
 msgid "Appointed"
 msgstr "Tillsatt"
 
-#: models/application.py:42
+#: models/application.py:40
 msgid "Turned down"
 msgstr "Avslagen"
 
-#: models/application.py:48
+#: models/application.py:46
 msgid "Status"
 msgstr "Status"
 
-#: models/application.py:55
+#: models/application.py:53
 msgid "Cover Letter"
 msgstr "Ansökningsbrev"
 
-#: models/application.py:56
+#: models/application.py:54
 msgid "Present yourself and state why you are who we are looking for"
 msgstr ""
 "Skriv en presentation av dig själv och en beskrivning av varför du är den vi "
 "letar efter"
 
-#: models/application.py:60
+#: models/application.py:58
 msgid "Qualifications"
 msgstr "Meriter"
 
-#: models/application.py:61
+#: models/application.py:59
 msgid "Give a summary of relevant qualifications"
 msgstr "Ge en sammanfattning av relevanta meriter"
 
-#: models/application.py:67
+#: models/application.py:65
+#, fuzzy
+#| msgid ""
+#| "I accept that my data is saved in accordance with Uppsala Union of "
+#| "Engineering and Science Students integrity policy that can be found "
+#| "within the link: "
 msgid ""
-"I accept that my data is saved in accordance with Uppsala Union of "
-"Engineering and Science Students integrity policy that can be found within "
-"the link: "
+"\n"
+"            I accept that my data is saved in accordance\n"
+"            with Uppsala Union of Engineering and Science Students "
+"integrity\n"
+"            policy that can be found within the link:\n"
+"        "
 msgstr ""
 "Jag godkänner att mina uppgifter sparas i enlighet med Uppsala teknolog- och "
 "naturvetarkårs integritetspolicy som går att hitta på: "
 
-#: models/application.py:82
+#: models/application.py:84
 msgid "Rejection date"
 msgstr ""
 
@@ -447,7 +456,7 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid "Approve applicants for %s"
 msgid "[UTN] No applicants for %(position)s"
-msgstr "Godkänn sökande till %s"
+msgstr "Godkänn sökande till %(position)s"
 
 #: templates/involvement/admin/position_appointment.html:22
 msgid ""
@@ -688,7 +697,7 @@ msgstr "Inga ansökningar har godkänts för denna roll."
 
 #: templates/modeladmin/involvement/role/inspect.html:28
 msgid "Earlier applicants"
-msgstr "Tidigare ansökande"
+msgstr "Tidigare ansökningar"
 
 #: templates/modeladmin/involvement/role/inspect.html:43
 msgid "No earlier applicants have been approved for this role."
