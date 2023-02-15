@@ -15,7 +15,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.conf.global_settings import LOGIN_URL
 from django.utils.translation import gettext_lazy as _
-from decouple import config
+from decouple import config, UndefinedValueError
 import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -245,8 +245,20 @@ INSTAGRAM_APP_ID = config('INSTAGRAM_APP_ID', default='')
 INSTAGRAM_APP_SECRET = config('INSTAGRAM_APP_SECRET', default='')
 INSTAGRAM_REDIRECT_URL = config('INSTAGRAM_REDIRECT_URL', default='')
 
-MELOS_URL = config('MELOS_URL')
-MELOS_ADMIN = config('MELOS_ADMIN')
+try:
+    MELOS_URL = config('MELOS_URL')
+    MELOS_ADMIN = config('MELOS_ADMIN')
+except UndefinedValueError as e:
+    # This allows the tests to be runned without having to have MELOS_URL and
+    # MELOS_ADMIN since they don't use the MELOS API. But this also raises
+    # the error if for example a developer tries to start the server but has
+    # not filled in the variables in their .env. I.e. The variables are still
+    # required, except for when the tests are runned.
+    if not IS_RUNNING_TEST:
+        raise UndefinedValueError(
+            "You must add MELOS_URL and MELOS_ADMIN to you .env file"
+        )
+
 MELOS_ORG_ID = config('MELOS_ORG_ID', default='')
 
 # Google API
