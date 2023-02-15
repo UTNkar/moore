@@ -1,6 +1,8 @@
 
+
 Django[argon2]==3.2.17
 wagtail==2.13
+
 
 
 # External Libraries
