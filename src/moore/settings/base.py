@@ -248,7 +248,7 @@ INSTAGRAM_REDIRECT_URL = config('INSTAGRAM_REDIRECT_URL', default='')
 try:
     MELOS_URL = config('MELOS_URL')
     MELOS_ADMIN = config('MELOS_ADMIN')
-except UndefinedValueError as _:
+except UndefinedValueError:
     # This allows the tests to be runned without having to have MELOS_URL and
     # MELOS_ADMIN since they don't use the MELOS API. But this also raises
     # the error if for example a developer tries to start the server but has
