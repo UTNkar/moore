@@ -456,7 +456,7 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid "Approve applicants for %s"
 msgid "[UTN] No applicants for %(position)s"
-msgstr "Godkänn sökande till %(position)s"
+msgstr "[UTN] Inga sökande till %(position)s"
 
 #: templates/involvement/admin/position_appointment.html:22
 msgid ""
