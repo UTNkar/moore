@@ -1,6 +1,8 @@
 
-Django[argon2]==3.2.3
+
+Django[argon2]==3.2.17
 wagtail==2.13
+
 
 
 # External Libraries
@@ -22,10 +24,10 @@ django-simple-email-confirmation==0.70
 sentry-sdk==1.5.11
 
 # Postgres
-psycopg2==2.9.3
+psycopg2==2.9.5
 
 # Phonenumber validation
-phonenumbers==8.12.48
+phonenumbers==8.13.6
 
 # Wagtail media module
 wagtailmedia==0.9.0
@@ -36,3 +38,6 @@ djangorestframework==3.13.1
 wagtail-django-recaptcha==1.0
 
 django-jsonschema-form==1.0.3
+
+# Improved environment variable handling
+python-decouple==3.7

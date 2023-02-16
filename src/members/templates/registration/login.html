@@ -12,8 +12,6 @@
     <div class="message error">{{ error }}</div>
 {% endfor %}
 
-<div class="registration-warning">{% blocktrans %}If you had an UTN-account before the 23rd of December 2019, you must create a new one because of an update of our database.{% endblocktrans %}</div>
-
 {% if next %}
     {% if user.is_authenticated %}
         <div class="message warning">{% blocktrans %}Your account doesn't have access to this page. To proceed, please login with an account that has access.{% endblocktrans %}</div>
