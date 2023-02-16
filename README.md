@@ -96,7 +96,7 @@ To create translations for an app:
 1. `cd src/<appname>`
 1. `../manage.py makemessages -l sv`
 1. This will create or update the files under `src/<appname>/locale/`.
-1. Use poedit (or your favourite tool -- please do not use a plain text editor
+1. Use **poedit** (or your favourite tool -- please do not use a plain text editor
    since those cannot handle all the subtleties) to fix the translations.
 1. `../manage.py compilemessages`
 

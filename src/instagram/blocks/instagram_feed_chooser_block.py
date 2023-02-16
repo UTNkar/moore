@@ -1,7 +1,7 @@
 from wagtail.core import blocks
 from instagram.models import InstagramFeed
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class InstagramFeedChooserBlock(blocks.ChooserBlock):
