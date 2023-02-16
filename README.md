@@ -8,33 +8,17 @@ applications. Built using [Wagtail](https://wagtail.io/) and the [Django](https:
 Moore intends to replace obfuscated custom applications. This is why this
 project keeps a high regard to programming practice and documentation.
 
-Any questions about the project can be send to the [UTN system
+Any questions about the project can be sent to the [UTN system
 administrator](mailto:admin@utn.se).
 
 Before contributing please read through our [contribution
 guidelines](CONTRIBUTING.md).
 
-To set up a local version of moore, use either Docker or a virtual environment (**recommended**).
+## Getting Started
 
-## Getting Started - Docker
+To set up a local version of moore, use **either** Docker or a virtual environment (**recommended**).
 
-If you can use Docker, there is an alternative way to get your development
-environment all set up:
-
-1. Install [docker engine](https://docs.docker.com/engine/install/)
-1. Install [docker compose](https://docs.docker.com/compose/install/).
-   (On Ubuntu you can install `docker-compose` with `sudo apt install docker-compose`)
-1. Clone the repository.
-1. Copy `.env-template` to `.env` and fill in the environments.
-1. Run `docker-compose up` create and start the docker instance
-1. Run `docker exec -it moore python src/manage.py migrate` to initialize the
-   database
-1. Run `docker exec -it moore python src/manage.py createsuperuser` to create an admin
-   user.
-
-The Moore application is now available on `http://localhost:8000` and can be started using `docker-compose up -d` (the `-d` flag starts the instance in the background) and stopped `docker-compose stop`.
-
-## Getting Started - Virtual Environment
+### Using Virtual Environment
 
 To get started with Project Moore, follow these instructions to set up a
 **development** environment:
@@ -54,11 +38,29 @@ To get started with Project Moore, follow these instructions to set up a
 9. Run `pip install -r dev-requirements.txt`
 10. Use `cd src` to enter the website directory.
 11. Run `./manage.py migrate` to initialize the database.
-12. Run `./manage.py createsuperuser` to create an admin user.
+12. Run `./manage.py createsuperuser` to create an admin user. (if the ssn is not passed, the most likely fault lies with the db-credentials)
 
 During development, you can run a test web server using `./manage.py runserver`.
 
 **IMPORTANT!** When running any command in moore, you must be in the virtual environment (a.k.a. `source source_me.sh`)
+
+### Using Docker
+
+If you cannot use a virtual environment, there is an alternative way to get your development
+environment all set up:
+
+1. Install [docker engine](https://docs.docker.com/engine/install/)
+1. Install [docker compose](https://docs.docker.com/compose/install/).
+(On Ubuntu you can install `docker-compose` with `sudo apt install docker-compose`)
+1. Clone the repository.
+2. Copy `.env-docker-template` to `.env` and fill in the environments.
+3. Run `docker-compose up` create and start the docker instance
+4. Run `docker exec -it moore python src/manage.py migrate` to initialize the
+database
+5. Run `docker exec -it moore python src/manage.py createsuperuser` to create an admin
+user.
+
+The Moore application is now available on `http://localhost:8000` and can be started using `docker-compose up -d` (the `-d` flag starts the instance in the background) and stopped `docker-compose stop`.
 
 ## Documentation
 
