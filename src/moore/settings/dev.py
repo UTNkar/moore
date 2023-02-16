@@ -51,17 +51,6 @@ elif 'DOCKER' in os.environ:
             'PORT': 5432,
         }
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('DJANGO_DB_NAME', 'moore'),
-            'USER': os.environ.get('DJANGO_DB_USER', 'moore'),
-            'PASSWORD': os.environ.get('DJANGO_DB_PASS', 'moore'),
-            'HOST': os.environ.get('DJANGO_DB_HOST', '127.0.0.1'),
-            'PORT':  os.environ.get('DJANGO_DB_PORT', '5432'),
-        }
-    }
 
 # Base URL to use when referring to full URLs within the Wagtail admin
 # backend - e.g. in notification emails. Don't include '/admin' or a
@@ -74,15 +63,3 @@ BASE_URL = 'http://localhost:8000'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 DEFAULT_FROM_EMAIL = 'info@localhost'
-
-MELOS_URL = os.environ.get('MELOS_URL')
-MELOS_ORG_ID = os.environ.get('MELOS_ORG_ID')
-MELOS_ADMIN = os.environ.get('MELOS_ADMIN')
-
-# Google API
-GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
-
-try:
-    from .local import *
-except ImportError:
-    pass

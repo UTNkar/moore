@@ -2,8 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2022-11-23 15:37+0100\n"
 "PO-Revision-Date: 2022-11-23 15:43+0100\n"
+=======
+"POT-Creation-Date: 2022-11-10 20:55+0100\n"
+"PO-Revision-Date: 2017-06-26 10:23+0200\n"
+>>>>>>> origin/development
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -73,64 +78,70 @@ msgstr ""
 "Du kan inte tillsätta sökande till %(current)s. Det maximala antalet för "
 "denna post är %(max)s."
 
-#: forms/approval_form.py:11 models/application.py:37
+#: forms/approval_form.py:11 models/application.py:39
 msgid "Approved"
 msgstr "Nominerad"
 
-#: forms/approval_form.py:12 models/application.py:38
+#: forms/approval_form.py:12 models/application.py:40
 msgid "Disapproved"
 msgstr "Inte Nominerad"
 
-#: models/application.py:29
+#: models/application.py:31
 msgid "Application"
 msgstr "Ansökning"
 
-#: models/application.py:30 wagtail_hooks.py:242
+#: models/application.py:32 wagtail_hooks.py:242
 msgid "Applications"
 msgstr "Ansökningar"
 
-#: models/application.py:35
+#: models/application.py:37
 msgid "Draft"
 msgstr "Utkast"
 
-#: models/application.py:36
+#: models/application.py:38
 msgid "Submitted"
 msgstr "Inskickade"
 
-#: models/application.py:39
+#: models/application.py:41
 msgid "Appointed"
 msgstr "Tillsatt"
 
-#: models/application.py:40
+#: models/application.py:42
 msgid "Turned down"
 msgstr "Avslagen"
 
-#: models/application.py:46
+#: models/application.py:48
 msgid "Status"
 msgstr "Status"
 
-#: models/application.py:53
+#: models/application.py:55
 msgid "Cover Letter"
 msgstr "Ansökningsbrev"
 
+<<<<<<< HEAD
 #: models/application.py:54
 #, fuzzy
 #| msgid "Present yourself and state why you are who we are looking for"
 msgid ""
 "Present yourself and state why you are \n"
 "        who we are looking for"
+=======
+#: models/application.py:56
+msgid "Present yourself and state why you are who we are looking for"
+>>>>>>> origin/development
 msgstr ""
 "Skriv en presentation av dig själv och en beskrivning av varför du är den vi "
 "letar efter"
 
-#: models/application.py:58
+#: models/application.py:60
 msgid "Qualifications"
 msgstr "Meriter"
 
-#: models/application.py:59
+#: models/application.py:61
 msgid "Give a summary of relevant qualifications"
 msgstr "Ge en sammanfattning av relevanta meriter"
 
+<<<<<<< HEAD
 #: models/application.py:65
 msgid ""
 "\n"
@@ -145,6 +156,18 @@ msgstr ""
 "och naturvetarkårs integritetspolicy som går att hitta på: "
 
 #: models/application.py:84
+=======
+#: models/application.py:67
+msgid ""
+"I accept that my data is saved in accordance with Uppsala Union of "
+"Engineering and Science Students integrity policy that can be found within "
+"the link: "
+msgstr ""
+"Jag godkänner att mina uppgifter sparas i enlighet med Uppsala teknolog- och "
+"naturvetarkårs integritetspolicy som går att hitta på: "
+
+#: models/application.py:82
+>>>>>>> origin/development
 msgid "Rejection date"
 msgstr ""
 
