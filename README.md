@@ -58,6 +58,7 @@ environment all set up:
 1. Run `docker-compose up` create and start the docker instance
 1. Run `docker exec -it moore python src/manage.py migrate` to initialize the
    database
+1. Run `docker exec -it moore python src/manage.py compilemessages` to create all the translations
 1. Run `docker exec -it moore python src/manage.py createsuperuser` to create an admin
    user.
 
