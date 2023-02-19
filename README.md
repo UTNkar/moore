@@ -38,7 +38,8 @@ To get started with Project Moore, follow these instructions to set up a
 9. Run `pip install -r dev-requirements.txt`
 10. Use `cd src` to enter the website directory.
 11. Run `./manage.py migrate` to initialize the database.
-12. Run `./manage.py createsuperuser` to create an admin user. (if the ssn is not passed, the most likely fault lies with the db-credentials)
+12. Run `./manage.py compilemessages` to create all the translations.
+13. Run `./manage.py createsuperuser` to create an admin user. (if the ssn is not passed, the most likely fault lies with the db-credentials)
 
 During development, you can run a test web server using `./manage.py runserver`.
 
@@ -51,14 +52,14 @@ environment all set up:
 
 1. Install [docker engine](https://docs.docker.com/engine/install/)
 1. Install [docker compose](https://docs.docker.com/compose/install/).
-(On Ubuntu you can install `docker-compose` with `sudo apt install docker-compose`)
+   (On Ubuntu you can install `docker-compose` with `sudo apt install docker-compose`)
 1. Clone the repository.
-2. Copy `.env-docker-template` to `.env` and fill in the environments.
-3. Run `docker-compose up` create and start the docker instance
-4. Run `docker exec -it moore python src/manage.py migrate` to initialize the
-database
-5. Run `docker exec -it moore python src/manage.py createsuperuser` to create an admin
-user.
+1. Copy `.env-docker-template` to `.env` and fill in the environments.
+1. Run `docker-compose up` create and start the docker instance
+1. Run `docker exec -it moore python src/manage.py migrate` to initialize the
+   database
+1. Run `docker exec -it moore python src/manage.py createsuperuser` to create an admin
+   user.
 
 The Moore application is now available on `http://localhost:8000` and can be started using `docker-compose up -d` (the `-d` flag starts the instance in the background) and stopped `docker-compose stop`.
 
@@ -96,7 +97,7 @@ To create translations for an app:
 1. `cd src/<appname>`
 1. `../manage.py makemessages -l sv`
 1. This will create or update the files under `src/<appname>/locale/`.
-1. Use **poedit** (or your favourite tool -- please do not use a plain text editor
+1. Use [poedit](https://poedit.net/) (or your favourite tool -- please do not use a plain text editor
    since those cannot handle all the subtleties) to fix the translations.
 1. `../manage.py compilemessages`
 
