@@ -14,7 +14,7 @@ def admin_unassign_unpaid(request, pos_id=None):
         if 'confirm' in request.POST:
             for ticket in unpaid_tickets:
                 Participant.objects.filter(ticket=ticket).delete()
-                EventApplication.objects.filter(
+                EventApplication.filter(
                     event=event, event_applicant=ticket.owner).delete()
                 ticket.owner = None
                 ticket.save()

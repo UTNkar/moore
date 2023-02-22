@@ -1,7 +1,7 @@
 from django import forms
 from phonenumbers import parse, is_valid_number
 from django.utils.translation import gettext_lazy as _
-from django.utils.encoding import force_str
+from django.utils.encoding import force_text
 from utils.validators import SSNValidator
 
 
@@ -29,7 +29,7 @@ class PersonNumberField(forms.Field):
     def to_python(self, value):
         if value in self.empty_values:
             return None, ''
-        value = force_str(value).strip()
+        value = force_text(value).strip()
         SSNValidator()(value)
         return value
 

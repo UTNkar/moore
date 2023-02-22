@@ -79,7 +79,7 @@ with the blocks produced by applying the mapper_func.
 
 def stream_field_filter_map(stream_field, block_type, mapper_func):
     new_stream_data = []
-    for block in stream_field.raw_data:
+    for block in stream_field.stream_data:
         new_stream_data.append(
             block_filter_map(block, block_type, mapper_func)
         )

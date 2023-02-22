@@ -16,3 +16,7 @@ else
     python3 -m venv venv
     source venv/bin/activate
 fi
+
+if [ -f .env-normal ]; then
+    source .env-normal
+fi

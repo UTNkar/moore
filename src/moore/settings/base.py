@@ -15,7 +15,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.conf.global_settings import LOGIN_URL
 from django.utils.translation import gettext_lazy as _
-from decouple import config, UndefinedValueError
+
 import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -89,17 +89,6 @@ MIDDLEWARE = [
 
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DJANGO_DB_NAME', default='moore'),
-        'USER': config('DJANGO_DB_USER', default='moore'),
-        'PASSWORD': config('DJANGO_DB_PASS', default='moore'),
-        'HOST': config('DJANGO_DB_HOST', default='127.0.0.1'),
-        'PORT':  config('DJANGO_DB_PORT', default='5432'),
-    }
-}
 
 ROOT_URLCONF = 'moore.urls'
 
@@ -241,28 +230,9 @@ WAGTAILSEARCH_BACKENDS = {
 
 IS_RUNNING_TEST = 'test' in sys.argv
 
-INSTAGRAM_APP_ID = config('INSTAGRAM_APP_ID', default='')
-INSTAGRAM_APP_SECRET = config('INSTAGRAM_APP_SECRET', default='')
-INSTAGRAM_REDIRECT_URL = config('INSTAGRAM_REDIRECT_URL', default='')
-
-try:
-    MELOS_URL = config('MELOS_URL')
-    MELOS_ADMIN = config('MELOS_ADMIN')
-except UndefinedValueError:
-    # This allows the tests to be runned without having to have MELOS_URL and
-    # MELOS_ADMIN since they don't use the MELOS API. But this also raises
-    # the error if for example a developer tries to start the server but has
-    # not filled in the variables in their .env. I.e. The variables are still
-    # required, except for when the tests are runned.
-    if not IS_RUNNING_TEST:
-        raise UndefinedValueError(
-            "You must add MELOS_URL and MELOS_ADMIN to you .env file"
-        )
-
-MELOS_ORG_ID = config('MELOS_ORG_ID', default='')
-
-# Google API
-GOOGLE_API_KEY = config('GOOGLE_API_KEY', default='')
+INSTAGRAM_APP_ID = os.environ.get('INSTAGRAM_APP_ID')
+INSTAGRAM_APP_SECRET = os.environ.get('INSTAGRAM_APP_SECRET')
+INSTAGRAM_REDIRECT_URL = os.environ.get('INSTAGRAM_REDIRECT_URL')
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
