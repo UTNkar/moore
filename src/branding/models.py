@@ -13,7 +13,7 @@ from utils.translation import TranslatedField
 @register_setting(icon='fa-window-minimize')
 class FooterSettings(BaseSetting):
     class Meta:
-        verbose_name = _('footer')
+        verbose_name = _('footer_en')   # quickfix
 
     footer_en = StreamField(
         [('column', blocks.StructBlock([
