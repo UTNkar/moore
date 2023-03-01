@@ -113,7 +113,11 @@ msgid "Cover Letter"
 msgstr "Ansökningsbrev"
 
 #: models/application.py:54
-msgid "Present yourself and state why you are who we are looking for"
+#, fuzzy
+#| msgid "Present yourself and state why you are who we are looking for"
+msgid ""
+"Present yourself and state why you are \n"
+"        who we are looking for"
 msgstr ""
 "Skriv en presentation av dig själv och en beskrivning av varför du är den vi "
 "letar efter"
@@ -140,8 +144,11 @@ msgid ""
 "            policy that can be found within the link:\n"
 "        "
 msgstr ""
-"Jag godkänner att mina uppgifter sparas i enlighet med Uppsala teknolog- och "
-"naturvetarkårs integritetspolicy som går att hitta på: "
+"\n"
+" Jag godkänner att mina uppgifter sparas i enlighet med Uppsala teknolog- "
+"och naturvetarkårs integritetspolicy som går att hitta på: "
+
+#: models/application.py:84
 
 #: models/application.py:84
 msgid "Rejection date"
