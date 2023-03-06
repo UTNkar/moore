@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-23 15:37+0100\n"
-"PO-Revision-Date: 2022-11-23 15:43+0100\n"
+"POT-Creation-Date: 2023-02-15 23:58+0100\n"
+"PO-Revision-Date: 2023-02-16 22:31+0100\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: apps.py:7 wagtail_hooks.py:309
 msgid "Involvement"
@@ -30,10 +30,8 @@ msgid "The submitted status was invalid."
 msgstr "Den angivna statusen var ej giltig."
 
 #: forms/appointment_form.py:17
-#, fuzzy
-#| msgid "person number"
 msgid "Person number"
-msgstr "personnummer"
+msgstr "Personnummer"
 
 #: forms/appointment_form.py:18
 #, fuzzy
@@ -51,7 +49,7 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid "No user with the username %(user)s exists."
 msgid "No user with the person number %(pnr)s exists."
-msgstr "Det finns ingen användare med användarnamnet %(user)s."
+msgstr "Det finns ingen användare med personnummret %(pnr)s."
 
 #: forms/appointment_form.py:57
 #, fuzzy, python-format
@@ -62,7 +60,8 @@ msgid ""
 "User with person number %(pnr)s already applied for this position and can "
 "not be appointed through the overturn field."
 msgstr ""
-"Användaren %(user)s har redan sökt den här posten och kan inte bli tillsatt."
+"Användaren med personnummret %(pnr)s har redan sökt den här posten och kan "
+"inte bli tillsatt."
 
 #: forms/appointment_form.py:75
 #, python-format
@@ -73,43 +72,43 @@ msgstr ""
 "Du kan inte tillsätta sökande till %(current)s. Det maximala antalet för "
 "denna post är %(max)s."
 
-#: forms/approval_form.py:11 models/application.py:39
+#: forms/approval_form.py:11 models/application.py:37
 msgid "Approved"
 msgstr "Nominerad"
 
-#: forms/approval_form.py:12 models/application.py:40
+#: forms/approval_form.py:12 models/application.py:38
 msgid "Disapproved"
 msgstr "Inte Nominerad"
 
-#: models/application.py:31
+#: models/application.py:29
 msgid "Application"
 msgstr "Ansökning"
 
-#: models/application.py:32 wagtail_hooks.py:242
+#: models/application.py:30 wagtail_hooks.py:242
 msgid "Applications"
 msgstr "Ansökningar"
 
-#: models/application.py:37
+#: models/application.py:35
 msgid "Draft"
 msgstr "Utkast"
 
-#: models/application.py:38
+#: models/application.py:36
 msgid "Submitted"
 msgstr "Inskickade"
 
-#: models/application.py:41
+#: models/application.py:39
 msgid "Appointed"
 msgstr "Tillsatt"
 
-#: models/application.py:42
+#: models/application.py:40
 msgid "Turned down"
 msgstr "Avslagen"
 
-#: models/application.py:48
+#: models/application.py:46
 msgid "Status"
 msgstr "Status"
 
-#: models/application.py:55
+#: models/application.py:53
 msgid "Cover Letter"
 msgstr "Ansökningsbrev"
 
@@ -123,15 +122,20 @@ msgstr ""
 "Skriv en presentation av dig själv och en beskrivning av varför du är den vi "
 "letar efter"
 
-#: models/application.py:60
+#: models/application.py:58
 msgid "Qualifications"
 msgstr "Meriter"
 
-#: models/application.py:61
+#: models/application.py:59
 msgid "Give a summary of relevant qualifications"
 msgstr "Ge en sammanfattning av relevanta meriter"
 
 #: models/application.py:65
+#, fuzzy
+#| msgid ""
+#| "I accept that my data is saved in accordance with Uppsala Union of "
+#| "Engineering and Science Students integrity policy that can be found "
+#| "within the link: "
 msgid ""
 "\n"
 "            I accept that my data is saved in accordance\n"
@@ -146,12 +150,13 @@ msgstr ""
 
 #: models/application.py:84
 
+#: models/application.py:84
 msgid "Rejection date"
-msgstr ""
+msgstr "Datum för avslag"
 
 #: models/contact_card.py:76 models/contact_card.py:84
 msgid "picture missing"
-msgstr ""
+msgstr "bild saknas"
 
 #: models/contact_card.py:83 templatetags/involvement_tags.py:34
 msgid "Vacant Position"
@@ -362,7 +367,7 @@ msgstr "Email att kontakta nuvarande person tillsatt på posten"
 
 #: models/role.py:112
 msgid "Enter a phone number to contact this role."
-msgstr "Ange ett telefonnummer som din referens kan nås på"
+msgstr "Ange ett telefonnummer som din referens kan nås på."
 
 #: models/role.py:115
 #, fuzzy
@@ -436,7 +441,7 @@ msgstr "referenser"
 
 #: templates/involvement/admin/application_overview_fields.html:46
 msgid "application status"
-msgstr "Ansökans status"
+msgstr "ansökans status"
 
 #: templates/involvement/admin/email_extend_deadline.html:1
 #, python-format
@@ -445,18 +450,23 @@ msgid ""
 "for this position ended yesterday. If this position should be filled, you "
 "can extend the deadline by clicking the following link:"
 msgstr ""
+"Det verkar som att ingen har sökt positionen `%(position)s'. Söket stängde "
+"igår. Om positionen är vital kan du förlänga söket genom att klicka på "
+"följande länk:"
 
 #: templates/involvement/admin/email_extend_deadline.html:5
 msgid ""
 "Just extending the deadline might not be enough. Make sure you make some "
 "extra noise about the position!"
 msgstr ""
+"Att endast förlänga söket kanske inte räcker. Se till att sprida "
+"information om positionen!"
 
 #: templates/involvement/admin/extend_deadline_subject.txt:2
 #, fuzzy, python-format
 #| msgid "Approve applicants for %s"
 msgid "[UTN] No applicants for %(position)s"
-msgstr "Godkänn sökande till %s"
+msgstr "[UTN] Inga sökande till %(position)s"
 
 #: templates/involvement/admin/position_appointment.html:22
 msgid ""
@@ -468,7 +478,7 @@ msgstr ""
 
 #: templates/involvement/admin/position_appointment.html:63
 msgid "manual appointment"
-msgstr "Manuell tillsättning"
+msgstr "manuell tillsättning"
 
 #: templates/involvement/admin/position_appointment.html:88
 #: templates/involvement/admin/position_approval.html:73
@@ -603,7 +613,7 @@ msgstr "Mandatperiod"
 #: templates/involvement/open_positions.html:42
 #: templates/involvement/position.html:36
 msgid "role description"
-msgstr "Rollbeskrivning"
+msgstr "rollbeskrivning"
 
 #: templates/involvement/open_positions.html:46
 #: templates/involvement/open_positions.html:58
@@ -631,7 +641,7 @@ msgstr ""
 
 #: templates/involvement/position.html:27
 msgid "contact election official"
-msgstr "Kontakta sökansvarig"
+msgstr "kontakta sökansvarig"
 
 #: templates/involvement/position.html:37
 msgid ""
@@ -655,7 +665,7 @@ msgstr "logga in"
 
 #: templates/involvement/tags/contact_card.html:8
 msgid "UTN logo"
-msgstr ""
+msgstr "UTN logotyp"
 
 #: templates/involvement/tags/contact_card.html:22
 msgid "send email"
@@ -677,11 +687,11 @@ msgstr "telefonnummer"
 #: templates/modeladmin/involvement/position/inspect.html:36
 #: templates/modeladmin/involvement/position/inspect.html:72
 msgid "No applications have been submitted for this position."
-msgstr "Din ansökan har skickats."
+msgstr "Inga ansökningar har har skickats för denna position."
 
 #: templates/modeladmin/involvement/position/inspect.html:69
 msgid "See application"
-msgstr "granska ansökan"
+msgstr "Granska ansökan"
 
 #: templates/modeladmin/involvement/role/inspect.html:6
 msgid "role"
@@ -697,11 +707,11 @@ msgstr "Inga ansökningar har godkänts för denna roll."
 
 #: templates/modeladmin/involvement/role/inspect.html:28
 msgid "Earlier applicants"
-msgstr "Tidigare ansökande"
+msgstr "Tidigare ansökningar"
 
 #: templates/modeladmin/involvement/role/inspect.html:43
 msgid "No earlier applicants have been approved for this role."
-msgstr "Inga tidigare ansökningar har godkänts för denna roll"
+msgstr "Inga tidigare ansökningar har godkänts för denna roll."
 
 #: templates/modeladmin/involvement/team/inspect.html:10
 msgid "members"
@@ -717,12 +727,12 @@ msgstr "Dina val har sparats."
 
 #: views/admin_extend_deadline.py:21
 msgid "This position is not due for an extension yet."
-msgstr ""
+msgstr "Denna tjänst är inte aktuell för förlängning ännu."
 
 #: views/admin_extend_deadline.py:26
 msgid ""
 "A position with submitted applications cannot be automatically extended."
-msgstr "En position med inlämnade ansökningar kan inte automatiskt förlängas"
+msgstr "En position med inlämnade ansökningar kan inte automatiskt förlängas."
 
 #: views/admin_extend_deadline.py:34
 #, python-format

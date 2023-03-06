@@ -3,18 +3,19 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 from django.utils.translation import gettext_lazy as _
 from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, \
-    MultiFieldPanel, StreamFieldPanel
+    MultiFieldPanel, StreamFieldPanel, TabbedInterface, ObjectList
 from wagtail.core import blocks
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
+from utils.translation import TranslatedField
 
 
 @register_setting(icon='fa-window-minimize')
 class FooterSettings(BaseSetting):
     class Meta:
-        verbose_name = _('footer')
+        verbose_name = _('footer_en')   # quickfix
 
-    footer = StreamField(
+    footer_en = StreamField(
         [('column', blocks.StructBlock([
             ('size', blocks.IntegerBlock(min_value=1, max_value=12)),
             ('content', blocks.RichTextBlock()),
@@ -22,9 +23,28 @@ class FooterSettings(BaseSetting):
         blank=True,
     )
 
-    panels = [
-        StreamFieldPanel('footer')
+    footer_sv = StreamField(
+        [('column', blocks.StructBlock([
+            ('size', blocks.IntegerBlock(min_value=1, max_value=12)),
+            ('content', blocks.RichTextBlock()),
+        ]))],
+        blank=True,
+    )
+
+    footer = TranslatedField('footer_en', 'footer_sv')
+
+    panels_sv = [
+        StreamFieldPanel('footer_sv')
     ]
+
+    panels_en = [
+        StreamFieldPanel('footer_en')
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(panels_en, heading=_("English")),
+        ObjectList(panels_sv, heading=_("Swedish"))
+    ])
 
 
 @register_setting(icon='openquote')
