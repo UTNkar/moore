@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-23 01:37+0100\n"
+"POT-Creation-Date: 2023-02-15 23:54+0100\n"
 "PO-Revision-Date: 2017-06-26 10:25+0200\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
@@ -21,7 +21,7 @@ msgstr "Underhåll av UTN-medlemmar"
 msgid "Username or SSN (YYYYMMDD-XXXX)"
 msgstr "Användarnamn eller personnummer (YYYYMMDD-XXXX)"
 
-#: fields.py:11 forms.py:333 forms.py:401 models/member.py:198
+#: fields.py:11 forms.py:334 forms.py:402 models/member.py:198
 msgid "Phone number"
 msgstr "Telefonnummer"
 
@@ -29,81 +29,81 @@ msgstr "Telefonnummer"
 msgid "Invalid phonenumber"
 msgstr "Ogiltigt telefonnummer"
 
-#: forms.py:28 forms.py:103 forms.py:327 forms.py:392 models/member.py:169
+#: forms.py:28 forms.py:104 forms.py:328 forms.py:393 models/member.py:169
 msgid "Person number"
 msgstr "Personnummer"
 
-#: forms.py:29 forms.py:104 forms.py:328 forms.py:393
+#: forms.py:29 forms.py:105 forms.py:329 forms.py:394
 msgid "Person number using the YYYYMMDD-XXXX format."
 msgstr "Personnummer på formen ÅÅÅÅMDD-NNNN."
 
-#: forms.py:58 forms.py:203 models/member.py:137
+#: forms.py:58 forms.py:204 models/member.py:137
 msgid "A user with that username already exists."
 msgstr "En användare med det användrnamnet finns redan"
 
-#: forms.py:66 forms.py:433
+#: forms.py:66 forms.py:434
 msgid "Incorrect SSN"
 msgstr "Felaktigt personnummer"
 
-#: forms.py:204
+#: forms.py:205
 msgid "The two password fields didn't match."
 msgstr ""
 
-#: forms.py:207 models/member.py:164
+#: forms.py:208 models/member.py:164
 msgid "Name"
 msgstr ""
 
-#: forms.py:210
+#: forms.py:211
 #, fuzzy
 #| msgid "Password reset"
 msgid "Password"
 msgstr "Återställning av lösenord"
 
-#: forms.py:212
+#: forms.py:213
 msgid "Leave blank if not changing."
 msgstr ""
 
-#: forms.py:214
+#: forms.py:215
 #, fuzzy
 #| msgid "Password changed"
 msgid "Password confirmation"
 msgstr "Lösenordet har ändrats"
 
-#: forms.py:216
+#: forms.py:217
 #, fuzzy
 #| msgid "Enter the name of the section"
 msgid "Enter the same password as above, for verification."
 msgstr "Ange namnet på sektionen"
 
-#: forms.py:219
+#: forms.py:220
 msgid "Administrator"
 msgstr ""
 
-#: forms.py:220
+#: forms.py:221
 msgid "Administrators have full access to manage any object or setting."
 msgstr ""
 
-#: forms.py:337 forms.py:397
+#: forms.py:338 forms.py:398
 msgid "Email"
 msgstr ""
 
-#: forms.py:341 forms.py:405 models/member.py:212
+#: forms.py:342 forms.py:406 models/member.py:212
 msgid "Registration year"
 msgstr "Inskrivningsår"
 
-#: forms.py:346 wagtail_hooks.py:42
+#: forms.py:347 wagtail_hooks.py:42
 msgid "Study Program"
 msgstr "Program"
 
-#: forms.py:351 forms.py:415
+#: forms.py:352 forms.py:416
 msgid "Section"
 msgstr "Sektion"
 
-#: forms.py:355 models/member.py:184
+#: forms.py:356 models/member.py:184
 msgid "Membership status"
 msgstr "Medlemsstatus"
 
-#: forms.py:410 models/member.py:224
+#: forms.py:411 models/member.py:224
 msgid "Study program"
 msgstr "Program"
 
@@ -143,11 +143,11 @@ msgstr ""
 msgid "Unknown"
 msgstr "Okänt"
 
-#: models/member.py:176 models/member.py:363
+#: models/member.py:176 models/member.py:368
 msgid "Nonmember"
 msgstr "Icke medlem"
 
-#: models/member.py:177 models/member.py:363
+#: models/member.py:177 models/member.py:368
 msgid "Member"
 msgstr "Medlem"
 
@@ -340,17 +340,21 @@ msgstr "spara"
 msgid "Register"
 msgstr "Registrera"
 
-#: templates/members/register.html:6 templates/registration/login.html:35
+#: templates/members/register.html:6 templates/registration/login.html:33
 msgid "Create a UTN account"
 msgstr "Skapa ett UTN-konto"
 
-#: templates/members/register.html:47
+#: templates/members/register.html:48
 msgid "register"
 msgstr "register"
 
 #: templates/registration/logged_out.html:4
 msgid "Logged out"
 msgstr "Utloggad"
+
+#: templates/registration/logged_out.html:5
+msgid "Goodbye!"
+msgstr "Hejdå!"
 
 #: templates/registration/logged_out.html:7
 msgid "You have succesfully been logged out."
@@ -364,15 +368,7 @@ msgstr "Logga in"
 msgid "Log into your UTN account"
 msgstr "Logga in på ditt UTN-konto"
 
-#: templates/registration/login.html:16
-msgid ""
-"If you had an UTN-account before the 23rd of December 2019, you must create "
-"a new one because of an update of our database."
-msgstr ""
-"Om du hade ett UTN-konto före den 23:e december 2019 måste du skapa ett nytt, "
-"detta på grund av en uppdatering i vår databas."
-
-#: templates/registration/login.html:20
+#: templates/registration/login.html:18
 msgid ""
 "Your account doesn't have access to this page. To proceed, please login with "
 "an account that has access."
@@ -380,11 +376,11 @@ msgstr ""
 "Du har inte åtkomst till den här sidan. Var vänlig logga in på ett "
 "autkoriserat konto."
 
-#: templates/registration/login.html:31
+#: templates/registration/login.html:29
 msgid "Sign In"
 msgstr "Logga in"
 
-#: templates/registration/login.html:34
+#: templates/registration/login.html:32
 msgid "I forgot my password"
 msgstr "Jag har glömt mitt lösenord"
 
@@ -424,7 +420,7 @@ msgstr "Ändra mitt lösenord"
 #: templates/registration/password_reset_complete.html:7
 #: templates/registration/password_reset_complete.html:9
 #: templates/registration/password_reset_confirm.html:7
-#: templates/registration/password_reset_confirm.html:9 views.py:72
+#: templates/registration/password_reset_confirm.html:9 views.py:78
 msgid "Password reset"
 msgstr "Återställning av lösenord"
 
@@ -514,49 +510,15 @@ msgstr "Återställ mitt lösenord"
 msgid "[UTN] Password reset request"
 msgstr "[UTN] Återställ lösenord"
 
-#: templates/wagtailusers/users/create.html:4
-#: templates/wagtailusers/users/create.html:7
-#: templates/wagtailusers/users/create.html:47
-msgid "Add user"
-msgstr ""
-
-#: templates/wagtailusers/users/create.html:11
-#: templates/wagtailusers/users/edit.html:11
-#, fuzzy
-#| msgid "Account Settings"
-msgid "Account"
-msgstr "Kontoinställningar"
-
-#: templates/wagtailusers/users/create.html:12
-#: templates/wagtailusers/users/create.html:40
-#: templates/wagtailusers/users/edit.html:12
-msgid "Roles"
-msgstr ""
-
-#: templates/wagtailusers/users/edit.html:4
-#: templates/wagtailusers/users/edit.html:7
-msgid "Editing"
-msgstr ""
-
-#: templates/wagtailusers/users/edit.html:47
-#: templates/wagtailusers/users/edit.html:62
-msgid "Save"
-msgstr ""
-
-#: templates/wagtailusers/users/edit.html:49
-#: templates/wagtailusers/users/edit.html:64
-msgid "Delete user"
-msgstr ""
-
-#: views.py:29
+#: views.py:29 views.py:39
 msgid "Your account settings have been saved."
 msgstr "Dina kontoinställningar har sparats."
 
-#: views.py:101
+#: views.py:107
 msgid "Your email address has been confirmed."
 msgstr "Din emailadress har bekräftats."
 
-#: views.py:104
+#: views.py:110
 msgid "The provided confirmation token was invalid."
 msgstr "Bekräftelselänken var ogiltig."
 
@@ -575,6 +537,18 @@ msgstr "Sektioner"
 #: wagtail_hooks.py:88
 msgid "Education"
 msgstr "Utbildning"
+
+#~ msgid ""
+#~ "If you had an UTN-account before the 23rd of December 2019, you must "
+#~ "create a new one because of an update of our database."
+#~ msgstr ""
+#~ "Om du hade ett UTN-konto före den 23:e december 2019 måste du skapa ett "
+#~ "nytt, detta på grund av en uppdatering i vår databas."
+
+#, fuzzy
+#~| msgid "Account Settings"
+#~ msgid "Account"
+#~ msgstr "Kontoinställningar"
 
 #~ msgid "Birthday"
 #~ msgstr "Födelsedag"
