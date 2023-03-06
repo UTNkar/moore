@@ -31,14 +31,9 @@ if IS_RUNNING_TEST:
     # Override search backend to not use postgres
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.search.backends.db',
+            'BACKEND': 'wagtail.search.backends.database',
         }
     }
-    # Since this app has postgres-specific migrations, it is not
-    # compatbile with the other database backends. As the tests run
-    # using sqlite3, we have to remove it when testing or it will
-    # cause a crash.
-    INSTALLED_APPS.remove('wagtail.contrib.postgres_search')
 
 elif 'DOCKER' in os.environ:
     DATABASES = {
