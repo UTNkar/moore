@@ -178,3 +178,5 @@ postgres-data/
 
 src/media/
 *.log
+
+node_modules/
