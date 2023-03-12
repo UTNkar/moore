@@ -1,17 +1,28 @@
 {
-  "name": "moore-npm-deps",
-  "version": "1.0.0",
-  "description": "A collection of all packages that moore needs from npm",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@codemirror/commands": "^6.2.1",
-    "@codemirror/state": "^6.2.0",
-    "@codemirror/view": "^6.9.2",
-    "vite": "^4.1.4"
-  }
+    "name": "moore-npm-deps",
+    "version": "1.0.0",
+    "description": "A collection of all packages that moore needs from npm",
+    "type": "module",
+    "files": ["static"],
+    "main": "./static/my-lib.umd.cjs",
+    "module": "./static/my-lib.js",
+    "exports": {
+      ".": {
+        "import": "./static/my-lib.js",
+        "require": "./static/my-lib.umd.cjs"
+      }
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@codemirror/commands": "^6.2.1",
+        "@codemirror/state": "^6.2.0",
+        "@codemirror/view": "^6.9.2",
+        "vite": "^4.1.4"
+    }
 }
