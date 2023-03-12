@@ -173,10 +173,13 @@ CACHE/
 .vscode
 
 # Docker data
-# Docker data
 postgres-data/
 
 src/media/
+src/static/
 *.log
 
 node_modules/
+
+# Ignore all generated static files from the npm module
+src/npm/static/
