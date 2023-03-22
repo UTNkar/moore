@@ -38,3 +38,6 @@ django-jsonschema-form==1.0.3
 
 # Improved environment variable handling
 python-decouple==3.7
+
+# Gettext for translations
+gettext==0.21.1
