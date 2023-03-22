@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-15 23:54+0100\n"
-"PO-Revision-Date: 2017-06-26 10:25+0200\n"
+"PO-Revision-Date: 2023-03-22 20:08+0100\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: apps.py:7
 msgid "UTN Member Management"
@@ -39,7 +39,7 @@ msgstr "Personnummer på formen ÅÅÅÅMDD-NNNN."
 
 #: forms.py:58 forms.py:204 models/member.py:137
 msgid "A user with that username already exists."
-msgstr "En användare med det användrnamnet finns redan"
+msgstr "En användare med det användarnamnet finns redan."
 
 #: forms.py:66 forms.py:434
 msgid "Incorrect SSN"
@@ -47,21 +47,19 @@ msgstr "Felaktigt personnummer"
 
 #: forms.py:205
 msgid "The two password fields didn't match."
-msgstr ""
+msgstr "Lösenorden matchar inte"
 
 #: forms.py:208 models/member.py:164
 msgid "Name"
-msgstr ""
+msgstr "Namn"
 
 #: forms.py:211
-#, fuzzy
-#| msgid "Password reset"
 msgid "Password"
-msgstr "Återställning av lösenord"
+msgstr "Lösenord"
 
 #: forms.py:213
 msgid "Leave blank if not changing."
-msgstr ""
+msgstr "Lämna tomt om oförändrat"
 
 #: forms.py:215
 #, fuzzy
@@ -70,22 +68,20 @@ msgid "Password confirmation"
 msgstr "Lösenordet har ändrats"
 
 #: forms.py:217
-#, fuzzy
-#| msgid "Enter the name of the section"
 msgid "Enter the same password as above, for verification."
-msgstr "Ange namnet på sektionen"
+msgstr "Ange samma lösenord igen."
 
 #: forms.py:220
 msgid "Administrator"
-msgstr ""
+msgstr "Administratör"
 
 #: forms.py:221
 msgid "Administrators have full access to manage any object or setting."
-msgstr ""
+msgstr "Administratörer har full tillgång till objekt och inställningar."
 
 #: forms.py:338 forms.py:398
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: forms.py:342 forms.py:406 models/member.py:212
 msgid "Registration year"
@@ -109,11 +105,12 @@ msgstr "Program"
 
 #: models/member.py:128
 msgid "username"
-msgstr ""
+msgstr "användarnamn"
 
 #: models/member.py:132
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
+"Krävs. 150 tecken eller färre. Endast bokstäver, siffror eller @/./+/-/_ "
 
 #: models/member.py:142
 #, fuzzy
@@ -123,21 +120,23 @@ msgstr "nuvarande status"
 
 #: models/member.py:145
 msgid "Designates whether the user can log into this admin site."
-msgstr ""
+msgstr "Avgör huruvida användaren kan logga in på denna admin-sida. "
 
 #: models/member.py:150
 msgid "active"
-msgstr ""
+msgstr "aktiv"
 
 #: models/member.py:153
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
+"Avgör huruvida användaren ska anses aktiv. Avmarkera denna istället för att "
+"radera konton. "
 
 #: models/member.py:158
 msgid "date joined"
-msgstr ""
+msgstr "medlemsdatum"
 
 #: models/member.py:175
 msgid "Unknown"
@@ -145,7 +144,7 @@ msgstr "Okänt"
 
 #: models/member.py:176 models/member.py:368
 msgid "Nonmember"
-msgstr "Icke medlem"
+msgstr "Icke-medlem"
 
 #: models/member.py:177 models/member.py:368
 msgid "Member"
@@ -161,7 +160,7 @@ msgstr "Ange ett telefonnummer som UTN kan nå dig på"
 
 #: models/member.py:204 templates/members/admin_panel.html:15
 msgid "email"
-msgstr ""
+msgstr "email"
 
 #: models/member.py:205
 msgid "Enter an email address so UTN may reach you"
@@ -181,11 +180,11 @@ msgstr "Sektionsmedlem i"
 
 #: models/member.py:250
 msgid "user"
-msgstr ""
+msgstr "användare"
 
 #: models/member.py:251
 msgid "users"
-msgstr ""
+msgstr "användare"
 
 #: models/section.py:11
 msgid "section"
@@ -262,11 +261,11 @@ msgstr "%(degree_type)s i %(study_program)s"
 
 #: templates/members/admin_panel.html:4
 msgid "system administrators"
-msgstr ""
+msgstr "systemadministratörer"
 
 #: templates/members/admin_panel.html:14
 msgid "name"
-msgstr ""
+msgstr "namn"
 
 #: templates/members/email_change_email.html:1
 msgid ""

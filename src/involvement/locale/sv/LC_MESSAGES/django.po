@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-15 23:58+0100\n"
-"PO-Revision-Date: 2023-02-16 22:31+0100\n"
+"PO-Revision-Date: 2023-03-22 19:43+0100\n"
 "Last-Translator: Jip J. Dekker <jip@dekker.li>\n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -82,7 +82,7 @@ msgstr "Inte Nominerad"
 
 #: models/application.py:29
 msgid "Application"
-msgstr "Ansökning"
+msgstr "Ansökan"
 
 #: models/application.py:30 wagtail_hooks.py:242
 msgid "Applications"
@@ -113,14 +113,10 @@ msgid "Cover Letter"
 msgstr "Ansökningsbrev"
 
 #: models/application.py:54
-#, fuzzy
-#| msgid "Present yourself and state why you are who we are looking for"
 msgid ""
 "Present yourself and state why you are \n"
 "        who we are looking for"
-msgstr ""
-"Skriv en presentation av dig själv och en beskrivning av varför du är den vi "
-"letar efter"
+msgstr "Presentera dig själv och berätta varför du är den vi letar efter"
 
 #: models/application.py:58
 msgid "Qualifications"
@@ -149,8 +145,6 @@ msgstr ""
 "och naturvetarkårs integritetspolicy som går att hitta på: "
 
 #: models/application.py:84
-
-#: models/application.py:84
 msgid "Rejection date"
 msgstr "Datum för avslag"
 
@@ -160,15 +154,15 @@ msgstr "bild saknas"
 
 #: models/contact_card.py:83 templatetags/involvement_tags.py:34
 msgid "Vacant Position"
-msgstr "Ledig position"
+msgstr "Vakant position"
 
 #: models/mandate_history.py:22
 msgid "Mandate history"
-msgstr "Mandat historik"
+msgstr "Mandathistorik"
 
 #: models/mandate_history.py:23
 msgid "Mandate histories"
-msgstr "Mandat historik"
+msgstr "Mandathistorik"
 
 #: models/position.py:16 models/position.py:83 wagtail_hooks.py:276
 msgid "Position"
@@ -184,7 +178,7 @@ msgstr "Sökstart"
 
 #: models/position.py:32
 msgid "Recruitment deadline"
-msgstr "Sista ansökningssdag"
+msgstr "Sista ansökningsdag"
 
 #: models/position.py:36
 msgid "Number of appointments"
@@ -459,8 +453,8 @@ msgid ""
 "Just extending the deadline might not be enough. Make sure you make some "
 "extra noise about the position!"
 msgstr ""
-"Att endast förlänga söket kanske inte räcker. Se till att sprida "
-"information om positionen!"
+"Att endast förlänga söket kanske inte räcker. Se till att sprida information "
+"om positionen!"
 
 #: templates/involvement/admin/extend_deadline_subject.txt:2
 #, fuzzy, python-format
