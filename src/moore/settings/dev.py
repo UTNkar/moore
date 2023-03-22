@@ -31,14 +31,9 @@ if IS_RUNNING_TEST:
     # Override search backend to not use postgres
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.search.backends.db',
+            'BACKEND': 'wagtail.search.backends.database',
         }
     }
-    # Since this app has postgres-specific migrations, it is not
-    # compatbile with the other database backends. As the tests run
-    # using sqlite3, we have to remove it when testing or it will
-    # cause a crash.
-    INSTALLED_APPS.remove('wagtail.contrib.postgres_search')
 
 elif 'DOCKER' in os.environ:
     DATABASES = {
@@ -49,17 +44,6 @@ elif 'DOCKER' in os.environ:
             'HOST': 'moore-db',
             'PASSWORD': 'moore',
             'PORT': 5432,
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('DJANGO_DB_NAME', 'moore'),
-            'USER': os.environ.get('DJANGO_DB_USER', 'moore'),
-            'PASSWORD': os.environ.get('DJANGO_DB_PASS', 'moore'),
-            'HOST': os.environ.get('DJANGO_DB_HOST', '127.0.0.1'),
-            'PORT':  os.environ.get('DJANGO_DB_PORT', '5432'),
         }
     }
 
@@ -74,15 +58,3 @@ BASE_URL = 'http://localhost:8000'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 DEFAULT_FROM_EMAIL = 'info@localhost'
-
-MELOS_URL = os.environ.get('MELOS_URL')
-MELOS_ORG_ID = os.environ.get('MELOS_ORG_ID')
-MELOS_ADMIN = os.environ.get('MELOS_ADMIN')
-
-# Google API
-GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
-
-try:
-    from .local import *
-except ImportError:
-    pass

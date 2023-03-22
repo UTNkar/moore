@@ -1,6 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from django import forms
 from wagtail.core import blocks
+from wagtail.core.blocks.field_block import CharBlock, ChoiceBlock
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
 from instagram.blocks import InstagramFeedChooserBlock
@@ -70,8 +71,26 @@ class ParagraphBlock(blocks.StructBlock):
 
 
 class HeadingBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=True)
-    subtitle = blocks.CharBlock(required=False)
+    title = CharBlock(required=True)
+    title_alignment = ChoiceBlock(
+        default=("Center", _("Center")),
+        required=True,
+        choices=[
+            ("Left", _("Left")),
+            ("Center", _("Center")),
+            ("Right", _("Right"))],
+        help_text=_("Choose the title alignment")
+    )
+    subtitle = CharBlock(required=False)
+    subtitle_alignment = ChoiceBlock(
+        default=("Center", _("Center")),
+        required=True,
+        choices=[
+            ("Left", _("Left")),
+            ("Center", _("Center")),
+            ("Right", _("Right"))],
+        help_text=_("Choose the subtitle alignment")
+    )
 
     class Meta:
         label = _('Heading')
