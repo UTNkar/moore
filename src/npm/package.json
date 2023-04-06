@@ -3,21 +3,13 @@
     "version": "1.0.0",
     "description": "A collection of all packages that moore needs from npm",
     "type": "module",
-    "files": ["static"],
-    "main": "./static/my-lib.umd.cjs",
-    "module": "./static/my-lib.js",
-    "exports": {
-      ".": {
-        "import": "./static/my-lib.js",
-        "require": "./static/my-lib.umd.cjs"
-      }
-    },
+    "files": [
+        "static"
+    ],
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "vite",
         "build": "vite build"
     },
-    "author": "",
+    "author": "UTN",
     "license": "ISC",
     "dependencies": {
         "@codemirror/commands": "^6.2.1",
