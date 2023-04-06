@@ -38,3 +38,6 @@ django-jsonschema-form==1.0.3
 
 # Improved environment variable handling
 python-decouple==3.7
+
+# Add customabilitiy for including JS scripts in Forms media
+django-js-asset==2.0.0

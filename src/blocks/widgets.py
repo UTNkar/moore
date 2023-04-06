@@ -1,4 +1,5 @@
 from django import forms
+from js_asset import JS
 from wagtail.utils.widgets import WidgetWithScript
 from django.utils.html import format_html
 from string import Template
@@ -57,17 +58,11 @@ class CodeMirrorWidget(WidgetWithScript, forms.Textarea):
 
     @property
     def media(self):
-        media = forms.Media(
-            # css={'all': ('libraries/codemirror/codemirror.css',)},
-            # js=(
-            #     'libraries/codemirror/codemirror.js',
-            #     'libraries/codemirror/autorefresh.js',
-            #     'libraries/codemirror/xml.js',
-            #     'libraries/codemirror/css.js',
-            #     'libraries/codemirror/javascript.js',
-            #     'libraries/codemirror/htmlmixed.js',
-            # )
-            js=("my-lib.js", )
-        )
+        # The JS module allows us to add custom attributes to script tags.
+        # In this case we need to add type=module since codemirror.js is
+        # made as an ES module.
+        media = forms.Media(js=[
+            JS("codemirror.js", {"type": "module"})
+        ])
 
         return media
