@@ -1,17 +1,11 @@
-import { EditorView, keymap } from "@codemirror/view";
-import { defaultKeymap } from "@codemirror/commands";
+import { basicSetup, EditorView } from "codemirror";
 import { EditorState } from "@codemirror/state";
+import { html } from "@codemirror/lang-html";
 
-let startState = EditorState.create({
-    doc: "Hello World",
-    extensions: [keymap.of(defaultKeymap)],
+const theme = EditorView.baseTheme({
+    "&.cm-editor": {
+        fontSize: "1rem",
+    },
 });
 
-let view1 = new EditorView({
-    state: startState,
-    parent: document.querySelector("#editor1"),
-});
-
-console.log("its working");
-
-export { EditorView, EditorState, keymap, defaultKeymap };
+export { EditorView, EditorState, html, basicSetup, theme };

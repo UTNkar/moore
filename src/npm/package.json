@@ -12,9 +12,9 @@
     "author": "UTN",
     "license": "ISC",
     "dependencies": {
-        "@codemirror/commands": "^6.2.1",
+        "@codemirror/lang-html": "^6.4.3",
         "@codemirror/state": "^6.2.0",
-        "@codemirror/view": "^6.9.2",
+        "codemirror": "^6.0.1",
         "vite": "^4.1.4"
     }
 }
