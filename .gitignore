@@ -54,6 +54,12 @@ cover/
 # Translations
 *.mo
 *.pot
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
 
 # Django stuff:
 *.log
@@ -166,6 +172,7 @@ CACHE/
 # VSCode
 .vscode
 
+# Docker data
 # Docker data
 postgres-data/
 

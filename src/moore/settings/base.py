@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.settings',
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.routable_page',
-    'wagtail.contrib.postgres_search',
+    'wagtail.search.backends.database',
     'wagtail.api.v2',
     'wagtailmedia',
 
@@ -235,7 +235,7 @@ WAGTAIL_USER_CUSTOM_FIELDS = ['registration_year', 'study',
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.contrib.postgres_search.backend',
+        'BACKEND': 'wagtail.search.backends.database',
     }
 }
 
