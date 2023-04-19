@@ -5,6 +5,7 @@ from events.models import Event, Ticket, Participant
 from events.forms import ParticipantForm
 from django.contrib.auth.decorators import login_required
 
+import swish
 
 @login_required
 def my_ticket(request, event_pk):
@@ -67,6 +68,25 @@ def my_ticket(request, event_pk):
             # so that the first user can't be tampered with.
             ticket.save()
     else:
+        # Swish grejer
+        swish_client = swish.SwishClient(
+            environment=swish.Environment.Test,
+            merchant_swish_number='1231181189',
+            cert=('../swish_certificates/Swish_Merchant_TestCertificate_1234679304.pem', '../swish_certificates/Swish_Merchant_TestCertificate_1234679304.pem'),
+            verify='../swish_certificates/Swish_TLS_RootCA.pem'
+        )
+
+        payment = swish_client.create_payment(
+            payee_payment_reference='0123456789',
+            callback_url='https://example.com/api/swishcb/paymentrequests',
+            payer_alias='46712345678',
+            amount=100,
+            currency='SEK',
+            message='Kingston USB Flash Drive 8 GB'
+        )
+
+        print(payment)
+
         formset = ParticipantFormset(
             queryset=queryset,
             form_kwargs={'price_list': event.price_list,
