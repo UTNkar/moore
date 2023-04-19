@@ -22,17 +22,25 @@ class MockClient:
         return 100000
 
 
+#  try:
+#             return requests.get(  
+#                 settings.MELOS_URL + "/" + path,
+#                 auth=HTTPBasicAuth('admin', settings.MELOS_ADMIN),
+#                 params=params,
+#             )
+#         except: #cachad data 
+
 class ApiClient:
 
     def request_get(self, path, params=None):
         if params is not None:
             params['orgId'] = settings.MELOS_ORG_ID
-
-        return requests.get(
-            settings.MELOS_URL + "/" + path,
-            auth=HTTPBasicAuth('admin', settings.MELOS_ADMIN),
-            params=params,
-        )
+            return requests.get(  
+                    settings.MELOS_URL + "/" + path,
+                    auth=HTTPBasicAuth('admin', settings.MELOS_ADMIN),
+                    params=params,
+            )
+       
 
     def get_user_data(self, melos_id):
         r = self.request_get('user' + '/' + str(melos_id))
