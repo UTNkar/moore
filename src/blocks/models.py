@@ -1,15 +1,15 @@
 from django.utils.translation import gettext_lazy as _
 from django import forms
-from wagtail.core import blocks
-from wagtail.core.blocks.field_block import CharBlock, ChoiceBlock
+from wagtail import blocks
+from wagtail.blocks.field_block import CharBlock, ChoiceBlock
 from wagtail.images.blocks import ImageChooserBlock
 from involvement.blocks import ContactCardBlock
 from instagram.blocks import InstagramFeedChooserBlock
 import requests
 from datetime import datetime
 from blocks.widgets import CodeMirrorWidget
-from wagtail.core.blocks.struct_block import StructBlockAdapter
-from wagtail.core.telepath import register
+from wagtail.blocks.struct_block import StructBlockAdapter
+from wagtail.telepath import register
 from django.utils.functional import cached_property
 
 

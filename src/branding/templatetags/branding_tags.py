@@ -1,7 +1,7 @@
 from django import template
 
 from branding.models import Logo, SocialMediaSettings, FooterSettings
-from wagtail.core.models import Site
+from wagtail.models import Site
 
 register = template.Library()
 

@@ -6,7 +6,7 @@ from django.apps import apps
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
+from wagtail.admin.panels import MultiFieldPanel, FieldPanel, \
     FieldRowPanel
 from utils.translation import TranslatedField
 from involvement.rule_utils import is_admin, is_board, is_fum, \

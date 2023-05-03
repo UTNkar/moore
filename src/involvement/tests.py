@@ -4,10 +4,10 @@ from django.contrib.auth.models import Group, Permission
 from django.core import mail
 from django.test import TestCase
 from django.urls import reverse
-from wagtail.tests.utils import WagtailPageTests
-from wagtail.core.models import Page
-from wagtail.tests.utils.form_data import inline_formset
-from wagtail.tests.utils.form_data import nested_form_data
+from wagtail.test.utils import WagtailPageTests
+from wagtail.models import Page
+from wagtail.test.utils.form_data import inline_formset
+from wagtail.test.utils.form_data import nested_form_data
 
 from home.models import HomePage
 from involvement.cron import send_extension_emails

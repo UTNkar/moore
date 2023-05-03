@@ -50,7 +50,7 @@ elif 'DOCKER' in os.environ:
 # Base URL to use when referring to full URLs within the Wagtail admin
 # backend - e.g. in notification emails. Don't include '/admin' or a
 # trailing slash
-BASE_URL = 'http://localhost:8000'
+WAGTAIL_BASE_URL = 'http://localhost:8000'
 
 # Email
 # https://docs.djangoproject.com/en/1.10/ref/settings/#email-backend

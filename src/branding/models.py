@@ -1,17 +1,16 @@
 from django.db import models
-from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 
 from django.utils.translation import gettext_lazy as _
-from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, \
-    MultiFieldPanel, StreamFieldPanel, TabbedInterface, ObjectList
-from wagtail.core import blocks
-from wagtail.core.fields import StreamField
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, \
+    MultiFieldPanel, TabbedInterface, ObjectList
+from wagtail import blocks
+from wagtail.fields import StreamField
 from utils.translation import TranslatedField
 
 
 @register_setting(icon='fa-window-minimize')
-class FooterSettings(BaseSetting):
+class FooterSettings(BaseSiteSetting):
     class Meta:
         verbose_name = _('footer_en')   # quickfix
 
@@ -21,6 +20,7 @@ class FooterSettings(BaseSetting):
             ('content', blocks.RichTextBlock()),
         ]))],
         blank=True,
+        use_json_field=True,
     )
 
     footer_sv = StreamField(
@@ -29,16 +29,17 @@ class FooterSettings(BaseSetting):
             ('content', blocks.RichTextBlock()),
         ]))],
         blank=True,
+        use_json_field=True,
     )
 
     footer = TranslatedField('footer_en', 'footer_sv')
 
     panels_sv = [
-        StreamFieldPanel('footer_sv')
+        FieldPanel('footer_sv')
     ]
 
     panels_en = [
-        StreamFieldPanel('footer_en')
+        FieldPanel('footer_en')
     ]
 
     edit_handler = TabbedInterface([
@@ -48,7 +49,7 @@ class FooterSettings(BaseSetting):
 
 
 @register_setting(icon='openquote')
-class SocialMediaSettings(BaseSetting):
+class SocialMediaSettings(BaseSiteSetting):
     class Meta:
         verbose_name = _('social media accounts')
 
@@ -137,8 +138,8 @@ class Logo(models.Model):
             FieldPanel('category'),
             FieldPanel('link'),
         ]),
-        ImageChooserPanel('logo'),
-        ImageChooserPanel('logo_white'),
-        ImageChooserPanel('logo_black'),
+        FieldPanel('logo'),
+        FieldPanel('logo_white'),
+        FieldPanel('logo_black'),
         FieldPanel('belongs_to'),
     ])]

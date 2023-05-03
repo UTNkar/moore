@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'news',
     'search',
     'moore',  # include for templatetags
-
+    
+    'wagtail',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
@@ -49,7 +50,6 @@ INSTALLED_APPS = [
     'wagtail.images',
     'wagtail.search',
     'wagtail.admin',
-    'wagtail.core',
     'wagtail.contrib.settings',
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.routable_page',

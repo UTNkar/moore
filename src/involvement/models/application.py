@@ -5,7 +5,7 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from modelcluster.models import ClusterableModel
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
+from wagtail.admin.panels import MultiFieldPanel, FieldPanel, \
     InlinePanel, FieldRowPanel
 
 

@@ -2,9 +2,8 @@ from datetime import date
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
+from wagtail.admin.panels import MultiFieldPanel, FieldPanel, \
     FieldRowPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
 from utils.translation import TranslatedField
 
 
@@ -83,7 +82,7 @@ class Team(models.Model):
             FieldPanel('name_en'),
             FieldPanel('name_sv'),
         ]),
-        ImageChooserPanel('logo'),
+        FieldPanel('logo'),
         FieldPanel('description_en'),
         FieldPanel('description_sv'),
     ])]

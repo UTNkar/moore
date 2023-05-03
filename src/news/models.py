@@ -1,11 +1,10 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from wagtail.admin.edit_handlers import FieldPanel, TabbedInterface, \
+from wagtail.admin.panels import FieldPanel, TabbedInterface, \
     ObjectList
-from wagtail.core import blocks
-from wagtail.core.fields import RichTextField
-from wagtail.core.models import Page
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail import blocks
+from wagtail.fields import RichTextField
+from wagtail.models import Page
 from wagtail.search import index
 
 from utils.translation import TranslatedField
@@ -94,7 +93,7 @@ class NewsPage(Page):
         FieldPanel('body_sv', classname="full"),
     ]
     promote_panels = [
-        ImageChooserPanel('feed_image')
+        FieldPanel('feed_image')
     ] + Page.promote_panels
 
     edit_handler = TabbedInterface([

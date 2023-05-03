@@ -2,9 +2,9 @@ from django.core import validators
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
+from wagtail.admin.panels import MultiFieldPanel, FieldPanel, \
     FieldRowPanel
-from wagtail.core.models import Orderable
+from wagtail.models import Orderable
 
 
 class Reference(Orderable):
