@@ -2,7 +2,7 @@ from django.contrib.admin.utils import quote
 from django.templatetags.static import static
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
-from wagtail.core import hooks
+from wagtail import hooks
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, \
     modeladmin_register

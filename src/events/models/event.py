@@ -2,10 +2,9 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel, \
+from wagtail.admin.panels import MultiFieldPanel, FieldPanel, \
     FieldRowPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.core.fields import RichTextField
+from wagtail.fields import RichTextField
 from wagtail.snippets.models import register_snippet
 from events.models import Ticket
 
@@ -158,7 +157,7 @@ class Event(models.Model):
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
         FieldPanel('title'),
-        ImageChooserPanel('image'),
+        FieldPanel('image'),
         FieldPanel('description'),
         FieldPanel('info_for_participants'),
         FieldPanel('end_of_application'),

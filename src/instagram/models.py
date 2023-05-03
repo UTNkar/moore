@@ -1,7 +1,7 @@
 from django.db import models
 from django import forms
 from wagtail.contrib.modeladmin.options import ModelAdmin
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.panels import FieldPanel
 
 
 class InstagramFeed(models.Model):

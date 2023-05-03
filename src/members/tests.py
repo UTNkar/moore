@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from django.core import mail
+from django import mail
 from django.test import TestCase
 from django.urls import reverse
 from members.models import Member, StudyProgram

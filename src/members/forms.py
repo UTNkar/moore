@@ -10,7 +10,7 @@ from django.contrib.auth.password_validation import (
     validate_password
 )
 from django.template import loader
-from django.core.mail import EmailMultiAlternatives
+from django.mail import EmailMultiAlternatives
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes

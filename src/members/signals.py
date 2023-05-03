@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
+from django.mail import EmailMultiAlternatives
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.template import loader

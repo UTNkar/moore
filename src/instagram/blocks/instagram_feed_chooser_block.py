@@ -1,4 +1,4 @@
-from wagtail.core import blocks
+from wagtail import blocks
 from instagram.models import InstagramFeed
 from django import forms
 from django.utils.translation import gettext_lazy as _

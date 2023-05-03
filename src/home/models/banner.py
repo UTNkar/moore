@@ -2,16 +2,15 @@ from __future__ import absolute_import, unicode_literals
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import MultiFieldPanel, FieldRowPanel, \
+from wagtail.admin.panels import MultiFieldPanel, FieldRowPanel, \
         FieldPanel
-from wagtail.core.models import Orderable
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.models import Orderable
 from utils.translation import TranslatedField
 
 from wagtailmedia.edit_handlers import MediaChooserPanel
 
 
-from wagtail.core import hooks
+from wagtail import hooks
 
 
 @hooks.register('construct_media_chooser_queryset')
@@ -97,7 +96,7 @@ class Banner(Orderable):
 
     # ------ Administrator settings ------
     panels = [MultiFieldPanel([
-        ImageChooserPanel('image'),
+        FieldPanel('image'),
         MediaChooserPanel('video'),
         FieldRowPanel([
             FieldPanel('title_en'),

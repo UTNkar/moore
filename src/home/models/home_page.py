@@ -1,10 +1,10 @@
 from __future__ import absolute_import, unicode_literals
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from wagtail.admin.edit_handlers import InlinePanel, FieldPanel, \
-        StreamFieldPanel, TabbedInterface, ObjectList, MultiFieldPanel
-from wagtail.core.fields import StreamField
-from wagtail.core.models import Page
+from wagtail.admin.panels import InlinePanel, FieldPanel, \
+        TabbedInterface, ObjectList, MultiFieldPanel
+from wagtail.fields import StreamField
+from wagtail.models import Page
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES, HTMLCodeBlock
 from news.models import LatestNewsBlock
 from utils.translation import TranslatedField
@@ -24,6 +24,7 @@ class HomePage(Page):
             ('html', HTMLCodeBlock()),
         ],
         blank=True,
+        use_json_field=True,
     )
     body_sv = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
@@ -31,18 +32,19 @@ class HomePage(Page):
             ('html', HTMLCodeBlock()),
         ],
         blank=True,
+        use_json_field=True,
     )
     body = TranslatedField('body_en', 'body_sv')
 
     banner_panels = [InlinePanel('banners', label=_('Banner'))]
 
     content_panels_en = Page.content_panels + [
-        StreamFieldPanel('body_en'),
+        FieldPanel('body_en'),
     ]
 
     content_panels_sv = [
         FieldPanel('title_sv', classname="full title"),
-        StreamFieldPanel('body_sv'),
+        FieldPanel('body_sv'),
     ]
 
     custom_settings_panel = Page.settings_panels + [

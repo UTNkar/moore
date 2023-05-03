@@ -1,10 +1,10 @@
 from __future__ import absolute_import, unicode_literals
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
-from wagtail.core import blocks
-from wagtail.core.fields import StreamField, RichTextField
-from wagtail.core.models import Page
+from wagtail.admin.panels import FieldPanel
+from wagtail import blocks
+from wagtail.fields import StreamField, RichTextField
+from wagtail.models import Page
 from utils.translation import TranslatedField
 from involvement.blocks import ContactCardBlock
 
@@ -16,6 +16,7 @@ class ContactPage(Page):
 
     contact_point = StreamField(
         [('person', ContactCardBlock())],
+        use_json_field=True,
     )
 
     other_contacts = StreamField(
@@ -30,6 +31,7 @@ class ContactPage(Page):
                 required=False,
             )),
         ], icon='user'))],
+        use_json_field=True,
     )
 
     map_location = models.CharField(
@@ -70,6 +72,6 @@ class ContactPage(Page):
         FieldPanel('title_sv', classname="full title"),
         FieldPanel('map_location'),
         FieldPanel('location_description'),
-        StreamFieldPanel('contact_point'),
-        StreamFieldPanel('other_contacts'),
+        FieldPanel('contact_point'),
+        FieldPanel('other_contacts'),
     ]

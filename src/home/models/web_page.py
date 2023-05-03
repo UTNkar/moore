@@ -1,10 +1,10 @@
 from __future__ import absolute_import, unicode_literals
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, \
+from wagtail.admin.panels import FieldPanel, \
         TabbedInterface, ObjectList
-from wagtail.core.fields import StreamField
-from wagtail.core.models import Page
+from wagtail.fields import StreamField
+from wagtail.models import Page
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES, EventbriteBlock, \
     HTMLCodeBlock
 from google.models import GoogleFormBlock, GoogleDriveBlock, \
@@ -32,6 +32,7 @@ class WebPage(Page):
             ('events', EventListBlock()),
         ],
         blank=True,
+        use_json_field=True,
     )
     body_sv = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
@@ -43,16 +44,17 @@ class WebPage(Page):
             ('eventbrite', EventbriteBlock())
         ],
         blank=True,
+        use_json_field=True,
     )
     body = TranslatedField('body_en', 'body_sv')
 
     content_panels_en = Page.content_panels + [
-        StreamFieldPanel('body_en'),
+        FieldPanel('body_en'),
     ]
 
     content_panels_sv = [
         FieldPanel('title_sv', classname="full title"),
-        StreamFieldPanel('body_sv'),
+        FieldPanel('body_sv'),
     ]
 
     edit_handler = TabbedInterface([

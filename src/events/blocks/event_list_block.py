@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 from wagtail.snippets.blocks import SnippetChooserBlock
-from wagtail.core import blocks
+from wagtail import blocks
 from events.models import Ticket
 
 

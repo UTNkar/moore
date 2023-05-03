@@ -1,10 +1,10 @@
 from __future__ import absolute_import, unicode_literals
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from wagtail.admin.edit_handlers import InlinePanel, MultiFieldPanel, \
-    FieldRowPanel, FieldPanel, StreamFieldPanel, TabbedInterface, ObjectList
-from wagtail.core.fields import StreamField
-from wagtail.core.models import Page
+from wagtail.admin.panels import InlinePanel, MultiFieldPanel, \
+    FieldRowPanel, FieldPanel, TabbedInterface, ObjectList
+from wagtail.fields import StreamField
+from wagtail.models import Page
 from wagtail.contrib.forms.models import AbstractEmailForm
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from utils.translation import TranslatedField
@@ -27,6 +27,7 @@ class FormPage(WagtailCaptchaEmailForm):
         ],
         verbose_name=_('English Introduction'),
         blank=True,
+        use_json_field=True,
     )
     intro_sv = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
@@ -34,6 +35,7 @@ class FormPage(WagtailCaptchaEmailForm):
         ],
         verbose_name=_('Swedish Introduction'),
         blank=True,
+        use_json_field=True,
     )
     intro = TranslatedField('intro_en', 'intro_sv')
 
@@ -43,6 +45,7 @@ class FormPage(WagtailCaptchaEmailForm):
         ],
         verbose_name=_('English Thank You Text'),
         blank=True,
+        use_json_field=True,
     )
     thank_you_text_sv = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES + [
@@ -50,6 +53,7 @@ class FormPage(WagtailCaptchaEmailForm):
         ],
         verbose_name=_('Swedish Thank You Text'),
         blank=True,
+        use_json_field=True,
     )
     thank_you_text = TranslatedField('thank_you_text_en', 'thank_you_text_sv')
 
@@ -77,16 +81,16 @@ class FormPage(WagtailCaptchaEmailForm):
     ]
 
     content_panels_en = AbstractEmailForm.content_panels + [
-        StreamFieldPanel('intro_en'),
+        FieldPanel('intro_en'),
         FieldPanel('form_title_en', classname="full title"),
-        StreamFieldPanel('thank_you_text_en'),
+        FieldPanel('thank_you_text_en'),
     ]
 
     content_panels_sv = [
         FieldPanel('title_sv', classname="full title"),
-        StreamFieldPanel('intro_sv'),
+        FieldPanel('intro_sv'),
         FieldPanel('form_title_sv', classname="full title"),
-        StreamFieldPanel('thank_you_text_sv'),
+        FieldPanel('thank_you_text_sv'),
     ]
 
     custom_settings_panel = Page.settings_panels + [

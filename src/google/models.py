@@ -2,11 +2,11 @@ from datetime import date
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, \
+from wagtail.admin.panels import FieldPanel, \
     TabbedInterface, ObjectList
-from wagtail.core import blocks
-from wagtail.core.fields import StreamField, RichTextField
-from wagtail.core.models import Page
+from wagtail import blocks
+from wagtail.fields import StreamField, RichTextField
+from wagtail.models import Page
 from wagtail.search import index
 from blocks.models import WAGTAIL_STATIC_BLOCKTYPES
 from utils.translation import TranslatedField
@@ -129,8 +129,8 @@ class GoogleFormPage(Page):
     translated_title = TranslatedField('title', 'title_sv')
 
     # TODO: Limit to one form!
-    form_en = StreamField([('google_form', GoogleFormBlock())])
-    form_sv = StreamField([('google_form', GoogleFormBlock())])
+    form_en = StreamField([('google_form', GoogleFormBlock())],use_json_field=True)
+    form_sv = StreamField([('google_form', GoogleFormBlock())],use_json_field=True)
     form = TranslatedField('form_en', 'form_sv')
 
     deadline = models.DateField(verbose_name=_('Form deadline'))
@@ -138,10 +138,12 @@ class GoogleFormPage(Page):
     results_en = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES,
         blank=True,
+        use_json_field=True,
     )
     results_sv = StreamField(
         WAGTAIL_STATIC_BLOCKTYPES,
         blank=True,
+        use_json_field=True,
     )
     results = TranslatedField('results_en', 'results_sv')
 
@@ -153,14 +155,14 @@ class GoogleFormPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('title_sv', classname="full title"),
         FieldPanel('deadline'),
-        StreamFieldPanel('form_en'),
-        StreamFieldPanel('form_sv'),
+        FieldPanel('form_en'),
+        FieldPanel('form_sv'),
     ]
 
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading=_('Common')),
-        ObjectList([StreamFieldPanel('results_en')], heading=_('English')),
-        ObjectList([StreamFieldPanel('results_sv')], heading=_('Swedish')),
+        ObjectList([FieldPanel('results_en')], heading=_('English')),
+        ObjectList([FieldPanel('results_sv')], heading=_('Swedish')),
         ObjectList(
             Page.promote_panels + Page.settings_panels, heading=_('Settings')
         ),

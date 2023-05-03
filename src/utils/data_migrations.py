@@ -1,5 +1,5 @@
 from django.core.serializers.json import DjangoJSONEncoder
-from wagtail.core.blocks.stream_block import StreamValue
+from wagtail.blocks.stream_block import StreamValue
 from json import dumps
 
 """
