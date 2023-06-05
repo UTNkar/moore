@@ -24,22 +24,25 @@ To get started with Project Moore, follow these instructions to set up a
 **development** environment:
 
 1. Install Python 3, at least version 3.6 or up.
-2. [Install postgresql](INSTALLING_POSTGRES.md)
-3. Install the following python packages:
+2. [Install the LTS version of NodeJS](https://nodejs.org). If you are using Ubuntu or Ubuntu for windows, use [NVM](https://github.com/nvm-sh/nvm) to install the LTS version node instead.
+3. [Install postgresql](INSTALLING_POSTGRES.md)
+4. Install the following python packages:
     - python3-venv
     - python3-dev
     - build-essential
     - libpq-dev
-4. Clone the repository.
-5. Copy the file `.env-template` and name the copy `.env`
-6. Fill in the necessary variables in `.env`. `MELOS_URL` and `MELOS_ADMIN` are required. You might have to fill in some database credidentils. Check `src/moore/settings/base.py` for which default values are used if you don't specify and credidentials.
-7. Run `source ./source_me.sh` to create a virtual environment.
-8. Run `pip install --upgrade pip` to make sure that pip is running the latest version
-9. Run `pip install -r dev-requirements.txt`
-10. Use `cd src` to enter the website directory.
-11. Run `./manage.py migrate` to initialize the database.
-12. Run `./manage.py compilemessages` to create all the translations.
-13. Run `./manage.py createsuperuser` to create an admin user. (if the ssn is not passed, the most likely fault lies with the db-credentials)
+5. Clone the repository.
+6. Copy the file `.env-template` and name the copy `.env`
+7. Fill in the necessary variables in `.env`. `MELOS_URL` and `MELOS_ADMIN` are required. You might have to fill in some database credidentils. Check `src/moore/settings/base.py` for which default values are used if you don't specify and credidentials.
+8. Run `source ./source_me.sh` to create a virtual environment.
+9. Run `pip install --upgrade pip` to make sure that pip is running the latest version
+10. Run `pip install -r dev-requirements.txt`
+11. Use `cd src` to enter the website directory.
+12. Run `./manage.py migrate` to initialize the database.
+13. Run `./manage.py compilemessages` to create all the translations.
+14. Run `./manage.py createsuperuser` to create an admin user. (if the ssn is not passed, the most likely fault lies with the db-credentials)
+15. Use `cd npm` and run the command `npx vite build` to compile all javascript libraries.
+16. Go back to `src` by running `cd ..`
 
 During development, you can run a test web server using `./manage.py runserver`.
 
@@ -61,6 +64,7 @@ environment all set up:
 1. Run `docker exec -it moore python src/manage.py compilemessages` to create all the translations
 1. Run `docker exec -it moore python src/manage.py createsuperuser` to create an admin
    user.
+1. Run `docker exec -w src/npm -it npx vite build` to compile all javascript libraries.
 
 The Moore application is now available on `http://localhost:8000` and can be started using `docker-compose up -d` (the `-d` flag starts the instance in the background) and stopped `docker-compose stop`.
 

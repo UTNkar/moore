@@ -1,0 +1,42 @@
+<textarea name="{{ widget.name }}" id="{{widget.attrs.id}}">
+    {% if widget.value %}{{ widget.value }}{% endif %}
+</textarea>
+
+<div id="{{widget.attrs.id}}-target"></div>
+<script type="module">
+    import {
+        EditorState,
+        EditorView,
+        html,
+        basicSetup,
+        theme,
+    } from "/static/codemirror.js";
+
+    const editorSource = document.querySelector("#{{widget.attrs.id}}");
+    editorSource.setAttribute("hidden", "true");
+
+    let startState = EditorState.create({
+        doc: editorSource.value,
+        extensions: [
+            basicSetup,
+            html(),
+            theme,
+            EditorView.updateListener.of((v) => {
+                if (v.docChanged) {
+                    // Each time codemirror is updated the new value is
+                    // set on the actual form field
+                    const doc = v.state.doc;
+                    editorSource.value = doc.toString();
+                }
+            }),
+        ],
+    });
+
+    // Find the editor targtet
+    const editorTarget = document.querySelector("#{{widget.attrs.id}}-target");
+
+    let view1 = new EditorView({
+        state: startState,
+        parent: editorTarget,
+    });
+</script>
