@@ -148,7 +148,8 @@ class TicketAdmin(ModelAdmin):
     menu_label = _('Tickets')
     menu_icon = 'fa-ticket'
     menu_order = 300
-    list_display = ['owner_person_nr', 'owner_email', 'event', 'ticket_number', 'total_payment']
+    list_display = ['owner_person_nr', 'owner_email', 'event', 'ticket_number',
+                    'total_payment']
     list_filter = ('event', 'payment_status')
     list_export = ('event', 'owner_person_nr', 'owner_email',
                    'ticket_number', 'payment_status')

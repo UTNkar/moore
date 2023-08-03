@@ -5,9 +5,9 @@ from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from wagtail.admin.edit_handlers import FieldPanel
 import events.models as event_models
-from members.models import Member
 
 from django_select2.forms import Select2Widget
+
 
 class Ticket(models.Model):
     """A ticket type determines what allows a user entry to an event"""
