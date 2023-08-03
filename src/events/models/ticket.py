@@ -34,7 +34,8 @@ class Ticket(models.Model):
         help_text=_(
             'Dictates the number of participants '
             'in the ticket besides the ticket owner.'),
-        default=0)
+        default=0
+    )
 
     locked = models.BooleanField(
         default=False,
@@ -54,6 +55,12 @@ class Ticket(models.Model):
         blank=False,
         null=False,
         default='unpaid',
+    )
+
+    total_payment = models.FloatField(
+        verbose_name=('Total payment'),
+        help_text=('Price to be paid by participant(s)'),
+        default=0,
     )
 
     class Meta:
@@ -80,6 +87,7 @@ class Ticket(models.Model):
         FieldPanel('event'),
         FieldPanel('ticket_number'),
         FieldPanel('locked'),
+        FieldPanel('total_payment'),
         FieldPanel('payment_status'),
     ]
 

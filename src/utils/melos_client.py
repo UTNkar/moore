@@ -35,7 +35,7 @@ class ApiClient:
         )
 
     def get_user_data(self, melos_id):
-        r = self.request_get('user' + '/' + str(melos_id))
+        r = self.request_get('user-by-id' + '/' + str(melos_id))
         if r.status_code == 200:
             response_json = r.json()
 
@@ -51,8 +51,11 @@ class ApiClient:
             }
 
     def is_member(self, ssn):
-        r = self.request_get('user/validateMembership', {'ssn': ssn})
-        return r.status_code == 204
+        r = self.request_get('is-member/' + ssn)
+        if r.status_code == 200:
+            return r.json()['Member']
+        else:
+            return False
 
     def get_melos_id(self, ssn):
         parsed_ssn = ssn
@@ -60,9 +63,7 @@ class ApiClient:
         if (not isinstance(parsed_ssn, str)):
             parsed_ssn = ssn[0].strftime('%Y%m%d') + '-' + ssn[1]
 
-        r = self.request_get('user', {
-            'ssn': parsed_ssn,
-        })
+        r = self.request_get('user' + '/' + parsed_ssn)
 
         if r.status_code == 200:
             return r.json()['Id']

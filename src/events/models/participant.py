@@ -48,10 +48,17 @@ class Participant(models.Model):
             cost += self.ticket.event.price_per_participant_nonmember
 
         for orderable in price_list.fields:
-            if self.order.get(orderable['Name']):
+            order = self.order.get(orderable['Name'])
+            if order:
                 if is_member:
-                    cost += orderable.get('Price', 0)
+                    if isinstance(order, int):
+                        cost += order * orderable.get('Non-member price', 0)
+                    else:
+                        cost += orderable.get('Price', 0)
                 else:
-                    cost += orderable.get('Non-member price', 0)
+                    if isinstance(order, int):
+                        cost += order * orderable.get('Non-member price', 0)
+                    else:
+                        cost += orderable.get('Non-member price', 0)
 
         return cost
