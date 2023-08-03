@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'wagtailcaptcha',
     'captcha',
     'jsonschemaform',
+    'django_select2', # Custom select2 widget
 
     'django.contrib.admin',  # Used for wagtail admin filters
     'django.contrib.auth',
