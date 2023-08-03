@@ -49,7 +49,7 @@ def my_ticket(request, event_pk):
                     elif 'lock_for_payment' in request.POST:
                         ticket.locked = True
                         ticket.total_payment = event.base_price + \
-                            sum([participant.calculate_order_cost() 
+                            sum([participant.calculate_order_cost()
                                 for participant in queryset])
                         instance.save()
                     else:
