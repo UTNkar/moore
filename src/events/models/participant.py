@@ -41,7 +41,6 @@ class Participant(models.Model):
         cost = 0
         price_list = self.ticket.event.price_list
         is_member = self.person_nr and MelosClient.is_member(self.person_nr)
-        print("MEMBER:", is_member)
 
         if is_member:
             cost += self.ticket.event.price_per_participant
