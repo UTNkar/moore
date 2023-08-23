@@ -4,6 +4,7 @@ from django.utils import timezone as tz
 from events.models import Event, Ticket, Participant
 from events.forms import ParticipantForm
 from django.contrib.auth.decorators import login_required
+from utils.melos_client import MelosClient
 
 
 @login_required
@@ -75,7 +76,10 @@ def my_ticket(request, event_pk):
 
     # Set this as the first user has to be the owner.
     formset[0].fields['person_nr'].disabled = True
-    cost = event.base_price + \
+    owner_is_member = MelosClient.is_member(ticket.owner.person_nr)
+    base_price = event.base_price if owner_is_member \
+        else event.base_price_nonmember
+    cost = base_price + \
         sum([participant.calculate_order_cost()
             for participant in queryset])
     context['ticket'] = ticket
