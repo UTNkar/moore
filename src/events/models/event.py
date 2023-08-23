@@ -71,6 +71,12 @@ class Event(models.Model):
         default=0
     )
 
+    base_price_nonmember = models.IntegerField(
+        help_text=_('Base ticket price for non-members.'),
+        verbose_name=_('Ticket price for non-members'),
+        default=0
+    )
+
     price_per_participant = models.IntegerField(
         help_text=_(
             'Price per participant, independent of their order. '
@@ -167,7 +173,10 @@ class Event(models.Model):
             FieldPanel('num_participants_per_ticket'),
         ]),
         FieldPanel('first_come_first_serve'),
-        FieldPanel('base_price'),
+        FieldRowPanel([
+            FieldPanel('base_price'),
+            FieldPanel('base_price_nonmember'),
+        ]),
         FieldRowPanel([
             FieldPanel('price_per_participant'),
             FieldPanel('price_per_participant_nonmember'),
