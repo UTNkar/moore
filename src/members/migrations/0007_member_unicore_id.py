@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='member',
-            name='melos_id',
+            name='unicore_id',
             field=models.IntegerField(blank=True, editable=False, null=True),
         ),
 		migrations.RunPython(nullify_columns),

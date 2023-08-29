@@ -9,7 +9,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
-from utils.melos_client import MelosClient
+from utils.unicore_client import UnicoreClient
 from utils.validators import SSNValidator
 from phonenumbers import format_number, PhoneNumberFormat, parse
 
@@ -26,8 +26,8 @@ class CaseInsensitiveUsernameUserManager(UserManager):
         return self.get(**{case_insensitive_username_field: username})
 
 
-class MelosUserManager(CaseInsensitiveUsernameUserManager):
-    # Search Member through Melos if username is SSN
+class UnicoreUserManager(CaseInsensitiveUsernameUserManager):
+    # Search Member through Unicore if username is SSN
     def get_by_natural_key(self, username):
         member = None
         try:
@@ -42,26 +42,26 @@ class MelosUserManager(CaseInsensitiveUsernameUserManager):
 
     def _create_user(
         self, username, password,
-        email, phone_number, melos_id,
+        email, phone_number, unicore_id,
         is_superuser=False, is_staff=False,
         study=None, section=None, registration_year=""
     ):
-        melos_data = MelosClient.get_user_data(melos_id)
+        unicore_data = UnicoreClient.get_user_data(unicore_id)
 
         name = ""
         person_nr = ""
 
-        if melos_data is not None:
+        if unicore_data is not None:
             name = "{} {}".format(
-                melos_data['first_name'].strip(),
-                melos_data['last_name'].strip()
+                unicore_data['first_name'].strip(),
+                unicore_data['last_name'].strip()
             )
 
-            person_nr = melos_data["person_number"]
+            person_nr = unicore_data["person_number"]
 
         user = Member.objects.create(
             username=username,
-            melos_id=melos_id,
+            unicore_id=unicore_id,
             email=email,
             phone_number=phone_number,
             is_superuser=is_superuser,
@@ -80,26 +80,26 @@ class MelosUserManager(CaseInsensitiveUsernameUserManager):
 
     def create_superuser(
         self, username, password,
-        email, phone_number, melos_id,
+        email, phone_number, unicore_id,
         study=None, section=None, registration_year=""
     ):
-        """Creates a new superuser with a melos id."""
+        """Creates a new superuser with a unicore id."""
         return self._create_user(
             username, password, email,
-            phone_number, melos_id,
+            phone_number, unicore_id,
             is_superuser=True, is_staff=True,
             study=study, section=section, registration_year=registration_year
         )
 
     def create_user(
         self, username, password,
-        email, phone_number, melos_id,
+        email, phone_number, unicore_id,
         study=None, section=None, registration_year=""
     ):
-        """Creates a user with a melos id."""
+        """Creates a user with a unicore id."""
         return self._create_user(
             username, password, email,
-            phone_number, melos_id,
+            phone_number, unicore_id,
             study=study, section=section, registration_year=registration_year
         )
 
@@ -110,7 +110,7 @@ class Member(
         PermissionsMixin):
     """This class describes a member"""
 
-    objects = MelosUserManager()
+    objects = UnicoreUserManager()
     username_validator = UnicodeUsernameValidator()
 
     EMAIL_FIELD = 'email'
@@ -119,7 +119,7 @@ class Member(
     REQUIRED_FIELDS = [
         AbstractBaseUser.get_email_field_name(),
         "phone_number",
-        "melos_id"
+        "unicore_id"
     ]
 
     # ---- Necessary fields ---
@@ -157,7 +157,7 @@ class Member(
 
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
-    # ----- Fields for caching user information from melos
+    # ----- Fields for caching user information from unicore
 
     name = models.CharField(
         max_length=254,
@@ -235,16 +235,16 @@ class Member(
         blank=True,
     )
 
-    # ---- Melos ------
+    # ---- Unicore ------
 
-    melos_id = models.IntegerField(
+    unicore_id = models.IntegerField(
         blank=True,
         editable=False,
         null=True,
         unique=True,
     )
 
-    melos_user_data = None
+    unicore_user_data = None
 
     class Meta:
         verbose_name = _('user')
@@ -286,14 +286,14 @@ class Member(
     def get_full_name(self):
         return self.name
 
-    def fetch_and_save_melos_info(self):
-        melos_data = self.get_melos_user_data()
-        if melos_data is not None:
+    def fetch_and_save_unicore_info(self):
+        unicore_data = self.get_unicore_user_data()
+        if unicore_data is not None:
             self.name = "{} {}".format(
-                melos_data['first_name'].strip(),
-                melos_data['last_name'].strip()
+                unicore_data['first_name'].strip(),
+                unicore_data['last_name'].strip()
             )
-            self.person_nr = melos_data['person_number']
+            self.person_nr = unicore_data['person_number']
             self.save()
 
             return True
@@ -322,7 +322,7 @@ class Member(
     @property
     def get_email(self):
         if not self.email:
-            data = self.get_melos_user_data()
+            data = self.get_unicore_user_data()
             if data | data['email']:
                 self.email = data['email']
                 self.save()
@@ -338,10 +338,10 @@ class Member(
             if timezone.now() - self.status_changed < timedelta(days=1):
                 return
 
-            melos_user_data = self.get_melos_user_data()
-            if melos_user_data is None:
+            unicore_user_data = self.get_unicore_user_data()
+            if unicore_user_data is None:
                 return
-            is_member = MelosClient.is_member(melos_user_data['person_number'])
+            is_member = UnicoreClient.is_member(unicore_user_data['person_number'])
             data = "member" if is_member else "nonmember"
 
         if data == 'member':
@@ -384,15 +384,15 @@ class Member(
             if (group not in current_groups):
                 group.user_set.add(self)
 
-    def get_melos_user_data(self):
-        if self.melos_user_data is None:
-            self.melos_user_data = MelosClient.get_user_data(self.melos_id)
-        return self.melos_user_data
+    def get_unicore_user_data(self):
+        if self.unicore_user_data is None:
+            self.unicore_user_data = UnicoreClient.get_user_data(self.unicore_id)
+        return self.unicore_user_data
 
     @staticmethod
-    def find_by_melos_id(melos_id):
-        if melos_id:
-            return Member.objects.filter(melos_id=int(melos_id)).first()
+    def find_by_unicore_id(unicore_id):
+        if unicore_id:
+            return Member.objects.filter(unicore_id=int(unicore_id)).first()
         return None
 
     @staticmethod
@@ -403,10 +403,10 @@ class Member(
             user = Member.objects.filter(person_nr=ssn).first()
 
             if user is None:
-                melos_id = MelosClient.get_melos_id(ssn)
-                return Member.find_by_melos_id(melos_id), melos_id
+                unicore_id = UnicoreClient.get_unicore_id(ssn)
+                return Member.find_by_unicore_id(unicore_id), unicore_id
             else:
-                return user, user.melos_id
+                return user, user.unicore_id
         except Exception:
             pass
 

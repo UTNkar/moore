@@ -8,14 +8,14 @@ import members.models.member
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('members', '0007_member_melos_id'),
+        ('members', '0007_member_unicore_id'),
     ]
 
     operations = [
         migrations.AlterModelManagers(
             name='member',
             managers=[
-                ('objects', members.models.member.MelosUserManager()),
+                ('objects', members.models.member.UnicoreUserManager()),
             ],
         ),
         migrations.AlterField(

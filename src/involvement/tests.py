@@ -32,7 +32,7 @@ class RecruitmentPageTests(WagtailPageTests):
         user_data['password'] = 'password'
         user_data[user_model.EMAIL_FIELD] = "test@email.com"
         user_data['phone_number'] = "0733221121"
-        user_data['melos_id'] = 8631280
+        user_data['unicore_id'] = 8631280
 
         user_model.objects.create_superuser(**user_data)
 

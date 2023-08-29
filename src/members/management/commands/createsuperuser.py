@@ -7,22 +7,22 @@ class Command(createsuperuser.Command):
     def get_input_data(self, field, message, default=None):
         """
             Extends get_input_data from the build in createsuperuser
-            so that we can get a melos id for the superuser to be
+            so that we can get a unicore id for the superuser to be
             created.
         """
-        if field.name == "melos_id":
-            melos_id = None
-            while melos_id is None:
+        if field.name == "unicore_id":
+            unicore_id = None
+            while unicore_id is None:
                 ssn = input("Personnummer: ")
-                found_user, found_melos_id = Member.find_by_ssn(ssn)
+                found_user, found_unicore_id = Member.find_by_ssn(ssn)
                 if found_user is None:
-                    melos_id = found_melos_id
+                    unicore_id = found_unicore_id
                 else:
                     self.stderr.write(
                         "An account with that personnummer already exists"
                     )
-                    melos_id = None
+                    unicore_id = None
 
-            return melos_id
+            return unicore_id
         else:
             return super().get_input_data(field, message, default)

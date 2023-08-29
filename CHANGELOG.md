@@ -274,7 +274,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- Extended createsuperuser so it gets a melos id
+- Extended createsuperuser so it gets a unicore id
 - Teams, roles and positions are now ordered alphabetically after their name
 - Updated django-compressor to 2.4
 - Updated django-libsass to 0.8
@@ -326,10 +326,10 @@ Exception to applications where a board member can see and modify applications f
 | Applications  | Full access   | Board/Presidium (all teams)   | Presidium (all teams) | Group Leader/Engaged  | Engaged       |           |
 | Contact Cards | Full access   | Board/Presidium (all teams)   | Presidium             | Group Leader/Engaged  | Engaged       |           |
 
-- Melos is now used to fetch user-information such as name, ssn and member status.
-- Registering an account requires the SSN to exist in Melos.
+- Unicore is now used to fetch user-information such as name, ssn and member status.
+- Registering an account requires the SSN to exist in Unicore.
 - A user may now log in using both username or ssn.
-- Firstname, Lastname, SSN, Registration Year and Study Program is no longer stored in Moores database and is instead fetched from Melos.
+- Firstname, Lastname, SSN, Registration Year and Study Program is no longer stored in Moores database and is instead fetched from Unicore.
 - Replaced Marvin to Bocken
 - Upgrade dependencies
 

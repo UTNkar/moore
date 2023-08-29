@@ -19,7 +19,7 @@ def view_position(request, context, page, position=None):
 
     # Load application form if user is logged in
     if request.user.is_authenticated:
-        if request.user.melos_id:
+        if request.user.unicore_id:
             context['membership_status'] = request.user.get_status
             context['email'] = request.user.get_email
             context['phone'] = request.user.get_phone_formatted

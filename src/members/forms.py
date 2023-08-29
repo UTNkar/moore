@@ -17,7 +17,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 
 from members.models import StudyProgram, Member, Section
-from utils.melos_client import MelosClient
+from utils.unicore_client import UnicoreClient
 from members.fields import PhoneNumberField, PersonNumberField
 
 User = get_user_model()
@@ -61,11 +61,11 @@ class MemberForm(forms.ModelForm):
     def clean_person_number(self):
         person_number = self.cleaned_data['person_number']
         if self.instance.pk is None:
-            melos_id = MelosClient.get_melos_id(person_number)
-            if not melos_id or Member.find_by_melos_id(melos_id):
+            unicore_id = UnicoreClient.get_unicore_id(person_number)
+            if not unicore_id or Member.find_by_unicore_id(unicore_id):
                 raise forms.ValidationError(_("Incorrect SSN"))
 
-            self.instance.melos_id = melos_id
+            self.instance.unicore_id = unicore_id
 
         return person_number
 
@@ -87,13 +87,13 @@ class RegistrationForm(MemberForm, auth.UserCreationForm):
         field_classes = {'username': auth.UsernameField}
 
     def save(self):
-        melos_id = MelosClient.get_melos_id(self.cleaned_data['person_number'])
+        unicore_id = UnicoreClient.get_unicore_id(self.cleaned_data['person_number'])
         return Member.objects.create_user(
             self.cleaned_data['username'],
             self.cleaned_data['password1'],
             self.cleaned_data['email'],
             self.cleaned_data['phone_number'],
-            melos_id,
+            unicore_id,
             section=self.cleaned_data['section']
         )
 
@@ -105,8 +105,8 @@ class CustomPasswordResetForm(forms.Form):
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
     )
 
-    def get_email(self, melos_id):
-        member = Member.find_by_melos_id(melos_id)
+    def get_email(self, unicore_id):
+        member = Member.find_by_unicore_id(unicore_id)
         if member:
             return member.get_email
         return ''
@@ -429,11 +429,11 @@ class CustomUserCreationForm(UserCreationForm):
 
     def clean_person_number(self):
         person_number = self.cleaned_data['person_number']
-        melos_id = MelosClient.get_melos_id(person_number)
-        if not melos_id or Member.find_by_melos_id(melos_id):
+        unicore_id = UnicoreClient.get_unicore_id(person_number)
+        if not unicore_id or Member.find_by_unicore_id(unicore_id):
             raise forms.ValidationError(_("Incorrect SSN"))
 
-        self.instance.melos_id = melos_id
+        self.instance.unicore_id = unicore_id
         return person_number
 
     def save(self):
@@ -442,7 +442,7 @@ class CustomUserCreationForm(UserCreationForm):
             "password": self.cleaned_data["password1"],
             "email": self.cleaned_data["email"],
             "phone_number": self.cleaned_data["phone_number"],
-            "melos_id": self.instance.melos_id,
+            "unicore_id": self.instance.unicore_id,
             'study': self.cleaned_data['study'],
             "section": self.cleaned_data["section"],
             "registration_year": self.cleaned_data["registration_year"]
