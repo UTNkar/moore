@@ -87,7 +87,10 @@ class RegistrationForm(MemberForm, auth.UserCreationForm):
         field_classes = {'username': auth.UsernameField}
 
     def save(self):
-        unicore_id = UnicoreClient.get_unicore_id(self.cleaned_data['person_number'])
+        unicore_id = UnicoreClient.get_unicore_id(
+            self.cleaned_data['person_number']
+        )
+        
         return Member.objects.create_user(
             self.cleaned_data['username'],
             self.cleaned_data['password1'],

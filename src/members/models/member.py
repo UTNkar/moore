@@ -341,7 +341,9 @@ class Member(
             unicore_user_data = self.get_unicore_user_data()
             if unicore_user_data is None:
                 return
-            is_member = UnicoreClient.is_member(unicore_user_data['person_number'])
+            is_member = UnicoreClient.is_member(
+                unicore_user_data['person_number']
+            )
             data = "member" if is_member else "nonmember"
 
         if data == 'member':
@@ -386,7 +388,9 @@ class Member(
 
     def get_unicore_user_data(self):
         if self.unicore_user_data is None:
-            self.unicore_user_data = UnicoreClient.get_user_data(self.unicore_id)
+            self.unicore_user_data = UnicoreClient.get_user_data(
+                self.unicore_id
+            )
         return self.unicore_user_data
 
     @staticmethod
