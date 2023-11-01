@@ -348,7 +348,7 @@ class CustomUserEditForm(UserEditForm):
     )
     section = forms.ModelChoiceField(
         required=False,
-        queryset=Section.objects,
+        queryset=Section.objects.order_by('abbreviation'),
         label=_('Section'),
     )
     status = forms.ChoiceField(
@@ -412,7 +412,7 @@ class CustomUserCreationForm(UserCreationForm):
     )
     section = forms.ModelChoiceField(
         required=False,
-        queryset=Section.objects,
+        queryset=Section.objects.order_by('abbreviation'),
         label=_("Section"),
     )
 
