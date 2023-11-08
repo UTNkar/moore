@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='member',
-            name='unicore_id',
+            name='melos_id',
             field=models.IntegerField(blank=True, editable=False, null=True, unique=True),
         ),
     ]

@@ -8,7 +8,7 @@ import members.models.member
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('members', '0007_member_unicore_id'),
+        ('members', '0007_member_melos_id'),
     ]
 
     operations = [
