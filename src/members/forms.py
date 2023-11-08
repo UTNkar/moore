@@ -90,7 +90,7 @@ class RegistrationForm(MemberForm, auth.UserCreationForm):
         unicore_id = UnicoreClient.get_unicore_id(
             self.cleaned_data['person_number']
         )
-        
+
         return Member.objects.create_user(
             self.cleaned_data['username'],
             self.cleaned_data['password1'],
