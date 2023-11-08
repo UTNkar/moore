@@ -1,7 +1,6 @@
 from django.conf.urls import re_path
 from rest_framework import routers
 from involvement import views
-# from position_api import PositionViewSet
 
 router = routers.SimpleRouter()
 router.register(r'^position', views.position_api.PositionViewSet, basename="PositionView")
