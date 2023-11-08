@@ -4,6 +4,7 @@ from involvement import views
 
 router = routers.SimpleRouter()
 router.register(r'^position', views.position_api.PositionViewSet, basename="PositionView")
+router.register(r'^position2', views.position_api.Position2ViewSet, basename="Position2View")
 
 urlpatterns = [
     re_path(
