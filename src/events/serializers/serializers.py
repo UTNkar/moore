@@ -8,19 +8,24 @@ from rest_framework import serializers
 class CostsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Costs
+        fields = '__all__'
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
+        fields = '__all__'
 
 class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
+        fields = '__all__'
 
 class EventApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventApplication
+        fields = '__all__'
 
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
+        fields = '__all__'
