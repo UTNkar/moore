@@ -3,11 +3,11 @@ from rest_framework import routers
 from events import views
 
 router = routers.SimpleRouter()
-router.register(r'^costs', views.api.CostsViewSet, basename="CostsView")
-router.register(r'^event', views.api.EventViewSet, basename="EventView")
-router.register(r'^eventapplication', views.api.EventApplicationViewSet, basename="EventApplicationView")
-router.register(r'^ticket', views.api.TicketViewSet, basename="TicketView")
-router.register(r'^participant', views.api.ParticipantViewSet, basename="ParticipantView")
+router.register(r'^api/costs', views.api.CostsViewSet, basename="CostsView")
+router.register(r'^api/event', views.api.EventViewSet, basename="EventView")
+router.register(r'^api/eventapplication', views.api.EventApplicationViewSet, basename="EventApplicationView")
+router.register(r'^api/ticket', views.api.TicketViewSet, basename="TicketView")
+router.register(r'^api/participant', views.api.ParticipantViewSet, basename="ParticipantView")
 
 
 urlpatterns = [
