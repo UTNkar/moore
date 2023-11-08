@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 from members import views
-from members.forms import CustomUserCreationForm
+from members.forms import RegistrationForm
 
 urlpatterns = [
     re_path(r'^profile/$', views.ProfileView.as_view(), name='profile'),
@@ -14,7 +14,7 @@ urlpatterns = [
     ),
     re_path('^register/', CreateView.as_view(
         template_name='members/register.html',
-        form_class=CustomUserCreationForm,
+        form_class=RegistrationForm,
         success_url=reverse_lazy('login'),
     ), name='register'),
 

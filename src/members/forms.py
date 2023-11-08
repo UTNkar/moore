@@ -24,6 +24,11 @@ User = get_user_model()
 
 
 class MemberForm(forms.ModelForm):
+    section = forms.ModelChoiceField(
+        required=False,
+        queryset=Section.objects.order_by('abbreviation'),
+        label=_('Section'),
+    )
     person_number = PersonNumberField(
         label=_('Person number'),
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
@@ -81,6 +86,12 @@ class MemberForm(forms.ModelForm):
 
 
 class RegistrationForm(MemberForm, auth.UserCreationForm):
+    section = forms.ModelChoiceField(
+        required=False,
+        queryset=Section.objects.order_by('abbreviation'),
+        label=_('Section'),
+    )
+
     class Meta:
         model = Member
         fields = ['username', 'email', 'phone_number', 'section']
@@ -216,6 +227,12 @@ class UserForm(wagtail.UsernameForm):
         widget=forms.PasswordInput,
         help_text=_("Enter the same password as above, for verification."))
 
+    section = forms.ModelChoiceField(
+        required=False,
+        queryset=Section.objects.order_by('abbreviation'),
+        label=_('Section'),
+    )
+
     is_superuser = forms.BooleanField(
         label=_("Administrator"), required=False,
         help_text=_('Administrators have full access to manage any object '
@@ -304,6 +321,11 @@ class UserForm(wagtail.UsernameForm):
 
 class UserEditForm(UserForm):
     password_required = False
+    section = forms.ModelChoiceField(
+        required=False,
+        queryset=Section.objects.order_by('abbreviation'),
+        label=_('Section'),
+    )
 
     def __init__(self, *args, **kwargs):
         kwargs.pop('editing_self', False)
