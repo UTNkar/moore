@@ -19,7 +19,7 @@ msgstr "Branding"
 
 #: branding/models.py:15
 msgid "footer"
-msgstr ""
+msgstr "sidfot"
 
 #: branding/models.py:33
 msgid "social media accounts"
