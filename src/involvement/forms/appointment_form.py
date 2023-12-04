@@ -101,3 +101,4 @@ class AppointmentForm(forms.Form):
                 appl.status = 'appointed'
                 appl.save()
         cron.remove_old_applications()
+
