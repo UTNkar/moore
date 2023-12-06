@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from involvement.models import Application
 from utils.forms import AdvancedModelMultipleChoiceField
-from utils.melos_client import MelosClient
+from utils.unicore_client import UnicoreClient
 
 
 class AppointmentForm(forms.Form):
@@ -39,17 +39,17 @@ class AppointmentForm(forms.Form):
             pnrs = string.split(',')
             users = []
             for pnr in pnrs:
-                melos_id = MelosClient.get_melos_id(pnr)
+                unicore_id = UnicoreClient.get_unicore_id(pnr)
 
                 if not get_user_model().objects.filter(
-                    melos_id=melos_id
-                ).exists() or melos_id is False:
+                    unicore_id=unicore_id
+                ).exists() or unicore_id is False:
                     raise forms.ValidationError(
                         _('No user with the person number %(pnr)s exists.'),
                         params={'pnr': pnr},
                     )
                 elif self.position.applications.filter(
-                    applicant__melos_id=melos_id,
+                    applicant__unicore_id=unicore_id,
                 ).exclude(
                     status='draft'
                 ).exists():
@@ -61,7 +61,7 @@ class AppointmentForm(forms.Form):
                     )
                 else:
                     users.append(get_user_model().objects.filter(
-                        melos_id=melos_id
+                        unicore_id=unicore_id
                     ).first())
             return users
 

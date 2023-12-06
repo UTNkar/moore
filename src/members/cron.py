@@ -5,7 +5,7 @@ from members.models import Member
 
 
 # There is now good way for bulk updates and
-# without bulk update we will need to make at least 2 requests against melos to
+# without bulk update we'll need to make at least 2 requests against unicore to
 # update one single member. To reduce the amounts of requests,
 # we will only update status for active members e.g the ones that has
 # status="member" as this value is updated when you log in to your account.

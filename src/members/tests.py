@@ -83,7 +83,7 @@ class ProfileTest(TestCase):
             password='Intel1968',
             email='g.moore@localhost',
             phone_number="0733221111",
-            melos_id='123456789',
+            unicore_id='123456789',
             study=self.study,
             registration_year='1946',
         )
@@ -141,9 +141,9 @@ class ProfileTest(TestCase):
         formatted_phone = self.member.get_phone_formatted
         self.assertEqual(formatted_phone, "+44 20 8366 1177")
 
-    def test_update_melos_info(self):
+    def test_update_unicore_info(self):
         """
-        Test if a user can update their information from melos
+        Test if a user can update their information from unicore
         """
         # Some wrong data
         self.member.name = "Not myname"

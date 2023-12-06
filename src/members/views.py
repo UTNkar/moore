@@ -15,7 +15,7 @@ from members.models import Section, StudyProgram
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from members.serializers import MemberCheckSerializer
-from utils.melos_client import MelosClient
+from utils.unicore_client import UnicoreClient
 from rest_framework import status
 
 
@@ -32,7 +32,7 @@ class ProfileView(LoginRequiredMixin, UpdateView):
     def post(self, request, *args, **kwargs):
         update_member_info = "update_member_info" in request.POST
         if update_member_info:
-            request.user.fetch_and_save_melos_info()
+            request.user.fetch_and_save_unicore_info()
             messages.add_message(
                 self.request,
                 messages.SUCCESS,
@@ -122,7 +122,7 @@ def member_check_api(request):
 
     if serializer.is_valid():
         ssn = serializer.data.get('ssn')
-        is_member = MelosClient.is_member(ssn)
+        is_member = UnicoreClient.is_member(ssn)
         data = {"is_member": is_member}
     else:
         error = serializer.errors.get("ssn")
