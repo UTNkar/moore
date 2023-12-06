@@ -2,7 +2,7 @@
 
 from django.db import migrations
 from django.db.models import Q
-from utils.melos_client import MelosClient
+from utils.unicore_client import UnicoreClient
 
 # This is a copy of the function used to get the melos
 # data for a member. The reason it is copied is that django migrations
@@ -11,7 +11,7 @@ from utils.melos_client import MelosClient
 # makes sure that this migration file will work in the future, regardless
 # of the changes to the Member model
 def fetch_and_save_melos_info(melos_id):
-    melos_data = MelosClient.get_user_data(melos_id)
+    melos_data = UnicoreClient.get_user_data(melos_id)
     if melos_data is not None:
         name = "{} {}".format(
             melos_data['first_name'].strip(),

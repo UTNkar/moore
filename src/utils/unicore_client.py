@@ -5,7 +5,7 @@ from django.conf import settings
 
 class MockClient:
 
-    def get_user_data(self, melos_id):
+    def get_user_data(self, unicore_id):
         return {
             'first_name': 'Firstname',
             'last_name': 'Lastname',
@@ -18,7 +18,7 @@ class MockClient:
         else:
             return True
 
-    def get_melos_id(self, ssn):
+    def get_unicore_id(self, ssn):
         return 100000
 
 
@@ -26,21 +26,21 @@ class ApiClient:
 
     def request_get(self, path, params=None):
         if params is not None:
-            params['orgId'] = settings.MELOS_ORG_ID
+            params['orgId'] = settings.UNICORE_ORG_ID
 
         return requests.get(
-            settings.MELOS_URL + "/" + path,
-            auth=HTTPBasicAuth('admin', settings.MELOS_ADMIN),
+            settings.UNICORE_URL + "/" + path,
+            auth=HTTPBasicAuth('admin', settings.UNICORE_ADMIN),
             params=params,
         )
 
-    def get_user_data(self, melos_id):
-        r = self.request_get('user-by-id' + '/' + str(melos_id))
+    def get_user_data(self, unicore_id):
+        r = self.request_get('user-by-id' + '/' + str(unicore_id))
         if r.status_code == 200:
             response_json = r.json()
 
             # person_nr is None for exchange students with T-numbers.
-            # This is becuase Melos stores their personnummer
+            # This is becuase Unicore stores their personnummer
             # in medlemsnr instead of person_number
             if response_json['Personnr'] is None:
                 response_json['Personnr'] = response_json["Medlemsnr"]
@@ -57,7 +57,7 @@ class ApiClient:
         else:
             return False
 
-    def get_melos_id(self, ssn):
+    def get_unicore_id(self, ssn):
         parsed_ssn = ssn
 
         if (not isinstance(parsed_ssn, str)):
@@ -71,28 +71,28 @@ class ApiClient:
             return False
 
 
-class MelosClient:
+class UnicoreClient:
     client = None
 
     @staticmethod
     def __setup():
-        if MelosClient.client is None:
+        if UnicoreClient.client is None:
             if settings.IS_RUNNING_TEST:
-                MelosClient.client = MockClient()
+                UnicoreClient.client = MockClient()
             else:
-                MelosClient.client = ApiClient()
+                UnicoreClient.client = ApiClient()
 
     @staticmethod
-    def get_user_data(melos_id):
-        MelosClient.__setup()
-        return MelosClient.client.get_user_data(melos_id)
+    def get_user_data(unicore_id):
+        UnicoreClient.__setup()
+        return UnicoreClient.client.get_user_data(unicore_id)
 
     @staticmethod
     def is_member(ssn):
-        MelosClient.__setup()
-        return MelosClient.client.is_member(ssn)
+        UnicoreClient.__setup()
+        return UnicoreClient.client.is_member(ssn)
 
     @staticmethod
-    def get_melos_id(ssn):
-        MelosClient.__setup()
-        return MelosClient.client.get_melos_id(ssn)
+    def get_unicore_id(ssn):
+        UnicoreClient.__setup()
+        return UnicoreClient.client.get_unicore_id(ssn)
