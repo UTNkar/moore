@@ -32,7 +32,7 @@ To get started with Project Moore, follow these instructions to set up a
     - libpq-dev
 4. Clone the repository.
 5. Copy the file `.env-template` and name the copy `.env`
-6. Fill in the necessary variables in `.env`. `MELOS_URL` and `MELOS_ADMIN` are required. You might have to fill in some database credidentils. Check `src/moore/settings/base.py` for which default values are used if you don't specify and credidentials.
+6. Fill in the necessary variables in `.env`. `UNICORE_URL` and `UNICORE_ADMIN` are required. You might have to fill in some database credidentils. Check `src/moore/settings/base.py` for which default values are used if you don't specify and credidentials.
 7. Run `source ./source_me.sh` to create a virtual environment.
 8. Run `pip install --upgrade pip` to make sure that pip is running the latest version
 9. Run `pip install -r dev-requirements.txt`
