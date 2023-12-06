@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from wagtail.admin.edit_handlers import MultiFieldPanel, FieldPanel
-from utils.melos_client import MelosClient
+from utils.unicore_client import UnicoreClient
 
 
 class Participant(models.Model):
@@ -40,7 +40,7 @@ class Participant(models.Model):
     def calculate_order_cost(self):
         cost = 0
         price_list = self.ticket.event.price_list
-        is_member = self.person_nr and MelosClient.is_member(self.person_nr)
+        is_member = self.person_nr and UnicoreClient.is_member(self.person_nr)
 
         if is_member:
             cost += self.ticket.event.price_per_participant

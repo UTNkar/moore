@@ -247,20 +247,20 @@ INSTAGRAM_APP_SECRET = config('INSTAGRAM_APP_SECRET', default='')
 INSTAGRAM_REDIRECT_URL = config('INSTAGRAM_REDIRECT_URL', default='')
 
 try:
-    MELOS_URL = config('MELOS_URL')
-    MELOS_ADMIN = config('MELOS_ADMIN')
+    UNICORE_URL = config('UNICORE_URL')
+    UNICORE_ADMIN = config('UNICORE_ADMIN')
 except UndefinedValueError:
-    # This allows the tests to be runned without having to have MELOS_URL and
-    # MELOS_ADMIN since they don't use the MELOS API. But this also raises
+    # This allows the tests to be runned without having to have UNICORE_URL and
+    # UNICORE_ADMIN since they don't use the UNICORE API. But this also raises
     # the error if for example a developer tries to start the server but has
     # not filled in the variables in their .env. I.e. The variables are still
     # required, except for when the tests are runned.
     if not IS_RUNNING_TEST:
         raise UndefinedValueError(
-            "You must add MELOS_URL and MELOS_ADMIN to you .env file"
+            "You must add UNICORE_URL and UNICORE_ADMIN to you .env file"
         )
 
-MELOS_ORG_ID = config('MELOS_ORG_ID', default='')
+UNICORE_ORG_ID = config('UNICORE_ORG_ID', default='')
 
 # Google API
 GOOGLE_API_KEY = config('GOOGLE_API_KEY', default='')

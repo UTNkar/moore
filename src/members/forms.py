@@ -17,13 +17,18 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 
 from members.models import StudyProgram, Member, Section
-from utils.melos_client import MelosClient
+from utils.unicore_client import UnicoreClient
 from members.fields import PhoneNumberField, PersonNumberField
 
 User = get_user_model()
 
 
 class MemberForm(forms.ModelForm):
+    section = forms.ModelChoiceField(
+        required=False,
+        queryset=Section.objects.order_by('abbreviation'),
+        label=_('Section'),
+    )
     person_number = PersonNumberField(
         label=_('Person number'),
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
@@ -61,11 +66,11 @@ class MemberForm(forms.ModelForm):
     def clean_person_number(self):
         person_number = self.cleaned_data['person_number']
         if self.instance.pk is None:
-            melos_id = MelosClient.get_melos_id(person_number)
-            if not melos_id or Member.find_by_melos_id(melos_id):
+            unicore_id = UnicoreClient.get_unicore_id(person_number)
+            if not unicore_id or Member.find_by_unicore_id(unicore_id):
                 raise forms.ValidationError(_("Incorrect SSN"))
 
-            self.instance.melos_id = melos_id
+            self.instance.unicore_id = unicore_id
 
         return person_number
 
@@ -81,19 +86,28 @@ class MemberForm(forms.ModelForm):
 
 
 class RegistrationForm(MemberForm, auth.UserCreationForm):
+    section = forms.ModelChoiceField(
+        required=False,
+        queryset=Section.objects.order_by('abbreviation'),
+        label=_('Section'),
+    )
+
     class Meta:
         model = Member
         fields = ['username', 'email', 'phone_number', 'section']
         field_classes = {'username': auth.UsernameField}
 
     def save(self):
-        melos_id = MelosClient.get_melos_id(self.cleaned_data['person_number'])
+        unicore_id = UnicoreClient.get_unicore_id(
+            self.cleaned_data['person_number']
+        )
+
         return Member.objects.create_user(
             self.cleaned_data['username'],
             self.cleaned_data['password1'],
             self.cleaned_data['email'],
             self.cleaned_data['phone_number'],
-            melos_id,
+            unicore_id,
             section=self.cleaned_data['section']
         )
 
@@ -105,8 +119,8 @@ class CustomPasswordResetForm(forms.Form):
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
     )
 
-    def get_email(self, melos_id):
-        member = Member.find_by_melos_id(melos_id)
+    def get_email(self, unicore_id):
+        member = Member.find_by_unicore_id(unicore_id)
         if member:
             return member.get_email
         return ''
@@ -216,6 +230,12 @@ class UserForm(wagtail.UsernameForm):
         widget=forms.PasswordInput,
         help_text=_("Enter the same password as above, for verification."))
 
+    section = forms.ModelChoiceField(
+        required=False,
+        queryset=Section.objects.order_by('abbreviation'),
+        label=_('Section'),
+    )
+
     is_superuser = forms.BooleanField(
         label=_("Administrator"), required=False,
         help_text=_('Administrators have full access to manage any object '
@@ -304,6 +324,11 @@ class UserForm(wagtail.UsernameForm):
 
 class UserEditForm(UserForm):
     password_required = False
+    section = forms.ModelChoiceField(
+        required=False,
+        queryset=Section.objects.order_by('abbreviation'),
+        label=_('Section'),
+    )
 
     def __init__(self, *args, **kwargs):
         kwargs.pop('editing_self', False)
@@ -329,10 +354,9 @@ class CustomUserEditForm(UserEditForm):
         help_text=_('Person number using the YYYYMMDD-XXXX format.'),
         required=False
     )
-    phone_number = forms.CharField(
-        required=True,
-        label=_('Phone number'),
-    )
+
+    phone_number = PhoneNumberField()
+
     email = forms.EmailField(
         required=True,
         label=_('Email'),
@@ -348,7 +372,7 @@ class CustomUserEditForm(UserEditForm):
     )
     section = forms.ModelChoiceField(
         required=False,
-        queryset=Section.objects,
+        queryset=Section.objects.order_by('abbreviation'),
         label=_('Section'),
     )
     status = forms.ChoiceField(
@@ -397,10 +421,7 @@ class CustomUserCreationForm(UserCreationForm):
         required=True,
         label=_('Email'),
     )
-    phone_number = forms.CharField(
-        required=True,
-        label=_('Phone number'),
-    )
+    phone_number = PhoneNumberField()
     registration_year = forms.CharField(
         required=False,
         label=_('Registration year'),
@@ -412,7 +433,7 @@ class CustomUserCreationForm(UserCreationForm):
     )
     section = forms.ModelChoiceField(
         required=False,
-        queryset=Section.objects,
+        queryset=Section.objects.order_by('abbreviation'),
         label=_("Section"),
     )
 
@@ -429,11 +450,11 @@ class CustomUserCreationForm(UserCreationForm):
 
     def clean_person_number(self):
         person_number = self.cleaned_data['person_number']
-        melos_id = MelosClient.get_melos_id(person_number)
-        if not melos_id or Member.find_by_melos_id(melos_id):
+        unicore_id = UnicoreClient.get_unicore_id(person_number)
+        if not unicore_id or Member.find_by_unicore_id(unicore_id):
             raise forms.ValidationError(_("Incorrect SSN"))
 
-        self.instance.melos_id = melos_id
+        self.instance.unicore_id = unicore_id
         return person_number
 
     def save(self):
@@ -442,7 +463,7 @@ class CustomUserCreationForm(UserCreationForm):
             "password": self.cleaned_data["password1"],
             "email": self.cleaned_data["email"],
             "phone_number": self.cleaned_data["phone_number"],
-            "melos_id": self.instance.melos_id,
+            "unicore_id": self.instance.unicore_id,
             'study': self.cleaned_data['study'],
             "section": self.cleaned_data["section"],
             "registration_year": self.cleaned_data["registration_year"]
