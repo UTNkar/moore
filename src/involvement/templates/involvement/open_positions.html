@@ -18,7 +18,10 @@
                         <h3>{{ pos }}</h3>
                         <div class="hide-on-med-and-up">
                             <b style="color: {{ pos.recruitment_end|date_color }};">
-                                {% trans 'deadline'|capfirst %}: {{ pos.recruitment_end }}
+                                {% trans 'deadline'|capfirst %}:
+                                {% language 'sv' %}
+                                {{ pos.recruitment_end|date:"SHORT_DATE_FORMAT" }}
+                                {% endlanguage %}
                             </b>
                         </div>
                         <div class="team">
@@ -31,7 +34,11 @@
                     </div>
                     <div class="apply hide-on-small-and-down">
                         <a class="btn" href="{% routablepageurl page 'position' pos.id  %}">{% trans 'apply' %}</a><br>
-                        <div class="hide-on-small-only"><b style="color: {{ pos.recruitment_end|date_color }};">{% trans 'deadline'|capfirst %}: {{ pos.recruitment_end|date:"SHORT_DATE_FORMAT"  }}</b></div>
+                        <div class="hide-on-small-only"><b style="color: {{ pos.recruitment_end|date_color }};">
+                            {% trans 'deadline'|capfirst %}:
+                            {% language 'sv' %}
+                            {{ pos.recruitment_end|date:"SHORT_DATE_FORMAT" }}
+                            {% endlanguage %}</b></div>
                     </div>
                 </div>
                 <div class="collapsible-body">
