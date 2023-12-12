@@ -21,3 +21,4 @@ class ApplicationForm(forms.ModelForm):
                     and status == 'draft'):
             raise forms.ValidationError(_('The submitted status was invalid.'))
         return status
+    
