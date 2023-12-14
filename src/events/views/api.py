@@ -7,27 +7,27 @@ from events.models.participant import Participant
 from events.models.application import EventApplication
 from events.models.ticket import Ticket
 
-class CostsViewSet(viewsets.ModelViewSet):
+class CostsViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CostsSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Costs.objects.all()
 
-class EventViewSet(viewsets.ModelViewSet):
+class EventViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EventSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Event.objects.all()
 
-class ParticipantViewSet(viewsets.ModelViewSet):
+class ParticipantViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ParticipantSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Participant.objects.all()
 
-class EventApplicationViewSet(viewsets.ModelViewSet):
+class EventApplicationViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EventApplicationSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = EventApplication.objects.all()
 
-class TicketViewSet(viewsets.ModelViewSet):
+class TicketViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TicketSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Ticket.objects.all()
