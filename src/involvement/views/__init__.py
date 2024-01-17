@@ -17,3 +17,4 @@ from .application_edit_view import ApplicationEditView
 from .application_inspect_view import ApplicationInspectView
 from .role_inspect_view import RoleInspectView
 from .team_read_api import TeamViewSet
+from .role_read_api import RoleViewSet
