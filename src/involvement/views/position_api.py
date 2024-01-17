@@ -1,6 +1,6 @@
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets
 from involvement.serializers.position_serializer import PositionSerializer, PositionDepthSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly,
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from involvement.models.position import Position
 
 class PositionViewSet(viewsets.ReadOnlyModelViewSet):
