@@ -14,3 +14,9 @@ class ReadCreateUpdate(BasePermission):
     def has_permission(self, request, view):
         return True if request.method not in ["DELETE"] else False
 
+class OwnApplicationPermission(BasePermission):
+    """
+    Object-level permission to only allow updating his own profile
+    """
+    def has_object_permission(self, request, view, obj):
+        return obj.applicant == request.user
