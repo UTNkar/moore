@@ -24,6 +24,7 @@ class EventApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventApplication
         fields = '__all__'
+        depth = 1
 
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:

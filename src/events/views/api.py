@@ -6,6 +6,7 @@ from events.models.event import Event
 from events.models.participant import Participant
 from events.models.application import EventApplication
 from events.models.ticket import Ticket
+from events.customPermissions import OwnApplicationPermission
 
 class CostsViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CostsSerializer
@@ -22,10 +23,14 @@ class ParticipantViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Participant.objects.all()
 
-class EventApplicationViewSet(viewsets.ReadOnlyModelViewSet):
+class EventApplicationViewSet(viewsets.ModelViewSet):
     serializer_class = EventApplicationSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    queryset = EventApplication.objects.all()
+    permission_classes = [IsAuthenticated, OwnApplicationPermission]
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = EventApplication.objects.filter(event_applicant=user)
+        return queryset
 
 class TicketViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TicketSerializer
