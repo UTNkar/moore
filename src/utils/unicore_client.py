@@ -28,6 +28,11 @@ class ApiClient:
         if params is not None:
             params['orgId'] = settings.UNICORE_ORG_ID
 
+        if settings.UNICORE_ADMIN == '':
+            raise requests.exceptions.RequestException(
+                "Missing token to make requests to the Unicore API."
+            )
+
         return requests.get(
             settings.UNICORE_URL + "/" + path,
             auth=HTTPBasicAuth('admin', settings.UNICORE_ADMIN),
@@ -89,6 +94,8 @@ class UnicoreClient:
 
     @staticmethod
     def is_member(ssn):
+        if settings.UNICORE_ADMIN == '':
+            return True
         UnicoreClient.__setup()
         return UnicoreClient.client.is_member(ssn)
 
