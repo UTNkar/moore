@@ -1,12 +1,21 @@
-import type { Config, ConfigEnv } from 'vike/types';
+import type { ConfigEnv } from 'vike/types';
+
+import { PageConfig } from '#root/utils/page';
+
+import DefaultLayout from './layout/DefaultLayout';
 
 // https://vike.dev/config
 export default {
   clientRouting: true,
+  description:
+    'Uppsala teknolog- och naturvetarkår är studentkåren för studenter på teknisk-naturvetenskapliga fakulteten vid Uppsala universitet.',
   hydrationCanBeAborted: true,
+  Layout: DefaultLayout,
+  locale: 'sv',
   meta: {
-    description: { env: 'server-and-client' },
-    Layout: { env: 'server-and-client' },
+    description: { env: { client: true, server: true } },
+    Layout: { env: { client: true, server: true } },
+    locale: { env: { client: true, server: true } },
     onBeforeRenderIsomorph: {
       effect: ({ configDefinedAt, configValue }) => {
         if (typeof configValue !== 'boolean') {
@@ -19,21 +28,23 @@ export default {
               onBeforeRender: {
                 // We override Vike's default behavior of always loading/executing onBeforeRender() on the server-side.
                 // If we set onBeforeRenderIsomorph to true, then onBeforeRender() is loaded/executed in the browser as well, allowing us to fetch data direcly from the browser upon client-side navigation (without involving our Node.js/Edge server at all).
-                env: 'server-and-client',
+                env: { client: true, server: true },
               },
             },
           };
         }
       },
-      env: 'config-only',
+      env: { client: false, config: true, server: false },
     },
     renderMode: {
       effect: ({ configDefinedAt, configValue }) => {
+        console.log('GET EFFECT');
+
         let env: ConfigEnv | undefined;
 
-        if (configValue === 'HTML') env = 'server-only';
-        if (configValue === 'SPA') env = 'client-only';
-        if (configValue === 'SSR') env = 'server-and-client';
+        if (configValue === 'HTML') env = { client: false, server: true };
+        if (configValue === 'SPA') env = { client: true, server: false };
+        if (configValue === 'SSR') env = { client: true, server: true };
 
         if (!env) {
           throw new Error(`${configDefinedAt} should be 'SSR', 'SPA', or 'HTML'`);
@@ -45,10 +56,12 @@ export default {
           },
         };
       },
-      env: 'config-only',
+      env: { client: false, config: true, server: false },
     },
-    title: { env: 'server-and-client' },
+    title: { env: { client: true, server: true } },
   },
   // https://vike.dev/passToClient
-  passToClient: ['pageProps', 'title', 'description', 'urlOriginal', 'locale'],
-} satisfies Config;
+  passToClient: ['pageProps', 'title', 'description', 'locale'],
+
+  title: 'Uppsala teknolog- och naturvetarkår',
+} satisfies PageConfig;

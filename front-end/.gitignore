@@ -12,6 +12,7 @@ dist
 *.local
 
 # Editor directories and files
+.env
 .vscode/*
 .idea
 .DS_Store

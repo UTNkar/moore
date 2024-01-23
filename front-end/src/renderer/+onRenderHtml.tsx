@@ -5,12 +5,16 @@ import { PageContextServer } from 'vike/types';
 
 import clsx from 'clsx';
 
+import { PageProps } from '#root/utils/page';
+
 import { getLocale, getPageDescription, getPageTitle } from './page-meta-utils';
 import PageShell from './PageShell';
 
 export default async function onRenderHtml(pageContext: PageContextServer): Promise<any> {
   // See https://vike.dev/head
-  const { documentProps, Page, pageProps } = pageContext;
+  const { documentProps, Page, pageProps = {} as PageProps } = pageContext;
+
+  pageProps.pageContext = pageContext;
 
   const locale = getLocale(pageContext, documentProps);
   const title = getPageTitle(pageContext, documentProps, locale);
@@ -22,11 +26,9 @@ export default async function onRenderHtml(pageContext: PageContextServer): Prom
   };
 
   const classes = {
-    body: clsx('min-h-screen w-screen overflow-x-hidden overflow-y-scroll flex flex-col text-black'),
-    html: clsx(
-      'no-js non-interactive js-focus-visible light [--scroll-mt:9.875rem] lg:[--scroll-mt:6.3125rem]',
-    ),
-    root: clsx('flex flex-auto flex-col justify-start w-full relative'),
+    body: clsx(''),
+    html: clsx('no-js non-interactive'),
+    root: clsx(''),
   };
 
   let pageHtml: string = '';
@@ -52,8 +54,8 @@ export default async function onRenderHtml(pageContext: PageContextServer): Prom
         ${/* Fonts */ ''}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        
+        <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+
         ${/* Manifests and favicons */ ''}
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
@@ -86,7 +88,7 @@ export default async function onRenderHtml(pageContext: PageContextServer): Prom
             } else {
               document.documentElement.classList.add('light');
               document.documentElement.classList.remove('dark');
-              
+
               [
                 ['meta[name="theme-color"]', 'content'],
                 ['link[rel="mask-icon"]', 'color'],

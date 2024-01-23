@@ -1,16 +1,15 @@
-import { PropsWithChildren } from '#root/utils/types';
+import { Footer } from '#root/devlink/Footer';
+import { Header } from '#root/devlink/Header';
+import { LayoutProps, isWithinIframe } from '#root/utils/page';
 
-import Footer from './Footer';
-import Header from './Header';
-
-export default function DefaultLayout({ children }: PropsWithChildren) {
+export default function DefaultLayout({ children, pageContext }: LayoutProps) {
   return (
     <>
-      <Header />
+      {!isWithinIframe(pageContext) && <Header />}
 
-      <main className="flex flex-1 flex-col items-start justify-items-start">{children}</main>
+      <main>{children}</main>
 
-      <Footer />
+      {!isWithinIframe(pageContext) && <Footer />}
     </>
   );
 }

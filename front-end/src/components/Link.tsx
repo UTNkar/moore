@@ -4,13 +4,11 @@ import { usePageContext } from '#root/utils/page';
 export default function Link({ locale, href, keepScrollPosition, ...props }: LinkProps) {
   const pageContext = usePageContext();
 
-  const className = [props.className, pageContext.urlPathname === href && 'is-active']
-    .filter(Boolean)
-    .join(' ');
+  const className = [props.className, pageContext.urlPathname === href && 'active'].filter(Boolean).join(' ');
 
   locale = locale || pageContext.locale;
 
-  if (locale !== defaultLocale) {
+  if (href && href.charAt(0) !== '#' && locale !== defaultLocale) {
     href = '/' + locale + href;
   }
 

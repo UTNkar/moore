@@ -1,20 +1,22 @@
 // https://vike.dev/onPrerenderStart
 
-import { defaultLocale, locales } from '#root/utils/intl';
+import { PageContextServer } from 'vike/types';
+
+import { locales } from '#root/utils/intl';
 
 // We only need this for pre-rendered apps https://vike.dev/pre-rendering
 export default function onPrerenderStart(prerenderContext: any): any {
   const pageContexts = [];
 
-  prerenderContext.pageContexts.forEach((pageContext) => {
+  prerenderContext.pageContexts.forEach((pageContext: PageContextServer) => {
     // Duplicate pageContext for each locale
     locales.forEach((locale) => {
       // Localize URL
-      let { urlOriginal } = pageContext;
+      // let { urlOriginal } = pageContext;
 
-      if (locale !== defaultLocale) {
-        urlOriginal = `/${locale}${pageContext.urlOriginal}`;
-      }
+      // if (locale !== defaultLocale) {
+      //   urlOriginal = `/${locale}${pageContext.urlOriginal}`;
+      // }
 
       pageContexts.push({
         ...pageContext,
@@ -25,7 +27,7 @@ export default function onPrerenderStart(prerenderContext: any): any {
         },
         // Set pageContext.locale
         locale,
-        urlOriginal,
+        // urlOriginal,
       });
     });
   });

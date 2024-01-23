@@ -17,7 +17,7 @@ export default function Header() {
               className="block"
               aria-label={useLocalizedText('Uppsala teknolog- och naturvetarkår')}
             >
-              <LogoIcon className="h-10 w-10 fill-blue" />
+              <LogoIcon className="fill-blue h-10 w-10" />
             </Link>
           </div>
 

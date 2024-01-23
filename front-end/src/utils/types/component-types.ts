@@ -1,16 +1,8 @@
-import { PageContext } from 'vike/types';
+// eslint-disable-next-line @rushstack/no-new-null
+export type Falsy = null | undefined | false;
 
 export type PropsWithChildren<T extends object = {}> = T & {
   children?: React.ReactNode;
-};
-
-export type PropsWithChildrenAndPageContext<T extends object = {}> = T & {
-  children?: React.ReactNode;
-  pageContext: PageContext;
-};
-
-export type PropsWithPageContext<T extends object = {}> = T & {
-  pageContext: PageContext;
 };
 
 export type PropsWithRequiredChildren<T extends object = {}> = T & {

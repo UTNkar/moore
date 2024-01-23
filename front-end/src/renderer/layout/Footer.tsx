@@ -15,7 +15,7 @@ export default function Footer() {
                   className="inline-block"
                   aria-label={useLocalizedText('Uppsala teknolog- och naturvetarkår')}
                 >
-                  <LogoIcon className="h-10 w-10 fill-blue" />
+                  <LogoIcon className="fill-blue h-10 w-10" />
                 </Link>
               </div>
               <div className="text-gray-600">
@@ -24,7 +24,7 @@ export default function Footer() {
                   teknisk-naturvetenskapliga fakulteten vid Uppsala universitet.
                 </LocalizedText>{' '}
                 <LocalizedText>Kontakta oss på</LocalizedText>{' '}
-                <a className="font-semibold text-blue" href="mailto:admin@utn.se">
+                <a className="text-blue font-semibold" href="mailto:admin@utn.se">
                   admin@utn.se
                 </a>
                 .

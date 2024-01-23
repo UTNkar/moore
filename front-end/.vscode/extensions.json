@@ -1,7 +1,3 @@
 {
-	"recommendations": [
-		"dbaeumer.vscode-eslint",
-        "stylelint.vscode-stylelint",
-		"editorconfig.editorconfig",
-	]
+  "recommendations": ["dbaeumer.vscode-eslint", "stylelint.vscode-stylelint", "editorconfig.editorconfig"]
 }

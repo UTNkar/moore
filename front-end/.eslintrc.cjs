@@ -16,7 +16,8 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['*.ts', '*.tsx'],
+      files: ['*.{ts,tsx,js,jsx}'],
+      parser: '@typescript-eslint/parser',
       rules: {
         /**
          * Allow `private get _propertyName()`.
@@ -32,19 +33,9 @@ module.exports = {
         ],
 
         /**
-         * Allow the use of `any`.
-         */
-        '@typescript-eslint/no-explicit-any': 'off',
-
-        /**
          * Slow rules (and not that useful.)
          */
         '@typescript-eslint/no-floating-promises': 'off',
-
-        /**
-         * Allow use of namespaces.
-         */
-        '@typescript-eslint/no-namespace': 'off',
 
         /**
          * Do not allow unused variables.
@@ -102,28 +93,6 @@ module.exports = {
         ],
 
         /**
-         * Sorting union (`|`) and intersection (`&`) types.
-         */
-        // '@typescript-eslint/sort-type-constituents': 'error',
-
-        /**
-         * Require type declarations for members and function parameters, excluding arrow functions.
-         */
-        '@typescript-eslint/typedef': [
-          'error',
-          {
-            arrayDestructuring: false,
-            arrowParameter: false,
-            memberVariableDeclaration: true,
-            objectDestructuring: false,
-            parameter: true,
-            propertyDeclaration: true,
-            variableDeclaration: false,
-            variableDeclarationIgnoreFunction: true,
-          },
-        ],
-
-        /**
          * Slow rules.
          */
         'import/default': 'off',
@@ -135,45 +104,6 @@ module.exports = {
 
         /* Replaced by @typescript-eslint */
         'padding-line-between-statements': 'off',
-        'typescript-sort-keys/interface': 'error',
-        'typescript-sort-keys/string-enum': 'error',
-      },
-    },
-    {
-      extends: ['plugin:jsonc/recommended-with-jsonc'],
-      files: ['*.json', '*.json5', '*.jsonc'],
-      parser: 'jsonc-eslint-parser',
-    },
-    {
-      /**
-       * Allow default exports have a different name than the file name for pages
-       * and index files.
-       */
-      files: ['*/routes/**/*.{ts,tsx,js,jsx}', '*/src/root.{ts,tsx,js,jsx}', 'index.{ts,tsx,js,jsx}'],
-      rules: {
-        'consistent-default-export-name/default-export-match-filename': 'off',
-      },
-    },
-    {
-      /**
-       * Apply looser linting for exports in configuration, page, test and Storybook files, because these exports
-       * are not imported by other parts of the codebase. Additionally, structures and typings are
-       * clear, recurring, and well-known.
-       */
-      files: [
-        './*.{ts,tsx,js,jsx}',
-        '*/routes/**/*.{ts,tsx,js,jsx}',
-        '*/root.{ts,tsx,js,jsx}',
-        '*/entry.*.{ts,tsx,js,jsx}',
-        '*/tests/**/*.{ts,tsx,js,jsx}',
-        '*.test.{ts,tsx,js,jsx}',
-        '*.e2e.{ts,tsx,js,jsx}',
-        '*.stories.{ts,tsx,js,jsx,mdx}',
-      ],
-      rules: {
-        '@rushstack/typedef-var': 'off',
-        'func-style': 'off',
-        'import/no-anonymous-default-export': 'off',
       },
     },
     {
@@ -196,6 +126,83 @@ module.exports = {
           },
         ],
       },
+    },
+    {
+      files: ['*.{ts,tsx}'],
+      rules: {
+        /**
+         * Allow the use of `any`.
+         */
+        '@typescript-eslint/no-explicit-any': 'off',
+
+        /**
+         * Allow use of namespaces.
+         */
+        '@typescript-eslint/no-namespace': 'off',
+
+        /**
+         * Sorting union (`|`) and intersection (`&`) types.
+         */
+        // '@typescript-eslint/sort-type-constituents': 'error',
+
+        /**
+         * Require type declarations for members and function parameters, excluding arrow functions.
+         */
+        '@typescript-eslint/typedef': [
+          'error',
+          {
+            arrayDestructuring: false,
+            arrowParameter: false,
+            memberVariableDeclaration: true,
+            objectDestructuring: false,
+            parameter: true,
+            propertyDeclaration: true,
+            variableDeclaration: false,
+            variableDeclarationIgnoreFunction: true,
+          },
+        ],
+
+        'typescript-sort-keys/interface': 'error',
+        'typescript-sort-keys/string-enum': 'error',
+      },
+    },
+    {
+      /**
+       * Allow default exports have a different name than the file name for pages
+       * and index files.
+       */
+      files: ['*/routes/**/*.{ts,tsx,js,jsx}', '*/src/root.{ts,tsx,js,jsx}', 'index.{ts,tsx,js,jsx}'],
+      rules: {
+        'consistent-default-export-name/default-export-match-filename': 'off',
+      },
+    },
+    {
+      /**
+       * Apply looser linting for exports in configuration, page, test and Storybook files, because these exports
+       * are not imported by other parts of the codebase. Additionally, structures and typings are
+       * clear, recurring, and well-known.
+       */
+      files: [
+        './*.{ts,tsx,js,jsx}',
+        '*/routes/**/*.{ts,tsx,js,jsx}',
+        '*/root.{ts,tsx,js,jsx}',
+        '*/entry.*.{ts,tsx,js,jsx}',
+        '*/devlink/**/*.{ts,tsx,js,jsx}',
+        '*/tests/**/*.{ts,tsx,js,jsx}',
+        '*.test.{ts,tsx,js,jsx}',
+        '*.e2e.{ts,tsx,js,jsx}',
+        '*.stories.{ts,tsx,js,jsx,mdx}',
+      ],
+      rules: {
+        '@rushstack/typedef-var': 'off',
+        'func-style': 'off',
+        'import/no-anonymous-default-export': 'off',
+      },
+    },
+    {
+      extends: ['plugin:jsonc/recommended-with-jsonc'],
+      files: ['*.json', '*.json5', '*.jsonc'],
+      parser: 'jsonc-eslint-parser',
     },
     {
       extends: ['plugin:yml/standard'],

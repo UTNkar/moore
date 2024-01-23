@@ -12,9 +12,9 @@
     "skipLibCheck": true,
     "paths": {
       "#root/*": ["./src/*"],
-      "#public/*": ["./public/*"]
-    }
+      "#public/*": ["./public/*"],
+    },
   },
   "include": ["node", "src/**/*.ts", "src/**/*.tsx", "./*.ts", "./dev-server/*.ts", "./worker/*.ts"],
-  "exclude": ["node_modules/**/*"]
+  "exclude": ["node_modules/**/*"],
 }
