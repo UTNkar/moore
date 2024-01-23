@@ -51,7 +51,6 @@ elif 'DOCKER' in os.environ:
 # backend - e.g. in notification emails. Don't include '/admin' or a
 # trailing slash
 BASE_URL = 'http://localhost:8000'
-DEFAULT_HOST = 'www'
 
 ALLOWED_HOSTS = ['admin.localhost', 'localhost']
 # Email
