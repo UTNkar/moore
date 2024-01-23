@@ -56,6 +56,8 @@ class ApiClient:
             }
 
     def is_member(self, ssn):
+        if settings.UNICORE_ADMIN == '':
+            return True
         r = self.request_get('is-member/' + ssn)
         if r.status_code == 200:
             return r.json()['Member']
@@ -94,8 +96,6 @@ class UnicoreClient:
 
     @staticmethod
     def is_member(ssn):
-        if settings.UNICORE_ADMIN == '':
-            return True
         UnicoreClient.__setup()
         return UnicoreClient.client.is_member(ssn)
 
