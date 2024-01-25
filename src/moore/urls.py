@@ -2,19 +2,19 @@ from __future__ import absolute_import, unicode_literals
 
 from django.conf import settings
 from django.conf.urls import include, url
-from django.urls import path
+from django.urls import path, re_path
 
 from search import views as search_views
-from wagtail.admin import urls as wagtailadmin_urls
+# from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from .api import api_router
 
 from members.views import member_check_api
+from admin.views import redirect_admin
 
 urlpatterns = [
-
     # Needs to be imported before wagtail urls
     url(r'^api/', api_router.urls),
 
@@ -23,7 +23,8 @@ urlpatterns = [
     url(r'', include('events.urls')),
     path('member_check_api/', member_check_api, name='member_check_api'),
 
-    url(r'^admin/', include(wagtailadmin_urls)),
+    re_path(r'^admin/(?P<path>.*)$', redirect_admin),
+
     url(r'^documents/', include(wagtaildocs_urls)),
 
     url(r'^search/$', search_views.search, name='search'),

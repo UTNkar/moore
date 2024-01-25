@@ -53,6 +53,8 @@ elif 'DOCKER' in os.environ:
 BASE_URL = 'http://localhost:8000'
 
 ALLOWED_HOSTS = ['admin.localhost', 'localhost']
+PARENT_HOST = 'localhost'
+HOST_PORT = '8000'
 # Email
 # https://docs.djangoproject.com/en/1.10/ref/settings/#email-backend
 
