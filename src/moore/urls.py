@@ -5,7 +5,6 @@ from django.conf.urls import include, url
 from django.urls import path, re_path
 
 from search import views as search_views
-# from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
@@ -18,7 +17,6 @@ urlpatterns = [
     # Needs to be imported before wagtail urls
     url(r'^api/', api_router.urls),
 
-    # Needs to be imported before wagtail admin
     url(r'', include('involvement.urls')),
     url(r'', include('events.urls')),
     path('member_check_api/', member_check_api, name='member_check_api'),
