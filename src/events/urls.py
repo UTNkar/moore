@@ -1,5 +1,14 @@
 from django.urls import path, re_path
+from rest_framework import routers
 from events import views
+
+router = routers.SimpleRouter()
+router.register(r'^api/costs', views.api.CostsViewSet, basename="CostsView")
+router.register(r'^api/event', views.api.EventViewSet, basename="EventView")
+router.register(r'^api/eventapplication', views.api.EventApplicationViewSet, basename="EventApplicationView")
+router.register(r'^api/ticket', views.api.TicketViewSet, basename="TicketView")
+router.register(r'^api/participant', views.api.ParticipantViewSet, basename="ParticipantView")
+
 
 urlpatterns = [
     path('event/<int:pk>',
@@ -31,3 +40,5 @@ urlpatterns = [
         name='events_event_modeladmin_export_participants'
     ),
 ]
+
+urlpatterns += router.urls
