@@ -1,11 +1,13 @@
 import clsx from 'clsx';
 
+import { LocalizedText } from '#root/utils/intl';
 import type { Falsy } from '#root/utils/types';
 
 import Link, { LinkProps } from './Link';
 
-export interface TabOptions extends LinkProps {
+export interface TabOptions extends Omit<LinkProps, 'children'> {
   key?: React.Key;
+  label: string;
 }
 
 export interface TabsProps {
@@ -23,7 +25,13 @@ export default function Tabs({ tabs }: TabsProps): JSX.Element {
         }
 
         // eslint-disable-next-line jsx-a11y/anchor-has-content
-        return <Link key={index} keepScrollPosition {...tab} className={clsx('module-tab', tab.className)} />;
+        return (
+          <Link key={index} {...tab} className={clsx('module-tab', tab.className)}>
+            <LocalizedText element="h4" className="without-decoration without-spacing">
+              {tab.label}
+            </LocalizedText>
+          </Link>
+        );
       })}
     </div>
   );

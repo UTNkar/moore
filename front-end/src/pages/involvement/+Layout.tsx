@@ -11,19 +11,10 @@ export default function InvolvementLayout({ children, pageContext }: LayoutProps
     <div className="w-layout-hflex sticky-content-wrapper involvement">
       <Tabs
         tabs={[
-          {
-            children: <LocalizedText element="span">Lediga poster</LocalizedText>,
-            href: '/involvement',
-          },
-          {
-            children: <LocalizedText element="span">Sökta poster</LocalizedText>,
-            href: '/involvement/applications',
-          },
+          { href: '/involvement', label: 'Lediga poster' },
+          { href: '/involvement/applications', label: 'Sökta poster' },
           'space',
-          {
-            children: <LocalizedText element="span">Min profil</LocalizedText>,
-            href: '/involvement/profile',
-          },
+          { href: '/involvement/profile', label: 'Min profil' },
         ]}
       />
 

@@ -1,10 +1,17 @@
 import { Locale, defaultLocale } from '#root/utils/intl';
 import { usePageContext } from '#root/utils/page';
 
-export default function Link({ locale, href, keepScrollPosition, ...props }: LinkProps) {
+export default function Link({ locale, href, keepScrollPosition, hasSubpaths, ...props }: LinkProps) {
   const pageContext = usePageContext();
 
-  const className = [props.className, pageContext.urlPathname === href && 'active'].filter(Boolean).join(' ');
+  const className = [
+    props.className,
+    (!hasSubpaths || href === '/'
+      ? pageContext.urlPathname === href
+      : pageContext.urlPathname.startsWith(href)) && 'active',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   locale = locale || pageContext.locale;
 
@@ -25,6 +32,7 @@ export default function Link({ locale, href, keepScrollPosition, ...props }: Lin
 }
 
 export type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  hasSubpaths?: boolean;
   keepScrollPosition?: boolean;
   locale?: Locale;
 };
