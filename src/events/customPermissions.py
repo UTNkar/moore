@@ -11,3 +11,11 @@ class OwnApplicationPermission(BasePermission):
     """
     def has_object_permission(self, request, view, obj):
         return obj.event_applicant == request.user
+
+class ParticipantAllowancePermission(BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        if request.method not in ["GET", "HEAD", "OPTIONS"]:
+            return not obj.ticket.locked
+        else:
+            return True

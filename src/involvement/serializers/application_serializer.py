@@ -8,3 +8,8 @@ class ApplicationSerializer(serializers.ModelSerializer):
         fields = '__all__'
         depth = 1
 
+class ApplicationEditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Application
+        exclude = ["status"]
+        depth = 1

@@ -1,5 +1,6 @@
 from rest_framework.permissions import BasePermission
 from rest_framework.authentication import SessionAuthentication
+from datetime import date
 class CsrfExemptSessionAuthentication(SessionAuthentication):
 
     def enforce_csrf(self, request):
@@ -24,3 +25,18 @@ class OwnApplicationPermission(BasePermission):
     """
     def has_object_permission(self, request, view, obj):
         return obj.applicant == request.user
+
+class DeleteApplicationPermission(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if obj.status in ["Draft", "Submitted"]:
+            return True
+        return False
+
+
+class EditApplicationPermission(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if obj.status in ["Draft"]:
+            if obj.position.recruitment_end > date.today():
+                return True
+            return False
+        return False

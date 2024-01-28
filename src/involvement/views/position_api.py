@@ -1,6 +1,6 @@
-from rest_framework import viewsets, authentication
+from rest_framework import viewsets, authentication, mixins
 from involvement.serializers.position_serializer import PositionSerializer, PositionDepthSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from involvement.models.position import Position
 from involvement.customPermissions import CsrfExemptSessionAuthentication
 
