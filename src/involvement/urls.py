@@ -9,6 +9,8 @@ router.register(r'^position2', views.position_api.Position2ViewSet, basename="Po
 router.register(r'^teams', views.team_read_api.TeamViewSet, basename="TeamsView")
 router.register(r'^roles', views.role_read_api.RoleViewSet, basename="RolesView")
 router.register(r'^application', views.application_api.ApplicationViewSet, basename="ApplicationView")
+router.register(r'^application-update', views.application_api.ApplicationEditViewSet, basename="ApplicationEditView")
+router.register(r'^application-delete', views.application_api.ApplicationDeleteViewSet, basename="ApplicationDeleteView")
 
 urlpatterns = [
     re_path(
