@@ -1,10 +1,11 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, authentication
 from involvement.serializers.role_serializer import RoleSerializer
 from rest_framework.permissions import AllowAny
 from involvement.models.role import Role
-from src.customPermissions import CsrfExemptSessionAuthentication
+from involvement.customPermissions import CsrfExemptSessionAuthentication
 #Role view
 class RoleViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = RoleSerializer
-    permission_classes = [AllowAny, CsrfExemptSessionAuthentication]
+    authentication_classes = (CsrfExemptSessionAuthentication, authentication.BasicAuthentication)
+    permission_classes = [AllowAny]
     queryset = Role.objects.all()

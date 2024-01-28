@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, authentication
 from events.serializers.serializers import *
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAuthenticated
 from events.models.costs import Costs
@@ -6,27 +6,30 @@ from events.models.event import Event
 from events.models.participant import Participant
 from events.models.application import EventApplication
 from events.models.ticket import Ticket
-from events.customPermissions import OwnApplicationPermission
-from src.customPermissions import CsrfExemptSessionAuthentication
+from events.customPermissions import OwnApplicationPermission, CsrfExemptSessionAuthentication
 
 class CostsViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CostsSerializer
-    permission_classes = [AllowAny, CsrfExemptSessionAuthentication]
+    authentication_classes = (CsrfExemptSessionAuthentication, authentication.BasicAuthentication)
+    permission_classes = [AllowAny]
     queryset = Costs.objects.all()
 
 class EventViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EventSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, CsrfExemptSessionAuthentication]
+    authentication_classes = (CsrfExemptSessionAuthentication, authentication.BasicAuthentication)
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Event.objects.all()
 
 class ParticipantViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ParticipantSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, CsrfExemptSessionAuthentication]
+    authentication_classes = (CsrfExemptSessionAuthentication, authentication.BasicAuthentication)
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Participant.objects.all()
 
 class EventApplicationViewSet(viewsets.ModelViewSet):
     serializer_class = EventApplicationSerializer
-    permission_classes = [IsAuthenticated, OwnApplicationPermission, CsrfExemptSessionAuthentication]
+    authentication_classes = (CsrfExemptSessionAuthentication, authentication.BasicAuthentication)
+    permission_classes = [IsAuthenticated, OwnApplicationPermission]
 
     def get_queryset(self):
         user = self.request.user
@@ -35,7 +38,8 @@ class EventApplicationViewSet(viewsets.ModelViewSet):
 
 class TicketViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TicketSerializer
-    permission_classes = [IsAuthenticated, CsrfExemptSessionAuthentication]
+    authentication_classes = (CsrfExemptSessionAuthentication, authentication.BasicAuthentication)
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user

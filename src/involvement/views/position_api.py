@@ -1,15 +1,17 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, authentication
 from involvement.serializers.position_serializer import PositionSerializer, PositionDepthSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from involvement.models.position import Position
-from src.customPermissions import CsrfExemptSessionAuthentication
+from involvement.customPermissions import CsrfExemptSessionAuthentication
 
 class PositionViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PositionSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, CsrfExemptSessionAuthentication]
+    authentication_classes = (CsrfExemptSessionAuthentication, authentication.BasicAuthentication)
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Position.objects.all()
 
 class Position2ViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PositionDepthSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, CsrfExemptSessionAuthentication]
+    authentication_classes = (CsrfExemptSessionAuthentication, authentication.BasicAuthentication)
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Position.objects.all()
