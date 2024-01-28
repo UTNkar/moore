@@ -15,6 +15,7 @@
     "lint-webflow": "eslint --fix \"src/devlink/**\"; eslint --fix \"src/devlink/**\"; eslint --fix \"src/devlink/**\"; eslint --fix \"src/devlink/**\""
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.17.19",
     "autoprefixer": "^10.4.17",
     "clsx": "^2.1.0",
     "object-assign": "^4.1.1",
@@ -26,6 +27,7 @@
     "tailwindcss": "^3.4.1",
     "vike": "^0.4.159",
     "vite-imagetools": "^6.2.9",
+    "wretch": "^2.8.0",
     "zustand": "^4.5.0"
   },
   "devDependencies": {

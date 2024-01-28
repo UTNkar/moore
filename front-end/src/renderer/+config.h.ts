@@ -38,8 +38,6 @@ export default {
     },
     renderMode: {
       effect: ({ configDefinedAt, configValue }) => {
-        console.log('GET EFFECT');
-
         let env: ConfigEnv | undefined;
 
         if (configValue === 'HTML') env = { client: false, server: true };

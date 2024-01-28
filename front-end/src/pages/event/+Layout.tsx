@@ -11,19 +11,10 @@ export default function EventLayout({ children, pageContext }: LayoutProps) {
     <>
       <Tabs
         tabs={[
-          {
-            children: <LocalizedText element="span">Öppna för anmälan</LocalizedText>,
-            href: '/event',
-          },
-          {
-            children: <LocalizedText element="span">Deltaganden</LocalizedText>,
-            href: '/event/applications',
-          },
+          { href: '/event', label: 'Öppna för anmälan' },
+          { href: '/event/applications', label: 'Deltaganden' },
           'space',
-          {
-            children: <LocalizedText element="span">Min profil</LocalizedText>,
-            href: '/event/profile',
-          },
+          { href: '/event/profile', label: 'Profil' },
         ]}
       />
 

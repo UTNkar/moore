@@ -12,14 +12,8 @@ export default function MemberLayout({ children, pageContext }: LayoutProps) {
       <Tabs
         tabs={[
           'space',
-          {
-            children: <LocalizedText element="span">Registrering</LocalizedText>,
-            href: '/member/register',
-          },
-          {
-            children: <LocalizedText element="span">Logga in</LocalizedText>,
-            href: '/member',
-          },
+          { href: '/member/register', label: 'Registrera dig' },
+          { href: '/member', label: 'Logga in' },
         ]}
       />
 
