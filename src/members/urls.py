@@ -1,9 +1,13 @@
 from django.conf.urls import re_path, include
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from rest_framework import routers
 
 from members import views
 from members.forms import RegistrationForm
+
+router = routers.SimpleRouter()
+router.register(r'^me', views.MemberViewSet, basename="MemberViewSet")
 
 urlpatterns = [
     re_path(r'^profile/$', views.ProfileView.as_view(), name='profile'),
@@ -25,3 +29,5 @@ urlpatterns = [
         views.CustomPasswordResetView.as_view(),
         name='password_reset_custom'),
 ]
+
+urlpatterns += router.urls

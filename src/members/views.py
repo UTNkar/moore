@@ -11,13 +11,15 @@ from django.views.generic.edit import FormView
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 from members.forms import MemberForm, CustomPasswordResetForm
-from members.models import Section, StudyProgram
+from members.models import Section, StudyProgram, Member
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from members.serializers import MemberCheckSerializer
 from utils.melos_client import MelosClient
-from rest_framework import status
-
+from rest_framework import status, viewsets
+from serializers.serializers import MemberSerializer
+from rest_framework.permissions import IsAuthenticated
+from src.customPermissions import CsrfExemptSessionAuthentication
 
 class ProfileView(LoginRequiredMixin, UpdateView):
     template_name = 'members/profile.html'
@@ -134,3 +136,12 @@ def member_check_api(request):
         status=status_code,
         headers={"Access-Control-Allow-Origin": "*"}
     )
+
+class MemberViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = MemberSerializer
+    permission_classes = [IsAuthenticated, CsrfExemptSessionAuthentication]
+
+    def get_queryset(self):
+        user = self.request.user.id
+        queryset = Member.objects.filter(id=user)
+        return queryset
