@@ -1,0 +1,7 @@
+.standalone-link {
+  font-family: var(--text);
+}
+
+.over-dark {
+  color: var(--white);
+}

@@ -1,0 +1,133 @@
+.section {
+  margin-top: 80px;
+  padding-top: 0px;
+}
+
+@media screen and (max-width: 991px) {
+  .section {
+    margin-top: 64px;
+  }
+}
+
+.section.a-bit-less-spacing {
+  margin-top: 64px;
+}
+
+.section.much-less-spacing {
+  margin-top: 16px;
+}
+
+.section.less-spacing {
+  margin-top: 48px;
+}
+
+.section.emphasised {
+  padding-top: 64px;
+  padding-bottom: 64px;
+  background-color: var(--blue-500);
+  color: var(--white);
+}
+
+.over-dark {
+  color: var(--white);
+}
+
+.container {
+  position: relative;
+  z-index: 5;
+
+  display: block;
+  width: 100%;
+  max-width: 1140px;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin-left: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  background-color: transparent;
+}
+
+.container.center {
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 991px) {
+  .container.full-width {
+    max-width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}
+
+.content-card {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+  padding: 2em 2.5em;
+  border-radius: var(--paper-border-radius);
+}
+
+.content-card.teal {
+  background-color: var(--teal-500);
+}
+
+.content-card.bordered {
+  position: relative;
+  max-width: 100%;
+  border: 1px solid var(--grey-300);
+}
+
+@media screen and (max-width: 991px) {
+  .content-card.bordered.full-width {
+    padding-top: 0em;
+    padding-bottom: 0em;
+  }
+}
+
+.content-card.grey {
+  background-color: var(--grey-200);
+}
+
+.content-card.small {
+  margin-top: 1.25em;
+  margin-bottom: 1.75em;
+  padding: 1.25em 1.5em;
+}
+
+.content-card.small.blue {
+  background-color: var(--blue-500);
+}
+
+.content-card.small.error {
+  background-color: var(--error-500);
+}
+
+.content-card.small.bordered.text-area {
+  width: var(--desktop-text-width);
+  max-width: 100%;
+  padding-top: 1.75em;
+  padding-bottom: 1.75em;
+  font-family: var(--text-paragraph);
+}
+
+@media screen and (max-width: 767px) {
+  .content-card.small.bordered.text-area {
+    width: var(--mobile-text-width);
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .content-card.full-width {
+    width: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+
+    border-right: 0px solid black;
+    border-left: 0px solid black;
+    border-radius: 0px;
+  }
+}

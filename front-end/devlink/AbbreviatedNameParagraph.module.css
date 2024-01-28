@@ -1,0 +1,15 @@
+.block {
+  display: block;
+}
+
+.paragraph-row {
+  display: block;
+}
+
+.paragraph-row-item {
+  display: inline-block;
+}
+
+.paragraph-row-item.spaced {
+  margin-left: 0.25ch;
+}

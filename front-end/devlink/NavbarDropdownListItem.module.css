@@ -1,0 +1,115 @@
+.navbar-dropdown-list-item-wrapper {
+  display: flex;
+  padding: 12px 16px;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: stretch;
+  flex: 0 0 auto;
+
+  border-left: 4px solid var(--grey-300);
+
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+@media screen and (max-width: 991px) {
+  .navbar-dropdown-list-item-wrapper {
+    padding: 0px 0px 0px 18px;
+  }
+}
+
+.navbar-dropdown-list-item-label-wrapper {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.navbar-dropdown-list-label {
+  position: relative;
+
+  padding: 0px;
+  align-items: center;
+  flex: 0 0 auto;
+
+  font-family: var(--text);
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+.navbar-dropdown-list-label:focus-visible {
+  border-radius: 5px;
+
+  outline-color: hsla(214.6153846153846, 100.00%, 37.00%, 1.00);
+  outline-offset: 0px;
+  outline-style: solid;
+  outline-width: 2px;
+
+  color: hsla(214.6153846153846, 100.00%, 37.00%, 1.00);
+}
+
+@media screen and (max-width: 991px) {
+  .navbar-dropdown-list-label {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .navbar-dropdown-list-label {
+    padding-top: 4px;
+    flex: 0 auto;
+    line-height: 18px;
+    white-space: normal;
+    word-break: normal;
+  }
+}
+
+.navbar-dropdown-list-label.arrow {
+  opacity: 0;
+  transform: translate(2px, 4px);
+}
+
+@media screen and (max-width: 479px) {
+  .navbar-dropdown-list-label.arrow {
+    flex: 0 0 auto;
+  }
+}
+
+.without-spacing {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+.navbar-dropdown-list-description {
+  width: 200px;
+  margin-top: 6px;
+
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 21px;
+  white-space: break-spaces;
+  word-break: keep-all;
+}
+
+@media screen and (max-width: 991px) {
+  .navbar-dropdown-list-description {
+    width: auto;
+    margin-top: 4px;
+    font-size: 15px;
+    line-height: 21px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .navbar-dropdown-list-description {
+    margin-top: 5px;
+    margin-bottom: 4px;
+  }
+}

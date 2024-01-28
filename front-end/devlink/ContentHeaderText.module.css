@@ -1,0 +1,10 @@
+.block {
+  display: block;
+}
+
+.large-paragraph {
+  font-family: var(--text-paragraph);
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 400;
+}
