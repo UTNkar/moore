@@ -1,4 +1,4 @@
-from rest_framework import viewsets, authentication
+from rest_framework import viewsets, authentication, mixins
 from events.serializers.serializers import *
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAuthenticated
 from events.models.costs import Costs
@@ -32,14 +32,18 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         queryset = Participant.objects.filter(ticket__in=tickets)
         return queryset
 
-class EventApplicationViewSet(viewsets.ModelViewSet):
+class EventApplicationViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, \
+                              mixins.DestroyModelMixin):
     serializer_class = EventApplicationSerializer
     authentication_classes = (CsrfExemptSessionAuthentication, authentication.BasicAuthentication)
     permission_classes = [IsAuthenticated, OwnApplicationPermission]
 
     def get_queryset(self):
         user = self.request.user
-        queryset = EventApplication.objects.filter(event_applicant=user)
+        if self.action in ['retrieve', 'list']:
+            queryset = EventApplication.objects.filter(event_applicant=user)
+        else:
+            queryset = EventApplication.objects.all()
         return queryset
 
 class TicketViewSet(viewsets.ReadOnlyModelViewSet):
