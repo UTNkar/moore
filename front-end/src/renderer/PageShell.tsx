@@ -1,9 +1,11 @@
-import './css/style.css';
+import 'react-toastify/dist/ReactToastify.css';
 import '../devlink/global.css';
+import './css/style.css';
 
 import { ComponentType, StrictMode, useMemo } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ToastContainer } from 'react-toastify';
 
 import { DevLinkProvider } from '#root/devlink/devlinkContext';
 import { LayoutProps, PageContextProvider, PropsWithChildrenAndPageContext } from '#root/utils/page';
@@ -25,6 +27,8 @@ export default function PageShell({
         <DevLinkProvider>
           <PageContextProvider pageContext={pageContext}>
             <Layout pageContext={pageContext}>{children}</Layout>
+
+            <ToastContainer />
           </PageContextProvider>
         </DevLinkProvider>
       </QueryClientProvider>
