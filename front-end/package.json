@@ -11,7 +11,8 @@
     "========= Only allow pnpm; forbid yarn & npm": "",
     "preinstall": "npx only-allow pnpm",
     "========= Synchronize and format Webflow component code (formatting multiple times for sorted keys)": "",
-    "sync-webflow": "webflow devlink sync && pnpm lint-webflow",
+    "sync-webflow": "webflow devlink sync && pnpm clean-webflow && pnpm lint-webflow",
+    "clean-webflow": "bash delete_unused_devlink.sh",
     "lint-webflow": "eslint --fix \"src/devlink/**\"; eslint --fix \"src/devlink/**\"; eslint --fix \"src/devlink/**\"; eslint --fix \"src/devlink/**\""
   },
   "dependencies": {

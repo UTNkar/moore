@@ -8,7 +8,7 @@ import { LayoutProps, isWithinIframe } from '#root/utils/page';
 
 export default function InvolvementLayout({ children, pageContext }: LayoutProps) {
   const iframeContent = (
-    <div className="w-layout-hflex sticky-content-wrapper involvement">
+    <div className="w-layout-hflex sticky-content-wrapper module">
       <Tabs
         tabs={[
           { href: '/involvement', label: 'Lediga poster' },

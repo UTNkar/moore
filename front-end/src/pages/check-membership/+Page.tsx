@@ -58,7 +58,7 @@ export default function CheckMembershipPage() {
 
   return (
     <>
-      <div className="sticky-content-sidebar involvement">
+      <div className="sticky-content-sidebar module">
         <div className="module-item-list-card w-inline-block">
           <LocalizedText element="h2" className="without-spacing">
             Kontrollera medlemskap
@@ -69,7 +69,7 @@ export default function CheckMembershipPage() {
           </LocalizedText>
         </div>
       </div>
-      <div className="sticky-content-body involvement-module">
+      <div className="sticky-content-body module">
         <div className="w-form">
           <form onSubmit={handleSubmit}>
             <div className="w-layout-vflex form-field-wrapper">

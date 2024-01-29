@@ -6,7 +6,7 @@ import { LocalizedText } from '#root/utils/intl';
 import { LayoutProps, isWithinIframe } from '#root/utils/page';
 
 export default function CheckMembershipLayout({ children, pageContext }: LayoutProps) {
-  const iframeContent = <div className="w-layout-hflex sticky-content-wrapper involvement">{children}</div>;
+  const iframeContent = <div className="w-layout-hflex sticky-content-wrapper module">{children}</div>;
 
   if (isWithinIframe(pageContext)) {
     return iframeContent;

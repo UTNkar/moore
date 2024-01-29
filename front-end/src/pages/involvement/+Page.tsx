@@ -6,11 +6,11 @@ export default function InvolvementPage({ pageContext }: PageProps) {
 
   return (
     <>
-      <div className="sticky-content-sidebar involvement" />
-      <div className="sticky-content-body involvement-module">
+      <div className="sticky-content-sidebar module" />
+      <div className="sticky-content-body module">
         <div className="module-item-header" />
 
-        <div className="divider involvement-content" />
+        <div className="divider module-content" />
       </div>
     </>
   );
