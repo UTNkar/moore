@@ -24,7 +24,7 @@ export default function HomePage({ pageContext }: PageProps) {
 
   return (
     <>
-      <Section>
+      <Section id="module">
         <Container>
           {iframeContent}
 

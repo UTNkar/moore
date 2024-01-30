@@ -25,12 +25,12 @@ export function PageContextProvider({
 }
 
 /** Access the `pageContext` from any React component */
-export function usePageContext(): PageContext {
+export function usePageContext<Data = unknown>(): PageContext<Data> {
   const pageContext = useContext(Context);
 
   if (!pageContext) {
     throw new Error('<PageContextProvider> is needed for being able to use usePageContext()');
   }
 
-  return pageContext;
+  return pageContext as PageContext<Data>;
 }

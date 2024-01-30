@@ -1,9 +1,11 @@
+import { IntlShape } from 'react-intl';
+
 import translations from '#root/translations';
 
-import { Locale, defaultLocale, defaultTranslationLocale } from './locales';
+import { defaultLocale, defaultTranslationLocale } from './locales';
 
-export default function translate(text: string, locale: Locale, key: string = text): string {
-  if (locale === defaultLocale) {
+export default function translate(text: string, intl: IntlShape, key: string = text): string {
+  if (intl.locale === defaultLocale) {
     return text || key;
   }
 
@@ -14,10 +16,10 @@ export default function translate(text: string, locale: Locale, key: string = te
 
     return text || key;
   } else if (
-    (typeof textTranslations === 'string' && locale !== defaultTranslationLocale) ||
-    !textTranslations[locale]
+    (typeof textTranslations === 'string' && intl.locale !== defaultTranslationLocale) ||
+    !textTranslations[intl.locale]
   ) {
-    console.error('No translation of "' + key + '" and locale "' + locale + '" found.');
+    console.error('No translation of "' + key + '" and locale "' + intl.locale + '" found.');
 
     return text || key;
   }
@@ -25,6 +27,6 @@ export default function translate(text: string, locale: Locale, key: string = te
   if (typeof textTranslations === 'string') {
     return textTranslations;
   } else {
-    return textTranslations[locale];
+    return textTranslations[intl.locale];
   }
 }

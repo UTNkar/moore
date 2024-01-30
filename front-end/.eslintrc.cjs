@@ -216,7 +216,15 @@ module.exports = {
     sourceType: 'module',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['prettier', 'import', 'sort-exports', 'sort-export-all', 'sort-keys-fix', 'typescript-sort-keys'],
+  plugins: [
+    'prettier',
+    'import',
+    'sort-exports',
+    'sort-export-all',
+    'sort-keys-fix',
+    'typescript-sort-keys',
+    'formatjs',
+  ],
   rules: {
     /**
      * Do not allow use of `null`.

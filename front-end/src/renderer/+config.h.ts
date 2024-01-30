@@ -13,6 +13,7 @@ export default {
   Layout: DefaultLayout,
   locale: 'sv',
   meta: {
+    data: { env: { client: true, server: true } },
     description: { env: { client: true, server: true } },
     Layout: { env: { client: true, server: true } },
     locale: { env: { client: true, server: true } },
@@ -59,7 +60,7 @@ export default {
     title: { env: { client: true, server: true } },
   },
   // https://vike.dev/passToClient
-  passToClient: ['pageProps', 'title', 'description', 'locale'],
+  passToClient: ['pageProps', 'title', 'description', 'locale', 'urlLogical', 'routeParams'],
 
   title: 'Uppsala teknolog- och naturvetarkår',
 } satisfies PageConfig;

@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import { useIntl } from 'react-intl';
+
 import { usePageContext } from '#root/utils/page';
 
 import { Locale } from './locales';
@@ -10,7 +12,8 @@ export default function useLocalizedText(
   locale: Locale = usePageContext().locale,
   key?: string,
 ): string {
-  const localizedText = useMemo(() => translate(text, locale, key), [text, locale, key]);
+  const intl = useIntl();
+  const localizedText = useMemo(() => translate(text, intl, key), [text, intl, key]);
 
   return localizedText;
 }

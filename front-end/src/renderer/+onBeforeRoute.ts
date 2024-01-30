@@ -7,10 +7,10 @@ export default function onBeforeRoute(pageContext: PageContext): ReturnType<OnBe
 
   return {
     pageContext: {
-      // We make `locale` available as `pageContext.locale`. We can then use https://vike.dev/pageContext-anywhere to access pageContext.locale in any React/Vue component.
+      // We make `locale` available as `pageContext.locale`. We can then use https://vike.dev/pageContext-anywhere to access pageContext.locale in any React component.
       locale,
       // We overwrite the original URL
-      urlOriginal: urlWithoutLocale,
+      urlLogical: urlWithoutLocale,
     },
   };
 }

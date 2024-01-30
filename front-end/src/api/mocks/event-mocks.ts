@@ -1,4 +1,5 @@
 import { Event, EventApplication, EventTicket } from '#root/types';
+import { addFromNow } from '#root/utils/intl';
 
 /* eslint-disable sort-exports/sort-exports */
 
@@ -8,8 +9,8 @@ export const eventMocks = {
     base_price_nonmember: 0,
     contact_email: 'forsranningen@utn.se',
     description: 'Ett våghalsigt äventyr längs Fyrisån.',
-    end_date: '2023-04-30',
-    end_of_application: '2023-04-15',
+    end_date: addFromNow({ days: 15 }),
+    end_of_application: addFromNow({ days: 5 }),
     num_participants_per_ticket: 5,
     num_tickets: 40,
     price_list: {
@@ -22,7 +23,7 @@ export const eventMocks = {
     },
     price_per_participant: 0,
     price_per_participant_nonmember: 0,
-    start_date: '2023-04-30',
+    start_date: addFromNow({ days: -15 }),
   } as Event,
 
   naturvetarbalen: {
@@ -30,8 +31,8 @@ export const eventMocks = {
     base_price_nonmember: 850,
     contact_email: 'balen@utn.se',
     description: 'En storslagen bal för alla naturvetare.',
-    end_date: '2023-04-29',
-    end_of_application: '2023-04-01',
+    end_date: addFromNow({ days: 10 }),
+    end_of_application: addFromNow({ hours: 16 }),
     num_participants_per_ticket: 1,
     num_tickets: 200,
     price_list: {
@@ -45,7 +46,7 @@ export const eventMocks = {
     price_per_participant: 750,
     price_per_participant_nonmember: 850,
     raffle_has_been_held: false,
-    start_date: '2023-04-29',
+    start_date: addFromNow({ days: -15 }),
   } as Event,
 
   polhacks: {
@@ -53,8 +54,8 @@ export const eventMocks = {
     base_price_nonmember: 250,
     contact_email: 'polhacks@utn.se',
     description: 'LAN och e-sportsevenemang för teknikintresserade.',
-    end_date: '2023-03-15',
-    end_of_application: '2023-02-28',
+    end_date: addFromNow({ days: 10 }),
+    end_of_application: addFromNow({ hours: 16 }),
     first_come_first_serve: true,
     num_participants_per_ticket: 1,
     num_tickets: 100,
@@ -68,7 +69,7 @@ export const eventMocks = {
     },
     price_per_participant: 200,
     price_per_participant_nonmember: 250,
-    start_date: '2023-03-13',
+    start_date: addFromNow({ days: -15 }),
   } as Event,
 
   rebusrallyt: {
@@ -76,8 +77,8 @@ export const eventMocks = {
     base_price_nonmember: 150,
     contact_email: 'rebusrallyt@utn.se',
     description: 'En heldag med kluriga problem och fysiska utmaningar.',
-    end_date: '2023-05-20',
-    end_of_application: '2023-05-01',
+    end_date: addFromNow({ days: 10 }),
+    end_of_application: addFromNow({ hours: 16 }),
     num_participants_per_ticket: 4,
     num_tickets: 50,
     price_list: {
@@ -90,7 +91,7 @@ export const eventMocks = {
     },
     price_per_participant: 100,
     price_per_participant_nonmember: 150,
-    start_date: '2023-05-20',
+    start_date: addFromNow({ days: -15 }),
   } as Event,
 };
 

@@ -11,7 +11,7 @@ export default function InvolvementLayout({ children, pageContext }: LayoutProps
     <div className="w-layout-hflex sticky-content-wrapper module">
       <Tabs
         tabs={[
-          { href: '/involvement', label: 'Lediga poster' },
+          { fallback: true, href: '/involvement', label: 'Lediga poster' },
           { href: '/involvement/applications', label: 'Sökta poster' },
           'space',
           { href: '/involvement/profile', label: 'Min profil' },
@@ -42,7 +42,7 @@ export default function InvolvementLayout({ children, pageContext }: LayoutProps
         </Container>
       </Section>
 
-      <Section subdued emphasised>
+      <Section subdued emphasised id="module">
         <Container>{iframeContent}</Container>
       </Section>
     </DefaultLayout>

@@ -28,7 +28,7 @@ export default function CheckMembershipLayout({ children, pageContext }: LayoutP
         </Container>
       </Section>
 
-      <Section subdued emphasised>
+      <Section subdued emphasised id="module">
         <Container>{iframeContent}</Container>
       </Section>
     </DefaultLayout>

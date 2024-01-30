@@ -1,12 +1,11 @@
+import { PageContext } from 'vike/types';
+
 import type { Locale } from '#root/utils/intl';
-import { usePageContext } from '#root/utils/page';
 
 import type { memberMocks } from '../mocks';
 
-export function useApiContext(): ApiContext {
-  const pageContext = usePageContext();
-
-  return { locale: pageContext.locale, mock: true, queryHash: pageContext.locale };
+export function apiContextFromPageContext<Data = unknown>(pageContext: PageContext<Data>): ApiContext<Data> {
+  return { data: pageContext.data, locale: pageContext.locale, mock: true, queryHash: pageContext.locale };
 }
 
 export function wrapWithApiContext<P extends any[], RT>(
@@ -16,9 +15,10 @@ export function wrapWithApiContext<P extends any[], RT>(
   return (...params) => func(context, ...params);
 }
 
-export interface ApiContext {
+export interface ApiContext<Data = unknown> {
   bearerToken?: string;
   csrfToken?: string;
+  data: Data;
   locale: Locale;
   mock?: boolean;
   mockMember?: keyof typeof memberMocks;

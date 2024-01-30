@@ -3,7 +3,6 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 import { checkMembership } from '#root/api';
-import Link from '#root/components/Link';
 import { LocalizedText, useLocalizedText } from '#root/utils/intl';
 
 interface FormData {

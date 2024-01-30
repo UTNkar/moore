@@ -1,7 +1,6 @@
 import type { ComponentType } from 'react';
 import type { PageContext } from 'vike/types';
 
-import type { QueryClient } from '@tanstack/react-query';
 import type { ConfigBuiltIn } from 'node_modules/vike/dist/esm/shared/page-configs/Config';
 
 import type { Locale } from '../intl';
@@ -13,8 +12,8 @@ export interface LayoutProps<Data = unknown> {
 
 export type PageConfig = ConfigBuiltIn & Vike.Config & VikePackages.ConfigVikeReact;
 
-export interface PageProps {
-  pageContext: PageContext;
+export interface PageProps<Data = unknown> {
+  pageContext: PageContext<Data>;
 }
 
 export type PropsWithChildrenAndPageContext<T extends object = {}> = T & {
@@ -41,7 +40,7 @@ declare global {
       locale: Locale;
       pageProps: PageProps;
       title: string;
-      urlOriginal: string;
+      urlLogical: string;
     }
 
     interface Config {
