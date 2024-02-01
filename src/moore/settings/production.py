@@ -40,6 +40,7 @@ sentry_sdk.init(
 BASE_URL = 'https://utn.se'
 
 ALLOWED_HOSTS = ['.utn.se', '.utnarm.se']
+PARENT_HOST = 'utn.se'
 
 # Email settings
 DEFAULT_FROM_EMAIL = 'info@utn.se'
