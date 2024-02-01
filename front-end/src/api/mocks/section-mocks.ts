@@ -45,3 +45,8 @@ export const sectionMocks = {
     studies: [studyProgramMocks.kemiteknik],
   } as Section,
 };
+
+// eslint-disable-next-line sort-exports/sort-exports
+export const sectionListMocks = (Object.keys(sectionMocks) as (keyof typeof sectionMocks)[])
+  .sort((a, b) => a.localeCompare(b))
+  .map((key) => sectionMocks[key]);

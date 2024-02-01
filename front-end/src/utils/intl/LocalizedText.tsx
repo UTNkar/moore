@@ -1,6 +1,8 @@
 import { Fragment, createElement } from 'react';
 import { PageContext } from 'vike/types';
 
+import clsx from 'clsx';
+
 import { Locale } from './locales';
 import useLocalizedText from './useLocalizedText';
 
@@ -9,12 +11,16 @@ export default function LocalizedText({
   pageContext,
   locale,
   id,
+  withoutSpacing,
+  className: passedClassName,
   ...otherProps
 }: LocalizedTextProps) {
   const text = useLocalizedText(children, locale || pageContext?.locale, id);
 
-  if (Object.keys(otherProps).length) {
-    return createElement(otherProps.element || 'span', otherProps, text);
+  const className = clsx(withoutSpacing && 'without-spacing', passedClassName);
+
+  if (Object.keys(otherProps).length || className) {
+    return createElement(otherProps.element || 'span', { ...otherProps, className }, text);
   }
 
   return createElement(Fragment, {}, text);
@@ -34,6 +40,8 @@ export interface LocalizedTextBaseProps extends Pick<React.HTMLAttributes<HTMLEl
   locale?: Locale;
   /** Page context to infer a locale from. */
   pageContext?: PageContext;
+  /** Whether margins should be removed. */
+  withoutSpacing?: boolean;
 }
 
 export type LocalizedTextProps = LocalizedTextWithIDProps | LocalizedTextWithChildrenProps;

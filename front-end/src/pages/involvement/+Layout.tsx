@@ -1,3 +1,4 @@
+import { useAuthenticatedMember, useIsAuthenticated } from '#root/api';
 import Container from '#root/components/Container';
 import NavigationButtonGroup from '#root/components/NavigationButtonGroup';
 import Section from '#root/components/Section';
@@ -6,15 +7,22 @@ import DefaultLayout from '#root/renderer/layout/DefaultLayout';
 import { LocalizedText } from '#root/utils/intl';
 import { LayoutProps, isWithinIframe } from '#root/utils/page';
 
+import { InvolvementPageData } from './positions/+data';
+
 export default function InvolvementLayout({ children, pageContext }: LayoutProps) {
+  const authenticatedMember = useAuthenticatedMember<InvolvementPageData>('authenticatedMember');
+  const isAuthenticated = useIsAuthenticated(authenticatedMember);
+
   const iframeContent = (
     <div className="w-layout-hflex sticky-content-wrapper module">
       <Tabs
         tabs={[
           { fallback: true, href: '/involvement', label: 'Lediga poster' },
-          { href: '/involvement/applications', label: 'Sökta poster' },
+          isAuthenticated && { href: '/involvement/applications', label: 'Sökta poster' },
           'space',
-          { href: '/involvement/profile', label: 'Min profil' },
+          !isAuthenticated && { href: '/involvement/register', label: 'Registrera dig' },
+          !isAuthenticated && { href: '/involvement/profile', label: 'Logga in' },
+          isAuthenticated && { href: '/involvement/profile', label: 'Min profil' },
         ]}
       />
 

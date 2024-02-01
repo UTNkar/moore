@@ -16,3 +16,7 @@ iframe {
   display: flex;
   flex-direction: row;
 }
+
+section#module {
+  min-height: 100vh;
+}

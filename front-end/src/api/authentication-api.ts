@@ -1,3 +1,5 @@
+import { Section } from '#root/types';
+
 export async function loginCheck(username: string, password: string): Promise<string> {
   const loginData = new FormData();
 
@@ -11,4 +13,21 @@ export async function loginCheck(username: string, password: string): Promise<st
   }).then((response) => response.json());
 
   return login;
+}
+
+export async function registerMember(_args: RegisterMemberArgs): Promise<void> {
+  throw new Error('Not implemented');
+}
+
+export interface LoginArgs {
+  password: string;
+  username: string;
+}
+
+export interface RegisterMemberArgs {
+  email: string;
+  person_number: string;
+  phone_number: string;
+  section: Section['id'];
+  username: string;
 }

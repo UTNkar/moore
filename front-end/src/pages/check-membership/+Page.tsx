@@ -3,6 +3,8 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 import { checkMembership } from '#root/api';
+import ModuleListItemCard from '#root/components/module/ModuleListItemCard';
+import ModuleSidebarWrapper from '#root/components/module/ModuleSidebarWrapper';
 import { LocalizedText, useLocalizedText } from '#root/utils/intl';
 
 interface FormData {
@@ -57,8 +59,8 @@ export default function CheckMembershipPage() {
 
   return (
     <>
-      <div className="sticky-content-sidebar module">
-        <div className="module-item-list-card w-inline-block">
+      <ModuleSidebarWrapper>
+        <ModuleListItemCard>
           <LocalizedText element="h2" className="without-spacing">
             Kontrollera medlemskap
           </LocalizedText>
@@ -66,8 +68,8 @@ export default function CheckMembershipPage() {
             Skriv ditt personnummer med 12 siffror för att se om du är registrerad som medlem i UTN. Annars är
             du varmt välkommen att bli medlem.
           </LocalizedText>
-        </div>
-      </div>
+        </ModuleListItemCard>
+      </ModuleSidebarWrapper>
       <div className="sticky-content-body module">
         <div className="w-form">
           <form onSubmit={handleSubmit}>

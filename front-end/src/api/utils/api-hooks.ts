@@ -21,7 +21,6 @@ export function usePageDataQuery<PageData = unknown, Data = unknown, P extends a
   return useQuery({
     initialData: context.data[pageDataKey],
     queryFn: wrapWithApiContext(context, func) as any,
-    queryHash: context.queryHash,
     queryKey: [pageDataKey, ...parameters],
     staleTime: 30 * 1000,
   });

@@ -1,6 +1,7 @@
-import clsx from 'clsx';
+import { useLocalizedText } from '#root/utils/intl';
 
-import { LocalizedText } from '#root/utils/intl';
+import Button from './Button';
+import ButtonGroupWrapper from './ButtonGroupWrapper';
 
 export default function NavigationButtonGroup({ exclude }: { exclude?: 'involvement' | 'event' | 'member' }) {
   const links = (
@@ -12,23 +13,19 @@ export default function NavigationButtonGroup({ exclude }: { exclude?: 'involvem
   )
     .filter((tuple) => tuple[0] !== exclude)
     .map((tuple, i) => {
-      const left = i === 0 || (!exclude && i === 1);
-      const right = i > 0;
-
       return (
-        <a
-          key={tuple[0]}
+        <Button
+          key={i}
+          large
+          secondary
           href={'/' + tuple[0]}
-          className={clsx('large-button secondary w-button', { left: left, right: right })}
+          left={i === 0 || (!exclude && i === 1)}
+          right={i > 0}
         >
-          <LocalizedText element="span">{tuple[1]}</LocalizedText>
-        </a>
+          {useLocalizedText(tuple[1])}
+        </Button>
       );
     });
 
-  return (
-    <div className="w-layout-vflex large-button-group-wrapper">
-      <div className="w-layout-vflex button-group-wrapper">{links}</div>
-    </div>
-  );
+  return <ButtonGroupWrapper large>{links}</ButtonGroupWrapper>;
 }

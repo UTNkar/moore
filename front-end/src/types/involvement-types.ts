@@ -14,6 +14,7 @@ export interface Position {
 export interface PositionApplication {
   cover_letter: string;
   gdpr: boolean;
+  id: number;
   position: Position;
   references: PositionApplicationReference[];
   rejection_date?: string;
@@ -28,6 +29,10 @@ export interface PositionApplicationReference {
   name: string;
   phone_number?: string;
   position: string;
+}
+
+export interface PositionWithApplication extends Position {
+  application: PositionApplication | undefined;
 }
 
 export interface Role {

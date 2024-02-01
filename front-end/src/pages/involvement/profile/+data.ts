@@ -2,9 +2,10 @@ import type { PageContextServer } from 'vike/types';
 
 import { getAuthenticatedMember, getPositionsWithApplications } from '#root/api';
 import { apiContextFromPageContext } from '#root/api/utils';
-import { Member, PositionWithApplication } from '#root/types';
+import type { MemberPageData } from '#root/pages/member/+data';
+import { PositionWithApplication } from '#root/types';
 
-export default async function data(pageContext: PageContextServer): Promise<InvolvementPageData> {
+export default async function data(pageContext: PageContextServer): Promise<InvolvementProfilePageData> {
   const apiContext = apiContextFromPageContext(pageContext);
 
   const authenticatedMember = await getAuthenticatedMember(apiContext);
@@ -13,7 +14,6 @@ export default async function data(pageContext: PageContextServer): Promise<Invo
   return { authenticatedMember, positionsWithApplications };
 }
 
-export interface InvolvementPageData {
-  authenticatedMember: Member | undefined;
+export interface InvolvementProfilePageData extends MemberPageData {
   positionsWithApplications: PositionWithApplication[];
 }
