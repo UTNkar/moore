@@ -1,0 +1,99 @@
+.card {
+  position: relative;
+
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+  max-width: 100%;
+  justify-content: space-between;
+  align-self: stretch;
+  flex: 0 auto;
+
+  border: 1px solid var(--grey-300);
+  border-radius: var(--paper-border-radius);
+}
+
+@media screen and (max-width: 479px) {
+  .card {
+    margin-top: 0px;
+    flex-direction: column;
+  }
+}
+
+.contact-card-thumbnail {
+  position: relative;
+
+  overflow: hidden;
+  width: 192px;
+  height: 100%;
+  max-width: 100%;
+  flex: 0 0 auto;
+}
+
+@media screen and (max-width: 479px) {
+  .contact-card-thumbnail {
+    width: 100%;
+    height: auto;
+    min-height: 0px;
+    padding-top: 28.125%;
+    padding-bottom: 28.125%;
+    align-self: auto;
+  }
+}
+
+.contact-card-photo {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+
+  display: block;
+  max-height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+
+  object-fit: cover;
+  object-position: 50% 25%;
+}
+
+@media screen and (max-width: 479px) {
+  .contact-card-photo {
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+}
+
+.card-text {
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-self: stretch;
+  flex: auto;
+}
+
+.without-spacing {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+.card-subhead {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+
+  font-family: var(--text-paragraph);
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+.standalone-link {
+  font-family: var(--text);
+}
+
+.over-dark {
+  color: var(--white);
+}

@@ -1,0 +1,4 @@
+.rich-text img {
+  overflow: hidden;
+  border-radius: var(--paper-border-radius);
+}

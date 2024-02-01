@@ -1,0 +1,17 @@
+.special-notice {
+  margin-bottom: 32px;
+  padding: 14px 24px;
+  align-self: flex-start;
+
+  border-radius: var(--button-corner-radius);
+
+  background-color: #089699;
+
+  color: var(--white);
+  text-decoration: none;
+}
+
+.without-spacing {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}

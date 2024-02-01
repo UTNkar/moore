@@ -1,0 +1,16 @@
+.about-section-item {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 2em;
+  align-self: stretch;
+  flex: 0 0 auto;
+
+  border-left: 6px solid var(--teal-500);
+}
+
+.without-spacing {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}

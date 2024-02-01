@@ -1,0 +1,15 @@
+.faq-item-wrapper {
+  width: 50%;
+  padding-right: 2em;
+  padding-left: 0px;
+}
+
+@media screen and (max-width: 767px) {
+  .faq-item-wrapper {
+    width: 100%;
+  }
+}
+
+.faq-answer {
+  margin-top: 6px;
+}
