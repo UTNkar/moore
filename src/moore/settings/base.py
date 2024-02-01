@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'captcha',
     'jsonschemaform',
     'django_select2',  # Custom select2 widget
+    'django_hosts',  # Subdomain for admin site
 
     'django.contrib.admin',  # Used for wagtail admin filters
     'django.contrib.auth',
@@ -79,6 +80,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # Subdomain for admin site. Needed by django_hosts
+    'django_hosts.middleware.HostsRequestMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -89,6 +92,8 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
 
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+    # Subdomain for admin site. Needed by django_hosts
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 DATABASES = {
@@ -103,6 +108,10 @@ DATABASES = {
 }
 
 ROOT_URLCONF = 'moore.urls'
+# Needed for django hosts, enables us to publish wagtail admin on subdomain.
+ROOT_HOSTCONF = 'moore.settings.hosts'
+DEFAULT_HOST = 'default'
+
 
 TEMPLATES = [
     {
