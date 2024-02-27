@@ -11,22 +11,22 @@ urlpatterns = [
          name="my-ticket"
          ),
     re_path(
-        r'^admin/events/event/assign/(\d+)/$',
+        r'^events/event/assign/(\d+)/$',
         views.admin_assign,
         name='events_event_modeladmin_assign_tickets'
     ),
     re_path(
-        r'^admin/events/event/unassign_unpaid/(\d+)/$',
+        r'^events/event/unassign_unpaid/(\d+)/$',
         views.admin_unassign_unpaid,
         name='events_event_modeladmin_unassign_unpaid_tickets'
     ),
     re_path(
-        r'^admin/events/event/remove_applications/(\d+)/$',
+        r'^events/event/remove_applications/(\d+)/$',
         views.admin_remove_applications,
         name='events_event_modeladmin_remove_applications'
     ),
     re_path(
-        r'^admin/events/event/export_participants/(\d+)/$',
+        r'^events/event/export_participants/(\d+)/$',
         views.admin_export_participants,
         name='events_event_modeladmin_export_participants'
     ),
