@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.conf import settings
 from django.conf.urls import include, url
-from django.urls import path, re_path
+from django.urls import path
 
 from search import views as search_views
 from wagtail.core import urls as wagtail_urls
@@ -13,7 +13,6 @@ from .api import api_router
 from .urls_utils import delete_urls
 
 from members.views import member_check_api
-from admin.views import redirect_admin
 
 urlpatterns = [
     # Needs to be imported before wagtail urls
@@ -22,12 +21,6 @@ urlpatterns = [
     url(r'', include('involvement.urls')),
     url(r'', include('events.urls')),
     path('member_check_api/', member_check_api, name='member_check_api'),
-
-    re_path(
-        r'^admin/(?P<path>.*)$',
-        redirect_admin,
-        name='wagtailadmin_redirect'
-    ),
 
     url(r'^documents/', include(wagtaildocs_urls)),
 
