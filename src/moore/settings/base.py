@@ -94,6 +94,8 @@ MIDDLEWARE = [
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     # Subdomain for admin site. Needed by django_hosts
     'django_hosts.middleware.HostsResponseMiddleware',
+    # Redirect GET html at path "/admin/*" admin subdomain
+    'admin.middleware.RedirectAdminMiddleware',
 ]
 
 DATABASES = {
