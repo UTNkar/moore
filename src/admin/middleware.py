@@ -27,8 +27,8 @@ class TrustedHostMiddleware(MiddlewareMixin):
     """
 
     def __call__(self, request):
-        if (request.META['HTTP_HOST'] and
-           self.is_allowed_host(request.META['HTTP_HOST'])):
+        current_host = request.META.get('HTTP_HOST', '')
+        if (current_host and self.is_allowed_host(current_host)):
             return self.get_response(request)
 
         headers_to_check = [
