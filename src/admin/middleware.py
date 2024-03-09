@@ -27,22 +27,33 @@ class TrustedHostMiddleware(MiddlewareMixin):
     """
 
     def __call__(self, request):
-        # Headers to check for the host value, in priority order.
-        # X-Forwarded-Host is typically set by proxies.
-        # HTTP_HOST is the standard header sent by clients.
-        # HTTP_ORIGIN and HTTP_REFERER can offer fallbacks.
         headers_to_check = [
-            'HTTP_X_FORWARDED_HOST', 'HTTP_HOST', 'HTTP_ORIGIN', 'HTTP_REFERER'
+            ('HTTP_X_FORWARDED_HOST', 'X-Forwarded-Host'),
+            ('HTTP_HOST', 'Host'),
+            ('HTTP_ORIGIN', 'Origin'),
+            ('HTTP_REFERER', 'Referer')
         ]
 
-        for header in headers_to_check:
-            host_value = request.META.get(header, '')
+        host_name = None
+        for meta_key, header in headers_to_check:
+            # Prefer META if defined; fallback to request.headers
+            host_value = (request.META.get(meta_key)
+                          or request.headers.get(header, ''))
             # Extract the hostname, excluding protocol and path.
             host_name = self.extract_hostname(host_value)
-            # If extracted host is allowed, set it as HTTP_HOST
-            if self.is_allowed_host(host_name):
+            if host_name and self.is_allowed_host(host_name):
                 request.META['HTTP_HOST'] = host_name
                 break
+            host_name = None
+
+        if not host_name:
+            # Fallback to using host from request URL if no matching header
+            fallback_host = (request.build_absolute_uri()
+                             .split('//')[1].split('/')[0])
+            fallback_host_name = self.extract_hostname(fallback_host)
+            if self.is_allowed_host(fallback_host_name):
+                request.META['HTTP_HOST'] = fallback_host_name
+
         return self.get_response(request)
 
     def extract_hostname(self, value):
