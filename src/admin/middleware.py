@@ -42,7 +42,6 @@ class TrustedHostMiddleware(MiddlewareMixin):
             # If extracted host is allowed, set it as HTTP_HOST
             if self.is_allowed_host(host_name):
                 request.META['HTTP_HOST'] = host_name
-                print("HOST", host_name, header)
                 break
         return self.get_response(request)
 
