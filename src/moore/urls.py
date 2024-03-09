@@ -10,7 +10,6 @@ from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.admin import urls as wagtailadmin_urls
 
 from .api import api_router
-from .urls_utils import delete_urls
 
 from members.views import member_check_api
 
@@ -52,12 +51,4 @@ if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT
-    )
-
-# We remove the /admin redirect
-# if running tests in order to make writing tests easier.
-if settings.IS_RUNNING_TEST:
-    urlpatterns = delete_urls(
-        urlpatterns,
-        delete_name='wagtailadmin_redirect'
     )
