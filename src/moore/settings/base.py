@@ -80,6 +80,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # Make sure the HTTP_HOST is set correctly – djang-hosts uses get_host()
+    # https://docs.djangoproject.com/en/5.0/ref/request-response/#django.http.HttpRequest.get_host
+    'admin.middleware.TrustedHostMiddleware',
     # Subdomain for admin site. Needed by django_hosts
     'django_hosts.middleware.HostsRequestMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -92,6 +95,8 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
 
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+    # Redirect GET html at path "/admin/*" admin subdomain
+    'admin.middleware.RedirectAdminMiddleware',
     # Subdomain for admin site. Needed by django_hosts
     'django_hosts.middleware.HostsResponseMiddleware',
     # Redirect GET html at path "/admin/*" admin subdomain
