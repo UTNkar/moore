@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from involvement.models import Application
 from utils.forms import AdvancedModelMultipleChoiceField
 from utils.unicore_client import UnicoreClient
+from involvement import cron
 
 
 class AppointmentForm(forms.Form):
@@ -99,3 +100,4 @@ class AppointmentForm(forms.Form):
             if not created:
                 appl.status = 'appointed'
                 appl.save()
+        cron.remove_old_applications()

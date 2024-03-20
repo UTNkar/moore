@@ -72,8 +72,8 @@ def send_extension_emails():
 def remove_old_applications():
     old_applications = Application.objects.filter(
         position__recruitment_end__lte=date.today() - timedelta(days=7)
-    ).exclude(
-        status='appointed'
+    ).filter(
+        status='turned_down'
     )
 
     for app in old_applications:
